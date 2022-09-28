@@ -59,6 +59,12 @@ public class YongHu {
 	public void setJsIds(String jsIds) {
 		this.jsIds = jsIds;
 	}
+	public String getQxIds() {
+		return qxIds;
+	}
+	public void setQxIds(String qxIds) {
+		this.qxIds = qxIds;
+	}
 	
 	//https://blog.csdn.net/qq_43416276/article/details/102981480
 	public YongHu() {
@@ -77,5 +83,6 @@ public class YongHu {
 	private String mm;
 	private String js;
 	private String jsIds;
+	private String qxIds;
 
 }
