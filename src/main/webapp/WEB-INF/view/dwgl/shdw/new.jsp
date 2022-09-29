@@ -89,15 +89,15 @@ function initNewDialog(){
 
 function checkNew(){
 	if(checkMC()){
-		newShouHuoBuMen();
+		newShouHuoDanWei();
 	}
 }
 
-function newShouHuoBuMen(){
+function newShouHuoDanWei(){
 	var formData = new FormData($("#form1")[0]);
 	$.ajax({
 		type:"post",
-		url:dwglPath+"newShouHuoBuMen",
+		url:dwglPath+"newShouHuoDanWei",
 		dataType: "json",
 		data:formData,
 		cache: false,

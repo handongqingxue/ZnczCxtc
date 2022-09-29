@@ -103,7 +103,7 @@ function setFitWidthInParent(parent,self){
 					名称
 				</td>
 				<td class="td2">
-					${requestScope.shbm.mc }
+					${requestScope.shdw.mc }
 				</td>
 				<td class="td1" align="right">
 				</td>

@@ -22,7 +22,7 @@
 .tab1_div .toolbar .row_div .yss_span,
 .tab1_div .toolbar .row_div .wzMc_span,
 .tab1_div .toolbar .row_div .fhdw_span,
-.tab1_div .toolbar .row_div .shbm_span,
+.tab1_div .toolbar .row_div .shdw_span,
 .tab1_div .toolbar .row_div .search_but{
 	margin-left: 13px;
 }
@@ -31,7 +31,7 @@
 .tab1_div .toolbar .row_div .yssMc_inp,
 .tab1_div .toolbar .row_div .wzMc_inp,
 .tab1_div .toolbar .row_div .fhdwMc_inp,
-.tab1_div .toolbar .row_div .shbmMc_inp{
+.tab1_div .toolbar .row_div .shdwMc_inp{
 	width: 120px;
 	height: 25px;
 }
@@ -323,9 +323,9 @@ function initSearchLB(){
 			var yssMc=$("#toolbar #yssMc").val();
 			var wzMc=$("#toolbar #wzMc").val();
 			var fhdwMc=$("#toolbar #fhdwMc").val();
-			var shbmMc=$("#toolbar #shbmMc").val();
+			var shdwMc=$("#toolbar #shdwMc").val();
 			tab1.datagrid("load",{ddh:ddh,ddztId:ddztId,cph:cph,yssMc:yssMc,
-				wzMc:wzMc,fhdwMc:fhdwMc,shbmMc:shbmMc});
+				wzMc:wzMc,fhdwMc:fhdwMc,shdwMc:shdwMc});
 		}
 	});
 }
@@ -443,7 +443,7 @@ function initTab1(){
 			{field:"wzMc",title:"物资名称",width:150},
 			{field:"yssMc",title:"运输商",width:150},
 			{field:"fhdwMc",title:"发货单位",width:150},
-			{field:"shbmMc",title:"收货部门",width:150},
+			{field:"shdwMc",title:"收货单位",width:150},
             {field:"lxlx",title:"流向类型",width:100,formatter:function(value,row){
             	var str;
             	switch (value) {
@@ -631,8 +631,8 @@ function setFitWidthInParent(parent,self){
 				<input type="text" class="wzMc_inp" id="wzMc" placeholder="请输入物资名称"/>
 				<span class="fhdw_span">发货单位：</span>
 				<input type="text" class="fhdwMc_inp" id="fhdwMc" placeholder="请输入发货单位"/>
-				<span class="shbm_span">收货部门：</span>
-				<input type="text" class="shbmMc_inp" id="shbmMc" placeholder="请输入收货部门"/>
+				<span class="shdw_span">收货单位：</span>
+				<input type="text" class="shdwMc_inp" id="shdwMc" placeholder="请输入收货单位"/>
 				<a class="search_but" id="search_but">查询</a>
 				<a id="manual_but">人工</a>
 				<a id="ddfw_but">订单复位</a>
