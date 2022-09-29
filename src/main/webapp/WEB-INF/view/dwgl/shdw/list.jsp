@@ -55,7 +55,7 @@ function initAddLB(){
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
-			location.href=dwglPath+"fhdw/new";
+			location.href=dwglPath+"shdw/new";
 		}
 	});
 }
@@ -71,8 +71,8 @@ function initRemoveLB(){
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"发货单位-列表",
-		url:dwglPath+"queryFaHuoDanWeiList",
+		title:"收货部门-列表",
+		url:dwglPath+"queryShouHuoDanWeiList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
 		pagination:true,
@@ -81,8 +81,8 @@ function initTab1(){
 			{field:"mc",title:"名称",width:200},
             {field:"bjsj",title:"编辑时间",width:200},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
-            	var str="<a href=\""+dwglPath+"fhdw/detail?id="+value+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\""+dwglPath+"fhdw/edit?id="+value+"\">修改</a>";
+            	var str="<a href=\""+dwglPath+"shdw/detail?id="+value+"\">详情</a>"
+            	+"&nbsp;|&nbsp;<a href=\""+dwglPath+"shdw/edit?id="+value+"\">修改</a>";
             	return str;
             }}
 	    ]],
@@ -125,7 +125,7 @@ function deleteByIds() {
 			ids=ids.substring(1);
 			
 			$.ajaxSetup({async:false});
-			$.post(dwglPath + "deleteFaHuoDanWei",
+			$.post(dwglPath + "deleteShouHuoDanWei",
 				{ids:ids},
 				function(result){
 					if(result.status==1){

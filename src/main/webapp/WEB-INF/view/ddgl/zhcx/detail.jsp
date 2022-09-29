@@ -176,10 +176,10 @@ function setFitWidthInParent(parent,self){
 					${requestScope.dd.fhdwMc }
 				</td>
 				<td class="td1" align="right">
-					收货部门
+					收货单位
 				</td>
 				<td class="td2">
-					${requestScope.dd.shbmMc }
+					${requestScope.dd.shdwMc }
 				</td>
 			  </tr>
 			</table>

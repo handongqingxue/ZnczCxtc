@@ -55,7 +55,7 @@ function initAddLB(){
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
-			location.href=dwglPath+"shbm/new";
+			location.href=dwglPath+"ck/new";
 		}
 	});
 }
@@ -71,25 +71,27 @@ function initRemoveLB(){
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"收货部门-列表",
-		url:dwglPath+"queryShouHuoBuMenList",
+		title:"仓库-列表",
+		url:dwglPath+"queryCangKuList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
 		pagination:true,
 		pageSize:10,
 		columns:[[
 			{field:"mc",title:"名称",width:200},
+			{field:"wz",title:"位置",width:200},
             {field:"bjsj",title:"编辑时间",width:200},
+			{field:"bz",title:"备注",width:200},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
-            	var str="<a href=\""+dwglPath+"shbm/detail?fnid="+'${param.fnid}'+"&snid="+'${param.snid}'+"&id="+value+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\""+dwglPath+"shbm/edit?fnid="+'${param.fnid}'+"&snid="+'${param.snid}'+"&id="+value+"\">修改</a>";
+            	var str="<a href=\""+dwglPath+"ck/detail?id="+value+"\">详情</a>"
+            	+"&nbsp;|&nbsp;<a href=\""+dwglPath+"ck/edit?id="+value+"\">修改</a>";
             	return str;
             }}
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{mc:"<div style=\"text-align:center;\">暂无数据<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"mc",colspan:3});
+				$(this).datagrid("mergeCells",{index:0,field:"mc",colspan:5});
 				data.total=0;
 			}
 			
@@ -125,7 +127,7 @@ function deleteByIds() {
 			ids=ids.substring(1);
 			
 			$.ajaxSetup({async:false});
-			$.post(dwglPath + "deleteShouHuoBuMen",
+			$.post(dwglPath + "deleteCangKu",
 				{ids:ids},
 				function(result){
 					if(result.status==1){

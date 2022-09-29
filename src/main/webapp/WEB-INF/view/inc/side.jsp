@@ -105,7 +105,7 @@ function showLeftMenuByQx(){
 	$(".dwgl_first_div").css("display","none");
 	$(".yss_item_li").css("display","none");
 	$(".fhdw_item_li").css("display","none");
-	$(".shbm_item_li").css("display","none");
+	$(".shdw_item_li").css("display","none");
 
 	$(".xtgl_first_div").css("display","none");
 	$(".yhcx_item_li").css("display","none");
@@ -135,7 +135,7 @@ function showLeftMenuByQx(){
 		$(".dwgl_first_div").css("display","block");
 		$(".yss_item_li").css("display","block");
 		$(".fhdw_item_li").css("display","block");
-		$(".shbm_item_li").css("display","block");
+		$(".shdw_item_li").css("display","block");
 		
 		$(".xtgl_first_div").css("display","block");
 		$(".yhcx_item_li").css("display","block");
@@ -172,7 +172,7 @@ function showLeftMenuByQx(){
 <div class="layui-header header_div">
 		<div class="layui-logo">
 			<img class="bgLogo_img" alt="" src="<%=basePath%>resource/image/bgLogo.jpg"/>
-			<a>创新碳材称重平台</a>
+			<a>创新炭材称重平台</a>
 		</div>
 		<ul class="layui-nav layui-layout-right">
 			<li class="layui-nav-item">
@@ -310,16 +310,16 @@ function showLeftMenuByQx(){
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item shbm_item_li">
+					<li class="layui-nav-item shdw_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
-						<a href="<%=basePath%>dwgl/shbm/list">
-							&nbsp;&nbsp;&nbsp;收货部门
+						<a href="<%=basePath%>dwgl/shdw/list">
+							&nbsp;&nbsp;&nbsp;收货单位
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item shbm_item_li">
+					<li class="layui-nav-item shdw_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
-						<a href="<%=basePath%>dwgl/shbm/list">
+						<a href="<%=basePath%>dwgl/ck/list">
 							&nbsp;&nbsp;&nbsp;仓库
 						</a>
 					</li>

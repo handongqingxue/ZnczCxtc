@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.znczCxtc.dao.CangKuMapper">
+	<insert id="add" parameterType="com.znczCxtc.entity.CangKu">
+		insert into cang_ku
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="mc!=null">
+				mc,
+			</if>
+			<if test="wz!=null">
+				wz,
+			</if>
+				bjsj,
+			<if test="bz!=null">
+				bz,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="mc!=null">
+				#{mc},
+			</if>
+			<if test="wz!=null">
+				#{wz},
+			</if>
+				now(),
+			<if test="bz!=null">
+				#{bz},
+			</if>
+		</trim>
+	</insert>
+	<delete id="deleteByIds">
+		delete from cang_ku where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in(" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
+	<update id="edit" parameterType="com.znczCxtc.entity.CangKu">
+		update cang_ku set 
+		<trim suffixOverrides=",">
+			<if test="mc!=null">
+				mc=#{mc},
+			</if>
+			<if test="wz!=null">
+				wz=#{wz},
+			</if>
+				bjsj=now(),
+			<if test="bz!=null">
+				bz=#{bz},
+			</if>
+		</trim>
+		 where id=#{id}
+	</update>
+	<select id="queryForInt" resultType="java.lang.Integer">
+		select count(*) from cang_ku where 1=1
+		<if test="mc!=''&amp;mc!=null">
+			and mc like CONCAT('%',#{mc},'%')
+		</if> 
+	</select>
+	<select id="queryList" resultType="com.znczCxtc.entity.CangKu">
+		select * from cang_ku where 1=1
+		<if test="mc!=''&amp;mc!=null">
+			and mc like CONCAT('%',#{mc},'%')
+		</if>
+		 limit ${param2},${param3}
+	</select>
+	<select id="selectById" resultType="com.znczCxtc.entity.CangKu">
+		select * from cang_ku where id=#{0}
+	</select>
+</mapper>
