@@ -172,7 +172,7 @@ function showLeftMenuByQx(){
 <div class="layui-header header_div">
 		<div class="layui-logo">
 			<img class="bgLogo_img" alt="" src="<%=basePath%>resource/image/bgLogo.jpg"/>
-			<a>创新碳材称重平台</a>
+			<a>创新炭材称重平台</a>
 		</div>
 		<ul class="layui-nav layui-layout-right">
 			<li class="layui-nav-item">
@@ -319,7 +319,7 @@ function showLeftMenuByQx(){
 					<div class="line_div"></div>
 					<li class="layui-nav-item shdw_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
-						<a href="<%=basePath%>dwgl/shdw/list">
+						<a href="<%=basePath%>dwgl/ck/list">
 							&nbsp;&nbsp;&nbsp;仓库
 						</a>
 					</li>

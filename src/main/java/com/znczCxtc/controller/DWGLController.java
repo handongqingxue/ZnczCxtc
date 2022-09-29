@@ -15,7 +15,6 @@ import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
 import com.znczCxtc.util.JsonUtil;
 import com.znczCxtc.util.PlanResult;
-import com.znczLfylJhb.entity.YunShuShang;
 
 @Controller
 @RequestMapping("/"+DWGLController.MODULE_NAME)
@@ -27,6 +26,8 @@ public class DWGLController {
 	private FaHuoDanWeiService faHuoDanWeiService;
 	@Autowired
     private ShouHuoDanWeiService shouHuoDanWeiService;
+	@Autowired
+    private CangKuService cangKuService;
 	public static final String MODULE_NAME="dwgl";
 
 	@RequestMapping(value="/yss/new")
@@ -186,6 +187,38 @@ public class DWGLController {
 		request.setAttribute("shdw", shdw);
 		
 		return MODULE_NAME+"/shdw/detail";
+	}
+
+	@RequestMapping(value="/ck/new")
+	public String goCkNew(HttpServletRequest request) {
+
+		return MODULE_NAME+"/ck/new";
+	}
+
+	@RequestMapping(value="/ck/edit")
+	public String goCkEdit(HttpServletRequest request) {
+		
+		String id = request.getParameter("id");
+		CangKu ck=cangKuService.selectById(id);
+		request.setAttribute("ck", ck);
+		
+		return MODULE_NAME+"/ck/edit";
+	}
+	
+	@RequestMapping(value="/ck/list")
+	public String goCkList(HttpServletRequest request) {
+		
+		return MODULE_NAME+"/ck/list";
+	}
+
+	@RequestMapping(value="/ck/detail")
+	public String goCkDetail(HttpServletRequest request) {
+		
+		String id = request.getParameter("id");
+		CangKu ck=cangKuService.selectById(id);
+		request.setAttribute("ck", ck);
+		
+		return MODULE_NAME+"/ck/detail";
 	}
 
 	@RequestMapping(value="/newYunShuShang")
@@ -397,6 +430,77 @@ public class DWGLController {
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", shdwList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/newCangKu")
+	@ResponseBody
+	public Map<String, Object> newCangKu(CangKu ck) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=cangKuService.add(ck);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建仓库成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建仓库失败！");
+		}
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteCangKu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteCangKu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cangKuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除仓库失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除仓库成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/editCangKu")
+	@ResponseBody
+	public Map<String, Object> editCangKu(CangKu ck) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=cangKuService.edit(ck);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑仓库成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑仓库失败！");
+		}
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/queryCangKuList")
+	@ResponseBody
+	public Map<String, Object> queryCangKuList(String mc,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = cangKuService.queryForInt(mc);
+		List<CangKu> ckList=cangKuService.queryList(mc, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", ckList);
 		
 		return jsonMap;
 	}
