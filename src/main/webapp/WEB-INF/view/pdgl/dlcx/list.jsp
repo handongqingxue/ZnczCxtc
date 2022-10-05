@@ -130,8 +130,8 @@ function initTab1(){
             	return str;
             }},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
-            	var str="<a href=\""+pdglPath+"fhdw/detail?id="+value+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\""+pdglPath+"fhdw/edit?id="+value+"\">修改</a>";
+            	var str="<a href=\""+pdglPath+"dlcx/detail?id="+value+"\">详情</a>"
+            	+"&nbsp;|&nbsp;<a href=\""+pdglPath+"dlcx/edit?id="+value+"\">修改</a>";
             	return str;
             }}
 	    ]],
@@ -174,12 +174,12 @@ function deleteByIds() {
 			ids=ids.substring(1);
 			
 			$.ajaxSetup({async:false});
-			$.post(pdglPath + "deleteFaHuoDanWei",
+			$.post(pdglPath + "deleteDuiLie",
 				{ids:ids},
 				function(result){
 					if(result.status==1){
 						alert(result.msg);
-						location.href = location.href;
+						tab1.datagrid("load");
 					}
 					else{
 						alert(result.msg);

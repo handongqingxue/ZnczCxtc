@@ -41,6 +41,33 @@
 			</if>
 		</trim>
 	</insert>
+	<delete id="deleteByIds">
+		delete from dui_lie where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in(" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
+	<update id="edit" parameterType="com.znczCxtc.entity.DuiLie">
+		update dui_lie set 
+		<trim suffixOverrides=",">
+			<if test="mc!=null">
+				mc=#{mc},
+			</if>
+			<if test="dm!=null">
+				dm=#{dm},
+			</if>
+			<if test="jhxs!=null">
+				jhxs=#{jhxs},
+			</if>
+			<if test="jhyz!=null">
+				jhyz=#{jhyz},
+			</if>
+			<if test="zt!=null">
+				zt=#{zt},
+			</if>
+		</trim>
+		 where id=#{id}
+	</update>
 	<select id="queryForInt" resultType="java.lang.Integer">
 		select count(*) from dui_lie where 1=1
 		<if test="mc!=''&amp;mc!=null">
@@ -65,5 +92,8 @@
 			and zt like CONCAT('%',#{zt},'%')
 		</if> 
 		 limit ${start},${rows}
+	</select>
+	<select id="selectById" resultType="com.znczCxtc.entity.DuiLie">
+		select * from dui_lie where id=#{0}
 	</select>
 </mapper>
