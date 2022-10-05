@@ -382,7 +382,7 @@ function showLeftMenuByQx(){
 					<div class="line_div"></div>
 					<li class="layui-nav-item zhcx_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
-						<a href="<%=basePath%>clgl/zhcx/list">
+						<a href="<%=basePath%>pdgl/dlcx/list">
 							&nbsp;&nbsp;&nbsp;队列查询
 						</a>
 					</li>

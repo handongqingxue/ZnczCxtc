@@ -6,27 +6,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 .tab1_div{
-	margin-top:80px;margin-left: 220px;
+	margin-top:80px;
+	margin-left: 220px;
 }
 .tab1_div .toolbar{
-	height:32px;line-height:32px;
+	height:32px;
 }
-.tab1_div .toolbar .mc_span{
+.tab1_div .toolbar .mc_span,.tab1_div .toolbar .dm_span,.tab1_div .toolbar .zt_span{
 	margin-left: 13px;
 }
-.tab1_div .toolbar .mc_inp{
-	width: 120px;height: 25px;
+.tab1_div .toolbar .mc_inp,.tab1_div .toolbar .dm_inp{
+	width: 120px;
+	height: 25px;
 }
 .tab1_div .toolbar .search_but{
 	margin-left: 13px;
 }
 </style>
-<title>发货单位</title>
+<title>队列查询</title>
 <%@include file="../../inc/js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
-var dwglPath=path+'dwgl/';
+var pdglPath=path+'pdgl/';
 $(function(){
+	initZTCBB();
 	initSearchLB();
 	initAddLB();
 	initRemoveLB();
@@ -41,12 +44,29 @@ function showCompontByQx(){
 	}
 }
 
+function initZTCBB(){
+	var data=[];
+	data.push({"value":"","text":"请选择"});
+	data.push({"value":1,"text":"在用"});
+	data.push({"value":2,"text":"暂停"});
+	data.push({"value":3,"text":"废弃"});
+	
+	ztCBB=$("#zt_cbb").combobox({
+		valueField:"value",
+		textField:"text",
+		//multiple:true,
+		data:data
+	});
+}
+
 function initSearchLB(){
 	$("#search_but").linkbutton({
 		iconCls:"icon-search",
 		onClick:function(){
 			var mc=$("#toolbar #mc").val();
-			tab1.datagrid("load",{mc:mc});
+			var dm=$("#toolbar #dm").val();
+			var zt=ztCBB.combobox("getValue");
+			tab1.datagrid("load",{mc:mc,dm:dm,zt:zt});
 		}
 	});
 }
@@ -55,7 +75,7 @@ function initAddLB(){
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
-			location.href=dwglPath+"fhdw/new";
+			location.href=pdglPath+"dlcx/new";
 		}
 	});
 }
@@ -71,25 +91,54 @@ function initRemoveLB(){
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"发货单位-列表",
-		url:dwglPath+"queryFaHuoDanWeiList",
+		title:"队列-列表",
+		url:pdglPath+"queryDuiLieList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
 		pagination:true,
 		pageSize:10,
 		columns:[[
 			{field:"mc",title:"名称",width:200},
-            {field:"bjsj",title:"编辑时间",width:200},
+			{field:"dm",title:"代码",width:150},
+			{field:"jhxs",title:"叫号形式",width:150,formatter:function(value,row){
+            	var str;
+            	switch (value) {
+				case 1:
+					str="自动";
+					break;
+				case 2:
+					str="手动";
+					break;
+				}
+            	str+="叫号";
+            	return str;
+            }},
+			{field:"jhyz",title:"叫号阈值",width:150},
+            {field:"zt",title:"状态",width:100,formatter:function(value,row){
+            	var str;
+            	switch (value) {
+				case 1:
+					str="在用";
+					break;
+				case 2:
+					str="暂停";
+					break;
+				case 3:
+					str="废弃";
+					break;
+				}
+            	return str;
+            }},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
-            	var str="<a href=\""+dwglPath+"fhdw/detail?id="+value+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\""+dwglPath+"fhdw/edit?id="+value+"\">修改</a>";
+            	var str="<a href=\""+pdglPath+"fhdw/detail?id="+value+"\">详情</a>"
+            	+"&nbsp;|&nbsp;<a href=\""+pdglPath+"fhdw/edit?id="+value+"\">修改</a>";
             	return str;
             }}
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{mc:"<div style=\"text-align:center;\">暂无数据<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"mc",colspan:3});
+				$(this).datagrid("mergeCells",{index:0,field:"mc",colspan:6});
 				data.total=0;
 			}
 			
@@ -125,7 +174,7 @@ function deleteByIds() {
 			ids=ids.substring(1);
 			
 			$.ajaxSetup({async:false});
-			$.post(dwglPath + "deleteFaHuoDanWei",
+			$.post(pdglPath + "deleteFaHuoDanWei",
 				{ids:ids},
 				function(result){
 					if(result.status==1){
@@ -155,6 +204,10 @@ function setFitWidthInParent(o){
 		<div class="toolbar" id="toolbar">
 			<span class="mc_span">名称：</span>
 			<input type="text" class="mc_inp" id="mc" placeholder="请输入名称"/>
+			<span class="dm_span">代码：</span>
+			<input type="text" class="dm_inp" id="dm" placeholder="请输入代码"/>
+			<span class="zt_span">状态：</span>
+			<input id="zt_cbb"/>
 			<a class="search_but" id="search_but">查询</a>
 			<a id="add_but">添加</a>
 			<a id="remove_but">删除</a>
