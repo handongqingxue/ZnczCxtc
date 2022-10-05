@@ -12,9 +12,9 @@ public interface ShouHuoDanWeiService {
 
 	public int edit(ShouHuoDanWei shdw);
 
-	public int queryForInt(String mc);
+	public int queryForInt(String mc, Boolean ywdl);
 
-	public List<ShouHuoDanWei> queryList(String mc, int page, int rows, String sort, String order);
+	public List<ShouHuoDanWei> queryList(String mc, Boolean ywdl, int page, int rows, String sort, String order);
 
 	public ShouHuoDanWei selectById(String id);
 

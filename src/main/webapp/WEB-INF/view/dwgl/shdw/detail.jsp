@@ -106,8 +106,10 @@ function setFitWidthInParent(parent,self){
 					${requestScope.shdw.mc }
 				</td>
 				<td class="td1" align="right">
+					队列
 				</td>
 				<td class="td2">
+					${requestScope.shdw.dlMc }
 				</td>
 			  </tr>
 			</table>

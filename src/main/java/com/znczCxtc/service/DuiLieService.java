@@ -18,4 +18,6 @@ public interface DuiLieService {
 
 	DuiLie selectById(String id);
 
+	List<DuiLie> queryCBBList(Integer zt);
+
 }

@@ -38,15 +38,15 @@ public class ShouHuoDanWeiServiceImpl implements ShouHuoDanWeiService {
 	}
 
 	@Override
-	public int queryForInt(String mc) {
+	public int queryForInt(String mc, Boolean ywdl) {
 		// TODO Auto-generated method stub
-		return shouHuoDanWeiDao.queryForInt(mc);
+		return shouHuoDanWeiDao.queryForInt(mc,ywdl);
 	}
 
 	@Override
-	public List<ShouHuoDanWei> queryList(String mc, int page, int rows, String sort, String order) {
+	public List<ShouHuoDanWei> queryList(String mc, Boolean ywdl, int page, int rows, String sort, String order) {
 		// TODO Auto-generated method stub
-		return shouHuoDanWeiDao.queryList(mc, (page-1)*rows, rows, sort, order);
+		return shouHuoDanWeiDao.queryList(mc, ywdl, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override

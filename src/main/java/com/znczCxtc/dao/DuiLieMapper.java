@@ -20,4 +20,6 @@ public interface DuiLieMapper {
 
 	DuiLie selectById(String id);
 
+	List<DuiLie> queryCBBList(@Param("zt") Integer zt);
+
 }

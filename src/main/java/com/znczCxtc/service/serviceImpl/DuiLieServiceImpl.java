@@ -55,4 +55,10 @@ public class DuiLieServiceImpl implements DuiLieService {
 		return duiLieDao.selectById(id);
 	}
 
+	@Override
+	public List<DuiLie> queryCBBList(Integer zt) {
+		// TODO Auto-generated method stub
+		return duiLieDao.queryCBBList(zt);
+	}
+
 }

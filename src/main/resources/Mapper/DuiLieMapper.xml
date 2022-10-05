@@ -96,4 +96,10 @@
 	<select id="selectById" resultType="com.znczCxtc.entity.DuiLie">
 		select * from dui_lie where id=#{0}
 	</select>
+	<select id="queryCBBList" resultType="com.znczCxtc.entity.DuiLie">
+		select id,mc from dui_lie where 1=1
+		<if test="zt!=''&amp;zt!=null">
+			and zt=#{zt}
+		</if> 
+	</select>
 </mapper>

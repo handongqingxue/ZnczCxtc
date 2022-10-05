@@ -2,6 +2,19 @@ package com.znczCxtc.entity;
 
 public class DuiLie {
 
+	/**
+	 * 在用
+	 */
+	public static final Integer ZAI_YONG=1;
+	/**
+	 * 暂停
+	 */
+	public static final Integer ZAN_TING=2;
+	/**
+	 * 废弃
+	 */
+	public static final Integer FEI_QI=3;
+	
 	private Integer id;//队列id
 	public Integer getId() {
 		return id;

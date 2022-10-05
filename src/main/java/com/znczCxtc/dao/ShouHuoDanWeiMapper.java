@@ -14,9 +14,9 @@ public interface ShouHuoDanWeiMapper {
 
 	public int edit(ShouHuoDanWei shdw);
 
-	public int queryForInt(@Param("mc") String mc);
+	public int queryForInt(@Param("mc") String mc, @Param("ywdl") Boolean ywdl);
 
-	public List<ShouHuoDanWei> queryList(@Param("mc") String mc, int i, int rows, String sort, String order);
+	public List<ShouHuoDanWei> queryList(@Param("mc") String mc, @Param("ywdl") Boolean ywdl, @Param("start") int start, @Param("rows") int rows, String sort, String order);
 
 	public ShouHuoDanWei selectById(String id);
 

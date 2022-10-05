@@ -139,7 +139,7 @@ public class DWGLController {
 	@RequestMapping(value="/shdw/new")
 	public String goShdwNew(HttpServletRequest request) {
 		
-		//publicService.selectNav(request);
+		request.setAttribute("dlzt", DuiLie.ZAI_YONG);
 		
 		return MODULE_NAME+"/shdw/new";
 	}
@@ -156,6 +156,7 @@ public class DWGLController {
 		String id = request.getParameter("id");
 		ShouHuoDanWei shdw=shouHuoDanWeiService.selectById(id);
 		request.setAttribute("shdw", shdw);
+		request.setAttribute("dlzt", DuiLie.ZAI_YONG);
 		
 		return MODULE_NAME+"/shdw/edit";
 	}
@@ -421,12 +422,13 @@ public class DWGLController {
 
 	@RequestMapping(value="/queryShouHuoDanWeiList")
 	@ResponseBody
-	public Map<String, Object> queryShouHuoDanWeiList(String mc,int page,int rows,String sort,String order) {
+	public Map<String, Object> queryShouHuoDanWeiList(String mc,Boolean ywdl,int page,int rows,String sort,String order) {
 		
+		//https://moyifeng.blog.csdn.net/article/details/95060416?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-95060416-blog-91444712.pc_relevant_multi_platform_whitelistv3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-95060416-blog-91444712.pc_relevant_multi_platform_whitelistv3&utm_relevant_index=2
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		int count = shouHuoDanWeiService.queryForInt(mc);
-		List<ShouHuoDanWei> shdwList=shouHuoDanWeiService.queryList(mc, page, rows, sort, order);
+		int count = shouHuoDanWeiService.queryForInt(mc,ywdl);
+		List<ShouHuoDanWei> shdwList=shouHuoDanWeiService.queryList(mc, ywdl, page, rows, sort, order);
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", shdwList);

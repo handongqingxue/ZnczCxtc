@@ -26,9 +26,11 @@
 <script type="text/javascript">
 var path='<%=basePath %>';
 var dwglPath=path+'dwgl/';
+var pdglPath=path+'pdgl/';
 var dialogTop=70;
 var dialogLeft=20;
 var ndNum=0;
+var dlzt='${requestScope.dlzt}';
 $(function(){
 	initNewDialog();
 
@@ -85,6 +87,31 @@ function initNewDialog(){
 	$("#new_div #ok_but").css("position","absolute");
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
+
+	initDLCBB();
+}
+
+function initDLCBB(){
+	var data=[];
+	data.push({"value":"","text":"请选择队列"});
+	$.post(pdglPath+"queryDuiLieCBBList",
+		{zt:dlzt},
+		function(result){
+			var rows=result.rows;
+			for(var i=0;i<rows.length;i++){
+				data.push({"value":rows[i].id,"text":rows[i].mc});
+			}
+			dlCBB=$("#dl_cbb").combobox({
+				valueField:"value",
+				textField:"text",
+				//multiple:true,
+				data:data,
+				onSelect:function(){
+					$("#dlId").val($(this).combobox("getValue"));
+				}
+			});
+		}
+	,"json");
 }
 
 function checkNew(){
@@ -94,6 +121,14 @@ function checkNew(){
 }
 
 function newShouHuoDanWei(){
+	var dlId=dlCBB.combobox("getValue");
+	var ywdl;
+	if(dlId=="")
+		ywdl=0;
+	else
+		ywdl=1;
+	$("#ywdl").val(ywdl);
+	
 	var formData = new FormData($("#form1")[0]);
 	$.ajax({
 		type:"post",
@@ -160,6 +195,7 @@ function setFitWidthInParent(parent,self){
 		
 		<div id="new_div">
 		<form id="form1" name="form1" method="post" enctype="multipart/form-data">
+			<input type="hidden" id="ywdl" name="ywdl"/>
 			<table>
 			  <tr>
 				<td class="td1" align="right">
@@ -169,8 +205,11 @@ function setFitWidthInParent(parent,self){
 					<input type="text" class="mc_inp" id="mc" name="mc" placeholder="请输入名称" onfocus="focusMC()" onblur="checkMC()"/>
 				</td>
 				<td class="td1" align="right">
+					队列
 				</td>
 				<td class="td2">
+					<input id="dl_cbb"/>
+					<input type="hidden" id="dlId" name="dlId"/>
 				</td>
 			  </tr>
 			</table>

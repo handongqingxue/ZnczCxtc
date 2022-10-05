@@ -9,14 +9,22 @@
 			<if test="mc!=null">
 				mc,
 			</if>
-				bjsj
+				bjsj,
+			<if test="ywdl!=null">
+				ywdl,
+			</if>
+				dlId
 		</trim>
 		values
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="mc!=null">
 				#{mc},
 			</if>
-				now()
+				now(),
+			<if test="ywdl!=null">
+				#{ywdl},
+			</if>
+				#{dlId},
 		</trim>
 	</insert>
 	<delete id="deleteByIds">
@@ -31,24 +39,34 @@
 			<if test="mc!=null">
 				mc=#{mc},
 			</if>
-				bjsj=now()
+				bjsj=now(),
+			<if test="ywdl!=null">
+				ywdl=#{ywdl},
+			</if>
+				dlId=#{dlId},
 		</trim>
 		 where id=#{id}
 	</update>
 	<select id="queryForInt" resultType="java.lang.Integer">
-		select count(*) from shou_huo_dan_wei where 1=1
+		select count(*) from shou_huo_dan_wei shdw left join dui_lie dl on shdw.dlId=dl.id where 1=1
 		<if test="mc!=''&amp;mc!=null">
-			and mc like CONCAT('%',#{mc},'%')
+			and shdw.mc like CONCAT('%',#{mc},'%')
+		</if> 
+		<if test="(ywdl!='' or ywdl==0)&amp;ywdl!=null">
+			and shdw.ywdl=#{ywdl}
 		</if> 
 	</select>
 	<select id="queryList" resultType="com.znczCxtc.entity.ShouHuoDanWei">
-		select * from shou_huo_dan_wei where 1=1
+		select shdw.*,dl.mc dlMc from shou_huo_dan_wei shdw left join dui_lie dl on shdw.dlId=dl.id where 1=1
 		<if test="mc!=''&amp;mc!=null">
-			and mc like CONCAT('%',#{mc},'%')
+			and shdw.mc like CONCAT('%',#{mc},'%')
+		</if> 
+		<if test="(ywdl!='' or ywdl==0)&amp;ywdl!=null">
+			and shdw.ywdl=#{ywdl}
 		</if> 
 	</select>
 	<select id="selectById" resultType="com.znczCxtc.entity.ShouHuoDanWei">
-		select * from shou_huo_dan_wei where id=#{0}
+		select shdw.*,dl.mc dlMc from shou_huo_dan_wei shdw left join dui_lie dl on shdw.dlId=dl.id where shdw.id=#{0}
 	</select>
 	<select id="queryCBBList" resultType="com.znczCxtc.entity.ShouHuoDanWei">
 		select id,mc from shou_huo_dan_wei

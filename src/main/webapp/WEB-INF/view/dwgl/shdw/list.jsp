@@ -9,9 +9,9 @@
 	margin-top:80px;margin-left: 220px;
 }
 .tab1_div .toolbar{
-	height:32px;line-height:32px;
+	height:32px;
 }
-.tab1_div .toolbar .mc_span{
+.tab1_div .toolbar .mc_span,.tab1_div .toolbar .ywdl_span{
 	margin-left: 13px;
 }
 .tab1_div .toolbar .mc_inp{
@@ -21,12 +21,13 @@
 	margin-left: 13px;
 }
 </style>
-<title>司机信息</title>
+<title>收货单位</title>
 <%@include file="../../inc/js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
 var dwglPath=path+'dwgl/';
 $(function(){
+	initYWDLCBB();
 	initSearchLB();
 	initAddLB();
 	initRemoveLB();
@@ -41,12 +42,27 @@ function showCompontByQx(){
 	}
 }
 
+function initYWDLCBB(){
+	var data=[];
+	data.push({"value":"","text":"请选择"});
+	data.push({"value":"1","text":"有"});
+	data.push({"value":"0","text":"无"});
+	
+	ywdlCBB=$("#ywdl_cbb").combobox({
+		valueField:"value",
+		textField:"text",
+		//multiple:true,
+		data:data
+	});
+}
+
 function initSearchLB(){
 	$("#search_but").linkbutton({
 		iconCls:"icon-search",
 		onClick:function(){
 			var mc=$("#toolbar #mc").val();
-			tab1.datagrid("load",{mc:mc});
+			var ywdl=ywdlCBB.combobox("getValue");
+			tab1.datagrid("load",{mc:mc,ywdl:ywdl});
 		}
 	});
 }
@@ -71,7 +87,7 @@ function initRemoveLB(){
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"收货部门-列表",
+		title:"收货单位-列表",
 		url:dwglPath+"queryShouHuoDanWeiList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
@@ -79,6 +95,10 @@ function initTab1(){
 		pageSize:10,
 		columns:[[
 			{field:"mc",title:"名称",width:200},
+			{field:"ywdl",title:"有无队列",width:100,formatter:function(value,row){
+				return value==1?"有":"无";
+			}},
+			{field:"dlMc",title:"队列名称",width:200},
             {field:"bjsj",title:"编辑时间",width:200},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\""+dwglPath+"shdw/detail?id="+value+"\">详情</a>"
@@ -89,7 +109,7 @@ function initTab1(){
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{mc:"<div style=\"text-align:center;\">暂无数据<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"mc",colspan:3});
+				$(this).datagrid("mergeCells",{index:0,field:"mc",colspan:5});
 				data.total=0;
 			}
 			
@@ -155,6 +175,8 @@ function setFitWidthInParent(o){
 		<div class="toolbar" id="toolbar">
 			<span class="mc_span">名称：</span>
 			<input type="text" class="mc_inp" id="mc" placeholder="请输入名称"/>
+			<span class="ywdl_span">有无队列：</span>
+			<input id="ywdl_cbb"/>
 			<a class="search_but" id="search_but">查询</a>
 			<a id="add_but">添加</a>
 			<a id="remove_but">删除</a>

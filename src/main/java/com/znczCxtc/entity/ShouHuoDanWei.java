@@ -41,8 +41,15 @@ public class ShouHuoDanWei {
 	public void setDlId(Integer dlId) {
 		this.dlId = dlId;
 	}
+	public String getDlMc() {
+		return dlMc;
+	}
+	public void setDlMc(String dlMc) {
+		this.dlMc = dlMc;
+	}
 	private String mc;//名称
 	private String bjsj;//编辑时间
 	private Boolean ywdl;
 	private Integer dlId;//队列id
+	private String dlMc;
 }

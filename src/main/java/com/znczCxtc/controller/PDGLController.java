@@ -131,4 +131,17 @@ public class PDGLController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/queryDuiLieCBBList")
+	@ResponseBody
+	public Map<String, Object> queryDuiLieCBBList(Integer zt) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<DuiLie> dlList=duiLieService.queryCBBList(zt);
+		
+		jsonMap.put("rows", dlList);
+		
+		return jsonMap;
+	}
 }
