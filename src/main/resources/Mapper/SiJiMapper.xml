@@ -77,6 +77,45 @@
 			</if>
 		</trim>
 	</insert>
+	<update id="edit" parameterType="com.znczCxtc.entity.SiJi">
+		update si_ji set 
+		<trim suffixOverrides=",">
+			<if test="xm!=null">
+				xm=#{xm},
+			</if>
+			<if test="sjh!=null">
+				sjh=#{sjh},
+			</if>
+			<if test="sfzzp!=null">
+				sfzzp=#{sfzzp},
+			</if>
+			<if test="sfzh!=null">
+				sfzh=#{sfzh},
+			</if>
+			<if test="zgzs!=null">
+				zgzs=#{zgzs},
+			</if>
+			<if test="zgzyxqz!=null">
+				zgzyxqz=#{zgzyxqz},
+			</if>
+			<if test="jz!=null">
+				jz=#{jz},
+			</if>
+			<if test="jzyxqz!=null">
+				jzyxqz=#{jzyxqz},
+			</if>
+			<if test="shzt!=null">
+				shzt=#{shzt},
+			</if>
+			<if test="zyzt!=null">
+				zyzt=#{zyzt},
+			</if>
+			<if test="glyhId!=null">
+				glyhId=#{glyhId},
+			</if>
+		</trim>
+		 where id=#{id}
+	</update>
 	<select id="queryForInt" resultType="java.lang.Integer">
 		select count(*) from si_ji where 1=1
 		<if test="xm!=''&amp;xm!=null">
@@ -107,5 +146,8 @@
 			and shzt in(#{shzt})
 		</if>
 		 limit ${start},${rows}
+	</select>
+	<select id="selectById" resultType="com.znczCxtc.entity.SiJi">
+		select * from si_ji where id=#{0}
 	</select>
 </mapper>

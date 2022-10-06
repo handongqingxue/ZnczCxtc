@@ -42,7 +42,7 @@ public class SiJi {
 	public String getSfzh() {
 		return sfzh;
 	}
-	public void setSfz(String sfzh) {
+	public void setSfzh(String sfzh) {
 		this.sfzh = sfzh;
 	}
 	public String getZgzs() {

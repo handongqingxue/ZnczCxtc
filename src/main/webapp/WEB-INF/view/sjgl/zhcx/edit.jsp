@@ -52,47 +52,47 @@ var path='<%=basePath %>';
 var sjglPath=path+'sjgl/';
 var dialogTop=70;
 var dialogLeft=20;
-var ndNum=0;
+var edNum=0;
 $(function(){
-	initNewDialog();
+	initEditDialog();
 
 	initDialogPosition();//将不同窗体移动到主要内容区域
 });
 
 function initDialogPosition(){
 	//基本属性组
-	var ndpw=$("body").find(".panel.window").eq(ndNum);
-	var ndws=$("body").find(".window-shadow").eq(ndNum);
+	var edpw=$("body").find(".panel.window").eq(edNum);
+	var edws=$("body").find(".window-shadow").eq(edNum);
 
 	var ccDiv=$("#center_con_div");
-	ccDiv.append(ndpw);
-	ccDiv.append(ndws);
+	ccDiv.append(edpw);
+	ccDiv.append(edws);
 }
 
-function initNewDialog(){
+function initEditDialog(){
 	dialogTop+=20;
-	$("#new_div").dialog({
+	$("#edit_div").dialog({
 		title:"司机信息",
-		width:setFitWidthInParent("body","new_div_table"),
+		width:setFitWidthInParent("body","edit_div_table"),
 		height:700,
 		top:dialogTop,
 		left:dialogLeft,
 		buttons:[
            {text:"保存",id:"ok_but",iconCls:"icon-save",handler:function(){
-        	   	checkNew();
+        	   	checkEdit();
            }}
         ]
 	});
 
-	$("#new_div table").css("width",(setFitWidthInParent("body","new_div_table"))+"px");
-	$("#new_div table").css("magin","-100px");
-	$("#new_div table td").css("padding-left","50px");
-	$("#new_div table td").css("padding-right","20px");
-	$("#new_div table td").css("font-size","15px");
-	$("#new_div table .td1").css("width","15%");
-	$("#new_div table .td2").css("width","30%");
-	$("#new_div table tr").css("border-bottom","#CAD9EA solid 1px");
-	$("#new_div table tr").each(function(i){
+	$("#edit_div table").css("width",(setFitWidthInParent("body","edit_div_table"))+"px");
+	$("#edit_div table").css("magin","-100px");
+	$("#edit_div table td").css("padding-left","50px");
+	$("#edit_div table td").css("padding-right","20px");
+	$("#edit_div table td").css("font-size","15px");
+	$("#edit_div table .td1").css("width","15%");
+	$("#edit_div table .td2").css("width","30%");
+	$("#edit_div table tr").css("border-bottom","#CAD9EA solid 1px");
+	$("#edit_div table tr").each(function(i){
 		var height;
 		if(i==1||i==3)
 			height=310;
@@ -101,19 +101,19 @@ function initNewDialog(){
 		$(this).css("height",height+"px");
 	});
 
-	$(".panel.window").eq(ndNum).css("margin-top","20px");
-	$(".panel.window .panel-title").eq(ndNum).css("color","#000");
-	$(".panel.window .panel-title").eq(ndNum).css("font-size","15px");
-	$(".panel.window .panel-title").eq(ndNum).css("padding-left","10px");
+	$(".panel.window").eq(edNum).css("margin-top","20px");
+	$(".panel.window .panel-title").eq(edNum).css("color","#000");
+	$(".panel.window .panel-title").eq(edNum).css("font-size","15px");
+	$(".panel.window .panel-title").eq(edNum).css("padding-left","10px");
 	
 	$(".panel-header, .panel-body").css("border-color","#ddd");
 	
 	//以下的是表格下面的面板
-	$(".window-shadow").eq(ndNum).css("margin-top","20px");
-	$(".window,.window .window-body").eq(ndNum).css("border-color","#ddd");
+	$(".window-shadow").eq(edNum).css("margin-top","20px");
+	$(".window,.window .window-body").eq(edNum).css("border-color","#ddd");
 
-	$("#new_div #ok_but").css("left","45%");
-	$("#new_div #ok_but").css("position","absolute");
+	$("#edit_div #ok_but").css("left","45%");
+	$("#edit_div #ok_but").css("position","absolute");
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 	
@@ -160,6 +160,9 @@ function initZYZTCBB(){
 		valueField:"value",
 		textField:"text",
 		data:data,
+		onLoadSuccess:function(){
+			$(this).combobox("setValue",'${requestScope.sj.zyzt }'?1:0);
+		},
 		onSelect:function(){
 			$("#zyzt").val($(this).combobox("getValue"));
 		}
@@ -171,29 +174,32 @@ function initSHZTCBB(){
 		valueField:"value",
 		textField:"text",
 		data:[{"value":"","text":"请选择审核状态"},{"value":"1","text":"编辑中"},{"value":"2","text":"待审核"},{"value":"3","text":"审核通过"}],
+		onLoadSuccess:function(){
+			$(this).combobox("setValue",'${requestScope.sj.shzt }');
+		},
 		onSelect:function(){
 			$("#shzt").val($(this).combobox("getValue"));
 		}
 	});
 }
 
-function checkNew(){
+function checkEdit(){
 	if(checkXM()){
 		if(checkSFZH()){
 			if(checkZYZT()){
 				if(checkSHZT()){
-					newSiJi();
+					editSiJi();
 				}
 			}
 		}
 	}
 }
 
-function newSiJi(){
+function editSiJi(){
 	var formData = new FormData($("#form1")[0]);
 	$.ajax({
 		type:"post",
-		url:sjglPath+"newSiJi",
+		url:sjglPath+"editSiJi",
 		dataType: "json",
 		data:formData,
 		cache: false,
@@ -354,10 +360,10 @@ function showJz(obj){
 function setFitWidthInParent(parent,self){
 	var space=0;
 	switch (self) {
-	case "new_div":
+	case "edit_div":
 		space=340;
 		break;
-	case "new_div_table":
+	case "edit_div_table":
 	case "panel_window":
 		space=355;
 		break;
@@ -372,23 +378,24 @@ function setFitWidthInParent(parent,self){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../inc/side.jsp"%>
 	<div class="center_con_div" id="center_con_div">
-		<div class="page_location_div">司机-创建</div>
+		<div class="page_location_div">司机信息-编辑</div>
 		
-		<div id="new_div">
-		<form id="form1" name="form1" method="post" enctype="multipart/form-data">
+		<div id="edit_div">
+			<form id="form1" name="form1" method="post" enctype="multipart/form-data">
+			<input type="hidden" id="id" name="id" value="${requestScope.sj.id }"/>
 			<table>
 			  <tr>
 				<td class="td1" align="right">
 					姓名
 				</td>
 				<td class="td2">
-					<input type="text" class="xm_inp" id="xm" name="xm" placeholder="请输入姓名" onfocus="focusXM()" onblur="checkXM()"/>
+					<input type="text" class="xm_inp" id="xm" name="xm" value="${requestScope.sj.xm }" placeholder="请输入姓名" onfocus="focusXM()" onblur="checkXM()"/>
 				</td>
 				<td class="td1" align="right">
 					手机号
 				</td>
 				<td class="td2">
-					<input type="text" class="sjh_inp" id="sjh" name="sjh" placeholder="请输入手机号"/>
+					<input type="text" class="sjh_inp" id="sjh" name="sjh" value="${requestScope.sj.sjh }" placeholder="请输入手机号"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -398,13 +405,13 @@ function setFitWidthInParent(parent,self){
 				<td class="td2">
 					<div class="uploadBut_div upSfzzpBut_div" onclick="uploadSfzzp()">选择照片</div>
 					<input type="file" class="sfzzp_file" id="sfzzp_file" name="sfzzp_file" onchange="showSfzzp(this)"/>
-					<img class="sfzzp_img" id="sfzzp_img" alt="" src=""/>
+					<img class="sfzzp_img" id="sfzzp_img" alt="" src="${requestScope.sj.sfzzp }"/>
 				</td>
 				<td class="td1" align="right">
 					身份证号
 				</td>
 				<td class="td2">
-					<input type="text" class="sfzh_inp" id="sfzh" name="sfzh" placeholder="请输入身份证号" onfocus="focusSFZH()" onblur="checkSFZH()"/>
+					<input type="text" class="sfzh_inp" id="sfzh" name="sfzh" value="${requestScope.sj.sfzh }" placeholder="请输入身份证号" onfocus="focusSFZH()" onblur="checkSFZH()"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -430,7 +437,7 @@ function setFitWidthInParent(parent,self){
 				<td class="td2">
 					<div class="uploadBut_div upZgzsBut_div" onclick="uploadZgzs()">选择资格证书</div>
 					<input type="file" class="zgzs_file" id="zgzs_file" name="zgzs_file" onchange="showZgzs(this)"/>
-					<img class="zgzs_img" id="zgzs_img" alt="" src=""/>
+					<img class="zgzs_img" id="zgzs_img" alt="" src="${requestScope.sj.zgzs }"/>
 				</td>
 				<td class="td1" align="right">
 					驾证
@@ -438,7 +445,7 @@ function setFitWidthInParent(parent,self){
 				<td class="td2">
 					<div class="uploadBut_div upJzBut_div" onclick="uploadJz()">选择驾证</div>
 					<input type="file" class="jz_file" id="jz_file" name="jz_file" onchange="showJz(this)"/>
-					<img class="jz_img" id="jz_img" alt="" src=""/>
+					<img class="jz_img" id="jz_img" alt="" src="${requestScope.sj.jz }"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -447,18 +454,18 @@ function setFitWidthInParent(parent,self){
 				</td>
 				<td class="td2">
 					<input id="zyzt_cbb"/>
-					<input type="hidden" id="zyzt" name="zyzt"/>
+					<input type="hidden" id="zyzt" name="zyzt" value="${requestScope.sj.zyzt }"/>
 				</td>
 				<td class="td1" align="right">
 					审核状态
 				</td>
 				<td class="td2">
 					<input id="shzt_cbb"/>
-					<input type="hidden" id="shzt" name="shzt"/>
+					<input type="hidden" id="shzt" name="shzt" value="${requestScope.sj.shzt }"/>
 				</td>
 			  </tr>
 			</table>
-		</form>
+			</form>
 		</div>
 		<%@include file="../../inc/foot.jsp"%>
 	</div>
