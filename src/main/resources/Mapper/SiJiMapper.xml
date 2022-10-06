@@ -121,10 +121,13 @@
 		<if test="xm!=''&amp;xm!=null">
 			and xm like CONCAT('%',#{xm},'%')
 		</if> 
-		<if test="sfz!=''&amp;sfz!=null">
-			and sfz like CONCAT('%',#{sfz},'%')
+		<if test="sjh!=''&amp;sjh!=null">
+			and sjh like CONCAT('%',#{sjh},'%')
 		</if> 
-		<if test="zyzt!=''&amp;zyzt!=null">
+		<if test="sfzh!=''&amp;sfzh!=null">
+			and sfzh like CONCAT('%',#{sfzh},'%')
+		</if> 
+		<if test="(zyzt!='' or zyzt==0)&amp;zyzt!=null">
 			and zyzt=#{zyzt}
 		</if> 
 		<if test="shzt!=''&amp;shzt!=null">
@@ -135,11 +138,14 @@
 		select * from si_ji where 1=1
 		<if test="xm!=''&amp;xm!=null">
 			and xm like CONCAT('%',#{xm},'%')
+		</if>  
+		<if test="sjh!=''&amp;sjh!=null">
+			and sjh like CONCAT('%',#{sjh},'%')
 		</if> 
-		<if test="sfz!=''&amp;sfz!=null">
-			and sfz like CONCAT('%',#{sfz},'%')
+		<if test="sfzh!=''&amp;sfzh!=null">
+			and sfzh like CONCAT('%',#{sfzh},'%')
 		</if> 
-		<if test="zyzt!=''&amp;zyzt!=null">
+		<if test="(zyzt!='' or zyzt==0)&amp;zyzt!=null">
 			and zyzt=#{zyzt}
 		</if> 
 		<if test="shzt!=''&amp;shzt!=null">

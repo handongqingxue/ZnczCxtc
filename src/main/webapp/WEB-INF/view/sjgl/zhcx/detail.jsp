@@ -19,6 +19,11 @@
 	margin-left: 20px;
 	font-size: 18px;
 }
+.sfzzp_img,.zgzs_img,.jz_img{
+	width: 220px;
+	height:220px;
+	margin-top: 10px;
+}
 </style>
 <script type="text/javascript">
 var path='<%=basePath %>';
@@ -46,9 +51,9 @@ function initDialogPosition(){
 function initDetailDialog(){
 	dialogTop+=20;
 	$("#detail_div").dialog({
-		title:"订单信息",
+		title:"司机信息",
 		width:setFitWidthInParent("body","detail_div"),
-		height:290,
+		height:720,
 		top:dialogTop,
 		left:dialogLeft
 	});
@@ -62,7 +67,12 @@ function initDetailDialog(){
 	$("#detail_div table .td2").css("width","30%");
 	$("#detail_div table tr").css("border-bottom","#CAD9EA solid 1px");
 	$("#detail_div table tr").each(function(i){
-		$(this).css("height","45px");
+		var height;
+		if(i==1||i==3)
+			height=260;
+		else
+			height=45;
+		$(this).css("height",height+"px");
 	});
 
 	$(".panel.window").eq(ddNum).css("margin-top","20px");
@@ -100,90 +110,86 @@ function setFitWidthInParent(parent,self){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../inc/side.jsp"%>
 	<div class="center_con_div" id="center_con_div">
-		<div class="page_location_div">订单管理-综合查询-订单详情</div>
+		<div class="page_location_div">司机管理-综合查询-司机详情</div>
 		
 		<div id="detail_div">
-			<form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
-			<input type="hidden" id="id" value="${requestScope.dd.id }"/>
 			<table>
 			  <tr>
 				<td class="td1" align="right">
-					订单号
+					姓名
 				</td>
 				<td class="td2">
-					${requestScope.dd.ddh }
+					${requestScope.sj.xm }
 				</td>
 				<td class="td1" align="right">
-					车牌号
+					手机号
 				</td>
 				<td class="td2">
-					${requestScope.dd.cph }
+					${requestScope.sj.sjh }
 				</td>
 			  </tr>
 			  <tr>
 				<td class="td1" align="right">
-					车辆类型
+					照片
 				</td>
 				<td class="td2">
-					<c:if test="${requestScope.dd.clLx eq 1 }">陌生</c:if>
-					<c:if test="${requestScope.dd.clLx eq 2 }">待识别</c:if>
-					<c:if test="${requestScope.dd.clLx eq 3 }">已识别</c:if>
-					车辆
+					<img class="sfzzp_img" id="sfzzp_img" alt="" src="${requestScope.sj.sfzzp }"/>
 				</td>
 				<td class="td1" align="right">
-					完成订单次数
+					身份证号
 				</td>
 				<td class="td2">
-					${requestScope.dd.clWcddcs }
+					${requestScope.sj.sfzh }
 				</td>
 			  </tr>
 			  <tr>
 				<td class="td1" align="right">
-					流向类型
+					资格证有效期至
+				</td>
+				<td class="td2">
+					${requestScope.sj.zgzyxqz }
+				</td>
+				<td class="td1" align="right">
+					驾证有效期至
+				</td>
+				<td class="td2">
+					${requestScope.sj.jzyxqz }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					资格证书
+				</td>
+				<td class="td2">
+					<img class="zgzs_img" id="zgzs_img" alt="" src="${requestScope.sj.zgzs }"/>
+				</td>
+				<td class="td1" align="right">
+					驾证
+				</td>
+				<td class="td2">
+					<img class="jz_img" id="jz_img" alt="" src="${requestScope.sj.jz }"/>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					在用状态
 				</td>
 				<td class="td2">
 					<c:choose>
-						<c:when test="${requestScope.dd.lxlx eq 1 }">送运</c:when>
-						<c:otherwise>取运</c:otherwise>
+						<c:when test="${requestScope.sj.zyzt }">是</c:when>
+						<c:otherwise>否</c:otherwise>
 					</c:choose>
 				</td>
 				<td class="td1" align="right">
-					物资类型
+					审核状态
 				</td>
 				<td class="td2">
-					${requestScope.dd.wzlxMc }
-				</td>
-			  </tr>
-			  <tr>
-				<td class="td1" align="right">
-					物资名称
-				</td>
-				<td class="td2">
-					${requestScope.dd.wzMc }
-				</td>
-				<td class="td1" align="right">
-					运输商
-				</td>
-				<td class="td2">
-					${requestScope.dd.yssMc }
-				</td>
-			  </tr>
-			  <tr>
-				<td class="td1" align="right">
-					发货单位
-				</td>
-				<td class="td2">
-					${requestScope.dd.fhdwMc }
-				</td>
-				<td class="td1" align="right">
-					收货单位
-				</td>
-				<td class="td2">
-					${requestScope.dd.shdwMc }
+					<c:if test="${requestScope.sj.shzt eq 1 }">编辑中</c:if>
+					<c:if test="${requestScope.sj.shzt eq 2 }">待审核</c:if>
+					<c:if test="${requestScope.sj.shzt eq 3 }">审核通过</c:if>
 				</td>
 			  </tr>
 			</table>
-			</form>
 		</div>
 
 		<%@include file="../../inc/foot.jsp"%>

@@ -6,16 +6,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 .tab1_div{
-	margin-top:80px;margin-left: 220px;
+	margin-top:80px;
+	margin-left: 220px;
 }
 .tab1_div .toolbar{
-	height:32px;line-height:32px;
+	height:32px;
 }
-.tab1_div .toolbar .mc_span{
+.tab1_div .toolbar .xm_span,
+.tab1_div .toolbar .sjh_span,
+.tab1_div .toolbar .sfzh_span,
+.tab1_div .toolbar .zyzt_span{
 	margin-left: 13px;
 }
-.tab1_div .toolbar .mc_inp{
-	width: 120px;height: 25px;
+.tab1_div .toolbar .xm_inp,
+.tab1_div .toolbar .sjh_inp{
+	width: 120px;
+	height: 25px;
+}
+.tab1_div .toolbar .sfzh_inp{
+	width: 180px;
+	height: 25px;
 }
 .tab1_div .toolbar .search_but{
 	margin-left: 13px;
@@ -27,6 +37,7 @@
 var path='<%=basePath %>';
 var sjglPath=path+'sjgl/';
 $(function(){
+	initZYZTCBB();
 	initSearchLB();
 	initAddLB();
 	initRemoveLB();
@@ -41,12 +52,29 @@ function showCompontByQx(){
 	}
 }
 
+function initZYZTCBB(){
+	var data=[];
+	data.push({"value":"","text":"请选择"});
+	data.push({"value":"1","text":"是"});
+	data.push({"value":"0","text":"否"});
+	
+	zyztCBB=$("#zyzt_cbb").combobox({
+		valueField:"value",
+		textField:"text",
+		//multiple:true,
+		data:data
+	});
+}
+
 function initSearchLB(){
 	$("#search_but").linkbutton({
 		iconCls:"icon-search",
 		onClick:function(){
-			var mc=$("#toolbar #mc").val();
-			tab1.datagrid("load",{mc:mc});
+			var xm=$("#toolbar #xm").val();
+			var sjh=$("#toolbar #sjh").val();
+			var sfzh=$("#toolbar #sfzh").val();
+			var zyzt=zyztCBB.combobox("getValue");
+			tab1.datagrid("load",{xm:xm,sjh:sjh,sfzh:sfzh,zyzt:zyzt});
 		}
 	});
 }
@@ -146,12 +174,12 @@ function deleteByIds() {
 			ids=ids.substring(1);
 			
 			$.ajaxSetup({async:false});
-			$.post(sjglPath + "deleteFaHuoDanWei",
+			$.post(sjglPath + "deleteSiJi",
 				{ids:ids},
 				function(result){
 					if(result.status==1){
 						alert(result.msg);
-						location.href = location.href;
+						tab1.datagrid("load");
 					}
 					else{
 						alert(result.msg);
@@ -174,8 +202,14 @@ function setFitWidthInParent(o){
 	<%@include file="../../inc/side.jsp"%>
 	<div class="tab1_div" id="tab1_div">
 		<div class="toolbar" id="toolbar">
-			<span class="mc_span">名称：</span>
-			<input type="text" class="mc_inp" id="mc" placeholder="请输入名称"/>
+			<span class="xm_span">姓名：</span>
+			<input type="text" class="xm_inp" id="xm" placeholder="请输入姓名"/>
+			<span class="sjh_span">手机号：</span>
+			<input type="text" class="sjh_inp" id="sjh" placeholder="请输入手机号"/>
+			<span class="sfzh_span">身份证号：</span>
+			<input type="text" class="sfzh_inp" id="sfzh" placeholder="请输入身份证号"/>
+			<span class="zyzt_span">在用状态：</span>
+			<input id="zyzt_cbb"/>
 			<a class="search_but" id="search_but">查询</a>
 			<a id="add_but">添加</a>
 			<a id="remove_but">删除</a>

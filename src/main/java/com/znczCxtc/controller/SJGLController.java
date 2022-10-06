@@ -36,7 +36,6 @@ public class SJGLController {
 	@RequestMapping(value="/zhcx/edit")
 	public String goZhcxEdit(HttpServletRequest request) {
 		
-		//publicService.selectNav(request);
 		String id = request.getParameter("id");
 		SiJi sj=siJiService.selectById(id);
 		request.setAttribute("sj", sj);
@@ -53,6 +52,16 @@ public class SJGLController {
 	public String goZhcxList(HttpServletRequest request) {
 		
 		return MODULE_NAME+"/zhcx/list";
+	}
+
+	@RequestMapping(value="/zhcx/detail")
+	public String goZhcxDetail(HttpServletRequest request) {
+		
+		String id = request.getParameter("id");
+		SiJi sj=siJiService.selectById(id);
+		request.setAttribute("sj", sj);
+		
+		return MODULE_NAME+"/zhcx/detail";
 	}
 	
 	@RequestMapping(value="/newSiJi")
@@ -190,12 +199,12 @@ public class SJGLController {
 
 	@RequestMapping(value="/querySiJiList")
 	@ResponseBody
-	public Map<String, Object> querySiJiList(String xm,String sfz,Integer zyzt,String shzt,int page,int rows,String sort,String order) {
+	public Map<String, Object> querySiJiList(String xm,String sjh,String sfzh,Integer zyzt,Integer shzt,int page,int rows,String sort,String order) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		int count = siJiService.queryForInt(xm,sfz,zyzt,shzt);
-		List<SiJi> sjList=siJiService.queryList(xm,sfz,zyzt, shzt, page, rows, sort, order);
+		int count = siJiService.queryForInt(xm,sjh,sfzh,zyzt,shzt);
+		List<SiJi> sjList=siJiService.queryList(xm,sjh,sfzh,zyzt, shzt, page, rows, sort, order);
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", sjList);

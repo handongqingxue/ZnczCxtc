@@ -10,9 +10,9 @@ public interface SiJiService {
 
 	public int edit(SiJi sj);
 
-	public int queryForInt(String xm, String sfz, Integer zyzt,String shzt);
+	public int queryForInt(String xm, String sjh, String sfzh, Integer zyzt,Integer shzt);
 
-	public List<SiJi> queryList(String xm, String sfz, Integer zyzt, String shzt, int page, int rows, String sort, String order);
+	public List<SiJi> queryList(String xm, String sjh, String sfzh, Integer zyzt, Integer shzt, int page, int rows, String sort, String order);
 
 	public SiJi selectById(String id);
 }

@@ -28,16 +28,16 @@ public class SiJiServiceImpl implements SiJiService {
 	}
 
 	@Override
-	public int queryForInt(String xm, String sfz, Integer zyzt,String shzt) {
+	public int queryForInt(String xm, String sjh, String sfzh, Integer zyzt,Integer shzt) {
 		// TODO Auto-generated method stub
-		return siJiDao.queryForInt(xm,sfz,zyzt,shzt);
+		return siJiDao.queryForInt(xm,sjh,sfzh,zyzt,shzt);
 	}
 
 	@Override
-	public List<SiJi> queryList(String xm, String sfz, Integer zyzt, String shzt, int page, int rows, String sort,
+	public List<SiJi> queryList(String xm, String sjh, String sfzh, Integer zyzt, Integer shzt, int page, int rows, String sort,
 			String order) {
 		// TODO Auto-generated method stub
-		return siJiDao.queryList(xm, sfz, zyzt, shzt, (page-1)*rows, rows, sort, order);
+		return siJiDao.queryList(xm, sjh, sfzh, zyzt, shzt, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override
