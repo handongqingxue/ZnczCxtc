@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.znczCxtc.dao.CheLiangMapper">
+	<insert id="add" parameterType="com.znczCxtc.entity.CheLiang">
+		insert into che_liang
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cph!=null">
+				cph,
+			</if>
+			<if test="czxx!=null">
+				czxx,
+			</if>
+			<if test="pz!=null">
+				pz,
+			</if>
+			<if test="cllx!=null">
+				cllx,
+			</if>
+			<if test="ppxh!=null">
+				ppxh,
+			</if>
+			<if test="zp!=null">
+				zp,
+			</if>
+			<if test="fdjhm!=null">
+				fdjhm,
+			</if>
+			<if test="clsbdh!=null">
+				clsbdh,
+			</if>
+				zcrq,
+			<if test="pfjd!=null">
+				pfjd,
+			</if>
+			<if test="fzrq!=null">
+				fzrq,
+			</if>
+			<if test="sfzy!=null">
+				sfzy,
+			</if>
+			<if test="shzt!=null">
+				shzt,
+			</if>
+			<if test="clyslx!=null">
+				clyslx,
+			</if>
+			<if test="xsz!=null">
+				xsz,
+			</if>
+			<if test="scqd!=null">
+				scqd,
+			</if>
+			<if test="pfjdcxjt!=null">
+				pfjdcxjt,
+			</if>
+			<if test="bz!=null">
+				bz,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cph!=null">
+				#{cph},
+			</if>
+			<if test="czxx!=null">
+				#{czxx},
+			</if>
+			<if test="pz!=null">
+				#{pz},
+			</if>
+			<if test="cllx!=null">
+				#{cllx},
+			</if>
+			<if test="ppxh!=null">
+				#{ppxh},
+			</if>
+			<if test="zp!=null">
+				#{zp},
+			</if>
+			<if test="fdjhm!=null">
+				#{fdjhm},
+			</if>
+			<if test="clsbdh!=null">
+				#{clsbdh},
+			</if>
+				now(),
+			<if test="pfjd!=null">
+				#{pfjd},
+			</if>
+			<if test="fzrq!=null">
+				#{fzrq},
+			</if>
+			<if test="sfzy!=null">
+				#{sfzy},
+			</if>
+			<if test="shzt!=null">
+				#{shzt},
+			</if>
+			<if test="clyslx!=null">
+				#{clyslx},
+			</if>
+			<if test="xsz!=null">
+				#{xsz},
+			</if>
+			<if test="scqd!=null">
+				#{scqd},
+			</if>
+			<if test="pfjdcxjt!=null">
+				#{pfjdcxjt},
+			</if>
+			<if test="bz!=null">
+				#{bz},
+			</if>
+		</trim>
+	</insert>
+	<delete id="deleteCheLiang">
+		delete from che_liang where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
+	<update id="shenHeCheLiang">
+		update che_liang set 
+		<if test="flag=='sh'">
+			sfzy=1,shzt=2
+		</if>
+		<if test="flag=='th'">
+			sfzy=0,shzt=3
+		</if>
+		where 1=1
+		<foreach collection="idList" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</update>
+	<update id="editCheLiang" parameterType="com.znczCxtc.entity.CheLiang">
+		update che_liang set 
+		<trim suffixOverrides=",">
+			<if test="cph!=null">
+				cph=#{cph},
+			</if>
+			<if test="czxx!=null">
+				czxx=#{czxx},
+			</if>
+			<if test="pz!=null">
+				pz=#{pz},
+			</if>
+			<if test="cllx!=null">
+				cllx=#{cllx},
+			</if>
+			<if test="ppxh!=null">
+				ppxh=#{ppxh},
+			</if>
+			<if test="zp!=null">
+				zp=#{zp},
+			</if>
+			<if test="fdjhm!=null">
+				fdjhm=#{fdjhm},
+			</if>
+			<if test="clsbdh!=null">
+				clsbdh=#{clsbdh},
+			</if>
+			<if test="zcrq!=null">
+				zcrq=#{zcrq},
+			</if>
+			<if test="pfjd!=null">
+				pfjd=#{pfjd},
+			</if>
+			<if test="fzrq!=null">
+				fzrq=#{fzrq},
+			</if>
+			<if test="sfzy!=null">
+				sfzy=#{sfzy},
+			</if>
+			<if test="shzt!=null">
+				shzt=#{shzt},
+			</if>
+			<if test="clyslx!=null">
+				clyslx=#{clyslx},
+			</if>
+			<if test="xsz!=null">
+				xsz=#{xsz},
+			</if>
+			<if test="scqd!=null">
+				scqd=#{scqd},
+			</if>
+			<if test="pfjdcxjt!=null">
+				pfjdcxjt=#{pfjdcxjt},
+			</if>
+			<if test="bz!=null">
+				bz=#{bz},
+			</if>
+		</trim>
+		 where id=#{id}
+	</update>
+	<select id="queryForInt" resultType="java.lang.Integer">
+		select count(*) from che_liang where 1=1
+		<if test="cph!=''&amp;cph!=null">
+			and cph like CONCAT('%',#{cph},'%')
+		</if> 
+		<if test="cllx!=''&amp;cllx!=null">
+			and cllx=#{cllx}
+		</if> 
+		<if test="sfzy!=''&amp;sfzy!=null">
+			and sfzy=#{sfzy}
+		</if> 
+		<if test="pfjd!=''&amp;pfjd!=null">
+			and pfjd=#{pfjd}
+		</if> 
+		<if test="shztList!=null">
+			<foreach collection="shztList" item="shzt" open=" and shzt in(" separator="," close=")">
+			#{shzt}
+			</foreach>
+		</if>
+		<if test="bz!=''&amp;bz!=null">
+			and bz like CONCAT('%',#{bz},'%')
+		</if> 
+	</select>
+	<select id="queryList" resultType="com.znczCxtc.entity.CheLiang">
+		select * from che_liang where 1=1
+		<if test="cph!=''&amp;cph!=null">
+			and cph like CONCAT('%',#{cph},'%')
+		</if> 
+		<if test="cllx!=''&amp;cllx!=null">
+			and cllx=#{cllx}
+		</if>  
+		<if test="sfzy!=''&amp;sfzy!=null">
+			and sfzy=#{sfzy}
+		</if> 
+		<if test="pfjd!=''&amp;pfjd!=null">
+			and pfjd=#{pfjd}
+		</if> 
+		<if test="shztList!=null">
+			<foreach collection="shztList" item="shzt" open=" and shzt in(" separator="," close=")">
+			#{shzt}
+			</foreach>
+		</if>
+		<if test="bz!=''&amp;bz!=null">
+			and bz like CONCAT('%',#{bz},'%')
+		</if> 
+		order by zcrq desc 
+		limit #{rowNum},#{rows}
+	</select>
+	<select id="selectCheLiangById" resultType="com.znczCxtc.entity.CheLiang">
+		select * from che_liang where id=#{0}
+	</select>
+</mapper>

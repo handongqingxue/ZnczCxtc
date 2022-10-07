@@ -109,7 +109,7 @@ public class SJGLController {
 						String folder="SiJi/";
 						switch (i) {
 						case 0:
-							folder+="Sfzzp";//照片
+							folder+="Sfzzp";//身份证照片
 							break;
 						case 1:
 							folder+="Jz";//驾证

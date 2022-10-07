@@ -260,7 +260,7 @@ function checkSJH(){
 
 function focusSFZH(){
 	var sfzh = $("#sfzh").val();
-	if(sfzh=="手机号不能为空"){
+	if(sfzh=="身份证号不能为空"){
 		$("#sfzh").val("");
 		$("#sfzh").css("color", "#555555");
 	}
