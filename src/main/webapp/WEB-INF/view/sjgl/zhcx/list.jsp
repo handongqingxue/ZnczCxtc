@@ -99,7 +99,7 @@ function initRemoveLB(){
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"司机-列表",
+		title:"司机管理-综合查询-列表",
 		url:sjglPath+"querySiJiList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),

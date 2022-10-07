@@ -354,7 +354,7 @@ function showLeftMenuByQx(){
 					<div class="line_div"></div>
 					<li class="layui-nav-item mscl_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
-						<a href="<%=basePath%>clgl/mscl/list">
+						<a href="<%=basePath%>sjgl/dsh/list">
 							&nbsp;&nbsp;&nbsp;待审核
 						</a>
 					</li>

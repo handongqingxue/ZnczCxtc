@@ -91,7 +91,7 @@ function initRemoveLB(){
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"队列-列表",
+		title:"排队管理-队列-列表",
 		url:pdglPath+"queryDuiLieList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),

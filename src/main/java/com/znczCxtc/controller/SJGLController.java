@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.znczCxtc.util.FileUploadUtil;
+import com.znczCxtc.util.*;
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
 
@@ -26,6 +26,29 @@ public class SJGLController {
 	@Autowired
     private SiJiService siJiService;
 	public static final String MODULE_NAME="sjgl";
+
+	/**
+	 * 跳转到司机管理-待审核-列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/dsh/list")
+	public String goDshList(HttpServletRequest request) {
+
+		request.setAttribute("shzt", SiJi.DAI_SHEN_HE);
+		
+		return MODULE_NAME+"/dsh/list";
+	}
+
+	@RequestMapping(value="/dsh/detail")
+	public String goDshDetail(HttpServletRequest request) {
+		
+		String id = request.getParameter("id");
+		SiJi sj=siJiService.selectById(id);
+		request.setAttribute("sj", sj);
+		
+		return MODULE_NAME+"/dsh/detail";
+	}
 
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {
@@ -131,6 +154,26 @@ public class SJGLController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/deleteSiJi",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteSiJi(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=siJiService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除司机信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除司机信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
 	@RequestMapping(value="/editSiJi")
 	@ResponseBody
 	public Map<String, Object> editSiJi(SiJi sj,
@@ -210,5 +253,31 @@ public class SJGLController {
 		jsonMap.put("rows", sjList);
 		
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/shenHeSiJi",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String shenHeSiJi(String ids, String flag) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=siJiService.shenHe(ids,flag);
+		PlanResult plan=new PlanResult();
+		String tsStr=null;
+		if("sh".equals(flag))
+			tsStr="审核";
+		else if("th".equals(flag))
+			tsStr="退回";
+		
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg(tsStr+"司机信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg(tsStr+"司机信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 }

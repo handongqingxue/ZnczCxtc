@@ -170,10 +170,15 @@ function initZYZTCBB(){
 }
 
 function initSHZTCBB(){
+	var data=[];
+	data.push({"value":"","text":"请选择审核状态"});
+	data.push({"value":"1","text":"编辑中"});
+	data.push({"value":"2","text":"待审核"});
+	data.push({"value":"3","text":"审核通过"});
 	shztCBB=$("#shzt_cbb").combobox({
 		valueField:"value",
 		textField:"text",
-		data:[{"value":"","text":"请选择审核状态"},{"value":"1","text":"编辑中"},{"value":"2","text":"待审核"},{"value":"3","text":"审核通过"}],
+		data:data,
 		onLoadSuccess:function(){
 			$(this).combobox("setValue",'${requestScope.sj.shzt }');
 		},
@@ -185,10 +190,12 @@ function initSHZTCBB(){
 
 function checkEdit(){
 	if(checkXM()){
-		if(checkSFZH()){
-			if(checkZYZT()){
-				if(checkSHZT()){
-					editSiJi();
+		if(checkSJH()){
+			if(checkSFZH()){
+				if(checkZYZT()){
+					if(checkSHZT()){
+						editSiJi();
+					}
 				}
 			}
 		}
@@ -231,6 +238,26 @@ function checkXM(){
 	if(xm==null||xm==""||xm=="姓名不能为空"){
 		$("#xm").css("color","#E15748");
     	$("#xm").val("姓名不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+function focusSJH(){
+	var sjh = $("#sjh").val();
+	if(sfzh=="手机号不能为空"){
+		$("#sjh").val("");
+		$("#sjh").css("color", "#555555");
+	}
+}
+
+//验证手机号
+function checkSJH(){
+	var sjh = $("#sjh").val();
+	if(sjh==null||sjh==""||sjh=="手机号不能为空"){
+		$("#sjh").css("color","#E15748");
+    	$("#sjh").val("手机号不能为空");
     	return false;
 	}
 	else
@@ -378,7 +405,7 @@ function setFitWidthInParent(parent,self){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../inc/side.jsp"%>
 	<div class="center_con_div" id="center_con_div">
-		<div class="page_location_div">司机信息-编辑</div>
+		<div class="page_location_div">司机管理-综合查询-编辑</div>
 		
 		<div id="edit_div">
 			<form id="form1" name="form1" method="post" enctype="multipart/form-data">
@@ -395,7 +422,7 @@ function setFitWidthInParent(parent,self){
 					手机号
 				</td>
 				<td class="td2">
-					<input type="text" class="sjh_inp" id="sjh" name="sjh" value="${requestScope.sj.sjh }" placeholder="请输入手机号"/>
+					<input type="text" class="sjh_inp" id="sjh" name="sjh" value="${requestScope.sj.sjh }" placeholder="请输入手机号" onfocus="focusSJH()" onblur="checkSJH()"/>
 				</td>
 			  </tr>
 			  <tr>

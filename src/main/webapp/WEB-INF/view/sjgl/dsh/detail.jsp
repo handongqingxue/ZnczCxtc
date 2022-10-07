@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
 <%@include file="../../inc/js.jsp"%>
 <style type="text/css">
 .center_con_div{
@@ -18,15 +19,19 @@
 	margin-left: 20px;
 	font-size: 18px;
 }
+.sfzzp_img,.zgzs_img,.jz_img{
+	width: 220px;
+	height:220px;
+	margin-top: 10px;
+}
 </style>
 <script type="text/javascript">
 var path='<%=basePath %>';
-var dwglPath=path+'dwgl/';
 var dialogTop=70;
 var dialogLeft=20;
 var ddNum=0;
 $(function(){
-	initDetailDialog();
+	initDetailDialog();//0
 
 	initDialogPosition();//将不同窗体移动到主要内容区域
 });
@@ -39,14 +44,15 @@ function initDialogPosition(){
 	var ccDiv=$("#center_con_div");
 	ccDiv.append(ddpw);
 	ccDiv.append(ddws);
+	ccDiv.css("width",setFitWidthInParent("body","center_con_div")+"px");
 }
 
 function initDetailDialog(){
 	dialogTop+=20;
 	$("#detail_div").dialog({
-		title:"运输商信息",
-		width:setFitWidthInParent("body","detail_div_table"),
-		height:200,
+		title:"司机信息",
+		width:setFitWidthInParent("body","detail_div"),
+		height:680,
 		top:dialogTop,
 		left:dialogLeft
 	});
@@ -59,7 +65,14 @@ function initDetailDialog(){
 	$("#detail_div table .td1").css("width","15%");
 	$("#detail_div table .td2").css("width","30%");
 	$("#detail_div table tr").css("border-bottom","#CAD9EA solid 1px");
-	$("#detail_div table tr").css("height","45px");
+	$("#detail_div table tr").each(function(i){
+		var height;
+		if(i==1||i==3)
+			height=260;
+		else
+			height=45;
+		$(this).css("height",height+"px");
+	});
 
 	$(".panel.window").eq(ddNum).css("margin-top","20px");
 	$(".panel.window .panel-title").eq(ddNum).css("color","#000");
@@ -76,6 +89,9 @@ function initDetailDialog(){
 function setFitWidthInParent(parent,self){
 	var space=0;
 	switch (self) {
+	case "center_con_div":
+		space=205;
+		break;
 	case "detail_div":
 		space=340;
 		break;
@@ -88,30 +104,74 @@ function setFitWidthInParent(parent,self){
 	return width.substring(0,width.length-2)-space;
 }
 </script>
-<title>Insert title here</title>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../inc/side.jsp"%>
 	<div class="center_con_div" id="center_con_div">
-		<div class="page_location_div">单位管理-运输商-详情</div>
+		<div class="page_location_div">司机管理-待审核-司机详情</div>
 		
 		<div id="detail_div">
 			<table>
 			  <tr>
 				<td class="td1" align="right">
-					名称
+					姓名
 				</td>
 				<td class="td2">
-					${requestScope.yss.mc }
+					${requestScope.sj.xm }
 				</td>
 				<td class="td1" align="right">
+					手机号
 				</td>
 				<td class="td2">
+					${requestScope.sj.sjh }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					照片
+				</td>
+				<td class="td2">
+					<img class="sfzzp_img" id="sfzzp_img" alt="" src="${requestScope.sj.sfzzp }"/>
+				</td>
+				<td class="td1" align="right">
+					身份证号
+				</td>
+				<td class="td2">
+					${requestScope.sj.sfzh }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					资格证有效期至
+				</td>
+				<td class="td2">
+					${requestScope.sj.zgzyxqz }
+				</td>
+				<td class="td1" align="right">
+					驾证有效期至
+				</td>
+				<td class="td2">
+					${requestScope.sj.jzyxqz }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					资格证书
+				</td>
+				<td class="td2">
+					<img class="zgzs_img" id="zgzs_img" alt="" src="${requestScope.sj.zgzs }"/>
+				</td>
+				<td class="td1" align="right">
+					驾证
+				</td>
+				<td class="td2">
+					<img class="jz_img" id="jz_img" alt="" src="${requestScope.sj.jz }"/>
 				</td>
 			  </tr>
 			</table>
 		</div>
+
 		<%@include file="../../inc/foot.jsp"%>
 	</div>
 </div>

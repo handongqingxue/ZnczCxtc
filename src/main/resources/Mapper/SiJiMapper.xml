@@ -77,6 +77,12 @@
 			</if>
 		</trim>
 	</insert>
+	<delete id="deleteByIds">
+		delete from si_ji where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in(" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
 	<update id="edit" parameterType="com.znczCxtc.entity.SiJi">
 		update si_ji set 
 		<trim suffixOverrides=",">
@@ -156,4 +162,17 @@
 	<select id="selectById" resultType="com.znczCxtc.entity.SiJi">
 		select * from si_ji where id=#{0}
 	</select>
+	<update id="shenHe">
+		update si_ji set 
+		<if test="flag=='sh'">
+			zyzt=1,shzt=3
+		</if>
+		<if test="flag=='th'">
+			zyzt=0,shzt=1
+		</if>
+		where 1=1
+		<foreach collection="idList" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.znczCxtc.service.serviceImpl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,15 @@ public class SiJiServiceImpl implements SiJiService {
 	public int add(SiJi sj) {
 		// TODO Auto-generated method stub
 		return siJiDao.add(sj);
+	}
+
+	@Override
+	public int deleteByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count = siJiDao.deleteByIds(idList);
+		return count;
 	}
 
 	@Override
@@ -44,5 +54,14 @@ public class SiJiServiceImpl implements SiJiService {
 	public SiJi selectById(String id) {
 		// TODO Auto-generated method stub
 		return siJiDao.selectById(id);
+	}
+
+	@Override
+	public int shenHe(String ids, String flag) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count = siJiDao.shenHe(idList,flag);
+		return count;
 	}
 }

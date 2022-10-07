@@ -50,7 +50,7 @@ function initDialogPosition(){
 function initNewDialog(){
 	dialogTop+=20;
 	$("#new_div").dialog({
-		title:"收货部门信息",
+		title:"收货单位信息",
 		width:setFitWidthInParent("body","new_div_table"),
 		height:200,
 		top:dialogTop,
@@ -191,7 +191,7 @@ function setFitWidthInParent(parent,self){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../inc/side.jsp"%>
 	<div class="center_con_div" id="center_con_div">
-		<div class="page_location_div">收货部门-创建</div>
+		<div class="page_location_div">单位管理-收货单位-创建</div>
 		
 		<div id="new_div">
 		<form id="form1" name="form1" method="post" enctype="multipart/form-data">
