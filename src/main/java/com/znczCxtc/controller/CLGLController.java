@@ -35,6 +35,22 @@ public class CLGLController {
 	}
 
 	/**
+	 * 跳转到车辆管理-综合查询-编辑页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/zhcx/edit")
+	public String goZhcxEdit(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		String id = request.getParameter("id");
+		CheLiang cl=cheLiangService.selectById(id);
+		request.setAttribute("cl", cl);
+		
+		return MODULE_NAME+"/zhcx/edit";
+	}
+
+	/**
 	 * 跳转到车辆管理-综合查询-列表页面
 	 * @param request
 	 * @return
@@ -112,6 +128,80 @@ public class CLGLController {
 			else {
 				jsonMap.put("message", "no");
 				jsonMap.put("info", "创建车辆信息失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/editCheLiang")
+	@ResponseBody
+	public Map<String, Object> editCheLiang(CheLiang cl,
+			@RequestParam(value="zp_file",required=false) MultipartFile zp_file,
+			@RequestParam(value="xsz_file",required=false) MultipartFile xsz_file,
+			@RequestParam(value="scqd_file",required=false) MultipartFile scqd_file,
+			@RequestParam(value="pfjdcxjt_file",required=false) MultipartFile pfjdcxjt_file,
+			HttpServletRequest request) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			MultipartFile[] fileArr=new MultipartFile[4];
+			fileArr[0]=zp_file;
+			fileArr[1]=xsz_file;
+			fileArr[2]=scqd_file;
+			fileArr[3]=pfjdcxjt_file;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						String folder="CheLiang/";
+						switch (i) {
+						case 0:
+							folder+="Zp";//照片
+							break;
+						case 1:
+							folder+="Xsz";//行驶证
+							break;
+						case 2:
+							folder+="Scqd";//随车清单
+							break;
+						case 3:
+							folder+="Pfjdcxjt";//排放阶段查询截图
+							break;
+						}
+						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								cl.setZp(dataJO.get("src").toString());
+								break;
+							case 1:
+								cl.setXsz(dataJO.get("src").toString());
+								break;
+							case 2:
+								cl.setScqd(dataJO.get("src").toString());
+								break;
+							case 3:
+								cl.setPfjdcxjt(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+				}
+			}
+			
+			int count=cheLiangService.edit(cl);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "编辑车辆信息成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "编辑车辆信息失败！");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

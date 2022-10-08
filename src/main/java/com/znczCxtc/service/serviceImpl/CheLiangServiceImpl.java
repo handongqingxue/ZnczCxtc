@@ -42,9 +42,9 @@ public class CheLiangServiceImpl implements CheLiangService {
 	}
 
 	@Override
-	public int editCheLiang(CheLiang cl) {
+	public int edit(CheLiang cl) {
 		// TODO Auto-generated method stub
-		return cheLiangDao.editCheLiang(cl);
+		return cheLiangDao.edit(cl);
 	}
 
 	@Override
@@ -66,8 +66,8 @@ public class CheLiangServiceImpl implements CheLiangService {
 	}
 
 	@Override
-	public CheLiang selectCheLiangById(String id) {
+	public CheLiang selectById(String id) {
 		// TODO Auto-generated method stub
-		return cheLiangDao.selectCheLiangById(id);
+		return cheLiangDao.selectById(id);
 	}
 }

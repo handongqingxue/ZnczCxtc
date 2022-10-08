@@ -12,11 +12,11 @@ public interface CheLiangService {
 
 	public int shenHeCheLiang(String ids,String flag);
 
-	public int editCheLiang(CheLiang cl);
+	public int edit(CheLiang cl);
 
 	public int queryForInt(String cph, Integer cllx, Boolean sfzy, Integer pfjd, String shzt, String bz);
 
 	public List<CheLiang> queryList(String cph, Integer cllx, Boolean sfzy, Integer pfjd, String shzt, String bz, int page, int rows, String sort, String order);
 
-	public CheLiang selectCheLiangById(String id);
+	public CheLiang selectById(String id);
 }

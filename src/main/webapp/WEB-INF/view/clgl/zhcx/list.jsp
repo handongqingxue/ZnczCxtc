@@ -175,8 +175,8 @@ function initTab1(){
 			}},
 			{field:"bz",title:"备注",width:200},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
-            	var str="<a href=\""+clglPath+"fhdw/detail?id="+value+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\""+clglPath+"fhdw/edit?id="+value+"\">修改</a>";
+            	var str="<a href=\""+clglPath+"zhcx/detail?id="+value+"\">详情</a>"
+            	+"&nbsp;|&nbsp;<a href=\""+clglPath+"zhcx/edit?id="+value+"\">修改</a>";
             	return str;
             }}
 	    ]],

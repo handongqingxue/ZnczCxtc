@@ -134,7 +134,7 @@
 		#{id}
 		</foreach>
 	</update>
-	<update id="editCheLiang" parameterType="com.znczCxtc.entity.CheLiang">
+	<update id="edit" parameterType="com.znczCxtc.entity.CheLiang">
 		update che_liang set 
 		<trim suffixOverrides=",">
 			<if test="cph!=null">
@@ -202,7 +202,7 @@
 		<if test="cllx!=''&amp;cllx!=null">
 			and cllx=#{cllx}
 		</if> 
-		<if test="sfzy!=''&amp;sfzy!=null">
+		<if test="(sfzy!='' or sfzy==0)&amp;sfzy!=null">
 			and sfzy=#{sfzy}
 		</if> 
 		<if test="pfjd!=''&amp;pfjd!=null">
@@ -225,7 +225,7 @@
 		<if test="cllx!=''&amp;cllx!=null">
 			and cllx=#{cllx}
 		</if>  
-		<if test="sfzy!=''&amp;sfzy!=null">
+		<if test="(sfzy!='' or sfzy==0)&amp;sfzy!=null">
 			and sfzy=#{sfzy}
 		</if> 
 		<if test="pfjd!=''&amp;pfjd!=null">
@@ -242,7 +242,7 @@
 		order by zcrq desc 
 		limit #{rowNum},#{rows}
 	</select>
-	<select id="selectCheLiangById" resultType="com.znczCxtc.entity.CheLiang">
+	<select id="selectById" resultType="com.znczCxtc.entity.CheLiang">
 		select * from che_liang where id=#{0}
 	</select>
 </mapper>
