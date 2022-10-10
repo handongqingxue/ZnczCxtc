@@ -115,7 +115,7 @@
 			</if>
 		</trim>
 	</insert>
-	<delete id="deleteCheLiang">
+	<delete id="deleteByIds">
 		delete from che_liang where 1=1
 		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
 		#{id}

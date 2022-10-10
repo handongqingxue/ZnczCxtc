@@ -8,7 +8,7 @@ public interface CheLiangService {
 
 	public int add(CheLiang cl);
 
-	public int deleteCheLiang(String ids);
+	public int deleteByIds(String ids);
 
 	public int shenHeCheLiang(String ids,String flag);
 

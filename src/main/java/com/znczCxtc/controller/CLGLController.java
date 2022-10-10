@@ -28,6 +28,19 @@ public class CLGLController {
 	private CheLiangService cheLiangService;
 	public static final String MODULE_NAME="clgl";
 
+	/**
+	 * 跳转到车辆管理-待审核-列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/dsh/list")
+	public String goDshList(HttpServletRequest request) {
+
+		request.setAttribute("shzt", CheLiang.DAI_SHEN_HE);
+		
+		return MODULE_NAME+"/dsh/list";
+	}
+
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {
 		
@@ -145,6 +158,26 @@ public class CLGLController {
 			e.printStackTrace();
 		}
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteCheLiang",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteCheLiang(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cheLiangService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除车辆信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除车辆信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 
 	@RequestMapping(value="/editCheLiang")

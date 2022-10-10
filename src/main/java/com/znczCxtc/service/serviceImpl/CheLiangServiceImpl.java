@@ -24,11 +24,11 @@ public class CheLiangServiceImpl implements CheLiangService {
 	}
 
 	@Override
-	public int deleteCheLiang(String ids) {
+	public int deleteByIds(String ids) {
 		// TODO Auto-generated method stub
 		int count=0;
 		List<String> idList = Arrays.asList(ids.split(","));
-		count = cheLiangDao.deleteCheLiang(idList);
+		count = cheLiangDao.deleteByIds(idList);
 		return count;
 	}
 
