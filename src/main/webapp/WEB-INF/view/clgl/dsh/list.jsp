@@ -24,7 +24,7 @@
 	margin-left: 13px;
 }
 </style>
-<title>发货单位</title>
+<title>待审核车辆</title>
 <%@include file="../../inc/js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
@@ -33,7 +33,8 @@ var defaultShzt='${requestScope.shzt}';
 $(function(){
 	initCLLXCBB();
 	initSearchLB();
-	initAddLB();
+	initSHTGLB();
+	initTuiHuiLB();
 	initTab1();
 	showCompontByQx();
 });
@@ -67,11 +68,21 @@ function initSearchLB(){
 	});
 }
 
-function initAddLB(){
-	$("#add_but").linkbutton({
-		iconCls:"icon-add",
+//初始化审核通过按钮
+function initSHTGLB(){
+	$("#shtg_but").linkbutton({
+		iconCls:"icon-ok",
 		onClick:function(){
-			location.href=clglPath+"fhdw/new";
+			shenHeByIds("sh");
+		}
+	});
+}
+
+function initTuiHuiLB(){
+	$("#tuiHui_but").linkbutton({
+		iconCls:"icon-back",
+		onClick:function(){
+			shenHeByIds("th");
 		}
 	});
 }
@@ -145,6 +156,45 @@ function initTab1(){
 	});
 }
 
+function shenHeByIds(flag) {
+	var tsStr;
+	if(flag=="sh")
+		tsStr="审核";
+	else if(flag=="th")
+		tsStr="退回";
+	
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要"+tsStr+"的信息！","warning");
+		return false;
+	}
+	
+	$.messager.confirm("提示","确定要"+tsStr+"吗？",function(r){
+		if(r){
+			var ids = "";
+			for (var i = 0; i < rows.length; i++) {
+				ids += "," + rows[i].id;
+			}
+			ids=ids.substring(1);
+			
+			$.ajaxSetup({async:false});
+			$.post(clglPath + "shenHeCheLiang",
+				{ids:ids,flag:flag},
+				function(result){
+					if(result.status==1){
+						alert(result.msg);
+						tab1.datagrid("load");
+					}
+					else{
+						alert(result.msg);
+					}
+				}
+			,"json");
+			
+		}
+	});
+}
+
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
 	return width.substring(0,width.length-2)-340;
@@ -161,7 +211,8 @@ function setFitWidthInParent(o){
 			<span class="cllx_span">车辆类型：</span>
 			<input id="cllx_cbb"/>
 			<a class="search_but" id="search_but">查询</a>
-			<a id="add_but">添加</a>
+			<a id="shtg_but">审核通过</a>
+			<a id="tuiHui_but">退回</a>
 		</div>
 		<table id="tab1">
 		</table>

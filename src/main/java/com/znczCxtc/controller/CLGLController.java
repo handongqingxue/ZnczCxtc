@@ -41,6 +41,16 @@ public class CLGLController {
 		return MODULE_NAME+"/dsh/list";
 	}
 
+	@RequestMapping(value="/dsh/detail")
+	public String goDshDetail(HttpServletRequest request) {
+		
+		String id = request.getParameter("id");
+		CheLiang cl=cheLiangService.selectById(id);
+		request.setAttribute("cl", cl);
+		
+		return MODULE_NAME+"/dsh/detail";
+	}
+
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {
 		
@@ -267,5 +277,31 @@ public class CLGLController {
 		jsonMap.put("rows", clList);
 		
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/shenHeCheLiang",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String shenHeCheLiang(String ids, String flag) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cheLiangService.shenHeByIds(ids,flag);
+		PlanResult plan=new PlanResult();
+		String tsStr=null;
+		if("sh".equals(flag))
+			tsStr="审核";
+		else if("th".equals(flag))
+			tsStr="退回";
+		
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg(tsStr+"车辆信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg(tsStr+"车辆信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 }

@@ -10,7 +10,7 @@ public interface CheLiangService {
 
 	public int deleteByIds(String ids);
 
-	public int shenHeCheLiang(String ids,String flag);
+	public int shenHeByIds(String ids,String flag);
 
 	public int edit(CheLiang cl);
 

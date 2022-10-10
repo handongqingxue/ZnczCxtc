@@ -12,7 +12,7 @@ public interface CheLiangMapper {
 
 	public int deleteByIds(List<String> idList);
 
-	public int shenHeCheLiang(@Param("idList") List<String> idList, @Param("flag") String flag);
+	public int shenHeByIds(@Param("idList") List<String> idList, @Param("flag") String flag);
 
 	public int edit(CheLiang cl);
 

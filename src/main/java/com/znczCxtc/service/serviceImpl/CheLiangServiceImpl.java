@@ -33,11 +33,11 @@ public class CheLiangServiceImpl implements CheLiangService {
 	}
 
 	@Override
-	public int shenHeCheLiang(String ids,String flag) {
+	public int shenHeByIds(String ids,String flag) {
 		// TODO Auto-generated method stub
 		int count=0;
 		List<String> idList = Arrays.asList(ids.split(","));
-		count = cheLiangDao.shenHeCheLiang(idList,flag);
+		count = cheLiangDao.shenHeByIds(idList,flag);
 		return count;
 	}
 

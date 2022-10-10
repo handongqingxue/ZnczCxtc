@@ -121,7 +121,7 @@
 		#{id}
 		</foreach>
 	</delete>
-	<update id="shenHeCheLiang">
+	<update id="shenHeByIds">
 		update che_liang set 
 		<if test="flag=='sh'">
 			sfzy=1,shzt=2
