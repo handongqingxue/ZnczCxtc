@@ -662,7 +662,7 @@ function setFitWidthInParent(parent,self){
 					备注
 				</td>
 				<td class="td2">
-					<textarea rows="3" cols="30" placeholder="请输入备注"></textarea>
+					<textarea rows="3" cols="30" id="bz" name="bz" placeholder="请输入备注"></textarea>
 				</td>
 			  </tr>
 			</table>

@@ -574,7 +574,7 @@ function setFitWidthInParent(parent,self){
 				</td>
 				<td class="td2">
 					<input id="zcrq_db"/>
-					<input type="hidden" id="zcrq" name="zcrq"/>
+					<input type="hidden" id="zcrq" name="zcrq" value="${requestScope.cl.fzrq }"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -613,7 +613,7 @@ function setFitWidthInParent(parent,self){
 				</td>
 				<td class="td2">
 					<input id="fzrq_db"/>
-					<input type="hidden" id="fzrq" name="fzrq"/>
+					<input type="hidden" id="fzrq" name="fzrq" value="${requestScope.cl.fzrq }"/>
 				</td>
 				<td class="td1" align="right">
 					皮重

@@ -60,6 +60,17 @@ public class CLGLController {
 		
 		return MODULE_NAME+"/zhcx/list";
 	}
+
+	@RequestMapping(value="/zhcx/detail")
+	public String goZhcxDetail(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		String id = request.getParameter("id");
+		CheLiang cl=cheLiangService.selectById(id);
+		request.setAttribute("cl", cl);
+		
+		return MODULE_NAME+"/zhcx/detail";
+	}
 	
 	@RequestMapping(value="/newCheLiang")
 	@ResponseBody
