@@ -22,7 +22,58 @@ public class PDGLController {
 
 	@Autowired
     private DuiLieService duiLieService;
+	@Autowired
+    private HaoMaZhuangTaiService haoMaZhuangTaiService;
 	public static final String MODULE_NAME="pdgl";
+	
+	@RequestMapping(value="/hmzt/new")
+	public String goHmztNew(HttpServletRequest request) {
+		
+		return MODULE_NAME+"/hmzt/new";
+	}
+	
+	@RequestMapping(value="/hmzt/edit")
+	public String goHmztEdit(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		String id = request.getParameter("id");
+		HaoMaZhuangTai hmzt=haoMaZhuangTaiService.selectById(id);
+		request.setAttribute("hmzt", hmzt);
+		
+		return MODULE_NAME+"/hmzt/edit";
+	}
+
+	/**
+	 * 跳转到排队管理-号码状态-列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/hmzt/list")
+	public String goHmztList(HttpServletRequest request) {
+		
+		return MODULE_NAME+"/hmzt/list";
+	}
+	
+	@RequestMapping(value="/hmzt/detail")
+	public String goHmztDetail(HttpServletRequest request) {
+		
+		String id = request.getParameter("id");
+		HaoMaZhuangTai hmzt=haoMaZhuangTaiService.selectById(id);
+		request.setAttribute("hmzt", hmzt);
+		
+		return MODULE_NAME+"/hmzt/detail";
+	}
+
+	/**
+	 * 跳转到排队管理-号码查询-列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/hmcx/list")
+	public String goHmcxList(HttpServletRequest request) {
+		
+		return MODULE_NAME+"/hmcx/list";
+	}
 
 	@RequestMapping(value="/dlcx/new")
 	public String goDlcxNew(HttpServletRequest request) {
@@ -59,6 +110,62 @@ public class PDGLController {
 		request.setAttribute("dl", dl);
 		
 		return MODULE_NAME+"/dlcx/detail";
+	}
+	
+	@RequestMapping(value="/newHaoMaZhuangTai")
+	@ResponseBody
+	public Map<String, Object> newHaoMaZhuangTai(HaoMaZhuangTai hmzt) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=haoMaZhuangTaiService.add(hmzt);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建号码状态成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建号码状态失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/editHaoMaZhuangTai")
+	@ResponseBody
+	public Map<String, Object> editHaoMaZhuangTai(HaoMaZhuangTai hmzt) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=haoMaZhuangTaiService.edit(hmzt);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑号码状态成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑号码状态失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryHMZTList")
+	@ResponseBody
+	public Map<String, Object> queryHMZTList(String mc,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = haoMaZhuangTaiService.queryForInt(mc);
+			List<HaoMaZhuangTai> hmztList=haoMaZhuangTaiService.queryList(mc, page, rows, sort, order);
+			
+			jsonMap.put("total", count);
+			jsonMap.put("rows", hmztList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
 	}
 
 	@RequestMapping(value="/newDuiLie")

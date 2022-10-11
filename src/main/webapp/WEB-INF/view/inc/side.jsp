@@ -375,7 +375,14 @@ function showLeftMenuByQx(){
 					<div class="line_div"></div>
 					<li class="layui-nav-item mscl_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
-						<a href="<%=basePath%>clgl/mscl/list">
+						<a href="<%=basePath%>pdgl/hmzt/list">
+							&nbsp;&nbsp;&nbsp;号码状态
+						</a>
+					</li>
+					<div class="line_div"></div>
+					<li class="layui-nav-item mscl_item_li">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
+						<a href="<%=basePath%>pdgl/hmcx/list">
 							&nbsp;&nbsp;&nbsp;号码查询
 						</a>
 					</li>
