@@ -51,17 +51,17 @@ public class HaoMa {
 	public void setKsjhsj(String ksjhsj) {
 		this.ksjhsj = ksjhsj;
 	}
-	public Integer getSjId() {
-		return sjId;
-	}
-	public void setSjId(Integer sjId) {
-		this.sjId = sjId;
-	}
 	public Integer getDlId() {
 		return dlId;
 	}
 	public void setDlId(Integer dlId) {
 		this.dlId = dlId;
+	}
+	public String getDlMc() {
+		return dlMc;
+	}
+	public void setDlMc(String dlMc) {
+		this.dlMc = dlMc;
 	}
 	public String getDdId() {
 		return ddId;
@@ -76,8 +76,8 @@ public class HaoMa {
 	private String hmztMc;//号码状态名称
 	private Integer fl;//分类 1.普通 2.其他
 	private String ksjhsj;//开始叫号时间
-	private Integer sjId;//司机id
 	private Integer dlId;//队列id
+	private String dlMc;//队列名称
 	private String ddId;//订单id
 
 }

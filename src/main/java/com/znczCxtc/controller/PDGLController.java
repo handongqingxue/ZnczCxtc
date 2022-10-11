@@ -23,6 +23,8 @@ public class PDGLController {
 	@Autowired
     private DuiLieService duiLieService;
 	@Autowired
+    private HaoMaService haoMaService;
+	@Autowired
     private HaoMaZhuangTaiService haoMaZhuangTaiService;
 	public static final String MODULE_NAME="pdgl";
 	
@@ -164,6 +166,21 @@ public class PDGLController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/queryHaoMaList")
+	@ResponseBody
+	public Map<String, Object> queryHaoMaList(String dlMc,String hm,String pdh,Integer ztId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = haoMaService.queryForInt(dlMc, hm, pdh, ztId);
+		List<HaoMa> hmList=haoMaService.queryList(dlMc, hm, pdh, ztId, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", hmList);
 		
 		return jsonMap;
 	}

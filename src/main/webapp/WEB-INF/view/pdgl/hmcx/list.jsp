@@ -12,10 +12,15 @@
 .tab1_div .toolbar{
 	height:32px;
 }
-.tab1_div .toolbar .mc_span{
+.tab1_div .toolbar .dlMc_span,
+.tab1_div .toolbar .hm_span,
+.tab1_div .toolbar .pdh_span,
+.tab1_div .toolbar .zt_span{
 	margin-left: 13px;
 }
-.tab1_div .toolbar .mc_inp{
+.tab1_div .toolbar .dlMc_inp,
+.tab1_div .toolbar .hm_inp,
+.tab1_div .toolbar .pdh_inp{
 	width: 120px;
 	height: 25px;
 }
@@ -23,12 +28,14 @@
 	margin-left: 13px;
 }
 </style>
-<title>发货单位</title>
+<title>号码查询</title>
 <%@include file="../../inc/js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
+var mainPath=path+'main/';
 var pdglPath=path+'pdgl/';
 $(function(){
+	initZTCBB();
 	initSearchLB();
 	initAddLB();
 	initRemoveLB();
@@ -43,12 +50,34 @@ function showCompontByQx(){
 	}
 }
 
+function initZTCBB(){
+	var data=[];
+	data.push({"value":"","text":"请选择状态"});
+	$.post(mainPath+"queryHaoMaZhuangTaiCBBList",
+		function(result){
+			var rows=result.rows;
+			for(var i=0;i<rows.length;i++){
+				data.push({"value":rows[i].id,"text":rows[i].mc});
+			}
+			ztCBB=$("#zt_cbb").combobox({
+				valueField:"value",
+				textField:"text",
+				//multiple:true,
+				data:data
+			});
+		}
+	,"json");
+}
+
 function initSearchLB(){
 	$("#search_but").linkbutton({
 		iconCls:"icon-search",
 		onClick:function(){
-			var mc=$("#toolbar #mc").val();
-			tab1.datagrid("load",{mc:mc});
+			var dlMc=$("#toolbar #dlMc").val();
+			var hm=$("#toolbar #hm").val();
+			var pdh=$("#toolbar #pdh").val();
+			var ddztId=ztCBB.combobox("getValue");
+			tab1.datagrid("load",{dlMc:dlMc,hm:hm,pdh:pdh,ddztId:ddztId});
 		}
 	});
 }
@@ -74,24 +103,38 @@ function initRemoveLB(){
 function initTab1(){
 	tab1=$("#tab1").datagrid({
 		title:"排队管理-号码查询-列表",
-		url:pdglPath+"queryFaHuoDanWeiList",
+		url:pdglPath+"queryHaoMaList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
 		pagination:true,
 		pageSize:10,
 		columns:[[
-			{field:"mc",title:"名称",width:200},
-            {field:"bjsj",title:"编辑时间",width:200},
-            {field:"id",title:"操作",width:150,formatter:function(value,row){
-            	var str="<a href=\""+pdglPath+"fhdw/detail?id="+value+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\""+pdglPath+"fhdw/edit?id="+value+"\">修改</a>";
+			{field:"hm",title:"号码",width:200},
+            {field:"pdh",title:"排队号",width:200},
+            {field:"prsj",title:"排入时间",width:200},
+            {field:"fl",title:"分类",width:200,formatter:function(value,row){
+            	var str;
+            	switch (value) {
+				case 1:
+					str="普通";
+					break;
+				case 2:
+					str="其他";
+					break;
+				}
+            	return str;
+            }},
+            {field:"ddztmc",title:"状态",width:200},
+            {field:"jhcs",title:"叫号次数",width:200},
+            {field:"id",title:"操作",width:80,formatter:function(value,row){
+            	var str="<a href=\""+pdglPath+"fhdw/detail?id="+value+"\">详情</a>";
             	return str;
             }}
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{mc:"<div style=\"text-align:center;\">暂无数据<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"mc",colspan:3});
+				$(this).datagrid("appendRow",{hm:"<div style=\"text-align:center;\">暂无数据<div>"});
+				$(this).datagrid("mergeCells",{index:0,field:"hm",colspan:7});
 				data.total=0;
 			}
 			
@@ -127,12 +170,12 @@ function deleteByIds() {
 			ids=ids.substring(1);
 			
 			$.ajaxSetup({async:false});
-			$.post(pdglPath + "deleteFaHuoDanWei",
+			$.post(pdglPath + "deleteHaoMa",
 				{ids:ids},
 				function(result){
 					if(result.status==1){
 						alert(result.msg);
-						location.href = location.href;
+						tab1.datagrid("load");
 					}
 					else{
 						alert(result.msg);
@@ -155,8 +198,14 @@ function setFitWidthInParent(o){
 	<%@include file="../../inc/side.jsp"%>
 	<div class="tab1_div" id="tab1_div">
 		<div class="toolbar" id="toolbar">
-			<span class="mc_span">名称：</span>
-			<input type="text" class="mc_inp" id="mc" placeholder="请输入名称"/>
+			<span class="dlMc_span">队列名称：</span>
+			<input type="text" class="dlMc_inp" id="dlMc" placeholder="请输入队列名称"/>
+			<span class="hm_span">号码：</span>
+			<input type="text" class="hm_inp" id="hm" placeholder="请输入号码"/>
+			<span class="pdh_span">排队号：</span>
+			<input type="text" class="pdh_inp" id="pdh" placeholder="请输入排队号"/>
+			<span class="zt_span">状态：</span>
+			<input id="zt_cbb"/>
 			<a class="search_but" id="search_but">查询</a>
 			<a id="add_but">添加</a>
 			<a id="remove_but">删除</a>

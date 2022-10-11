@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.znczCxtc.dao.HaoMaMapper">
+	<select id="queryForInt" resultType="java.lang.Integer">
+		select count(*) from hao_ma hm left join hao_ma_zhuang_tai hmzt on hm.hmztId=hmzt.id left join dui_lie dl on hm.dlId=dl.id where 1=1
+		<if test="dlMc!=''&amp;dlMc!=null">
+			and dl.mc like CONCAT('%',#{dlMc},'%')
+		</if> 
+		<if test="hm!=''&amp;hm!=null">
+			and hm like CONCAT('%',#{hm},'%')
+		</if> 
+		<if test="pdh!=''&amp;pdh!=null">
+			and pdh like CONCAT('%',#{pdh},'%')
+		</if> 
+		<if test="hmztId!=''&amp;hmztId!=null">
+			and hmztId=#{hmztId}
+		</if> 
+	</select>
+	<select id="queryList" resultType="com.znczCxtc.entity.HaoMa">
+		select hm.*,hmzt.mc ztMc,dl.mc dlMc from hao_ma hm left join hao_ma_zhuang_tai hmzt on hm.hmztId=hmzt.id left join dui_lie dl on hm.dlId=dl.id where 1=1
+		<if test="dlMc!=''&amp;dlMc!=null">
+			and dl.mc like CONCAT('%',#{dlMc},'%')
+		</if> 
+		<if test="hm!=''&amp;hm!=null">
+			and hm like CONCAT('%',#{hm},'%')
+		</if> 
+		<if test="pdh!=''&amp;pdh!=null">
+			and pdh like CONCAT('%',#{pdh},'%')
+		</if> 
+		<if test="hmztId!=''&amp;hmztId!=null">
+			and hmztId=#{hmztId}
+		</if>
+		limit #{rowNum},#{rows}
+	</select>
+	<insert id="newHaoMaChaXun" parameterType="com.znczCxtc.entity.YongHu">
+		insert into hao_ma
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="hm!=null">
+				hm,
+			</if>
+			<if test="prsj!=null">
+				prsj,
+			</if>
+			<if test="pdh!=null">
+				pdh,
+			</if>
+			<if test="ztId!=null">
+				ztId,
+			</if>
+			<if test="fl!=null">
+				fl,
+			</if>
+			<if test="ewm!=null">
+				ewm,
+			</if>
+			<if test="ksjhsj!=null">
+				ksjhsj,
+			</if>
+			<if test="sssjId!=null">
+				sssjId,
+			</if>
+			<if test="ssdlId!=null">
+				ssdlId,
+			</if>
+			<if test="ssddBm!=null">
+				ssddBm,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="hm!=null">
+				#{hm},
+			</if>
+			<if test="prsj!=null">
+				#{prsj},
+			</if>
+			<if test="pdh!=null">
+				#{pdh},
+			</if>
+			<if test="ztId!=null">
+				#{ztId},
+			</if>
+			<if test="fl!=null">
+				#{fl},
+			</if>
+			<if test="ewm!=null">
+				#{ewm},
+			</if>
+			<if test="ksjhsj!=null">
+				#{ksjhsj},
+			</if>
+			<if test="sssjId!=null">
+				#{sssjId},
+			</if>
+			<if test="ssdlId!=null">
+				#{ssdlId},
+			</if>
+			<if test="ssddBm!=null">
+				#{ssddBm},
+			</if>
+		</trim>
+	</insert>
+	<select id="selectHaoMaById" resultType="com.znczCxtc.entity.HaoMa">
+		select * from hao_ma where id=#{id}
+	</select>
+</mapper>
