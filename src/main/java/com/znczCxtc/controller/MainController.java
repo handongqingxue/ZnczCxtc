@@ -16,6 +16,16 @@ import com.znczCxtc.entity.*;
 import com.znczCxtc.util.JsonUtil;
 import com.znczCxtc.util.PlanResult;
 
+/*
+ * 订单流程：
+ * 1.新生成的订单状态都是待审核，管理员在订单列表点击通过，状态变成已下单；
+ * 2.入厂前刷身份证，状态变成排队中。LED屏幕显示入厂号，自动叫号，变成待入厂；
+ * 3.车牌识别摄像头识别后，状态变成待检验。检验合格继续往下走，出厂后状态就是已完成。
+ * 
+ * 特殊情况：
+ * 1.订单审核未通过，状态就是编辑中，需要重新审核。通过的话，状态才是已下单；
+ * 2.自动叫号要是没有找到车辆，超过时间了，状态从待入厂又变回已下单了，就得重新排队了。
+ */
 @Controller
 @RequestMapping("/"+MainController.MODULE_NAME)
 public class MainController {

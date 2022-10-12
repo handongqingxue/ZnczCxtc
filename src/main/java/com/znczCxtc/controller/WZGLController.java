@@ -26,7 +26,7 @@ public class WZGLController {
 	public static final String MODULE_NAME="wzgl";
 	
 	@RequestMapping(value="/wzlx/new")
-	public String goWzglWzlxNew(HttpServletRequest request) {
+	public String goWzlxNew(HttpServletRequest request) {
 		
 		return MODULE_NAME+"/wzlx/new";
 	}
@@ -42,7 +42,7 @@ public class WZGLController {
 	}
 	
 	@RequestMapping(value="/wzlx/list")
-	public String goWzglWzlxList(HttpServletRequest request) {
+	public String goWzlxList(HttpServletRequest request) {
 		
 		return MODULE_NAME+"/wzlx/list";
 	}
@@ -58,13 +58,13 @@ public class WZGLController {
 	}
 	
 	@RequestMapping(value="/wzcx/new")
-	public String goWzglWzcxNew(HttpServletRequest request) {
+	public String goWzcxNew(HttpServletRequest request) {
 		
 		return MODULE_NAME+"/wzcx/new";
 	}
 
 	@RequestMapping(value="/wzcx/edit")
-	public String goWzglWzcxEdit(HttpServletRequest request) {
+	public String goWzcxEdit(HttpServletRequest request) {
 		
 		String id = request.getParameter("id");
 		WuZi wz=wuZiService.selectById(id);
@@ -74,13 +74,13 @@ public class WZGLController {
 	}
 	
 	@RequestMapping(value="/wzcx/list")
-	public String goWzglWzcxList(HttpServletRequest request) {
+	public String goWzcxList(HttpServletRequest request) {
 		
 		return MODULE_NAME+"/wzcx/list";
 	}
 
 	@RequestMapping(value="/wzcx/detail")
-	public String goWzglWzcxDetail(HttpServletRequest request) {
+	public String goWzcxDetail(HttpServletRequest request) {
 		
 		String id = request.getParameter("id");
 		WuZi wz=wuZiService.selectById(id);
