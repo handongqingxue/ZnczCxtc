@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.znczCxtc.dao.DuiFangGuoBangJiLuMapper">
+	<insert id="add" parameterType="com.znczCxtc.entity.DuiFangGuoBangJiLu">
+		insert into dui_fang_guo_bang_ji_lu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="dfgbpz!=null">
+				dfgbpz,
+			</if>
+			<if test="dfgbmz!=null">
+				dfgbmz,
+			</if>
+			<if test="dfgbjz!=null">
+				dfgbjz,
+			</if>
+			<if test="dfgbzp!=null">
+				dfgbzp,
+			</if>
+			<if test="dfgbsj!=null">
+				dfgbsj,
+			</if>
+			<if test="ddId!=null">
+				ddId,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="dfgbpz!=null">
+				#{dfgbpz},
+			</if>
+			<if test="dfgbmz!=null">
+				#{dfgbmz},
+			</if>
+			<if test="dfgbjz!=null">
+				#{dfgbjz},
+			</if>
+			<if test="dfgbzp!=null">
+				#{dfgbzp},
+			</if>
+			<if test="dfgbsj!=null">
+				#{dfgbsj},
+			</if>
+			<if test="ddId!=null">
+				#{ddId},
+			</if>
+		</trim>
+	</insert>
+</mapper>

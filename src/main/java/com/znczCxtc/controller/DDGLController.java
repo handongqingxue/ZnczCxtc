@@ -19,6 +19,8 @@ import com.znczCxtc.service.*;
 public class DDGLController {
 
 	@Autowired
+	private DingDanService dingDanService;
+	@Autowired
 	private DingDanZhuangTaiService dingDanZhuangTaiService;
 	public static final String MODULE_NAME="ddgl";
 	
@@ -122,6 +124,40 @@ public class DDGLController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryZHCXList")
+	@ResponseBody
+	public Map<String, Object> queryZHCXList(String ddh,Integer ddztId,String ddztMc,String cph,String yssMc,String wzMc,
+			String fhdwMc,String shdwMc,String sjxm,String sjsfzh,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = dingDanService.queryZHCXForInt(ddh,ddztId,ddztMc,cph,yssMc,wzMc,fhdwMc,shdwMc,sjxm,sjsfzh);
+			List<DingDan> zhglList=dingDanService.queryZHCXList(ddh,ddztId,ddztMc,cph,yssMc,wzMc,fhdwMc,shdwMc,sjxm,sjsfzh, page, rows, sort, order);
+			
+			jsonMap.put("total", count);
+			jsonMap.put("rows", zhglList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryDingDanZhuangTaiCBBList")
+	@ResponseBody
+	public Map<String, Object> queryDingDanZhuangTaiCBBList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<DingDanZhuangTai> ddztList=dingDanZhuangTaiService.queryCBBList();
+		
+		jsonMap.put("rows", ddztList);
 		
 		return jsonMap;
 	}

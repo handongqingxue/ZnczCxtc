@@ -44,11 +44,11 @@ public class DingDan {
 	public void setDdztId(Integer ddztId) {
 		this.ddztId = ddztId;
 	}
-	public String getDdztmc() {
-		return ddztmc;
+	public String getDdztMc() {
+		return ddztMc;
 	}
-	public void setDdztmc(String ddztmc) {
-		this.ddztmc = ddztmc;
+	public void setDdztMc(String ddztMc) {
+		this.ddztMc = ddztMc;
 	}
 	public String getJhysrq() {
 		return jhysrq;
@@ -122,23 +122,35 @@ public class DingDan {
 	public void setYssId(Integer yssId) {
 		this.yssId = yssId;
 	}
-	public String getYssmc() {
-		return yssmc;
+	public String getYssMc() {
+		return yssMc;
 	}
-	public void setYssmc(String yssmc) {
-		this.yssmc = yssmc;
+	public void setYssMc(String yssMc) {
+		this.yssMc = yssMc;
 	}
-	public Integer getWlxxId() {
-		return wlxxId;
+	public Integer getWzlxId() {
+		return wzlxId;
 	}
-	public void setWlxxId(Integer wlxxId) {
-		this.wlxxId = wlxxId;
+	public void setWzlxId(Integer wzlxId) {
+		this.wzlxId = wzlxId;
 	}
-	public String getWlmc() {
-		return wlmc;
+	public String getWzlxMc() {
+		return wzlxMc;
 	}
-	public void setWlmc(String wlmc) {
-		this.wlmc = wlmc;
+	public void setWzlxMc(String wzlxMc) {
+		this.wzlxMc = wzlxMc;
+	}
+	public Integer getWzId() {
+		return wzId;
+	}
+	public void setWzId(Integer wzId) {
+		this.wzId = wzId;
+	}
+	public String getWzMc() {
+		return wzMc;
+	}
+	public void setWzMc(String wzMc) {
+		this.wzMc = wzMc;
 	}
 	public Integer getFhdwId() {
 		return fhdwId;
@@ -146,11 +158,11 @@ public class DingDan {
 	public void setFhdwId(Integer fhdwId) {
 		this.fhdwId = fhdwId;
 	}
-	public String getFhdwmc() {
-		return fhdwmc;
+	public String getFhdwMc() {
+		return fhdwMc;
 	}
-	public void setFhdwmc(String fhdwmc) {
-		this.fhdwmc = fhdwmc;
+	public void setFhdwMc(String fhdwMc) {
+		this.fhdwMc = fhdwMc;
 	}
 	public Integer getShdwId() {
 		return shdwId;
@@ -158,11 +170,11 @@ public class DingDan {
 	public void setShdwId(Integer shdwId) {
 		this.shdwId = shdwId;
 	}
-	public String getShdwmc() {
-		return shdwmc;
+	public String getShdwMc() {
+		return shdwMc;
 	}
-	public void setShdwmc(String shdwmc) {
-		this.shdwmc = shdwmc;
+	public void setShdwMc(String shdwMc) {
+		this.shdwMc = shdwMc;
 	}
 	public Integer getCyclId() {
 		return cyclId;
@@ -177,12 +189,32 @@ public class DingDan {
 		this.cysjId = cysjId;
 	}
 	private String ddh;//订单号
+	public Integer getXddztId() {
+		return xddztId;
+	}
+	public void setXddztId(Integer xddztId) {
+		this.xddztId = xddztId;
+	}
+	public String getXddztMc() {
+		return xddztMc;
+	}
+	public void setXddztMc(String xddztMc) {
+		this.xddztMc = xddztMc;
+	}
+	public String getBjsj() {
+		return bjsj;
+	}
+	public void setBjsj(String bjsj) {
+		this.bjsj = bjsj;
+	}
+	private Integer xddztId;//新订单状态id
+	private String xddztMc;//新订单状态名称
 	private Integer lxlx;//流向类型
 	private Float yzxzl;//预装卸重量
 	private Float sjzl;//实际重量
 	private Float zlceb;//重量差额比
 	private Integer ddztId;//订单状态id
-	private String ddztmc;//订单状态名称
+	private String ddztMc;//订单状态名称
 	private String jhysrq;//计划运输日期
 	private String bz;//备注
 	private Float jszl;//实际重量
@@ -195,13 +227,16 @@ public class DingDan {
 	private String dfgbsj;//对方过磅时间
 	private String ewm;//二维码
 	private Integer yssId;//运输商id
-	private String yssmc;
-	private Integer wlxxId;//物料信息id
-	private String wlmc;
+	private String yssMc;
+	private Integer wzlxId;
+	private String wzlxMc;
+	private Integer wzId;//物资id
+	private String wzMc;
 	private Integer fhdwId;//发货单位id
-	private String fhdwmc;
+	private String fhdwMc;
 	private Integer shdwId;//收货单位id
-	private String shdwmc;
+	private String shdwMc;
 	private Integer cyclId;//承运车辆id
 	private Integer cysjId;//承运司机id
+	private String bjsj;//编辑时间
 }
