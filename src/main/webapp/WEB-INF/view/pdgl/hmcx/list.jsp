@@ -32,7 +32,6 @@
 <%@include file="../../inc/js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
-var mainPath=path+'main/';
 var pdglPath=path+'pdgl/';
 $(function(){
 	initZTCBB();
@@ -53,7 +52,7 @@ function showCompontByQx(){
 function initZTCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择状态"});
-	$.post(mainPath+"queryHaoMaZhuangTaiCBBList",
+	$.post(pdglPath+"queryHaoMaZhuangTaiCBBList",
 		function(result){
 			var rows=result.rows;
 			for(var i=0;i<rows.length;i++){

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.znczCxtc.entity.*;
-import com.znczCxtc.service.*;
 import com.znczCxtc.util.JsonUtil;
 import com.znczCxtc.util.PlanResult;
 
@@ -21,8 +20,6 @@ import com.znczCxtc.util.PlanResult;
 @RequestMapping("/"+MainController.MODULE_NAME)
 public class MainController {
 	
-	@Autowired
-    private HaoMaZhuangTaiService haoMaZhuangTaiService;
 	public static final String MODULE_NAME="main";
 
 	/**
@@ -68,22 +65,5 @@ public class MainController {
 		//plan.setUrl("ddgl/zhcx/list");
 		plan.setUrl("pdgl/hmzt/list");
 		return JsonUtil.getJsonFromObject(plan);
-	}
-
-	/**
-	 * 查询号码状态下拉框信息
-	 * @return
-	 */
-	@RequestMapping(value="/queryHaoMaZhuangTaiCBBList")
-	@ResponseBody
-	public Map<String, Object> queryHaoMaZhuangTaiCBBList() {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<HaoMaZhuangTai> hmztList=haoMaZhuangTaiService.queryHaoMaZhuangTaiCBBList();
-		
-		jsonMap.put("rows", hmztList);
-		
-		return jsonMap;
 	}
 }

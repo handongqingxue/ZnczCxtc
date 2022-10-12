@@ -15,6 +15,12 @@ public class WuZiLeiXing {
 	public void setMc(String mc) {
 		this.mc = mc;
 	}
+	public String getCjsj() {
+		return cjsj;
+	}
+	public void setCjsj(String cjsj) {
+		this.cjsj = cjsj;
+	}
 	public String getBjsj() {
 		return bjsj;
 	}
@@ -34,6 +40,7 @@ public class WuZiLeiXing {
 		this.bz = bz;
 	}
 	private String mc;
+	private String cjsj;
 	private String bjsj;
 	private Integer px;
 	private String bz;

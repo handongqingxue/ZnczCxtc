@@ -268,4 +268,21 @@ public class PDGLController {
 		
 		return jsonMap;
 	}
+
+	/**
+	 * 查询号码状态下拉框信息
+	 * @return
+	 */
+	@RequestMapping(value="/queryHaoMaZhuangTaiCBBList")
+	@ResponseBody
+	public Map<String, Object> queryHaoMaZhuangTaiCBBList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<HaoMaZhuangTai> hmztList=haoMaZhuangTaiService.queryHaoMaZhuangTaiCBBList();
+		
+		jsonMap.put("rows", hmztList);
+		
+		return jsonMap;
+	}
 }
