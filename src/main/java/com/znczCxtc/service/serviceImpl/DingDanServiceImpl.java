@@ -162,8 +162,10 @@ public class DingDanServiceImpl implements DingDanService {
 	@Override
 	public String createDdhByDateYMD() {
 		// TODO Auto-generated method stub
-		String ddhDate = ddhSdf.format(new Date());
-		int count=dingDanDao.getCountByDdhDate(ddhDate);
+		String ddhDate = "DD"+ddhSdf.format(new Date());
+		Integer count=dingDanDao.getMaxDdhNumByDdhDate(ddhDate);
+		if(count==null)
+			count=0;
 		String ddhxhStr=null;
 		int ddhxh=count+1;
 		if(ddhxh<10)

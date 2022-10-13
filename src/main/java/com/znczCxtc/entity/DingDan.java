@@ -182,16 +182,22 @@ public class DingDan {
 	public void setCyclId(Integer cyclId) {
 		this.cyclId = cyclId;
 	}
+	public String getCyclCph() {
+		return cyclCph;
+	}
+	public void setCyclCph(String cyclCph) {
+		this.cyclCph = cyclCph;
+	}
 	public Integer getCysjId() {
 		return cysjId;
 	}
 	public void setCysjId(Integer cysjId) {
 		this.cysjId = cysjId;
 	}
-	public Integer getCysjXm() {
+	public String getCysjXm() {
 		return cysjXm;
 	}
-	public void setCysjXm(Integer cysjXm) {
+	public void setCysjXm(String cysjXm) {
 		this.cysjXm = cysjXm;
 	}
 	public Integer getCysjSfzh() {
@@ -249,8 +255,9 @@ public class DingDan {
 	private Integer shdwId;//收货单位id
 	private String shdwMc;
 	private Integer cyclId;//承运车辆id
+	private String cyclCph;//承运车辆车牌号
 	private Integer cysjId;//承运司机id
-	private Integer cysjXm;//承运司机姓名
+	private String cysjXm;//承运司机姓名
 	private Integer cysjSfzh;//承运司机身份证号
 	private String bjsj;//编辑时间
 }

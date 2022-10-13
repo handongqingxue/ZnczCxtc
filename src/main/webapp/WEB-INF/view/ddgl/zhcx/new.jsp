@@ -23,6 +23,26 @@
 	width: 180px;
 	height:30px;
 }
+.uploadBut_div{
+	line-height:30px;
+	text-align:center;
+	color:#fff;
+	background-color: #1777FF;
+	border-radius:5px;
+	cursor: pointer;
+}
+.upDfbdzpBut_div{
+	width: 150px;
+	height: 30px;
+}
+.dfbdzp_file{
+	display: none;
+}
+.dfbdzp_img{
+	width: 220px;
+	height:220px;
+	margin-top: 10px;
+}
 </style>
 <script type="text/javascript">
 var path='<%=basePath %>';
@@ -277,13 +297,21 @@ function initCYSJCBB(){
 }
 
 function checkNew(){
-	if(checkLXLXId()){
-		if(checkWZLXId()){
-			if(checkWZId()){
+	if(checkYZXZL()){
+		if(checkLXLXId()){
+			if(checkJHYSRQ()){
 				if(checkYSSId()){
-					if(checkFHDWId()){
-						if(checkSHBMId()){
-							newDingDanZongHeChaXun();
+					if(checkWZLXId()){
+						if(checkWZId()){
+							if(checkFHDWId()){
+								if(checkSHDWId()){
+									if(checkCYCLId()){
+										if(checkCYSJId()){
+											newDingDan();
+										}
+									}
+								}
+							}
 						}
 					}
 				}
@@ -292,10 +320,7 @@ function checkNew(){
 	}
 }
 
-function newDingDanZongHeChaXun(){
-	var sjc=lrSjcCBB.combobox("getValue");
-	var wscph=lrWscphCBB.combobox("getValue");
-	$("#new_div #cph").val(sjc+wscph);
+function newDingDan(){
 	var lxlx=lxlxCBB.combobox("getValue");
 	$("#new_div #lxlx").val(lxlx);
 	var wzlxId=wzlxCBB.combobox("getValue");
@@ -308,11 +333,15 @@ function newDingDanZongHeChaXun(){
 	$("#new_div #fhdwId").val(fhdwId);
 	var shdwId=shdwCBB.combobox("getValue");
 	$("#new_div #shdwId").val(shdwId);
+	var cyclId=cyclCBB.combobox("getValue");
+	$("#new_div #cyclId").val(cyclId);
+	var cysjId=cysjCBB.combobox("getValue");
+	$("#new_div #cysjId").val(cysjId);
 	
 	var formData = new FormData($("#form1")[0]);
 	$.ajax({
 		type:"post",
-		url:ddglPath+"newDingDanZongHeChaXun",
+		url:ddglPath+"newDingDan",
 		dataType: "json",
 		data:formData,
 		cache: false,
@@ -361,22 +390,11 @@ function checkLXLXId(){
 		return true;
 }
 
-//验证物资类型
-function checkWZLXId(){
-	var wzlxId=wzlxCBB.combobox("getValue");
-	if(wzlxId==null||wzlxId==""){
-	  	alert("请选择物资类型");
-	  	return false;
-	}
-	else
-		return true;
-}
-
-//验证物资
-function checkWZId(){
-	var wzId=wzCBB.combobox("getValue");
-	if(wzId==null||wzId==""){
-	  	alert("请选择物资");
+//验证计划运输日期
+function checkJHYSRQ(){
+	var jhysrq=jhysrqDB.datebox("getValue");
+	if(jhysrq==null||jhysrq==""){
+	  	alert("请选择计划运输日期");
 	  	return false;
 	}
 	else
@@ -388,6 +406,28 @@ function checkYSSId(){
 	var yssId=yssCBB.combobox("getValue");
 	if(yssId==null||yssId==""){
 	  	alert("请选择运输商");
+	  	return false;
+	}
+	else
+		return true;
+}
+
+//验证物资类型
+function checkWZLXId(){
+	var wzlxId=wzlxCBB.combobox("getValue");
+	if(wzlxId==null||wzlxId==""){
+	  	alert("请选择物资类型");
+	  	return false;
+	}
+	else
+		return true;
+}
+
+//验证物资名称
+function checkWZId(){
+	var wzId=wzCBB.combobox("getValue");
+	if(wzId==null||wzId==""){
+	  	alert("请选择物资名称");
 	  	return false;
 	}
 	else
@@ -414,6 +454,54 @@ function checkSHDWId(){
 	}
 	else
 		return true;
+}
+
+//验证承运车辆
+function checkCYCLId(){
+	var cyclId=cyclCBB.combobox("getValue");
+	if(cyclId==null||cyclId==""){
+	  	alert("请选择承运车辆");
+	  	return false;
+	}
+	else
+		return true;
+}
+
+//验证承运司机
+function checkCYSJId(){
+	var cysjId=cysjCBB.combobox("getValue");
+	if(cysjId==null||cysjId==""){
+	  	alert("请选择承运司机");
+	  	return false;
+	}
+	else
+		return true;
+}
+
+function uploadDfbdzp(){
+	document.getElementById("dfbdzp_file").click();
+}
+
+function showDfbdzp(obj){
+	var file = $(obj);
+    var fileObj = file[0];
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#dfbdzp_img");
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
 }
 
 function setFitWidthInParent(parent,self){
@@ -449,7 +537,7 @@ function setFitWidthInParent(parent,self){
 					预装卸重量
 				</td>
 				<td class="td2">
-					<input type="text" class="yzxzl_inp" id="yzxzl" name="yzxzl" placeholder="请输入预装卸重量" onfocus="focusYZXZL()" onblur="checkYZXZL()"/>
+					<input type="number" class="yzxzl_inp" id="yzxzl" name="yzxzl" placeholder="请输入预装卸重量" onfocus="focusYZXZL()" onblur="checkYZXZL()"/>
 				</td>
 				<td class="td1" align="right">
 					流向类型
@@ -464,7 +552,7 @@ function setFitWidthInParent(parent,self){
 					实际重量
 				</td>
 				<td class="td2">
-					<input type="text" class="sjzl_inp" id="sjzl" name="sjzl" placeholder="请输入实际重量"/>
+					<input type="number" class="sjzl_inp" id="sjzl" name="sjzl" placeholder="请输入实际重量"/>
 				</td>
 				<td class="td1" align="right">
 					计划运输日期
@@ -484,7 +572,7 @@ function setFitWidthInParent(parent,self){
 					结算重量
 				</td>
 				<td class="td2">
-					<input type="text" class="jszl_inp" id="jszl" name="jszl" placeholder="请输入结算重量"/>
+					<input type="number" class="jszl_inp" id="jszl" name="jszl" placeholder="请输入结算重量"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -506,13 +594,13 @@ function setFitWidthInParent(parent,self){
 					对方过磅净重
 				</td>
 				<td class="td2">
-					<input type="text" class="dfgbjz_inp" id="dfgbjz" name="dfgbjz" placeholder="请输入对方过磅净重" />
+					<input type="number" class="dfgbjz_inp" id="dfgbjz" name="dfgbjz" placeholder="请输入对方过磅净重" />
 				</td>
 				<td class="td1" align="right">
 					对方过磅皮重
 				</td>
 				<td class="td2">
-					<input type="text" class="dfgbpz_inp" id="dfgbpz" name="dfgbpz" placeholder="请输入对方过磅皮重" />
+					<input type="number" class="dfgbpz_inp" id="dfgbpz" name="dfgbpz" placeholder="请输入对方过磅皮重" />
 				</td>
 			  </tr>
 			  <tr>
@@ -520,12 +608,15 @@ function setFitWidthInParent(parent,self){
 					对方过磅毛重
 				</td>
 				<td class="td2">
-					<input type="text" class="dfgbmz_inp" id="dfgbmz" name="dfgbmz" placeholder="请输入对方过磅毛重" />
+					<input type="number" class="dfgbmz_inp" id="dfgbmz" name="dfgbmz" placeholder="请输入对方过磅毛重" />
 				</td>
 				<td class="td1" align="right">
 					对方榜单照片
 				</td>
 				<td class="td2">
+					<div class="uploadBut_div upDfbdzpBut_div" onclick="uploadDfbdzp()">选择对方榜单照片</div>
+					<input type="file" class="dfbdzp_file" id="dfbdzp_file" name="dfbdzp_file" onchange="showDfbdzp(this)"/>
+					<img class="dfbdzp_img" id="dfbdzp_img" alt="" src=""/>
 				</td>
 			  </tr>
 			  <tr>
@@ -572,7 +663,7 @@ function setFitWidthInParent(parent,self){
 				</td>
 				<td class="td2">
 					<input id="shdw_cbb"/>
-					<input type="hidden" id="shbmId" name="shbmId"/>
+					<input type="hidden" id="shdwId" name="shdwId"/>
 				</td>
 			  </tr>
 			  <tr>

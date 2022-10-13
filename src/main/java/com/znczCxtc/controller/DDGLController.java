@@ -22,6 +22,10 @@ public class DDGLController {
 	private DingDanService dingDanService;
 	@Autowired
 	private DingDanZhuangTaiService dingDanZhuangTaiService;
+	@Autowired
+	private RglrCphJiLuService rglrCphJiLuService;
+	@Autowired
+	private DuiFangGuoBangJiLuService duiFangGuoBangJiLuService;
 	public static final String MODULE_NAME="ddgl";
 	
 	@RequestMapping(value="/ddzt/new")
@@ -131,6 +135,41 @@ public class DDGLController {
 			e.printStackTrace();
 		}
 		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/newDingDan")
+	@ResponseBody
+	public Map<String, Object> newDingDan(DingDan dd,
+			DuiFangGuoBangJiLu dfgbjl, HttpServletRequest request) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			String ddh=dingDanService.createDdhByDateYMD();
+			dd.setDdh(ddh);
+			int count=dingDanService.add(dd);
+			if(count>0) {
+				int ddId=dingDanService.getIdByDdh(ddh);//因为新订单之前添加到订单表前没有id，添加完成后才生成id，这里在添加完成后，要根据订单号获取订单id
+				
+				dfgbjl.setDdId(ddId);
+				duiFangGuoBangJiLuService.add(dfgbjl);
+				
+				RglrCphJiLu rglrCphJiLu=new RglrCphJiLu();
+				rglrCphJiLu.setCph(dd.getCyclCph());
+				rglrCphJiLu.setDdId(ddId);//获取订单id后，生成人工录入车牌号记录，与订单id关联。这里的车牌号只是车牌号记录，后面业务部人员在订单里录入的车牌号可能会根据运输商情况变更
+				rglrCphJiLuService.add(rglrCphJiLu);
+				
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "创建订单成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "创建订单失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return jsonMap;
 	}
 	
