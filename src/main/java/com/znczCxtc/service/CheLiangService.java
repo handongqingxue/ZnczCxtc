@@ -19,4 +19,6 @@ public interface CheLiangService {
 	public List<CheLiang> queryList(String cph, Integer cllx, Boolean sfzy, Integer pfjd, String shzt, String bz, int page, int rows, String sort, String order);
 
 	public CheLiang selectById(String id);
+
+	public List<CheLiang> queryCBBList();
 }

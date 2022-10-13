@@ -245,4 +245,7 @@
 	<select id="selectById" resultType="com.znczCxtc.entity.CheLiang">
 		select * from che_liang where id=#{0}
 	</select>
+	<select id="queryCBBList" resultType="com.znczCxtc.entity.CheLiang">
+		select id,cph from che_liang
+	</select>
 </mapper>

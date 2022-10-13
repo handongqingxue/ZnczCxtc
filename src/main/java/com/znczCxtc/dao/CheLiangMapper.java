@@ -21,4 +21,6 @@ public interface CheLiangMapper {
 	public List<CheLiang> queryList(@Param("cph") String cph, @Param("cllx") Integer cllx, @Param("sfzy") Boolean sfzy, @Param("pfjd") Integer pfjd, @Param("shztList") List<String> shztList, @Param("bz") String bz, @Param("rowNum") int rowNum, @Param("rows") int rows, String sort, String order);
 
 	public CheLiang selectById(String id);
+
+	public List<CheLiang> queryCBBList();
 }

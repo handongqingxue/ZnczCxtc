@@ -64,4 +64,10 @@ public class SiJiServiceImpl implements SiJiService {
 		count = siJiDao.shenHe(idList,flag);
 		return count;
 	}
+
+	@Override
+	public List<SiJi> queryCBBList() {
+		// TODO Auto-generated method stub
+		return siJiDao.queryCBBList();
+	}
 }

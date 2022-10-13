@@ -19,4 +19,6 @@ public interface SiJiService {
 	public SiJi selectById(String id);
 
 	public int shenHe(String ids, String flag);
+
+	public List<SiJi> queryCBBList();
 }

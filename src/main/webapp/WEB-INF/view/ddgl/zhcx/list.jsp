@@ -78,7 +78,7 @@ var icphdNum=0;
 var dshDdztMc='${requestScope.dshDdztMc}';
 $(function(){
 	initDDZTCBB();
-	initJHYSRQDTB();
+	initJHYSRQDB();
 	initJCSJSDTB();
 	initJCSJEDTB();
 	initCCSJSDTB();
@@ -326,7 +326,7 @@ function initDDZTCBB(){
 	,"json");
 }
 
-function initJHYSRQDTB(){
+function initJHYSRQDB(){
 	jhysrqDB=$('#jhysrq_db').datebox({
         required:false
     });

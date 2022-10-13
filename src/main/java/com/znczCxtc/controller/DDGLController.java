@@ -60,6 +60,12 @@ public class DDGLController {
 		
 		return MODULE_NAME+"/ddzt/detail";
 	}
+	
+	@RequestMapping(value="/zhcx/new")
+	public String goDdglZhcxNew(HttpServletRequest request) {
+		
+		return MODULE_NAME+"/zhcx/new";
+	}
 
 	/**
 	 * 跳转到订单管理-综合查询-列表页面

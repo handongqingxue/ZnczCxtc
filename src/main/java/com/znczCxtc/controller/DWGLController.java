@@ -506,4 +506,43 @@ public class DWGLController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/queryYunShuShangCBBList")
+	@ResponseBody
+	public Map<String, Object> queryYunShuShangCBBList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<YunShuShang> yssList=yunShuShangService.queryCBBList();
+		
+		jsonMap.put("rows", yssList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryFaHuoDanWeiCBBList")
+	@ResponseBody
+	public Map<String, Object> queryFaHuoDanWeiCBBList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<FaHuoDanWei> fhdwList=faHuoDanWeiService.queryCBBList();
+		
+		jsonMap.put("rows", fhdwList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryShouHuoDanWeiCBBList")
+	@ResponseBody
+	public Map<String, Object> queryShouHuoDanWeiCBBList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<ShouHuoDanWei> shdwList=shouHuoDanWeiService.queryCBBList();
+		
+		jsonMap.put("rows", shdwList);
+		
+		return jsonMap;
+	}
 }

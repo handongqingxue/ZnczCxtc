@@ -167,8 +167,10 @@ public class DingDanServiceImpl implements DingDanService {
 		String ddhxhStr=null;
 		int ddhxh=count+1;
 		if(ddhxh<10)
-			ddhxhStr="00"+ddhxh;
+			ddhxhStr="000"+ddhxh;
 		else if(ddhxh<100)
+			ddhxhStr="00"+ddhxh;
+		else if(ddhxh<1000)
 			ddhxhStr="0"+ddhxh;
 		return ddhDate+ddhxhStr;
 	}

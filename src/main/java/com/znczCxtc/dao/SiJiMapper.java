@@ -21,4 +21,6 @@ public interface SiJiMapper {
 	public SiJi selectById(String id);
 
 	public int shenHe(@Param("idList") List<String> idList, @Param("flag") String flag);
+
+	public List<SiJi> queryCBBList();
 }

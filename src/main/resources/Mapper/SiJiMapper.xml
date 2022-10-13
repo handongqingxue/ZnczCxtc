@@ -175,4 +175,7 @@
 		#{id}
 		</foreach>
 	</update>
+	<select id="queryCBBList" resultType="com.znczCxtc.entity.SiJi">
+		select id,xm from si_ji
+	</select>
 </mapper>

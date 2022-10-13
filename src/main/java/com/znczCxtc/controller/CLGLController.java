@@ -304,4 +304,17 @@ public class CLGLController {
 		}
 		return json;
 	}
+	
+	@RequestMapping(value="/queryCheLiangCBBList")
+	@ResponseBody
+	public Map<String, Object> queryCheLiangCBBList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<CheLiang> clList=cheLiangService.queryCBBList();
+		
+		jsonMap.put("rows", clList);
+		
+		return jsonMap;
+	}
 }

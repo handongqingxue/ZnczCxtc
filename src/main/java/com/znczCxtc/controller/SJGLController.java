@@ -280,4 +280,17 @@ public class SJGLController {
 		}
 		return json;
 	}
+	
+	@RequestMapping(value="/querySiJiCBBList")
+	@ResponseBody
+	public Map<String, Object> querySiJiCBBList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<SiJi> sjList=siJiService.queryCBBList();
+		
+		jsonMap.put("rows", sjList);
+		
+		return jsonMap;
+	}
 }

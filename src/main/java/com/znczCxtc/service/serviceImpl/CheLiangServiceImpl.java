@@ -70,4 +70,10 @@ public class CheLiangServiceImpl implements CheLiangService {
 		// TODO Auto-generated method stub
 		return cheLiangDao.selectById(id);
 	}
+
+	@Override
+	public List<CheLiang> queryCBBList() {
+		// TODO Auto-generated method stub
+		return cheLiangDao.queryCBBList();
+	}
 }
