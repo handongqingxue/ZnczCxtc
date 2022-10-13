@@ -29,17 +29,19 @@ public class DingDanServiceImpl implements DingDanService {
 	private SimpleDateFormat ddhSdf=new SimpleDateFormat("yyyyMMdd");
 
 	@Override
-	public int queryZHCXForInt(String ddh, Integer ddztId, String ddztMc, String cph, String yssMc, String wzMc, 
-			String fhdwMc, String shdwMc, String sjxm, String sjsfzh) {
+	public int queryForInt(String ddh, Integer ddztId, String ddztMc, String cph, String jhysrq, String yssMc, String wzMc, 
+			String fhdwMc, String shdwMc, String cysjXm, String cysjSfzh, String jcsjs, String jcsje, String ccsjs, String ccsje) {
 		// TODO Auto-generated method stub
-		return dingDanDao.queryZHCXForInt(ddh,ddztId,ddztMc,cph,yssMc,wzMc,fhdwMc,shdwMc,sjxm,sjsfzh);
+		return dingDanDao.queryForInt(ddh,ddztId,ddztMc,cph,jhysrq,yssMc,wzMc,fhdwMc,shdwMc,cysjXm,cysjSfzh,jcsjs,jcsje,ccsjs,ccsje);
 	}
 
 	@Override
-	public List<DingDan> queryZHCXList(String ddh, Integer ddztId, String ddztMc, String cph, String yssMc, String wzMc, 
-			String fhdwMc, String shdwMc, String sjxm, String sjsfzh, int page, int rows, String sort, String order) {
+	public List<DingDan> queryList(String ddh, Integer ddztId, String ddztMc, String cph, String jhysrq, String yssMc, String wzMc, 
+			String fhdwMc, String shdwMc, String cysjXm, String cysjSfzh, String jcsjs, String jcsje, String ccsjs, String ccsje, 
+			int page, int rows, String sort, String order) {
 		// TODO Auto-generated method stub
-		return dingDanDao.queryZHCXList(ddh, ddztId, ddztMc, cph, yssMc, wzMc, fhdwMc, shdwMc, sjxm, sjsfzh, (page-1)*rows, rows, sort, order);
+		return dingDanDao.queryList(ddh, ddztId, ddztMc, cph, jhysrq, yssMc, wzMc, fhdwMc, shdwMc, cysjXm, cysjSfzh, jcsjs, jcsje, ccsjs, ccsje, 
+				(page-1)*rows, rows, sort, order);
 	}
 
 	@Override

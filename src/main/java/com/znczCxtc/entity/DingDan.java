@@ -188,6 +188,18 @@ public class DingDan {
 	public void setCysjId(Integer cysjId) {
 		this.cysjId = cysjId;
 	}
+	public Integer getCysjXm() {
+		return cysjXm;
+	}
+	public void setCysjXm(Integer cysjXm) {
+		this.cysjXm = cysjXm;
+	}
+	public Integer getCysjSfzh() {
+		return cysjSfzh;
+	}
+	public void setCysjSfzh(Integer cysjSfzh) {
+		this.cysjSfzh = cysjSfzh;
+	}
 	private String ddh;//订单号
 	public Integer getXddztId() {
 		return xddztId;
@@ -238,5 +250,7 @@ public class DingDan {
 	private String shdwMc;
 	private Integer cyclId;//承运车辆id
 	private Integer cysjId;//承运司机id
+	private Integer cysjXm;//承运司机姓名
+	private Integer cysjSfzh;//承运司机身份证号
 	private String bjsj;//编辑时间
 }

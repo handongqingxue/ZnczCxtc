@@ -8,11 +8,11 @@ import com.znczCxtc.entity.*;
 
 public interface DingDanMapper {
 
-	int queryZHCXForInt(@Param("ddh") String ddh, @Param("ddztId") Integer ddztId, @Param("ddztMc") String ddztMc, @Param("cph") String cph, @Param("yssMc") String yssMc, @Param("wzMc") String wzMc, 
-			@Param("fhdwMc") String fhdwMc, @Param("shdwMc") String shdwMc, @Param("sjxm") String sjxm, @Param("sjsfzh") String sjsfzh);
+	int queryForInt(@Param("ddh") String ddh, @Param("ddztId") Integer ddztId, @Param("ddztMc") String ddztMc, @Param("cph") String cph, @Param("jhysrq") String jhysrq, @Param("yssMc") String yssMc, @Param("wzMc") String wzMc, 
+			@Param("fhdwMc") String fhdwMc, @Param("shdwMc") String shdwMc, @Param("cysjXm") String cysjXm, @Param("cysjSfzh") String cysjSfzh, @Param("jcsjs") String jcsjs, @Param("jcsje") String jcsje, @Param("ccsjs") String ccsjs, @Param("ccsje") String ccsje);
 
-	List<DingDan> queryZHCXList(@Param("ddh") String ddh, @Param("ddztId") Integer ddztId, @Param("ddztMc") String ddztMc, @Param("cph") String cph, @Param("yssMc") String yssMc, @Param("wzMc") String wzMc, 
-			@Param("fhdwMc") String fhdwMc, @Param("shdwMc") String shdwMc, @Param("sjxm") String sjxm, @Param("sjsfzh") String sjsfzh, 
+	List<DingDan> queryList(@Param("ddh") String ddh, @Param("ddztId") Integer ddztId, @Param("ddztMc") String ddztMc, @Param("cph") String cph, @Param("jhysrq") String jhysrq, @Param("yssMc") String yssMc, @Param("wzMc") String wzMc, 
+			@Param("fhdwMc") String fhdwMc, @Param("shdwMc") String shdwMc, @Param("cysjXm") String cysjXm, @Param("cysjSfzh") String cysjSfzh, @Param("jcsjs") String jcsjs, @Param("jcsje") String jcsje, @Param("ccsjs") String ccsjs, @Param("ccsje") String ccsje,
 			@Param("rowNum") int rowNum, @Param("rows") int rows, String sort, String order);
 
 	DingDan selectById(@Param("id") String id);

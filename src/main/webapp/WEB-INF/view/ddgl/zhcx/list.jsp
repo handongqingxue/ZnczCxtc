@@ -11,7 +11,7 @@
 	position: fixed;
 }
 .tab1_div .toolbar{
-	height:64px;
+	height:96px;
 }
 .tab1_div .toolbar .row_div{
 	height:32px;
@@ -19,10 +19,15 @@
 .tab1_div .toolbar .row_div .ddh_span,
 .tab1_div .toolbar .row_div .ddzt_span,
 .tab1_div .toolbar .row_div .cph_span,
+.tab1_div .toolbar .row_div .jhysrq_span,
 .tab1_div .toolbar .row_div .yss_span,
 .tab1_div .toolbar .row_div .wzMc_span,
 .tab1_div .toolbar .row_div .fhdw_span,
 .tab1_div .toolbar .row_div .shdw_span,
+.tab1_div .toolbar .row_div .sjxm_span,
+.tab1_div .toolbar .row_div .sjsfzh_span,
+.tab1_div .toolbar .row_div .jcsj_span,
+.tab1_div .toolbar .row_div .ccsj_span,
 .tab1_div .toolbar .row_div .search_but{
 	margin-left: 13px;
 }
@@ -31,7 +36,9 @@
 .tab1_div .toolbar .row_div .yssMc_inp,
 .tab1_div .toolbar .row_div .wzMc_inp,
 .tab1_div .toolbar .row_div .fhdwMc_inp,
-.tab1_div .toolbar .row_div .shdwMc_inp{
+.tab1_div .toolbar .row_div .shdwMc_inp,
+.tab1_div .toolbar .row_div .sjxm_inp,
+.tab1_div .toolbar .row_div .sjsfzh_inp{
 	width: 120px;
 	height: 25px;
 }
@@ -71,9 +78,15 @@ var icphdNum=0;
 var dshDdztMc='${requestScope.dshDdztMc}';
 $(function(){
 	initDDZTCBB();
+	initJHYSRQDTB();
+	initJCSJSDTB();
+	initJCSJEDTB();
+	initCCSJSDTB();
+	initCCSJEDTB();
 	initSearchLB();
 	initManualLB();
 	initDdfwLB();
+	initAddLB();
 	initRemoveLB();
 	initTab1();
 	initInputCphDialog();//0
@@ -313,6 +326,36 @@ function initDDZTCBB(){
 	,"json");
 }
 
+function initJHYSRQDTB(){
+	jhysrqDB=$('#jhysrq_db').datebox({
+        required:false
+    });
+}
+
+function initJCSJSDTB(){
+	jcsjsDTB=$('#jcsjs_dtb').datetimebox({
+        required:false
+    });
+}
+
+function initJCSJEDTB(){
+	jcsjeDTB=$('#jcsje_dtb').datetimebox({
+        required:false
+    });
+}
+
+function initCCSJSDTB(){
+	ccsjsDTB=$('#ccsjs_dtb').datetimebox({
+        required:false
+    });
+}
+
+function initCCSJEDTB(){
+	ccsjeDTB=$('#ccsje_dtb').datetimebox({
+        required:false
+    });
+}
+
 function initSearchLB(){
 	$("#search_but").linkbutton({
 		iconCls:"icon-search",
@@ -320,12 +363,19 @@ function initSearchLB(){
 			var ddh=$("#toolbar #ddh").val();
 			var ddztId=ddztCBB.combobox("getValue");
 			var cph=$("#toolbar #cph").val();
+			var jhysrq=jhysrqDB.datebox("getValue");
 			var yssMc=$("#toolbar #yssMc").val();
 			var wzMc=$("#toolbar #wzMc").val();
 			var fhdwMc=$("#toolbar #fhdwMc").val();
 			var shdwMc=$("#toolbar #shdwMc").val();
-			tab1.datagrid("load",{ddh:ddh,ddztId:ddztId,cph:cph,yssMc:yssMc,
-				wzMc:wzMc,fhdwMc:fhdwMc,shdwMc:shdwMc});
+			var sjxm=$("#toolbar #sjxm").val();
+			var jcsjs=jcsjsDTB.datetimebox("getValue");
+			var jcsje=jcsjeDTB.datetimebox("getValue");
+			var ccsjs=ccsjsDTB.datetimebox("getValue");
+			var ccsje=ccsjeDTB.datetimebox("getValue");
+			
+			tab1.datagrid("load",{ddh:ddh,ddztId:ddztId,cph:cph,jhysrq:jhysrq,yssMc:yssMc,
+				wzMc:wzMc,fhdwMc:fhdwMc,shdwMc:shdwMc,sjxm:sjxm,jcsjs:jcsjs,jcsje:jcsje,ccsjs:ccsjs,ccsje:ccsje});
 		}
 	});
 }
@@ -351,6 +401,15 @@ function initDdfwLB(){
 			if(checkFwddZt()){
 				fwddById();
 			}
+		}
+	});
+}
+
+function initAddLB(){
+	addLB=$("#add_but").linkbutton({
+		iconCls:"icon-add",
+		onClick:function(){
+			location.href=ddglPath+"zhcx/new";
 		}
 	});
 }
@@ -383,6 +442,25 @@ function initTab1(){
             	return str;
             }},
 			{field:"ddh",title:"订单号",width:150},
+			{field:"wzlxMc",title:"物资类型",width:150},
+			{field:"wzMc",title:"物资名称",width:150},
+			{field:"cph",title:"车牌号",width:150},
+			{field:"yssMc",title:"运输商",width:150},
+			{field:"fhdwMc",title:"发货单位",width:150},
+			{field:"shdwMc",title:"收货单位",width:150},
+            {field:"lxlx",title:"流向类型",width:100,formatter:function(value,row){
+            	var str;
+            	switch (value) {
+				case 1:
+					str="送运";
+					break;
+				case 2:
+					str="取运";
+					break;
+				}
+            	return str;
+            }},
+			{field:"jhysrq",title:"计划运输日期",width:150},
 			{field:"ddztMc",title:"订单状态",width:150},
 			{field:"yjzt",title:"一检状态",width:100,formatter:function(value,row){
             	var str;
@@ -438,24 +516,6 @@ function initTab1(){
 				}
             	return str;
             }},
-			{field:"cph",title:"车牌号",width:150},
-			{field:"wzlxMc",title:"物资类型",width:150},
-			{field:"wzMc",title:"物资名称",width:150},
-			{field:"yssMc",title:"运输商",width:150},
-			{field:"fhdwMc",title:"发货单位",width:150},
-			{field:"shdwMc",title:"收货单位",width:150},
-            {field:"lxlx",title:"流向类型",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="送运";
-					break;
-				case 2:
-					str="取运";
-					break;
-				}
-            	return str;
-            }},
             {field:"yjbfh",title:"一检地磅",width:100,formatter:function(value,row){
             	var dbm;
             	switch (value) {
@@ -480,12 +540,19 @@ function initTab1(){
 				}
             	return dbm;
             }},
-            {field:"bjsj",title:"编辑时间",width:150}
+            {field:"yzxzl",title:"预装卸重量",width:150},
+            {field:"bjsj",title:"编辑时间",width:150},
+            {field:"mz",title:"毛重",width:100},
+            {field:"pz",title:"皮重",width:150},
+            {field:"sjzl",title:"实际重量",width:150},
+            {field:"dfgbmz",title:"对方过磅毛重",width:150},
+            {field:"dfgbpz",title:"对方过磅皮重",width:150},
+            {field:"dfgbjz",title:"对方过磅净重",width:150}
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{id:"<div style=\"text-align:center;\">暂无信息<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"id",colspan:15});
+				$(this).datagrid("mergeCells",{index:0,field:"id",colspan:23});
 				data.total=0;
 			}
 			
@@ -623,6 +690,8 @@ function setFitWidthInParent(parent,self){
 				<input id="ddzt_cbb"/>
 				<span class="cph_span">车牌号：</span>
 				<input type="text" class="cph_inp" id="cph" placeholder="请输入车牌号"/>
+				<span class="jhysrq_span">计划运输日期：</span>
+				<input id="jhysrq_db"/>
 				<span class="yss_span">运输商：</span>
 				<input type="text" class="yssMc_inp" id="yssMc" placeholder="请输入运输商"/>
 			</div>
@@ -633,9 +702,24 @@ function setFitWidthInParent(parent,self){
 				<input type="text" class="fhdwMc_inp" id="fhdwMc" placeholder="请输入发货单位"/>
 				<span class="shdw_span">收货单位：</span>
 				<input type="text" class="shdwMc_inp" id="shdwMc" placeholder="请输入收货单位"/>
+				<span class="sjxm_span">司机姓名：</span>
+				<input type="text" class="sjxm_inp" id="sjxm" placeholder="请输入司机姓名"/>
+				<span class="sjsfzh_span">司机身份证号：</span>
+				<input type="text" class="sjsfzh_inp" id="sjsfzh" placeholder="请输入司机身份证号"/>
+			</div>
+			<div class="row_div">
+				<span class="jcsj_span">进厂时间：</span>
+				<input id="jcsjs_dtb"/>
+				-
+				<input id="jcsje_dtb"/>
+				<span class="ccsj_span">出厂时间：</span>
+				<input id="ccsjs_dtb"/>
+				-
+				<input id="ccsje_dtb"/>
 				<a class="search_but" id="search_but">查询</a>
 				<a id="manual_but">人工</a>
 				<a id="ddfw_but">订单复位</a>
+				<a id="add_but">添加</a>
 				<a id="remove_but">删除</a>
 			</div>
 		</div>
