@@ -42,8 +42,8 @@
 		</if>
 	</select>
 	<select id="queryList" resultType="com.znczCxtc.entity.DingDan">
-		select dd.*,ddzt.mc ddztMc,cl.cph,wzlx.mc wzlxMc,wz.mc wzMc,yss.mc yssMc,fhdw.mc fhdwMc,shdw.mc shdwMc,sj.xm cysjXm from ding_dan dd
-		 left join ding_dan_zhuang_tai ddzt on dd.ddztId=ddzt.id left join che_liang cl on dd.cyclId=cl.id left join wu_zi_lei_xing wzlx on dd.wzlxId=wzlx.id left join wu_zi wz on dd.wzId=wz.id
+		select dd.*,ddzt.mc ddztMc,dfgbjl.dfgbmz,dfgbjl.dfgbpz,dfgbjl.dfgbjz,cl.cph cyclCph,wzlx.mc wzlxMc,wz.mc wzMc,yss.mc yssMc,fhdw.mc fhdwMc,shdw.mc shdwMc,sj.xm cysjXm from ding_dan dd
+		 left join ding_dan_zhuang_tai ddzt on dd.ddztId=ddzt.id left join dui_fang_guo_bang_ji_lu dfgbjl on dfgbjl.ddId=dd.id left join che_liang cl on dd.cyclId=cl.id left join wu_zi_lei_xing wzlx on dd.wzlxId=wzlx.id left join wu_zi wz on dd.wzId=wz.id
 		 left join yun_shu_shang yss on dd.yssId=yss.id left join fa_huo_dan_wei fhdw on dd.fhdwId=fhdw.id
 		 left join shou_huo_dan_wei shdw on dd.shdwId=shdw.id left join si_ji sj on dd.cysjId=sj.id where 1=1
 		<if test="ddh!=''&amp;ddh!=null">
@@ -104,11 +104,26 @@
 			<if test="yzxzl!=null">
 				yzxzl,
 			</if>
+			<if test="bs!=null">
+				bs,
+			</if>
+			<if test="ks!=null">
+				ks,
+			</if>
 			<if test="sjzl!=null">
 				sjzl,
 			</if>
 			<if test="zlceb!=null">
 				zlceb,
+			</if>
+			<if test="jhysrq!=null">
+				jhysrq,
+			</if>
+			<if test="bz!=null">
+				bz,
+			</if>
+			<if test="ewm!=null">
+				ewm,
 			</if>
 			<if test="wzlxId!=null">
 				wzlxId,
@@ -149,11 +164,26 @@
 			<if test="yzxzl!=null">
 				#{yzxzl},
 			</if>
+			<if test="bs!=null">
+				#{bs},
+			</if>
+			<if test="ks!=null">
+				#{ks},
+			</if>
 			<if test="sjzl!=null">
 				#{sjzl},
 			</if>
 			<if test="zlceb!=null">
 				#{zlceb},
+			</if>
+			<if test="jhysrq!=null">
+				#{jhysrq},
+			</if>
+			<if test="bz!=null">
+				#{bz},
+			</if>
+			<if test="ewm!=null">
+				#{ewm},
 			</if>
 			<if test="wzlxId!=null">
 				#{wzlxId},

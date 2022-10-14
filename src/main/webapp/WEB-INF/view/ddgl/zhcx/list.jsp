@@ -432,10 +432,11 @@ function initTab1(){
 		pagination:true,
 		pageSize:10,
 		columns:[[
-            {field:"id",title:"操作",width:80,formatter:function(value,row){
+            {field:"id",title:"操作",width:100,formatter:function(value,row){
             	var str;
            		if(row.id!="<div style=\"text-align:center;\">暂无信息<div>"){
-	            	str="<a href=\"detail?id="+value+"\">详情</a>";
+	            	str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
+	            	   +"<a href=\"detail?id="+value+"\">详情</a>&nbsp;&nbsp;";
            		}
            		else
            			str=value;
@@ -444,7 +445,7 @@ function initTab1(){
 			{field:"ddh",title:"订单号",width:150},
 			{field:"wzlxMc",title:"物资类型",width:150},
 			{field:"wzMc",title:"物资名称",width:150},
-			{field:"cph",title:"车牌号",width:150},
+			{field:"cyclCph",title:"车牌号",width:150},
 			{field:"yssMc",title:"运输商",width:150},
 			{field:"fhdwMc",title:"发货单位",width:150},
 			{field:"shdwMc",title:"收货单位",width:150},

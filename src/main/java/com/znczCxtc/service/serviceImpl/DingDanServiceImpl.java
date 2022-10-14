@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.znczCxtc.dao.*;
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
+import com.znczCxtc.util.QrcodeUtil;
 
 @Service
 public class DingDanServiceImpl implements DingDanService {
@@ -53,6 +54,14 @@ public class DingDanServiceImpl implements DingDanService {
 	@Override
 	public int add(DingDan dd) {
 		// TODO Auto-generated method stub
+		String ddh=dd.getDdh();
+		String url=dd.getCyclCph();
+		String fileName = ddh + ".jpg";
+		String avaPath="/ZnczCxtc/upload/Ewm/"+fileName;
+		String path = "D:/resource/ZnczCxtc/Ewm";
+        QrcodeUtil.createQrCode(url, path, fileName);
+        dd.setEwm(avaPath);
+        
 		int ddztId=dingDanZhuangTaiDao.getIdByMc(DingDanZhuangTai.DAI_SHEN_HE_TEXT);
 		dd.setDdztId(ddztId);
 		return dingDanDao.add(dd);

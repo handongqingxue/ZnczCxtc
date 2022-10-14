@@ -47,4 +47,7 @@
 			</if>
 		</trim>
 	</insert>
+	<select id="selectByDdId" resultType="com.znczCxtc.entity.DuiFangGuoBangJiLu">
+		select * from dui_fang_guo_bang_ji_lu where ddId=#{ddId}
+	</select>
 </mapper>

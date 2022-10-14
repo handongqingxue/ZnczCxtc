@@ -72,9 +72,22 @@ public class DDGLController {
 	}
 	
 	@RequestMapping(value="/zhcx/new")
-	public String goDdglZhcxNew(HttpServletRequest request) {
+	public String goZhcxNew(HttpServletRequest request) {
 		
 		return MODULE_NAME+"/zhcx/new";
+	}
+	
+	@RequestMapping(value="/zhcx/edit")
+	public String goZhcxEdit(HttpServletRequest request) {
+		
+		String id = request.getParameter("id");
+		DingDan dd=dingDanService.selectById(id);
+		request.setAttribute("dd", dd);
+		
+		DuiFangGuoBangJiLu dfgbjl=duiFangGuoBangJiLuService.selectByDdId(id);
+		request.setAttribute("dfgbjl", dfgbjl);
+		
+		return MODULE_NAME+"/zhcx/edit";
 	}
 
 	/**
@@ -180,13 +193,6 @@ public class DDGLController {
 			
 			String ddh=dingDanService.createDdhByDateYMD();
 			dd.setDdh(ddh);
-			
-			String url=dd.getCyclCph();
-			String fileName = ddh + ".jpg";
-			String avaPath="/ZnczCxtc/upload/Ewm/"+fileName;
-			String path = "D:/resource/ZnczCxtc/Ewm";
-	        QrcodeUtil.createQrCode(url, path, fileName);
-	        dd.setEwm(avaPath);
 	        
 			int count=dingDanService.add(dd);
 			if(count>0) {

@@ -18,4 +18,10 @@ public class DuiFangGuoBangJiLuServiceImpl implements DuiFangGuoBangJiLuService 
 		// TODO Auto-generated method stub
 		return duiFangGuoBangJiLuDao.add(dfgbjl);
 	}
+
+	@Override
+	public DuiFangGuoBangJiLu selectByDdId(String ddId) {
+		// TODO Auto-generated method stub
+		return duiFangGuoBangJiLuDao.selectByDdId(ddId);
+	}
 }

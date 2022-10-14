@@ -38,7 +38,7 @@
 .dfbdzp_file{
 	display: none;
 }
-.dfbdzp_img{
+.ewm_img,.dfbdzp_img{
 	width: 220px;
 	height:220px;
 	margin-top: 10px;
@@ -53,71 +53,104 @@ var clglPath=path+'clgl/';
 var sjglPath=path+'sjgl/';
 var dialogTop=70;
 var dialogLeft=20;
-var ndNum=0;
+var edNum=0;
 $(function(){
-	initNewDialog();//0
+	initEditDialog();//0
 
 	initDialogPosition();//将不同窗体移动到主要内容区域
+	showCompontByQx();
 });
+
+function showCompontByQx(){
+	if(yhm=="admin"){
+		$("#edit_div #ddh").removeAttr("disabled");
+		lxlxCBB.combobox({disabled:false});
+		setTimeout(function(){
+			wzlxCBB.combobox({disabled:false});
+			yssCBB.combobox({disabled:false});
+			fhdwCBB.combobox({disabled:false});
+			shdwCBB.combobox({disabled:false});
+		},"2000");
+		wzCBB.combobox({disabled:false});
+	}
+	else{
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==2){
+				$("#edit_div #ddh").removeAttr("disabled");
+				lxlxCBB.combobox({disabled:false});
+				setTimeout(function(){
+					wzlxCBB.combobox({disabled:false});
+					yssCBB.combobox({disabled:false});
+					fhdwCBB.combobox({disabled:false});
+					shdwCBB.combobox({disabled:false});
+				},"2000");
+				wzCBB.combobox({disabled:false});
+			}
+		}
+	}
+}
 
 function initDialogPosition(){
 	//基本属性组
-	var ndpw=$("body").find(".panel.window").eq(ndNum);
-	var ndws=$("body").find(".window-shadow").eq(ndNum);
+	var edpw=$("body").find(".panel.window").eq(edNum);
+	var edws=$("body").find(".window-shadow").eq(edNum);
 
 	var ccDiv=$("#center_con_div");
-	ccDiv.append(ndpw);
-	ccDiv.append(ndws);
+	ccDiv.append(edpw);
+	ccDiv.append(edws);
 	ccDiv.css("width",setFitWidthInParent("body","center_con_div")+"px");
 }
 
-function initNewDialog(){
+function initEditDialog(){
 	dialogTop+=20;
-	$("#new_div").dialog({
+	$("#edit_div").dialog({
 		title:"订单信息",
-		width:setFitWidthInParent("body","new_div"),
+		width:setFitWidthInParent("body","edit_div"),
 		height:720,
 		top:dialogTop,
 		left:dialogLeft,
 		buttons:[
            {text:"保存",id:"ok_but",iconCls:"icon-ok",handler:function(){
-        	   checkNew();
+        	   checkEdit();
            }}
         ]
 	});
 
-	$("#new_div table").css("width",(setFitWidthInParent("body","new_div_table"))+"px");
-	$("#new_div table").css("magin","-100px");
-	$("#new_div table td").css("padding-left","50px");
-	$("#new_div table td").css("padding-right","20px");
-	$("#new_div table td").css("font-size","15px");
-	$("#new_div table .td1").css("width","15%");
-	$("#new_div table .td2").css("width","30%");
-	$("#new_div table tr").css("border-bottom","#CAD9EA solid 1px");
-	$("#new_div table tr").each(function(i){
+	$("#edit_div table").css("width",(setFitWidthInParent("body","edit_div_table"))+"px");
+	$("#edit_div table").css("magin","-100px");
+	$("#edit_div table td").css("padding-left","50px");
+	$("#edit_div table td").css("padding-right","20px");
+	$("#edit_div table td").css("font-size","15px");
+	$("#edit_div table .td1").css("width","15%");
+	$("#edit_div table .td2").css("width","30%");
+	$("#edit_div table tr").css("border-bottom","#CAD9EA solid 1px");
+	$("#edit_div table tr").each(function(i){
 		var height;
 		if(i==2)
+			height=230;
+		else if(i==4)
 			height=100;
-		else if(i==5)
+		else if(i==8)
 			height=310;
 		else
 			height=45;
 		$(this).css("height",height+"px");
 	});
 
-	$(".panel.window").eq(ndNum).css("margin-top","20px");
-	$(".panel.window .panel-title").eq(ndNum).css("color","#000");
-	$(".panel.window .panel-title").eq(ndNum).css("font-size","15px");
-	$(".panel.window .panel-title").eq(ndNum).css("padding-left","10px");
+	$(".panel.window").eq(edNum).css("margin-top","20px");
+	$(".panel.window .panel-title").eq(edNum).css("color","#000");
+	$(".panel.window .panel-title").eq(edNum).css("font-size","15px");
+	$(".panel.window .panel-title").eq(edNum).css("padding-left","10px");
 	
 	$(".panel-header, .panel-body").css("border-color","#ddd");
 	
 	//以下的是表格下面的面板
-	$(".window-shadow").eq(ndNum).css("margin-top","20px");
-	$(".window,.window .window-body").eq(ndNum).css("border-color","#ddd");
+	$(".window-shadow").eq(edNum).css("margin-top","20px");
+	$(".window,.window .window-body").eq(edNum).css("border-color","#ddd");
 
-	$("#new_div #ok_but").css("left","45%");
-	$("#new_div #ok_but").css("position","absolute");
+	$("#edit_div #ok_but").css("left","45%");
+	$("#edit_div #ok_but").css("position","absolute");
 	
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
@@ -132,6 +165,9 @@ function initNewDialog(){
 	initSHDWCBB();
 	initCYCLCBB();
 	initCYSJCBB();
+	setTimeout(function(){
+		loadWZCBBData();
+	},"1000");
 }
 
 function initLXLXCBB(){
@@ -143,6 +179,9 @@ function initLXLXCBB(){
 		valueField:"value",
 		textField:"text",
 		data:data,
+		onLoadSuccess:function(){
+			$(this).combobox("setValue",'${requestScope.dd.lxlx }');
+		},
 		onSelect:function(){
 			$("#lxlx").val($(this).combobox("getValue"));
 		}
@@ -153,12 +192,14 @@ function initJHYSRQDB(){
 	jhysrqDB=$('#jhysrq_db').datebox({
         required:false
     });
+	jhysrqDB.datebox("setValue",'${requestScope.dd.jhysrq }');
 }
 
 function initDFGBSJDTB(){
 	dfgbsjDTB=$('#dfgbsj_dtb').datetimebox({
         required:false
     });
+	dfgbsjDTB.datetimebox("setValue",'${requestScope.dfgbjl.dfgbsj }');
 }
 
 function initYSSCBB(){
@@ -170,10 +211,13 @@ function initYSSCBB(){
 			for(var i=0;i<rows.length;i++){
 				data.push({"value":rows[i].id,"text":rows[i].mc});
 			}
-			yssCBB=$("#new_div #yss_cbb").combobox({
+			yssCBB=$("#edit_div #yss_cbb").combobox({
 				valueField:"value",
 				textField:"text",
-				data:data
+				data:data,
+				onLoadSuccess:function(){
+					$(this).combobox("setValue",'${requestScope.dd.yssId }');
+				}
 			});
 		}
 	,"json");
@@ -188,10 +232,13 @@ function initWZLXCBB(){
 			for(var i=0;i<rows.length;i++){
 				data.push({"value":rows[i].id,"text":rows[i].mc});
 			}
-			wzlxCBB=$("#new_div #wzlx_cbb").combobox({
+			wzlxCBB=$("#edit_div #wzlx_cbb").combobox({
 				valueField:"value",
 				textField:"text",
 				data:data,
+				onLoadSuccess:function(){
+					$(this).combobox("setValue",'${requestScope.dd.wzlxId }');
+				},
 				onSelect:function(){
 					loadWZCBBData();
 				}
@@ -203,10 +250,13 @@ function initWZLXCBB(){
 function initWZCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择物资名称"});
-	wzCBB=$("#new_div #wz_cbb").combobox({
+	wzCBB=$("#edit_div #wz_cbb").combobox({
 		valueField:"value",
 		textField:"text",
-		data:data
+		data:data,
+		onLoadSuccess:function(){
+			$(this).combobox("setValue",'${requestScope.dd.wzId }');
+		}
 	});
 }
 
@@ -235,10 +285,13 @@ function initFHDWCBB(){
 			for(var i=0;i<rows.length;i++){
 				data.push({"value":rows[i].id,"text":rows[i].mc});
 			}
-			fhdwCBB=$("#new_div #fhdw_cbb").combobox({
+			fhdwCBB=$("#edit_div #fhdw_cbb").combobox({
 				valueField:"value",
 				textField:"text",
-				data:data
+				data:data,
+				onLoadSuccess:function(){
+					$(this).combobox("setValue",'${requestScope.dd.fhdwId }');
+				}
 			});
 		}
 	,"json");
@@ -253,10 +306,13 @@ function initSHDWCBB(){
 			for(var i=0;i<rows.length;i++){
 				data.push({"value":rows[i].id,"text":rows[i].mc});
 			}
-			shdwCBB=$("#new_div #shdw_cbb").combobox({
+			shdwCBB=$("#edit_div #shdw_cbb").combobox({
 				valueField:"value",
 				textField:"text",
-				data:data
+				data:data,
+				onLoadSuccess:function(){
+					$(this).combobox("setValue",'${requestScope.dd.shdwId }');
+				}
 			});
 		}
 	,"json");
@@ -271,10 +327,13 @@ function initCYCLCBB(){
 			for(var i=0;i<rows.length;i++){
 				data.push({"value":rows[i].id,"text":rows[i].cph});
 			}
-			cyclCBB=$("#new_div #cycl_cbb").combobox({
+			cyclCBB=$("#edit_div #cycl_cbb").combobox({
 				valueField:"value",
 				textField:"text",
-				data:data
+				data:data,
+				onLoadSuccess:function(){
+					$(this).combobox("setValue",'${requestScope.dd.cyclId }');
+				}
 			});
 		}
 	,"json");
@@ -289,67 +348,46 @@ function initCYSJCBB(){
 			for(var i=0;i<rows.length;i++){
 				data.push({"value":rows[i].id,"text":rows[i].xm});
 			}
-			cysjCBB=$("#new_div #cysj_cbb").combobox({
+			cysjCBB=$("#edit_div #cysj_cbb").combobox({
 				valueField:"value",
 				textField:"text",
-				data:data
+				data:data,
+				onLoadSuccess:function(){
+					$(this).combobox("setValue",'${requestScope.dd.cysjId }');
+				}
 			});
 		}
 	,"json");
 }
 
-function checkNew(){
-	if(checkYZXZL()){
-		if(checkLXLXId()){
-			if(checkJHYSRQ()){
-				if(checkYSSId()){
-					if(checkWZLXId()){
-						if(checkWZId()){
-							if(checkFHDWId()){
-								if(checkSHDWId()){
-									if(checkCYCLId()){
-										if(checkCYSJId()){
-											newDingDan();
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+function checkEdit(){
+	if(checkWZLXId()){
+		if(checkWZId()){
+			editDingDanZongHeChaXun();
 		}
 	}
 }
 
-function newDingDan(){
-	var lxlx=lxlxCBB.combobox("getValue");
-	$("#new_div #lxlx").val(lxlx);
-	var jhysrq=jhysrqDB.datebox("getValue");
-	$("#new_div #jhysrq").val(jhysrq);
-	var dfgbsj=dfgbsjDTB.datetimebox("getValue");
-	$("#new_div #dfgbsj").val(dfgbsj);
+function editDingDanZongHeChaXun(){
+	var sjc=lrSjcCBB.combobox("getValue");
+	var wscph=lrWscphCBB.combobox("getValue");
+	$("#edit_div #cph").val(sjc+wscph);
 	var wzlxId=wzlxCBB.combobox("getValue");
-	$("#new_div #wzlxId").val(wzlxId);
+	$("#edit_div #wzlxId").val(wzlxId);
 	var wzId=wzCBB.combobox("getValue");
-	$("#new_div #wzId").val(wzId);
+	$("#edit_div #wzId").val(wzId);
 	var yssId=yssCBB.combobox("getValue");
-	$("#new_div #yssId").val(yssId);
+	$("#edit_div #yssId").val(yssId);
 	var fhdwId=fhdwCBB.combobox("getValue");
-	$("#new_div #fhdwId").val(fhdwId);
+	$("#edit_div #fhdwId").val(fhdwId);
 	var shdwId=shdwCBB.combobox("getValue");
-	$("#new_div #shdwId").val(shdwId);
-	var cyclId=cyclCBB.combobox("getValue");
-	$("#new_div #cyclId").val(cyclId);
-	var cyclCph=cyclCBB.combobox("getText");
-	$("#new_div #cyclCph").val(cyclCph);
-	var cysjId=cysjCBB.combobox("getValue");
-	$("#new_div #cysjId").val(cysjId);
+	$("#edit_div #shdwId").val(shdwId);
 	
 	var formData = new FormData($("#form1")[0]);
+	
 	$.ajax({
 		type:"post",
-		url:ddglPath+"newDingDan",
+		url:ddglPath+"editDingDanZongHeChaXun",
 		dataType: "json",
 		data:formData,
 		cache: false,
@@ -431,11 +469,11 @@ function checkWZLXId(){
 		return true;
 }
 
-//验证物资名称
+//验证物资
 function checkWZId(){
 	var wzId=wzCBB.combobox("getValue");
 	if(wzId==null||wzId==""){
-	  	alert("请选择物资名称");
+	  	alert("请选择物资");
 	  	return false;
 	}
 	else
@@ -518,10 +556,10 @@ function setFitWidthInParent(parent,self){
 	case "center_con_div":
 		space=205;
 		break;
-	case "new_div":
+	case "edit_div":
 		space=340;
 		break;
-	case "new_div_table":
+	case "edit_div_table":
 	case "panel_window":
 		space=355;
 		break;
@@ -535,18 +573,28 @@ function setFitWidthInParent(parent,self){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../inc/side.jsp"%>
 	<div class="center_con_div" id="center_con_div">
-		<div class="page_location_div">订单管理-综合查询-添加订单</div>
+		<div class="page_location_div">订单管理-综合查询-编辑订单</div>
 		
-		<div id="new_div">
+		<div id="edit_div">
 			<form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
+			<input type="hidden" id="id" name="id" value="${requestScope.dd.id }"/>
+			<input type="hidden" id="ddztMc" name="ddztMc" value="${requestScope.ddztMc }"/>
 			<table>
 			  <tr>
+				<td class="td1" align="right">
+					订单号
+				</td>
+				<td class="td2">
+					${requestScope.dd.ddh }
+				</td>
 				<td class="td1" align="right">
 					预装卸重量
 				</td>
 				<td class="td2">
-					<input type="number" class="yzxzl_inp" id="yzxzl" name="yzxzl" placeholder="请输入预装卸重量" onfocus="focusYZXZL()" onblur="checkYZXZL()"/>
+					<input type="number" class="yzxzl_inp" id="yzxzl" name="yzxzl" value="${requestScope.dd.yzxzl }" placeholder="请输入预装卸重量" onfocus="focusYZXZL()" onblur="checkYZXZL()"/>
 				</td>
+			  </tr>
+			  <tr>
 				<td class="td1" align="right">
 					流向类型
 				</td>
@@ -554,14 +602,42 @@ function setFitWidthInParent(parent,self){
 					<input id="lxlx_cbb"/>
 					<input type="hidden" id="lxlx" name="lxlx"/>
 				</td>
+				<td class="td1" align="right">
+					编辑时间
+				</td>
+				<td class="td2">
+					${requestScope.dd.bjsj }
+				</td>
 			  </tr>
 			  <tr>
+				<td class="td1" align="right">
+					二维码
+				</td>
+				<td class="td2">
+					<img class="ewm_img" id="ewm_img" alt="" src="${requestScope.dd.ewm }"/>
+				</td>
 				<td class="td1" align="right">
 					实际重量
 				</td>
 				<td class="td2">
-					<input type="number" class="sjzl_inp" id="sjzl" name="sjzl" placeholder="请输入实际重量"/>
+					<input type="number" class="sjzl_inp" id="sjzl" name="sjzl" value="${requestScope.dd.sjzl }" placeholder="请输入实际重量"/>
 				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					重量差额比
+				</td>
+				<td class="td2">
+					${requestScope.dd.zlceb }
+				</td>
+				<td class="td1" align="right">
+					订单状态
+				</td>
+				<td class="td2">
+					${requestScope.dd.ddztMc }
+				</td>
+			  </tr>
+			  <tr>
 				<td class="td1" align="right">
 					计划运输日期
 				</td>
@@ -569,128 +645,144 @@ function setFitWidthInParent(parent,self){
 					<input id="jhysrq_db"/>
 					<input type="hidden" id="jhysrq" name="jhysrq"/>
 				</td>
-			  </tr>
-			  <tr>
 				<td class="td1" align="right">
 					备注
 				</td>
 				<td class="td2">
-					<textarea rows="3" cols="30" id="bz" name="bz" placeholder="请输入备注"></textarea>
+					<textarea rows="3" cols="30" id="bz" name="bz" placeholder="请输入备注">${requestScope.dd.bz }</textarea>
 				</td>
+			  </tr>
+			  <tr>
 				<td class="td1" align="right">
 					结算重量
 				</td>
 				<td class="td2">
-					<input type="number" class="jszl_inp" id="jszl" name="jszl" placeholder="请输入结算重量"/>
+					<input type="number" class="jszl_inp" id="jszl" name="jszl" value="${requestScope.dd.jszl }" placeholder="请输入结算重量"/>
 				</td>
-			  </tr>
-			  <tr>
 				<td class="td1" align="right">
 					包数
 				</td>
 				<td class="td2">
-					<input type="text" class="bs_inp" id="bs" name="bs" placeholder="请输入包数" />
+					<input type="text" class="bs_inp" id="bs" name="bs" value="${requestScope.dd.bs }" placeholder="请输入包数" />
 				</td>
+			  </tr>
+			  <tr>
 				<td class="td1" align="right">
 					块数
 				</td>
 				<td class="td2">
-					<input type="text" class="ks_inp" id="ks" name="ks" placeholder="请输入块数" />
+					<input type="text" class="ks_inp" id="ks" name="ks" value="${requestScope.dd.ks }" placeholder="请输入块数" />
 				</td>
-			  </tr>
-			  <tr>
 				<td class="td1" align="right">
 					对方过磅净重
 				</td>
 				<td class="td2">
-					<input type="number" class="dfgbjz_inp" id="dfgbjz" name="dfgbjz" placeholder="请输入对方过磅净重" />
-				</td>
-				<td class="td1" align="right">
-					对方过磅皮重
-				</td>
-				<td class="td2">
-					<input type="number" class="dfgbpz_inp" id="dfgbpz" name="dfgbpz" placeholder="请输入对方过磅皮重" />
+					<input type="number" class="dfgbjz_inp" id="dfgbjz" name="dfgbjz" value="${requestScope.dfgbjl.dfgbjz }" placeholder="请输入对方过磅净重" />
 				</td>
 			  </tr>
 			  <tr>
 				<td class="td1" align="right">
+					对方过磅皮重
+				</td>
+				<td class="td2">
+					<input type="number" class="dfgbpz_inp" id="dfgbpz" name="dfgbpz" value="${requestScope.dfgbjl.dfgbpz }" placeholder="请输入对方过磅皮重" />
+				</td>
+				<td class="td1" align="right">
 					对方过磅毛重
 				</td>
 				<td class="td2">
-					<input type="number" class="dfgbmz_inp" id="dfgbmz" name="dfgbmz" placeholder="请输入对方过磅毛重" />
+					<input type="number" class="dfgbmz_inp" id="dfgbmz" name="dfgbmz" value="${requestScope.dfgbjl.dfgbmz }" placeholder="请输入对方过磅毛重" />
 				</td>
+			  </tr>
+			  <tr>
 				<td class="td1" align="right">
 					对方榜单照片
 				</td>
 				<td class="td2">
 					<div class="uploadBut_div upDfbdzpBut_div" onclick="uploadDfbdzp()">选择对方榜单照片</div>
 					<input type="file" class="dfbdzp_file" id="dfbdzp_file" name="dfbdzp_file" onchange="showDfbdzp(this)"/>
-					<img class="dfbdzp_img" id="dfbdzp_img" alt="" src=""/>
+					<img class="dfbdzp_img" id="dfbdzp_img" alt="" src="${requestScope.dfgbjl.dfbdzp }"/>
 				</td>
-			  </tr>
-			  <tr>
 				<td class="td1" align="right">
 					对方过磅时间
 				</td>
 				<td class="td2">
 					<input id="dfgbsj_dtb"/>
-					<input type="hidden" id="dfgbsj" name="dfgbsj"/>
+					<input type="hidden" id="dfgbsj" name="dfgbsj" value="${requestScope.dfgbjl.dfgbsj }"/>
 				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					出卡次数
+				</td>
+				<td class="td2">
+					${requestScope.dd.ckcs }
+				</td>
+				<td class="td1" align="right">
+					过磅时间
+				</td>
+				<td class="td2">
+				</td>
+			  </tr>
+			  <tr>
 				<td class="td1" align="right">
 					运输商
 				</td>
 				<td class="td2">
-					<input id="yss_cbb"/>
+					<input id="yss_cbb" disabled="disabled"/>
 					<input type="hidden" id="yssId" name="yssId"/>
 				</td>
-			  </tr>
-			  <tr>
 				<td class="td1" align="right">
 					物资类型
 				</td>
 				<td class="td2">
-					<input id="wzlx_cbb"/>
-					<input type="hidden" id="wzlxId" name="wzlxId"/>
+					<input id="wzlx_cbb" disabled="disabled"/>
+					<input type="hidden" id="wzlxId" name="wzlxId" value="${requestScope.dd.wzlxId }"/>
 				</td>
+			  </tr>
+			  <tr>
 				<td class="td1" align="right">
 					物资名称
 				</td>
 				<td class="td2">
-					<input id="wz_cbb"/>
-					<input type="hidden" id="wzId" name="wzId"/>
+					<input id="wz_cbb" disabled="disabled"/>
+					<input type="hidden" id="wzId" name="wzId" value="${requestScope.dd.wzId }"/>
 				</td>
-			  </tr>
-			  <tr>
 				<td class="td1" align="right">
 					发货单位
 				</td>
 				<td class="td2">
-					<input id="fhdw_cbb"/>
-					<input type="hidden" id="fhdwId" name="fhdwId"/>
+					<input id="fhdw_cbb" disabled="disabled"/>
+					<input type="hidden" id="fhdwId" name="fhdwId" value="${requestScope.dd.fhdwId }"/>
 				</td>
+			  </tr>
+			  <tr>
 				<td class="td1" align="right">
 					收货单位
 				</td>
 				<td class="td2">
-					<input id="shdw_cbb"/>
-					<input type="hidden" id="shdwId" name="shdwId"/>
+					<input id="shdw_cbb" disabled="disabled"/>
+					<input type="hidden" id="shdwId" name="shdwId" value="${requestScope.dd.shdwId }"/>
 				</td>
-			  </tr>
-			  <tr>
 				<td class="td1" align="right">
 					承运车辆
 				</td>
 				<td class="td2">
 					<input id="cycl_cbb"/>
-					<input type="hidden" id="cyclId" name="cyclId"/>
-					<input type="hidden" id="cyclCph" name="cyclCph"/>
+					<input type="hidden" id="cyclId" name="cyclId" value="${requestScope.dd.cyclId }"/>
 				</td>
+			  </tr>
+			  <tr>
 				<td class="td1" align="right">
 					承运司机
 				</td>
 				<td class="td2">
 					<input id="cysj_cbb"/>
-					<input type="hidden" id="cysjId" name="cysjId"/>
+					<input type="hidden" id="cysjId" name="cysjId" value="${requestScope.dd.cysjId }"/>
+				</td>
+				<td class="td1" align="right">
+				</td>
+				<td class="td2">
 				</td>
 			  </tr>
 			</table>
