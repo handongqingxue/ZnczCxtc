@@ -27,11 +27,11 @@ public class DuiFangGuoBangJiLu {
 	public void setDfgbjz(Float dfgbjz) {
 		this.dfgbjz = dfgbjz;
 	}
-	public String getDfgbzp() {
-		return dfgbzp;
+	public String getDfbdzp() {
+		return dfbdzp;
 	}
-	public void setDfgbzp(String dfgbzp) {
-		this.dfgbzp = dfgbzp;
+	public void setDfbdzp(String dfbdzp) {
+		this.dfbdzp = dfbdzp;
 	}
 	public String getDfgbsj() {
 		return dfgbsj;
@@ -48,7 +48,7 @@ public class DuiFangGuoBangJiLu {
 	private Float dfgbpz;
 	private Float dfgbmz;
 	private Float dfgbjz;
-	private String dfgbzp;
+	private String dfbdzp;
 	private String dfgbsj;
 	private Integer ddId;
 }

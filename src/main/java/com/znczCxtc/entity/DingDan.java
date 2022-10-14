@@ -98,11 +98,11 @@ public class DingDan {
 	public void setDfgbjz(Float dfgbjz) {
 		this.dfgbjz = dfgbjz;
 	}
-	public String getDfgbzp() {
-		return dfgbzp;
+	public String getDfbdzp() {
+		return dfbdzp;
 	}
-	public void setDfgbzp(String dfgbzp) {
-		this.dfgbzp = dfgbzp;
+	public void setDfbdzp(String dfbdzp) {
+		this.dfbdzp = dfbdzp;
 	}
 	public String getDfgbsj() {
 		return dfgbsj;
@@ -241,7 +241,7 @@ public class DingDan {
 	private Float dfgbpz;//对方过磅皮重
 	private Float dfgbmz;//对方过磅毛重
 	private Float dfgbjz;//对方过磅净重
-	private String dfgbzp;//对方过磅照片
+	private String dfbdzp;//对方磅单照片
 	private String dfgbsj;//对方过磅时间
 	private String ewm;//二维码
 	private Integer yssId;//运输商id

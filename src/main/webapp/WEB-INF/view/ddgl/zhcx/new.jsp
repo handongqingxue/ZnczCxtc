@@ -335,6 +335,8 @@ function newDingDan(){
 	$("#new_div #shdwId").val(shdwId);
 	var cyclId=cyclCBB.combobox("getValue");
 	$("#new_div #cyclId").val(cyclId);
+	var cyclCph=cyclCBB.combobox("getText");
+	$("#new_div #cyclCph").val(cyclCph);
 	var cysjId=cysjCBB.combobox("getValue");
 	$("#new_div #cysjId").val(cysjId);
 	
@@ -673,6 +675,7 @@ function setFitWidthInParent(parent,self){
 				<td class="td2">
 					<input id="cycl_cbb"/>
 					<input type="hidden" id="cyclId" name="cyclId"/>
+					<input type="hidden" id="cyclCph" name="cyclCph"/>
 				</td>
 				<td class="td1" align="right">
 					承运司机

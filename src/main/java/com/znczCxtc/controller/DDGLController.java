@@ -9,10 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
+import com.znczCxtc.util.FileUploadUtil;
+import com.znczCxtc.util.QrcodeUtil;
+
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/"+DDGLController.MODULE_NAME)
@@ -140,13 +146,48 @@ public class DDGLController {
 	
 	@RequestMapping(value="/newDingDan")
 	@ResponseBody
-	public Map<String, Object> newDingDan(DingDan dd,
-			DuiFangGuoBangJiLu dfgbjl, HttpServletRequest request) {
+	public Map<String, Object> newDingDan(DingDan dd, DuiFangGuoBangJiLu dfgbjl, 
+			@RequestParam(value="dfbdzp_file",required=false) MultipartFile dfbdzp_file,
+			HttpServletRequest request) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
+			MultipartFile[] fileArr=new MultipartFile[1];
+			fileArr[0]=dfbdzp_file;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						String folder="DuiFangGuoBangJiLu/";
+						switch (i) {
+						case 0:
+							folder+="Dfbdzp";//对方榜单照片
+							break;
+						}
+						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								dfgbjl.setDfbdzp(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+				}
+			}
+			
 			String ddh=dingDanService.createDdhByDateYMD();
 			dd.setDdh(ddh);
+			
+			String url=dd.getCyclCph();
+			String fileName = ddh + ".jpg";
+			String avaPath="/ZnczCxtc/upload/Ewm/"+fileName;
+			String path = "D:/resource/ZnczCxtc/Ewm";
+	        QrcodeUtil.createQrCode(url, path, fileName);
+	        dd.setEwm(avaPath);
+	        
 			int count=dingDanService.add(dd);
 			if(count>0) {
 				int ddId=dingDanService.getIdByDdh(ddh);//因为新订单之前添加到订单表前没有id，添加完成后才生成id，这里在添加完成后，要根据订单号获取订单id

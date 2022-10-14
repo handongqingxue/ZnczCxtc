@@ -15,8 +15,8 @@
 			<if test="dfgbjz!=null">
 				dfgbjz,
 			</if>
-			<if test="dfgbzp!=null">
-				dfgbzp,
+			<if test="dfbdzp!=null">
+				dfbdzp,
 			</if>
 			<if test="dfgbsj!=null">
 				dfgbsj,
@@ -36,8 +36,8 @@
 			<if test="dfgbjz!=null">
 				#{dfgbjz},
 			</if>
-			<if test="dfgbzp!=null">
-				#{dfgbzp},
+			<if test="dfbdzp!=null">
+				#{dfbdzp},
 			</if>
 			<if test="dfgbsj!=null">
 				#{dfgbsj},
