@@ -79,11 +79,6 @@ public class DingDanServiceImpl implements DingDanService {
 	@Override
 	public int edit(DingDan dd) {
 		// TODO Auto-generated method stub
-		String ddztMc = dd.getDdztMc();
-		if(!StringUtils.isEmpty(ddztMc)) {
-			int ddztId=dingDanZhuangTaiDao.getIdByMc(ddztMc);
-			dd.setDdztId(ddztId);
-		}
 		return dingDanDao.edit(dd);
 	}
 

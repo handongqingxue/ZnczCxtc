@@ -218,38 +218,11 @@
 	<update id="edit" parameterType="com.znczCxtc.entity.DingDan">
 		update ding_dan set 
 		<trim suffixOverrides=",">
-			<if test="ddh!=null">
-				ddh=#{ddh},
-			</if>
-			<if test="ddztId!=null">
-				ddztId=#{ddztId},
-			</if>
-			<if test="yjzt!=null">
-				yjzt=#{yjzt},
-			</if>
-			<if test="ejzt!=null">
-				ejzt=#{ejzt},
-			</if>
-			<if test="sjsfzh!=null">
-				sjsfzh=#{sjsfzh},
-			</if>
-			<if test="sjxm!=null">
-				sjxm=#{sjxm},
-			</if>
-			<if test="cph!=null">
-				cph=#{cph},
-			</if>
-			<if test="yjbfh!=0">
-				yjbfh=#{yjbfh},
-			</if>
-			<if test="ejbfh!=0">
-				ejbfh=#{ejbfh},
+			<if test="yzxzl!=null">
+				yzxzl=#{yzxzl},
 			</if>
 			<if test="lxlx!=null">
 				lxlx=#{lxlx},
-			</if>
-			<if test="yzxzl!=null">
-				yzxzl=#{yzxzl},
 			</if>
 			<if test="sjzl!=null">
 				sjzl=#{sjzl},
@@ -257,20 +230,41 @@
 			<if test="zlceb!=null">
 				zlceb=#{zlceb},
 			</if>
+			<if test="jhysrq!=null">
+				jhysrq=#{jhysrq},
+			</if>
+			<if test="bz!=null">
+				bz=#{bz},
+			</if>
+			<if test="jszl!=null">
+				jszl=#{jszl},
+			</if>
+			<if test="bs!=null">
+				bs=#{bs},
+			</if>
+			<if test="ks!=null">
+				ks=#{ks},
+			</if>
+			<if test="yssId!=null">
+				yssId=#{yssId},
+			</if>
 			<if test="wzlxId!=null">
 				wzlxId=#{wzlxId},
 			</if>
 			<if test="wzId!=null">
 				wzId=#{wzId},
 			</if>
-			<if test="yssId!=null">
-				yssId=#{yssId},
-			</if>
 			<if test="fhdwId!=null">
 				fhdwId=#{fhdwId},
 			</if>
 			<if test="shdwId!=null">
 				shdwId=#{shdwId},
+			</if>
+			<if test="cyclId!=null">
+				cyclId=#{cyclId},
+			</if>
+			<if test="cysjId!=null">
+				cysjId=#{cysjId},
 			</if>
 				bjsj=now()
 		</trim>
@@ -380,7 +374,7 @@
 		select id from ding_dan where ddh=#{ddh}
 	</select>
 	<select id="getCountByIdCph" resultType="java.lang.Integer">
-		select count(*) from ding_dan where id=#{id} and cph=#{cph}
+		select count(*) from ding_dan dd left join che_liang cl on dd.cyclId=cl.id where dd.id=#{id} and cl.cph=#{cph}
 	</select>
 	<select id="getMaxDdhNumByDdhDate" resultType="java.lang.Integer">
 		select substring(MAX(ddh),11,4) from ding_dan where ddh like CONCAT(#{ddhDate},'%')

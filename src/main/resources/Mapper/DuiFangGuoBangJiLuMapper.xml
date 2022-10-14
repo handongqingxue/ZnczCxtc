@@ -47,7 +47,31 @@
 			</if>
 		</trim>
 	</insert>
+	<update id="editByDdId" parameterType="com.znczCxtc.entity.DuiFangGuoBangJiLu">
+		update dui_fang_guo_bang_ji_lu set 
+		<trim suffixOverrides=",">
+			<if test="dfgbpz!=null">
+				dfgbpz=#{dfgbpz},
+			</if>
+			<if test="dfgbmz!=null">
+				dfgbmz=#{dfgbmz},
+			</if>
+			<if test="dfgbjz!=null">
+				dfgbjz=#{dfgbjz},
+			</if>
+			<if test="dfbdzp!=null">
+				dfbdzp=#{dfbdzp},
+			</if>
+			<if test="dfgbsj!=null">
+				dfgbsj=#{dfgbsj},
+			</if>
+		</trim>
+		where ddId=#{ddId}
+	</update>
 	<select id="selectByDdId" resultType="com.znczCxtc.entity.DuiFangGuoBangJiLu">
 		select * from dui_fang_guo_bang_ji_lu where ddId=#{ddId}
+	</select>
+	<select id="getCountByDdId" resultType="java.lang.Integer">
+		select count(*) from dui_fang_guo_bang_ji_lu where ddId=#{ddId}
 	</select>
 </mapper>

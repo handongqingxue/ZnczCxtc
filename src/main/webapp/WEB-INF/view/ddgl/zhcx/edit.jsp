@@ -361,17 +361,36 @@ function initCYSJCBB(){
 }
 
 function checkEdit(){
-	if(checkWZLXId()){
-		if(checkWZId()){
-			editDingDanZongHeChaXun();
+	if(checkYZXZL()){
+		if(checkLXLXId()){
+			if(checkJHYSRQ()){
+				if(checkYSSId()){
+					if(checkWZLXId()){
+						if(checkWZId()){
+							if(checkFHDWId()){
+								if(checkSHDWId()){
+									if(checkCYCLId()){
+										if(checkCYSJId()){
+											editDingDan();
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
 
-function editDingDanZongHeChaXun(){
-	var sjc=lrSjcCBB.combobox("getValue");
-	var wscph=lrWscphCBB.combobox("getValue");
-	$("#edit_div #cph").val(sjc+wscph);
+function editDingDan(){
+	var lxlx=lxlxCBB.combobox("getValue");
+	$("#edit_div #lxlx").val(lxlx);
+	var jhysrq=jhysrqDB.datebox("getValue");
+	$("#edit_div #jhysrq").val(jhysrq);
+	var dfgbsj=dfgbsjDTB.datetimebox("getValue");
+	$("#edit_div #dfgbsj").val(dfgbsj);
 	var wzlxId=wzlxCBB.combobox("getValue");
 	$("#edit_div #wzlxId").val(wzlxId);
 	var wzId=wzCBB.combobox("getValue");
@@ -382,12 +401,18 @@ function editDingDanZongHeChaXun(){
 	$("#edit_div #fhdwId").val(fhdwId);
 	var shdwId=shdwCBB.combobox("getValue");
 	$("#edit_div #shdwId").val(shdwId);
+	var cyclId=cyclCBB.combobox("getValue");
+	$("#edit_div #cyclId").val(cyclId);
+	var cyclCph=cyclCBB.combobox("getText");
+	$("#edit_div #cyclCph").val(cyclCph);
+	var cysjId=cysjCBB.combobox("getValue");
+	$("#edit_div #cysjId").val(cysjId);
 	
 	var formData = new FormData($("#form1")[0]);
 	
 	$.ajax({
 		type:"post",
-		url:ddglPath+"editDingDanZongHeChaXun",
+		url:ddglPath+"editDingDan",
 		dataType: "json",
 		data:formData,
 		cache: false,
@@ -578,6 +603,7 @@ function setFitWidthInParent(parent,self){
 		<div id="edit_div">
 			<form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
 			<input type="hidden" id="id" name="id" value="${requestScope.dd.id }"/>
+			<input type="hidden" id="ddId" name="ddId" value="${requestScope.dd.id }"/>
 			<input type="hidden" id="ddztMc" name="ddztMc" value="${requestScope.ddztMc }"/>
 			<table>
 			  <tr>
@@ -770,6 +796,7 @@ function setFitWidthInParent(parent,self){
 				<td class="td2">
 					<input id="cycl_cbb"/>
 					<input type="hidden" id="cyclId" name="cyclId" value="${requestScope.dd.cyclId }"/>
+					<input type="hidden" id="cyclCph" name="cyclCph"/>
 				</td>
 			  </tr>
 			  <tr>

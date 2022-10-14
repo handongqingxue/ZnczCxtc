@@ -220,6 +220,74 @@ public class DDGLController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/editDingDan")
+	@ResponseBody
+	public Map<String, Object> editDingDan(DingDan dd, DuiFangGuoBangJiLu dfgbjl,
+			@RequestParam(value="dfbdzp_file",required=false) MultipartFile dfbdzp_file,
+			HttpServletRequest request) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			MultipartFile[] fileArr=new MultipartFile[1];
+			fileArr[0]=dfbdzp_file;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						String folder="DuiFangGuoBangJiLu/";
+						switch (i) {
+						case 0:
+							folder+="Dfbdzp";//对方榜单照片
+							break;
+						}
+						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								dfgbjl.setDfbdzp(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+				}
+			}
+			
+			Integer ddId = dd.getId();
+			String cph = dd.getCyclCph();
+			boolean existDd=dingDanService.checkIfExistByIdCph(ddId,cph);//在修改订单信息前根据订单id和现在的车牌号验证订单表里是否存在订单，一定要在修改订单之前验证，因为这时车牌号就算待变更也还没变成新的
+			int count=dingDanService.edit(dd);
+			if(count>0) {
+				boolean existDfgbjl=duiFangGuoBangJiLuService.checkIfExistByDdId(ddId);
+				if(existDfgbjl) {
+					duiFangGuoBangJiLuService.editByDdId(dfgbjl);
+				}
+				else {
+					duiFangGuoBangJiLuService.add(dfgbjl);
+				}
+				
+				if(!existDd) {//订单id都是一个id，若不存在，说明编辑订单信息时车牌号也变更了，则需要给该订单再加条录入车牌号记录
+					RglrCphJiLu rglrCphJiLu=new RglrCphJiLu();
+					rglrCphJiLu.setCph(cph);
+					rglrCphJiLu.setDdId(ddId);
+					rglrCphJiLuService.add(rglrCphJiLu);
+				}
+				
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "编辑订单成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "编辑订单失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/queryZHCXList")
 	@ResponseBody
 	public Map<String, Object> queryZHCXList(String ddh,Integer ddztId,String ddztMc,String cph,String jhysrq,String yssMc,String wzMc,

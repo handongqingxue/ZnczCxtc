@@ -8,5 +8,9 @@ public interface DuiFangGuoBangJiLuMapper {
 
 	int add(DuiFangGuoBangJiLu dfgbjl);
 
+	int editByDdId(DuiFangGuoBangJiLu dfgbjl);
+
 	DuiFangGuoBangJiLu selectByDdId(@Param("ddId") String ddId);
+
+	int getCountByDdId(@Param("ddId") Integer ddId);
 }

@@ -20,8 +20,21 @@ public class DuiFangGuoBangJiLuServiceImpl implements DuiFangGuoBangJiLuService 
 	}
 
 	@Override
+	public int editByDdId(DuiFangGuoBangJiLu dfgbjl) {
+		// TODO Auto-generated method stub
+		return duiFangGuoBangJiLuDao.editByDdId(dfgbjl);
+	}
+
+	@Override
 	public DuiFangGuoBangJiLu selectByDdId(String ddId) {
 		// TODO Auto-generated method stub
 		return duiFangGuoBangJiLuDao.selectByDdId(ddId);
+	}
+
+	@Override
+	public boolean checkIfExistByDdId(Integer ddId) {
+		// TODO Auto-generated method stub
+		int count=duiFangGuoBangJiLuDao.getCountByDdId(ddId);
+		return count==0?false:true;
 	}
 }
