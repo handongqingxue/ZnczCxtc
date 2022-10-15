@@ -60,7 +60,7 @@ function initDetailDialog(){
            {text:"审核通过",id:"shtg_but",iconCls:"icon-ok",handler:function(){
         	   checkById(true);
            }},
-           {text:"退回",id:"th_but",iconCls:"icon-cancel",handler:function(){
+           {text:"退回",id:"th_but",iconCls:"icon-back",handler:function(){
         	   checkById(false);
            }}
         ]

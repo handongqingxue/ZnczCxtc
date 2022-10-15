@@ -80,7 +80,8 @@ public class DDGLController {
 	public String goDshList(HttpServletRequest request) {
 		
 		request.setAttribute("ddztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);
-		request.setAttribute("checkDdztMc", DingDanZhuangTai.YI_XIA_DAN_TEXT);
+		request.setAttribute("bjzDdztMc", DingDanZhuangTai.BIAN_JI_ZHONG_TEXT);
+		request.setAttribute("yxdDdztMc", DingDanZhuangTai.YI_XIA_DAN_TEXT);
 		request.setAttribute("shlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
 		
 		return MODULE_NAME+"/dsh/list";

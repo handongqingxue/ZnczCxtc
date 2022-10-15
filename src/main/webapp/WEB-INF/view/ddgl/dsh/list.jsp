@@ -38,10 +38,13 @@
 <script type="text/javascript">
 var path='<%=basePath %>';
 var ddglPath=path+'ddgl/';
-var ddztMc='${requestScope.ddztMc}';
+var defaultDdztMc='${requestScope.ddztMc}';
+var bjzDdztMc='${requestScope.bjzDdztMc}';
+var yxdDdztMc='${requestScope.yxdDdztMc}';
 $(function(){
 	initSearchLB();
-	initCheckLB();
+	initTGLB();
+	initTHLB();
 	initTab1();
 });
 
@@ -54,57 +57,54 @@ function initSearchLB(){
 			var yssMc=$("#toolbar #yssMc").val();
 			var fhdwMc=$("#toolbar #fhdwMc").val();
 			var shdwMc=$("#toolbar #shdwMc").val();
-			tab1.datagrid("load",{ddh:ddh,ddztMc:ddztMc,wzMc:wzMc,yssMc:yssMc,fhdwMc:fhdwMc,shdwMc:shdwMc});
+			tab1.datagrid("load",{ddh:ddh,ddztMc:defaultDdztMc,wzMc:wzMc,yssMc:yssMc,fhdwMc:fhdwMc,shdwMc:shdwMc});
 		}
 	});
 }
 
-function initCheckLB(){
-	$("#check_but").linkbutton({
+function initTGLB(){
+	$("#tg_but").linkbutton({
 		iconCls:"icon-ok",
 		onClick:function(){
-			checkByIds();
+			checkByIds(true);
 		}
 	});
 }
 
-function checkByIds() {
+function initTHLB(){
+	$("#th_but").linkbutton({
+		iconCls:"icon-back",
+		onClick:function(){
+			checkByIds(false);
+		}
+	});
+}
+
+function checkByIds(shjg) {
 	var rows=tab1.datagrid("getSelections");
 	if (rows.length == 0) {
 		$.messager.alert("提示","请选择要审核的信息！","warning");
 		return false;
 	}
 
-	var confirmStr="";
-	var wcphDdhs = "";
 	var shIds = "";
 	for (var i = 0; i < rows.length; i++) {
-		if(rows[i].cph=="")
-			wcphDdhs += "、" + rows[i].ddh;
-		else
-			shIds += "," + rows[i].id;
+		shIds += "," + rows[i].id;
 	}
-	if(wcphDdhs!="")
-		wcphDdhs=wcphDdhs.substring(1);
 	if(shIds!="")
 		shIds=shIds.substring(1);
 	
-	if(wcphDdhs!=""&shIds==""){
-		confirmStr="订单号"+wcphDdhs+"未录入车牌号";
-		alert(confirmStr);
-		return false;
-	}
-	else if(wcphDdhs!=""&shIds!="")
-		confirmStr="订单号"+wcphDdhs+"未录入车牌号,请确保其他订单都认真审核过！";
-	else
-		confirmStr="请确保所有订单都认真审核过！";
-	
+	var confirmStr="请确保所有订单都认真审核过！";
 	if(confirm(confirmStr)){
-		var ddztMc='${requestScope.checkDdztMc}';
+		var ddztMc;
+		if(shjg)
+			ddztMc=yxdDdztMc;
+		else
+			ddztMc=bjzDdztMc;
 		var shlx='${requestScope.shlx}';
 		var shrId='${sessionScope.yongHu.id}';
 		$.post(ddglPath + "checkDingDanByIds",
-			{ids:shIds,ddztMc:ddztMc,shlx:shlx,shjg:true,shrId:shrId},
+			{ids:shIds,ddztMc:ddztMc,shlx:shlx,shjg:shjg,shrId:shrId},
 			function(result){
 				if(result.status==1){
 					alert(result.msg);
@@ -124,7 +124,7 @@ function initTab1(){
 		url:ddglPath+"queryZHCXList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body","tab1_div"),
-		queryParams:{ddztMc:ddztMc},
+		queryParams:{ddztMc:defaultDdztMc},
 		pagination:true,
 		pageSize:10,
 		columns:[[
@@ -202,7 +202,8 @@ function setFitWidthInParent(parent,self){
 				<span class="shdw_span">收货单位：</span>
 				<input type="text" class="shdwMc_inp" id="shdwMc" placeholder="请输入收货单位"/>
 				<a class="search_but" id="search_but">查询</a>
-				<a id="check_but">审核</a>
+				<a id="tg_but">通过</a>
+				<a id="th_but">退回</a>
 			</div>
 		</div>
 		<table id="tab1">
