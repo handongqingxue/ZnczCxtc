@@ -1,6 +1,6 @@
 package com.znczCxtc.entity;
 
-public class ShenHeJiLu {
+public class DingDanShenHeJiLu {
 	
 	public static final Integer XIA_DAN_SHEN_HE=1;
 	public static final Integer YI_JIAN_SHEN_HE=2;

@@ -11,10 +11,10 @@ import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
 
 @Service
-public class ShenHeJiLuServiceImpl implements ShenHeJiLuService {
+public class DingDanShenHeJiLuServiceImpl implements DingDanShenHeJiLuService {
 	
 	@Autowired
-	private ShenHeJiLuMapper shenHeJiLuDao;
+	private DingDanShenHeJiLuMapper shenHeJiLuDao;
 
 	@Override
 	public int queryForInt(String ddh, Integer shlx, String shsjks, String shsjjs, String cph, String shrYhm, String yssMc, String wzMc, String fhdwMc, String shbmMc, String sjxm,
@@ -24,7 +24,7 @@ public class ShenHeJiLuServiceImpl implements ShenHeJiLuService {
 	}
 
 	@Override
-	public List<ShenHeJiLu> queryList(String ddh, Integer shlx, String shsjks, String shsjjs, String cph, String shrYhm, String yssMc, String wzMc, String fhdwMc, String shbmMc,
+	public List<DingDanShenHeJiLu> queryList(String ddh, Integer shlx, String shsjks, String shsjjs, String cph, String shrYhm, String yssMc, String wzMc, String fhdwMc, String shbmMc,
 			String sjxm, String sjsfzh, int page, int rows, String sort, String order) {
 		// TODO Auto-generated method stub
 		return shenHeJiLuDao.queryList(ddh, shlx, shsjks, shsjjs, cph, shrYhm, yssMc, wzMc, fhdwMc, shbmMc, sjxm, sjsfzh, (page-1)*rows, rows, sort, order);

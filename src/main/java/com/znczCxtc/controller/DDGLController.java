@@ -112,7 +112,7 @@ public class DDGLController {
 		request.setAttribute("dfgbjl", dfgbjl);
 		
 		request.setAttribute("yxdDdztMc", DingDanZhuangTai.YI_XIA_DAN_TEXT);
-		request.setAttribute("shlx", ShenHeJiLu.XIA_DAN_SHEN_HE);
+		request.setAttribute("shlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
 		
 		return MODULE_NAME+"/zhcx/detail";
 	}
@@ -341,7 +341,7 @@ public class DDGLController {
 
 	@RequestMapping(value="/checkDingDanByIds",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String checkDingDanByIds(String ids, String ddztMc, Integer jyFlag, ShenHeJiLu shjl) {
+	public String checkDingDanByIds(String ids, String ddztMc, Integer jyFlag, DingDanShenHeJiLu shjl) {
 		//TODO 针对分类的动态进行实时调整更新
 		int count=dingDanService.checkByIds(ids,ddztMc,jyFlag,shjl);
 		PlanResult plan=new PlanResult();
@@ -362,11 +362,11 @@ public class DDGLController {
 					Integer ddId = Integer.valueOf(idStr);
 					DingDan dd=new DingDan();
 					dd.setId(ddId);
-					if(shjl.getShlx()==ShenHeJiLu.YI_JIAN_SHEN_HE) {
+					if(shjl.getShlx()==DingDanShenHeJiLu.YI_JIAN_SHEN_HE) {
 						dd.setDdztMc(DingDanZhuangTai.YI_JIAN_DAI_SAO_MA_TEXT);
 						dd.setYjzt(DingDan.DAI_SHANG_BANG);
 					}
-					else if(shjl.getShlx()==ShenHeJiLu.ER_JIAN_SHEN_HE) {
+					else if(shjl.getShlx()==DingDanShenHeJiLu.ER_JIAN_SHEN_HE) {
 						dd.setDdztMc(DingDanZhuangTai.ER_JIAN_DAI_SAO_MA_TEXT);
 						dd.setEjzt(DingDan.DAI_SHANG_BANG);
 					}

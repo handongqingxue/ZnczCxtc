@@ -22,7 +22,7 @@ public class DingDanServiceImpl implements DingDanService {
 	@Autowired
 	private DingDanZhuangTaiMapper dingDanZhuangTaiDao;
 	@Autowired
-	private ShenHeJiLuMapper shenHeJiLuDao;
+	private DingDanShenHeJiLuMapper dingDanShenHeJiLuDao;
 	@Autowired
 	private BangDanJiLuMapper bangDanJiLuDao;
 	@Autowired
@@ -96,7 +96,7 @@ public class DingDanServiceImpl implements DingDanService {
 	}
 
 	@Override
-	public int checkByIds(String ids,String ddztMc,Integer jyFlag,ShenHeJiLu shjl) {
+	public int checkByIds(String ids,String ddztMc,Integer jyFlag,DingDanShenHeJiLu shjl) {
 		// TODO Auto-generated method stub
 		int count=0;
 		int ddztId=dingDanZhuangTaiDao.getIdByMc(ddztMc);
@@ -105,7 +105,7 @@ public class DingDanServiceImpl implements DingDanService {
 			for (String idStr : idList) {
 				Integer ddId = Integer.valueOf(idStr);
 				shjl.setDdId(ddId);
-				count+=shenHeJiLuDao.add(shjl);
+				count+=dingDanShenHeJiLuDao.add(shjl);
 				
 				if(!shjl.getShjg()) {//这块代码是在一检审核或二检审核不通过情况下，把之前的磅单记录、过磅记录删除。与下单审核、入库审核无关
 					if(jyFlag==GuoBangJiLu.RU_CHANG_GUO_BANG)//在入厂过磅审核不通过情况下，要删除入厂过磅记录，肯定要连同磅单记录一起删除掉
