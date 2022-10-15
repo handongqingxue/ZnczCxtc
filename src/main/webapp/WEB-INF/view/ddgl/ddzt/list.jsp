@@ -54,7 +54,7 @@ function initAddLB(){
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"订单状态查询",
+		title:"订单管理-订单状态-列表",
 		url:ddglPath+"queryDDZTList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),

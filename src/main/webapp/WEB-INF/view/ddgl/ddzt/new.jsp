@@ -161,7 +161,7 @@ function setFitWidthInParent(parent,self){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../inc/side.jsp"%>
 	<div class="center_con_div" id="center_con_div">
-		<div class="page_location_div">订单状态-添加</div>
+		<div class="page_location_div">订单管理-订单状态-添加</div>
 		
 		<div id="new_div">
 			<form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
