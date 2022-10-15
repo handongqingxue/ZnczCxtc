@@ -230,6 +230,9 @@
 			<if test="zlceb!=null">
 				zlceb=#{zlceb},
 			</if>
+			<if test="ddztId!=null">
+				ddztId=#{ddztId},
+			</if>
 			<if test="jhysrq!=null">
 				jhysrq=#{jhysrq},
 			</if>

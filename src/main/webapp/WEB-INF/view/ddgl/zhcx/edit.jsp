@@ -54,6 +54,8 @@ var sjglPath=path+'sjgl/';
 var dialogTop=70;
 var dialogLeft=20;
 var edNum=0;
+var dshDdztMc='${requestScope.dshDdztMc}';
+var bjzDdztMc='${requestScope.bjzDdztMc}';
 $(function(){
 	initEditDialog();//0
 
@@ -407,6 +409,9 @@ function editDingDan(){
 	$("#edit_div #cyclCph").val(cyclCph);
 	var cysjId=cysjCBB.combobox("getValue");
 	$("#edit_div #cysjId").val(cysjId);
+	var ddztMc=$("#edit_div #ddztMc").val();
+	if(ddztMc==bjzDdztMc)
+		$("#edit_div #ddztMc").val(dshDdztMc);
 	
 	var formData = new FormData($("#form1")[0]);
 	
@@ -604,7 +609,7 @@ function setFitWidthInParent(parent,self){
 			<form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
 			<input type="hidden" id="id" name="id" value="${requestScope.dd.id }"/>
 			<input type="hidden" id="ddId" name="ddId" value="${requestScope.dd.id }"/>
-			<input type="hidden" id="ddztMc" name="ddztMc" value="${requestScope.ddztMc }"/>
+			<input type="hidden" id="ddztMc" name="ddztMc" value="${requestScope.dd.ddztMc }"/>
 			<table>
 			  <tr>
 				<td class="td1" align="right">

@@ -58,7 +58,10 @@ function initDetailDialog(){
 		left:dialogLeft,
 		buttons:[
            {text:"审核通过",id:"shtg_but",iconCls:"icon-ok",handler:function(){
-        	   checkById();
+        	   checkById(true);
+           }},
+           {text:"退回",id:"th_but",iconCls:"icon-cancel",handler:function(){
+        	   checkById(false);
            }}
         ]
 	});
@@ -96,25 +99,38 @@ function initDetailDialog(){
 	$(".window,.window .window-body").eq(ddNum).css("border-color","#ddd");
 
 	var shtgBut=$("#detail_div #shtg_but");
-	shtgBut.css("left","45%");
+	shtgBut.css("left","35%");
 	shtgBut.css("position","absolute");
 	
-	if('${requestScope.dd.ddztId }'==1)
+	var thBut=$("#detail_div #th_but");
+	thBut.css("left","55%");
+	thBut.css("position","absolute");
+
+	var dshDdztMc=$("#detail_div #dshDdztMc").val();
+	if('${requestScope.dd.ddztMc }'==dshDdztMc){
 		shtgBut.linkbutton('enable');
-	else
+		thBut.linkbutton('enable');
+	}
+	else{
 		shtgBut.linkbutton('disable');
+		thBut.linkbutton('disable');
+	}
 	
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 }
 
-function checkById(){
+function checkById(shjg){
 	var id=$("#detail_div #id").val();
-	var ddztMc=$("#detail_div #yxdDdztMc").val();
+	var ddztMc;
+	if(shjg)
+		ddztMc=$("#detail_div #yxdDdztMc").val();
+	else
+		ddztMc=$("#detail_div #bjzDdztMc").val();
 	var shlx='${requestScope.shlx}';
 	var shrId='${sessionScope.yongHu.id}';
 	$.post(ddglPath + "checkDingDanByIds",
-		{ids:id,ddztMc:ddztMc,shlx:shlx,shjg:true,shrId:shrId},
+		{ids:id,ddztMc:ddztMc,shlx:shlx,shjg:shjg,shrId:shrId},
 		function(result){
 			if(result.status==1){
 				alert(result.msg);
@@ -155,6 +171,8 @@ function setFitWidthInParent(parent,self){
 		<div id="detail_div">
 			<form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
 			<input type="hidden" id="id" value="${requestScope.dd.id }"/>
+			<input type="hidden" id="dshDdztMc" value="${requestScope.dshDdztMc}"/>
+			<input type="hidden" id="bjzDdztMc" value="${requestScope.bjzDdztMc}"/>
 			<input type="hidden" id="yxdDdztMc" value="${requestScope.yxdDdztMc}"/>
 			<table>
 			  <tr>

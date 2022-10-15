@@ -70,6 +70,21 @@ public class DDGLController {
 		
 		return MODULE_NAME+"/ddzt/detail";
 	}
+
+	/**
+	 * 跳转到订单管理-待审核-列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/dsh/list")
+	public String goDshList(HttpServletRequest request) {
+		
+		request.setAttribute("ddztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);
+		request.setAttribute("checkDdztMc", DingDanZhuangTai.YI_XIA_DAN_TEXT);
+		request.setAttribute("shlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
+		
+		return MODULE_NAME+"/dsh/list";
+	}
 	
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {
@@ -86,6 +101,9 @@ public class DDGLController {
 		
 		DuiFangGuoBangJiLu dfgbjl=duiFangGuoBangJiLuService.selectByDdId(id);
 		request.setAttribute("dfgbjl", dfgbjl);
+		
+		request.setAttribute("dshDdztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);
+		request.setAttribute("bjzDdztMc", DingDanZhuangTai.BIAN_JI_ZHONG_TEXT);
 		
 		return MODULE_NAME+"/zhcx/edit";
 	}
@@ -110,7 +128,9 @@ public class DDGLController {
 		
 		DuiFangGuoBangJiLu dfgbjl=duiFangGuoBangJiLuService.selectByDdId(id);
 		request.setAttribute("dfgbjl", dfgbjl);
-		
+
+		request.setAttribute("dshDdztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);
+		request.setAttribute("bjzDdztMc", DingDanZhuangTai.BIAN_JI_ZHONG_TEXT);
 		request.setAttribute("yxdDdztMc", DingDanZhuangTai.YI_XIA_DAN_TEXT);
 		request.setAttribute("shlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
 		
