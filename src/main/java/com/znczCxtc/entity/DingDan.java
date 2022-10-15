@@ -1,6 +1,36 @@
 package com.znczCxtc.entity;
 
 public class DingDan {
+
+	/**
+	 * 待上磅
+	 */
+	public static final Integer DAI_SHANG_BANG=1;
+	/**
+	 * 上磅中
+	 */
+	public static final Integer SHANG_BANG_ZHONG=2;
+	/**
+	 * 待称重
+	 */
+	public static final Integer DAI_CHENG_ZHONG=3;
+	/**
+	 * 称重中
+	 */
+	public static final Integer CHENG_ZHONG_ZHONG=4;
+	/**
+	 * 待下磅
+	 */
+	public static final Integer DAI_XIA_BANG=5;
+	/**
+	 * 下磅中
+	 */
+	public static final Integer XIA_BANG_ZHONG=6;
+	/**
+	 * 已完成
+	 */
+	public static final Integer YI_WAN_CHENG=7;
+	
 	private Integer id;//订单id（主键）
 	public Integer getId() {
 		return id;

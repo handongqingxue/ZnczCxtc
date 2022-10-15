@@ -1,5 +1,6 @@
 package com.znczCxtc.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
-import com.znczCxtc.util.FileUploadUtil;
-import com.znczCxtc.util.QrcodeUtil;
+import com.znczCxtc.util.*;
 
 import net.sf.json.JSONObject;
 
@@ -99,6 +99,22 @@ public class DDGLController {
 	public String goZhcxList(HttpServletRequest request) {
 		
 		return MODULE_NAME+"/zhcx/list";
+	}
+	
+	@RequestMapping(value="/zhcx/detail")
+	public String goZhcxDetail(HttpServletRequest request) {
+		
+		String id = request.getParameter("id");
+		DingDan dd=dingDanService.selectById(id);
+		request.setAttribute("dd", dd);
+		
+		DuiFangGuoBangJiLu dfgbjl=duiFangGuoBangJiLuService.selectByDdId(id);
+		request.setAttribute("dfgbjl", dfgbjl);
+		
+		request.setAttribute("yxdDdztMc", DingDanZhuangTai.YI_XIA_DAN_TEXT);
+		request.setAttribute("shlx", ShenHeJiLu.XIA_DAN_SHEN_HE);
+		
+		return MODULE_NAME+"/zhcx/detail";
 	}
 	
 	@RequestMapping(value="/newDingDanZhuangTai")
@@ -321,5 +337,43 @@ public class DDGLController {
 		jsonMap.put("rows", ddztList);
 		
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/checkDingDanByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkDingDanByIds(String ids, String ddztMc, Integer jyFlag, ShenHeJiLu shjl) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=dingDanService.checkByIds(ids,ddztMc,jyFlag,shjl);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("审核订单失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("审核订单成功");
+			json=JsonUtil.getJsonFromObject(plan);
+			
+			if(!shjl.getShjg()) {//这块代码是在一检审核或二检审核不通过情况下，把订单状态还原到之前的排队中。与下单审核、入库审核无关
+				List<String> idList = Arrays.asList(ids.split(","));
+				for (String idStr : idList) {
+					Integer ddId = Integer.valueOf(idStr);
+					DingDan dd=new DingDan();
+					dd.setId(ddId);
+					if(shjl.getShlx()==ShenHeJiLu.YI_JIAN_SHEN_HE) {
+						dd.setDdztMc(DingDanZhuangTai.YI_JIAN_DAI_SAO_MA_TEXT);
+						dd.setYjzt(DingDan.DAI_SHANG_BANG);
+					}
+					else if(shjl.getShlx()==ShenHeJiLu.ER_JIAN_SHEN_HE) {
+						dd.setDdztMc(DingDanZhuangTai.ER_JIAN_DAI_SAO_MA_TEXT);
+						dd.setEjzt(DingDan.DAI_SHANG_BANG);
+					}
+					dingDanService.edit(dd);
+				}
+			}
+		}
+		return json;
 	}
 }

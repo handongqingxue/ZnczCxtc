@@ -19,6 +19,11 @@
 	margin-left: 20px;
 	font-size: 18px;
 }
+.ewm_img,.dfbdzp_img{
+	width: 220px;
+	height:220px;
+	margin-top: 10px;
+}
 </style>
 <script type="text/javascript">
 var path='<%=basePath %>';
@@ -48,9 +53,14 @@ function initDetailDialog(){
 	$("#detail_div").dialog({
 		title:"订单信息",
 		width:setFitWidthInParent("body","detail_div"),
-		height:290,
+		height:720,
 		top:dialogTop,
-		left:dialogLeft
+		left:dialogLeft,
+		buttons:[
+           {text:"审核通过",id:"shtg_but",iconCls:"icon-ok",handler:function(){
+        	   checkById();
+           }}
+        ]
 	});
 
 	$("#detail_div table").css("width",(setFitWidthInParent("body","detail_div_table"))+"px");
@@ -62,7 +72,16 @@ function initDetailDialog(){
 	$("#detail_div table .td2").css("width","30%");
 	$("#detail_div table tr").css("border-bottom","#CAD9EA solid 1px");
 	$("#detail_div table tr").each(function(i){
-		$(this).css("height","45px");
+		var height;
+		if(i==2)
+			height=230;
+		else if(i==4)
+			height=100;
+		else if(i==8)
+			height=310;
+		else
+			height=45;
+		$(this).css("height",height+"px");
 	});
 
 	$(".panel.window").eq(ddNum).css("margin-top","20px");
@@ -75,6 +94,37 @@ function initDetailDialog(){
 	//以下的是表格下面的面板
 	$(".window-shadow").eq(ddNum).css("margin-top","20px");
 	$(".window,.window .window-body").eq(ddNum).css("border-color","#ddd");
+
+	var shtgBut=$("#detail_div #shtg_but");
+	shtgBut.css("left","45%");
+	shtgBut.css("position","absolute");
+	
+	if('${requestScope.dd.ddztId }'==1)
+		shtgBut.linkbutton('enable');
+	else
+		shtgBut.linkbutton('disable');
+	
+	$(".dialog-button").css("background-color","#fff");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+}
+
+function checkById(){
+	var id=$("#detail_div #id").val();
+	var ddztMc=$("#detail_div #yxdDdztMc").val();
+	var shlx='${requestScope.shlx}';
+	var shrId='${sessionScope.yongHu.id}';
+	$.post(ddglPath + "checkDingDanByIds",
+		{ids:id,ddztMc:ddztMc,shlx:shlx,shjg:true,shrId:shrId},
+		function(result){
+			if(result.status==1){
+				alert(result.msg);
+				history.go(-1);
+			}
+			else{
+				alert(result.msg);
+			}
+		}
+	,"json");
 }
 
 function setFitWidthInParent(parent,self){
@@ -105,6 +155,7 @@ function setFitWidthInParent(parent,self){
 		<div id="detail_div">
 			<form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
 			<input type="hidden" id="id" value="${requestScope.dd.id }"/>
+			<input type="hidden" id="yxdDdztMc" value="${requestScope.yxdDdztMc}"/>
 			<table>
 			  <tr>
 				<td class="td1" align="right">
@@ -114,27 +165,10 @@ function setFitWidthInParent(parent,self){
 					${requestScope.dd.ddh }
 				</td>
 				<td class="td1" align="right">
-					车牌号
+					预装卸重量
 				</td>
 				<td class="td2">
-					${requestScope.dd.cph }
-				</td>
-			  </tr>
-			  <tr>
-				<td class="td1" align="right">
-					车辆类型
-				</td>
-				<td class="td2">
-					<c:if test="${requestScope.dd.clLx eq 1 }">陌生</c:if>
-					<c:if test="${requestScope.dd.clLx eq 2 }">待识别</c:if>
-					<c:if test="${requestScope.dd.clLx eq 3 }">已识别</c:if>
-					车辆
-				</td>
-				<td class="td1" align="right">
-					完成订单次数
-				</td>
-				<td class="td2">
-					${requestScope.dd.clWcddcs }
+					${requestScope.dd.yzxzl }
 				</td>
 			  </tr>
 			  <tr>
@@ -146,6 +180,131 @@ function setFitWidthInParent(parent,self){
 						<c:when test="${requestScope.dd.lxlx eq 1 }">送运</c:when>
 						<c:otherwise>取运</c:otherwise>
 					</c:choose>
+				</td>
+				<td class="td1" align="right">
+					编辑时间
+				</td>
+				<td class="td2">
+					${requestScope.dd.bjsj }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					二维码
+				</td>
+				<td class="td2">
+					<img class="ewm_img" id="ewm_img" alt="" src="${requestScope.dd.ewm }"/>
+				</td>
+				<td class="td1" align="right">
+					实际重量
+				</td>
+				<td class="td2">
+					${requestScope.dd.sjzl }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					重量差额比
+				</td>
+				<td class="td2">
+					${requestScope.dd.zlceb }
+				</td>
+				<td class="td1" align="right">
+					订单状态
+				</td>
+				<td class="td2">
+					${requestScope.dd.ddztMc }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					计划运输日期
+				</td>
+				<td class="td2">
+					${requestScope.dd.jhysrq }
+				</td>
+				<td class="td1" align="right">
+					备注
+				</td>
+				<td class="td2">
+					${requestScope.dd.bz }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					结算重量
+				</td>
+				<td class="td2">
+					${requestScope.dd.jszl }
+				</td>
+				<td class="td1" align="right">
+					包数
+				</td>
+				<td class="td2">
+					${requestScope.dd.bs }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					块数
+				</td>
+				<td class="td2">
+					${requestScope.dd.ks }
+				</td>
+				<td class="td1" align="right">
+					对方过磅净重
+				</td>
+				<td class="td2">
+					${requestScope.dfgbjl.dfgbjz }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					对方过磅皮重
+				</td>
+				<td class="td2">
+					${requestScope.dfgbjl.dfgbpz }
+				</td>
+				<td class="td1" align="right">
+					对方过磅毛重
+				</td>
+				<td class="td2">
+					${requestScope.dfgbjl.dfgbmz }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					对方榜单照片
+				</td>
+				<td class="td2">
+					<img class="dfbdzp_img" id="dfbdzp_img" alt="" src="${requestScope.dfgbjl.dfbdzp }"/>
+				</td>
+				<td class="td1" align="right">
+					对方过磅时间
+				</td>
+				<td class="td2">
+					${requestScope.dfgbjl.dfgbsj }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					出卡次数
+				</td>
+				<td class="td2">
+					${requestScope.dd.ckcs }
+				</td>
+				<td class="td1" align="right">
+					过磅时间
+				</td>
+				<td class="td2">
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					运输商
+				</td>
+				<td class="td2">
+					${requestScope.dd.yssMc }
 				</td>
 				<td class="td1" align="right">
 					物资类型
@@ -162,24 +321,36 @@ function setFitWidthInParent(parent,self){
 					${requestScope.dd.wzMc }
 				</td>
 				<td class="td1" align="right">
-					运输商
-				</td>
-				<td class="td2">
-					${requestScope.dd.yssMc }
-				</td>
-			  </tr>
-			  <tr>
-				<td class="td1" align="right">
 					发货单位
 				</td>
 				<td class="td2">
 					${requestScope.dd.fhdwMc }
 				</td>
+			  </tr>
+			  <tr>
 				<td class="td1" align="right">
 					收货单位
 				</td>
 				<td class="td2">
 					${requestScope.dd.shdwMc }
+				</td>
+				<td class="td1" align="right">
+					承运车辆
+				</td>
+				<td class="td2">
+					${requestScope.dd.cyclCph }
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					承运司机
+				</td>
+				<td class="td2">
+					${requestScope.dd.cysjXm }
+				</td>
+				<td class="td1" align="right">
+				</td>
+				<td class="td2">
 				</td>
 			  </tr>
 			</table>
