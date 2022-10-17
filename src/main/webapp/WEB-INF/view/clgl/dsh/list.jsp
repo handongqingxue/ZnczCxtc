@@ -73,7 +73,7 @@ function initSHTGLB(){
 	$("#shtg_but").linkbutton({
 		iconCls:"icon-ok",
 		onClick:function(){
-			shenHeByIds("sh");
+			checkByIds(true);
 		}
 	});
 }
@@ -82,7 +82,7 @@ function initTuiHuiLB(){
 	$("#tuiHui_but").linkbutton({
 		iconCls:"icon-back",
 		onClick:function(){
-			shenHeByIds("th");
+			checkByIds(false);
 		}
 	});
 }
@@ -156,11 +156,11 @@ function initTab1(){
 	});
 }
 
-function shenHeByIds(flag) {
+function checkByIds(shjg) {
 	var tsStr;
-	if(flag=="sh")
+	if(shjg)
 		tsStr="审核";
-	else if(flag=="th")
+	else
 		tsStr="退回";
 	
 	var rows=tab1.datagrid("getSelections");
@@ -176,10 +176,11 @@ function shenHeByIds(flag) {
 				ids += "," + rows[i].id;
 			}
 			ids=ids.substring(1);
-			
+
+			var shrId='${sessionScope.yongHu.id}';
 			$.ajaxSetup({async:false});
-			$.post(clglPath + "shenHeCheLiang",
-				{ids:ids,flag:flag},
+			$.post(clglPath + "checkCheLiangByIds",
+				{ids:ids,shjg:shjg,shrId:shrId},
 				function(result){
 					if(result.status==1){
 						alert(result.msg);

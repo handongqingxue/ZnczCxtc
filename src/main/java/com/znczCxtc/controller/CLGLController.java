@@ -26,6 +26,8 @@ public class CLGLController {
 
 	@Autowired
 	private CheLiangService cheLiangService;
+	@Autowired
+	private CheLiangShenHeJiLuService cheLiangShenHeJiLuService;
 	public static final String MODULE_NAME="clgl";
 
 	/**
@@ -282,16 +284,17 @@ public class CLGLController {
 		return jsonMap;
 	}
 
-	@RequestMapping(value="/shenHeCheLiang",produces="plain/text; charset=UTF-8")
+	@RequestMapping(value="/checkCheLiangByIds",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String shenHeCheLiang(String ids, String flag) {
+	public String checkCheLiangByIds(String ids, CheLiangShenHeJiLu clshjl) {
 		//TODO 针对分类的动态进行实时调整更新
-		int count=cheLiangService.shenHeByIds(ids,flag);
+		int count=cheLiangService.checkByIds(ids,clshjl);
 		PlanResult plan=new PlanResult();
 		String tsStr=null;
-		if("sh".equals(flag))
+		Boolean shjg = clshjl.getShjg();
+		if(shjg)
 			tsStr="审核";
-		else if("th".equals(flag))
+		else
 			tsStr="退回";
 		
 		String json;

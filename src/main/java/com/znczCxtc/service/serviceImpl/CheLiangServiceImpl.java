@@ -16,6 +16,8 @@ public class CheLiangServiceImpl implements CheLiangService {
 
 	@Autowired
 	private CheLiangMapper cheLiangDao;
+	@Autowired
+	private CheLiangShenHeJiLuMapper cheLiangShenHeJiLuDao;
 
 	@Override
 	public int add(CheLiang cl) {
@@ -33,11 +35,17 @@ public class CheLiangServiceImpl implements CheLiangService {
 	}
 
 	@Override
-	public int shenHeByIds(String ids,String flag) {
+	public int checkByIds(String ids,CheLiangShenHeJiLu clshjl) {
 		// TODO Auto-generated method stub
 		int count=0;
 		List<String> idList = Arrays.asList(ids.split(","));
-		count = cheLiangDao.shenHeByIds(idList,flag);
+		if(cheLiangDao.checkByIds(idList,clshjl.getShjg())>0) {
+			for (String idStr : idList) {
+				Integer clId = Integer.valueOf(idStr);
+				clshjl.setClId(clId);
+				count+=cheLiangShenHeJiLuDao.add(clshjl);
+			}
+		}
 		return count;
 	}
 

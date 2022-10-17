@@ -121,14 +121,16 @@
 		#{id}
 		</foreach>
 	</delete>
-	<update id="shenHeByIds">
+	<update id="checkByIds">
 		update che_liang set 
-		<if test="flag=='sh'">
-			sfzy=${@com.znczCxtc.entity.CheLiang@SHI},shzt=${@com.znczCxtc.entity.CheLiang@SHEN_HE_TONG_GUO}
-		</if>
-		<if test="flag=='th'">
-			sfzy=${@com.znczCxtc.entity.CheLiang@FOU},shzt=${@com.znczCxtc.entity.CheLiang@BIAN_JI_ZHONG}
-		</if>
+		<choose>
+			<when test="shjg">
+				sfzy=${@com.znczCxtc.entity.CheLiang@SHI},shzt=${@com.znczCxtc.entity.CheLiang@SHEN_HE_TONG_GUO}
+			</when>
+			<otherwise>
+				sfzy=${@com.znczCxtc.entity.CheLiang@FOU},shzt=${@com.znczCxtc.entity.CheLiang@BIAN_JI_ZHONG}
+			</otherwise>
+		</choose>
 		where 1=1
 		<foreach collection="idList" item="id" open=" and cast(id as char) in (" separator="," close=")">
 		#{id}
