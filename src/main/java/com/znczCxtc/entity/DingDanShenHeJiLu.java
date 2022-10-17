@@ -26,23 +26,23 @@ public class DingDanShenHeJiLu {
 	public void setDdh(String ddh) {
 		this.ddh = ddh;
 	}
-	public String getSjsfzh() {
-		return sjsfzh;
+	public String getSjSfzh() {
+		return sjSfzh;
 	}
-	public void setSjsfzh(String sjsfzh) {
-		this.sjsfzh = sjsfzh;
+	public void setSjSfzh(String sjSfzh) {
+		this.sjSfzh = sjSfzh;
 	}
-	public String getSjxm() {
-		return sjxm;
+	public String getSjXm() {
+		return sjXm;
 	}
-	public void setSjxm(String sjxm) {
-		this.sjxm = sjxm;
+	public void setSjXm(String sjXm) {
+		this.sjXm = sjXm;
 	}
-	public String getCph() {
-		return cph;
+	public String getCyclCph() {
+		return cyclCph;
 	}
-	public void setCph(String cph) {
-		this.cph = cph;
+	public void setCyclCph(String cyclCph) {
+		this.cyclCph = cyclCph;
 	}
 	public Integer getLxlx() {
 		return lxlx;
@@ -104,17 +104,17 @@ public class DingDanShenHeJiLu {
 	public void setFhdwMc(String fhdwMc) {
 		this.fhdwMc = fhdwMc;
 	}
-	public Integer getShbmId() {
-		return shbmId;
+	public Integer getShdwId() {
+		return shdwId;
 	}
-	public void setShbmId(Integer shbmId) {
-		this.shbmId = shbmId;
+	public void setShdwId(Integer shdwId) {
+		this.shdwId = shdwId;
 	}
-	public String getShbmMc() {
-		return shbmMc;
+	public String getShdwMc() {
+		return shdwMc;
 	}
-	public void setShbmMc(String shbmMc) {
-		this.shbmMc = shbmMc;
+	public void setShdwMc(String shdwMc) {
+		this.shdwMc = shdwMc;
 	}
 	public Integer getShlx() {
 		return shlx;
@@ -154,9 +154,9 @@ public class DingDanShenHeJiLu {
 	}
 	private Integer ddId;
 	private String ddh;//订单号
-	private String sjsfzh;
-	private String sjxm;
-	private String cph;
+	private String sjSfzh;
+	private String sjXm;
+	private String cyclCph;
 	private Integer lxlx;//流向类型
 	private Float yzxzl;//预装卸重量
 	private Float sjzl;//实际重量
@@ -167,8 +167,8 @@ public class DingDanShenHeJiLu {
 	private String yssMc;
 	private Integer fhdwId;
 	private String fhdwMc;
-	private Integer shbmId;
-	private String shbmMc;
+	private Integer shdwId;
+	private String shdwMc;
 	private Integer shlx;//审核类型 1.下单审核 2.一检审核 3.入库审核 4.二检审核
 	private String shsj;//审核时间
 	private Boolean shjg;//审核结果

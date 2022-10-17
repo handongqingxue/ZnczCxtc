@@ -32,6 +32,8 @@ public class DDGLController {
 	private RglrCphJiLuService rglrCphJiLuService;
 	@Autowired
 	private DuiFangGuoBangJiLuService duiFangGuoBangJiLuService;
+	@Autowired
+	private DingDanShenHeJiLuService dingDanShenHeJiLuService;
 	public static final String MODULE_NAME="ddgl";
 	
 	@RequestMapping(value="/ddzt/new")
@@ -136,6 +138,17 @@ public class DDGLController {
 		request.setAttribute("shlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
 		
 		return MODULE_NAME+"/zhcx/detail";
+	}
+
+	/**
+	 * 跳转到订单管理-审核记录-列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/shjl/list")
+	public String goShjlList(HttpServletRequest request) {
+		
+		return MODULE_NAME+"/shjl/list";
 	}
 	
 	@RequestMapping(value="/newDingDanZhuangTai")
@@ -346,16 +359,44 @@ public class DDGLController {
 		
 		return jsonMap;
 	}
-	
-	@RequestMapping(value="/queryDingDanZhuangTaiCBBList")
-	@ResponseBody
-	public Map<String, Object> queryDingDanZhuangTaiCBBList() {
 
+	@RequestMapping(value="/deleteShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteShenHeJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=dingDanShenHeJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除审核记录失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	@RequestMapping(value="/querySHJLList")
+	@ResponseBody
+	public Map<String, Object> querySHJLList(String ddh,Integer shlx,String shsjks,String shsjjs,String cyclCph,String shrYhm,
+			String yssMc,String wzMc,String fhdwMc,String shdwMc,String sjXm,String sjSfzh,int page,int rows,String sort,String order) {
+		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		List<DingDanZhuangTai> ddztList=dingDanZhuangTaiService.queryCBBList();
-		
-		jsonMap.put("rows", ddztList);
+		try {
+			int count = dingDanShenHeJiLuService.queryForInt(ddh,shlx,shsjks,shsjjs,cyclCph,shrYhm,yssMc,wzMc,fhdwMc,shdwMc,sjXm,sjSfzh);
+			List<DingDanShenHeJiLu> ddshjlList=dingDanShenHeJiLuService.queryList(ddh,shlx,shsjks,shsjjs,cyclCph,shrYhm,yssMc,wzMc,fhdwMc,shdwMc,sjXm,sjSfzh, page, rows, sort, order);
+			
+			jsonMap.put("total", count);
+			jsonMap.put("rows", ddshjlList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return jsonMap;
 	}
@@ -396,5 +437,18 @@ public class DDGLController {
 			}
 		}
 		return json;
+	}
+	
+	@RequestMapping(value="/queryDingDanZhuangTaiCBBList")
+	@ResponseBody
+	public Map<String, Object> queryDingDanZhuangTaiCBBList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<DingDanZhuangTai> ddztList=dingDanZhuangTaiService.queryCBBList();
+		
+		jsonMap.put("rows", ddztList);
+		
+		return jsonMap;
 	}
 }

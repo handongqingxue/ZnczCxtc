@@ -14,20 +14,20 @@ import com.znczCxtc.service.*;
 public class DingDanShenHeJiLuServiceImpl implements DingDanShenHeJiLuService {
 	
 	@Autowired
-	private DingDanShenHeJiLuMapper shenHeJiLuDao;
+	private DingDanShenHeJiLuMapper dingDanShenHeJiLuDao;
 
 	@Override
-	public int queryForInt(String ddh, Integer shlx, String shsjks, String shsjjs, String cph, String shrYhm, String yssMc, String wzMc, String fhdwMc, String shbmMc, String sjxm,
-			String sjsfzh) {
+	public int queryForInt(String ddh, Integer shlx, String shsjks, String shsjjs, String cyclCph, String shrYhm, String yssMc, String wzMc, String fhdwMc, String shdwMc, String sjXm,
+			String sjSfzh) {
 		// TODO Auto-generated method stub
-		return shenHeJiLuDao.queryForInt(ddh, shlx, shsjks, shsjjs, cph, shrYhm, yssMc, wzMc, fhdwMc, shbmMc, sjxm, sjsfzh);
+		return dingDanShenHeJiLuDao.queryForInt(ddh, shlx, shsjks, shsjjs, cyclCph, shrYhm, yssMc, wzMc, fhdwMc, shdwMc, sjXm, sjSfzh);
 	}
 
 	@Override
-	public List<DingDanShenHeJiLu> queryList(String ddh, Integer shlx, String shsjks, String shsjjs, String cph, String shrYhm, String yssMc, String wzMc, String fhdwMc, String shbmMc,
-			String sjxm, String sjsfzh, int page, int rows, String sort, String order) {
+	public List<DingDanShenHeJiLu> queryList(String ddh, Integer shlx, String shsjks, String shsjjs, String cyclCph, String shrYhm, String yssMc, String wzMc, String fhdwMc, String shdwMc,
+			String sjXm, String sjSfzh, int page, int rows, String sort, String order) {
 		// TODO Auto-generated method stub
-		return shenHeJiLuDao.queryList(ddh, shlx, shsjks, shsjjs, cph, shrYhm, yssMc, wzMc, fhdwMc, shbmMc, sjxm, sjsfzh, (page-1)*rows, rows, sort, order);
+		return dingDanShenHeJiLuDao.queryList(ddh, shlx, shsjks, shsjjs, cyclCph, shrYhm, yssMc, wzMc, fhdwMc, shdwMc, sjXm, sjSfzh, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class DingDanShenHeJiLuServiceImpl implements DingDanShenHeJiLuService {
 		// TODO Auto-generated method stub
 		int count=0;
 		List<String> idList = Arrays.asList(ids.split(","));
-		count=shenHeJiLuDao.deleteByIds(idList);
+		count=dingDanShenHeJiLuDao.deleteByIds(idList);
 		return count;
 	}
 
