@@ -115,13 +115,13 @@ function initTab1(){
 				var str;
 				switch (value) {
 				case 1:
-					str="编辑中";
-					break;
-				case 2:
 					str="待审核";
 					break;
-				case 3:
+				case 2:
 					str="审核通过";
+					break;
+				case 3:
+					str="编辑中";
 					break;
 				}
 				return str;

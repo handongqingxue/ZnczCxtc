@@ -1,6 +1,16 @@
 package com.znczCxtc.entity;
 
 public class CheLiang {
+
+	/**
+	 * ÊÇ
+	 */
+	public static final Integer SHI=1;
+	/**
+	 * ·ñ
+	 */
+	public static final Integer FOU=0;
+	
 	/**
 	 * ´ıÉóºË
 	 */

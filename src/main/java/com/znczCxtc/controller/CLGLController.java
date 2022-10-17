@@ -70,6 +70,9 @@ public class CLGLController {
 		CheLiang cl=cheLiangService.selectById(id);
 		request.setAttribute("cl", cl);
 		
+		request.setAttribute("dshShzt", CheLiang.DAI_SHEN_HE);
+		request.setAttribute("bjzShzt", CheLiang.BIAN_JI_ZHONG);
+		
 		return MODULE_NAME+"/zhcx/edit";
 	}
 

@@ -3,17 +3,26 @@ package com.znczCxtc.entity;
 public class SiJi {
 
 	/**
-	 * 编辑中
+	 * 是
 	 */
-	public static final Integer BIAN_JI_ZHONG=1;
+	public static final Integer SHI=1;
+	/**
+	 * 否
+	 */
+	public static final Integer FOU=0;
+	
 	/**
 	 * 待审核
 	 */
-	public static final Integer DAI_SHEN_HE=2;
+	public static final Integer DAI_SHEN_HE=1;
 	/**
 	 * 审核通过
 	 */
-	public static final Integer SHEN_HE_TONG_GUO=3;
+	public static final Integer SHEN_HE_TONG_GUO=2;
+	/**
+	 * 编辑中
+	 */
+	public static final Integer BIAN_JI_ZHONG=3;
 	private Integer id;//司机id
 	public Integer getId() {
 		return id;

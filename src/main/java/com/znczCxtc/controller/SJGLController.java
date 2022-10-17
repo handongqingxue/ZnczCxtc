@@ -63,6 +63,9 @@ public class SJGLController {
 		SiJi sj=siJiService.selectById(id);
 		request.setAttribute("sj", sj);
 		
+		request.setAttribute("dshShzt", SiJi.DAI_SHEN_HE);
+		request.setAttribute("bjzShzt", SiJi.BIAN_JI_ZHONG);
+		
 		return MODULE_NAME+"/zhcx/edit";
 	}
 

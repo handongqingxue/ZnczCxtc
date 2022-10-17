@@ -53,6 +53,8 @@ var sjglPath=path+'sjgl/';
 var dialogTop=70;
 var dialogLeft=20;
 var edNum=0;
+var dshShzt='${requestScope.dshShzt}';
+var bjzShzt='${requestScope.bjzShzt}';
 $(function(){
 	initEditDialog();
 
@@ -120,7 +122,6 @@ function initEditDialog(){
 	initZGZYXQZDB();
 	initJZYXQZDB();
 	initZYZTCBB();
-	initSHZTCBB();
 }
 
 function initZGZYXQZDB(){
@@ -161,29 +162,10 @@ function initZYZTCBB(){
 		textField:"text",
 		data:data,
 		onLoadSuccess:function(){
-			$(this).combobox("setValue",'${requestScope.sj.zyzt }'?1:0);
+			$(this).combobox("setValue",'${requestScope.sj.zyzt }'=="true"?"1":"0");
 		},
 		onSelect:function(){
 			$("#zyzt").val($(this).combobox("getValue"));
-		}
-	});
-}
-
-function initSHZTCBB(){
-	var data=[];
-	data.push({"value":"","text":"请选择审核状态"});
-	data.push({"value":"1","text":"编辑中"});
-	data.push({"value":"2","text":"待审核"});
-	data.push({"value":"3","text":"审核通过"});
-	shztCBB=$("#shzt_cbb").combobox({
-		valueField:"value",
-		textField:"text",
-		data:data,
-		onLoadSuccess:function(){
-			$(this).combobox("setValue",'${requestScope.sj.shzt }');
-		},
-		onSelect:function(){
-			$("#shzt").val($(this).combobox("getValue"));
 		}
 	});
 }
@@ -193,9 +175,7 @@ function checkEdit(){
 		if(checkSJH()){
 			if(checkSFZH()){
 				if(checkZYZT()){
-					if(checkSHZT()){
-						editSiJi();
-					}
+					editSiJi();
 				}
 			}
 		}
@@ -203,6 +183,10 @@ function checkEdit(){
 }
 
 function editSiJi(){
+	var shzt=$("#edit_div #shzt").val();
+	if(shzt==bjzShzt)
+		$("#edit_div #shzt").val(dshShzt);
+	
 	var formData = new FormData($("#form1")[0]);
 	$.ajax({
 		type:"post",
@@ -289,17 +273,6 @@ function checkZYZT(){
 	var zyzt=zyztCBB.combobox("getValue");
 	if(zyzt==null||zyzt==""){
 	  	alert("请选择在用状态");
-	  	return false;
-	}
-	else
-		return true;
-}
-
-//验证审核状态
-function checkSHZT(){
-	var shzt=shztCBB.combobox("getValue");
-	if(shzt==null||shzt==""){
-	  	alert("请选择审核状态");
 	  	return false;
 	}
 	else
@@ -487,8 +460,10 @@ function setFitWidthInParent(parent,self){
 					审核状态
 				</td>
 				<td class="td2">
-					<input id="shzt_cbb"/>
 					<input type="hidden" id="shzt" name="shzt" value="${requestScope.sj.shzt }"/>
+					<c:if test="${requestScope.sj.shzt eq 1 }">待审核</c:if>
+					<c:if test="${requestScope.sj.shzt eq 2 }">审核通过</c:if>
+					<c:if test="${requestScope.sj.shzt eq 3 }">编辑中</c:if>
 				</td>
 			  </tr>
 			</table>

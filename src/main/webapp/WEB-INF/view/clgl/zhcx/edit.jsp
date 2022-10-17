@@ -61,6 +61,8 @@ var clglPath=path+'clgl/';
 var dialogTop=70;
 var dialogLeft=20;
 var edNum=0;
+var dshShzt='${requestScope.dshShzt}';
+var bjzShzt='${requestScope.bjzShzt}';
 $(function(){
 	initEditDialog();
 
@@ -133,7 +135,6 @@ function initEditDialog(){
 	initFZRQDB();
 	initCLLXCBB();
 	initSFZYCBB();
-	initSHZTCBB();
 }
 
 function initZCRQDB(){
@@ -229,29 +230,10 @@ function initSFZYCBB(){
 		textField:"text",
 		data:data,
 		onLoadSuccess:function(){
-			$(this).combobox("setValue",'${requestScope.cl.sfzy }'?1:0);
+			$(this).combobox("setValue",'${requestScope.cl.sfzy }'=="true"?"1":"0");
 		},
 		onSelect:function(){
 			$("#sfzy").val($(this).combobox("getValue"));
-		}
-	});
-}
-
-function initSHZTCBB(){
-	var data=[];
-	data.push({"value":"","text":"请选择审核状态"});
-	data.push({"value":"1","text":"待审核"});
-	data.push({"value":"2","text":"审核通过"});
-	data.push({"value":"3","text":"编辑中"});
-	shztCBB=$("#shzt_cbb").combobox({
-		valueField:"value",
-		textField:"text",
-		data:data,
-		onLoadSuccess:function(){
-			$(this).combobox("setValue",'${requestScope.cl.shzt }');
-		},
-		onSelect:function(){
-			$("#shzt").val($(this).combobox("getValue"));
 		}
 	});
 }
@@ -265,9 +247,7 @@ function checkEdit(){
 						if(checkFZRQ()){
 							if(checkCLLX()){
 								if(checkSFZY()){
-									if(checkSHZT()){
-										editCheLiang();
-									}
+									editCheLiang();
 								}
 							}
 						}
@@ -279,6 +259,10 @@ function checkEdit(){
 }
 
 function editCheLiang(){
+	var shzt=$("#edit_div #shzt").val();
+	if(shzt==bjzShzt)
+		$("#edit_div #shzt").val(dshShzt);
+	
 	var formData = new FormData($("#form1")[0]);
 	$.ajax({
 		type:"post",
@@ -400,17 +384,6 @@ function checkSFZY(){
 	var sfzy=sfzyCBB.combobox("getValue");
 	if(sfzy==null||sfzy==""){
 	  	alert("请选择是否在用");
-	  	return false;
-	}
-	else
-		return true;
-}
-
-//验证审核状态
-function checkSHZT(){
-	var shzt=shztCBB.combobox("getValue");
-	if(shzt==null||shzt==""){
-	  	alert("请选择审核状态");
 	  	return false;
 	}
 	else
@@ -679,8 +652,10 @@ function setFitWidthInParent(parent,self){
 					审核状态
 				</td>
 				<td class="td2">
-					<input id="shzt_cbb"/>
-					<input type="hidden" id="shzt" name="shzt"/>
+					<input type="hidden" id="shzt" name="shzt" value="${requestScope.cl.shzt }"/>
+					<c:if test="${requestScope.cl.shzt eq 1 }">待审核</c:if>
+					<c:if test="${requestScope.cl.shzt eq 2 }">审核通过</c:if>
+					<c:if test="${requestScope.cl.shzt eq 3 }">编辑中</c:if>
 				</td>
 				<td class="td1" align="right">
 					备注

@@ -184,9 +184,9 @@ function setFitWidthInParent(parent,self){
 					审核状态
 				</td>
 				<td class="td2">
-					<c:if test="${requestScope.sj.shzt eq 1 }">编辑中</c:if>
-					<c:if test="${requestScope.sj.shzt eq 2 }">待审核</c:if>
-					<c:if test="${requestScope.sj.shzt eq 3 }">审核通过</c:if>
+					<c:if test="${requestScope.sj.shzt eq 1 }">待审核</c:if>
+					<c:if test="${requestScope.sj.shzt eq 2 }">审核通过</c:if>
+					<c:if test="${requestScope.sj.shzt eq 3 }">编辑中</c:if>
 				</td>
 			  </tr>
 			</table>
