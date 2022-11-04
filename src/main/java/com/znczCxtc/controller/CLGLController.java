@@ -99,6 +99,17 @@ public class CLGLController {
 		
 		return MODULE_NAME+"/zhcx/detail";
 	}
+
+	/**
+	 * 跳转到车辆管理-审核记录-列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/shjl/list")
+	public String goShjlList(HttpServletRequest request) {
+		
+		return MODULE_NAME+"/shjl/list";
+	}
 	
 	@RequestMapping(value="/newCheLiang")
 	@ResponseBody
@@ -280,6 +291,46 @@ public class CLGLController {
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", clList);
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteShenHeJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cheLiangShenHeJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除审核记录失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	@RequestMapping(value="/querySHJLList")
+	@ResponseBody
+	public Map<String, Object> querySHJLList(String clCph,String shrYhm,String shsjks,String shsjjs,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = cheLiangShenHeJiLuService.queryForInt(clCph,shrYhm,shsjks,shsjjs);
+			List<CheLiangShenHeJiLu> clshjlList=cheLiangShenHeJiLuService.queryList(clCph, shrYhm, shsjks, shsjjs, page, rows, sort, order);
+			
+			jsonMap.put("total", count);
+			jsonMap.put("rows", clshjlList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return jsonMap;
 	}
