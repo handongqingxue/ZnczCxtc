@@ -162,14 +162,16 @@
 	<select id="selectById" resultType="com.znczCxtc.entity.SiJi">
 		select * from si_ji where id=#{0}
 	</select>
-	<update id="shenHe">
+	<update id="checkByIds">
 		update si_ji set 
-		<if test="flag=='sh'">
-			zyzt=${@com.znczCxtc.entity.SiJi@SHI},shzt=${@com.znczCxtc.entity.SiJi@SHEN_HE_TONG_GUO}
-		</if>
-		<if test="flag=='th'">
-			zyzt=${@com.znczCxtc.entity.SiJi@FOU},shzt=${@com.znczCxtc.entity.SiJi@BIAN_JI_ZHONG}
-		</if>
+		<choose>
+			<when test="shjg">
+				zyzt=${@com.znczCxtc.entity.SiJi@SHI},shzt=${@com.znczCxtc.entity.SiJi@SHEN_HE_TONG_GUO}
+			</when>
+			<otherwise>
+				zyzt=${@com.znczCxtc.entity.SiJi@FOU},shzt=${@com.znczCxtc.entity.SiJi@BIAN_JI_ZHONG}
+			</otherwise>
+		</choose>
 		where 1=1
 		<foreach collection="idList" item="id" open=" and cast(id as char) in (" separator="," close=")">
 		#{id}

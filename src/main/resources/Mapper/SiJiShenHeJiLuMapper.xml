@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.znczCxtc.dao.SiJiShenHeJiLuMapper">
+	<insert id="add" parameterType="com.znczCxtc.entity.SiJiShenHeJiLu">
+		insert into si_ji_shen_he_ji_lu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sjId!=null">
+				sjId,
+			</if>
+				shsj,
+			<if test="shjg!=null">
+				shjg,
+			</if>
+			<if test="shrId!=null">
+				shrId,
+			</if>
+			<if test="bz!=null">
+				bz,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sjId!=null">
+				#{sjId},
+			</if>
+				now(),
+			<if test="shjg!=null">
+				#{shjg},
+			</if>
+			<if test="shrId!=null">
+				#{shrId},
+			</if>
+			<if test="bz!=null">
+				#{bz},
+			</if>
+		</trim>
+	</insert>
+</mapper>

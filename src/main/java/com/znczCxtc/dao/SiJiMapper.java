@@ -20,7 +20,7 @@ public interface SiJiMapper {
 	
 	public SiJi selectById(String id);
 
-	public int shenHe(@Param("idList") List<String> idList, @Param("flag") String flag);
+	public int checkByIds(@Param("idList") List<String> idList, @Param("shjg") Boolean shjg);
 
 	public List<SiJi> queryCBBList();
 }

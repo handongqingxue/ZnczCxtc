@@ -15,6 +15,8 @@ public class SiJiServiceImpl implements SiJiService {
 
 	@Autowired
 	private SiJiMapper siJiDao;
+	@Autowired
+	private SiJiShenHeJiLuMapper siJiShenHeJiLuDao;
 	
 	@Override
 	public int add(SiJi sj) {
@@ -57,11 +59,17 @@ public class SiJiServiceImpl implements SiJiService {
 	}
 
 	@Override
-	public int shenHe(String ids, String flag) {
+	public int checkByIds(String ids, SiJiShenHeJiLu sjshjl) {
 		// TODO Auto-generated method stub
 		int count=0;
 		List<String> idList = Arrays.asList(ids.split(","));
-		count = siJiDao.shenHe(idList,flag);
+		if(siJiDao.checkByIds(idList,sjshjl.getShjg())>0) {
+			for (String idStr : idList) {
+				Integer sjId = Integer.valueOf(idStr);
+				sjshjl.setSjId(sjId);
+				count+=siJiShenHeJiLuDao.add(sjshjl);
+			}
+		}
 		return count;
 	}
 
