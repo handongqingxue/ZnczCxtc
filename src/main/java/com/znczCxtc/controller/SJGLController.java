@@ -25,6 +25,8 @@ public class SJGLController {
 
 	@Autowired
     private SiJiService siJiService;
+	@Autowired
+    private SiJiShenHeJiLuService siJiShenHeJiLuService;
 	public static final String MODULE_NAME="sjgl";
 
 	/**
@@ -88,6 +90,17 @@ public class SJGLController {
 		request.setAttribute("sj", sj);
 		
 		return MODULE_NAME+"/zhcx/detail";
+	}
+
+	/**
+	 * 跳转到司机管理-审核记录-列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/shjl/list")
+	public String goShjlList(HttpServletRequest request) {
+		
+		return MODULE_NAME+"/shjl/list";
 	}
 	
 	@RequestMapping(value="/newSiJi")
@@ -254,6 +267,26 @@ public class SJGLController {
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", sjList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/querySHJLList")
+	@ResponseBody
+	public Map<String, Object> querySHJLList(String sjXm,String shrYhm,String shsjks,String shsjjs,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = siJiShenHeJiLuService.queryForInt(sjXm,shrYhm,shsjks,shsjjs);
+			List<SiJiShenHeJiLu> sjshjlList=siJiShenHeJiLuService.queryList(sjXm, shrYhm, shsjks, shsjjs, page, rows, sort, order);
+			
+			jsonMap.put("total", count);
+			jsonMap.put("rows", sjshjlList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return jsonMap;
 	}

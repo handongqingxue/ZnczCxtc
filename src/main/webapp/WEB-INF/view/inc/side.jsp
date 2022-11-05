@@ -372,6 +372,13 @@ function showLeftMenuByQx(){
 							&nbsp;&nbsp;&nbsp;综合查询
 						</a>
 					</li>
+					<div class="line_div"></div>
+					<li class="layui-nav-item shjl_item_li">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
+						<a href="<%=basePath%>sjgl/shjl/list">
+							&nbsp;&nbsp;&nbsp;审核记录
+						</a>
+					</li>
 				</div>
 				<div class="first-level-div clgl_first_div">
 					<li class="layui-nav-item first-level">

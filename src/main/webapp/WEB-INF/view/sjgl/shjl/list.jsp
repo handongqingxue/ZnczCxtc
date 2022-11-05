@@ -13,13 +13,13 @@
 .tab1_div .toolbar{
 	height:32px;
 }
-.tab1_div .toolbar .clCph_span,
+.tab1_div .toolbar .sjXm_span,
 .tab1_div .toolbar .shr_span,
 .tab1_div .toolbar .shsj_span,
 .tab1_div .toolbar .search_but{
 	margin-left: 13px;
 }
-.tab1_div .toolbar .clCph_inp,
+.tab1_div .toolbar .sjXm_inp,
 .tab1_div .toolbar .shr_inp{
 	width: 120px;
 	height: 25px;
@@ -29,7 +29,7 @@
 <%@include file="../../inc/js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
-var clglPath=path+'clgl/';
+var sjglPath=path+'sjgl/';
 $(function(){
 	initSHSJKSDTB();
 	initSHSJJSDTB();
@@ -62,11 +62,11 @@ function initSearchLB(){
 	$("#search_but").linkbutton({
 		iconCls:"icon-search",
 		onClick:function(){
-			var clCph=$("#toolbar #clCph").val();
+			var sjXm=$("#toolbar #sjXm").val();
 			var shrYhm=$("#toolbar #shr").val();
 			var shsjks=shsjksDTB.datetimebox("getValue");
 			var shsjjs=shsjjsDTB.datetimebox("getValue");
-			tab1.datagrid("load",{clCph:clCph,shrYhm:shrYhm,shsjks:shsjks,shsjjs:shsjjs});
+			tab1.datagrid("load",{sjXm:sjXm,shrYhm:shrYhm,shsjks:shsjks,shsjjs:shsjjs});
 		}
 	});
 }
@@ -82,14 +82,14 @@ function initRemoveLB(){
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"车辆管理-审核记录-列表",
-		url:clglPath+"querySHJLList",
+		title:"司机管理-审核记录-列表",
+		url:sjglPath+"querySHJLList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body","tab1_div"),
 		pagination:true,
 		pageSize:10,
 		columns:[[
-			{field:"clCph",title:"车牌号",width:150},
+			{field:"sjXm",title:"姓名",width:150},
             {field:"shrYhm",title:"审核人",width:150},
             {field:"shsj",title:"审核时间",width:150},
 			{field:"shjg",title:"审核结果",width:100,formatter:function(value,row){
@@ -99,8 +99,8 @@ function initTab1(){
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{clCph:"<div style=\"text-align:center;\">暂无信息<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"clCph",colspan:5});
+				$(this).datagrid("appendRow",{sjXm:"<div style=\"text-align:center;\">暂无信息<div>"});
+				$(this).datagrid("mergeCells",{index:0,field:"sjXm",colspan:5});
 				data.total=0;
 			}
 			
@@ -127,7 +127,7 @@ function deleteByIds() {
 			}
 			ids=ids.substring(1);
 			
-			$.post(clglPath + "deleteShenHeJiLu",
+			$.post(sjglPath + "deleteShenHeJiLu",
 				{ids:ids},
 				function(result){
 					if(result.status==1){
@@ -170,8 +170,8 @@ function setFitWidthInParent(parent,self){
 	<%@include file="../../inc/side.jsp"%>
 	<div class="tab1_div" id="tab1_div">
 		<div class="toolbar" id="toolbar">
-			<span class="clCph_span">车牌号：</span>
-			<input type="text" class="clCph_inp" id="clCph" placeholder="请输入车牌号"/>
+			<span class="sjXm_span">姓名：</span>
+			<input type="text" class="sjXm_inp" id="sjXm" placeholder="请输入姓名"/>
 			<span class="shr_span">审核人：</span>
 			<input type="text" class="shr_inp" id="shr" placeholder="请输入审核人"/>
 			<span class="shsj_span">审核时间：</span>
