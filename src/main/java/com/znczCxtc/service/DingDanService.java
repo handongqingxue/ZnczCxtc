@@ -25,7 +25,9 @@ public interface DingDanService {
 
 	int checkByIds(String ids,String ddztMc,Integer jyFlag,DingDanShenHeJiLu shjl);
 
-	DingDan getDingDan(String cph, String ddztMc);
+	DingDan getDingDanBySfzhZt(String sfzh, String ddztMc);
+
+	DingDan getDingDanByCphZt(String cph, String ddztMc);
 
 	DingDan getByZt(Integer yjbfh, Integer ejbfh, String ddztMc, Integer yjzt, Integer ejzt);
 

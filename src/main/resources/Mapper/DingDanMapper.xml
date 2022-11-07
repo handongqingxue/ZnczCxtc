@@ -340,6 +340,9 @@
 			and ejzt=#{ejzt}
 		</if>
 	</update>
+	<select id="getByZtSfzh" resultType="com.znczCxtc.entity.DingDan">
+		select dd.* from ding_dan dd,si_ji sj where dd.cysjId=sj.id and dd.ddztId=#{ddztId} and sj.sfzh=#{sfzh}
+	</select>
 	<select id="getByZtCph" resultType="com.znczCxtc.entity.DingDan">
 		select * from ding_dan where ddztId=#{ddztId} and cph=#{cph}
 	</select>

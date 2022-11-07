@@ -123,7 +123,15 @@ public class DingDanServiceImpl implements DingDanService {
 	}
 
 	@Override
-	public DingDan getDingDan(String cph, String ddztMc) {
+	public DingDan getDingDanBySfzhZt(String sfzh, String ddztMc) {
+		// TODO Auto-generated method stub
+		int ddztId=dingDanZhuangTaiDao.getIdByMc(ddztMc);
+		DingDan dd = dingDanDao.getByZtSfzh(ddztId,sfzh);
+		return dd;
+	}
+
+	@Override
+	public DingDan getDingDanByCphZt(String cph, String ddztMc) {
 		// TODO Auto-generated method stub
 		int ddztId=dingDanZhuangTaiDao.getIdByMc(ddztMc);
 		DingDan dd = dingDanDao.getByZtCph(ddztId,cph);
