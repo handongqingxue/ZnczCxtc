@@ -269,6 +269,12 @@
 			<if test="cysjId!=null">
 				cysjId=#{cysjId},
 			</if>
+			<if test="yjbfh!=0">
+				yjbfh=#{yjbfh},
+			</if>
+			<if test="ejbfh!=0">
+				ejbfh=#{ejbfh},
+			</if>
 				bjsj=now()
 		</trim>
 		where id=#{id}

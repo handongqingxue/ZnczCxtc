@@ -285,6 +285,18 @@ public class DingDan {
 	public void setBjsj(String bjsj) {
 		this.bjsj = bjsj;
 	}
+	public Integer getYjbfh() {
+		return yjbfh;
+	}
+	public void setYjbfh(Integer yjbfh) {
+		this.yjbfh = yjbfh;
+	}
+	public Integer getEjbfh() {
+		return ejbfh;
+	}
+	public void setEjbfh(Integer ejbfh) {
+		this.ejbfh = ejbfh;
+	}
 	private Integer xddztId;//新订单状态id
 	private String xddztMc;//新订单状态名称
 	private Integer yjzt;//一检状态(1.待上磅 2.上磅中 3.已完成)
@@ -325,4 +337,6 @@ public class DingDan {
 	private String cysjXm;//承运司机姓名
 	private Integer cysjSfzh;//承运司机身份证号
 	private String bjsj;//编辑时间
+	private Integer yjbfh=0;//一检磅房号
+	private Integer ejbfh=0;//二检磅房号
 }
