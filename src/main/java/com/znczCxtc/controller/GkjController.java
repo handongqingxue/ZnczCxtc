@@ -1,6 +1,7 @@
 package com.znczCxtc.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class GkjController {
 
 	@Autowired
 	private DingDanService dingDanService;
+	@Autowired
+    private HaoMaService haoMaService;
 
 	@RequestMapping(value="/getDingDanBySfzhZt")
 	@ResponseBody
@@ -36,6 +39,26 @@ public class GkjController {
 		else {
 			jsonMap.put("status", "ok");
 			jsonMap.put("dingDan", dd);
+		}
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/getJhPdHMList")
+	@ResponseBody
+	public Map<String, Object> getJhPdList() {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<HaoMa> hmList=haoMaService.getJhPdList();
+		
+		if(hmList==null) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("hmList", hmList);
 		}
 		
 		return jsonMap;

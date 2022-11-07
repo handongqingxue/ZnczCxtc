@@ -105,4 +105,8 @@
 	<select id="selectHaoMaById" resultType="com.znczCxtc.entity.HaoMa">
 		select * from hao_ma where id=#{id}
 	</select>
+	<select id="getJhPdList" resultType="com.znczCxtc.entity.HaoMa">
+		select hm.* from hao_ma hm,hao_ma_zhuang_tai hmzt where hm.hmztId=hmzt.id
+		 and (hmzt.mc=${@com.znczCxtc.entity.HaoMaZhuangTai@PAI_DUI_ZHONG_TEXT} or hmzt.mc=${@com.znczCxtc.entity.HaoMaZhuangTai@JIAO_HAO_ZHONG_TEXT})
+	</select>
 </mapper>

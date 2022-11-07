@@ -15,4 +15,6 @@ public interface HaoMaService {
 	public int newHaoMaChaXun(HaoMa hm);
 
 	public HaoMa selectHaoMaById(String id);
+
+	public List<HaoMa> getJhPdList();
 }

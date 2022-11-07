@@ -39,4 +39,10 @@ public class HaoMaServiceImpl implements HaoMaService {
 		// TODO Auto-generated method stub
 		return haoMaDao.selectHaoMaById(id);
 	}
+
+	@Override
+	public List<HaoMa> getJhPdList() {
+		// TODO Auto-generated method stub
+		return haoMaDao.getJhPdList();
+	}
 }
