@@ -17,4 +17,6 @@ public interface HaoMaService {
 	public HaoMa selectHaoMaById(String id);
 
 	public List<HaoMa> getJhPdList();
+
+	public int edit(HaoMa hm);
 }

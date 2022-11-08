@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +63,38 @@ public class GkjController {
 			jsonMap.put("hmList", hmList);
 		}
 		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/editHaoMa")
+	@ResponseBody
+	public Map<String, Object> editHaoMa(HaoMa hm,
+			HttpServletRequest request) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			int count=haoMaService.edit(hm);
+			if(count>0) {
+				if(HaoMaZhuangTai.YI_GUO_HAO_TEXT.equals(hm.getHmztMc())) {
+					DingDan dd=new DingDan();
+					dd.setId(hm.getDdId());
+					dd.setDdztMc(DingDanZhuangTai.YI_XIA_DAN_TEXT);
+					count=dingDanService.edit(dd);
+				}
+			}
+			
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "±‡º≠∫≈¬Î≥…π¶£°");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "±‡º≠∫≈¬Î ß∞‹£°");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return jsonMap;
 	}
 }

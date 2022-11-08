@@ -2,6 +2,7 @@ package com.znczCxtc.service.serviceImpl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ public class HaoMaServiceImpl implements HaoMaService {
 
 	@Autowired
 	private HaoMaMapper haoMaDao;
+	@Autowired
+	private HaoMaZhuangTaiMapper haoMaZhuangTaiDao;
 
 	@Override
 	public int queryForInt(String dlMc, String hm, String pdh, Integer ztId) {
@@ -44,5 +47,16 @@ public class HaoMaServiceImpl implements HaoMaService {
 	public List<HaoMa> getJhPdList() {
 		// TODO Auto-generated method stub
 		return haoMaDao.getJhPdList();
+	}
+
+	@Override
+	public int edit(HaoMa hm) {
+		// TODO Auto-generated method stub
+		String hmztMc = hm.getHmztMc();
+		if(!StringUtils.isEmpty(hmztMc)) {
+			int hmztId=haoMaZhuangTaiDao.getIdByMc(hmztMc);
+			hm.setHmztId(hmztId);
+		}
+		return haoMaDao.edit(hm);
 	}
 }

@@ -19,4 +19,6 @@ public interface HaoMaZhuangTaiMapper {
 	HaoMaZhuangTai selectById(@Param("id") String id);
 
 	public List<HaoMaZhuangTai> queryHaoMaZhuangTaiCBBList();
+
+	int getIdByMc(@Param("mc") String mc);
 }

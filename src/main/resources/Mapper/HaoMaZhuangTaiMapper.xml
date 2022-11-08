@@ -46,4 +46,7 @@
 	<select id="queryHaoMaZhuangTaiCBBList" resultType="com.znczCxtc.entity.HaoMaZhuangTai">
 		select * from hao_ma_zhuang_tai
 	</select>
+	<select id="getIdByMc" resultType="java.lang.Integer">
+		select id from hao_ma_zhuang_tai where mc=#{mc}
+	</select>
 </mapper>

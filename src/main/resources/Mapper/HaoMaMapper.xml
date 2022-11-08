@@ -106,7 +106,35 @@
 		select * from hao_ma where id=#{id}
 	</select>
 	<select id="getJhPdList" resultType="com.znczCxtc.entity.HaoMa">
-		select hm.* from hao_ma hm,hao_ma_zhuang_tai hmzt where hm.hmztId=hmzt.id
+		select hm.*,cl.cph clCph from hao_ma hm,hao_ma_zhuang_tai hmzt,ding_dan dd,che_liang cl where hm.hmztId=hmzt.id
 		 and (hmzt.mc=${@com.znczCxtc.entity.HaoMaZhuangTai@PAI_DUI_ZHONG_TEXT} or hmzt.mc=${@com.znczCxtc.entity.HaoMaZhuangTai@JIAO_HAO_ZHONG_TEXT})
+		  and hm.ddId=dd.id and dd.cyclId=cl.id
 	</select>
+	<update id="edit" parameterType="com.znczCxtc.entity.HaoMa">
+		update hao_ma set 
+		<trim suffixOverrides=",">
+			<if test="hm!=null">
+				hm=#{hm},
+			</if>
+			<if test="pdh!=null">
+				pdh=#{pdh},
+			</if>
+			<if test="hmztId!=null">
+				hmztId=#{hmztId},
+			</if>
+			<if test="fl!=null">
+				fl=#{fl},
+			</if>
+			<if test="jhcs!=null">
+				jhcs=#{jhcs},
+			</if>
+			<if test="dlId!=null">
+				dlId=#{dlId},
+			</if>
+			<if test="ddId!=null">
+				ddId=#{ddId},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
 </mapper>

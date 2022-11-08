@@ -63,11 +63,17 @@ public class HaoMa {
 	public void setDlMc(String dlMc) {
 		this.dlMc = dlMc;
 	}
-	public String getDdId() {
+	public Long getDdId() {
 		return ddId;
 	}
-	public void setDdId(String ddId) {
+	public void setDdId(Long ddId) {
 		this.ddId = ddId;
+	}
+	public String getClCph() {
+		return clCph;
+	}
+	public void setClCph(String clCph) {
+		this.clCph = clCph;
 	}
 	private String hm;//号码
 	private Integer pdh;//排队号	
@@ -78,6 +84,7 @@ public class HaoMa {
 	private String ksjhsj;//开始叫号时间
 	private Integer dlId;//队列id
 	private String dlMc;//队列名称
-	private String ddId;//订单id
+	private Long ddId;//订单id
+	private String clCph;
 
 }

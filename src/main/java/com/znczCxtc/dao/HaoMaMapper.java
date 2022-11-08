@@ -17,4 +17,6 @@ public interface HaoMaMapper {
 	public HaoMa selectHaoMaById(@Param("id") String id);
 
 	public List<HaoMa> getJhPdList();
+
+	public int edit(HaoMa hm);
 }
