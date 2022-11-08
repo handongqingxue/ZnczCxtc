@@ -12,5 +12,5 @@ public interface DuiFangGuoBangJiLuMapper {
 
 	DuiFangGuoBangJiLu selectByDdId(@Param("ddId") String ddId);
 
-	int getCountByDdId(@Param("ddId") Integer ddId);
+	int getCountByDdId(@Param("ddId") Long ddId);
 }

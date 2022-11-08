@@ -39,10 +39,10 @@ public class DuiFangGuoBangJiLu {
 	public void setDfgbsj(String dfgbsj) {
 		this.dfgbsj = dfgbsj;
 	}
-	public Integer getDdId() {
+	public Long getDdId() {
 		return ddId;
 	}
-	public void setDdId(Integer ddId) {
+	public void setDdId(Long ddId) {
 		this.ddId = ddId;
 	}
 	private Float dfgbpz;
@@ -50,5 +50,5 @@ public class DuiFangGuoBangJiLu {
 	private Float dfgbjz;
 	private String dfbdzp;
 	private String dfgbsj;
-	private Integer ddId;
+	private Long ddId;
 }

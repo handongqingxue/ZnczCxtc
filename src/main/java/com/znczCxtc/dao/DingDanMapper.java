@@ -41,7 +41,7 @@ public interface DingDanMapper {
 
 	int getIdByDdh(@Param("ddh") String ddh);
 
-	int getCountByIdCph(@Param("id") Integer id, @Param("cph") String cph);
+	int getCountByIdCph(@Param("id") Long id, @Param("cph") String cph);
 
 	Integer getMaxDdhNumByDdhDate(@Param("ddhDate") String ddhDate);
 

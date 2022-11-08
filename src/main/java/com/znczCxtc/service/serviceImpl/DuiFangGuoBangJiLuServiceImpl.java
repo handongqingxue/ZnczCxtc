@@ -32,7 +32,7 @@ public class DuiFangGuoBangJiLuServiceImpl implements DuiFangGuoBangJiLuService 
 	}
 
 	@Override
-	public boolean checkIfExistByDdId(Integer ddId) {
+	public boolean checkIfExistByDdId(Long ddId) {
 		// TODO Auto-generated method stub
 		int count=duiFangGuoBangJiLuDao.getCountByDdId(ddId);
 		return count==0?false:true;

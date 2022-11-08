@@ -165,13 +165,13 @@ public class DingDanServiceImpl implements DingDanService {
 	}
 
 	@Override
-	public int getIdByDdh(String ddh) {
+	public long getIdByDdh(String ddh) {
 		// TODO Auto-generated method stub
 		return dingDanDao.getIdByDdh(ddh);
 	}
 
 	@Override
-	public boolean checkIfExistByIdCph(Integer id, String cph) {
+	public boolean checkIfExistByIdCph(Long id, String cph) {
 		// TODO Auto-generated method stub
 		return dingDanDao.getCountByIdCph(id, cph)==0?false:true;
 	}

@@ -36,15 +36,15 @@ public class RglrCphJiLu {
 	public void setLrsj(String lrsj) {
 		this.lrsj = lrsj;
 	}
-	public Integer getDdId() {
+	public Long getDdId() {
 		return ddId;
 	}
-	public void setDdId(Integer ddId) {
+	public void setDdId(Long ddId) {
 		this.ddId = ddId;
 	}
 	private String sjc;
 	private String wscph;
 	private String cph;
 	private String lrsj;
-	private Integer ddId;
+	private Long ddId;
 }

@@ -246,7 +246,7 @@ public class DDGLController {
 	        
 			int count=dingDanService.add(dd);
 			if(count>0) {
-				int ddId=dingDanService.getIdByDdh(ddh);//因为新订单之前添加到订单表前没有id，添加完成后才生成id，这里在添加完成后，要根据订单号获取订单id
+				long ddId=dingDanService.getIdByDdh(ddh);//因为新订单之前添加到订单表前没有id，添加完成后才生成id，这里在添加完成后，要根据订单号获取订单id
 				
 				dfgbjl.setDdId(ddId);
 				duiFangGuoBangJiLuService.add(dfgbjl);
@@ -304,7 +304,7 @@ public class DDGLController {
 				}
 			}
 			
-			Integer ddId = dd.getId();
+			Long ddId = dd.getId();
 			String cph = dd.getCyclCph();
 			boolean existDd=dingDanService.checkIfExistByIdCph(ddId,cph);//在修改订单信息前根据订单id和现在的车牌号验证订单表里是否存在订单，一定要在修改订单之前验证，因为这时车牌号就算待变更也还没变成新的
 			int count=dingDanService.edit(dd);
@@ -421,7 +421,7 @@ public class DDGLController {
 			if(!shjl.getShjg()) {//这块代码是在一检审核或二检审核不通过情况下，把订单状态还原到之前的排队中。与下单审核、入库审核无关
 				List<String> idList = Arrays.asList(ids.split(","));
 				for (String idStr : idList) {
-					Integer ddId = Integer.valueOf(idStr);
+					Long ddId = Long.valueOf(idStr);
 					DingDan dd=new DingDan();
 					dd.setId(ddId);
 					if(shjl.getShlx()==DingDanShenHeJiLu.YI_JIAN_SHEN_HE) {

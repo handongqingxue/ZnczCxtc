@@ -10,5 +10,5 @@ public interface DuiFangGuoBangJiLuService {
 
 	DuiFangGuoBangJiLu selectByDdId(String ddId);
 
-	boolean checkIfExistByDdId(Integer ddId);
+	boolean checkIfExistByDdId(Long ddId);
 }
