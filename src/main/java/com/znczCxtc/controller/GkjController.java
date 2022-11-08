@@ -45,6 +45,29 @@ public class GkjController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/editDingDan")
+	@ResponseBody
+	public Map<String, Object> editDingDan(DingDan dd,
+			HttpServletRequest request) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			int count=dingDanService.edit(dd);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "±à¼­¶©µ¥³É¹¦£¡");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "±à¼­¶©µ¥Ê§°Ü£¡");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/getJhPdHMList")
 	@ResponseBody
