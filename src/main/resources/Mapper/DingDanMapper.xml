@@ -349,8 +349,11 @@
 	<select id="getByZtSfzh" resultType="com.znczCxtc.entity.DingDan">
 		select dd.* from ding_dan dd,si_ji sj where dd.cysjId=sj.id and dd.ddztId=#{ddztId} and sj.sfzh=#{sfzh}
 	</select>
-	<select id="getByZtCph" resultType="com.znczCxtc.entity.DingDan">
-		select * from ding_dan where ddztId=#{ddztId} and cph=#{cph}
+	<select id="getByZtListCph" resultType="com.znczCxtc.entity.DingDan">
+		select * from ding_dan where cph=#{cph}
+		<foreach collection="ddztIdList" item="ddztId" open=" and cast(ddztId as char) in (" separator="," close=")">
+		#{ddztId}
+		</foreach>
 	</select>
 	<select id="getByZt" resultType="com.znczCxtc.entity.DingDan">
 		select dd.* from ding_dan dd,ding_dan_zhuang_tai ddzt where dd.ddztId=ddzt.id and ddzt.mc=#{ddztMc}

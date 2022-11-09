@@ -21,4 +21,6 @@ public interface DingDanZhuangTaiMapper {
 	List<DingDanZhuangTai> queryCBBList();
 
 	int getIdByMc(@Param("mc") String mc);
+
+	List<Integer> getIdListByMcList(@Param("mcList") List<String> mcList);
 }

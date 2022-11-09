@@ -27,7 +27,7 @@ public interface DingDanService {
 
 	DingDan getDingDanBySfzhZt(String sfzh, String ddztMc);
 
-	DingDan getDingDanByCphZt(String cph, String ddztMc);
+	DingDan getDingDanByCphZts(String cph, String ddztMcs);
 
 	DingDan getByZt(Integer yjbfh, Integer ejbfh, String ddztMc, Integer yjzt, Integer ejzt);
 

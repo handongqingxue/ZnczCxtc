@@ -31,6 +31,12 @@ public class GkjController {
 	@Autowired
     private CheLiangTaiZhangService cheLiangTaiZhangService;
 
+	/**
+	 * 根据身份证号和订单状态查询订单(返回一条订单记录,用于门岗身份证阅读器那里)
+	 * @param sfzh
+	 * @param ddztMc
+	 * @return
+	 */
 	@RequestMapping(value="/getDingDanBySfzhZt")
 	@ResponseBody
 	public Map<String, Object> getDingDanBySfzhZt(String sfzh,String ddztMc) {
@@ -41,6 +47,35 @@ public class GkjController {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
 		DingDan dd = dingDanService.getDingDanBySfzhZt(sfzh, ddztMc);
+		
+		if(dd==null) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "没找到相关订单");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("dingDan", dd);
+		}
+		
+		return jsonMap;
+	}
+
+	/**
+	 * 根据车牌号和订单状态查询订单(返回的订单只有一条记录,状态参数可能是多个状态)
+	 * @param cph
+	 * @param ddztMcs
+	 * @return
+	 */
+	@RequestMapping(value="/getDingDanByCphZts")
+	@ResponseBody
+	public Map<String, Object> getDingDanByCphZts(String cph,String ddztMcs) {
+		
+		System.out.println("cph==="+cph);
+		System.out.println("ddztMcs==="+ddztMcs);
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		DingDan dd = dingDanService.getDingDanByCphZts(cph, ddztMcs);
 		
 		if(dd==null) {
 			jsonMap.put("status", "no");

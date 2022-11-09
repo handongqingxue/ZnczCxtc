@@ -49,4 +49,10 @@
 	<select id="getIdByMc" resultType="java.lang.Integer">
 		select id from ding_dan_zhuang_tai where mc=#{mc}
 	</select>
+	<select id="getIdListByMcList" resultType="java.lang.Integer">
+		select id from ding_dan_zhuang_tai where 1=1
+		<foreach collection="list" item="mc" open=" and cast(mc as char) in (" separator="," close=")">
+		#{mc}
+		</foreach>
+	</select>
 </mapper>

@@ -131,10 +131,11 @@ public class DingDanServiceImpl implements DingDanService {
 	}
 
 	@Override
-	public DingDan getDingDanByCphZt(String cph, String ddztMc) {
+	public DingDan getDingDanByCphZts(String cph, String ddztMcs) {
 		// TODO Auto-generated method stub
-		int ddztId=dingDanZhuangTaiDao.getIdByMc(ddztMc);
-		DingDan dd = dingDanDao.getByZtCph(ddztId,cph);
+		List<String> ddztMcList = Arrays.asList(ddztMcs.split(","));
+		List<Integer> ddztIdList = dingDanZhuangTaiDao.getIdListByMcList(ddztMcList);
+		DingDan dd = dingDanDao.getByZtListCph(ddztIdList,cph);
 		return dd;
 	}
 
