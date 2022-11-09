@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.znczCxtc.dao.CheLiangTaiZhangMapper">
+	<insert id="uploadJinChang" parameterType="com.znczCxtc.entity.CheLiangTaiZhang">
+		insert into che_liang_tai_zhang
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				jcsj,
+			<if test="jczp!=null">
+				jczp,
+			</if>
+			<if test="ddId!=null">
+				ddId,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				now(),
+			<if test="jczp!=null">
+				#{jczp},
+			</if>
+			<if test="ddId!=null">
+				#{ddId},
+			</if>
+		</trim>
+	</insert>
+	<update id="uploadChuChang" parameterType="com.znczCxtc.entity.CheLiangTaiZhang">
+		update che_liang_tai_zhang
+		<trim suffixOverrides=",">
+				ccsj=now(),
+			<if test="cczp!=null">
+				cczp=#{cczp},
+			</if>
+		</trim>
+		 where ddId=#{ddId}
+	</update>
+</mapper>

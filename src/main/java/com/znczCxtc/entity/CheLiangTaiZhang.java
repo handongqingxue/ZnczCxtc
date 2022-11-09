@@ -1,6 +1,9 @@
 package com.znczCxtc.entity;
 
 public class CheLiangTaiZhang {
+	
+	public static final int JIN_CHANG=1;
+	public static final int CHU_CHANG=2;
 
 	private Long id;
 	public Long getId() {

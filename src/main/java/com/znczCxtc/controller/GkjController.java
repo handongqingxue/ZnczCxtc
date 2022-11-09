@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.znczCxtc.entity.*;
@@ -22,6 +24,8 @@ public class GkjController {
 	private DingDanService dingDanService;
 	@Autowired
     private HaoMaService haoMaService;
+	@Autowired
+    private CheLiangTaiZhangService cheLiangTaiZhangService;
 
 	@RequestMapping(value="/getDingDanBySfzhZt")
 	@ResponseBody
@@ -48,8 +52,7 @@ public class GkjController {
 	
 	@RequestMapping(value="/editDingDan")
 	@ResponseBody
-	public Map<String, Object> editDingDan(DingDan dd,
-			HttpServletRequest request) {
+	public Map<String, Object> editDingDan(DingDan dd) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
@@ -91,8 +94,7 @@ public class GkjController {
 	
 	@RequestMapping(value="/editHaoMa")
 	@ResponseBody
-	public Map<String, Object> editHaoMa(HaoMa hm,
-			HttpServletRequest request) {
+	public Map<String, Object> editHaoMa(HaoMa hm) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
@@ -117,6 +119,35 @@ public class GkjController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/uploadCheLiangTaiZhang")
+	@ResponseBody
+	public Map<String, Object> uploadCheLiangTaiZhang(CheLiangTaiZhang cltz, int actionFlag) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count=0;
+		String actionStr=null;
+		switch (actionFlag) {
+		case CheLiangTaiZhang.JIN_CHANG:
+			count=cheLiangTaiZhangService.uploadJinChang(cltz);
+			actionStr="进厂";
+			break;
+		case CheLiangTaiZhang.CHU_CHANG:
+			count=cheLiangTaiZhangService.uploadChuChang(cltz);
+			actionStr="出厂";
+			break;
+		}
+
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "上传"+actionStr+"台账成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "上传"+actionStr+"台账失败！");
 		}
 		return jsonMap;
 	}
