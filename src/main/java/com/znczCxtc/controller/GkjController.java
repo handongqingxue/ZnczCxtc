@@ -16,6 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
+import com.znczCxtc.util.FileUploadUtil;
+
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/gkj")
@@ -126,40 +129,85 @@ public class GkjController {
 
 	@RequestMapping(value="/uploadCheLiangTaiZhang")
 	@ResponseBody
-	public Map<String, Object> uploadCheLiangTaiZhang(CheLiangTaiZhang cltz, int actionFlag) {
+	public Map<String, Object> uploadCheLiangTaiZhang(CheLiangTaiZhang cltz, int actionFlag,
+			@RequestParam(value = "zp_file", required = false) MultipartFile zp_file,
+			HttpServletRequest request) {
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		int count=0;
-		String actionStr=null;
-		switch (actionFlag) {
-		case CheLiangTaiZhang.JIN_CHANG:
-			count=cheLiangTaiZhangService.uploadJinChang(cltz);
-			actionStr="进厂";
-			break;
-		case CheLiangTaiZhang.CHU_CHANG:
-			count=cheLiangTaiZhangService.uploadChuChang(cltz);
-			actionStr="出厂";
-			break;
-		}
+		try {
+			MultipartFile[] fileArr=new MultipartFile[1];
+			fileArr[0]=zp_file;
+			String pzSrc=null;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						String folder="CheLiangTaiZhang/";
+						switch (i) {
+						case 0:
+							switch (actionFlag) {
+							case CheLiangTaiZhang.JIN_CHANG:
+								folder+="Jczp";//进厂照片
+								break;
+							case CheLiangTaiZhang.CHU_CHANG:
+								folder+="Cczp";//出厂照片
+								break;
+							}
+							break;
+						}
+						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								pzSrc=dataJO.get("src").toString();
+								break;
+							}
+						}
+					}
+				}
+			}
+		
+			int count=0;
+			String actionStr=null;
+			switch (actionFlag) {
+			case CheLiangTaiZhang.JIN_CHANG:
+				cltz.setJczp(pzSrc);
+				count=cheLiangTaiZhangService.uploadJinChang(cltz);
+				actionStr="进厂";
+				break;
+			case CheLiangTaiZhang.CHU_CHANG:
+				cltz.setCczp(pzSrc);
+				count=cheLiangTaiZhangService.uploadChuChang(cltz);
+				actionStr="出厂";
+				break;
+			}
 
-		if(count>0) {
-			jsonMap.put("message", "ok");
-			jsonMap.put("info", "上传"+actionStr+"台账成功！");
-		}
-		else {
-			jsonMap.put("message", "no");
-			jsonMap.put("info", "上传"+actionStr+"台账失败！");
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "上传"+actionStr+"台账成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "上传"+actionStr+"台账失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return jsonMap;
 	}
 
 	@RequestMapping(value="/testFile")
 	@ResponseBody
-	public Map<String, Object> testFile(@RequestParam(value = "file1", required = false) MultipartFile file1,
+	public Map<String, Object> testFile(CheLiangTaiZhang cltz,
+			@RequestParam(value = "file1", required = false) MultipartFile file1,
 			@RequestParam(value = "file2", required = false) MultipartFile file2) {
 		//https://blog.csdn.net/weixin_31976851/article/details/114153507
 		//https://wenku.baidu.com/view/73de8f265c0e7cd184254b35eefdc8d377ee1450.html?_wkts_=1667965735195&bdQuery=java+HttpURLConnection%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92file%E5%AF%B9%E8%B1%A1
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		System.out.println("jcsj==="+cltz.getJcsj());
 		System.out.println("file1size==="+file1.getSize());
 		System.out.println("file2size==="+file2.getSize());
 		return jsonMap;
