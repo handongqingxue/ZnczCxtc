@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
@@ -149,6 +150,17 @@ public class GkjController {
 			jsonMap.put("message", "no");
 			jsonMap.put("info", "…œ¥´"+actionStr+"Ã®’À ß∞‹£°");
 		}
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/testFile")
+	@ResponseBody
+	public Map<String, Object> testFile(@RequestParam(value = "file", required = false) MultipartFile file) {
+		//https://blog.csdn.net/weixin_31976851/article/details/114153507
+		//https://blog.csdn.net/weixin_35674742/article/details/114192180
+		//https://wenku.baidu.com/view/73de8f265c0e7cd184254b35eefdc8d377ee1450.html?_wkts_=1667965735195&bdQuery=java+HttpURLConnection%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92file%E5%AF%B9%E8%B1%A1
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		System.out.println("file==="+file);
 		return jsonMap;
 	}
 }
