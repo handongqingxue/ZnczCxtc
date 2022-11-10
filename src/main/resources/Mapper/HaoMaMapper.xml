@@ -34,38 +34,30 @@
 		</if>
 		limit #{rowNum},#{rows}
 	</select>
-	<insert id="newHaoMaChaXun" parameterType="com.znczCxtc.entity.YongHu">
+	<insert id="add" parameterType="com.znczCxtc.entity.HaoMa">
 		insert into hao_ma
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="hm!=null">
 				hm,
 			</if>
-			<if test="prsj!=null">
-				prsj,
-			</if>
 			<if test="pdh!=null">
 				pdh,
 			</if>
-			<if test="ztId!=null">
-				ztId,
+				prsj,
+			<if test="hmztId!=null">
+				hmztId,
 			</if>
 			<if test="fl!=null">
 				fl,
 			</if>
-			<if test="ewm!=null">
-				ewm,
-			</if>
 			<if test="ksjhsj!=null">
 				ksjhsj,
 			</if>
-			<if test="sssjId!=null">
-				sssjId,
+			<if test="jhcs!=null">
+				jhcs,
 			</if>
-			<if test="ssdlId!=null">
-				ssdlId,
-			</if>
-			<if test="ssddBm!=null">
-				ssddBm,
+			<if test="ddId!=null">
+				ddId,
 			</if>
 		</trim>
 		values
@@ -73,32 +65,22 @@
 			<if test="hm!=null">
 				#{hm},
 			</if>
-			<if test="prsj!=null">
-				#{prsj},
-			</if>
 			<if test="pdh!=null">
 				#{pdh},
 			</if>
-			<if test="ztId!=null">
-				#{ztId},
+				now(),
+			<if test="hmztId!=null">
+				#{hmztId},
 			</if>
 			<if test="fl!=null">
 				#{fl},
 			</if>
-			<if test="ewm!=null">
-				#{ewm},
-			</if>
 			<if test="ksjhsj!=null">
 				#{ksjhsj},
 			</if>
-			<if test="sssjId!=null">
-				#{sssjId},
-			</if>
-			<if test="ssdlId!=null">
-				#{ssdlId},
-			</if>
-			<if test="ssddBm!=null">
-				#{ssddBm},
+				0,
+			<if test="ddId!=null">
+				#{ddId},
 			</if>
 		</trim>
 	</insert>
@@ -137,4 +119,10 @@
 		</trim>
 		where id=#{id}
 	</update>
+	<select id="getMaxHmByDlId" resultType="java.lang.Integer">
+		select max(hm.hm) hm from hao_ma hm,ding_dan dd,shou_huo_dan_wei shdw,dui_lie dl where hm.ddId=dd.id and dd.shdwId=shdw.id and shdw.dlId=dl.id and dl.id=#{dlId}
+	</select>
+	<select id="getMaxPdh" resultType="java.lang.Integer">
+		select max(hm.pdh) pdh from hao_ma hm,ding_dan dd,ding_dan_zhuang_tai ddzt where hm.ddId=dd.id and dd.ddztId=ddzt.id and ddzt.mc=${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}
+	</select>
 </mapper>

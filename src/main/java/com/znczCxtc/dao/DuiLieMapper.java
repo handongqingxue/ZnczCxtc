@@ -22,4 +22,6 @@ public interface DuiLieMapper {
 
 	List<DuiLie> queryCBBList(@Param("zt") Integer zt);
 
+	Integer getIdByDdId(@Param("ddId") Long ddId);
+
 }

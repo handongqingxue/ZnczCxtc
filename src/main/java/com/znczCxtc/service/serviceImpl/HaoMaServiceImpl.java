@@ -32,9 +32,9 @@ public class HaoMaServiceImpl implements HaoMaService {
 	}
 
 	@Override
-	public int newHaoMaChaXun(HaoMa hm) {
+	public int add(HaoMa hm) {
 		// TODO Auto-generated method stub
-		return haoMaDao.newHaoMaChaXun(hm);
+		return haoMaDao.add(hm);
 	}
 
 	@Override
@@ -58,5 +58,17 @@ public class HaoMaServiceImpl implements HaoMaService {
 			hm.setHmztId(hmztId);
 		}
 		return haoMaDao.edit(hm);
+	}
+
+	@Override
+	public Integer getMaxHmByDlId(Integer dlId) {
+		// TODO Auto-generated method stub
+		return haoMaDao.getMaxHmByDlId(dlId);
+	}
+
+	@Override
+	public Integer getMaxPdh() {
+		// TODO Auto-generated method stub
+		return haoMaDao.getMaxPdh();
 	}
 }

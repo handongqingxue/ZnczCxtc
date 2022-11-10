@@ -102,4 +102,7 @@
 			and zt=#{zt}
 		</if> 
 	</select>
+	<select id="getIdByDdId" resultType="java.lang.Integer">
+		select dl.id from ding_dan dd,shou_huo_dan_wei shdw,dui_lie dl where dd.shdwId=shdw.id and shdw.dlId=dl.id and dd.id=#{ddId}
+	</select>
 </mapper>

@@ -12,11 +12,15 @@ public interface HaoMaService {
 	public List<HaoMa> queryList(String dlMc, String hm, String pdh, Integer ztId, int page, int rows, String sort,
 			String order);
 
-	public int newHaoMaChaXun(HaoMa hm);
+	public int add(HaoMa hm);
 
 	public HaoMa selectHaoMaById(String id);
 
 	public List<HaoMa> getJhPdList();
 
 	public int edit(HaoMa hm);
+
+	public Integer getMaxHmByDlId(Integer dlId);
+
+	public Integer getMaxPdh();
 }

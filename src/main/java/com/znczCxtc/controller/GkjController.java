@@ -29,6 +29,8 @@ public class GkjController {
 	@Autowired
     private HaoMaService haoMaService;
 	@Autowired
+    private DuiLieService duiLieService;
+	@Autowired
     private CheLiangTaiZhangService cheLiangTaiZhangService;
 
 	/**
@@ -128,6 +130,34 @@ public class GkjController {
 			jsonMap.put("hmList", hmList);
 		}
 		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/newHaoMa")
+	@ResponseBody
+	public Map<String, Object> newHaoMa(Long ddId) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		Integer dlId=duiLieService.getIdByDdId(ddId);
+		Integer maxHm=haoMaService.getMaxHmByDlId(dlId);
+		Integer maxPdh=haoMaService.getMaxPdh();
+		
+		HaoMa hm=new HaoMa();
+		hm.setHm(maxHm++);
+		hm.setPdh(maxPdh++);
+		hm.setHmztMc(HaoMaZhuangTai.PAI_DUI_ZHONG_TEXT);
+		hm.setFl(HaoMa.PU_TONG);
+		hm.setDdId(ddId);
+		int count=haoMaService.add(hm);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "ÃÌº”∫≈¬Î≥…π¶£°");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "ÃÌº”∫≈¬Î ß∞‹£°");
+		}
 		return jsonMap;
 	}
 	

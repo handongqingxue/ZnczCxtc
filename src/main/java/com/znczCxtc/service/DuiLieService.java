@@ -20,4 +20,6 @@ public interface DuiLieService {
 
 	List<DuiLie> queryCBBList(Integer zt);
 
+	Integer getIdByDdId(Long ddId);
+
 }

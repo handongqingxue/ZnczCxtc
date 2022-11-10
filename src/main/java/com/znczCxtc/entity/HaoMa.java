@@ -1,6 +1,9 @@
 package com.znczCxtc.entity;
 
 public class HaoMa {
+	
+	public static final int PU_TONG=1;
+	public static final int QI_TA=2;
 
 	private Integer id;//号码id
 	public Integer getId() {
@@ -9,10 +12,10 @@ public class HaoMa {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getHm() {
+	public Integer getHm() {
 		return hm;
 	}
-	public void setHm(String hm) {
+	public void setHm(Integer hm) {
 		this.hm = hm;
 	}
 	public Integer getPdh() {
@@ -75,7 +78,7 @@ public class HaoMa {
 	public void setClCph(String clCph) {
 		this.clCph = clCph;
 	}
-	private String hm;//号码
+	private Integer hm;//号码
 	private Integer pdh;//排队号	
 	private String prsj;//排入时间
 	private Integer hmztId;//号码状态 1.排队中2.已完成3.已过号4.取消5.叫号中6.受理中

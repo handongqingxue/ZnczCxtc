@@ -61,4 +61,10 @@ public class DuiLieServiceImpl implements DuiLieService {
 		return duiLieDao.queryCBBList(zt);
 	}
 
+	@Override
+	public Integer getIdByDdId(Long ddId) {
+		// TODO Auto-generated method stub
+		return duiLieDao.getIdByDdId(ddId);
+	}
+
 }
