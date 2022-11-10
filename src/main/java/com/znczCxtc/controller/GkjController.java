@@ -176,15 +176,6 @@ public class GkjController {
 		try {
 			int count=haoMaService.edit(hm);
 			if(count>0) {
-				if(HaoMaZhuangTai.YI_GUO_HAO_TEXT.equals(hm.getHmztMc())) {
-					DingDan dd=new DingDan();
-					dd.setId(hm.getDdId());
-					dd.setDdztMc(DingDanZhuangTai.YI_XIA_DAN_TEXT);
-					count=dingDanService.edit(dd);
-				}
-			}
-			
-			if(count>0) {
 				jsonMap.put("message", "ok");
 				jsonMap.put("info", "±à¼­ºÅÂë³É¹¦£¡");
 			}

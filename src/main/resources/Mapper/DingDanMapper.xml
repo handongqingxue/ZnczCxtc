@@ -350,8 +350,8 @@
 		select dd.* from ding_dan dd,si_ji sj where dd.cysjId=sj.id and dd.ddztId=#{ddztId} and sj.sfzh=#{sfzh}
 	</select>
 	<select id="getByZtListCph" resultType="com.znczCxtc.entity.DingDan">
-		select * from ding_dan where cph=#{cph}
-		<foreach collection="ddztIdList" item="ddztId" open=" and cast(ddztId as char) in (" separator="," close=")">
+		select dd.*,hm.id hmId from ding_dan dd left join hao_ma hm on dd.id=hm.ddId where dd.cph=#{cph}
+		<foreach collection="ddztIdList" item="ddztId" open=" and cast(dd.ddztId as char) in (" separator="," close=")">
 		#{ddztId}
 		</foreach>
 	</select>
