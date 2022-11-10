@@ -16,6 +16,10 @@ public interface HaoMaService {
 
 	public HaoMa selectHaoMaById(String id);
 
+	/**
+	 * 获得叫号中、排队中的号码列表
+	 * @return
+	 */
 	public List<HaoMa> getJhPdList();
 
 	public int edit(HaoMa hm);
@@ -29,4 +33,10 @@ public interface HaoMaService {
 	 * @return
 	 */
 	public int changeToJhz();
+
+	/**
+	 * 重新排序排队中的号码
+	 * @return
+	 */
+	public int sortPdzHm();
 }

@@ -1,6 +1,7 @@
 package com.znczCxtc.service.serviceImpl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -115,6 +116,19 @@ public class HaoMaServiceImpl implements HaoMaService {
 				dd.setDdztId(drcDdztId);
 				count=dingDanDao.edit(dd);
 			}
+		}
+		return count;
+	}
+
+	@Override
+	public int sortPdzHm() {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<HaoMa> pdzList=haoMaDao.getPdzList();
+		for (int i = 0; i < pdzList.size(); i++) {
+			HaoMa pdzHm = pdzList.get(i);
+			pdzHm.setHm(i++);
+			count=haoMaDao.edit(pdzHm);
 		}
 		return count;
 	}

@@ -27,4 +27,6 @@ public interface HaoMaMapper {
 	public List<HaoMa> getSlzList();
 
 	public HaoMa getFirstWmdPdz(@Param("ymdDlIdList") List<Integer> ymdDlIdList);
+
+	public List<HaoMa> getPdzList();
 }

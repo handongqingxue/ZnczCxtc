@@ -136,4 +136,7 @@
 		</foreach>
 		  ORDER BY pdh LIMIT 0,1
 	</select>
+	<select id="getPdzList" resultType="com.znczCxtc.entity.HaoMa">
+		select hm.* from hao_ma hm,hao_ma_zhuang_tai hmzt where hm.hmztId=hmzt.id and hmzt.mc=${@com.znczCxtc.entity.HaoMaZhuangTai@PAI_DUI_ZHONG_TEXT} ORDER BY hm.hm
+	</select>
 </mapper>

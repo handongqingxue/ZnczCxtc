@@ -113,6 +113,10 @@ public class GkjController {
 		return jsonMap;
 	}
 
+	/**
+	 * 获得叫号中、排队中的号码列表
+	 * @return
+	 */
 	@RequestMapping(value="/getJhPdHMList")
 	@ResponseBody
 	public Map<String, Object> getJhPdList() {
@@ -120,6 +124,8 @@ public class GkjController {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
 		haoMaService.changeToJhz();
+		//改变状态后，重新排序排队中的号码
+		haoMaService.sortPdzHm();
 		List<HaoMa> hmList=haoMaService.getJhPdList();
 		
 		if(hmList==null) {
