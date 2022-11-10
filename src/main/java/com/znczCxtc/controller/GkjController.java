@@ -119,6 +119,7 @@ public class GkjController {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
+		haoMaService.changeToJhz();
 		List<HaoMa> hmList=haoMaService.getJhPdList();
 		
 		if(hmList==null) {

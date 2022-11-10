@@ -23,4 +23,8 @@ public interface HaoMaMapper {
 	public Integer getMaxHmByDlId(@Param("dlId") Integer dlId);
 
 	public Integer getMaxPdh();
+
+	public List<HaoMa> getSlzList();
+
+	public HaoMa getFirstWmdPdz(@Param("ymdDlIdList") List<Integer> ymdDlIdList);
 }

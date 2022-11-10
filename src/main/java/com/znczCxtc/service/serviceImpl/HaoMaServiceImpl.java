@@ -1,5 +1,6 @@
 package com.znczCxtc.service.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -17,6 +18,10 @@ public class HaoMaServiceImpl implements HaoMaService {
 	private HaoMaMapper haoMaDao;
 	@Autowired
 	private HaoMaZhuangTaiMapper haoMaZhuangTaiDao;
+	@Autowired
+	private DingDanMapper dingDanDao;
+	@Autowired
+	private DingDanZhuangTaiMapper dingDanZhuangTaiDao;
 
 	@Override
 	public int queryForInt(String dlMc, String hm, String pdh, Integer ztId) {
@@ -34,6 +39,11 @@ public class HaoMaServiceImpl implements HaoMaService {
 	@Override
 	public int add(HaoMa hm) {
 		// TODO Auto-generated method stub
+		String hmztMc = hm.getHmztMc();
+		if(!StringUtils.isEmpty(hmztMc)) {
+			int hmztId=haoMaZhuangTaiDao.getIdByMc(hmztMc);
+			hm.setHmztId(hmztId);
+		}
 		return haoMaDao.add(hm);
 	}
 
@@ -70,5 +80,42 @@ public class HaoMaServiceImpl implements HaoMaService {
 	public Integer getMaxPdh() {
 		// TODO Auto-generated method stub
 		return haoMaDao.getMaxPdh();
+	}
+
+	@Override
+	public int changeToJhz() {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<Integer> ymdDlIdList=new ArrayList<Integer>();
+		List<HaoMa> slzHmList=haoMaDao.getSlzList();
+		for (HaoMa slzHm : slzHmList) {
+			Integer slzsl = slzHm.getSlzsl();
+			Integer dlJhyz = slzHm.getDlJhyz();
+			if(slzsl==dlJhyz) {
+				Integer dlId = slzHm.getDlId();
+				ymdDlIdList.add(dlId);
+			}
+		}
+		HaoMa firstHm=haoMaDao.getFirstWmdPdz(ymdDlIdList);
+		if(firstHm!=null) {
+			Long id = firstHm.getId();
+			Long ddId = firstHm.getDdId();
+			
+			int jhzHmztId = haoMaZhuangTaiDao.getIdByMc(HaoMaZhuangTai.JIAO_HAO_ZHONG_TEXT);
+			
+			HaoMa hm=new HaoMa();
+			hm.setId(id);
+			hm.setHmztId(jhzHmztId);
+			count=haoMaDao.edit(hm);
+			if(count>0) {
+				int drcDdztId = dingDanZhuangTaiDao.getIdByMc(DingDanZhuangTai.DAI_RU_CHANG_TEXT);
+				
+				DingDan dd=new DingDan();
+				dd.setId(ddId);
+				dd.setDdztId(drcDdztId);
+				count=dingDanDao.edit(dd);
+			}
+		}
+		return count;
 	}
 }

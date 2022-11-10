@@ -23,4 +23,10 @@ public interface HaoMaService {
 	public Integer getMaxHmByDlId(Integer dlId);
 
 	public Integer getMaxPdh();
+
+	/**
+	 * 号码状态改为叫号中、订单状态改为待入厂
+	 * @return
+	 */
+	public int changeToJhz();
 }

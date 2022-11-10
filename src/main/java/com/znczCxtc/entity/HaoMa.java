@@ -5,11 +5,11 @@ public class HaoMa {
 	public static final int PU_TONG=1;
 	public static final int QI_TA=2;
 
-	private Integer id;//号码id
-	public Integer getId() {
+	private Long id;//号码id
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Integer getHm() {
@@ -66,6 +66,12 @@ public class HaoMa {
 	public void setDlMc(String dlMc) {
 		this.dlMc = dlMc;
 	}
+	public Integer getDlJhyz() {
+		return dlJhyz;
+	}
+	public void setDlJhyz(Integer dlJhyz) {
+		this.dlJhyz = dlJhyz;
+	}
 	public Long getDdId() {
 		return ddId;
 	}
@@ -78,6 +84,12 @@ public class HaoMa {
 	public void setClCph(String clCph) {
 		this.clCph = clCph;
 	}
+	public Integer getSlzsl() {
+		return slzsl;
+	}
+	public void setSlzsl(Integer slzsl) {
+		this.slzsl = slzsl;
+	}
 	private Integer hm;//号码
 	private Integer pdh;//排队号	
 	private String prsj;//排入时间
@@ -87,7 +99,9 @@ public class HaoMa {
 	private String ksjhsj;//开始叫号时间
 	private Integer dlId;//队列id
 	private String dlMc;//队列名称
+	private Integer dlJhyz;//队列叫号阈值(判断厂内车辆数量是否大于这个数值，大于的话队列里排队中的车辆状态就暂时不改变，早晚小于时才改变)
 	private Long ddId;//订单id
 	private String clCph;
+	private Integer slzsl;//受理中数量
 
 }
