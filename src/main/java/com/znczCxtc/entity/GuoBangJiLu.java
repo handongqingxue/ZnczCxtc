@@ -1,6 +1,12 @@
 package com.znczCxtc.entity;
 
 public class GuoBangJiLu {
+	
+	public static final Integer ZHENG_CHANG=1;
+	public static final Integer YI_CHANG=2;
+	
+	public static final Integer RU_CHANG_GUO_BANG=1;
+	public static final Integer CHU_CHANG_GUO_BANG=2;
 
 	private Integer id;
 	public Integer getId() {

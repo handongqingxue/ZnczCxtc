@@ -34,12 +34,6 @@ public class Constant {
 	 * 物资管理模块类名
 	 */
 	public static final String WZGL_MODULE_NAME="wzgl";
-	
-	public static final Integer ZHENG_CHANG=1;
-	public static final Integer YI_CHANG=2;
-	
-	public static final Integer RU_CHANG_GUO_BANG=1;
-	public static final Integer CHU_CHANG_GUO_BANG=2;
 
 	//地点标识start
 	public static final int WEI_GUO_BANG=0;
