@@ -14,7 +14,7 @@ public interface RglrCphJiLuService {
 	 * @param cph
 	 * @return
 	 */
-	boolean checkIfExistByDdIdCph(Integer ddId, String cph);
+	boolean checkIfExistByDdIdCph(Long ddId, String cph);
 
 	List<String> queryXzCphCBBList(int page, int rows, String sort, String order);
 

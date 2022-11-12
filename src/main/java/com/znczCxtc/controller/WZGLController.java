@@ -23,7 +23,7 @@ public class WZGLController {
 	private WuZiLeiXingService wuZiLeiXingService;
 	@Autowired
 	private WuZiService wuZiService;
-	public static final String MODULE_NAME="wzgl";
+	static final String MODULE_NAME=Constant.WZGL_MODULE_NAME;
 	
 	@RequestMapping(value="/wzlx/new")
 	public String goWzlxNew(HttpServletRequest request) {

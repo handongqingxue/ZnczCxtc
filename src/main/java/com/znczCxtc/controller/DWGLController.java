@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
-import com.znczCxtc.util.JsonUtil;
-import com.znczCxtc.util.PlanResult;
+import com.znczCxtc.util.*;
 
 @Controller
 @RequestMapping("/"+DWGLController.MODULE_NAME)
@@ -28,7 +27,7 @@ public class DWGLController {
     private ShouHuoDanWeiService shouHuoDanWeiService;
 	@Autowired
     private CangKuService cangKuService;
-	public static final String MODULE_NAME="dwgl";
+	static final String MODULE_NAME=Constant.DWGL_MODULE_NAME;
 
 	@RequestMapping(value="/yss/new")
 	public String goYssNew(HttpServletRequest request) {

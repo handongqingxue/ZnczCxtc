@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
-import com.znczCxtc.util.JsonUtil;
-import com.znczCxtc.util.PlanResult;
+import com.znczCxtc.util.*;
 
 @Controller
 @RequestMapping("/"+PDGLController.MODULE_NAME)
@@ -26,7 +25,7 @@ public class PDGLController {
     private HaoMaService haoMaService;
 	@Autowired
     private HaoMaZhuangTaiService haoMaZhuangTaiService;
-	public static final String MODULE_NAME="pdgl";
+	static final String MODULE_NAME=Constant.PDGL_MODULE_NAME;
 	
 	@RequestMapping(value="/hmzt/new")
 	public String goHmztNew(HttpServletRequest request) {

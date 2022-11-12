@@ -13,8 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.znczCxtc.entity.*;
-import com.znczCxtc.util.JsonUtil;
-import com.znczCxtc.util.PlanResult;
+import com.znczCxtc.util.*;
 
 /*
  * 订单流程：
@@ -30,7 +29,7 @@ import com.znczCxtc.util.PlanResult;
 @RequestMapping("/"+MainController.MODULE_NAME)
 public class MainController {
 	
-	public static final String MODULE_NAME="main";
+	static final String MODULE_NAME=Constant.MAIN_MODULE_NAME;
 
 	/**
 	 * 跳转到登录页

@@ -27,7 +27,7 @@ public class SJGLController {
     private SiJiService siJiService;
 	@Autowired
     private SiJiShenHeJiLuService siJiShenHeJiLuService;
-	public static final String MODULE_NAME="sjgl";
+	static final String MODULE_NAME=Constant.SJGL_MODULE_NAME;
 
 	/**
 	 * 跳转到司机管理-待审核-列表页面

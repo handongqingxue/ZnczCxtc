@@ -92,7 +92,24 @@ var dxbGbztMc;
 var xbzGbztMc;
 var ywcGbztMc;
 
+var wgb;
+var yhbf;
+var ehbf;
+var shbf;
+
+var wgbMc;
+var yhbfMc;
+var ehbfMc;
+var shbfMc;
+
+var pushCph;
+var pushSfzh;
+
 $(function(){
+	initGbztVar();
+	initBfVar();
+	initPushVar();
+	
 	initDDZTCBB();
 	initJHYSRQDB();
 	initJCSJSDTB();
@@ -100,7 +117,7 @@ $(function(){
 	initCCSJSDTB();
 	initCCSJEDTB();
 	initSearchLB();
-	initManualLB();
+	initRgsbcpLB();
 	initDdfwLB();
 	initAddLB();
 	initRemoveLB();
@@ -129,11 +146,28 @@ function initGbztVar(){
 	ywcGbztMc='${requestScope.ywcGbztMc}';
 }
 
+function initBfVar(){
+	wgb=parseInt('${requestScope.wgb}');
+	yhbf=parseInt('${requestScope.yhbf}');
+	ehbf=parseInt('${requestScope.ehbf}');
+	shbf=parseInt('${requestScope.shbf}');
+
+	wgbMc='${requestScope.wgbMc}';
+	yhbfMc='${requestScope.yhbfMc}';
+	ehbfMc='${requestScope.ehbfMc}';
+	shbfMc='${requestScope.shbfMc}';
+}
+
+function initPushVar(){
+	pushCph=parseInt('${requestScope.pushCph}');
+	pushSfzh=parseInt('${requestScope.pushSfzh}');
+}
+
 function showCompontByQx(){
-	manualLB.hide();
+	rgsbcpLB.hide();
 	removeLB.hide();
 	if(yhm=="admin"){
-		manualLB.show();
+		rgsbcpLB.show();
 		removeLB.show();
 	}
 	else{
@@ -145,7 +179,7 @@ function showCompontByQx(){
 				},2000)
 			}
 			if(qxIdsArr[i]==2){//磅房人员
-				manualLB.show();
+				rgsbcpLB.show();
 			}
 		}
 	}
@@ -206,19 +240,21 @@ function initInputCphDialog(){
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 
-	initBFHCBB();
+	initPlaceCBB();
 	initXzCphCBB();
 	initLrSjcCBB();
 	initLrWscphCBB();
 }
 
-function initBFHCBB(){
+function initPlaceCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择"});
-	data.push({"value":1,"text":"北磅房"});
-	data.push({"value":2,"text":"南磅房"});
+	data.push({"value":mg,"text":mgMc});
+	data.push({"value":yhbf,"text":yhbfMc});
+	data.push({"value":ehbf,"text":ehbfMc});
+	data.push({"value":shbf,"text":shbfMc});
 	
-	bfhCBB=$("#bfh_cbb").combobox({
+	placeCBB=$("#place_cbb").combobox({
 		width:120,
 		valueField:"value",
 		textField:"text",
@@ -296,20 +332,20 @@ function initLrWscphCBB(){
 }
 
 function checkCphToClient(){
-	if(checkBfh()){
+	if(checkPlace()){
 		if(checkRglrCph()){
-			sendCphToClient();
+			pushCphToClient();
 		}
 	}
 }
 
-function sendCphToClient(){
-	var bfNoFlag=bfhCBB.combobox("getValue");
+function pushCphToClient(){
+	var placeFlag=placeCBB.combobox("getValue");
 	var sjc=lrSjcCBB.combobox("getValue");
 	var wscph=lrWscphCBB.combobox("getValue");
 	var cph=sjc+wscph;
-	$.post(gkjPath+"sendCphToClient",
-		{cph:cph,bfNoFlag:bfNoFlag},
+	$.post(gkjPath+"pushToClient",
+		{cph:cph,placeFlag:placeFlag,pushFlag:pushCph},
 		function(data){
 			if(data.status=="ok"){
 				openInputCphDialog(false);
@@ -318,11 +354,11 @@ function sendCphToClient(){
 	,"json");
 }
 
-//验证磅房号
-function checkBfh(){
-	var bfh=bfhCBB.combobox("getValue");
+//验证地点
+function checkPlace(){
+	var bfh=placeCBB.combobox("getValue");
 	if(bfh==null||bfh==""){
-	  	alert("请选择磅房");
+	  	alert("请选择地点");
 	  	return false;
 	}
 	else
@@ -414,8 +450,8 @@ function initSearchLB(){
 	});
 }
 
-function initManualLB(){
-	manualLB=$("#manual_but").linkbutton({
+function initRgsbcpLB(){
+	rgsbcpLB=$("#rgsbcp_but").linkbutton({
 		iconCls:"icon-save",
 		onClick:function(){
 			openInputCphDialog(true);
@@ -504,31 +540,10 @@ function initTab1(){
 				return getGbztMcById(value);
             }},
             {field:"yjbfh",title:"一检地磅",width:100,formatter:function(value,row){
-            	var dbm;
-            	switch (value) {
-				case 1:
-					dbm="托利多";
-					break;
-				case 2:
-					dbm="耀华";
-					break;
-				default:
-					dbm="未过磅";
-					break;
-				}
-            	return dbm;
+            	return getBfMcByBfh(value);
             }},
             {field:"ejbfh",title:"二检地磅",width:100,formatter:function(value,row){
-            	var dbm;
-            	switch (value) {
-				case 1:
-					dbm="托利多";
-					break;
-				case 2:
-					dbm="耀华";
-					break;
-				}
-            	return dbm;
+            	return getBfMcByBfh(value);
             }},
             {field:"yzxzl",title:"预装卸重量",width:150},
             {field:"bjsj",title:"编辑时间",width:150},
@@ -577,6 +592,25 @@ function getGbztMcById(gbztId){
 		break;
 	case ywcGbzt:
 		str=ywcGbztMc;//已完成
+		break;
+	}
+	return str;
+}
+
+function getBfMcByBfh(bfh){
+	var str;
+	switch (bfh) {
+	case wgb:
+		str=wgbMc;
+		break;
+	case yhbf:
+		str=yhbfMc;
+		break;
+	case ehbf:
+		str=ehbfMc;
+		break;
+	case shbf:
+		str=shbfMc;
 		break;
 	}
 	return str;
@@ -735,7 +769,7 @@ function setFitWidthInParent(parent,self){
 				-
 				<input id="ccsje_dtb"/>
 				<a class="search_but" id="search_but">查询</a>
-				<a id="manual_but">人工</a>
+				<a id="rgsbcp_but">人工识别车牌</a>
 				<a id="ddfw_but">订单复位</a>
 				<a id="add_but">添加</a>
 				<a id="remove_but">删除</a>
@@ -751,10 +785,10 @@ function setFitWidthInParent(parent,self){
 				<table>
 				  <tr>
 					<td class="td1" align="right">
-						磅房
+						地点
 					</td>
 					<td class="td2">
-						<input id="bfh_cbb"/>
+						<input id="place_cbb"/>
 					</td>
 				  </tr>
 				  <tr>

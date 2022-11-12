@@ -2,6 +2,7 @@ package com.znczCxtc.entity;
 
 public class DingDan {
 
+	//订单的过磅状态标识start
 	/**
 	 * 待上磅过磅状态标识
 	 */
@@ -59,6 +60,7 @@ public class DingDan {
 	 * 已完成过磅状态名称
 	 */
 	public static final String YI_WAN_CHENG_TEXT="已完成";
+	//订单的过磅状态标识end
 	
 	private Long id;//订单id（主键）
 	public Long getId() {

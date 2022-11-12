@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.znczCxtc.dao.*;
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
-import com.znczCxtc.util.QrcodeUtil;
+import com.znczCxtc.util.*;
 
 @Service
 public class DingDanServiceImpl implements DingDanService {
@@ -112,8 +112,8 @@ public class DingDanServiceImpl implements DingDanService {
 				ddshjl.setDdId(ddId);
 				count+=dingDanShenHeJiLuDao.add(ddshjl);
 				
-				if(!ddshjl.getShjg()&&(jyFlag==GuoBangJiLu.RU_CHANG_GUO_BANG||jyFlag==GuoBangJiLu.CHU_CHANG_GUO_BANG)) {//这块代码是在一检审核或二检审核不通过情况下，把之前的磅单记录、过磅记录删除。与下单审核、入库审核无关
-					if(jyFlag==GuoBangJiLu.RU_CHANG_GUO_BANG)//在入厂过磅审核不通过情况下，要删除入厂过磅记录，肯定要连同磅单记录一起删除掉
+				if(!ddshjl.getShjg()&&(jyFlag==Constant.RU_CHANG_GUO_BANG||jyFlag==Constant.CHU_CHANG_GUO_BANG)) {//这块代码是在一检审核或二检审核不通过情况下，把之前的磅单记录、过磅记录删除。与下单审核、入库审核无关
+					if(jyFlag==Constant.RU_CHANG_GUO_BANG)//在入厂过磅审核不通过情况下，要删除入厂过磅记录，肯定要连同磅单记录一起删除掉
 						bangDanJiLuDao.deleteByDdId(ddId);
 					guoBangJiLuDao.deleteByDdId(jyFlag,ddId);
 				}

@@ -16,12 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
-import com.znczCxtc.util.FileUploadUtil;
+import com.znczCxtc.socket.*;
+import com.znczCxtc.util.*;
 
 import net.sf.json.JSONObject;
 
 @Controller
-@RequestMapping("/gkj")
+@RequestMapping("/"+GkjController.MODULE_NAME)
 public class GkjController {
 
 	@Autowired
@@ -32,6 +33,9 @@ public class GkjController {
     private DuiLieService duiLieService;
 	@Autowired
     private CheLiangTaiZhangService cheLiangTaiZhangService;
+	@Autowired
+	private RglrCphJiLuService rglrCphJiLuService; 
+	static final String MODULE_NAME=Constant.GKJ_MODULE_NAME;
 
 	/**
 	 * 根据身份证号和订单状态查询订单(返回一条订单记录,用于门岗身份证阅读器那里)
@@ -273,6 +277,41 @@ public class GkjController {
 		System.out.println("jcsj==="+cltz.getJcsj());
 		System.out.println("file1size==="+file1.getSize());
 		System.out.println("file2size==="+file2.getSize());
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/pushToClient")
+	@ResponseBody
+	public Map<String, Object> pushToClient(Long ddId,String cph,Integer placeFlag,Integer jyFlag,String pushFlag) {
+		
+		System.out.println("pushToClient.placeFlag==="+placeFlag);
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		//ProxySet.sayToClient("鲁A9031", SocketProxy.YI_JIAN);
+		StringBuilder mesJOSB=new StringBuilder();
+		String mesJO="{\"action\":\"pushCph\",jyFlag:"+jyFlag+",\"cph\":\" "+cph+"\"}";
+		if(Constant.PUSH_CPH.equals(pushFlag)) {
+			switch (placeFlag) {
+			case Constant.YI_HAO_BANG_FANG:
+			case Constant.ER_HAO_BANG_FANG:
+			case Constant.SAN_HAO_BANG_FANG:
+				
+				break;
+			}
+		}
+		ProxySet.sayToClient(mesJO, placeFlag);
+		
+		boolean exist=rglrCphJiLuService.checkIfExistByDdIdCph(ddId,cph);//验证同一个订单是否存在该车牌号，存在则说明之前录入过了，不需要再生成车牌号记录了，反之则需要生成
+		if(!exist) {
+			RglrCphJiLu rglrCphJiLu=new RglrCphJiLu();
+			rglrCphJiLu.setCph(cph);
+			rglrCphJiLu.setDdId(ddId);
+			rglrCphJiLuService.add(rglrCphJiLu);
+		}
+		
+		jsonMap.put("status", "ok");
+		
 		return jsonMap;
 	}
 }

@@ -2,20 +2,6 @@ package com.znczCxtc.entity;
 
 public class GuoBangJiLu {
 
-	public static final Integer ZHENG_CHANG=1;
-	public static final Integer YI_CHANG=2;
-	
-	public static final Integer RU_CHANG_GUO_BANG=1;
-	public static final Integer CHU_CHANG_GUO_BANG=2;
-
-	public static final int YI_HAO_BANG_FANG=1;
-	public static final int ER_HAO_BANG_FANG=2;
-	public static final int SAN_HAO_BANG_FANG=3;
-	
-	public static final String YI_HAO_BANG_FANG_TEXT="一号磅房";
-	public static final String ER_HAO_BANG_FANG_TEXT="二号磅房";
-	public static final String SAN_HAO_BANG_FANG_TEXT="三号磅房";
-
 	private Integer id;
 	public Integer getId() {
 		return id;

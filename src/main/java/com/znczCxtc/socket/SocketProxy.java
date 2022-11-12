@@ -10,10 +10,6 @@ import com.znczCxtc.socket.ProxySet;
 
 public class SocketProxy implements Runnable {
 
-	public static final int YI_HAO_BANG_FANG=1;
-	public static final int ER_HAO_BANG_FANG=2;
-	public static final int SAN_HAO_BANG_FANG=3;
-	public static final int MEN_GANG=4;
 	private Socket socket;
 	private BufferedReader in;
 	private int placeFlag;

@@ -28,7 +28,7 @@ public class CLGLController {
 	private CheLiangService cheLiangService;
 	@Autowired
 	private CheLiangShenHeJiLuService cheLiangShenHeJiLuService;
-	public static final String MODULE_NAME="clgl";
+	static final String MODULE_NAME=Constant.CLGL_MODULE_NAME;
 
 	/**
 	 * 跳转到车辆管理-待审核-列表页面

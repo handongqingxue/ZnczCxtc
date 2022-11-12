@@ -1,7 +1,8 @@
 package com.znczCxtc.entity;
 
 public class DingDanZhuangTai {
-
+	
+	//订单状态的标识start
 	public static final String DAI_SHEN_HE_TEXT="待审核";//1
 	public static final String BIAN_JI_ZHONG_TEXT="编辑中";//2
 	public static final String YI_XIA_DAN_TEXT="已下单";//3
@@ -22,7 +23,8 @@ public class DingDanZhuangTai {
 	public static final String YI_WAN_CHENG_TEXT="已完成";//18
 	public static final String YI_CHANG_TEXT="异常";//19
 	public static final String YI_FEI_QI_TEXT="已废弃";//20
-	
+	//订单状态的标识end
+		
 	private Integer id;
 	public Integer getId() {
 		return id;

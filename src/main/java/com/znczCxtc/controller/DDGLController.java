@@ -34,7 +34,7 @@ public class DDGLController {
 	private DuiFangGuoBangJiLuService duiFangGuoBangJiLuService;
 	@Autowired
 	private DingDanShenHeJiLuService dingDanShenHeJiLuService;
-	public static final String MODULE_NAME="ddgl";
+	static final String MODULE_NAME=Constant.DDGL_MODULE_NAME;
 	
 	@RequestMapping(value="/ddzt/new")
 	public String goDdztNew(HttpServletRequest request) {
@@ -120,7 +120,8 @@ public class DDGLController {
 	public String goZhcxList(HttpServletRequest request) {
 
 		setGbztInRequest(request);
-		setBfInRequest(request);
+		setPlaceInRequest(request);
+		setPushInRequest(request);
 		
 		return MODULE_NAME+"/zhcx/list";
 	}
@@ -455,6 +456,37 @@ public class DDGLController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/queryXzCphCBBList")
+	@ResponseBody
+	public Map<String, Object> queryXzCphCBBList(int page,int rows,String sort,String order) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<String> cphList=rglrCphJiLuService.queryXzCphCBBList(page, rows, sort, order);
+		
+		jsonMap.put("rows", cphList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryLrSjcCBBList")
+	@ResponseBody
+	public List<RglrCphJiLu> queryLrSjcCBBList(String q,int page,int rows,String sort,String order) {
+
+		List<RglrCphJiLu> sjcList=rglrCphJiLuService.queryLrSjcCBBList(q, page, rows, sort, order);
+		
+		return sjcList;
+	}
+	
+	@RequestMapping(value="/queryLrWscphCBBList")
+	@ResponseBody
+	public List<RglrCphJiLu> queryLrWscphCBBList(String sjc,String q,int page,int rows,String sort,String order) {
+
+		List<RglrCphJiLu> cphList=rglrCphJiLuService.queryLrWscphCBBList(sjc, q, page, rows, sort, order);
+		
+		return cphList;
+	}
+	
 	public void setGbztInRequest(HttpServletRequest request) {
 		
 		request.setAttribute("dsbGbzt", DingDan.DAI_SHANG_BANG);
@@ -474,14 +506,24 @@ public class DDGLController {
 		request.setAttribute("ywcGbztMc", DingDan.YI_WAN_CHENG_TEXT);
 	}
 	
-	public void setBfInRequest(HttpServletRequest request) {
+	public void setPlaceInRequest(HttpServletRequest request) {
 
-		request.setAttribute("yhbf", GuoBangJiLu.YI_HAO_BANG_FANG);
-		request.setAttribute("ehbf", GuoBangJiLu.ER_HAO_BANG_FANG);
-		request.setAttribute("shbf", GuoBangJiLu.SAN_HAO_BANG_FANG);
+		request.setAttribute("wgb", Constant.WEI_GUO_BANG);
+		request.setAttribute("yhbf", Constant.YI_HAO_BANG_FANG);
+		request.setAttribute("ehbf", Constant.ER_HAO_BANG_FANG);
+		request.setAttribute("shbf", Constant.SAN_HAO_BANG_FANG);
+		request.setAttribute("mg", Constant.MEN_GANG);
 
-		request.setAttribute("yhbfMc", GuoBangJiLu.YI_HAO_BANG_FANG_TEXT);
-		request.setAttribute("ehbfMc", GuoBangJiLu.ER_HAO_BANG_FANG_TEXT);
-		request.setAttribute("shbfMc", GuoBangJiLu.SAN_HAO_BANG_FANG_TEXT);
+		request.setAttribute("wgbMc", Constant.WEI_GUO_BANG_TEXT);
+		request.setAttribute("yhbfMc", Constant.YI_HAO_BANG_FANG_TEXT);
+		request.setAttribute("ehbfMc", Constant.ER_HAO_BANG_FANG_TEXT);
+		request.setAttribute("shbfMc", Constant.SAN_HAO_BANG_FANG_TEXT);
+		request.setAttribute("mgMc", Constant.MEN_GANG_TEXT);
+	}
+	
+	public void setPushInRequest(HttpServletRequest request) {
+
+		request.setAttribute("pushCph", Constant.PUSH_CPH);
+		request.setAttribute("pushSfzh", Constant.PUSH_SFZH);
 	}
 }
