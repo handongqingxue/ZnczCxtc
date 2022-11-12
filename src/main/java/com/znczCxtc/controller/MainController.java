@@ -38,7 +38,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="/goLogin")
 	public String goLogin() {
-		
+		//http://localhost:8080/ZnczCxtc/main/goLogin
 		return "login";
 	}
 	

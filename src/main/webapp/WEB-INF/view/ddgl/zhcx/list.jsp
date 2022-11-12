@@ -75,7 +75,23 @@ var gkjPath=path+'gkj/';
 var dialogTop=10;
 var dialogLeft=20;
 var icphdNum=0;
-var dshDdztMc='${requestScope.dshDdztMc}';
+
+var dsbGbzt;
+var sbzGbzt;
+var dczGbzt;
+var czzGbzt;
+var dxbGbzt;
+var xbzGbzt;
+var ywcGbzt;
+
+var dsbGbztMc;
+var sbzGbztMc;
+var dczGbztMc;
+var czzGbztMc;
+var dxbGbztMc;
+var xbzGbztMc;
+var ywcGbztMc;
+
 $(function(){
 	initDDZTCBB();
 	initJHYSRQDB();
@@ -94,6 +110,24 @@ $(function(){
 	initDialogPosition();//将不同窗体移动到主要内容区域
 	//showCompontByQx();
 });
+
+function initGbztVar(){
+	dsbGbzt=parseInt('${requestScope.dsbGbzt}');
+	sbzGbzt=parseInt('${requestScope.sbzGbzt}');
+	dczGbzt=parseInt('${requestScope.dczGbzt}');
+	czzGbzt=parseInt('${requestScope.czzGbzt}');
+	dxbGbzt=parseInt('${requestScope.dxbGbzt}');
+	xbzGbzt=parseInt('${requestScope.xbzGbzt}');
+	ywcGbzt=parseInt('${requestScope.ywcGbzt}');
+	
+	dsbGbztMc='${requestScope.dsbGbztMc}';
+	sbzGbztMc='${requestScope.sbzGbztMc}';
+	dczGbztMc='${requestScope.dczGbztMc}';
+	czzGbztMc='${requestScope.czzGbztMc}';
+	dxbGbztMc='${requestScope.dxbGbztMc}';
+	xbzGbztMc='${requestScope.xbzGbztMc}';
+	ywcGbztMc='${requestScope.ywcGbztMc}';
+}
 
 function showCompontByQx(){
 	manualLB.hide();
@@ -464,58 +498,10 @@ function initTab1(){
 			{field:"jhysrq",title:"计划运输日期",width:150},
 			{field:"ddztMc",title:"订单状态",width:150},
 			{field:"yjzt",title:"一检状态",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="待上磅";
-					break;
-				case 2:
-					str="上磅中";
-					break;
-				case 3:
-					str="待称重";
-					break;
-				case 4:
-					str="称重中";
-					break;
-				case 5:
-					str="待下磅";
-					break;
-				case 6:
-					str="下磅中";
-					break;
-				case 7:
-					str="已完成";
-					break;
-				}
-            	return str;
+            	return getGbztMcById(value);
             }},
 			{field:"ejzt",title:"二检状态",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="待上磅";
-					break;
-				case 2:
-					str="上磅中";
-					break;
-				case 3:
-					str="待称重";
-					break;
-				case 4:
-					str="称重中";
-					break;
-				case 5:
-					str="待下磅";
-					break;
-				case 6:
-					str="下磅中";
-					break;
-				case 7:
-					str="已完成";
-					break;
-				}
-            	return str;
+				return getGbztMcById(value);
             }},
             {field:"yjbfh",title:"一检地磅",width:100,formatter:function(value,row){
             	var dbm;
@@ -525,6 +511,9 @@ function initTab1(){
 					break;
 				case 2:
 					dbm="耀华";
+					break;
+				default:
+					dbm="未过磅";
 					break;
 				}
             	return dbm;
@@ -563,6 +552,34 @@ function initTab1(){
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 		}
 	});
+}
+
+function getGbztMcById(gbztId){
+	var str;
+	switch (gbztId) {
+	case dsbGbzt:
+		str=dsbGbztMc;//待上磅
+		break;
+	case sbzGbzt:
+		str=sbzGbztMc;//上磅中
+		break;
+	case dczGbzt:
+		str=dczGbztMc;//待称重
+		break;
+	case czzGbzt:
+		str=czzGbztMc;//称重中
+		break;
+	case dxbGbzt:
+		str=dxbGbztMc;//待下磅
+		break;
+	case xbzGbzt:
+		str=xbzGbztMc;//下磅中
+		break;
+	case ywcGbzt:
+		str=ywcGbztMc;//已完成
+		break;
+	}
+	return str;
 }
 
 function openInputCphDialog(flag){

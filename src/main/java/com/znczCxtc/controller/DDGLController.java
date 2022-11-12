@@ -118,6 +118,9 @@ public class DDGLController {
 	 */
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
+
+		setGbztInRequest(request);
+		setBfInRequest(request);
 		
 		return MODULE_NAME+"/zhcx/list";
 	}
@@ -450,5 +453,35 @@ public class DDGLController {
 		jsonMap.put("rows", ddztList);
 		
 		return jsonMap;
+	}
+	
+	public void setGbztInRequest(HttpServletRequest request) {
+		
+		request.setAttribute("dsbGbzt", DingDan.DAI_SHANG_BANG);
+		request.setAttribute("sbzGbzt", DingDan.SHANG_BANG_ZHONG);
+		request.setAttribute("dczGbzt", DingDan.DAI_CHENG_ZHONG);
+		request.setAttribute("czzGbzt", DingDan.CHENG_ZHONG_ZHONG);
+		request.setAttribute("dxbGbzt", DingDan.DAI_XIA_BANG);
+		request.setAttribute("xbzGbzt", DingDan.XIA_BANG_ZHONG);
+		request.setAttribute("ywcGbzt", DingDan.YI_WAN_CHENG);
+		
+		request.setAttribute("dsbGbztMc", DingDan.DAI_SHANG_BANG_TEXT);
+		request.setAttribute("sbzGbztMc", DingDan.SHANG_BANG_ZHONG_TEXT);
+		request.setAttribute("dczGbztMc", DingDan.DAI_CHENG_ZHONG_TEXT);
+		request.setAttribute("czzGbztMc", DingDan.CHENG_ZHONG_ZHONG_TEXT);
+		request.setAttribute("dxbGbztMc", DingDan.DAI_XIA_BANG_TEXT);
+		request.setAttribute("xbzGbztMc", DingDan.XIA_BANG_ZHONG_TEXT);
+		request.setAttribute("ywcGbztMc", DingDan.YI_WAN_CHENG_TEXT);
+	}
+	
+	public void setBfInRequest(HttpServletRequest request) {
+
+		request.setAttribute("yhbf", GuoBangJiLu.YI_HAO_BANG_FANG);
+		request.setAttribute("ehbf", GuoBangJiLu.ER_HAO_BANG_FANG);
+		request.setAttribute("shbf", GuoBangJiLu.SAN_HAO_BANG_FANG);
+
+		request.setAttribute("yhbfMc", GuoBangJiLu.YI_HAO_BANG_FANG_TEXT);
+		request.setAttribute("ehbfMc", GuoBangJiLu.ER_HAO_BANG_FANG_TEXT);
+		request.setAttribute("shbfMc", GuoBangJiLu.SAN_HAO_BANG_FANG_TEXT);
 	}
 }
