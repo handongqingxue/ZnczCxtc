@@ -46,6 +46,7 @@
 	visibility: hidden;
 }
 
+.input_sfzh_bg_div,
 .input_cph_bg_div{
 	width: 100%;
 	height: 100%;
@@ -53,6 +54,17 @@
 	position: fixed;
 	z-index: 9016;
 	display:none;
+}
+
+.input_sfzh_div{
+	width: 500px;
+	height: 260px;
+	margin: 250px auto 0;
+	background-color: #fff;
+	border-radius:5px;
+	position: absolute;
+	left: 0;
+	right: 0;
 }
 
 .input_cph_div{
@@ -74,7 +86,8 @@ var ddglPath=path+'ddgl/';
 var gkjPath=path+'gkj/';
 var dialogTop=10;
 var dialogLeft=20;
-var icphdNum=0;
+var isfzhdNum=0;
+var icphdNum=1;
 
 var dsbGbzt;
 var sbzGbzt;
@@ -96,18 +109,20 @@ var wgb;
 var yhbf;
 var ehbf;
 var shbf;
+var mg;
 
 var wgbMc;
 var yhbfMc;
 var ehbfMc;
 var shbfMc;
+var mgMc;
 
 var pushCph;
 var pushSfzh;
 
 $(function(){
 	initGbztVar();
-	initBfVar();
+	initPlaceFlagVar();
 	initPushVar();
 	
 	initDDZTCBB();
@@ -117,12 +132,15 @@ $(function(){
 	initCCSJSDTB();
 	initCCSJEDTB();
 	initSearchLB();
+	initRgsbsfzLB();
 	initRgsbcpLB();
 	initDdfwLB();
 	initAddLB();
 	initRemoveLB();
 	initTab1();
-	initInputCphDialog();//0
+	
+	initInputSfzhDialog();//0
+	initInputCphDialog();//1
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
 	//showCompontByQx();
@@ -146,21 +164,23 @@ function initGbztVar(){
 	ywcGbztMc='${requestScope.ywcGbztMc}';
 }
 
-function initBfVar(){
+function initPlaceFlagVar(){
 	wgb=parseInt('${requestScope.wgb}');
 	yhbf=parseInt('${requestScope.yhbf}');
 	ehbf=parseInt('${requestScope.ehbf}');
 	shbf=parseInt('${requestScope.shbf}');
+	mg=parseInt('${requestScope.mg}');
 
 	wgbMc='${requestScope.wgbMc}';
 	yhbfMc='${requestScope.yhbfMc}';
 	ehbfMc='${requestScope.ehbfMc}';
 	shbfMc='${requestScope.shbfMc}';
+	mgMc='${requestScope.mgMc}';
 }
 
 function initPushVar(){
-	pushCph=parseInt('${requestScope.pushCph}');
-	pushSfzh=parseInt('${requestScope.pushSfzh}');
+	pushCph='${requestScope.pushCph}';
+	pushSfzh='${requestScope.pushSfzh}';
 }
 
 function showCompontByQx(){
@@ -186,12 +206,92 @@ function showCompontByQx(){
 }
 
 function initDialogPosition(){
+	var isfzhdpw=$("body").find(".panel.window").eq(isfzhdNum);
+	var isfzhdws=$("body").find(".window-shadow").eq(isfzhdNum);
+	
 	var icphdpw=$("body").find(".panel.window").eq(icphdNum);
 	var icphdws=$("body").find(".window-shadow").eq(icphdNum);
 
+	var isfzhdDiv=$("#input_sfzh_div");
+	isfzhdDiv.append(isfzhdpw);
+	isfzhdDiv.append(isfzhdws);
+	
 	var icphdDiv=$("#input_cph_div");
 	icphdDiv.append(icphdpw);
 	icphdDiv.append(icphdws);
+}
+
+function initInputSfzhDialog(){
+	$("#input_sfzh_dialog_div").dialog({
+		title:"录入身份证号",
+		width:setFitWidthInParent("#input_sfzh_div","input_sfzh_dialog_div"),
+		height:200,
+		top:5,
+		left:dialogLeft,
+		buttons:[
+           {text:"确定",id:"ok_but",iconCls:"icon-ok",handler:function(){
+        	   checkSfzhToClient();
+           }},
+           {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
+        	   openInputSfzhDialog(false);
+           }}
+        ]
+	});
+
+	$("#input_sfzh_dialog_div table").css("width",(setFitWidthInParent("#input_sfzh_div","input_sfzh_dialog_table"))+"px");
+	$("#input_sfzh_dialog_div table").css("magin","-100px");
+	$("#input_sfzh_dialog_div table td").css("padding-left","40px");
+	$("#input_sfzh_dialog_div table td").css("padding-right","20px");
+	$("#input_sfzh_dialog_div table td").css("font-size","15px");
+	$("#input_sfzh_dialog_div table .td1").css("width","30%");
+	$("#input_sfzh_dialog_div table .td2").css("width","60%");
+	$("#input_sfzh_dialog_div table tr").css("height","45px");
+
+	$(".panel.window").eq(isfzhdNum).css("margin-top","20px");
+	$(".panel.window .panel-title").eq(isfzhdNum).css("color","#000");
+	$(".panel.window .panel-title").eq(isfzhdNum).css("font-size","15px");
+	$(".panel.window .panel-title").eq(isfzhdNum).css("padding-left","10px");
+	
+	$(".panel-header, .panel-body").css("border-color","#ddd");
+	
+	//以下的是表格下面的面板
+	$(".window-shadow").eq(isfzhdNum).css("margin-top","20px");
+	$(".window,.window .window-body").eq(isfzhdNum).css("border-color","#ddd");
+
+	$("#input_sfzh_dialog_div #ok_but").css("left","30%");
+	$("#input_sfzh_dialog_div #ok_but").css("position","absolute");
+
+	$("#input_sfzh_dialog_div #cancel_but").css("left","50%");
+	$("#input_sfzh_dialog_div #cancel_but").css("position","absolute");
+	
+	$(".dialog-button").css("background-color","#fff");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+
+	initXzSfzhCBB();
+}
+
+function initXzSfzhCBB(){
+	var data=[];
+	data.push({"value":"","text":"请选择"});
+	$.post(ddglPath+"queryXzSfzhCBBList",
+		{page:1,rows:20,sort:"lrsj",order:"desc"},
+		function(result){
+			var rows=result.rows;
+			for(var i=0;i<rows.length;i++){
+				data.push({"value":rows[i],"text":rows[i]});
+			}
+			xzsfzhCBB=$("#xzsfzh_cbb").combobox({
+				width:120,
+				valueField:"value",
+				textField:"text",
+				data:data,
+				onChange:function(){
+					var sfzh=xzsfzhCBB.combobox("getValue");
+					$("#input_sfzh_div #sfzh_inp").val(sfzh);
+				}
+			});
+		}
+	,"json");
 }
 
 function initInputCphDialog(){
@@ -340,12 +440,52 @@ function checkCphToClient(){
 }
 
 function pushCphToClient(){
+	var rows=tab1.datagrid("getSelections");
 	var placeFlag=placeCBB.combobox("getValue");
 	var sjc=lrSjcCBB.combobox("getValue");
 	var wscph=lrWscphCBB.combobox("getValue");
 	var cph=sjc+wscph;
+	if(cph!=rows[0].cyclCph){
+		alert("输入的车牌号与订单里的车牌号不一致");
+		return false;
+	}
+	
+	var paramJO={};
+	paramJO.cph=cph;
+	paramJO.placeFlag=placeFlag;
+	alert(pushCph)
+	paramJO.pushFlag=pushCph;
+	
+	var jyFlag=0;
+	var ddztMc=rows[0].ddztMc;
+	switch (placeFlag) {
+	case yhbf:
+	case ehbf:
+	case shbf:
+		if(ddztMc=='${requestScope.yjdsbDdztMc}')//一检待上磅
+			jyFlag=1
+		else if(ddztMc=='${requestScope.ejdsbDdztMc}')//二检待上磅
+			jyFlag=2
+		else{
+			alert("该车辆非待上磅状态");
+			return false;
+		}
+		paramJO.jyFlag=jyFlag;
+		break;
+	case mg:
+		if(ddztMc!='${requestScope.yxdDdztMc}'){//已下单
+			alert("该车辆非"+ddztMc+"状态");
+			return false;
+		}
+		break;
+	}
+	
+	
+	var ddId=rows[0].id;
+	paramJO.ddId=ddId;
 	$.post(gkjPath+"pushToClient",
-		{cph:cph,placeFlag:placeFlag,pushFlag:pushCph},
+		//{ddId:ddId,cph:cph,placeFlag:placeFlag,pushFlag:pushCph},
+		paramJO,
 		function(data){
 			if(data.status=="ok"){
 				openInputCphDialog(false);
@@ -446,6 +586,15 @@ function initSearchLB(){
 			
 			tab1.datagrid("load",{ddh:ddh,ddztId:ddztId,cph:cph,jhysrq:jhysrq,yssMc:yssMc,
 				wzMc:wzMc,fhdwMc:fhdwMc,shdwMc:shdwMc,sjxm:sjxm,jcsjs:jcsjs,jcsje:jcsje,ccsjs:ccsjs,ccsje:ccsje});
+		}
+	});
+}
+
+function initRgsbsfzLB(){
+	rgsbsfzLB=$("#rgsbsfz_but").linkbutton({
+		iconCls:"icon-save",
+		onClick:function(){
+			openInputSfzhDialog(true);
 		}
 	});
 }
@@ -616,6 +765,15 @@ function getBfMcByBfh(bfh){
 	return str;
 }
 
+function openInputSfzhDialog(flag){
+	if(flag){
+		$("#input_sfzh_bg_div").css("display","block");
+	}
+	else{
+		$("#input_sfzh_bg_div").css("display","none");
+	}
+}
+
 function openInputCphDialog(flag){
 	if(flag){
 		$("#input_cph_bg_div").css("display","block");
@@ -715,9 +873,11 @@ function setFitWidthInParent(parent,self){
 	case "tab1_div":
 		space=250;
 		break;
+	case "input_sfzh_dialog_div":
 	case "input_cph_dialog_div":
 		space=50;
 		break;
+	case "input_sfzh_dialog_table":
 	case "input_cph_dialog_table":
 		space=68;
 		break;
@@ -769,6 +929,7 @@ function setFitWidthInParent(parent,self){
 				-
 				<input id="ccsje_dtb"/>
 				<a class="search_but" id="search_but">查询</a>
+				<a id="rgsbsfz_but">人工识别身份证</a>
 				<a id="rgsbcp_but">人工识别车牌</a>
 				<a id="ddfw_but">订单复位</a>
 				<a id="add_but">添加</a>
@@ -777,6 +938,31 @@ function setFitWidthInParent(parent,self){
 		</div>
 		<table id="tab1">
 		</table>
+	</div>
+	
+	<div class="input_sfzh_bg_div" id="input_sfzh_bg_div">
+		<div class="input_sfzh_div" id="input_sfzh_div">
+			<div class="input_sfzh_dialog_div" id="input_sfzh_dialog_div">
+				<table>
+				  <tr>
+					<td class="td1" align="right">
+						选择
+					</td>
+					<td class="td2">
+						<input id="xzsfzh_cbb"/>
+					</td>
+				  </tr>
+				  <tr>
+					<td class="td1" align="right">
+						身份证号
+					</td>
+					<td class="td2">
+						<input id="sfzh_inp"/>
+					</td>
+				  </tr>
+				</table>
+			</div>
+		</div>
 	</div>
 	
 	<div class="input_cph_bg_div" id="input_cph_bg_div">

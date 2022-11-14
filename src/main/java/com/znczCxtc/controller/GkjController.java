@@ -282,33 +282,52 @@ public class GkjController {
 
 	@RequestMapping(value="/pushToClient")
 	@ResponseBody
-	public Map<String, Object> pushToClient(Long ddId,String cph,Integer placeFlag,Integer jyFlag,String pushFlag) {
+	public Map<String, Object> pushToClient(HttpServletRequest request) {
 		
+		Long ddId = Long.valueOf(request.getParameter("ddId"));
+		Integer placeFlag = Integer.valueOf(request.getParameter("placeFlag"));
+		String pushFlag = request.getParameter("pushFlag");
+		
+		System.out.println("pushToClient.ddId==="+ddId);
 		System.out.println("pushToClient.placeFlag==="+placeFlag);
+		System.out.println("pushToClient.pushFlag==="+pushFlag);
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
 		//ProxySet.sayToClient("鲁A9031", SocketProxy.YI_JIAN);
 		StringBuilder mesJOSB=new StringBuilder();
-		String mesJO="{\"action\":\"pushCph\",jyFlag:"+jyFlag+",\"cph\":\" "+cph+"\"}";
+		String mesJOStr="";
+		mesJOSB.append("");
+		mesJOSB.append("");
+		mesJOSB.append("");
+		mesJOSB.append("");
+		
+		mesJOSB.append("{\"action\":\""+pushFlag+"\",");
 		if(Constant.PUSH_CPH.equals(pushFlag)) {
 			switch (placeFlag) {
 			case Constant.YI_HAO_BANG_FANG:
 			case Constant.ER_HAO_BANG_FANG:
 			case Constant.SAN_HAO_BANG_FANG:
-				
+				Integer jyFlag = Integer.valueOf(request.getParameter("jyFlag"));
+				mesJOSB.append("jyFlag:"+jyFlag+",");
 				break;
 			}
+			String cph = request.getParameter("cph");
+			mesJOSB.append("\"cph\":\""+cph+"\"}");
+			
+			boolean exist=rglrCphJiLuService.checkIfExistByDdIdCph(ddId,cph);//验证同一个订单是否存在该车牌号，存在则说明之前录入过了，不需要再生成车牌号记录了，反之则需要生成
+			if(!exist) {
+				RglrCphJiLu rglrCphJiLu=new RglrCphJiLu();
+				rglrCphJiLu.setCph(cph);
+				rglrCphJiLu.setDdId(ddId);
+				rglrCphJiLuService.add(rglrCphJiLu);
+			}
 		}
-		ProxySet.sayToClient(mesJO, placeFlag);
-		
-		boolean exist=rglrCphJiLuService.checkIfExistByDdIdCph(ddId,cph);//验证同一个订单是否存在该车牌号，存在则说明之前录入过了，不需要再生成车牌号记录了，反之则需要生成
-		if(!exist) {
-			RglrCphJiLu rglrCphJiLu=new RglrCphJiLu();
-			rglrCphJiLu.setCph(cph);
-			rglrCphJiLu.setDdId(ddId);
-			rglrCphJiLuService.add(rglrCphJiLu);
+		else if(Constant.PUSH_SFZH.equals(pushFlag)) {
+			
 		}
+		mesJOStr=mesJOSB.toString();
+		ProxySet.sayToClient(mesJOStr, placeFlag);//添加人工录入车牌记录成功后，推送给客户端工控机端人工抬杆
 		
 		jsonMap.put("status", "ok");
 		
