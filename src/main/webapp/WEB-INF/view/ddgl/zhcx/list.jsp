@@ -431,6 +431,54 @@ function initLrWscphCBB(){
 	});
 }
 
+function checkSfzhToClient(){
+	if(checkRglrSfzh()){
+		pushSfzhToClient();
+	}
+}
+
+//验证人工录入身份证号
+function checkRglrSfzh(){
+	var sfzh = $("#input_sfzh_div #sfzh_inp").val();
+	if(sfzh==null||sfzh==""||sfzh=="身份证号不能为空"){
+		$("#input_sfzh_div #sfzh_inp").css("color","#E15748");
+    	$("#input_sfzh_div #sfzh_inp").val("身份证号不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+function pushSfzhToClient(){
+	var rows=tab1.datagrid("getSelections");
+	var sfzh = $("#input_sfzh_div #sfzh_inp").val();
+	if(sfzh!=rows[0].cysjSfzh){
+		alert("输入的身份证号与订单里的身份证号不一致");
+		return false;
+	}
+	
+	var paramJO={};
+	paramJO.sfzh=sfzh;
+	paramJO.pushFlag=pushSfzh;
+	
+	var ddztMc=rows[0].ddztMc;
+	if(ddztMc!='${requestScope.yxdDdztMc}'){//已下单
+		alert("该车辆非"+ddztMc+"状态");
+		return false;
+	}
+	
+	var ddId=rows[0].id;
+	paramJO.ddId=ddId;
+	$.post(gkjPath+"pushToClient",
+		paramJO,
+		function(data){
+			if(data.status=="ok"){
+				openInputSfzhDialog(false);
+			}
+		}
+	,"json");
+}
+
 function checkCphToClient(){
 	if(checkPlace()){
 		if(checkRglrCph()){
@@ -453,7 +501,6 @@ function pushCphToClient(){
 	var paramJO={};
 	paramJO.cph=cph;
 	paramJO.placeFlag=placeFlag;
-	alert(pushCph)
 	paramJO.pushFlag=pushCph;
 	
 	var jyFlag=0;
@@ -662,6 +709,7 @@ function initTab1(){
             	return str;
             }},
 			{field:"ddh",title:"订单号",width:150},
+			{field:"cysjSfzh",title:"司机身份证号",width:200},
 			{field:"wzlxMc",title:"物资类型",width:150},
 			{field:"wzMc",title:"物资名称",width:150},
 			{field:"cyclCph",title:"车牌号",width:150},
@@ -706,7 +754,7 @@ function initTab1(){
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{id:"<div style=\"text-align:center;\">暂无信息<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"id",colspan:23});
+				$(this).datagrid("mergeCells",{index:0,field:"id",colspan:24});
 				data.total=0;
 			}
 			

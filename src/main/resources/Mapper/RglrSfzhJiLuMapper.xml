@@ -3,6 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.znczCxtc.dao.RglrSfzhJiLuMapper">
+	<insert id="add" parameterType="com.znczCxtc.entity.RglrSfzhJiLu">
+		insert into rglr_sfzh_ji_lu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sfzh!=null">
+				sfzh,
+			</if>
+				lrsj,
+			<if test="ddId!=null">
+				ddId,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sfzh!=null">
+				#{sfzh},
+			</if>
+				now(),
+			<if test="ddId!=null">
+				#{ddId},
+			</if>
+		</trim>
+	</insert>
+	<select id="getCount" resultType="java.lang.Integer">
+		select count(*) from rglr_sfzh_ji_lu where ddId=#{ddId} and sfzh=#{sfzh}
+	</select>
 	<select id="queryXzSfzhCBBList" resultType="java.lang.String">
 		select distinct sfzh from rglr_sfzh_ji_lu order by #{sort} #{order} limit #{rowNum},#{rows}
 	</select>
