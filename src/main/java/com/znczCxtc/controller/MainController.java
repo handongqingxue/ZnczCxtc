@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.znczCxtc.entity.*;
+import com.znczCxtc.socket.*;
 import com.znczCxtc.util.*;
 
 /*
@@ -30,6 +31,11 @@ import com.znczCxtc.util.*;
 public class MainController {
 	
 	static final String MODULE_NAME=Constant.MAIN_MODULE_NAME;
+	
+	static {
+		StartServer ss=new StartServer();
+		ss.start();
+	}
 
 	/**
 	 * Ìø×ªµ½µÇÂ¼Ò³

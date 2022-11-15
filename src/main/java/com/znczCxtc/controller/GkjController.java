@@ -154,7 +154,13 @@ public class GkjController {
 		
 		Integer dlId=duiLieService.getIdByDdId(ddId);
 		Integer maxHm=haoMaService.getMaxHmByDlId(dlId);
+		System.out.println("maxHm==="+maxHm);
+		if(maxHm==null)
+			maxHm=0;
 		Integer maxPdh=haoMaService.getMaxPdh();
+		System.out.println("maxPdh==="+maxPdh);
+		if(maxPdh==null)
+			maxPdh=0;
 		
 		HaoMa hm=new HaoMa();
 		hm.setHm(maxHm++);

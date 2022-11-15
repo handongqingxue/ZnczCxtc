@@ -4,7 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.znczCxtc.dao.HaoMaMapper">
 	<select id="queryForInt" resultType="java.lang.Integer">
-		select count(*) from hao_ma hm left join hao_ma_zhuang_tai hmzt on hm.hmztId=hmzt.id left join dui_lie dl on hm.dlId=dl.id where 1=1
+		select count(*) from hao_ma hm left join hao_ma_zhuang_tai hmzt on hm.hmztId=hmzt.id left join ding_dan dd on hm.ddId=dd.id
+		 left join shou_huo_dan_wei shdw on dd.shdwId=shdw.id left join dui_lie dl on shdw.dlId=dl.id where 1=1
 		<if test="dlMc!=''&amp;dlMc!=null">
 			and dl.mc like CONCAT('%',#{dlMc},'%')
 		</if> 
@@ -19,7 +20,8 @@
 		</if> 
 	</select>
 	<select id="queryList" resultType="com.znczCxtc.entity.HaoMa">
-		select hm.*,hmzt.mc ztMc,dl.mc dlMc from hao_ma hm left join hao_ma_zhuang_tai hmzt on hm.hmztId=hmzt.id left join dui_lie dl on hm.dlId=dl.id where 1=1
+		select hm.*,hmzt.mc ztMc,dl.mc dlMc from hao_ma hm left join hao_ma_zhuang_tai hmzt on hm.hmztId=hmzt.id left join ding_dan dd on hm.ddId=dd.id
+		 left join shou_huo_dan_wei shdw on dd.shdwId=shdw.id left join dui_lie dl on shdw.dlId=dl.id where 1=1
 		<if test="dlMc!=''&amp;dlMc!=null">
 			and dl.mc like CONCAT('%',#{dlMc},'%')
 		</if> 
@@ -53,9 +55,7 @@
 			<if test="ksjhsj!=null">
 				ksjhsj,
 			</if>
-			<if test="jhcs!=null">
 				jhcs,
-			</if>
 			<if test="ddId!=null">
 				ddId,
 			</if>
@@ -89,7 +89,7 @@
 	</select>
 	<select id="getJhPdList" resultType="com.znczCxtc.entity.HaoMa">
 		select hm.*,cl.cph clCph from hao_ma hm,hao_ma_zhuang_tai hmzt,ding_dan dd,che_liang cl where hm.hmztId=hmzt.id
-		 and (hmzt.mc=${@com.znczCxtc.entity.HaoMaZhuangTai@PAI_DUI_ZHONG_TEXT} or hmzt.mc=${@com.znczCxtc.entity.HaoMaZhuangTai@JIAO_HAO_ZHONG_TEXT})
+		 and (hmzt.mc='${@com.znczCxtc.entity.HaoMaZhuangTai@PAI_DUI_ZHONG_TEXT}' or hmzt.mc='${@com.znczCxtc.entity.HaoMaZhuangTai@JIAO_HAO_ZHONG_TEXT}')
 		  and hm.ddId=dd.id and dd.cyclId=cl.id
 	</select>
 	<update id="edit" parameterType="com.znczCxtc.entity.HaoMa">
@@ -123,20 +123,20 @@
 		select max(hm.hm) hm from hao_ma hm,ding_dan dd,shou_huo_dan_wei shdw,dui_lie dl where hm.ddId=dd.id and dd.shdwId=shdw.id and shdw.dlId=dl.id and dl.id=#{dlId}
 	</select>
 	<select id="getMaxPdh" resultType="java.lang.Integer">
-		select max(hm.pdh) pdh from hao_ma hm,ding_dan dd,ding_dan_zhuang_tai ddzt where hm.ddId=dd.id and dd.ddztId=ddzt.id and ddzt.mc=${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}
+		select max(hm.pdh) pdh from hao_ma hm,ding_dan dd,ding_dan_zhuang_tai ddzt where hm.ddId=dd.id and dd.ddztId=ddzt.id and ddzt.mc='${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}'
 	</select>
 	<select id="getSlzList" resultType="com.znczCxtc.entity.HaoMa">
 		select count(hm.id) slzsl,dl.id dlId,dl.jhyz dlJhyz from hao_ma hm,hao_ma_zhuang_tai hmzt,ding_dan dd,shou_huo_dan_wei shdw,dui_lie dl where hm.hmztId=hmzt.id and hm.ddId=dd.id
-		 and dd.shdwId=shdw.id and shdw.dlId=dl.id and hmzt.mc=${@com.znczCxtc.entity.HaoMaZhuangTai@SHOU_LI_ZHONG_TEXT} GROUP BY dl.id
+		 and dd.shdwId=shdw.id and shdw.dlId=dl.id and hmzt.mc='${@com.znczCxtc.entity.HaoMaZhuangTai@SHOU_LI_ZHONG_TEXT}' GROUP BY dl.id
 	</select>
 	<select id="getFirstWmdPdz" resultType="com.znczCxtc.entity.HaoMa">
-		select hm.* from hao_ma hm,ding_dan dd,ding_dan_zhuang_tai ddzt,shou_huo_dan_wei shdw,dui_lie dl where hm.ddId=dd.id and dd.ddztId=ddzt.id and ddzt.mc=${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}
+		select hm.* from hao_ma hm,ding_dan dd,ding_dan_zhuang_tai ddzt,shou_huo_dan_wei shdw,dui_lie dl where hm.ddId=dd.id and dd.ddztId=ddzt.id and ddzt.mc='${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}'
 		<foreach collection="ymdDlIdList" item="ymdDlId" open=" and cast(dl.id as char) not in (" separator="," close=")">
 		#{ymdDlId}
 		</foreach>
 		  ORDER BY pdh LIMIT 0,1
 	</select>
 	<select id="getPdzList" resultType="com.znczCxtc.entity.HaoMa">
-		select hm.* from hao_ma hm,hao_ma_zhuang_tai hmzt where hm.hmztId=hmzt.id and hmzt.mc=${@com.znczCxtc.entity.HaoMaZhuangTai@PAI_DUI_ZHONG_TEXT} ORDER BY hm.hm
+		select hm.* from hao_ma hm,hao_ma_zhuang_tai hmzt where hm.hmztId=hmzt.id and hmzt.mc='${@com.znczCxtc.entity.HaoMaZhuangTai@PAI_DUI_ZHONG_TEXT}' ORDER BY hm.hm
 	</select>
 </mapper>

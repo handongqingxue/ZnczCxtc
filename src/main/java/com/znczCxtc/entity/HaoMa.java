@@ -54,6 +54,12 @@ public class HaoMa {
 	public void setKsjhsj(String ksjhsj) {
 		this.ksjhsj = ksjhsj;
 	}
+	public Integer getJhcs() {
+		return jhcs;
+	}
+	public void setJhcs(Integer jhcs) {
+		this.jhcs = jhcs;
+	}
 	public Integer getDlId() {
 		return dlId;
 	}
@@ -97,6 +103,7 @@ public class HaoMa {
 	private String hmztMc;//号码状态名称
 	private Integer fl;//分类 1.普通 2.其他
 	private String ksjhsj;//开始叫号时间
+	private Integer jhcs;
 	private Integer dlId;//队列id
 	private String dlMc;//队列名称
 	private Integer dlJhyz;//队列叫号阈值(判断厂内车辆数量是否大于这个数值，大于的话队列里排队中的车辆状态就暂时不改变，早晚小于时才改变)
