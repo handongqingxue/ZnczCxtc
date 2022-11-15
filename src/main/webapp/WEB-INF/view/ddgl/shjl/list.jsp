@@ -48,7 +48,36 @@
 <script type="text/javascript">
 var path='<%=basePath %>';
 var ddglPath=path+'ddgl/';
+
+var xdshShlx;
+var zjshShlx;
+var yjshShlx;
+var rkshShlx;
+var ejshShlx;
+
+var xdshShlxMc;
+var zjshShlxMc;
+var yjshShlxMc;
+var rkshShlxMc;
+var ejshShlxMc;
+
+var hgShjg;
+var bhgShjg;
+
+var hgShjgMc;
+var bhgShjgMc;
+
+var syLxlx;
+var qyLxlx;
+
+var syLxlxMc;
+var qyLxlxMc;
+
 $(function(){
+	initShlxVar();
+	initShjgVar();
+	initLxlxVar();
+	
 	initSHLXCBB();
 	initSHSJKSDTB();
 	initSHSJJSDTB();
@@ -57,6 +86,36 @@ $(function(){
 	initTab1();
 	showCompontByQx();
 });
+
+function initShlxVar(){
+	xdshShlx=parseInt('${requestScope.xdshShlx}');
+	zjshShlx=parseInt('${requestScope.zjshShlx}');
+	yjshShlx=parseInt('${requestScope.yjshShlx}');
+	rkshShlx=parseInt('${requestScope.rkshShlx}');
+	ejshShlx=parseInt('${requestScope.ejshShlx}');
+
+	xdshShlxMc='${requestScope.xdshShlxMc}';
+	zjshShlxMc='${requestScope.zjshShlxMc}';
+	yjshShlxMc='${requestScope.yjshShlxMc}';
+	rkshShlxMc='${requestScope.rkshShlxMc}';
+	ejshShlxMc='${requestScope.ejshShlxMc}';
+}
+
+function initShjgVar(){
+	hgShjg=Boolean('${requestScope.hgShjg}');
+	bhgShjg=Boolean('${requestScope.bhgShjg}');
+
+	hgShjgMc='${requestScope.hgShjgMc}';
+	bhgShjgMc='${requestScope.bhgShjgMc}';
+}
+
+function initLxlxVar(){
+	syLxlx=parseInt('${requestScope.syLxlx}');
+	qyLxlx=parseInt('${requestScope.qyLxlx}');
+
+	syLxlxMc='${requestScope.syLxlxMc}';
+	qyLxlxMc='${requestScope.qyLxlxMc}';
+}
 
 function showCompontByQx(){
 	removeLB.hide();
@@ -135,27 +194,11 @@ function initTab1(){
 		columns:[[
 			{field:"ddh",title:"订单号",width:150},
 			{field:"shlx",title:"审核类型",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="下单";
-					break;
-				case 2:
-					str="一检";
-					break;
-				case 3:
-					str="入库";
-					break;
-				case 4:
-					str="二检";
-					break;
-				}
-            	str+="审核";
-            	return str;
+            	return getShlxMcById(value);
             }},
             {field:"shsj",title:"审核时间",width:150},
 			{field:"shjg",title:"审核结果",width:100,formatter:function(value,row){
-            	return value==1?"合格":"不合格";
+            	return getShjgMcByJg(value);
             }},
             {field:"shrYhm",title:"审核人",width:150},
 			{field:"sjSfzh",title:"司机身份证号",width:200},
@@ -166,16 +209,7 @@ function initTab1(){
 			{field:"fhdwMc",title:"发货单位",width:150},
 			{field:"shdwMc",title:"收货单位",width:150},
             {field:"lxlx",title:"流向类型",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="送运";
-					break;
-				case 2:
-					str="取运";
-					break;
-				}
-            	return str;
+            	return getLxlxMcById(value);
             }},
             {field:"yzxzl",title:"预装卸重量",width:100},
             {field:"sjzl",title:"实际重量",width:100},
@@ -194,6 +228,50 @@ function initTab1(){
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 		}
 	});
+}
+
+function getShlxMcById(shlxId){
+	var str;
+	switch (shlxId) {
+	case xdshShlx:
+		str=xdshShlxMc;//下单审核
+		break;
+	case zjshShlx:
+		str=zjshShlxMc;//质检审核
+		break;
+	case yjshShlx:
+		str=yjshShlxMc;//一检审核
+		break;
+	case rkshShlx:
+		str=rkshShlxMc;//入库审核
+		break;
+	case ejshShlx:
+		str=ejshShlxMc;//二检审核
+		break;
+	}
+	return str;
+}
+
+function getShjgMcByJg(shjg){
+	var str;
+	if(shjg)
+		str=hgShjgMc;//合格
+	else
+		str=bhgShjgMc;//不合格
+	return str;
+}
+
+function getLxlxMcById(lxlxId){
+	var str;
+	switch (lxlxId) {
+	case syLxlx:
+		str=syLxlxMc;//送运
+		break;
+	case qyLxlx:
+		str=qyLxlxMc;//取运
+		break;
+	}
+	return str;
 }
 
 function deleteByIds() {

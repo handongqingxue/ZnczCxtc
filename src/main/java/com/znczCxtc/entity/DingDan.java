@@ -62,6 +62,24 @@ public class DingDan {
 	public static final String YI_WAN_CHENG_TEXT="已完成";
 	//订单的过磅状态标识end
 	
+	/**
+	 * 送运标识
+	 */
+	public static final Integer SONG_YUN=1;
+	/**
+	 * 取运标识
+	 */
+	public static final Integer QU_YUN=2;
+	
+	/**
+	 * 送运名称
+	 */
+	public static final String SONG_YUN_TEXT="送运";
+	/**
+	 * 取运名称
+	 */
+	public static final String QU_YUN_TEXT="取运";
+	
 	private Long id;//订单id（主键）
 	public Long getId() {
 		return id;

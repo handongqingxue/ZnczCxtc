@@ -171,6 +171,10 @@ public class DDGLController {
 	@RequestMapping(value="/shjl/list")
 	public String goShjlList(HttpServletRequest request) {
 		
+		setShlxInRequest(request);
+		setLxlxInRequest(request);
+		setShjgInRequest(request);
+		
 		return MODULE_NAME+"/shjl/list";
 	}
 	
@@ -581,5 +585,42 @@ public class DDGLController {
 
 		request.setAttribute("pushCph", Constant.PUSH_CPH);
 		request.setAttribute("pushSfzh", Constant.PUSH_SFZH);
+	}
+	
+	public void setShlxInRequest(HttpServletRequest request) {
+
+		request.setAttribute("xdshShlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
+		request.setAttribute("zjshShlx", DingDanShenHeJiLu.ZHI_JIAN_SHEN_HE);
+		request.setAttribute("yjshShlx", DingDanShenHeJiLu.YI_JIAN_SHEN_HE);
+		request.setAttribute("rkshShlx", DingDanShenHeJiLu.RU_KU_SHEN_HE);
+		request.setAttribute("ejshShlx", DingDanShenHeJiLu.ER_JIAN_SHEN_HE);
+		
+		request.setAttribute("xdshShlxMc", DingDanShenHeJiLu.XIA_DAN_SHEN_HE_TEXT);
+		request.setAttribute("zjshShlxMc", DingDanShenHeJiLu.ZHI_JIAN_SHEN_HE_TEXT);
+		request.setAttribute("yjshShlxMc", DingDanShenHeJiLu.YI_JIAN_SHEN_HE_TEXT);
+		request.setAttribute("rkshShlxMc", DingDanShenHeJiLu.RU_KU_SHEN_HE_TEXT);
+		request.setAttribute("ejshShlxMc", DingDanShenHeJiLu.ER_JIAN_SHEN_HE_TEXT);
+	}
+	
+	/**
+	 * 存放审核记录常量
+	 * @param request
+	 */
+	public void setShjgInRequest(HttpServletRequest request) {
+
+		request.setAttribute("hgShjg", DingDanShenHeJiLu.HE_GE);
+		request.setAttribute("bhgShjg", DingDanShenHeJiLu.BU_HE_GE);
+		
+		request.setAttribute("hgShjgMc", DingDanShenHeJiLu.HE_GE_TEXT);
+		request.setAttribute("bhgShjgMc", DingDanShenHeJiLu.BU_HE_GE_TEXT);
+	}
+	
+	public void setLxlxInRequest(HttpServletRequest request) {
+
+		request.setAttribute("syLxlx", DingDan.SONG_YUN);
+		request.setAttribute("qyLxlx", DingDan.QU_YUN);
+		
+		request.setAttribute("syLxlxMc", DingDan.SONG_YUN_TEXT);
+		request.setAttribute("qyLxlxMc", DingDan.QU_YUN_TEXT);
 	}
 }

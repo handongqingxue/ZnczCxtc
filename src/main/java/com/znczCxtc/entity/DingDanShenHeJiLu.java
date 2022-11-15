@@ -2,11 +2,65 @@ package com.znczCxtc.entity;
 
 public class DingDanShenHeJiLu {
 	
+	/**
+	 * 下单审核标识
+	 */
 	public static final Integer XIA_DAN_SHEN_HE=1;
+	/**
+	 * 质检审核标识
+	 */
 	public static final Integer ZHI_JIAN_SHEN_HE=2;
+	/**
+	 * 一检审核标识
+	 */
 	public static final Integer YI_JIAN_SHEN_HE=3;
+	/**
+	 * 入库审核标识
+	 */
 	public static final Integer RU_KU_SHEN_HE=4;
+	/**
+	 * 二检审核标识
+	 */
 	public static final Integer ER_JIAN_SHEN_HE=5;
+
+	/**
+	 * 下单审核名称
+	 */
+	public static final String XIA_DAN_SHEN_HE_TEXT="下单审核";
+	/**
+	 * 质检审核名称
+	 */
+	public static final String ZHI_JIAN_SHEN_HE_TEXT="质检审核";
+	/**
+	 * 一检审核名称
+	 */
+	public static final String YI_JIAN_SHEN_HE_TEXT="一检审核";
+	/**
+	 * 入库审核名称
+	 */
+	public static final String RU_KU_SHEN_HE_TEXT="入库审核";
+	/**
+	 * 二检审核名称
+	 */
+	public static final String ER_JIAN_SHEN_HE_TEXT="二检审核";
+	
+	/**
+	 * 合格标识
+	 */
+	public static final Boolean HE_GE=true;
+	/**
+	 * 不合格标识
+	 */
+	public static final Boolean BU_HE_GE=false;
+	
+	/**
+	 * 合格名称
+	 */
+	public static final String HE_GE_TEXT="合格";
+	/**
+	 * 不合格名称
+	 */
+	public static final String BU_HE_GE_TEXT="不合格";
 
 	private Integer id;
 	public Integer getId() {
