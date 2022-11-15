@@ -3,9 +3,10 @@ package com.znczCxtc.entity;
 public class DingDanShenHeJiLu {
 	
 	public static final Integer XIA_DAN_SHEN_HE=1;
-	public static final Integer YI_JIAN_SHEN_HE=2;
-	public static final Integer RU_KU_SHEN_HE=3;
-	public static final Integer ER_JIAN_SHEN_HE=4;
+	public static final Integer ZHI_JIAN_SHEN_HE=2;
+	public static final Integer YI_JIAN_SHEN_HE=3;
+	public static final Integer RU_KU_SHEN_HE=4;
+	public static final Integer ER_JIAN_SHEN_HE=5;
 
 	private Integer id;
 	public Integer getId() {
