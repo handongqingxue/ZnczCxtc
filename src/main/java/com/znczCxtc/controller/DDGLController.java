@@ -97,10 +97,9 @@ public class DDGLController {
 	@RequestMapping(value="/dzj/list")
 	public String goDzjList(HttpServletRequest request) {
 		
-		request.setAttribute("ddztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);
-		request.setAttribute("bjzDdztMc", DingDanZhuangTai.BIAN_JI_ZHONG_TEXT);
-		request.setAttribute("yxdDdztMc", DingDanZhuangTai.YI_XIA_DAN_TEXT);
-		request.setAttribute("shlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
+		setDdztInRequest(request);
+		setShlxInRequest(request);
+		setLxlxInRequest(request);
 		
 		return MODULE_NAME+"/dzj/list";
 	}

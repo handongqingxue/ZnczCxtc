@@ -167,17 +167,8 @@ function initTab1(){
 function setFitWidthInParent(parent,self){
 	var space=0;
 	switch (self) {
-	case "center_con_div":
-		space=205;
-		break;
 	case "tab1_div":
 		space=250;
-		break;
-	case "check_ddxx_dialog_div":
-		space=50;
-		break;
-	case "panel_window":
-		space=355;
 		break;
 	}
 	var width=$(parent).css("width");
