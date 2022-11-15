@@ -89,6 +89,12 @@ var dialogLeft=20;
 var isfzhdNum=0;
 var icphdNum=1;
 
+var syLxlx;
+var qyLxlx;
+
+var syLxlxMc;
+var qyLxlxMc;
+
 var dsbGbzt;
 var sbzGbzt;
 var dczGbzt;
@@ -121,6 +127,7 @@ var pushCph;
 var pushSfzh;
 
 $(function(){
+	initLxlxVar();
 	initGbztVar();
 	initPlaceFlagVar();
 	initPushVar();
@@ -145,6 +152,14 @@ $(function(){
 	initDialogPosition();//将不同窗体移动到主要内容区域
 	//showCompontByQx();
 });
+
+function initLxlxVar(){
+	syLxlx=parseInt('${requestScope.syLxlx}');
+	qyLxlx=parseInt('${requestScope.qyLxlx}');
+
+	syLxlxMc='${requestScope.syLxlxMc}';
+	qyLxlxMc='${requestScope.qyLxlxMc}';
+}
 
 function initGbztVar(){
 	dsbGbzt=parseInt('${requestScope.dsbGbzt}');
@@ -717,16 +732,7 @@ function initTab1(){
 			{field:"fhdwMc",title:"发货单位",width:150},
 			{field:"shdwMc",title:"收货单位",width:150},
             {field:"lxlx",title:"流向类型",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="送运";
-					break;
-				case 2:
-					str="取运";
-					break;
-				}
-            	return str;
+            	return getLxlxMcById(value);
             }},
 			{field:"jhysrq",title:"计划运输日期",width:150},
 			{field:"ddztMc",title:"订单状态",width:150},
@@ -764,6 +770,19 @@ function initTab1(){
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 		}
 	});
+}
+
+function getLxlxMcById(lxlxId){
+	var str;
+	switch (lxlxId) {
+	case syLxlx:
+		str=syLxlxMc;//送运
+		break;
+	case qyLxlx:
+		str=qyLxlxMc;//取运
+		break;
+	}
+	return str;
 }
 
 function getGbztMcById(gbztId){

@@ -83,16 +83,14 @@ public class DDGLController {
 	@RequestMapping(value="/dsh/list")
 	public String goDshList(HttpServletRequest request) {
 		
-		request.setAttribute("ddztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);
-		request.setAttribute("bjzDdztMc", DingDanZhuangTai.BIAN_JI_ZHONG_TEXT);
-		request.setAttribute("yxdDdztMc", DingDanZhuangTai.YI_XIA_DAN_TEXT);
-		request.setAttribute("shlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
+		setDdztInRequest(request);
+		setShlxInRequest(request);
 		
 		return MODULE_NAME+"/dsh/list";
 	}
 
 	/**
-	 * 跳转到订单管理-待审核-列表页面
+	 * 跳转到订单管理-待质检-列表页面
 	 * @param request
 	 * @return
 	 */
@@ -137,6 +135,7 @@ public class DDGLController {
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
 
+		setLxlxInRequest(request);
 		setDdztInRequest(request);
 		setGbztInRequest(request);
 		setPlaceInRequest(request);
@@ -523,6 +522,10 @@ public class DDGLController {
 		return cphList;
 	}
 	
+	/**
+	 * 存放订单状态常量
+	 * @param request
+	 */
 	public void setDdztInRequest(HttpServletRequest request) {
 
 		request.setAttribute("dshDdztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);//待审核
@@ -547,6 +550,10 @@ public class DDGLController {
 		request.setAttribute("yfqDdztMc", DingDanZhuangTai.YI_FEI_QI_TEXT);//已废弃
 	}
 	
+	/**
+	 * 存放过磅状态常量
+	 * @param request
+	 */
 	public void setGbztInRequest(HttpServletRequest request) {
 		
 		request.setAttribute("dsbGbzt", DingDan.DAI_SHANG_BANG);
@@ -566,6 +573,10 @@ public class DDGLController {
 		request.setAttribute("ywcGbztMc", DingDan.YI_WAN_CHENG_TEXT);
 	}
 	
+	/**
+	 * 存放地点常量
+	 * @param request
+	 */
 	public void setPlaceInRequest(HttpServletRequest request) {
 
 		request.setAttribute("wgb", Constant.WEI_GUO_BANG);
@@ -581,12 +592,20 @@ public class DDGLController {
 		request.setAttribute("mgMc", Constant.MEN_GANG_TEXT);
 	}
 	
+	/**
+	 * 存放推送类型常量
+	 * @param request
+	 */
 	public void setPushInRequest(HttpServletRequest request) {
 
 		request.setAttribute("pushCph", Constant.PUSH_CPH);
 		request.setAttribute("pushSfzh", Constant.PUSH_SFZH);
 	}
 	
+	/**
+	 * 存放审核类型常量
+	 * @param request
+	 */
 	public void setShlxInRequest(HttpServletRequest request) {
 
 		request.setAttribute("xdshShlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
@@ -615,6 +634,10 @@ public class DDGLController {
 		request.setAttribute("bhgShjgMc", DingDanShenHeJiLu.BU_HE_GE_TEXT);
 	}
 	
+	/**
+	 * 存放流向类型常量
+	 * @param request
+	 */
 	public void setLxlxInRequest(HttpServletRequest request) {
 
 		request.setAttribute("syLxlx", DingDan.SONG_YUN);

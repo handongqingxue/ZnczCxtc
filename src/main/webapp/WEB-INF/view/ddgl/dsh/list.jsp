@@ -38,9 +38,11 @@
 <script type="text/javascript">
 var path='<%=basePath %>';
 var ddglPath=path+'ddgl/';
-var defaultDdztMc='${requestScope.ddztMc}';
+var defaultDdztMc='${requestScope.dshDdztMc}';
 var bjzDdztMc='${requestScope.bjzDdztMc}';
 var yxdDdztMc='${requestScope.yxdDdztMc}';
+var shlx='${requestScope.xdshShlx}';
+var shrId='${sessionScope.yongHu.id}';
 $(function(){
 	initSearchLB();
 	initTGLB();
@@ -101,8 +103,6 @@ function checkByIds(shjg) {
 			ddztMc=yxdDdztMc;
 		else
 			ddztMc=bjzDdztMc;
-		var shlx='${requestScope.shlx}';
-		var shrId='${sessionScope.yongHu.id}';
 		$.post(ddglPath + "checkDingDanByIds",
 			{ids:shIds,ddztMc:ddztMc,shlx:shlx,shjg:shjg,shrId:shrId},
 			function(result){
