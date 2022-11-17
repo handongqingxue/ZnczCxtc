@@ -33,7 +33,7 @@ public interface DingDanMapper {
 	 * @param cph
 	 * @return
 	 */
-	DingDan getByZtListCph(@Param("ddztIdList") List<Integer> ddztIdList, @Param("cph") String cph);
+	List<DingDan> getByZtListCph(@Param("ddztIdList") List<Integer> ddztIdList, @Param("cph") String cph);
 
 	DingDan getByZt(@Param("yjbfh")Integer yjbfh,@Param("ejbfh") Integer ejbfh, @Param("ddztMc") String ddztMc, @Param("yjzt") Integer yjzt, @Param("ejzt") Integer ejzt);
 

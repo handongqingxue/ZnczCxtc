@@ -123,7 +123,8 @@ function initTab1(){
 				}
             	return str;
             }},
-            {field:"ddztmc",title:"状态",width:200},
+            {field:"hmztMc",title:"状态",width:100},
+            {field:"ksjhsj",title:"开始叫号时间",width:200},
             {field:"jhcs",title:"叫号次数",width:200},
             {field:"id",title:"操作",width:80,formatter:function(value,row){
             	var str="<a href=\""+pdglPath+"fhdw/detail?id="+value+"\">详情</a>";
@@ -133,7 +134,7 @@ function initTab1(){
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{hm:"<div style=\"text-align:center;\">暂无数据<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"hm",colspan:7});
+				$(this).datagrid("mergeCells",{index:0,field:"hm",colspan:8});
 				data.total=0;
 			}
 			

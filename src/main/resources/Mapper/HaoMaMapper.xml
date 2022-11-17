@@ -20,7 +20,7 @@
 		</if> 
 	</select>
 	<select id="queryList" resultType="com.znczCxtc.entity.HaoMa">
-		select hm.*,hmzt.mc ztMc,dl.mc dlMc from hao_ma hm left join hao_ma_zhuang_tai hmzt on hm.hmztId=hmzt.id left join ding_dan dd on hm.ddId=dd.id
+		select hm.*,hmzt.mc hmztMc,dl.mc dlMc from hao_ma hm left join hao_ma_zhuang_tai hmzt on hm.hmztId=hmzt.id left join ding_dan dd on hm.ddId=dd.id
 		 left join shou_huo_dan_wei shdw on dd.shdwId=shdw.id left join dui_lie dl on shdw.dlId=dl.id where 1=1
 		<if test="dlMc!=''&amp;dlMc!=null">
 			and dl.mc like CONCAT('%',#{dlMc},'%')
@@ -52,9 +52,6 @@
 			<if test="fl!=null">
 				fl,
 			</if>
-			<if test="ksjhsj!=null">
-				ksjhsj,
-			</if>
 				jhcs,
 			<if test="ddId!=null">
 				ddId,
@@ -74,9 +71,6 @@
 			</if>
 			<if test="fl!=null">
 				#{fl},
-			</if>
-			<if test="ksjhsj!=null">
-				#{ksjhsj},
 			</if>
 				0,
 			<if test="ddId!=null">
@@ -107,11 +101,11 @@
 			<if test="fl!=null">
 				fl=#{fl},
 			</if>
+			<if test="ksjhsj!=null">
+				ksjhsj=#{ksjhsj},
+			</if>
 			<if test="jhcs!=null">
 				jhcs=#{jhcs},
-			</if>
-			<if test="dlId!=null">
-				dlId=#{dlId},
 			</if>
 			<if test="ddId!=null">
 				ddId=#{ddId},

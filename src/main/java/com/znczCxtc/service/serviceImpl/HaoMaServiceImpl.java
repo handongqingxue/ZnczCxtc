@@ -87,12 +87,12 @@ public class HaoMaServiceImpl implements HaoMaService {
 	public int changeToJhz() {
 		// TODO Auto-generated method stub
 		int count=0;
-		List<Integer> ymdDlIdList=new ArrayList<Integer>();
+		List<Integer> ymdDlIdList=new ArrayList<Integer>();//已满队列表
 		List<HaoMa> slzHmList=haoMaDao.getSlzList();
 		for (HaoMa slzHm : slzHmList) {
 			Integer slzsl = slzHm.getSlzsl();
 			Integer dlJhyz = slzHm.getDlJhyz();
-			if(slzsl==dlJhyz) {
+			if(slzsl==dlJhyz) {//若受理中数量等于队列叫号阈值，就判断该队列已满队，不再继续叫号
 				Integer dlId = slzHm.getDlId();
 				ymdDlIdList.add(dlId);
 			}
@@ -127,7 +127,7 @@ public class HaoMaServiceImpl implements HaoMaService {
 		List<HaoMa> pdzList=haoMaDao.getPdzList();
 		for (int i = 0; i < pdzList.size(); i++) {
 			HaoMa pdzHm = pdzList.get(i);
-			pdzHm.setHm(i++);
+			pdzHm.setPdh(++i);
 			count=haoMaDao.edit(pdzHm);
 		}
 		return count;
