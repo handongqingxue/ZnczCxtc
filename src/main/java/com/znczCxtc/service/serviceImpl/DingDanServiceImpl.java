@@ -126,8 +126,8 @@ public class DingDanServiceImpl implements DingDanService {
 	public DingDan getDingDanBySfzhZt(String sfzh, String ddztMc) {
 		// TODO Auto-generated method stub
 		int ddztId=dingDanZhuangTaiDao.getIdByMc(ddztMc);
-		DingDan dd = dingDanDao.getByZtSfzh(ddztId,sfzh);
-		return dd;
+		List<DingDan> ddList = dingDanDao.getByZtSfzh(ddztId,sfzh);
+		return ddList.get(0);
 	}
 
 	@Override

@@ -88,7 +88,7 @@
 		select * from hao_ma where id=#{id}
 	</select>
 	<select id="getJhPdList" resultType="com.znczCxtc.entity.HaoMa">
-		select hm.*,cl.cph clCph from hao_ma hm,hao_ma_zhuang_tai hmzt,ding_dan dd,che_liang cl where hm.hmztId=hmzt.id
+		select hm.*,hmzt.mc hmztMc,cl.cph clCph from hao_ma hm,hao_ma_zhuang_tai hmzt,ding_dan dd,che_liang cl where hm.hmztId=hmzt.id
 		 and (hmzt.mc='${@com.znczCxtc.entity.HaoMaZhuangTai@PAI_DUI_ZHONG_TEXT}' or hmzt.mc='${@com.znczCxtc.entity.HaoMaZhuangTai@JIAO_HAO_ZHONG_TEXT}')
 		  and hm.ddId=dd.id and dd.cyclId=cl.id
 	</select>

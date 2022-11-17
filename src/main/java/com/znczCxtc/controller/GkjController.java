@@ -163,8 +163,8 @@ public class GkjController {
 			maxPdh=0;
 		
 		HaoMa hm=new HaoMa();
-		hm.setHm(maxHm++);
-		hm.setPdh(maxPdh++);
+		hm.setHm(++maxHm);
+		hm.setPdh(++maxPdh);
 		hm.setHmztMc(HaoMaZhuangTai.PAI_DUI_ZHONG_TEXT);
 		hm.setFl(HaoMa.PU_TONG);
 		hm.setDdId(ddId);

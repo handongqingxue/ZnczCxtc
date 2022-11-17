@@ -25,7 +25,7 @@ public interface DingDanMapper {
 
 	int editByZt(DingDan dd);
 
-	DingDan getByZtSfzh(@Param("ddztId") int ddztId, @Param("sfzh") String sfzh);
+	List<DingDan> getByZtSfzh(@Param("ddztId") int ddztId, @Param("sfzh") String sfzh);
 
 	/**
 	 * 这里是根据多个订单状态查询某车牌号关联的订单，因为是一辆车，只返回一条订单信息
