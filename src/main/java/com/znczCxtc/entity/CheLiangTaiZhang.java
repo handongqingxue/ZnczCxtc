@@ -42,9 +42,30 @@ public class CheLiangTaiZhang {
 	public void setDdId(Long ddId) {
 		this.ddId = ddId;
 	}
+	public String getDdh() {
+		return ddh;
+	}
+	public void setDdh(String ddh) {
+		this.ddh = ddh;
+	}
+	public String getDdztMc() {
+		return ddztMc;
+	}
+	public void setDdztMc(String ddztMc) {
+		this.ddztMc = ddztMc;
+	}
+	public String getCyclCph() {
+		return cyclCph;
+	}
+	public void setCyclCph(String cyclCph) {
+		this.cyclCph = cyclCph;
+	}
 	private String jcsj;
 	private String jczp;
 	private String ccsj;
 	private String cczp;
 	private Long ddId;
+	private String ddh;
+	private String ddztMc;
+	private String cyclCph;
 }

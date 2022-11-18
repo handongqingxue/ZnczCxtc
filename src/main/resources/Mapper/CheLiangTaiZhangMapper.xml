@@ -35,4 +35,10 @@
 		</trim>
 		 where ddId=#{ddId}
 	</update>
+	<select id="queryForInt" resultType="java.lang.Integer">
+		select count(*) from che_liang_tai_zhang cltz left join ding_dan dd on cltz.ddId=dd.id left join ding_dan_zhuang_tai ddzt on dd.ddztId=ddzt.id left join che_liang cl on dd.cyclId=cl.id
+	</select>
+	<select id="queryList" resultType="com.znczCxtc.entity.CheLiangTaiZhang">
+		select cltz.*,dd.ddh,ddzt.mc ddztMc,cl.cph cyclCph from che_liang_tai_zhang cltz left join ding_dan dd on cltz.ddId=dd.id left join ding_dan_zhuang_tai ddzt on dd.ddztId=ddzt.id left join che_liang cl on dd.cyclId=cl.id
+	</select>
 </mapper>
