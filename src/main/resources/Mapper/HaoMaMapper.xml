@@ -117,14 +117,15 @@
 		select max(hm.hm) hm from hao_ma hm,ding_dan dd,shou_huo_dan_wei shdw,dui_lie dl where hm.ddId=dd.id and dd.shdwId=shdw.id and shdw.dlId=dl.id and dl.id=#{dlId}
 	</select>
 	<select id="getMaxPdh" resultType="java.lang.Integer">
-		select max(hm.pdh) pdh from hao_ma hm,ding_dan dd,ding_dan_zhuang_tai ddzt where hm.ddId=dd.id and dd.ddztId=ddzt.id and ddzt.mc='${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}'
+		select max(hm.pdh) pdh from hao_ma hm,hao_ma_zhuang_tai hmzt where hm.hmztId=hmzt.id and hmzt.mc='${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}'
 	</select>
 	<select id="getSlzList" resultType="com.znczCxtc.entity.HaoMa">
 		select count(hm.id) slzsl,dl.id dlId,dl.jhyz dlJhyz from hao_ma hm,hao_ma_zhuang_tai hmzt,ding_dan dd,shou_huo_dan_wei shdw,dui_lie dl where hm.hmztId=hmzt.id and hm.ddId=dd.id
 		 and dd.shdwId=shdw.id and shdw.dlId=dl.id and hmzt.mc='${@com.znczCxtc.entity.HaoMaZhuangTai@SHOU_LI_ZHONG_TEXT}' GROUP BY dl.id
 	</select>
 	<select id="getFirstWmdPdz" resultType="com.znczCxtc.entity.HaoMa">
-		select hm.* from hao_ma hm,ding_dan dd,ding_dan_zhuang_tai ddzt,shou_huo_dan_wei shdw,dui_lie dl where hm.ddId=dd.id and dd.ddztId=ddzt.id and ddzt.mc='${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}'
+		select hm.* from hao_ma hm,ding_dan dd,hao_ma_zhuang_tai hmzt,shou_huo_dan_wei shdw,dui_lie dl where hm.ddId=dd.id and dd.shdwId=shdw.id
+		 and shdw.dlId=dl.id and hm.hmztId=hmzt.id and hmzt.mc='${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}'
 		<foreach collection="ymdDlIdList" item="ymdDlId" open=" and cast(dl.id as char) not in (" separator="," close=")">
 		#{ymdDlId}
 		</foreach>
@@ -132,5 +133,8 @@
 	</select>
 	<select id="getPdzList" resultType="com.znczCxtc.entity.HaoMa">
 		select hm.* from hao_ma hm,hao_ma_zhuang_tai hmzt where hm.hmztId=hmzt.id and hmzt.mc='${@com.znczCxtc.entity.HaoMaZhuangTai@PAI_DUI_ZHONG_TEXT}' ORDER BY hm.hm
+	</select>
+	<select id="getLastByDdId" resultType="com.znczCxtc.entity.HaoMa">
+		select * from hao_ma where ddId=#{ddId} order by prsj desc LIMIT 0,1
 	</select>
 </mapper>

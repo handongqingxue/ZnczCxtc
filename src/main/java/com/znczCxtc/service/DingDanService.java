@@ -25,8 +25,20 @@ public interface DingDanService {
 
 	int checkByIds(String ids,String ddztMc,Integer jyFlag,DingDanShenHeJiLu shjl);
 
+	/**
+	 * 根据身份证号和状态获取订单信息(因为测试中可能忽略身份证号的唯一性，同一个身份证号可能有多条订单，出现多条记录时只返回第一条记录)
+	 * @param sfzh
+	 * @param ddztMc
+	 * @return
+	 */
 	DingDan getDingDanBySfzhZt(String sfzh, String ddztMc);
 
+	/**
+	 * 根据车牌号和状态获取订单信息(可能是多个状态下的订单，因为测试中可能忽略车牌号的唯一性，同一个车牌号可能有多条订单，出现多条记录时只返回第一条记录)
+	 * @param cph
+	 * @param ddztMcs
+	 * @return
+	 */
 	DingDan getDingDanByCphZts(String cph, String ddztMcs);
 
 	DingDan getByZt(Integer yjbfh, Integer ejbfh, String ddztMc, Integer yjzt, Integer ejzt);

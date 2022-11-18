@@ -39,4 +39,6 @@ public interface HaoMaService {
 	 * @return
 	 */
 	public int sortPdzHm();
+
+	public HaoMa getLastByDdId(Long ddId);
 }

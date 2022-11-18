@@ -127,7 +127,10 @@ public class DingDanServiceImpl implements DingDanService {
 		// TODO Auto-generated method stub
 		int ddztId=dingDanZhuangTaiDao.getIdByMc(ddztMc);
 		List<DingDan> ddList = dingDanDao.getByZtSfzh(ddztId,sfzh);
-		return ddList.get(0);
+		DingDan dd=null;
+		if(ddList!=null)
+			dd=ddList.get(0);
+		return dd;
 	}
 
 	@Override
@@ -136,7 +139,10 @@ public class DingDanServiceImpl implements DingDanService {
 		List<String> ddztMcList = Arrays.asList(ddztMcs.split(","));
 		List<Integer> ddztIdList = dingDanZhuangTaiDao.getIdListByMcList(ddztMcList);
 		List<DingDan> ddList = dingDanDao.getByZtListCph(ddztIdList,cph);
-		return ddList.get(0);
+		DingDan dd=null;
+		if(ddList!=null)
+			dd=ddList.get(0);
+		return dd;
 	}
 
 	@Override

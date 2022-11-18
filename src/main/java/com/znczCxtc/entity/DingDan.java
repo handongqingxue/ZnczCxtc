@@ -346,12 +346,6 @@ public class DingDan {
 	public void setEjbfh(Integer ejbfh) {
 		this.ejbfh = ejbfh;
 	}
-	public Long getHmId() {
-		return hmId;
-	}
-	public void setHmId(Long hmId) {
-		this.hmId = hmId;
-	}
 	private Integer xddztId;//新订单状态id
 	private String xddztMc;//新订单状态名称
 	private Integer yjzt;//一检状态(1.待上磅 2.上磅中 3.已完成)
@@ -394,5 +388,4 @@ public class DingDan {
 	private String bjsj;//编辑时间
 	private Integer yjbfh=0;//一检磅房号
 	private Integer ejbfh=0;//二检磅房号
-	private Long hmId;//号码id
 }

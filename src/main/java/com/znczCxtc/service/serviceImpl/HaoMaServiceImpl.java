@@ -132,4 +132,10 @@ public class HaoMaServiceImpl implements HaoMaService {
 		}
 		return count;
 	}
+
+	@Override
+	public HaoMa getLastByDdId(Long ddId) {
+		// TODO Auto-generated method stub
+		return haoMaDao.getLastByDdId(ddId);
+	}
 }

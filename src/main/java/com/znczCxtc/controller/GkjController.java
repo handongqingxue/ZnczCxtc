@@ -97,6 +97,28 @@ public class GkjController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/getLastHaoMaByDdId")
+	@ResponseBody
+	public Map<String, Object> getLastHaoMaByDdId(Long ddId) {
+
+		System.out.println("ddId==="+ddId);
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		HaoMa hm = haoMaService.getLastByDdId(ddId);
+		
+		if(hm==null) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "没找到相关号码");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("haoMa", hm);
+		}
+		
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/editDingDan")
 	@ResponseBody
 	public Map<String, Object> editDingDan(DingDan dd) {

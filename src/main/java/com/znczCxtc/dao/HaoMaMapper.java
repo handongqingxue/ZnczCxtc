@@ -26,7 +26,14 @@ public interface HaoMaMapper {
 
 	public List<HaoMa> getSlzList();
 
+	/**
+	 * 获取未满队队列里的第一个排队号(状态对应的是号码状态下的排队中，而不是订单状态下的排队中)
+	 * @param ymdDlIdList
+	 * @return
+	 */
 	public HaoMa getFirstWmdPdz(@Param("ymdDlIdList") List<Integer> ymdDlIdList);
 
 	public List<HaoMa> getPdzList();
+
+	public HaoMa getLastByDdId(@Param("ddId") Long ddId);
 }
