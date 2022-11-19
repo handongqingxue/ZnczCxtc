@@ -60,6 +60,12 @@ public class CheLiangTaiZhang {
 	public void setCyclCph(String cyclCph) {
 		this.cyclCph = cyclCph;
 	}
+	public Integer getLxlx() {
+		return lxlx;
+	}
+	public void setLxlx(Integer lxlx) {
+		this.lxlx = lxlx;
+	}
 	private String jcsj;
 	private String jczp;
 	private String ccsj;
@@ -68,4 +74,5 @@ public class CheLiangTaiZhang {
 	private String ddh;
 	private String ddztMc;
 	private String cyclCph;
+	private Integer lxlx;//流向类型
 }

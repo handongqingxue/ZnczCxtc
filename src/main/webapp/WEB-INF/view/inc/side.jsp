@@ -365,6 +365,13 @@ function showLeftMenuByQx(){
 							&nbsp;&nbsp;&nbsp;台账查询
 						</a>
 					</li>
+					<div class="line_div"></div>
+					<li class="layui-nav-item zhcx_item_li">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
+						<a href="<%=basePath%>clgl/cntz/list">
+							&nbsp;&nbsp;&nbsp;厂内台账
+						</a>
+					</li>
 				</div>
 				<div class="first-level-div clgl_first_div">
 					<li class="layui-nav-item first-level">

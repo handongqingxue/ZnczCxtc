@@ -134,6 +134,20 @@ public class CLGLController {
 		
 		return MODULE_NAME+"/tzcx/detail";
 	}
+
+	/**
+	 * 跳转到车辆管理-厂内台账-列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/cntz/list")
+	public String goCntzList(HttpServletRequest request) {
+		
+		Constant.setDdztInRequest(request);
+		
+		return MODULE_NAME+"/cntz/list";
+	}
+
 	
 	@RequestMapping(value="/newCheLiang")
 	@ResponseBody
@@ -388,13 +402,13 @@ public class CLGLController {
 	
 	@RequestMapping(value="/queryCLTZList")
 	@ResponseBody
-	public Map<String, Object> queryCLTZList(String ddh,String cph,Integer ddztId,String ddztMcs,String jcsjs,String jcsje,String ccsjs,String ccsje,
+	public Map<String, Object> queryCLTZList(String ddh,String cph,String ddztIds,String ddztMcs,String jcsjs,String jcsje,String ccsjs,String ccsje,
 			int page,int rows,String sort,String order) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		int count = cheLiangTaiZhangService.queryForInt(ddh,cph,ddztId,ddztMcs,jcsjs,jcsje,ccsjs,ccsje);
-		List<CheLiangTaiZhang> cltzList=cheLiangTaiZhangService.queryList(ddh, cph, ddztId, ddztMcs, jcsjs, jcsje, ccsjs, ccsje, page, rows, sort, order);
+		int count = cheLiangTaiZhangService.queryForInt(ddh,cph,ddztIds,ddztMcs,jcsjs,jcsje,ccsjs,ccsje);
+		List<CheLiangTaiZhang> cltzList=cheLiangTaiZhangService.queryList(ddh, cph, ddztIds, ddztMcs, jcsjs, jcsje, ccsjs, ccsje, page, rows, sort, order);
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", cltzList);

@@ -43,8 +43,11 @@
 		<if test="cph!=''&amp;cph!=null">
 			and cl.cph like CONCAT('%',#{cph},'%')
 		</if>
-		<if test="ddztId!=''&amp;ddztId!=null">
+		<if test="ddztIdList!=null">
 			and dd.ddztId=#{ddztId}
+			<foreach collection="ddztIdList" item="ddztId" open=" and cast(ddzt.id as char) in (" separator="," close=")">
+			#{ddztId}
+			</foreach>
 		</if>
 		<if test="ddztMcList!=null">
 			<foreach collection="ddztMcList" item="ddztMc" open=" and cast(ddzt.mc as char) in (" separator="," close=")">
@@ -63,8 +66,11 @@
 		<if test="cph!=''&amp;cph!=null">
 			and cl.cph like CONCAT('%',#{cph},'%')
 		</if>
-		<if test="ddztId!=''&amp;ddztId!=null">
+		<if test="ddztIdList!=null">
 			and dd.ddztId=#{ddztId}
+			<foreach collection="ddztIdList" item="ddztId" open=" and cast(ddzt.id as char) in (" separator="," close=")">
+			#{ddztId}
+			</foreach>
 		</if>
 		<if test="ddztMcList!=null">
 			<foreach collection="ddztMcList" item="ddztMc" open=" and cast(ddzt.mc as char) in (" separator="," close=")">
@@ -78,6 +84,6 @@
 		limit #{rowNum},#{rows}
 	</select>
 	<select id="selectById" resultType="com.znczCxtc.entity.CheLiangTaiZhang">
-		select cltz.*,dd.ddh,ddzt.mc ddztMc,cl.cph cyclCph from che_liang_tai_zhang cltz left join ding_dan dd on cltz.ddId=dd.id left join ding_dan_zhuang_tai ddzt on dd.ddztId=ddzt.id left join che_liang cl on dd.cyclId=cl.id where cltz.id=#{id}
+		select cltz.*,dd.ddh,dd.lxlx,ddzt.mc ddztMc,cl.cph cyclCph from che_liang_tai_zhang cltz left join ding_dan dd on cltz.ddId=dd.id left join ding_dan_zhuang_tai ddzt on dd.ddztId=ddzt.id left join che_liang cl on dd.cyclId=cl.id where cltz.id=#{id}
 	</select>
 </mapper>
