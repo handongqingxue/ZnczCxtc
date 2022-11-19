@@ -148,6 +148,17 @@ public class CLGLController {
 		return MODULE_NAME+"/cntz/list";
 	}
 
+	@RequestMapping(value="/cntz/detail")
+	public String goCntzDetail(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		String id = request.getParameter("id");
+		CheLiangTaiZhang cltz=cheLiangTaiZhangService.selectById(id);
+		request.setAttribute("cltz", cltz);
+		
+		return MODULE_NAME+"/cntz/detail";
+	}
+
 	
 	@RequestMapping(value="/newCheLiang")
 	@ResponseBody

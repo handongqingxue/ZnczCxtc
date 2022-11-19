@@ -156,7 +156,7 @@ function initTab1(){
 			{field:"ddztMc",title:"订单状态",width:150},
 			{field:"jcsj",title:"进厂时间",width:200},
             {field:"id",title:"操作",width:80,formatter:function(value,row){
-            	var str="<a href=\""+clglPath+"tzcx/detail?id="+value+"\">详情</a>";
+            	var str="<a href=\""+clglPath+"cntz/detail?id="+value+"\">详情</a>";
             	return str;
             }}
 	    ]],
