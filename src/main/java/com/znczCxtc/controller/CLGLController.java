@@ -123,6 +123,17 @@ public class CLGLController {
 		
 		return MODULE_NAME+"/tzcx/list";
 	}
+
+	@RequestMapping(value="/tzcx/detail")
+	public String goTzcxDetail(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		String id = request.getParameter("id");
+		CheLiangTaiZhang cltz=cheLiangTaiZhangService.selectById(id);
+		request.setAttribute("cltz", cltz);
+		
+		return MODULE_NAME+"/tzcx/detail";
+	}
 	
 	@RequestMapping(value="/newCheLiang")
 	@ResponseBody

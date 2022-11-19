@@ -15,4 +15,6 @@ public interface CheLiangTaiZhangService {
 
 	public List<CheLiangTaiZhang> queryList(String ddh, String cph, Integer ddztId, String ddztMcs, String jcsjs,
 			String jcsje, String ccsjs, String ccsje, int page, int rows, String sort, String order);
+
+	public CheLiangTaiZhang selectById(String id);
 }

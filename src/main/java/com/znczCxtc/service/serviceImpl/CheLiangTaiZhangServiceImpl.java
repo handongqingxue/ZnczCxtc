@@ -49,4 +49,10 @@ public class CheLiangTaiZhangServiceImpl implements CheLiangTaiZhangService {
 		return cheLiangTaiZhangDao.queryList(ddh, cph, ddztId, ddztMcList, jcsjs, jcsje, ccsjs, ccsje, 
 				(page-1)*rows, rows, sort, order);
 	}
+
+	@Override
+	public CheLiangTaiZhang selectById(String id) {
+		// TODO Auto-generated method stub
+		return cheLiangTaiZhangDao.selectById(id);
+	}
 }

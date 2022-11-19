@@ -10,27 +10,37 @@
 	margin-left: 220px;
 }
 .tab1_div .toolbar{
+	height:64px;
+}
+.tab1_div .toolbar .row_div{
 	height:32px;
 }
-.tab1_div .toolbar .cph_span,
-.tab1_div .toolbar .bz_span{
+.tab1_div .toolbar .row_div .ddh_span,
+.tab1_div .toolbar .row_div .cph_span,
+.tab1_div .toolbar .row_div .ddzt_span,
+.tab1_div .toolbar .row_div .jcsj_span,
+.tab1_div .toolbar .row_div .ccsj_span,
+.tab1_div .toolbar .row_div .search_but{
 	margin-left: 13px;
 }
-.tab1_div .toolbar .cph_inp,
-.tab1_div .toolbar .bz_inp{
+.tab1_div .toolbar .row_div .ddh_inp,
+.tab1_div .toolbar .row_div .cph_inp{
 	width: 120px;
 	height: 25px;
-}
-.tab1_div .toolbar .search_but{
-	margin-left: 13px;
 }
 </style>
 <title>车辆列表</title>
 <%@include file="../../inc/js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
+var ddglPath=path+'ddgl/';
 var clglPath=path+'clgl/';
 $(function(){
+	initDDZTCBB();
+	initJCSJSDTB();
+	initJCSJEDTB();
+	initCCSJSDTB();
+	initCCSJEDTB();
 	initSearchLB();
 	initRemoveLB();
 	initTab1();
@@ -44,16 +54,61 @@ function showCompontByQx(){
 	}
 }
 
+function initDDZTCBB(){
+	var data=[];
+	data.push({"value":"","text":"请选择"});
+	$.post(ddglPath+"queryDingDanZhuangTaiCBBList",
+		function(result){
+			var rows=result.rows;
+			for(var i=0;i<rows.length;i++){
+				data.push({"value":rows[i].id,"text":rows[i].mc});
+			}
+			ddztCBB=$("#ddzt_cbb").combobox({
+				valueField:"value",
+				textField:"text",
+				//multiple:true,
+				data:data
+			});
+		}
+	,"json");
+}
+
+function initJCSJSDTB(){
+	jcsjsDTB=$('#jcsjs_dtb').datetimebox({
+        required:false
+    });
+}
+
+function initJCSJEDTB(){
+	jcsjeDTB=$('#jcsje_dtb').datetimebox({
+        required:false
+    });
+}
+
+function initCCSJSDTB(){
+	ccsjsDTB=$('#ccsjs_dtb').datetimebox({
+        required:false
+    });
+}
+
+function initCCSJEDTB(){
+	ccsjeDTB=$('#ccsje_dtb').datetimebox({
+        required:false
+    });
+}
+
 function initSearchLB(){
 	$("#search_but").linkbutton({
 		iconCls:"icon-search",
 		onClick:function(){
+			var ddh=$("#toolbar #ddh").val();
 			var cph=$("#toolbar #cph").val();
-			var cllx=cllxCBB.combobox("getValue");
-			var sfzy=sfzyCBB.combobox("getValue");
-			var shzt=shztCBB.combobox("getValue");
-			var bz=$("#toolbar #bz").val();
-			tab1.datagrid("load",{cph:cph,cllx:cllx,sfzy:sfzy,shzt:shzt,bz:bz});
+			var ddztId=ddztCBB.combobox("getValue");
+			var jcsjs=jcsjsDTB.datetimebox("getValue");
+			var jcsje=jcsjeDTB.datetimebox("getValue");
+			var ccsjs=ccsjsDTB.datetimebox("getValue");
+			var ccsje=ccsjeDTB.datetimebox("getValue");
+			tab1.datagrid("load",{ddh:ddh,cph:cph,ddztId:ddztId,jcsjs:jcsjs,jcsje:jcsje,ccsjs:ccsjs,ccsje:ccsje});
 		}
 	});
 }
@@ -153,12 +208,26 @@ function setFitWidthInParent(o){
 	<%@include file="../../inc/side.jsp"%>
 	<div class="tab1_div" id="tab1_div">
 		<div class="toolbar" id="toolbar">
-			<span class="cph_span">车牌号：</span>
-			<input type="text" class="cph_inp" id="cph" placeholder="请输入车牌号"/>
-			<span class="bz_span">备注：</span>
-			<input type="text" class="bz_inp" id="bz" placeholder="请输入备注"/>
-			<a class="search_but" id="search_but">查询</a>
-			<a id="remove_but">删除</a>
+			<div class="row_div">
+				<span class="ddh_span">订单号：</span>
+				<input type="text" class="ddh_inp" id="ddh" placeholder="请输入订单号"/>
+				<span class="cph_span">车牌号：</span>
+				<input type="text" class="cph_inp" id="cph" placeholder="请输入车牌号"/>
+				<span class="ddzt_span">订单状态：</span>
+				<input id="ddzt_cbb"/>
+			</div>
+			<div class="row_div">
+				<span class="jcsj_span">进厂时间：</span>
+				<input id="jcsjs_dtb"/>
+				-
+				<input id="jcsje_dtb"/>
+				<span class="ccsj_span">出厂时间：</span>
+				<input id="ccsjs_dtb"/>
+				-
+				<input id="ccsje_dtb"/>
+				<a class="search_but" id="search_but">查询</a>
+				<a id="remove_but">删除</a>
+			</div>
 		</div>
 		<table id="tab1">
 		</table>
