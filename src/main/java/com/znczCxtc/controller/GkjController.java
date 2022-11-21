@@ -356,6 +356,33 @@ public class GkjController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/selectBangDanJiLuByDdId")
+	@ResponseBody
+	public Map<String, Object> selectBangDanJiLuByDdId(Integer ddId) {
+
+		System.out.println("ddId==="+ddId);
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			BangDanJiLu bdjl = bangDanJiLuService.selectByDdId(ddId);
+			if(bdjl==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "找不到相关磅单！");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("bdjl", bdjl);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return jsonMap;
+		}
+	}
+
 	@RequestMapping(value="/newGuoBangJiLu")
 	@ResponseBody
 	public Map<String, Object> newGuoBangJiLu(GuoBangJiLu gbjl) {
