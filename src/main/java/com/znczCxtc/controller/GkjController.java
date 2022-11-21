@@ -36,7 +36,11 @@ public class GkjController {
 	@Autowired
 	private RglrCphJiLuService rglrCphJiLuService; 
 	@Autowired
-	private RglrSfzhJiLuService rglrSfzhJiLuService; 
+	private RglrSfzhJiLuService rglrSfzhJiLuService;
+	@Autowired
+	private BangDanJiLuService bangDanJiLuService;
+	@Autowired
+	private GuoBangJiLuService guoBangJiLuService;
 	static final String MODULE_NAME=Constant.GKJ_MODULE_NAME;
 
 	/**
@@ -94,6 +98,23 @@ public class GkjController {
 			jsonMap.put("dingDan", dd);
 		}
 		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/checkDingDanIfExistByZt")
+	@ResponseBody
+	public Map<String, Object> checkDingDanIfExistByZt(Integer yjbfh,Integer ejbfh,String ddztMc, Integer yjzt, Integer ejzt) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		boolean bool=dingDanService.checkIfExistByZt(yjbfh,ejbfh,ddztMc, yjzt, ejzt);
+		if(bool) {
+			jsonMap.put("status", "ok");
+			jsonMap.put("message", "订单已存在！");
+		}
+		else {
+			jsonMap.put("status", "no");
+		}
 		return jsonMap;
 	}
 	
@@ -308,6 +329,55 @@ public class GkjController {
 		System.out.println("file1size==="+file1.getSize());
 		System.out.println("file2size==="+file2.getSize());
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/newBangDanJiLu")
+	@ResponseBody
+	public Map<String, Object> newBangDanJiLu(BangDanJiLu bdjl) {
+
+		System.out.println("ddId==="+bdjl.getDdId());
+		System.out.println("mz==="+bdjl.getMz());
+		System.out.println("pz==="+bdjl.getPz());
+		System.out.println("jz==="+bdjl.getJz());
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = bangDanJiLuService.add(bdjl);
+		
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "创建磅单信息失败！");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("message", "创建磅单信息成功！");
+		}
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/newGuoBangJiLu")
+	@ResponseBody
+	public Map<String, Object> newGuoBangJiLu(GuoBangJiLu gbjl) {
+
+		Map<String, Object> jsonMap=new HashMap<String, Object>();
+		try {
+			int count=guoBangJiLuService.add(gbjl);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "创建过磅信息成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "创建过磅信息失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return jsonMap;
+		}
 	}
 
 	@RequestMapping(value="/pushToClient")
