@@ -101,6 +101,32 @@ public class GkjController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/getDingDanByZt")
+	@ResponseBody
+	public Map<String, Object> getDingDanByZt(Integer yjbfh,Integer ejbfh,String ddztMc,Integer yjzt,Integer ejzt) {
+		
+		System.out.println("yjbfh==="+yjbfh);
+		System.out.println("ejbfh==="+ejbfh);
+		System.out.println("ddztMc==="+ddztMc);
+		System.out.println("yjzt==="+yjzt);
+		System.out.println("ejzt==="+ejzt);
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		DingDan dd = dingDanService.getByZt(yjbfh,ejbfh,ddztMc,yjzt,ejzt);
+		
+		if(dd==null) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "没找到相关订单");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("dingDan", dd);
+		}
+		
+		return jsonMap;
+	}
+
 	@RequestMapping(value="/checkDingDanIfExistByZt")
 	@ResponseBody
 	public Map<String, Object> checkDingDanIfExistByZt(Integer yjbfh,Integer ejbfh,String ddztMc, Integer yjzt, Integer ejzt) {
@@ -147,6 +173,29 @@ public class GkjController {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
 			int count=dingDanService.edit(dd);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "编辑订单成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "编辑订单失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/editDingDanByZt")
+	@ResponseBody
+	public Map<String, Object> editDingDanByZt(DingDan dd,
+			HttpServletRequest request) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			int count=dingDanService.editByZt(dd);
 			if(count>0) {
 				jsonMap.put("message", "ok");
 				jsonMap.put("info", "编辑订单成功！");

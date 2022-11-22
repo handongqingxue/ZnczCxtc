@@ -294,15 +294,6 @@
 			<if test="xejzt!=0">
 				ejzt=#{xejzt},
 			</if>
-			<if test="sjsfzh!=null">
-				sjsfzh=#{sjsfzh},
-			</if>
-			<if test="sjxm!=null">
-				sjxm=#{sjxm},
-			</if>
-			<if test="cph!=null">
-				cph=#{cph},
-			</if>
 			<if test="lxlx!=null">
 				lxlx=#{lxlx},
 			</if>
