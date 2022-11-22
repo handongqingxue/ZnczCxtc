@@ -21,7 +21,7 @@
 .tab1_div .toolbar .row_div .yss_span,
 .tab1_div .toolbar .row_div .wzmc_span,
 .tab1_div .toolbar .row_div .fhdw_span,
-.tab1_div .toolbar .row_div .shbm_span,
+.tab1_div .toolbar .row_div .shdw_span,
 .tab1_div .toolbar .row_div .sjxm_span,
 .tab1_div .toolbar .row_div .sjsfzh_span,
 .tab1_div .toolbar .row_div .search_but{
@@ -32,7 +32,7 @@
 .tab1_div .toolbar .row_div .yssMc_inp,
 .tab1_div .toolbar .row_div .wzMc_inp,
 .tab1_div .toolbar .row_div .fhdwMc_inp,
-.tab1_div .toolbar .row_div .shbmMc_inp,
+.tab1_div .toolbar .row_div .shdwMc_inp,
 .tab1_div .toolbar .row_div .sjxm_inp,
 .tab1_div .toolbar .row_div .sjsfzh_inp{
 	width: 120px;
@@ -45,7 +45,6 @@
 var path='<%=basePath %>';
 var ddglPath=path+'ddgl/';
 var defaultDdztMc='${requestScope.dzxhDdztMc}';
-alert(defaultDdztMc)
 $(function(){
 	initSearchLB();
 	initCheckLB();
@@ -61,11 +60,11 @@ function initSearchLB(){
 			var yssMc=$("#toolbar #yssMc").val();
 			var wzMc=$("#toolbar #wzMc").val();
 			var fhdwMc=$("#toolbar #fhdwMc").val();
-			var shbmMc=$("#toolbar #shbmMc").val();
+			var shdwMc=$("#toolbar #shdwMc").val();
 			var sjxm=$("#toolbar #sjxm").val();
 			var sjsfzh=$("#toolbar #sjsfzh").val();
 			tab1.datagrid("load",{ddh:ddh,ddztMc:defaultDdztMc,cph:cph,yssMc:yssMc,wzMc:wzMc,
-				fhdwMc:fhdwMc,shbmMc:shbmMc,sjxm:sjxm,sjsfzh:sjsfzh});
+				fhdwMc:fhdwMc,shdwMc:shdwMc,sjxm:sjxm,sjsfzh:sjsfzh});
 		}
 	});
 }
@@ -120,13 +119,13 @@ function initTab1(){
 		pageSize:10,
 		columns:[[
 			{field:"ddh",title:"订单号",width:150},
-			{field:"sjsfzh",title:"司机身份证号",width:200},
-			{field:"sjxm",title:"司机姓名",width:100},
-			{field:"cph",title:"车牌号",width:150},
+			{field:"cysjSfzh",title:"司机身份证号",width:200},
+			{field:"cysjXm",title:"司机姓名",width:100},
+			{field:"cyclCph",title:"车牌号",width:150},
 			{field:"wzMc",title:"物资名称",width:150},
 			{field:"yssMc",title:"运输商",width:150},
 			{field:"fhdwMc",title:"发货单位",width:150},
-			{field:"shbmMc",title:"收货部门",width:150},
+			{field:"shdwMc",title:"收货单位",width:150},
             {field:"lxlx",title:"流向类型",width:100,formatter:function(value,row){
             	var str;
             	switch (value) {
@@ -203,8 +202,8 @@ function setFitWidthInParent(parent,self){
 			<div class="row_div">
 				<span class="fhdw_span">发货单位：</span>
 				<input type="text" class="fhdwMc_inp" id="fhdwMc" placeholder="请输入发货单位"/>
-				<span class="shbm_span">收货部门：</span>
-				<input type="text" class="shbmMc_inp" id="shbmMc" placeholder="请输入收货部门"/>
+				<span class="shdw_span">收货单位：</span>
+				<input type="text" class="shdwMc_inp" id="shdwMc" placeholder="请输入收货单位"/>
 				<span class="sjxm_span">司机姓名：</span>
 				<input type="text" class="sjxm_inp" id="sjxm" placeholder="请输入司机姓名"/>
 				<span class="sjsfzh_span">司机身份证号：</span>

@@ -16,9 +16,9 @@
 	height:32px;
 }
 .tab1_div .toolbar .row_div .ddh_span,
-.tab1_div .toolbar .row_div .sjxm_span,
-.tab1_div .toolbar .row_div .sjsfzh_span,
-.tab1_div .toolbar .row_div .cph_span,
+.tab1_div .toolbar .row_div .cysjXm_span,
+.tab1_div .toolbar .row_div .cysjSfzh_span,
+.tab1_div .toolbar .row_div .cyclCph_span,
 .tab1_div .toolbar .row_div .yss_span,
 .tab1_div .toolbar .row_div .fhdw_span,
 .tab1_div .toolbar .row_div .gbsj_span,
@@ -27,9 +27,9 @@
 	margin-left: 13px;
 }
 .tab1_div .toolbar .row_div .ddh_inp,
-.tab1_div .toolbar .row_div .sjxm_inp,
-.tab1_div .toolbar .row_div .sjsfzh_inp,
-.tab1_div .toolbar .row_div .cph_inp,
+.tab1_div .toolbar .row_div .cysjXm_inp,
+.tab1_div .toolbar .row_div .cysjSfzh_inp,
+.tab1_div .toolbar .row_div .cyclCph_inp,
 .tab1_div .toolbar .row_div .yssMc_inp,
 .tab1_div .toolbar .row_div .fhdwMc_inp,
 .tab1_div .toolbar .row_div .shdwMc_inp{
@@ -72,15 +72,15 @@ function initSearchLB(){
 		iconCls:"icon-search",
 		onClick:function(){
 			var ddh=$("#toolbar #ddh").val();
-			var sjxm=$("#toolbar #sjxm").val();
-			var sjsfzh=$("#toolbar #sjsfzh").val();
-			var cph=$("#toolbar #cph").val();
+			var cysjXm=$("#toolbar #cysjXm").val();
+			var cysjSfzh=$("#toolbar #cysjSfzh").val();
+			var cyclCph=$("#toolbar #cyclCph").val();
 			var yssMc=$("#toolbar #yssMc").val();
 			var fhdwMc=$("#toolbar #fhdwMc").val();
 			var shdwMc=$("#toolbar #shdwMc").val();
 			var gbsjks=gbsjksDTB.datetimebox("getValue");
 			var gbsjjs=gbsjjsDTB.datetimebox("getValue");
-			tab1.datagrid("load",{ddztMc:defaultDdztMc,ddh:ddh,sjxm:sjxm,sjsfzh:sjsfzh,cph:cph,yssMc:yssMc,fhdwMc:fhdwMc,shdwMc:shdwMc,gbsjks:gbsjks,gbsjjs:gbsjjs,gblx:defaultGblx});
+			tab1.datagrid("load",{ddztMc:defaultDdztMc,ddh:ddh,cysjXm:cysjXm,cysjSfzh:cysjSfzh,cyclCph:cyclCph,yssMc:yssMc,fhdwMc:fhdwMc,shdwMc:shdwMc,gbsjks:gbsjks,gbsjjs:gbsjjs,gblx:defaultGblx});
 		}
 	});
 }
@@ -202,12 +202,12 @@ function setFitWidthInParent(o){
 			<div class="row_div">
 				<span class="ddh_span">订单号：</span>
 				<input type="text" class="ddh_inp" id="ddh" placeholder="请输入订单号"/>
-				<span class="sjxm_span">司机姓名：</span>
-				<input type="text" class="sjxm_inp" id="sjxm" placeholder="请输入司机姓名"/>
-				<span class="sjsfzh_span">司机身份证号：</span>
-				<input type="text" class="sjsfzh_inp" id="sjsfzh" placeholder="请输入司机身份证号"/>
-				<span class="cph_span">车牌号：</span>
-				<input type="text" class="cph_inp" id="cph" placeholder="请输入车牌号"/>
+				<span class="cysjXm_span">司机姓名：</span>
+				<input type="text" class="cysjXm_inp" id="cysjXm" placeholder="请输入司机姓名"/>
+				<span class="cysjSfzh_span">司机身份证号：</span>
+				<input type="text" class="cysjSfzh_inp" id="cysjSfzh" placeholder="请输入司机身份证号"/>
+				<span class="cyclCph_span">车牌号：</span>
+				<input type="text" class="cyclCph_inp" id="cyclCph" placeholder="请输入车牌号"/>
 			</div>
 			<div class="row_div">
 				<span class="yss_span">运输商：</span>
