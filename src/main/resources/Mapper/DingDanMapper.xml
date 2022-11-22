@@ -233,6 +233,12 @@
 			<if test="ddztId!=null">
 				ddztId=#{ddztId},
 			</if>
+			<if test="yjzt!=null">
+				yjzt=#{yjzt},
+			</if>
+			<if test="ejzt!=null">
+				ejzt=#{ejzt},
+			</if>
 			<if test="jhysrq!=null">
 				jhysrq=#{jhysrq},
 			</if>

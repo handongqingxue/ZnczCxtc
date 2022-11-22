@@ -5,8 +5,23 @@ public class GuoBangJiLu {
 	public static final Integer ZHENG_CHANG=1;
 	public static final Integer YI_CHANG=2;
 	
+	/**
+	 * 入厂过磅标识
+	 */
 	public static final Integer RU_CHANG_GUO_BANG=1;
+	/**
+	 * 出厂过磅标识
+	 */
 	public static final Integer CHU_CHANG_GUO_BANG=2;
+	
+	/**
+	 * 入厂过磅名称
+	 */
+	public static final String RU_CHANG_GUO_BANG_TEXT="入厂过磅";
+	/**
+	 * 出厂过磅名称
+	 */
+	public static final String CHU_CHANG_GUO_BANG_TEXT="出厂过磅";
 
 	private Integer id;
 	public Integer getId() {
@@ -75,23 +90,23 @@ public class GuoBangJiLu {
 	public void setDdh(String ddh) {
 		this.ddh = ddh;
 	}
+	public String getCysjXm() {
+		return cysjXm;
+	}
+	public void setCysjXm(String cysjXm) {
+		this.cysjXm = cysjXm;
+	}
 	public String getCyclCph() {
 		return cyclCph;
 	}
 	public void setCyclCph(String cyclCph) {
 		this.cyclCph = cyclCph;
 	}
-	public String getSjSfzh() {
-		return sjSfzh;
+	public String getCysjSfzh() {
+		return cysjSfzh;
 	}
-	public void setSjSfzh(String sjSfzh) {
-		this.sjSfzh = sjSfzh;
-	}
-	public String getSjXm() {
-		return sjXm;
-	}
-	public void setSjXm(String sjXm) {
-		this.sjXm = sjXm;
+	public void setCysjSfzh(String cysjSfzh) {
+		this.cysjSfzh = cysjSfzh;
 	}
 	public Integer getLxlx() {
 		return lxlx;
@@ -111,11 +126,11 @@ public class GuoBangJiLu {
 	public void setFhdwMc(String fhdwMc) {
 		this.fhdwMc = fhdwMc;
 	}
-	public String getShbmMc() {
-		return shbmMc;
+	public String getShdwMc() {
+		return shdwMc;
 	}
-	public void setShbmMc(String shbmMc) {
-		this.shbmMc = shbmMc;
+	public void setShdwMc(String shdwMc) {
+		this.shdwMc = shdwMc;
 	}
 	private Float gbzl;
 	private String zp1;
@@ -127,11 +142,11 @@ public class GuoBangJiLu {
 	private String gblxName;
 	private Integer ddId;
 	private String ddh;
+	private String cysjXm;
 	private String cyclCph;
-	private String sjSfzh;
-	private String sjXm;
+	private String cysjSfzh;
 	private Integer lxlx;//流向类型
 	private String yssMc;
 	private String fhdwMc;
-	private String shbmMc;
+	private String shdwMc;
 }

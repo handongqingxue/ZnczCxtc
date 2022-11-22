@@ -84,7 +84,7 @@ public class DDGLController {
 	public String goDshList(HttpServletRequest request) {
 		
 		Constant.setDdztInRequest(request);
-		setShlxInRequest(request);
+		Constant.setShlxInRequest(request);
 		
 		return MODULE_NAME+"/dsh/list";
 	}
@@ -98,7 +98,7 @@ public class DDGLController {
 	public String goDzjList(HttpServletRequest request) {
 		
 		Constant.setDdztInRequest(request);
-		setShlxInRequest(request);
+		Constant.setShlxInRequest(request);
 		setLxlxInRequest(request);
 		
 		return MODULE_NAME+"/dzj/list";
@@ -114,7 +114,7 @@ public class DDGLController {
 		
 		//publicService.selectNav(request);
 		Constant.setDdztInRequest(request);
-		setShlxInRequest(request);
+		Constant.setShlxInRequest(request);
 		setLxlxInRequest(request);
 		
 		return MODULE_NAME+"/drk/list";
@@ -185,7 +185,7 @@ public class DDGLController {
 	@RequestMapping(value="/shjl/list")
 	public String goShjlList(HttpServletRequest request) {
 		
-		setShlxInRequest(request);
+		Constant.setShlxInRequest(request);
 		setLxlxInRequest(request);
 		setShjgInRequest(request);
 		
@@ -459,7 +459,7 @@ public class DDGLController {
 			plan.setMsg("审核订单成功");
 			json=JsonUtil.getJsonFromObject(plan);
 			
-			if(!shjl.getShjg()) {//这块代码是在一检审核或二检审核不通过情况下，把订单状态还原到之前的排队中。与下单审核、入库审核无关
+			if(!shjl.getShjg()) {//这块代码是在一检审核或二检审核不通过情况下，把订单状态还原到之前的待扫码。与下单审核、入库审核无关
 				List<String> idList = Arrays.asList(ids.split(","));
 				for (String idStr : idList) {
 					Long ddId = Long.valueOf(idStr);
@@ -587,25 +587,6 @@ public class DDGLController {
 
 		request.setAttribute("pushCph", Constant.PUSH_CPH);
 		request.setAttribute("pushSfzh", Constant.PUSH_SFZH);
-	}
-	
-	/**
-	 * 存放审核类型常量
-	 * @param request
-	 */
-	public void setShlxInRequest(HttpServletRequest request) {
-
-		request.setAttribute("xdshShlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
-		request.setAttribute("zjshShlx", DingDanShenHeJiLu.ZHI_JIAN_SHEN_HE);
-		request.setAttribute("yjshShlx", DingDanShenHeJiLu.YI_JIAN_SHEN_HE);
-		request.setAttribute("rkshShlx", DingDanShenHeJiLu.RU_KU_SHEN_HE);
-		request.setAttribute("ejshShlx", DingDanShenHeJiLu.ER_JIAN_SHEN_HE);
-		
-		request.setAttribute("xdshShlxMc", DingDanShenHeJiLu.XIA_DAN_SHEN_HE_TEXT);
-		request.setAttribute("zjshShlxMc", DingDanShenHeJiLu.ZHI_JIAN_SHEN_HE_TEXT);
-		request.setAttribute("yjshShlxMc", DingDanShenHeJiLu.YI_JIAN_SHEN_HE_TEXT);
-		request.setAttribute("rkshShlxMc", DingDanShenHeJiLu.RU_KU_SHEN_HE_TEXT);
-		request.setAttribute("ejshShlxMc", DingDanShenHeJiLu.ER_JIAN_SHEN_HE_TEXT);
 	}
 	
 	/**

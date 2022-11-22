@@ -348,10 +348,10 @@ public class DingDan {
 	}
 	private Integer xddztId;//新订单状态id
 	private String xddztMc;//新订单状态名称
-	private Integer yjzt;//一检状态(1.待上磅 2.上磅中 3.已完成)
-	private Integer xyjzt;//新一检状态(1.待上磅 2.上磅中 3.已完成)
-	private Integer ejzt;//二检状态(1.待上磅 2.上磅中 3.已完成)
-	private Integer xejzt;//新二检状态(1.待上磅 2.上磅中 3.已完成)
+	private Integer yjzt;//一检状态(1.待上磅 2.上磅中 3.待称重4.称重中5.待下磅6.下磅中7.已完成)
+	private Integer xyjzt;//新一检状态(1.待上磅 2.上磅中 3.待称重4.称重中5.待下磅6.下磅中7.已完成)
+	private Integer ejzt;//二检状态(1.待上磅 2.上磅中 3.待称重4.称重中5.待下磅6.下磅中7.已完成)
+	private Integer xejzt;//新二检状态(1.待上磅 2.上磅中 3.待称重4.称重中5.待下磅6.下磅中7.已完成)
 	private Integer lxlx;//流向类型
 	private Float yzxzl;//预装卸重量
 	private Float sjzl;//实际重量

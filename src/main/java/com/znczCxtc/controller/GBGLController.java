@@ -180,10 +180,13 @@ public class GBGLController {
 		
 		//publicService.selectNav(request);
 		
-		request.setAttribute("yjdshDdztMc", DingDanZhuangTai.YI_JIAN_DAI_SHEN_HE_TEXT);
-		request.setAttribute("drkDdztMc", DingDanZhuangTai.DAI_ZHUANG_XIE_HUO_TEXT);
-		request.setAttribute("shlx", DingDanShenHeJiLu.YI_JIAN_SHEN_HE);
-		request.setAttribute("gblx", GuoBangJiLu.RU_CHANG_GUO_BANG);
+		//request.setAttribute("yjdshDdztMc", DingDanZhuangTai.YI_JIAN_DAI_SHEN_HE_TEXT);
+		//request.setAttribute("drkDdztMc", DingDanZhuangTai.DAI_ZHUANG_XIE_HUO_TEXT);
+		//request.setAttribute("shlx", DingDanShenHeJiLu.YI_JIAN_SHEN_HE);
+		//request.setAttribute("gblx", GuoBangJiLu.RU_CHANG_GUO_BANG);
+		Constant.setDdztInRequest(request);
+		Constant.setShlxInRequest(request);
+		Constant.setGblxInRequest(request);
 		
 		return MODULE_NAME+"/yjdsh/list";
 	}

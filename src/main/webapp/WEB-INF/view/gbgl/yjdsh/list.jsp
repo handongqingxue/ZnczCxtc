@@ -22,7 +22,7 @@
 .tab1_div .toolbar .row_div .yss_span,
 .tab1_div .toolbar .row_div .fhdw_span,
 .tab1_div .toolbar .row_div .gbsj_span,
-.tab1_div .toolbar .row_div .shbm_span,
+.tab1_div .toolbar .row_div .shdw_span,
 .tab1_div .toolbar .row_div .search_but{
 	margin-left: 13px;
 }
@@ -32,7 +32,7 @@
 .tab1_div .toolbar .row_div .cph_inp,
 .tab1_div .toolbar .row_div .yssMc_inp,
 .tab1_div .toolbar .row_div .fhdwMc_inp,
-.tab1_div .toolbar .row_div .shbmMc_inp{
+.tab1_div .toolbar .row_div .shdwMc_inp{
 	width: 120px;
 	height: 25px;
 }
@@ -44,8 +44,8 @@ var path='<%=basePath %>';
 var gbglPath=path+'gbgl/';
 var ddglPath=path+'ddgl/';
 var exportExcelPath=path+'exportExcel/';
-var ddztMc='${requestScope.yjdshDdztMc}';
-var gblx='${requestScope.gblx}';
+var defaultDdztMc='${requestScope.yjdshDdztMc}';
+var defaultGblx='${requestScope.rcgbGblx}';
 $(function(){
 	initGBSJKSDTB();
 	initGBSJJSDTB();
@@ -77,10 +77,10 @@ function initSearchLB(){
 			var cph=$("#toolbar #cph").val();
 			var yssMc=$("#toolbar #yssMc").val();
 			var fhdwMc=$("#toolbar #fhdwMc").val();
-			var shbmMc=$("#toolbar #shbmMc").val();
+			var shdwMc=$("#toolbar #shdwMc").val();
 			var gbsjks=gbsjksDTB.datetimebox("getValue");
 			var gbsjjs=gbsjjsDTB.datetimebox("getValue");
-			tab1.datagrid("load",{ddztMc:ddztMc,ddh:ddh,sjxm:sjxm,sjsfzh:sjsfzh,cph:cph,yssMc:yssMc,fhdwMc:fhdwMc,shbmMc:shbmMc,gbsjks:gbsjks,gbsjjs:gbsjjs,gblx:gblx});
+			tab1.datagrid("load",{ddztMc:defaultDdztMc,ddh:ddh,sjxm:sjxm,sjsfzh:sjsfzh,cph:cph,yssMc:yssMc,fhdwMc:fhdwMc,shdwMc:shdwMc,gbsjks:gbsjks,gbsjjs:gbsjjs,gblx:defaultGblx});
 		}
 	});
 }
@@ -116,11 +116,11 @@ function checkByIds(shjg) {
 	}
 	ddIds=ddIds.substring(1);
 	
-	var ddztMc='${requestScope.drkDdztMc}';
-	var shlx='${requestScope.shlx}';
+	var dzxhDdztMc='${requestScope.dzxhDdztMc}';
+	var yjshShlx='${requestScope.yjshShlx}';
 	var shrId='${sessionScope.yongHu.id}';
 	$.post(ddglPath + "checkDingDanByIds",
-		{ids:ddIds,ddztMc:ddztMc,shlx:shlx,shjg:shjg,shrId:shrId,jyFlag:1},
+		{ids:ddIds,ddztMc:dzxhDdztMc,shlx:yjshShlx,shjg:shjg,shrId:shrId,jyFlag:1},
 		function(result){
 			if(result.status==1){
 				alert(result.msg);
@@ -139,17 +139,17 @@ function initTab1(){
 		url:gbglPath+"queryDJYList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
-		queryParams:{ddztMc:ddztMc,gblx:gblx},
+		queryParams:{ddztMc:defaultDdztMc,gblx:defaultGblx},
 		pagination:true,
 		pageSize:10,
 		columns:[[
 			{field:"ddh",title:"订单号",width:150},
-			{field:"sjxm",title:"司机姓名",width:100},
-			{field:"sjsfzh",title:"司机身份证号",width:200},
-			{field:"cph",title:"车牌号",width:150},
+			{field:"cysjXm",title:"司机姓名",width:100},
+			{field:"cysjSfzh",title:"司机身份证号",width:200},
+			{field:"cyclCph",title:"车牌号",width:150},
 			{field:"yssMc",title:"运输商",width:150},
 			{field:"fhdwMc",title:"发货单位",width:150},
-			{field:"shbmMc",title:"收货部门",width:150},
+			{field:"shdwMc",title:"收货单位",width:150},
             {field:"lxlx",title:"流向类型",width:100,formatter:function(value,row){
             	var str;
             	switch (value) {
@@ -214,8 +214,8 @@ function setFitWidthInParent(o){
 				<input type="text" class="yssMc_inp" id="yssMc" placeholder="请输入运输商"/>
 				<span class="fhdw_span">发货单位：</span>
 				<input type="text" class="fhdwMc_inp" id="fhdwMc" placeholder="请输入发货单位"/>
-				<span class="shbm_span">收货部门：</span>
-				<input type="text" class="shbmMc_inp" id="shbmMc" placeholder="请输入收货部门"/>
+				<span class="shdw_span">收货单位：</span>
+				<input type="text" class="shdwMc_inp" id="shdwMc" placeholder="请输入收货单位"/>
 				<span class="gbsj_span">过磅时间：</span>
 				<input id="gbsjks_dtb"/>-
 				<input id="gbsjjs_dtb"/>

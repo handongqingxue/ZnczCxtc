@@ -2,7 +2,7 @@ package com.znczCxtc.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.znczCxtc.entity.DingDanZhuangTai;
+import com.znczCxtc.entity.*;
 
 public class Constant {
 
@@ -108,5 +108,37 @@ public class Constant {
 		request.setAttribute("ycDdztMc", DingDanZhuangTai.YI_CHANG_TEXT);//异常
 		request.setAttribute("yfqDdztMc", DingDanZhuangTai.YI_FEI_QI_TEXT);//已废弃
 		
+	}
+	
+	/**
+	 * 存放审核类型常量
+	 * @param request
+	 */
+	public static void setShlxInRequest(HttpServletRequest request) {
+
+		request.setAttribute("xdshShlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
+		request.setAttribute("zjshShlx", DingDanShenHeJiLu.ZHI_JIAN_SHEN_HE);
+		request.setAttribute("yjshShlx", DingDanShenHeJiLu.YI_JIAN_SHEN_HE);
+		request.setAttribute("rkshShlx", DingDanShenHeJiLu.RU_KU_SHEN_HE);
+		request.setAttribute("ejshShlx", DingDanShenHeJiLu.ER_JIAN_SHEN_HE);
+		
+		request.setAttribute("xdshShlxMc", DingDanShenHeJiLu.XIA_DAN_SHEN_HE_TEXT);
+		request.setAttribute("zjshShlxMc", DingDanShenHeJiLu.ZHI_JIAN_SHEN_HE_TEXT);
+		request.setAttribute("yjshShlxMc", DingDanShenHeJiLu.YI_JIAN_SHEN_HE_TEXT);
+		request.setAttribute("rkshShlxMc", DingDanShenHeJiLu.RU_KU_SHEN_HE_TEXT);
+		request.setAttribute("ejshShlxMc", DingDanShenHeJiLu.ER_JIAN_SHEN_HE_TEXT);
+	}
+	
+	/**
+	 * 存放过磅类型常量
+	 * @param request
+	 */
+	public static void setGblxInRequest(HttpServletRequest request) {
+
+		request.setAttribute("rcgbGblx", GuoBangJiLu.RU_CHANG_GUO_BANG);
+		request.setAttribute("ccgbGblx", GuoBangJiLu.CHU_CHANG_GUO_BANG);
+
+		request.setAttribute("rcgbGblxMc", GuoBangJiLu.RU_CHANG_GUO_BANG_TEXT);
+		request.setAttribute("ccgbGblxMc", GuoBangJiLu.CHU_CHANG_GUO_BANG_TEXT);
 	}
 }
