@@ -103,6 +103,22 @@ public class DDGLController {
 		
 		return MODULE_NAME+"/dzj/list";
 	}
+
+	/**
+	 * 跳转到订单管理-待入库-列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/drk/list")
+	public String goDrkList(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		Constant.setDdztInRequest(request);
+		setShlxInRequest(request);
+		setLxlxInRequest(request);
+		
+		return MODULE_NAME+"/drk/list";
+	}
 	
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {

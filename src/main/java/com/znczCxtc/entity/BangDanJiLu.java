@@ -51,17 +51,17 @@ public class BangDanJiLu {
 	public void setBz(String bz) {
 		this.bz = bz;
 	}
-	public String getSjxm() {
-		return sjxm;
+	public String getCysjXm() {
+		return cysjXm;
 	}
-	public void setSjxm(String sjxm) {
-		this.sjxm = sjxm;
+	public void setCysjXm(String cysjXm) {
+		this.cysjXm = cysjXm;
 	}
-	public String getCph() {
-		return cph;
+	public String getCyclCph() {
+		return cyclCph;
 	}
-	public void setCph(String cph) {
-		this.cph = cph;
+	public void setCyclCph(String cyclCph) {
+		this.cyclCph = cyclCph;
 	}
 	public Integer getLxlx() {
 		return lxlx;
@@ -106,8 +106,8 @@ public class BangDanJiLu {
 	private Integer ddId;
 	private String ddh;
 	private String bz;
-	private String sjxm;
-	private String cph;
+	private String cysjXm;
+	private String cyclCph;
 	private Integer lxlx;
 	private String wzMc;
 	private String shbmMc;

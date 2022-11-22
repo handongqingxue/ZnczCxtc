@@ -38,6 +38,10 @@ public class Constant {
 	 * 物资管理模块类名
 	 */
 	public static final String WZGL_MODULE_NAME="wzgl";
+	/**
+	 * 过磅管理模块类名
+	 */
+	public static final String GBGL_MODULE_NAME="gbgl";
 
 	//地点标识start
 	public static final int WEI_GUO_BANG=0;

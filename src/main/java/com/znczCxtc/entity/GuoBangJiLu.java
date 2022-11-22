@@ -75,23 +75,23 @@ public class GuoBangJiLu {
 	public void setDdh(String ddh) {
 		this.ddh = ddh;
 	}
-	public String getCph() {
-		return cph;
+	public String getCyclCph() {
+		return cyclCph;
 	}
-	public void setCph(String cph) {
-		this.cph = cph;
+	public void setCyclCph(String cyclCph) {
+		this.cyclCph = cyclCph;
 	}
-	public String getSjsfzh() {
-		return sjsfzh;
+	public String getSjSfzh() {
+		return sjSfzh;
 	}
-	public void setSjsfzh(String sjsfzh) {
-		this.sjsfzh = sjsfzh;
+	public void setSjSfzh(String sjSfzh) {
+		this.sjSfzh = sjSfzh;
 	}
-	public String getSjxm() {
-		return sjxm;
+	public String getSjXm() {
+		return sjXm;
 	}
-	public void setSjxm(String sjxm) {
-		this.sjxm = sjxm;
+	public void setSjXm(String sjXm) {
+		this.sjXm = sjXm;
 	}
 	public Integer getLxlx() {
 		return lxlx;
@@ -127,9 +127,9 @@ public class GuoBangJiLu {
 	private String gblxName;
 	private Integer ddId;
 	private String ddh;
-	private String cph;
-	private String sjsfzh;
-	private String sjxm;
+	private String cyclCph;
+	private String sjSfzh;
+	private String sjXm;
 	private Integer lxlx;//流向类型
 	private String yssMc;
 	private String fhdwMc;
