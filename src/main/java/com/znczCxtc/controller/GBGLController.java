@@ -9,9 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.znczCxtc.util.*;
+
+import net.sf.json.JSONObject;
+
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
 
@@ -280,18 +285,66 @@ public class GBGLController {
 
 	@RequestMapping(value="/editGuoBangJiLu")
 	@ResponseBody
-	public Map<String, Object> editGuoBangJiLu(GuoBangJiLu gbjl) {
+	public Map<String, Object> editGuoBangJiLu(GuoBangJiLu gbjl,
+			@RequestParam(value="zp1_file",required=false) MultipartFile zp1_file,
+			@RequestParam(value="zp2_file",required=false) MultipartFile zp2_file,
+			@RequestParam(value="zp3_file",required=false) MultipartFile zp3_file,
+			HttpServletRequest request) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			MultipartFile[] fileArr=new MultipartFile[3];
+			fileArr[0]=zp1_file;
+			fileArr[1]=zp2_file;
+			fileArr[2]=zp3_file;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						String folder="GuoBangJiLu/";
+						switch (i) {
+						case 0:
+							folder+="Zp1";//照片1
+							break;
+						case 1:
+							folder+="Zp2";//照片2
+							break;
+						case 2:
+							folder+="Zp3";//照片3
+							break;
+						}
+						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								gbjl.setZp1(dataJO.get("src").toString());
+								break;
+							case 1:
+								gbjl.setZp2(dataJO.get("src").toString());
+								break;
+							case 2:
+								gbjl.setZp3(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+				}
+			}
 		
-		int count=guoBangJiLuService.edit(gbjl);
-		if(count>0) {
-			jsonMap.put("message", "ok");
-			jsonMap.put("info", "编辑过磅信息成功！");
-		}
-		else {
-			jsonMap.put("message", "no");
-			jsonMap.put("info", "编辑过磅信息失败！");
+			int count=guoBangJiLuService.edit(gbjl);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "编辑过磅信息成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "编辑过磅信息失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return jsonMap;
 	}

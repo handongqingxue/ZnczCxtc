@@ -23,62 +23,72 @@
 	width: 180px;
 	height:30px;
 }
+.zp1_img,.zp2_img,.zp3_img{
+	width: 220px;
+	height:220px;
+	margin-top: 10px;
+}
 </style>
 <script type="text/javascript">
 var path='<%=basePath %>';
 var gbglPath=path+'gbgl/';
 var dialogTop=70;
 var dialogLeft=20;
-var edNum=0;
+var ddNum=0;
 $(function(){
-	initEditDialog();//0
+	initDetailDialog();//0
 
 	initDialogPosition();//将不同窗体移动到主要内容区域
 });
 
 function initDialogPosition(){
 	//基本属性组
-	var edpw=$("body").find(".panel.window").eq(edNum);
-	var edws=$("body").find(".window-shadow").eq(edNum);
+	var ddpw=$("body").find(".panel.window").eq(ddNum);
+	var ddws=$("body").find(".window-shadow").eq(ddNum);
 
 	var ccDiv=$("#center_con_div");
-	ccDiv.append(edpw);
-	ccDiv.append(edws);
+	ccDiv.append(ddpw);
+	ccDiv.append(ddws);
 	ccDiv.css("width",setFitWidthInParent("body","center_con_div")+"px");
 }
 
-function initEditDialog(){
+function initDetailDialog(){
 	dialogTop+=20;
-	$("#edit_div").dialog({
+	$("#detail_div").dialog({
 		title:"过磅信息",
-		width:setFitWidthInParent("body","edit_div"),
-		height:160,
+		width:setFitWidthInParent("body","detail_div"),
+		height:720,
 		top:dialogTop,
 		left:dialogLeft
 	});
 
-	$("#edit_div table").css("width",(setFitWidthInParent("body","edit_div_table"))+"px");
-	$("#edit_div table").css("magin","-100px");
-	$("#edit_div table td").css("padding-left","50px");
-	$("#edit_div table td").css("padding-right","20px");
-	$("#edit_div table td").css("font-size","15px");
-	$("#edit_div table .td1").css("width","15%");
-	$("#edit_div table .td2").css("width","30%");
-	$("#edit_div table tr").css("border-bottom","#CAD9EA solid 1px");
-	$("#edit_div table tr").each(function(i){
-		$(this).css("height","45px");
+	$("#detail_div table").css("width",(setFitWidthInParent("body","detail_div_table"))+"px");
+	$("#detail_div table").css("magin","-100px");
+	$("#detail_div table td").css("padding-left","50px");
+	$("#detail_div table td").css("padding-right","20px");
+	$("#detail_div table td").css("font-size","15px");
+	$("#detail_div table .td1").css("width","15%");
+	$("#detail_div table .td2").css("width","30%");
+	$("#detail_div table tr").css("border-bottom","#CAD9EA solid 1px");
+	$("#detail_div table tr").each(function(i){
+		var height;
+		if(i==2||i==3)
+			height=310;
+		else
+			height=45;
+		$(this).css("height",height+"px");
 	});
 
-	$(".panel.window").eq(edNum).css("margin-top","20px");
-	$(".panel.window .panel-title").eq(edNum).css("color","#000");
-	$(".panel.window .panel-title").eq(edNum).css("font-size","15px");
-	$(".panel.window .panel-title").eq(edNum).css("padding-left","10px");
+	$(".panel.window").eq(ddNum).css("margin-top","20px");
+	$(".panel.window .panel-title").eq(ddNum).css("color","#000");
+	$(".panel.window .panel-title").eq(ddNum).css("font-size","15px");
+	$(".panel.window .panel-title").eq(ddNum).css("padding-left","10px");
 	
 	$(".panel-header, .panel-body").css("border-color","#ddd");
 	
 	//以下的是表格下面的面板
-	$(".window-shadow").eq(edNum).css("margin-top","20px");
-	$(".window,.window .window-body").eq(edNum).css("border-color","#ddd");
+	$(".window-shadow").eq(ddNum).css("margin-top","20px");
+	$(".window,.window .window-body").eq(ddNum).css("border-color","#ddd");
 }
 
 function setFitWidthInParent(parent,self){
@@ -87,10 +97,10 @@ function setFitWidthInParent(parent,self){
 	case "center_con_div":
 		space=205;
 		break;
-	case "edit_div":
+	case "detail_div":
 		space=340;
 		break;
-	case "edit_div_table":
+	case "detail_div_table":
 	case "panel_window":
 		space=355;
 		break;
@@ -106,7 +116,7 @@ function setFitWidthInParent(parent,self){
 	<div class="center_con_div" id="center_con_div">
 		<div class="page_location_div">过磅管理-过磅记录-过磅详情</div>
 		
-		<div id="edit_div">
+		<div id="detail_div">
 			<form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
 			<table>
 			  <tr>
@@ -125,6 +135,12 @@ function setFitWidthInParent(parent,self){
 			  </tr>
 			  <tr>
 				<td class="td1" align="right">
+					过磅时间
+				</td>
+				<td class="td2">
+					${requestScope.gbjl.gbsj }
+				</td>
+				<td class="td1" align="right">
 					过磅状态
 				</td>
 				<td class="td2">
@@ -133,6 +149,8 @@ function setFitWidthInParent(parent,self){
 						<c:otherwise>异常</c:otherwise>
 					</c:choose>
 				</td>
+			  </tr>
+			  <tr>
 				<td class="td1" align="right">
 					过磅类型
 				</td>
@@ -140,6 +158,26 @@ function setFitWidthInParent(parent,self){
 					<c:if test="${requestScope.gbjl.gblx eq 1 }">入厂</c:if>
 					<c:if test="${requestScope.gbjl.gblx eq 2 }">出厂</c:if>
 					过磅
+				</td>
+				<td class="td1" align="right">
+					照片1
+				</td>
+				<td class="td2">
+					<img class="zp1_img" id="zp1_img" alt="" src="${requestScope.gbjl.zp1 }"/>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					照片2
+				</td>
+				<td class="td2">
+					<img class="zp2_img" id="zp2_img" alt="" src="${requestScope.gbjl.zp2 }"/>
+				</td>
+				<td class="td1" align="right">
+					照片3
+				</td>
+				<td class="td2">
+					<img class="zp3_img" id="zp3_img" alt="" src="${requestScope.gbjl.zp3 }"/>
 				</td>
 			  </tr>
 			</table>

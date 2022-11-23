@@ -43,6 +43,15 @@
 			<if test="gbzl!=null">
 				gbzl=#{gbzl},
 			</if>
+			<if test="zp1!=null">
+				zp1=#{zp1},
+			</if>
+			<if test="zp2!=null">
+				zp2=#{zp2},
+			</if>
+			<if test="zp3!=null">
+				zp3=#{zp3},
+			</if>
 			<if test="gbzt!=null">
 				gbzt=#{gbzt},
 			</if>
