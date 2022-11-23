@@ -405,6 +405,29 @@ public class GkjController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/editBangDanJiLu")
+	@ResponseBody
+	public Map<String, Object> editBangDanJiLu(BangDanJiLu bdjl) {
+
+		System.out.println("ddId==="+bdjl.getDdId());
+		System.out.println("mz==="+bdjl.getMz());
+		System.out.println("pz==="+bdjl.getPz());
+		System.out.println("jz==="+bdjl.getJz());
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		int count=bangDanJiLuService.edit(bdjl);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑磅单信息成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑磅单信息失败！");
+		}
+		return jsonMap;
+	}
+
 	@RequestMapping(value="/selectBangDanJiLuByDdId")
 	@ResponseBody
 	public Map<String, Object> selectBangDanJiLuByDdId(Integer ddId) {

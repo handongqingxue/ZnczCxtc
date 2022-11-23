@@ -30,18 +30,18 @@ public class DingDanServiceImpl implements DingDanService {
 	private SimpleDateFormat ddhSdf=new SimpleDateFormat("yyyyMMdd");
 
 	@Override
-	public int queryForInt(String ddh, Integer ddztId, String ddztMc, String cph, String jhysrq, String yssMc, String wzMc, 
+	public int queryForInt(String ddh, Integer ddztId, String ddztMc, String cyclCph, String jhysrq, String yssMc, String wzMc, 
 			String fhdwMc, String shdwMc, String cysjXm, String cysjSfzh, String jcsjs, String jcsje, String ccsjs, String ccsje) {
 		// TODO Auto-generated method stub
-		return dingDanDao.queryForInt(ddh,ddztId,ddztMc,cph,jhysrq,yssMc,wzMc,fhdwMc,shdwMc,cysjXm,cysjSfzh,jcsjs,jcsje,ccsjs,ccsje);
+		return dingDanDao.queryForInt(ddh,ddztId,ddztMc,cyclCph,jhysrq,yssMc,wzMc,fhdwMc,shdwMc,cysjXm,cysjSfzh,jcsjs,jcsje,ccsjs,ccsje);
 	}
 
 	@Override
-	public List<DingDan> queryList(String ddh, Integer ddztId, String ddztMc, String cph, String jhysrq, String yssMc, String wzMc, 
+	public List<DingDan> queryList(String ddh, Integer ddztId, String ddztMc, String cyclCph, String jhysrq, String yssMc, String wzMc, 
 			String fhdwMc, String shdwMc, String cysjXm, String cysjSfzh, String jcsjs, String jcsje, String ccsjs, String ccsje, 
 			int page, int rows, String sort, String order) {
 		// TODO Auto-generated method stub
-		return dingDanDao.queryList(ddh, ddztId, ddztMc, cph, jhysrq, yssMc, wzMc, fhdwMc, shdwMc, cysjXm, cysjSfzh, jcsjs, jcsje, ccsjs, ccsje, 
+		return dingDanDao.queryList(ddh, ddztId, ddztMc, cyclCph, jhysrq, yssMc, wzMc, fhdwMc, shdwMc, cysjXm, cysjSfzh, jcsjs, jcsje, ccsjs, ccsje, 
 				(page-1)*rows, rows, sort, order);
 	}
 
@@ -140,7 +140,7 @@ public class DingDanServiceImpl implements DingDanService {
 		List<Integer> ddztIdList = dingDanZhuangTaiDao.getIdListByMcList(ddztMcList);
 		List<DingDan> ddList = dingDanDao.getByZtListCph(ddztIdList,cph);
 		DingDan dd=null;
-		if(ddList!=null)
+		if(ddList.size()>0)
 			dd=ddList.get(0);
 		return dd;
 	}

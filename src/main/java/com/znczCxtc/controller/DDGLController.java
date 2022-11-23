@@ -99,7 +99,7 @@ public class DDGLController {
 		
 		Constant.setDdztInRequest(request);
 		Constant.setShlxInRequest(request);
-		setLxlxInRequest(request);
+		Constant.setLxlxInRequest(request);
 		
 		return MODULE_NAME+"/dzj/list";
 	}
@@ -115,7 +115,7 @@ public class DDGLController {
 		//publicService.selectNav(request);
 		Constant.setDdztInRequest(request);
 		Constant.setShlxInRequest(request);
-		setLxlxInRequest(request);
+		Constant.setLxlxInRequest(request);
 		
 		return MODULE_NAME+"/drk/list";
 	}
@@ -150,7 +150,7 @@ public class DDGLController {
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
 
-		setLxlxInRequest(request);
+		Constant.setLxlxInRequest(request);
 		Constant.setDdztInRequest(request);
 		setGbztInRequest(request);
 		setPlaceInRequest(request);
@@ -186,7 +186,7 @@ public class DDGLController {
 	public String goShjlList(HttpServletRequest request) {
 		
 		Constant.setShlxInRequest(request);
-		setLxlxInRequest(request);
+		Constant.setLxlxInRequest(request);
 		setShjgInRequest(request);
 		
 		return MODULE_NAME+"/shjl/list";
@@ -381,15 +381,15 @@ public class DDGLController {
 	
 	@RequestMapping(value="/queryZHCXList")
 	@ResponseBody
-	public Map<String, Object> queryZHCXList(String ddh,Integer ddztId,String ddztMc,String cph,String jhysrq,String yssMc,String wzMc,
+	public Map<String, Object> queryZHCXList(String ddh,Integer ddztId,String ddztMc,String cyclCph,String jhysrq,String yssMc,String wzMc,
 			String fhdwMc,String shdwMc,String cysjXm,String cysjSfzh,String jcsjs,String jcsje,String ccsjs,String ccsje,
 			int page,int rows,String sort,String order) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
 		try {
-			int count = dingDanService.queryForInt(ddh,ddztId,ddztMc,cph,jhysrq,yssMc,wzMc,fhdwMc,shdwMc,cysjXm,cysjSfzh,jcsjs,jcsje,ccsjs,ccsje);
-			List<DingDan> zhglList=dingDanService.queryList(ddh,ddztId,ddztMc,cph,jhysrq,yssMc,wzMc,fhdwMc,shdwMc,cysjXm,cysjSfzh,jcsjs,jcsje,ccsjs,ccsje, page, rows, sort, order);
+			int count = dingDanService.queryForInt(ddh,ddztId,ddztMc,cyclCph,jhysrq,yssMc,wzMc,fhdwMc,shdwMc,cysjXm,cysjSfzh,jcsjs,jcsje,ccsjs,ccsje);
+			List<DingDan> zhglList=dingDanService.queryList(ddh,ddztId,ddztMc,cyclCph,jhysrq,yssMc,wzMc,fhdwMc,shdwMc,cysjXm,cysjSfzh,jcsjs,jcsje,ccsjs,ccsje, page, rows, sort, order);
 			
 			jsonMap.put("total", count);
 			jsonMap.put("rows", zhglList);
@@ -600,18 +600,5 @@ public class DDGLController {
 		
 		request.setAttribute("hgShjgMc", DingDanShenHeJiLu.HE_GE_TEXT);
 		request.setAttribute("bhgShjgMc", DingDanShenHeJiLu.BU_HE_GE_TEXT);
-	}
-	
-	/**
-	 * 存放流向类型常量
-	 * @param request
-	 */
-	public void setLxlxInRequest(HttpServletRequest request) {
-
-		request.setAttribute("syLxlx", DingDan.SONG_YUN);
-		request.setAttribute("qyLxlx", DingDan.QU_YUN);
-		
-		request.setAttribute("syLxlxMc", DingDan.SONG_YUN_TEXT);
-		request.setAttribute("qyLxlxMc", DingDan.QU_YUN_TEXT);
 	}
 }

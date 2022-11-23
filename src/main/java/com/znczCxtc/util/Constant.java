@@ -141,4 +141,17 @@ public class Constant {
 		request.setAttribute("rcgbGblxMc", GuoBangJiLu.RU_CHANG_GUO_BANG_TEXT);
 		request.setAttribute("ccgbGblxMc", GuoBangJiLu.CHU_CHANG_GUO_BANG_TEXT);
 	}
+	
+	/**
+	 * 存放流向类型常量
+	 * @param request
+	 */
+	public static void setLxlxInRequest(HttpServletRequest request) {
+
+		request.setAttribute("syLxlx", DingDan.SONG_YUN);
+		request.setAttribute("qyLxlx", DingDan.QU_YUN);
+		
+		request.setAttribute("syLxlxMc", DingDan.SONG_YUN_TEXT);
+		request.setAttribute("qyLxlxMc", DingDan.QU_YUN_TEXT);
+	}
 }

@@ -6,10 +6,10 @@ import com.znczCxtc.entity.*;
 
 public interface DingDanService {
 
-	int queryForInt(String ddh, Integer ddztId, String ddztMc, String cph, String jhysrq, String yssMc, String wzMc, 
+	int queryForInt(String ddh, Integer ddztId, String ddztMc, String cyclCph, String jhysrq, String yssMc, String wzMc, 
 			String fhdwMc, String shdwMc, String cysjXm, String cysjSfzh, String jcsjs, String jcsje, String ccsjs, String ccsje);
 
-	List<DingDan> queryList(String ddh, Integer ddztId, String ddztMc, String cph, String jhysrq, String yssMc, String wzMc, 
+	List<DingDan> queryList(String ddh, Integer ddztId, String ddztMc, String cyclCph, String jhysrq, String yssMc, String wzMc, 
 			String fhdwMc, String shdwMc, String cysjXm, String cysjSfzh, String jcsjs, String jcsje, String ccsjs, String ccsje, 
 			int page, int rows, String sort, String order);
 

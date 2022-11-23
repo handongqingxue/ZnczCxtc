@@ -17,24 +17,24 @@
 	height:32px;
 }
 .tab1_div .toolbar .row_div .ddh_span,
-.tab1_div .toolbar .row_div .cph_span,
+.tab1_div .toolbar .row_div .cyclCph_span,
 .tab1_div .toolbar .row_div .yss_span,
 .tab1_div .toolbar .row_div .wzmc_span,
 .tab1_div .toolbar .row_div .fhdw_span,
 .tab1_div .toolbar .row_div .shdw_span,
-.tab1_div .toolbar .row_div .sjxm_span,
-.tab1_div .toolbar .row_div .sjsfzh_span,
+.tab1_div .toolbar .row_div .cysjXm_span,
+.tab1_div .toolbar .row_div .cysjSfzh_span,
 .tab1_div .toolbar .row_div .search_but{
 	margin-left: 13px;
 }
 .tab1_div .toolbar .row_div .ddh_inp,
-.tab1_div .toolbar .row_div .cph_inp,
+.tab1_div .toolbar .row_div .cyclCph_inp,
 .tab1_div .toolbar .row_div .yssMc_inp,
 .tab1_div .toolbar .row_div .wzMc_inp,
 .tab1_div .toolbar .row_div .fhdwMc_inp,
 .tab1_div .toolbar .row_div .shdwMc_inp,
-.tab1_div .toolbar .row_div .sjxm_inp,
-.tab1_div .toolbar .row_div .sjsfzh_inp{
+.tab1_div .toolbar .row_div .cysjXm_inp,
+.tab1_div .toolbar .row_div .cysjSfzh_inp{
 	width: 120px;
 	height: 25px;
 }
@@ -45,26 +45,46 @@
 var path='<%=basePath %>';
 var ddglPath=path+'ddgl/';
 var defaultDdztMc='${requestScope.dzxhDdztMc}';
+var ejdsmDdztMc='${requestScope.ejdsmDdztMc}';
+var rkshShlx='${requestScope.rkshShlx}';
+var shrId='${sessionScope.yongHu.id}';
+
+var syLxlx;
+var qyLxlx;
+
+var syLxlxMc;
+var qyLxlxMc;
+
 $(function(){
+	initLxlxVar();
+	
 	initSearchLB();
 	initCheckLB();
 	initTab1();
 });
+
+function initLxlxVar(){
+	syLxlx=parseInt('${requestScope.syLxlx}');
+	qyLxlx=parseInt('${requestScope.qyLxlx}');
+
+	syLxlxMc='${requestScope.syLxlxMc}';
+	qyLxlxMc='${requestScope.qyLxlxMc}';
+}
 
 function initSearchLB(){
 	$("#search_but").linkbutton({
 		iconCls:"icon-search",
 		onClick:function(){
 			var ddh=$("#toolbar #ddh").val();
-			var cph=$("#toolbar #cph").val();
+			var cyclCph=$("#toolbar #cyclCph").val();
 			var yssMc=$("#toolbar #yssMc").val();
 			var wzMc=$("#toolbar #wzMc").val();
 			var fhdwMc=$("#toolbar #fhdwMc").val();
 			var shdwMc=$("#toolbar #shdwMc").val();
-			var sjxm=$("#toolbar #sjxm").val();
-			var sjsfzh=$("#toolbar #sjsfzh").val();
-			tab1.datagrid("load",{ddh:ddh,ddztMc:defaultDdztMc,cph:cph,yssMc:yssMc,wzMc:wzMc,
-				fhdwMc:fhdwMc,shdwMc:shdwMc,sjxm:sjxm,sjsfzh:sjsfzh});
+			var cysjXm=$("#toolbar #cysjXm").val();
+			var cysjSfzh=$("#toolbar #cysjSfzh").val();
+			tab1.datagrid("load",{ddh:ddh,ddztMc:defaultDdztMc,cyclCph:cyclCph,yssMc:yssMc,wzMc:wzMc,
+				fhdwMc:fhdwMc,shdwMc:shdwMc,cysjXm:cysjXm,cysjSfzh:cysjSfzh});
 		}
 	});
 }
@@ -91,11 +111,8 @@ function checkByIds() {
 	}
 	ids=ids.substring(1);
 
-	var ddztMc='${requestScope.checkDdztMc}';
-	var shlx='${requestScope.shlx}';
-	var shrId='${sessionScope.yongHu.id}';
 	$.post(ddglPath + "checkDingDanByIds",
-		{ids:ids,ddztMc:ddztMc,shlx:shlx,shjg:true,shrId:shrId},
+		{ids:ids,ddztMc:ejdsmDdztMc,shlx:rkshShlx,shjg:true,shrId:shrId},
 		function(result){
 			if(result.status==1){
 				alert(result.msg);
@@ -127,16 +144,7 @@ function initTab1(){
 			{field:"fhdwMc",title:"发货单位",width:150},
 			{field:"shdwMc",title:"收货单位",width:150},
             {field:"lxlx",title:"流向类型",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="送运";
-					break;
-				case 2:
-					str="取运";
-					break;
-				}
-            	return str;
+            	return getLxlxMcById(value);
             }},
             {field:"yzxzl",title:"预装卸重量",width:100},
             {field:"sjzl",title:"实际重量",width:100},
@@ -161,6 +169,19 @@ function initTab1(){
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 		}
 	});
+}
+
+function getLxlxMcById(lxlxId){
+	var str;
+	switch (lxlxId) {
+	case syLxlx:
+		str=syLxlxMc;//送运
+		break;
+	case qyLxlx:
+		str=qyLxlxMc;//取运
+		break;
+	}
+	return str;
 }
 
 function setFitWidthInParent(parent,self){
@@ -192,8 +213,8 @@ function setFitWidthInParent(parent,self){
 			<div class="row_div">
 				<span class="ddh_span">订单号：</span>
 				<input type="text" class="ddh_inp" id="ddh" placeholder="请输入订单号"/>
-				<span class="cph_span">车牌号：</span>
-				<input type="text" class="cph_inp" id="cph" placeholder="请输入车牌号"/>
+				<span class="cyclCph_span">车牌号：</span>
+				<input type="text" class="cyclCph_inp" id="cyclCph" placeholder="请输入车牌号"/>
 				<span class="yss_span">运输商：</span>
 				<input type="text" class="yssMc_inp" id="yssMc" placeholder="请输入运输商"/>
 				<span class="wzMc_span">物资名称：</span>
@@ -204,10 +225,10 @@ function setFitWidthInParent(parent,self){
 				<input type="text" class="fhdwMc_inp" id="fhdwMc" placeholder="请输入发货单位"/>
 				<span class="shdw_span">收货单位：</span>
 				<input type="text" class="shdwMc_inp" id="shdwMc" placeholder="请输入收货单位"/>
-				<span class="sjxm_span">司机姓名：</span>
-				<input type="text" class="sjxm_inp" id="sjxm" placeholder="请输入司机姓名"/>
-				<span class="sjsfzh_span">司机身份证号：</span>
-				<input type="text" class="sjsfzh_inp" id="sjsfzh" placeholder="请输入司机身份证号"/>
+				<span class="cysjXm_span">司机姓名：</span>
+				<input type="text" class="cysjXm_inp" id="cysjXm" placeholder="请输入司机姓名"/>
+				<span class="cysjSfzh_span">司机身份证号：</span>
+				<input type="text" class="cysjSfzh_inp" id="cysjSfzh" placeholder="请输入司机身份证号"/>
 				<a class="search_but" id="search_but">查询</a>
 				<a id="check_but">审核</a>
 			</div>

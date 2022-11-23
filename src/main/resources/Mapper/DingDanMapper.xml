@@ -16,8 +16,8 @@
 		<if test="ddztMc!=''&amp;ddztMc!=null">
 			and ddzt.mc=#{ddztMc}
 		</if>
-		<if test="cph!=''&amp;cph!=null">
-			and cl.cph like CONCAT('%',#{cph},'%')
+		<if test="cyclCph!=''&amp;cyclCph!=null">
+			and cl.cph like CONCAT('%',#{cyclCph},'%')
 		</if>
 		<if test="jhysrq!=''&amp;jhysrq!=null">
 			and dd.jhysrq like CONCAT('%',#{jhysrq},'%')
@@ -55,8 +55,8 @@
 		<if test="ddztMc!=''&amp;ddztMc!=null">
 			and ddzt.mc=#{ddztMc}
 		</if>
-		<if test="cph!=''&amp;cph!=null">
-			and cl.cph like CONCAT('%',#{cph},'%')
+		<if test="cyclCph!=''&amp;cyclCph!=null">
+			and cl.cph like CONCAT('%',#{cyclCph},'%')
 		</if>
 		<if test="jhysrq!=''&amp;jhysrq!=null">
 			and dd.jhysrq like CONCAT('%',#{jhysrq},'%')
