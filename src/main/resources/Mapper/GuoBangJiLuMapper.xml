@@ -9,6 +9,15 @@
 			<if test="gbzl!=null">
 				gbzl,
 			</if>
+			<if test="zp1!=null">
+				zp1,
+			</if>
+			<if test="zp2!=null">
+				zp2,
+			</if>
+			<if test="zp3!=null">
+				zp3,
+			</if>
 			<if test="gbzt!=null">
 				gbzt,
 			</if>
@@ -24,6 +33,15 @@
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="gbzl!=null">
 				#{gbzl},
+			</if>
+			<if test="zp1!=null">
+				#{zp1},
+			</if>
+			<if test="zp2!=null">
+				#{zp2},
+			</if>
+			<if test="zp3!=null">
+				#{zp3},
 			</if>
 			<if test="gbzt!=null">
 				#{gbzt},

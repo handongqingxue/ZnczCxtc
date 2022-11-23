@@ -27,6 +27,26 @@
 	width: 150px;
 	height:30px;
 }
+.uploadBut_div{
+	line-height:30px;
+	text-align:center;
+	color:#fff;
+	background-color: #1777FF;
+	border-radius:5px;
+	cursor: pointer;
+}
+.upZp1But_div,.upZp2But_div,.upZp3But_div{
+	width: 150px;
+	height: 30px;
+}
+.zp1_file,.zp2_file,.zp3_file{
+	display: none;
+}
+.zp1_img,.zp2_img,.zp3_img{
+	width: 220px;
+	height:220px;
+	margin-top: 10px;
+}
 </style>
 <script type="text/javascript">
 var path='<%=basePath %>';
@@ -56,7 +76,7 @@ function initNewDialog(){
 	$("#new_div").dialog({
 		title:"过磅信息",
 		width:setFitWidthInParent("body","new_div"),
-		height:200,
+		height:720,
 		top:dialogTop,
 		left:dialogLeft,
 		buttons:[
@@ -75,7 +95,12 @@ function initNewDialog(){
 	$("#new_div table .td2").css("width","30%");
 	$("#new_div table tr").css("border-bottom","#CAD9EA solid 1px");
 	$("#new_div table tr").each(function(i){
-		$(this).css("height","45px");
+		var height;
+		if(i==2||i==3)
+			height=310;
+		else
+			height=45;
+		$(this).css("height",height+"px");
 	});
 
 	$(".panel.window").eq(ndNum).css("margin-top","20px");
@@ -201,6 +226,84 @@ function checkGBLX(){
 		return true;
 }
 
+function uploadZp1(){
+	document.getElementById("zp1_file").click();
+}
+
+function uploadZp2(){
+	document.getElementById("zp2_file").click();
+}
+
+function uploadZp3(){
+	document.getElementById("zp3_file").click();
+}
+
+function showZp1(obj){
+	var file = $(obj);
+    var fileObj = file[0];
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#zp1_img");
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function showZp2(obj){
+	var file = $(obj);
+    var fileObj = file[0];
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#zp2_img");
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function showZp3(obj){
+	var file = $(obj);
+    var fileObj = file[0];
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#zp3_img");
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
 function setFitWidthInParent(parent,self){
 	var space=0;
 	switch (self) {
@@ -257,6 +360,38 @@ function setFitWidthInParent(parent,self){
 				<td class="td2">
 					<input id="gblx_cbb"/>
 					<input type="hidden" id="gblx" name="gblx"/>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					照片1
+				</td>
+				<td class="td2">
+					<div class="uploadBut_div upZp1But_div" onclick="uploadZp1()">选择照片1</div>
+					<input type="file" class="zp1_file" id="zp1_file" name="zp1_file" onchange="showZp1(this)"/>
+					<img class="zp1_img" id="zp1_img" alt="" src=""/>
+				</td>
+				<td class="td1" align="right">
+					照片2
+				</td>
+				<td class="td2">
+					<div class="uploadBut_div upZp2But_div" onclick="uploadZp2()">选择照片2</div>
+					<input type="file" class="zp2_file" id="zp2_file" name="zp2_file" onchange="showZp2(this)"/>
+					<img class="zp2_img" id="zp2_img" alt="" src=""/>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+					照片3
+				</td>
+				<td class="td2">
+					<div class="uploadBut_div upZp3But_div" onclick="uploadZp3()">选择照片3</div>
+					<input type="file" class="zp3_file" id="zp3_file" name="zp3_file" onchange="showZp3(this)"/>
+					<img class="zp3_img" id="zp3_img" alt="" src=""/>
+				</td>
+				<td class="td1" align="right">
+				</td>
+				<td class="td2">
 				</td>
 			  </tr>
 			</table>

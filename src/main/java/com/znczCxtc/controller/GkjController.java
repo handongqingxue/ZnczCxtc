@@ -457,10 +457,54 @@ public class GkjController {
 
 	@RequestMapping(value="/newGuoBangJiLu")
 	@ResponseBody
-	public Map<String, Object> newGuoBangJiLu(GuoBangJiLu gbjl) {
+	public Map<String, Object> newGuoBangJiLu(GuoBangJiLu gbjl,
+			@RequestParam(value="zp1_file",required=false) MultipartFile zp1_file,
+			@RequestParam(value="zp2_file",required=false) MultipartFile zp2_file,
+			@RequestParam(value="zp3_file",required=false) MultipartFile zp3_file,
+			HttpServletRequest request) {
 
 		Map<String, Object> jsonMap=new HashMap<String, Object>();
 		try {
+			MultipartFile[] fileArr=new MultipartFile[3];
+			fileArr[0]=zp1_file;
+			fileArr[1]=zp2_file;
+			fileArr[2]=zp3_file;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						String folder="GuoBangJiLu/";
+						switch (i) {
+						case 0:
+							folder+="Zp1";//ÕÕÆ¬1
+							break;
+						case 1:
+							folder+="Zp2";//ÕÕÆ¬2
+							break;
+						case 2:
+							folder+="Zp3";//ÕÕÆ¬3
+							break;
+						}
+						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("³É¹¦".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								gbjl.setZp1(dataJO.get("src").toString());
+								break;
+							case 1:
+								gbjl.setZp2(dataJO.get("src").toString());
+								break;
+							case 2:
+								gbjl.setZp3(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+				}
+			}
+			
 			int count=guoBangJiLuService.add(gbjl);
 			if(count>0) {
 				jsonMap.put("message", "ok");
