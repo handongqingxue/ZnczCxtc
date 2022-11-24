@@ -554,6 +554,10 @@ public class GkjController {
 				Integer jyFlag = Integer.valueOf(request.getParameter("jyFlag"));
 				mesJOSB.append("jyFlag:"+jyFlag+",");
 				break;
+			case Constant.MEN_GANG:
+				Integer jccFlag = Integer.valueOf(request.getParameter("jccFlag"));
+				mesJOSB.append("jccFlag:"+jccFlag+",");
+				break;
 			}
 			String cph = request.getParameter("cph");
 			mesJOSB.append("\"cph\":\""+cph+"\"}");

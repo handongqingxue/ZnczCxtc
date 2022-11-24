@@ -26,7 +26,7 @@
 		</trim>
 	</insert>
 	<update id="uploadChuChang" parameterType="com.znczCxtc.entity.CheLiangTaiZhang">
-		update che_liang_tai_zhang
+		update che_liang_tai_zhang set
 		<trim suffixOverrides=",">
 				ccsj=now(),
 			<if test="cczp!=null">

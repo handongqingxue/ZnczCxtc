@@ -2,8 +2,23 @@ package com.znczCxtc.entity;
 
 public class GuoBangJiLu {
 	
+	/**
+	 * 正常标识
+	 */
 	public static final Integer ZHENG_CHANG=1;
+	/**
+	 * 异常标识
+	 */
 	public static final Integer YI_CHANG=2;
+	
+	/**
+	 * 正常名称
+	 */
+	public static final String ZHENG_CHANG_TEXT="正常";
+	/**
+	 * 异常名称
+	 */
+	public static final String YI_CHANG_TEXT="异常";
 	
 	/**
 	 * 入厂过磅标识

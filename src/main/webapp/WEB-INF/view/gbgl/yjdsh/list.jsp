@@ -46,7 +46,17 @@ var ddglPath=path+'ddgl/';
 var exportExcelPath=path+'exportExcel/';
 var defaultDdztMc='${requestScope.yjdshDdztMc}';
 var defaultGblx='${requestScope.rcgbGblx}';
+var yjshShlx='${requestScope.yjshShlx}';
+var shrId='${sessionScope.yongHu.id}';
+
+var syLxlx;
+var qyLxlx;
+
+var syLxlxMc;
+var qyLxlxMc;
 $(function(){
+	initLxlxVar();
+	
 	initGBSJKSDTB();
 	initGBSJJSDTB();
 	initSearchLB();
@@ -54,6 +64,14 @@ $(function(){
 	initSHBTGLB();
 	initTab1();
 });
+
+function initLxlxVar(){
+	syLxlx=parseInt('${requestScope.syLxlx}');
+	qyLxlx=parseInt('${requestScope.qyLxlx}');
+
+	syLxlxMc='${requestScope.syLxlxMc}';
+	qyLxlxMc='${requestScope.qyLxlxMc}';
+}
 
 function initGBSJKSDTB(){
 	gbsjksDTB=$("#gbsjks_dtb").datetimebox({
@@ -117,8 +135,6 @@ function checkByIds(shjg) {
 	ddIds=ddIds.substring(1);
 	
 	var dzxhDdztMc='${requestScope.dzxhDdztMc}';
-	var yjshShlx='${requestScope.yjshShlx}';
-	var shrId='${sessionScope.yongHu.id}';
 	$.post(ddglPath + "checkDingDanByIds",
 		{ids:ddIds,ddztMc:dzxhDdztMc,shlx:yjshShlx,shjg:shjg,shrId:shrId,jyFlag:1},
 		function(result){
@@ -151,16 +167,7 @@ function initTab1(){
 			{field:"fhdwMc",title:"发货单位",width:150},
 			{field:"shdwMc",title:"收货单位",width:150},
             {field:"lxlx",title:"流向类型",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="送运";
-					break;
-				case 2:
-					str="取运";
-					break;
-				}
-            	return str;
+            	return getLxlxMcById(value);
             }},
 			{field:"gbzl",title:"过磅重量",width:200},
 			{field:"gbzt",title:"过磅状态",width:100,formatter:function(value,row){
@@ -186,6 +193,19 @@ function initTab1(){
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 		}
 	});
+}
+
+function getLxlxMcById(lxlxId){
+	var str;
+	switch (lxlxId) {
+	case syLxlx:
+		str=syLxlxMc;//送运
+		break;
+	case qyLxlx:
+		str=qyLxlxMc;//取运
+		break;
+	}
+	return str;
 }
 
 function setFitWidthInParent(o){

@@ -504,7 +504,7 @@ function checkCphToClient(){
 
 function pushCphToClient(){
 	var rows=tab1.datagrid("getSelections");
-	var placeFlag=placeCBB.combobox("getValue");
+	var placeFlag=parseInt(placeCBB.combobox("getValue"));
 	var sjc=lrSjcCBB.combobox("getValue");
 	var wscph=lrWscphCBB.combobox("getValue");
 	var cph=sjc+wscph;
@@ -518,12 +518,12 @@ function pushCphToClient(){
 	paramJO.placeFlag=placeFlag;
 	paramJO.pushFlag=pushCph;
 	
-	var jyFlag=0;
 	var ddztMc=rows[0].ddztMc;
 	switch (placeFlag) {
 	case yhbf:
 	case ehbf:
 	case shbf:
+		var jyFlag=0;
 		if(ddztMc=='${requestScope.yjdsbDdztMc}')//一检待上磅
 			jyFlag=1
 		else if(ddztMc=='${requestScope.ejdsbDdztMc}')//二检待上磅
@@ -535,10 +535,16 @@ function pushCphToClient(){
 		paramJO.jyFlag=jyFlag;
 		break;
 	case mg:
-		if(ddztMc!='${requestScope.yxdDdztMc}'){//已下单
+		var jccFlag=0;//进出厂标识
+		if(ddztMc=='${requestScope.yxdDdztMc}')//已下单
+			jccFlag=1;
+		else if(ddztMc=='${requestScope.ddypzDdztMc}'||ddztMc=='${requestScope.dlcDdztMc}')//待打印凭证或待离厂
+			jccFlag=2
+		else{
 			alert("该车辆非"+ddztMc+"状态");
 			return false;
 		}
+		paramJO.jccFlag=jccFlag;
 		break;
 	}
 	

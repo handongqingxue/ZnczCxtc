@@ -154,4 +154,13 @@ public class Constant {
 		request.setAttribute("syLxlxMc", DingDan.SONG_YUN_TEXT);
 		request.setAttribute("qyLxlxMc", DingDan.QU_YUN_TEXT);
 	}
+	
+	public static void setGbztInRequest(HttpServletRequest request) {
+
+		request.setAttribute("zcGbzt", GuoBangJiLu.ZHENG_CHANG);
+		request.setAttribute("ycGbzt", GuoBangJiLu.YI_CHANG);
+		
+		request.setAttribute("zcGbztMc", GuoBangJiLu.ZHENG_CHANG_TEXT);
+		request.setAttribute("ycgbztMc", GuoBangJiLu.YI_CHANG_TEXT);
+	}
 }

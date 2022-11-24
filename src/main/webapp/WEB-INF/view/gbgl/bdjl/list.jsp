@@ -243,17 +243,22 @@ function openPreviewBDXXDialog(flag,row){
 		$("#preview_bdxx_bg_div").css("display","block");
 		$("#preview_bdxx_div #gby_val_span").text(row.cysjXm);
 		$("#preview_bdxx_div #dh_val_span").text(row.ddh);
+		
 		$("#preview_bdxx_div #wzMc_val_td").text(row.wzMc);
 		$("#preview_bdxx_div table #jcsj_val_td").text(row.jcsj);
 		$("#preview_bdxx_div table #ccsj_val_td").text(row.ccsj);
+		
 		$("#preview_bdxx_div table #mz_val_td").text(row.mz);
 		$("#preview_bdxx_div table #dfgbmz_val_td").text(row.dfgbmz);
+		
 		$("#preview_bdxx_div table #fhdwMc_val_td").text(row.fhdwMc);
 		$("#preview_bdxx_div table #pz_val_td").text(row.pz);
 		$("#preview_bdxx_div table #dfgbpz_val_td").text(row.dfgbpz);
+		
 		$("#preview_bdxx_div table #shdwMc_val_td").text(row.shdwMc);
 		$("#preview_bdxx_div table #jz_val_td").text(row.jz);
 		$("#preview_bdxx_div table #dfgbjz_val_td").text(row.dfgbjz);
+		
 		$("#preview_bdxx_div table #yssMc_val_td").text(row.shdwMc);
 		$("#preview_bdxx_div table #cyclCph_val_td").text(row.cyclCph);
 		$("#preview_bdxx_div table #bz_val_td").text(row.bz);
@@ -262,17 +267,22 @@ function openPreviewBDXXDialog(flag,row){
 		$("#preview_bdxx_bg_div").css("display","none");
 		$("#preview_bdxx_div #gby_val_span").text("");
 		$("#preview_bdxx_div #dh_val_span").text("");
+		
 		$("#preview_bdxx_div #wzMc_val_td").text("");
 		$("#preview_bdxx_div table #jcsj_val_td").text("");
 		$("#preview_bdxx_div table #ccsj_val_td").text("");
+		
 		$("#preview_bdxx_div table #mz_val_td").text("");
 		$("#preview_bdxx_div table #dfgbmz_val_td").text("");
+		
 		$("#preview_bdxx_div table #fhdwMc_val_td").text("");
 		$("#preview_bdxx_div table #pz_val_td").text("");
 		$("#preview_bdxx_div table #dfgbpz_val_td").text("");
+		
 		$("#preview_bdxx_div table #shdwMc_val_td").text("");
 		$("#preview_bdxx_div table #jz_val_td").text("");
 		$("#preview_bdxx_div table #dfgbjz_val_td").text("");
+		
 		$("#preview_bdxx_div table #yssMc_val_td").text("");
 		$("#preview_bdxx_div table #cyclCph_val_td").text("");
 		$("#preview_bdxx_div table #bz_val_td").text("");

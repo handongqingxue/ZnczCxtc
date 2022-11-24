@@ -185,13 +185,11 @@ public class GBGLController {
 		
 		//publicService.selectNav(request);
 		
-		//request.setAttribute("yjdshDdztMc", DingDanZhuangTai.YI_JIAN_DAI_SHEN_HE_TEXT);
-		//request.setAttribute("drkDdztMc", DingDanZhuangTai.DAI_ZHUANG_XIE_HUO_TEXT);
-		//request.setAttribute("shlx", DingDanShenHeJiLu.YI_JIAN_SHEN_HE);
-		//request.setAttribute("gblx", GuoBangJiLu.RU_CHANG_GUO_BANG);
 		Constant.setDdztInRequest(request);
+		Constant.setLxlxInRequest(request);
 		Constant.setShlxInRequest(request);
 		Constant.setGblxInRequest(request);
+		Constant.setGbztInRequest(request);
 		
 		return MODULE_NAME+"/yjdsh/list";
 	}
@@ -206,10 +204,16 @@ public class GBGLController {
 		
 		//publicService.selectNav(request);
 		
-		request.setAttribute("ejdshDdztMc", DingDanZhuangTai.ER_JIAN_DAI_SHEN_HE_TEXT);
-		request.setAttribute("ywcDdztMc", DingDanZhuangTai.YI_WAN_CHENG_TEXT);
-		request.setAttribute("shlx", DingDanShenHeJiLu.ER_JIAN_SHEN_HE);
-		request.setAttribute("gblx", GuoBangJiLu.CHU_CHANG_GUO_BANG);
+		//request.setAttribute("ejdshDdztMc", DingDanZhuangTai.ER_JIAN_DAI_SHEN_HE_TEXT);
+		//request.setAttribute("ywcDdztMc", DingDanZhuangTai.YI_WAN_CHENG_TEXT);
+		//request.setAttribute("shlx", DingDanShenHeJiLu.ER_JIAN_SHEN_HE);
+		//request.setAttribute("gblx", GuoBangJiLu.CHU_CHANG_GUO_BANG);
+		
+		Constant.setDdztInRequest(request);
+		Constant.setLxlxInRequest(request);
+		Constant.setShlxInRequest(request);
+		Constant.setGblxInRequest(request);
+		Constant.setGbztInRequest(request);
 		
 		return MODULE_NAME+"/ejdsh/list";
 	}

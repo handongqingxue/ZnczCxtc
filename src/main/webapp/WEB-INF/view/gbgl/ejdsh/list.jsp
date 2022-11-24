@@ -16,23 +16,23 @@
 	height:32px;
 }
 .tab1_div .toolbar .row_div .ddh_span,
-.tab1_div .toolbar .row_div .sjxm_span,
-.tab1_div .toolbar .row_div .sjsfzh_span,
-.tab1_div .toolbar .row_div .cph_span,
+.tab1_div .toolbar .row_div .cysjXm_span,
+.tab1_div .toolbar .row_div .cysjSfzh_span,
+.tab1_div .toolbar .row_div .cysjCph_span,
 .tab1_div .toolbar .row_div .yss_span,
 .tab1_div .toolbar .row_div .fhdw_span,
 .tab1_div .toolbar .row_div .gbsj_span,
-.tab1_div .toolbar .row_div .shbm_span,
+.tab1_div .toolbar .row_div .shdw_span,
 .tab1_div .toolbar .row_div .search_but{
 	margin-left: 13px;
 }
 .tab1_div .toolbar .row_div .ddh_inp,
-.tab1_div .toolbar .row_div .sjxm_inp,
-.tab1_div .toolbar .row_div .sjsfzh_inp,
-.tab1_div .toolbar .row_div .cph_inp,
+.tab1_div .toolbar .row_div .cysjXm_inp,
+.tab1_div .toolbar .row_div .cysjSfzh_inp,
+.tab1_div .toolbar .row_div .cysjCph_inp,
 .tab1_div .toolbar .row_div .yssMc_inp,
 .tab1_div .toolbar .row_div .fhdwMc_inp,
-.tab1_div .toolbar .row_div .shbmMc_inp{
+.tab1_div .toolbar .row_div .shdwMc_inp{
 	width: 120px;
 	height: 25px;
 }
@@ -44,9 +44,26 @@ var path='<%=basePath %>';
 var gbglPath=path+'gbgl/';
 var ddglPath=path+'ddgl/';
 var exportExcelPath=path+'exportExcel/';
-var ddztMc='${requestScope.ejdshDdztMc}';
-var gblx='${requestScope.gblx}';
+var defaultDdztMc='${requestScope.ejdshDdztMc}';
+var defaultGblx='${requestScope.rcgbGblx}';
+var ejshShlx='${requestScope.ejshShlx}';
+var shrId='${sessionScope.yongHu.id}';
+
+var syLxlx;
+var qyLxlx;
+
+var syLxlxMc;
+var qyLxlxMc;
+
+var zcGbzt;
+var ycGbzt;
+
+var zcGbztMc;
+var ycGbztMc;
 $(function(){
+	initLxlxVar();
+	initGbztVar();
+	
 	initGBSJKSDTB();
 	initGBSJJSDTB();
 	initSearchLB();
@@ -54,6 +71,22 @@ $(function(){
 	initSHBTGLB();
 	initTab1();
 });
+
+function initLxlxVar(){
+	syLxlx=parseInt('${requestScope.syLxlx}');
+	qyLxlx=parseInt('${requestScope.qyLxlx}');
+
+	syLxlxMc='${requestScope.syLxlxMc}';
+	qyLxlxMc='${requestScope.qyLxlxMc}';
+}
+
+function initGbztVar(){
+	zcGbzt=parseInt('${requestScope.zcGbzt}');
+	ycGbzt=parseInt('${requestScope.ycGbzt}');
+
+	zcGbztMc='${requestScope.zcGbztMc}';
+	ycGbztMc='${requestScope.ycGbztMc}';
+}
 
 function initGBSJKSDTB(){
 	gbsjksDTB=$("#gbsjks_dtb").datetimebox({
@@ -72,15 +105,15 @@ function initSearchLB(){
 		iconCls:"icon-search",
 		onClick:function(){
 			var ddh=$("#toolbar #ddh").val();
-			var sjxm=$("#toolbar #sjxm").val();
-			var sjsfzh=$("#toolbar #sjsfzh").val();
-			var cph=$("#toolbar #cph").val();
+			var cysjXm=$("#toolbar #cysjXm").val();
+			var cysjSfzh=$("#toolbar #cysjSfzh").val();
+			var cysjCph=$("#toolbar #cysjCph").val();
 			var yssMc=$("#toolbar #yssMc").val();
 			var fhdwMc=$("#toolbar #fhdwMc").val();
-			var shbmMc=$("#toolbar #shbmMc").val();
+			var shdwMc=$("#toolbar #shdwMc").val();
 			var gbsjks=gbsjksDTB.datetimebox("getValue");
 			var gbsjjs=gbsjjsDTB.datetimebox("getValue");
-			tab1.datagrid("load",{ddztMc:ddztMc,ddh:ddh,sjxm:sjxm,sjsfzh:sjsfzh,cph:cph,yssMc:yssMc,fhdwMc:fhdwMc,shbmMc:shbmMc,gbsjks:gbsjks,gbsjjs:gbsjjs,gblx:gblx});
+			tab1.datagrid("load",{defaultDdztMc:defaultDdztMc,ddh:ddh,cysjXm:cysjXm,cysjSfzh:cysjSfzh,cysjCph:cysjCph,yssMc:yssMc,fhdwMc:fhdwMc,shdwMc:shdwMc,gbsjks:gbsjks,gbsjjs:gbsjjs,gblx:defaultGblx});
 		}
 	});
 }
@@ -116,11 +149,9 @@ function checkByIds(shjg) {
 	}
 	ddIds=ddIds.substring(1);
 	
-	var ddztMc='${requestScope.ywcDdztMc}';
-	var shlx='${requestScope.shlx}';
-	var shrId='${sessionScope.yongHu.id}';
+	var ddypzDdztMc='${requestScope.ddypzDdztMc}';
 	$.post(ddglPath + "checkDingDanByIds",
-		{ids:ddIds,ddztMc:ddztMc,shlx:shlx,shjg:shjg,shrId:shrId,jyFlag:2},
+		{ids:ddIds,ddztMc:ddypzDdztMc,shlx:ejshShlx,shjg:shjg,shrId:shrId,jyFlag:2},
 		function(result){
 			if(result.status==1){
 				alert(result.msg);
@@ -139,32 +170,23 @@ function initTab1(){
 		url:gbglPath+"queryDJYList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
-		queryParams:{ddztMc:ddztMc,gblx:gblx},
+		queryParams:{ddztMc:defaultDdztMc,gblx:defaultGblx},
 		pagination:true,
 		pageSize:10,
 		columns:[[
 			{field:"ddh",title:"订单号",width:150},
-			{field:"sjxm",title:"司机姓名",width:100},
-			{field:"sjsfzh",title:"司机身份证号",width:200},
-			{field:"cph",title:"车牌号",width:150},
+			{field:"cysjXm",title:"司机姓名",width:100},
+			{field:"cysjSfzh",title:"司机身份证号",width:200},
+			{field:"cyclCph",title:"车牌号",width:150},
 			{field:"yssMc",title:"运输商",width:150},
 			{field:"fhdwMc",title:"发货单位",width:150},
-			{field:"shbmMc",title:"收货部门",width:150},
+			{field:"shdwMc",title:"收货单位",width:150},
             {field:"lxlx",title:"流向类型",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="送运";
-					break;
-				case 2:
-					str="取运";
-					break;
-				}
-            	return str;
+            	return getLxlxMcById(value);
             }},
 			{field:"gbzl",title:"过磅重量",width:200},
 			{field:"gbzt",title:"过磅状态",width:100,formatter:function(value,row){
-				return value==1?"正常":"异常";
+				return getGbztMcById(value);
 			}},
             {field:"gbsj",title:"过磅时间",width:150},
             {field:"id",title:"操作",width:50,formatter:function(value,row){
@@ -188,6 +210,32 @@ function initTab1(){
 	});
 }
 
+function getLxlxMcById(lxlxId){
+	var str;
+	switch (lxlxId) {
+	case syLxlx:
+		str=syLxlxMc;//送运
+		break;
+	case qyLxlx:
+		str=qyLxlxMc;//取运
+		break;
+	}
+	return str;
+}
+
+function getGbztMcById(gbztId){
+	var str;
+	switch (gbztId) {
+	case zcGbzt:
+		str=zcGbztMc;//正常
+		break;
+	case ycGbzt:
+		str=ycGbztMc;//异常
+		break;
+	}
+	return str;
+}
+
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
 	return width.substring(0,width.length-2)-250;
@@ -202,20 +250,20 @@ function setFitWidthInParent(o){
 			<div class="row_div">
 				<span class="ddh_span">订单号：</span>
 				<input type="text" class="ddh_inp" id="ddh" placeholder="请输入订单号"/>
-				<span class="sjxm_span">司机姓名：</span>
-				<input type="text" class="sjxm_inp" id="sjxm" placeholder="请输入司机姓名"/>
-				<span class="sjsfzh_span">司机身份证号：</span>
-				<input type="text" class="sjsfzh_inp" id="sjsfzh" placeholder="请输入司机身份证号"/>
-				<span class="cph_span">车牌号：</span>
-				<input type="text" class="cph_inp" id="cph" placeholder="请输入车牌号"/>
+				<span class="cysjXm_span">司机姓名：</span>
+				<input type="text" class="cysjXm_inp" id="sjxm" placeholder="请输入司机姓名"/>
+				<span class="cysjSfzh_span">司机身份证号：</span>
+				<input type="text" class="cysjSfzh_inp" id="cysjSfzh" placeholder="请输入司机身份证号"/>
+				<span class="cysjCph_span">车牌号：</span>
+				<input type="text" class="cysjCph_inp" id="cysjCph" placeholder="请输入车牌号"/>
 			</div>
 			<div class="row_div">
 				<span class="yss_span">运输商：</span>
 				<input type="text" class="yssMc_inp" id="yssMc" placeholder="请输入运输商"/>
 				<span class="fhdw_span">发货单位：</span>
 				<input type="text" class="fhdwMc_inp" id="fhdwMc" placeholder="请输入发货单位"/>
-				<span class="shbm_span">收货部门：</span>
-				<input type="text" class="shbmMc_inp" id="shbmMc" placeholder="请输入收货部门"/>
+				<span class="shdw_span">收货单位：</span>
+				<input type="text" class="shdwMc_inp" id="shdwMc" placeholder="请输入收货单位"/>
 				<span class="gbsj_span">过磅时间：</span>
 				<input id="gbsjks_dtb"/>-
 				<input id="gbsjjs_dtb"/>
