@@ -75,29 +75,53 @@ public class BangDanJiLu {
 	public void setWzMc(String wzMc) {
 		this.wzMc = wzMc;
 	}
-	public String getShbmMc() {
-		return shbmMc;
-	}
-	public void setShbmMc(String shbmMc) {
-		this.shbmMc = shbmMc;
-	}
 	public String getFhdwMc() {
 		return fhdwMc;
 	}
 	public void setFhdwMc(String fhdwMc) {
 		this.fhdwMc = fhdwMc;
 	}
-	public String getSygbsj() {
-		return sygbsj;
+	public String getShdwMc() {
+		return shdwMc;
 	}
-	public void setSygbsj(String sygbsj) {
-		this.sygbsj = sygbsj;
+	public void setShdwMc(String shdwMc) {
+		this.shdwMc = shdwMc;
 	}
-	public String getQygbsj() {
-		return qygbsj;
+	public String getYssMc() {
+		return yssMc;
 	}
-	public void setQygbsj(String qygbsj) {
-		this.qygbsj = qygbsj;
+	public void setYssMc(String yssMc) {
+		this.yssMc = yssMc;
+	}
+	public Float getDfgbpz() {
+		return dfgbpz;
+	}
+	public void setDfgbpz(Float dfgbpz) {
+		this.dfgbpz = dfgbpz;
+	}
+	public Float getDfgbmz() {
+		return dfgbmz;
+	}
+	public void setDfgbmz(Float dfgbmz) {
+		this.dfgbmz = dfgbmz;
+	}
+	public Float getDfgbjz() {
+		return dfgbjz;
+	}
+	public void setDfgbjz(Float dfgbjz) {
+		this.dfgbjz = dfgbjz;
+	}
+	public String getJcsj() {
+		return jcsj;
+	}
+	public void setJcsj(String jcsj) {
+		this.jcsj = jcsj;
+	}
+	public String getCcsj() {
+		return ccsj;
+	}
+	public void setCcsj(String ccsj) {
+		this.ccsj = ccsj;
 	}
 	private Float mz;
 	private Float pz;
@@ -110,8 +134,12 @@ public class BangDanJiLu {
 	private String cyclCph;
 	private Integer lxlx;
 	private String wzMc;
-	private String shbmMc;
 	private String fhdwMc;
-	private String sygbsj;
-	private String qygbsj;
+	private String shdwMc;
+	private String yssMc;
+	private Float dfgbpz;
+	private Float dfgbmz;
+	private Float dfgbjz;
+	private String jcsj;
+	private String ccsj;
 }
