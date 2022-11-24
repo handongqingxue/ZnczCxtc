@@ -334,6 +334,18 @@ public class DingDan {
 	public void setBjsj(String bjsj) {
 		this.bjsj = bjsj;
 	}
+	public String getJcsj() {
+		return jcsj;
+	}
+	public void setJcsj(String jcsj) {
+		this.jcsj = jcsj;
+	}
+	public String getCcsj() {
+		return ccsj;
+	}
+	public void setCcsj(String ccsj) {
+		this.ccsj = ccsj;
+	}
 	public Integer getYjbfh() {
 		return yjbfh;
 	}
@@ -386,6 +398,8 @@ public class DingDan {
 	private String cysjXm;//承运司机姓名
 	private Integer cysjSfzh;//承运司机身份证号
 	private String bjsj;//编辑时间
+	private String jcsj;
+	private String ccsj;
 	private Integer yjbfh=0;//一检磅房号
 	private Integer ejbfh=0;//二检磅房号
 }

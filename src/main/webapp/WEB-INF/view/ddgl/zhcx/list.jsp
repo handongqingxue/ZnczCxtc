@@ -18,27 +18,27 @@
 }
 .tab1_div .toolbar .row_div .ddh_span,
 .tab1_div .toolbar .row_div .ddzt_span,
-.tab1_div .toolbar .row_div .cph_span,
+.tab1_div .toolbar .row_div .cyclCph_span,
 .tab1_div .toolbar .row_div .jhysrq_span,
 .tab1_div .toolbar .row_div .yss_span,
 .tab1_div .toolbar .row_div .wzMc_span,
 .tab1_div .toolbar .row_div .fhdw_span,
 .tab1_div .toolbar .row_div .shdw_span,
-.tab1_div .toolbar .row_div .sjxm_span,
-.tab1_div .toolbar .row_div .sjsfzh_span,
+.tab1_div .toolbar .row_div .cjsjXm_span,
+.tab1_div .toolbar .row_div .cysjSfzh_span,
 .tab1_div .toolbar .row_div .jcsj_span,
 .tab1_div .toolbar .row_div .ccsj_span,
 .tab1_div .toolbar .row_div .search_but{
 	margin-left: 13px;
 }
 .tab1_div .toolbar .row_div .ddh_inp,
-.tab1_div .toolbar .row_div .cph_inp,
+.tab1_div .toolbar .row_div .cyclCph_inp,
 .tab1_div .toolbar .row_div .yssMc_inp,
 .tab1_div .toolbar .row_div .wzMc_inp,
 .tab1_div .toolbar .row_div .fhdwMc_inp,
 .tab1_div .toolbar .row_div .shdwMc_inp,
-.tab1_div .toolbar .row_div .sjxm_inp,
-.tab1_div .toolbar .row_div .sjsfzh_inp{
+.tab1_div .toolbar .row_div .cysjXm_inp,
+.tab1_div .toolbar .row_div .cysjSfzh_inp{
 	width: 120px;
 	height: 25px;
 }
@@ -640,20 +640,20 @@ function initSearchLB(){
 		onClick:function(){
 			var ddh=$("#toolbar #ddh").val();
 			var ddztId=ddztCBB.combobox("getValue");
-			var cph=$("#toolbar #cph").val();
+			var cyclCph=$("#toolbar #cyclCph").val();
 			var jhysrq=jhysrqDB.datebox("getValue");
 			var yssMc=$("#toolbar #yssMc").val();
 			var wzMc=$("#toolbar #wzMc").val();
 			var fhdwMc=$("#toolbar #fhdwMc").val();
 			var shdwMc=$("#toolbar #shdwMc").val();
-			var sjxm=$("#toolbar #sjxm").val();
+			var cysjXm=$("#toolbar #cysjXm").val();
 			var jcsjs=jcsjsDTB.datetimebox("getValue");
 			var jcsje=jcsjeDTB.datetimebox("getValue");
 			var ccsjs=ccsjsDTB.datetimebox("getValue");
 			var ccsje=ccsjeDTB.datetimebox("getValue");
 			
-			tab1.datagrid("load",{ddh:ddh,ddztId:ddztId,cph:cph,jhysrq:jhysrq,yssMc:yssMc,
-				wzMc:wzMc,fhdwMc:fhdwMc,shdwMc:shdwMc,sjxm:sjxm,jcsjs:jcsjs,jcsje:jcsje,ccsjs:ccsjs,ccsje:ccsje});
+			tab1.datagrid("load",{ddh:ddh,ddztId:ddztId,cyclCph:cyclCph,jhysrq:jhysrq,yssMc:yssMc,
+				wzMc:wzMc,fhdwMc:fhdwMc,shdwMc:shdwMc,cysjXm:cysjXm,jcsjs:jcsjs,jcsje:jcsje,ccsjs:ccsjs,ccsje:ccsje});
 		}
 	});
 }
@@ -756,6 +756,8 @@ function initTab1(){
             }},
             {field:"yzxzl",title:"预装卸重量",width:150},
             {field:"bjsj",title:"编辑时间",width:150},
+            {field:"jcsj",title:"进厂时间",width:150},
+            {field:"ccsj",title:"出厂时间",width:150},
             {field:"mz",title:"毛重",width:100},
             {field:"pz",title:"皮重",width:150},
             {field:"sjzl",title:"实际重量",width:150},
@@ -766,7 +768,7 @@ function initTab1(){
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{id:"<div style=\"text-align:center;\">暂无信息<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"id",colspan:24});
+				$(this).datagrid("mergeCells",{index:0,field:"id",colspan:26});
 				data.total=0;
 			}
 			
@@ -973,8 +975,8 @@ function setFitWidthInParent(parent,self){
 				<input type="text" class="ddh_inp" id="ddh" placeholder="请输入订单号"/>
 				<span class="ddzt_span">订单状态：</span>
 				<input id="ddzt_cbb"/>
-				<span class="cph_span">车牌号：</span>
-				<input type="text" class="cph_inp" id="cph" placeholder="请输入车牌号"/>
+				<span class="cyclCph_span">车牌号：</span>
+				<input type="text" class="cyclCph_inp" id="cyclCph" placeholder="请输入车牌号"/>
 				<span class="jhysrq_span">计划运输日期：</span>
 				<input id="jhysrq_db"/>
 				<span class="yss_span">运输商：</span>
@@ -987,10 +989,10 @@ function setFitWidthInParent(parent,self){
 				<input type="text" class="fhdwMc_inp" id="fhdwMc" placeholder="请输入发货单位"/>
 				<span class="shdw_span">收货单位：</span>
 				<input type="text" class="shdwMc_inp" id="shdwMc" placeholder="请输入收货单位"/>
-				<span class="sjxm_span">司机姓名：</span>
-				<input type="text" class="sjxm_inp" id="sjxm" placeholder="请输入司机姓名"/>
-				<span class="sjsfzh_span">司机身份证号：</span>
-				<input type="text" class="sjsfzh_inp" id="sjsfzh" placeholder="请输入司机身份证号"/>
+				<span class="cjsjXm_span">司机姓名：</span>
+				<input type="text" class="cysjXm_inp" id="cysjXm" placeholder="请输入司机姓名"/>
+				<span class="cysjSfzh_span">司机身份证号：</span>
+				<input type="text" class="cysjSfzh_inp" id="cysjSfzh" placeholder="请输入司机身份证号"/>
 			</div>
 			<div class="row_div">
 				<span class="jcsj_span">进厂时间：</span>
