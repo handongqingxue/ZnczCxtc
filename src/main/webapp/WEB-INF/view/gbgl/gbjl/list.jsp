@@ -32,7 +32,22 @@
 var path='<%=basePath %>';
 var gbglPath=path+'gbgl/';
 var exportExcelPath=path+'exportExcel/';
+
+var zcGbzt;
+var ycGbzt;
+
+var zcGbztMc;
+var ycGbztMc;
+
+var rcgbGblx;
+var ccgbGblx;
+
+var rcgbGblxMc;
+var ccgbGblxMc;
 $(function(){
+	initGbztVar();
+	initGblxVar();
+	
 	initGBSJKSDTB();
 	initGBSJJSDTB();
 	initSearchLB();
@@ -40,6 +55,22 @@ $(function(){
 	initOutputBut();
 	initTab1();
 });
+
+function initGbztVar(){
+	zcGbzt=parseInt('${requestScope.zcGbzt}');
+	ycGbzt=parseInt('${requestScope.ycGbzt}');
+
+	zcGbztMc='${requestScope.zcGbztMc}';
+	ycGbztMc='${requestScope.ycGbztMc}';
+}
+
+function initGblxVar(){
+	rcgbGblx=parseInt('${requestScope.rcgbGblx}');
+	ccgbGblx=parseInt('${requestScope.ccgbGblx}');
+
+	rcgbGblxMc='${requestScope.rcgbGblxMc}';
+	ccgbGblxMc='${requestScope.ccgbGblxMc}';
+}
 
 function initGBSJKSDTB(){
 	gbsjksDTB=$("#gbsjks_dtb").datetimebox({
@@ -97,19 +128,10 @@ function initTab1(){
 			{field:"cyclCph",title:"车牌号",width:150},
 			{field:"gbzl",title:"过磅重量",width:200},
 			{field:"gbzt",title:"过磅状态",width:100,formatter:function(value,row){
-				return value==1?"正常":"异常";
+				return getGbztMcById(value);
 			}},
             {field:"gblx",title:"过磅类型",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="入厂";
-					break;
-				case 2:
-					str="出厂";
-					break;
-				}
-            	return str+"过磅";
+            	return getGblxMcById(value);
             }},
             {field:"gbsj",title:"过磅时间",width:150},
             {field:"id",title:"操作",width:110,formatter:function(value,row){
@@ -131,6 +153,32 @@ function initTab1(){
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 		}
 	});
+}
+
+function getGbztMcById(gbztId){
+	var str;
+	switch (gbztId) {
+	case zcGbzt:
+		str=zcGbztMc;//正常
+		break;
+	case ycGbzt:
+		str=ycGbztMc;//异常
+		break;
+	}
+	return str;
+}
+
+function getGblxMcById(gblxId){
+	var str;
+	switch (gblxId) {
+	case rcgbGblx:
+		str=rcgbGblxMc;//入厂过磅
+		break;
+	case ccgbGblx:
+		str=ccgbGblxMc;//出厂过磅
+		break;
+	}
+	return str;
 }
 
 function setFitWidthInParent(o){

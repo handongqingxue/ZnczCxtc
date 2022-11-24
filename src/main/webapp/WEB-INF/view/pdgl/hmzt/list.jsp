@@ -55,7 +55,7 @@ function initAddLB(){
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"号码状态查询",
+		title:"排队管理-号码状态-列表",
 		url:pdglPath+"queryHMZTList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),

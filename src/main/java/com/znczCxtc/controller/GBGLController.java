@@ -155,6 +155,8 @@ public class GBGLController {
 	public String goGbjlList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setGblxInRequest(request);
+		Constant.setGbztInRequest(request);
 		
 		return MODULE_NAME+"/gbjl/list";
 	}
@@ -203,11 +205,6 @@ public class GBGLController {
 	public String goEjdshList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
-		
-		//request.setAttribute("ejdshDdztMc", DingDanZhuangTai.ER_JIAN_DAI_SHEN_HE_TEXT);
-		//request.setAttribute("ywcDdztMc", DingDanZhuangTai.YI_WAN_CHENG_TEXT);
-		//request.setAttribute("shlx", DingDanShenHeJiLu.ER_JIAN_SHEN_HE);
-		//request.setAttribute("gblx", GuoBangJiLu.CHU_CHANG_GUO_BANG);
 		
 		Constant.setDdztInRequest(request);
 		Constant.setLxlxInRequest(request);

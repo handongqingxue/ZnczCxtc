@@ -155,6 +155,10 @@ public class Constant {
 		request.setAttribute("qyLxlxMc", DingDan.QU_YUN_TEXT);
 	}
 	
+	/**
+	 * 存放过磅状态常量
+	 * @param request
+	 */
 	public static void setGbztInRequest(HttpServletRequest request) {
 
 		request.setAttribute("zcGbzt", GuoBangJiLu.ZHENG_CHANG);

@@ -54,8 +54,15 @@ var qyLxlx;
 
 var syLxlxMc;
 var qyLxlxMc;
+
+var zcGbzt;
+var ycGbzt;
+
+var zcGbztMc;
+var ycGbztMc;
 $(function(){
 	initLxlxVar();
+	initGbztVar();
 	
 	initGBSJKSDTB();
 	initGBSJJSDTB();
@@ -71,6 +78,14 @@ function initLxlxVar(){
 
 	syLxlxMc='${requestScope.syLxlxMc}';
 	qyLxlxMc='${requestScope.qyLxlxMc}';
+}
+
+function initGbztVar(){
+	zcGbzt=parseInt('${requestScope.zcGbzt}');
+	ycGbzt=parseInt('${requestScope.ycGbzt}');
+
+	zcGbztMc='${requestScope.zcGbztMc}';
+	ycGbztMc='${requestScope.ycGbztMc}';
 }
 
 function initGBSJKSDTB(){
@@ -151,7 +166,7 @@ function checkByIds(shjg) {
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"一检待审核查询",
+		title:"过磅管理-一检待审核-列表",
 		url:gbglPath+"queryDJYList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
@@ -171,7 +186,7 @@ function initTab1(){
             }},
 			{field:"gbzl",title:"过磅重量",width:200},
 			{field:"gbzt",title:"过磅状态",width:100,formatter:function(value,row){
-				return value==1?"正常":"异常";
+				return getGbztMcById(value);
 			}},
             {field:"gbsj",title:"过磅时间",width:150},
             {field:"id",title:"操作",width:50,formatter:function(value,row){
@@ -203,6 +218,19 @@ function getLxlxMcById(lxlxId){
 		break;
 	case qyLxlx:
 		str=qyLxlxMc;//取运
+		break;
+	}
+	return str;
+}
+
+function getGbztMcById(gbztId){
+	var str;
+	switch (gbztId) {
+	case zcGbzt:
+		str=zcGbztMc;//正常
+		break;
+	case ycGbzt:
+		str=ycGbztMc;//异常
 		break;
 	}
 	return str;

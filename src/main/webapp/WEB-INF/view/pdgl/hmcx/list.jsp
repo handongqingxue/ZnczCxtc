@@ -36,7 +36,6 @@ var pdglPath=path+'pdgl/';
 $(function(){
 	initZTCBB();
 	initSearchLB();
-	initAddLB();
 	initRemoveLB();
 	initTab1();
 	showCompontByQx();
@@ -81,15 +80,6 @@ function initSearchLB(){
 	});
 }
 
-function initAddLB(){
-	$("#add_but").linkbutton({
-		iconCls:"icon-add",
-		onClick:function(){
-			location.href=pdglPath+"fhdw/new";
-		}
-	});
-}
-
 function initRemoveLB(){
 	removeLB=$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
@@ -127,7 +117,7 @@ function initTab1(){
             {field:"ksjhsj",title:"开始叫号时间",width:200},
             {field:"jhcs",title:"叫号次数",width:200},
             {field:"id",title:"操作",width:80,formatter:function(value,row){
-            	var str="<a href=\""+pdglPath+"fhdw/detail?id="+value+"\">详情</a>";
+            	var str="";
             	return str;
             }}
 	    ]],
@@ -207,7 +197,6 @@ function setFitWidthInParent(o){
 			<span class="zt_span">状态：</span>
 			<input id="zt_cbb"/>
 			<a class="search_but" id="search_but">查询</a>
-			<a id="add_but">添加</a>
 			<a id="remove_but">删除</a>
 		</div>
 		<table id="tab1">

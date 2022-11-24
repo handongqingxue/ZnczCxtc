@@ -166,7 +166,7 @@ function checkByIds(shjg) {
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"二检待审核查询",
+		title:"过磅管理-二检待审核-列表",
 		url:gbglPath+"queryDJYList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),

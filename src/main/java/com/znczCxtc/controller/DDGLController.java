@@ -85,6 +85,7 @@ public class DDGLController {
 		
 		Constant.setDdztInRequest(request);
 		Constant.setShlxInRequest(request);
+		Constant.setLxlxInRequest(request);
 		
 		return MODULE_NAME+"/dsh/list";
 	}

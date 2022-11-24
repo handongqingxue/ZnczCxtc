@@ -43,12 +43,28 @@ var bjzDdztMc='${requestScope.bjzDdztMc}';
 var yxdDdztMc='${requestScope.yxdDdztMc}';
 var shlx='${requestScope.xdshShlx}';
 var shrId='${sessionScope.yongHu.id}';
+
+var syLxlx;
+var qyLxlx;
+
+var syLxlxMc;
+var qyLxlxMc;
 $(function(){
+	initLxlxVar();
+	
 	initSearchLB();
 	initTGLB();
 	initTHLB();
 	initTab1();
 });
+
+function initLxlxVar(){
+	syLxlx=parseInt('${requestScope.syLxlx}');
+	qyLxlx=parseInt('${requestScope.qyLxlx}');
+
+	syLxlxMc='${requestScope.syLxlxMc}';
+	qyLxlxMc='${requestScope.qyLxlxMc}';
+}
 
 function initSearchLB(){
 	$("#search_but").linkbutton({
@@ -135,16 +151,7 @@ function initTab1(){
 			{field:"fhdwMc",title:"发货单位",width:150},
 			{field:"shdwMc",title:"收货单位",width:150},
             {field:"lxlx",title:"流向类型",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="送运";
-					break;
-				case 2:
-					str="取运";
-					break;
-				}
-            	return str;
+            	return getLxlxMcById(value);
             }},
             {field:"jhysrq",title:"计划运输日期",width:150},
             {field:"yzxzl",title:"预装卸重量",width:100}
@@ -162,6 +169,19 @@ function initTab1(){
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 		}
 	});
+}
+
+function getLxlxMcById(lxlxId){
+	var str;
+	switch (lxlxId) {
+	case syLxlx:
+		str=syLxlxMc;//送运
+		break;
+	case qyLxlx:
+		str=qyLxlxMc;//取运
+		break;
+	}
+	return str;
 }
 
 function setFitWidthInParent(parent,self){

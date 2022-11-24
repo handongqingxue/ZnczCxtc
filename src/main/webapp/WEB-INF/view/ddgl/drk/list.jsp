@@ -127,7 +127,7 @@ function checkByIds() {
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"待入库查询",
+		title:"订单管理-待入库-列表",
 		url:ddglPath+"queryZHCXList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body","tab1_div"),
