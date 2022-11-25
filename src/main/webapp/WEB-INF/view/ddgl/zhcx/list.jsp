@@ -48,6 +48,7 @@
 
 .input_sfzh_bg_div,
 .input_cph_bg_div,
+.input_ewm_bg_div,
 .preview_bdxx_bg_div{
 	width: 100%;
 	height: 100%;
@@ -68,7 +69,8 @@
 	right: 0;
 }
 
-.input_cph_div{
+.input_cph_div,
+.input_ewm_div{
 	width: 500px;
 	height: 300px;
 	margin: 200px auto 0;
@@ -101,7 +103,8 @@ var dialogTop=10;
 var dialogLeft=20;
 var isfzhdNum=0;
 var icphdNum=1;
-var pbdxxdNum=2;
+var iewmdNum=2;
+var pbdxxdNum=3;
 var appendStr="";
 
 var syLxlx;
@@ -156,6 +159,7 @@ $(function(){
 	initSearchLB();
 	initRgsbsfzLB();
 	initRgsbcpLB();
+	initRgsbewmLB();
 	initDdfwLB();
 	initBddyLB();
 	initAddLB();
@@ -163,8 +167,9 @@ $(function(){
 	initTab1();
 	
 	initInputSfzhDialog();//0
-	initInputCphDialog();//1
-	initPreviewBDXXDialog();//2
+	initInputRGSBCPDialog();//1
+	initInputRGSBEWMDialog();//2
+	initPreviewBDXXDialog();//3
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
 	//showCompontByQx();
@@ -244,6 +249,9 @@ function initDialogPosition(){
 	var icphdpw=$("body").find(".panel.window").eq(icphdNum);
 	var icphdws=$("body").find(".window-shadow").eq(icphdNum);
 	
+	var iewmdpw=$("body").find(".panel.window").eq(iewmdNum);
+	var iewmdws=$("body").find(".window-shadow").eq(iewmdNum);
+	
 	var pbdxxdpw=$("body").find(".panel.window").eq(pbdxxdNum);
 	var pbdxxdws=$("body").find(".window-shadow").eq(pbdxxdNum);
 
@@ -254,6 +262,10 @@ function initDialogPosition(){
 	var icphdDiv=$("#input_cph_div");
 	icphdDiv.append(icphdpw);
 	icphdDiv.append(icphdws);
+	
+	var iewmdDiv=$("#input_ewm_div");
+	iewmdDiv.append(iewmdpw);
+	iewmdDiv.append(iewmdws);
 
 	var pbdxxdDiv=$("#preview_bdxx_div");
 	pbdxxdDiv.append(pbdxxdpw);
@@ -333,7 +345,7 @@ function initXzSfzhCBB(){
 	,"json");
 }
 
-function initInputCphDialog(){
+function initInputRGSBCPDialog(){
 	$("#input_cph_dialog_div").dialog({
 		title:"录入车牌号",
 		width:setFitWidthInParent("#input_cph_div","input_cph_dialog_div"),
@@ -379,13 +391,13 @@ function initInputCphDialog(){
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 
-	initPlaceCBB();
-	initXzCphCBB();
-	initLrSjcCBB();
-	initLrWscphCBB();
+	initRGSBCPPlaceCBB();
+	initRGSBCPXzCphCBB();
+	initRGSBCPLrSjcCBB();
+	initRGSBCPLrWscphCBB();
 }
 
-function initPlaceCBB(){
+function initRGSBCPPlaceCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择"});
 	data.push({"value":mg,"text":mgMc});
@@ -393,7 +405,7 @@ function initPlaceCBB(){
 	data.push({"value":ehbf,"text":ehbfMc});
 	data.push({"value":shbf,"text":shbfMc});
 	
-	placeCBB=$("#place_cbb").combobox({
+	rgsbcpPlaceCBB=$("#rgsbcp_place_cbb").combobox({
 		width:120,
 		valueField:"value",
 		textField:"text",
@@ -402,7 +414,7 @@ function initPlaceCBB(){
 	});
 }
 
-function initXzCphCBB(){
+function initRGSBCPXzCphCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择"});
 	$.post(ddglPath+"queryXzCphCBBList",
@@ -412,25 +424,25 @@ function initXzCphCBB(){
 			for(var i=0;i<rows.length;i++){
 				data.push({"value":rows[i],"text":rows[i]});
 			}
-			xzcphCBB=$("#xzcph_cbb").combobox({
+			rgsbcpXzcphCBB=$("#rgsbcp_xzcph_cbb").combobox({
 				width:120,
 				valueField:"value",
 				textField:"text",
 				data:data,
 				onChange:function(){
-					var cph=xzcphCBB.combobox("getValue");
-					lrSjcCBB.combobox("setValue",cph.substring(0,1));
-					lrWscphCBB.combobox("setValue",cph.substring(1));
+					var cph=rgsbcpXzcphCBB.combobox("getValue");
+					rgsbcpLrSjcCBB.combobox("setValue",cph.substring(0,1));
+					rgsbcpLrWscphCBB.combobox("setValue",cph.substring(1));
 				}
 			});
 		}
 	,"json");
 }
 
-function initLrSjcCBB(){
+function initRGSBCPLrSjcCBB(){
 	var data=[];
 	data.push({"value":"","text":"请录入"});
-	lrSjcCBB=$("#lrSjc_cbb").combobox({
+	rgsbcpLrSjcCBB=$("#rgsbcp_lrSjc_cbb").combobox({
 		width:50,
 		valueField:"sjc",
 		textField:"sjc",
@@ -446,10 +458,10 @@ function initLrSjcCBB(){
 	});
 }
 
-function initLrWscphCBB(){
+function initRGSBCPLrWscphCBB(){
 	var data=[];
 	data.push({"value":"","text":"请录入"});
-	lrWscphCBB=$("#lrWscph_cbb").combobox({
+	rgsbcpLrWscphCBB=$("#rgsbcp_lrWscph_cbb").combobox({
 		width:70,
 		valueField:"wscph",
 		textField:"wscph",
@@ -457,7 +469,7 @@ function initLrWscphCBB(){
         mode:'remote',
         url:ddglPath+"queryLrWscphCBBList",
         onBeforeLoad: function(param){
-        	var sjc=lrSjcCBB.combobox("getValue");
+        	var sjc=rgsbcpLrSjcCBB.combobox("getValue");
         	if(sjc==null||sjc==""){
         	  	return false;
         	}
@@ -468,6 +480,58 @@ function initLrWscphCBB(){
     		param.order = "desc";
     	}
 	});
+}
+
+function initInputRGSBEWMDialog(){
+	$("#input_ewm_dialog_div").dialog({
+		title:"录入二维码信息",
+		width:setFitWidthInParent("#input_ewm_div","input_ewm_dialog_div"),
+		height:250,
+		top:5,
+		left:dialogLeft,
+		buttons:[
+           {text:"确定",id:"ok_but",iconCls:"icon-ok",handler:function(){
+        	   checkEwmxxToClient();
+           }},
+           {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
+        	   openInputEwmDialog(false);
+           }}
+        ]
+	});
+
+	$("#input_ewm_dialog_div table").css("width",(setFitWidthInParent("#input_ewm_div","input_ewm_dialog_table"))+"px");
+	$("#input_ewm_dialog_div table").css("magin","-100px");
+	$("#input_ewm_dialog_div table td").css("padding-left","40px");
+	$("#input_ewm_dialog_div table td").css("padding-right","20px");
+	$("#input_ewm_dialog_div table td").css("font-size","15px");
+	$("#input_ewm_dialog_div table .td1").css("width","30%");
+	$("#input_ewm_dialog_div table .td2").css("width","60%");
+	$("#input_ewm_dialog_div table tr").css("height","45px");
+
+	$(".panel.window").eq(iewmdNum).css("margin-top","20px");
+	$(".panel.window .panel-title").eq(iewmdNum).css("color","#000");
+	$(".panel.window .panel-title").eq(iewmdNum).css("font-size","15px");
+	$(".panel.window .panel-title").eq(iewmdNum).css("padding-left","10px");
+	
+	$(".panel-header, .panel-body").css("border-color","#ddd");
+	
+	//以下的是表格下面的面板
+	$(".window-shadow").eq(iewmdNum).css("margin-top","20px");
+	$(".window,.window .window-body").eq(iewmdNum).css("border-color","#ddd");
+
+	$("#input_ewm_dialog_div #ok_but").css("left","30%");
+	$("#input_ewm_dialog_div #ok_but").css("position","absolute");
+
+	$("#input_ewm_dialog_div #cancel_but").css("left","50%");
+	$("#input_ewm_dialog_div #cancel_but").css("position","absolute");
+	
+	$(".dialog-button").css("background-color","#fff");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+
+	//initRGSBCPPlaceCBB();
+	//initRGSBCPXzCphCBB();
+	//initRGSBCPLrSjcCBB();
+	//initRGSBCPLrWscphCBB();
 }
 
 function initPreviewBDXXDialog(){
@@ -645,18 +709,18 @@ function pushSfzhToClient(){
 }
 
 function checkCphToClient(){
-	if(checkPlace()){
-		if(checkRglrCph()){
-			pushCphToClient();
+	if(checkRGSBCPPlace()){
+		if(checkRGSBCPRglrCph()){
+			pushRGSBCphToClient();
 		}
 	}
 }
 
-function pushCphToClient(){
+function pushRGSBCphToClient(){
 	var rows=tab1.datagrid("getSelections");
-	var placeFlag=parseInt(placeCBB.combobox("getValue"));
-	var sjc=lrSjcCBB.combobox("getValue");
-	var wscph=lrWscphCBB.combobox("getValue");
+	var placeFlag=parseInt(rgsbcpPlaceCBB.combobox("getValue"));
+	var sjc=rgsbcpLrSjcCBB.combobox("getValue");
+	var wscph=rgsbcpLrWscphCBB.combobox("getValue");
 	var cph=sjc+wscph;
 	if(cph!=rows[0].cyclCph){
 		alert("输入的车牌号与订单里的车牌号不一致");
@@ -713,8 +777,8 @@ function pushCphToClient(){
 }
 
 //验证地点
-function checkPlace(){
-	var bfh=placeCBB.combobox("getValue");
+function checkRGSBCPPlace(){
+	var bfh=rgsbcpPlaceCBB.combobox("getValue");
 	if(bfh==null||bfh==""){
 	  	alert("请选择地点");
 	  	return false;
@@ -724,9 +788,9 @@ function checkPlace(){
 }
 
 //验证人工录入车牌号
-function checkRglrCph(){
-	var sjc=lrSjcCBB.combobox("getValue");
-	var wscph=lrWscphCBB.combobox("getValue");
+function checkRGSBCPRglrCph(){
+	var sjc=rgsbcpLrSjcCBB.combobox("getValue");
+	var wscph=rgsbcpLrWscphCBB.combobox("getValue");
 	if(sjc==null||sjc==""||wscph==null||wscph==""){
 	  	alert("请录入车牌号");
 	  	return false;
@@ -822,6 +886,15 @@ function initRgsbcpLB(){
 		iconCls:"icon-save",
 		onClick:function(){
 			openInputCphDialog(true);
+		}
+	});
+}
+
+function initRgsbewmLB(){
+	rgsbewmLB=$("#rgsbewm_but").linkbutton({
+		iconCls:"icon-save",
+		onClick:function(){
+			openInputEwmDialog(true);
 		}
 	});
 }
@@ -1019,6 +1092,15 @@ function openInputCphDialog(flag){
 	}
 	else{
 		$("#input_cph_bg_div").css("display","none");
+	}
+}
+
+function openInputEwmDialog(flag){
+	if(flag){
+		$("#input_ewm_bg_div").css("display","block");
+	}
+	else{
+		$("#input_ewm_bg_div").css("display","none");
 	}
 }
 
@@ -1227,11 +1309,13 @@ function setFitWidthInParent(parent,self){
 		break;
 	case "input_sfzh_dialog_div":
 	case "input_cph_dialog_div":
+	case "input_ewm_dialog_div":
 	case "preview_bdxx_dialog_div":
 		space=50;
 		break;
 	case "input_sfzh_dialog_table":
 	case "input_cph_dialog_table":
+	case "input_ewm_dialog_table":
 		space=68;
 		break;
 	case "panel_window":
@@ -1284,6 +1368,7 @@ function setFitWidthInParent(parent,self){
 				<a class="search_but" id="search_but">查询</a>
 				<a id="rgsbsfz_but">人工识别身份证</a>
 				<a id="rgsbcp_but">人工识别车牌</a>
+				<a id="rgsbewm_but">人工识别二维码</a>
 				<a id="ddfw_but">订单复位</a>
 				<a id="bddy_but">磅单打印</a>
 				<a id="add_but">添加</a>
@@ -1328,7 +1413,7 @@ function setFitWidthInParent(parent,self){
 						地点
 					</td>
 					<td class="td2">
-						<input id="place_cbb"/>
+						<input id="rgsbcp_place_cbb"/>
 					</td>
 				  </tr>
 				  <tr>
@@ -1336,7 +1421,7 @@ function setFitWidthInParent(parent,self){
 						选择
 					</td>
 					<td class="td2">
-						<input id="xzcph_cbb"/>
+						<input id="rgsbcp_xzcph_cbb"/>
 					</td>
 				  </tr>
 				  <tr>
@@ -1344,8 +1429,42 @@ function setFitWidthInParent(parent,self){
 						车牌号
 					</td>
 					<td class="td2">
-						<input id="lrSjc_cbb"/>
-						<input id="lrWscph_cbb"/>
+						<input id="rgsbcp_lrSjc_cbb"/>
+						<input id="rgsbcp_lrWscph_cbb"/>
+					</td>
+				  </tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="input_ewm_bg_div" id="input_ewm_bg_div">
+		<div class="input_ewm_div" id="input_ewm_div">
+			<div class="input_ewm_dialog_div" id="input_ewm_dialog_div">
+				<table>
+				  <tr>
+					<td class="td1" align="right">
+						地点
+					</td>
+					<td class="td2">
+						<input id="rgsbewm_place_cbb"/>
+					</td>
+				  </tr>
+				  <tr>
+					<td class="td1" align="right">
+						选择
+					</td>
+					<td class="td2">
+						<input id="rgsbewm_xzcph_cbb"/>
+					</td>
+				  </tr>
+				  <tr>
+					<td class="td1" align="right">
+						车牌号
+					</td>
+					<td class="td2">
+						<input id="rgsbewm_lrSjc_cbb"/>
+						<input id="rgsbewm_lrWscph_cbb"/>
 					</td>
 				  </tr>
 				</table>
