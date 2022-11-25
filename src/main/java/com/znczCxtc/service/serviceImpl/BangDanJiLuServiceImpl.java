@@ -52,14 +52,14 @@ public class BangDanJiLuServiceImpl implements BangDanJiLuService {
 	}
 
 	@Override
-	public boolean checkIfExistByDdId(Integer ddId) {
+	public boolean checkIfExistByDdId(Long ddId) {
 		// TODO Auto-generated method stub
 		int count=bangDanJiLuDao.getCountByDdId(ddId);
 		return count==0?false:true;
 	}
 
 	@Override
-	public int deleteByDdId(Integer ddId) {
+	public int deleteByDdId(Long ddId) {
 		// TODO Auto-generated method stub
 		return bangDanJiLuDao.deleteByDdId(ddId);
 	}

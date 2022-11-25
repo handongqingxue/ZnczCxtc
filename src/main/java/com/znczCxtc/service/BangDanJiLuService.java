@@ -18,7 +18,7 @@ public interface BangDanJiLuService {
 
 	BangDanJiLu selectByDdId(Integer ddId);
 
-	boolean checkIfExistByDdId(Integer ddId);
+	boolean checkIfExistByDdId(Long ddId);
 
-	int deleteByDdId(Integer id);
+	int deleteByDdId(Long id);
 }

@@ -1130,11 +1130,11 @@ function deleteByIds() {
 function checkFwddZt(){
 	var rows=tab1.datagrid("getSelections");
 	var ddztMc=rows[0].ddztMc;
-	var yjsbDdztMc='${requestScope.yjsbDdztMc}';
-	var ejsbDdztMc='${requestScope.ejsbDdztMc}';
-	if(ddztMc==yjsbDdztMc)
+	var yjzDdztMc='${requestScope.yjzDdztMc}';
+	var ejzDdztMc='${requestScope.ejzDdztMc}';
+	if(ddztMc==yjzDdztMc)
 		return true;
-	else if(ddztMc==ejsbDdztMc)
+	else if(ddztMc==ejzDdztMc)
 		return true;
 	else{
 		alert("该车辆非过磅状态");
@@ -1147,20 +1147,20 @@ function fwddById(){
 	var rows=tab1.datagrid("getSelections");
 	var id=rows[0].id;
 	var ddztMc=rows[0].ddztMc;
-	var yjsbDdztMc='${requestScope.yjsbDdztMc}';
-	var ejsbDdztMc='${requestScope.ejsbDdztMc}';
+	var yjzDdztMc='${requestScope.yjzDdztMc}';
+	var ejzDdztMc='${requestScope.ejzDdztMc}';
 	var xddztMc;
 	var yjzt;
 	var ejzt;
-	if(ddztMc==yjsbDdztMc){
+	if(ddztMc==yjzDdztMc){
 		jyFlag=1
 		yjzt=1;
-		xddztMc='${requestScope.yjpdzDdztMc}';
+		xddztMc='${requestScope.yjdsmDdztMc}';
 	}
-	else if(ddztMc==ejsbDdztMc){
+	else if(ddztMc==ejzDdztMc){
 		jyFlag=2
 		ejzt=1;
-		xddztMc='${requestScope.ejpdzDdztMc}';
+		xddztMc='${requestScope.ejdsmDdztMc}';
 	}
 	$.post(ddglPath+"fwddById",
 		{id:id,jyFlag:jyFlag,ddztMc:xddztMc,yjzt:yjzt,ejzt:ejzt},

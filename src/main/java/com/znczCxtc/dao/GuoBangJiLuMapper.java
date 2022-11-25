@@ -27,7 +27,7 @@ public interface GuoBangJiLuMapper {
 
 	GuoBangJiLu selectPrintInfo(@Param("ddId") Integer ddId, @Param("gblx") Integer gblx);
 
-	int deleteByDdId(@Param("gblx") Integer gblx, @Param("ddId") Integer ddId);
+	int deleteByDdId(@Param("gblx") Integer gblx, @Param("ddId") Long ddId);
 
-	int getCountByDdId(@Param("gblx") Integer gblx, @Param("ddId") Integer ddId);
+	int getCountByDdId(@Param("gblx") Integer gblx, @Param("ddId") Long ddId);
 }

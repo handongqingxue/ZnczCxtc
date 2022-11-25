@@ -23,8 +23,8 @@ public interface GuoBangJiLuService {
 
 	GuoBangJiLu selectPrintInfo(Integer ddId, Integer gblx);
 
-	boolean checkIfExistByDdId(Integer gblx, Integer ddId);
+	boolean checkIfExistByDdId(Integer gblx, Long ddId);
 
-	int deleteByDdId(Integer gblx,Integer ddId);
+	int deleteByDdId(Integer gblx,Long ddId);
 
 }

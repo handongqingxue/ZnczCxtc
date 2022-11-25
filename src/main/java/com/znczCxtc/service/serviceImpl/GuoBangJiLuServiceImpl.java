@@ -71,14 +71,14 @@ public class GuoBangJiLuServiceImpl implements GuoBangJiLuService {
 	}
 
 	@Override
-	public boolean checkIfExistByDdId(Integer gblx, Integer ddId) {
+	public boolean checkIfExistByDdId(Integer gblx, Long ddId) {
 		// TODO Auto-generated method stub
 		int count=guoBangJiLuDao.getCountByDdId(gblx,ddId);
 		return count==0?false:true;
 	}
 
 	@Override
-	public int deleteByDdId(Integer gblx,Integer ddId) {
+	public int deleteByDdId(Integer gblx,Long ddId) {
 		// TODO Auto-generated method stub
 		return guoBangJiLuDao.deleteByDdId(gblx, ddId);
 	}

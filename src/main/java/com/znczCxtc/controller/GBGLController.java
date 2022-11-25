@@ -70,6 +70,7 @@ public class GBGLController {
 	public String goBdjlList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setDdztInRequest(request);
 		
 		return MODULE_NAME+"/bdjl/list";
 	}

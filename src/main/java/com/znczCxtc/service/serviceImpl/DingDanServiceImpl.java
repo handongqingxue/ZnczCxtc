@@ -108,7 +108,7 @@ public class DingDanServiceImpl implements DingDanService {
 		List<String> idList = Arrays.asList(ids.split(","));
 		if(dingDanDao.checkByIds(idList,ddztId)>0) {
 			for (String idStr : idList) {
-				Integer ddId = Integer.valueOf(idStr);
+				Long ddId = Long.valueOf(idStr);
 				ddshjl.setDdId(ddId);
 				count+=dingDanShenHeJiLuDao.add(ddshjl);
 				

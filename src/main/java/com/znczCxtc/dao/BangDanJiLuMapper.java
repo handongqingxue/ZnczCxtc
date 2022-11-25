@@ -20,7 +20,7 @@ public interface BangDanJiLuMapper {
 
 	BangDanJiLu selectByDdId(@Param("ddId") Integer ddId);
 
-	int deleteByDdId(@Param("ddId") Integer ddId);
+	int deleteByDdId(@Param("ddId") Long ddId);
 
-	int getCountByDdId(@Param("ddId") Integer ddId);
+	int getCountByDdId(@Param("ddId") Long ddId);
 }

@@ -47,6 +47,7 @@
 <script type="text/javascript">
 var path='<%=basePath %>';
 var gbglPath=path+'gbgl/';
+var gkjPath=path+'gkj/';
 var dialogTop=10;
 var dialogLeft=20;
 var pbdxxdNum=0;
@@ -84,8 +85,11 @@ function initPreviewBDXXDialog(){
         	   $.post(gbglPath+"newDaYinJiLu",
         		  {time:time,html:printHtml},
         	   	  function(data){
-        		   	 if(data.message=="ok")
+        		   	 if(data.message=="ok"){
+     		       		if(checkBddyddZt())
+       		       			changeDdztToDlc();
         	        	window.open("print?time="+time);
+        		   	 }
         	      }
         	   ,"json");
         	   //window.document.body.innerHTML= $("#preview_bdxx_dialog_div .panel-body").html();
@@ -124,6 +128,9 @@ function initPreviewBDXXDialog(){
 
 function initPreviewModuleHtmlStr(){
 	appendStr="<div style=\"width: 100%;height:40px;line-height:40px;text-align: center;font-size: 20px;font-weight: bold;\">山东创新炭材料有限公司</div>";
+	
+	appendStr+="<input type=\"hidden\" id=\"ddId_val_hid\"/>";
+	appendStr+="<input type=\"hidden\" id=\"ddztMc_val_hid\"/>";
   	
 	appendStr+="<div style=\"width: 90%;height:30px;line-height:30px;margin:auto;\">";
 		appendStr+="<span class=\"dysj_key_td\" style=\"margin-left: 10px;\">打印时间：</span>";
@@ -242,6 +249,10 @@ function openPreviewBDXXDialog(flag,row){
 		panelBody.append(appendStr);
 		
 		$("#preview_bdxx_bg_div").css("display","block");
+		
+		$("#preview_bdxx_div #ddId_val_hid").val(row.ddId);
+		$("#preview_bdxx_div #ddztMc_val_hid").val(row.ddztMc);
+		
 		$("#preview_bdxx_div #dysj_val_span").text(createDysj());
 		$("#preview_bdxx_div #gby_val_span").text(row.cysjXm);
 		$("#preview_bdxx_div #dh_val_span").text(row.ddh);
@@ -267,6 +278,10 @@ function openPreviewBDXXDialog(flag,row){
 	}
 	else{
 		$("#preview_bdxx_bg_div").css("display","none");
+		
+		$("#preview_bdxx_div #ddId_val_hid").val("");
+		$("#preview_bdxx_div #ddztMc_val_hid").val("");
+		
 		$("#preview_bdxx_div #dysj_val_span").text("");
 		$("#preview_bdxx_div #gby_val_span").text("");
 		$("#preview_bdxx_div #dh_val_span").text("");
@@ -290,6 +305,27 @@ function openPreviewBDXXDialog(flag,row){
 		$("#preview_bdxx_div table #cyclCph_val_td").text("");
 		$("#preview_bdxx_div table #bz_val_td").text("");
 	}
+}
+
+function checkBddyddZt(){
+	var ddztMc=$("#preview_bdxx_div #ddztMc_val_hid").val();
+	var ddypzDdztMc='${requestScope.ddypzDdztMc}';
+	if(ddztMc==ddypzDdztMc)
+		return true;
+	else{
+		return false;
+	}
+}
+
+function changeDdztToDlc(){
+	var ddId=$("#preview_bdxx_div #ddId_val_hid").val();
+	var dlcDdztMc='${requestScope.dlcDdztMc}';
+	$.post(gkjPath+"editDingDan",
+		{id:ddId,ddztMc:dlcDdztMc},
+		function(result){
+			
+		}
+	,"json");
 }
 
 function createDysj(){

@@ -69,10 +69,10 @@ public class DingDanShenHeJiLu {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getDdId() {
+	public Long getDdId() {
 		return ddId;
 	}
-	public void setDdId(Integer ddId) {
+	public void setDdId(Long ddId) {
 		this.ddId = ddId;
 	}
 	public String getDdh() {
@@ -207,7 +207,7 @@ public class DingDanShenHeJiLu {
 	public void setBz(String bz) {
 		this.bz = bz;
 	}
-	private Integer ddId;
+	private Long ddId;
 	private String ddh;//¶©µ¥ºÅ
 	private String sjSfzh;
 	private String sjXm;

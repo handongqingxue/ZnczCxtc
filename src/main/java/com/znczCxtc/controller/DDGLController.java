@@ -33,6 +33,10 @@ public class DDGLController {
 	@Autowired
 	private RglrSfzhJiLuService rglrSfzhJiLuService;
 	@Autowired
+	private BangDanJiLuService bangDanJiLuService;
+	@Autowired
+	private GuoBangJiLuService guoBangJiLuService;
+	@Autowired
 	private DuiFangGuoBangJiLuService duiFangGuoBangJiLuService;
 	@Autowired
 	private DingDanShenHeJiLuService dingDanShenHeJiLuService;
@@ -417,6 +421,36 @@ public class DDGLController {
 		else {
 			plan.setStatus(1);
 			plan.setMsg("删除审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/fwddById",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String fwddById(DingDan dd,int jyFlag) {
+
+		PlanResult plan=new PlanResult();
+		String json;
+		boolean bool=false;
+		int count=dingDanService.edit(dd);
+		if(jyFlag==GuoBangJiLu.RU_CHANG_GUO_BANG) {
+			bool=bangDanJiLuService.checkIfExistByDdId(dd.getId());
+			if(bool)
+				bangDanJiLuService.deleteByDdId(dd.getId());
+		}
+		bool=guoBangJiLuService.checkIfExistByDdId(jyFlag,dd.getId());
+		if(bool)
+			guoBangJiLuService.deleteByDdId(jyFlag,dd.getId());
+			
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("订单复位失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("订单复位成功，请车辆重新排队上磅");
 			json=JsonUtil.getJsonFromObject(plan);
 		}
 		return json;
