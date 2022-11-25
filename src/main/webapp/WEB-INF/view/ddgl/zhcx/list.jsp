@@ -47,7 +47,8 @@
 }
 
 .input_sfzh_bg_div,
-.input_cph_bg_div{
+.input_cph_bg_div,
+.preview_bdxx_bg_div{
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0,0,0,.45);
@@ -77,17 +78,31 @@
 	left: 0;
 	right: 0;
 }
+
+.preview_bdxx_div{
+	width: 1000px;
+	height: 570px;
+	margin: 100px auto 0;
+	background-color: #fff;
+	border-radius:5px;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
 </style>
 <title>Insert title here</title>
 <%@include file="../../inc/js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
 var ddglPath=path+'ddgl/';
+var gbglPath=path+'gbgl/';
 var gkjPath=path+'gkj/';
 var dialogTop=10;
 var dialogLeft=20;
 var isfzhdNum=0;
 var icphdNum=1;
+var pbdxxdNum=2;
+var appendStr="";
 
 var syLxlx;
 var qyLxlx;
@@ -142,12 +157,14 @@ $(function(){
 	initRgsbsfzLB();
 	initRgsbcpLB();
 	initDdfwLB();
+	initBddyLB();
 	initAddLB();
 	initRemoveLB();
 	initTab1();
 	
 	initInputSfzhDialog();//0
 	initInputCphDialog();//1
+	initPreviewBDXXDialog();//2
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
 	//showCompontByQx();
@@ -226,6 +243,9 @@ function initDialogPosition(){
 	
 	var icphdpw=$("body").find(".panel.window").eq(icphdNum);
 	var icphdws=$("body").find(".window-shadow").eq(icphdNum);
+	
+	var pbdxxdpw=$("body").find(".panel.window").eq(pbdxxdNum);
+	var pbdxxdws=$("body").find(".window-shadow").eq(pbdxxdNum);
 
 	var isfzhdDiv=$("#input_sfzh_div");
 	isfzhdDiv.append(isfzhdpw);
@@ -234,6 +254,10 @@ function initDialogPosition(){
 	var icphdDiv=$("#input_cph_div");
 	icphdDiv.append(icphdpw);
 	icphdDiv.append(icphdws);
+
+	var pbdxxdDiv=$("#preview_bdxx_div");
+	pbdxxdDiv.append(pbdxxdpw);
+	pbdxxdDiv.append(pbdxxdws);
 }
 
 function initInputSfzhDialog(){
@@ -444,6 +468,132 @@ function initLrWscphCBB(){
     		param.order = "desc";
     	}
 	});
+}
+
+function initPreviewBDXXDialog(){
+	dialogTop+=20;
+	$("#preview_bdxx_dialog_div").dialog({
+		title:"磅单信息",
+		width:setFitWidthInParent("#preview_bdxx_div","preview_bdxx_dialog_div"),
+		height:480,
+		top:dialogTop,
+		left:dialogLeft,
+		buttons:[
+           {text:"打印",id:"print_but",iconCls:"icon-ok",handler:function(){
+        	   var time=new Date().getTime();
+        	   var printHtml = $("#preview_bdxx_dialog_div .panel-body").html();
+        	   $.post(gbglPath+"newDaYinJiLu",
+        		  {time:time,html:printHtml},
+        	   	  function(data){
+        		   	 if(data.message=="ok"){
+        		   		if(checkBddyddZt())
+        		   			changeDdztToDlc();
+        	        	window.open(gbglPath+"bdjl/print?time="+time);
+        		   	 }
+        	      }
+        	   ,"json");
+        	   //window.document.body.innerHTML= $("#preview_bdxx_dialog_div .panel-body").html();
+        	   //window.print();//打印上面新建的网页
+        	   //window.document.body.innerHTML= pageHtml;
+        	   //location.href=location.href;
+           }},
+           {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
+        	   openPreviewBDXXDialog(false,null);
+           }}
+        ]
+	});
+
+	$(".panel.window").eq(pbdxxdNum).css("margin-top","20px");
+	$(".panel.window .panel-title").eq(pbdxxdNum).css("color","#000");
+	$(".panel.window .panel-title").eq(pbdxxdNum).css("font-size","15px");
+	$(".panel.window .panel-title").eq(pbdxxdNum).css("padding-left","10px");
+	
+	$(".panel-header, .panel-body").css("border-color","#ddd");
+	
+	//以下的是表格下面的面板
+	$(".window-shadow").eq(pbdxxdNum).css("margin-top","20px");
+	$(".window,.window .window-body").eq(pbdxxdNum).css("border-color","#ddd");
+
+	$("#preview_bdxx_dialog_div #print_but").css("left","30%");
+	$("#preview_bdxx_dialog_div #print_but").css("position","absolute");
+
+	$("#preview_bdxx_dialog_div #cancel_but").css("left","45%");
+	$("#preview_bdxx_dialog_div #cancel_but").css("position","absolute");
+	
+	$(".dialog-button").css("background-color","#fff");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+	
+	initPreviewModuleHtmlStr();
+}
+
+function initPreviewModuleHtmlStr(){
+	appendStr="<div style=\"width: 100%;height:40px;line-height:40px;text-align: center;font-size: 20px;font-weight: bold;\">山东创新炭材料有限公司磅单</div>";
+  	
+	appendStr+="<div style=\"width: 90%;height:30px;line-height:30px;margin:auto;\">";
+		appendStr+="<span class=\"dysj_key_td\" style=\"margin-left: 10px;\">打印时间：</span>";
+		appendStr+="<span id=\"dysj_val_span\" style=\"margin-left: 20px;\"></span>";
+		appendStr+="<span id=\"dh_key_span\" style=\"margin-left: 120px;\">单号:</span>";
+		appendStr+="<span id=\"dh_val_span\" style=\"margin-left: 20px;\"></span>";
+	    appendStr+="<span style=\"margin-left: 50px;\">单位：kg</span>";
+    appendStr+="</div>";
+    
+	appendStr+="<table border=\"1\" style=\"width: 90%;margin:auto;text-align: center;border-color: #000;border-spacing:0;\">";
+		appendStr+="<tr style=\"height: 25px;\">";
+			appendStr+="<td class=\"wzMc_key_td\" style=\"width: 10%;\">物资名称</td>";
+			appendStr+="<td class=\"wzMc_val_td\" id=\"wzMc_val_td\" style=\"width: 23%;\"></td>";
+			appendStr+="<td class=\"wzlxMc_key_td\" style=\"width: 10%;\">型号</td>";
+			appendStr+="<td class=\"wzlxMc_val_td\" id=\"wzlxMc_val_td\" style=\"width: 23%;\"></td>";
+			appendStr+="<td class=\"cyclCph_key_td\" style=\"width: 10%;\">车号</td>";
+			appendStr+="<td class=\"cyclCph_val_td\" id=\"cyclCph_val_td\" style=\"width: 23%;\"></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 25px;\">";
+			appendStr+="<td class=\"fhdwMc_key_td\">发货单位</td>";
+			appendStr+="<td class=\"fhdwMc_val_td\" id=\"fhdwMc_val_td\"></td>";
+			appendStr+="<td class=\"mz_key_td\">我方毛重</td>";
+			appendStr+="<td class=\"mz_val_td\" id=\"mz_val_td\"></td>";
+			appendStr+="<td class=\"dfgbmz_key_td\">对方毛重</td>";
+			appendStr+="<td class=\"dfgbmz_val_td\" id=\"dfgbmz_val_td\"></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 25px;\">";
+			appendStr+="<td class=\"shdwMc_key_td\">收货单位</td>";
+			appendStr+="<td class=\"shdwMc_val_td\" id=\"shdwMc_val_td\"></td>";
+			appendStr+="<td class=\"pz_key_td\">我方皮重</td>";
+			appendStr+="<td class=\"pz_val_td\" id=\"pz_val_td\"></td>";
+			appendStr+="<td class=\"dfgbpz_key_td\">对方皮重</td>";
+			appendStr+="<td class=\"dfgbpz_val_td\" id=\"dfgbpz_val_td\"></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 25px;\">";
+			appendStr+="<td class=\"yssMc_key_td\">运输单位</td>";
+			appendStr+="<td class=\"yssMc_val_td\" id=\"yssMc_val_td\"></td>";
+			appendStr+="<td class=\"jz_key_td\">我方净重</td>";
+			appendStr+="<td class=\"jz_val_td\" id=\"jz_val_td\"></td>";
+			appendStr+="<td class=\"dfgbjz_key_td\">对方净重</td>";
+			appendStr+="<td class=\"dfgbjz_val_td\" id=\"dfgbjz_val_td\"></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 25px;\">";
+			appendStr+="<td class=\"jcsj_key_td\">进厂时间</td>";
+			appendStr+="<td class=\"jcsj_val_td\" id=\"jcsj_val_td\"></td>";
+			appendStr+="<td class=\"bs_key_td\">包 数</td>";
+			appendStr+="<td class=\"bs_val_td\" id=\"bs_val_td\"></td>";
+			appendStr+="<td class=\"ks_key_td\">块 数</td>";
+			appendStr+="<td class=\"ks_val_td\" id=\"ks_val_td\"></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 25px;\">";
+			appendStr+="<td class=\"ccsj_key_td\">出厂时间</td>";
+			appendStr+="<td class=\"ccsj_val_td\" id=\"ccsj_val_td\"></td>";
+			appendStr+="<td class=\"jszl_key_td\">结算重量</td>";
+			appendStr+="<td class=\"jszl_val_td\" id=\"jszl_val_td\"></td>";
+			appendStr+="<td class=\"bz_key_td\">备 注</td>";
+			appendStr+="<td class=\"bz_val_td\" id=\"bz_val_td\"></td>";
+		appendStr+="</tr>";
+	appendStr+="</table>";
+	
+  	appendStr+="<div style=\"width: 90%;height:30px;line-height:30px;margin:auto;\">";
+		appendStr+="<span id=\"gby_key_span\" style=\"margin-left: 20px;\">过磅员</span>";
+		appendStr+="<span id=\"gby_val_span\" style=\"margin-left: 20px;\"></span>";
+		appendStr+="<span id=\"cysjXm_key_span\" style=\"margin-left: 120px;\">司机</span>";
+		appendStr+="<span id=\"cysjXm_val_span\" style=\"margin-left: 20px;\"></span>";
+    appendStr+="</div>";
 }
 
 function checkSfzhToClient(){
@@ -692,6 +842,20 @@ function initDdfwLB(){
 	});
 }
 
+function initBddyLB(){
+	bddyLB=$("#bddy_but").linkbutton({
+		iconCls:"icon-print",
+		onClick:function(){
+			var rows=tab1.datagrid("getSelections");
+			if (rows.length == 0) {
+				$.messager.alert("提示","请选择要打印磅单的订单信息！","warning");
+				return false;
+			}
+   			openPreviewBDXXDialog(true,rows[0]);
+		}
+	});
+}
+
 function initAddLB(){
 	addLB=$("#add_but").linkbutton({
 		iconCls:"icon-add",
@@ -858,6 +1022,79 @@ function openInputCphDialog(flag){
 	}
 }
 
+function openPreviewBDXXDialog(flag,row){
+	var panelBody=$("#preview_bdxx_dialog_div .panel-body");
+	panelBody.empty();
+	if(flag){
+		panelBody.append(appendStr);
+		
+		$("#preview_bdxx_bg_div").css("display","block");
+		
+		$("#preview_bdxx_div #dysj_val_span").text(createDysj());
+		$("#preview_bdxx_div #dh_val_span").text(row.ddh);
+		
+		$("#preview_bdxx_div #wzMc_val_td").text(row.wzMc);
+		$("#preview_bdxx_div #wzlxMc_val_td").text(row.wzlxMc);
+		$("#preview_bdxx_div table #cyclCph_val_td").text(row.cyclCph);
+		
+		$("#preview_bdxx_div table #fhdwMc_val_td").text(row.fhdwMc);
+		$("#preview_bdxx_div table #mz_val_td").text(row.mz);
+		$("#preview_bdxx_div table #dfgbmz_val_td").text(row.dfgbmz);
+		
+		$("#preview_bdxx_div table #shdwMc_val_td").text(row.shdwMc);
+		$("#preview_bdxx_div table #pz_val_td").text(row.pz);
+		$("#preview_bdxx_div table #dfgbpz_val_td").text(row.dfgbpz);
+		
+		$("#preview_bdxx_div table #yssMc_val_td").text(row.shdwMc);
+		$("#preview_bdxx_div table #jz_val_td").text(row.jz);
+		$("#preview_bdxx_div table #dfgbjz_val_td").text(row.dfgbjz);
+		
+		$("#preview_bdxx_div table #jcsj_val_td").text(row.jcsj);
+		$("#preview_bdxx_div table #bs_val_td").text(row.bs);
+		$("#preview_bdxx_div table #ks_val_td").text(row.ks);
+		
+		$("#preview_bdxx_div table #ccsj_val_td").text(row.ccsj);
+		$("#preview_bdxx_div table #jszl_val_td").text(row.jszl);
+		$("#preview_bdxx_div table #bz_val_td").text(row.bz);
+		
+		$("#preview_bdxx_div #gby_val_span").text(row.cysjXm);
+		$("#preview_bdxx_div #cysjXm_val_span").text(row.cysjXm);
+	}
+	else{
+		$("#preview_bdxx_bg_div").css("display","none");
+		
+		$("#preview_bdxx_div #dysj_val_span").text("");
+		$("#preview_bdxx_div #dh_val_span").text("");
+		
+		$("#preview_bdxx_div #wzMc_val_td").text("");
+		$("#preview_bdxx_div #wzlxMc_val_td").text("");
+		$("#preview_bdxx_div table #cyclCph_val_td").text("");
+		
+		$("#preview_bdxx_div table #fhdwMc_val_td").text("");
+		$("#preview_bdxx_div table #mz_val_td").text("");
+		$("#preview_bdxx_div table #dfgbmz_val_td").text("");
+		
+		$("#preview_bdxx_div table #shdwMc_val_td").text("");
+		$("#preview_bdxx_div table #pz_val_td").text(row.pz);
+		$("#preview_bdxx_div table #dfgbpz_val_td").text("");
+		
+		$("#preview_bdxx_div table #yssMc_val_td").text("");
+		$("#preview_bdxx_div table #jz_val_td").text("");
+		$("#preview_bdxx_div table #dfgbjz_val_td").text("");
+		
+		$("#preview_bdxx_div table #jcsj_val_td").text("");
+		$("#preview_bdxx_div table #bs_val_td").text("");
+		$("#preview_bdxx_div table #ks_val_td").text("");
+		
+		$("#preview_bdxx_div table #ccsj_val_td").text("");
+		$("#preview_bdxx_div table #jszl_val_td").text("");
+		$("#preview_bdxx_div table #bz_val_td").text("");
+		
+		$("#preview_bdxx_div #gby_val_span").text("");
+		$("#preview_bdxx_div #cysjXm_val_span").text("");
+	}
+}
+
 function deleteByIds() {
 	var rows=tab1.datagrid("getSelections");
 	if (rows.length == 0) {
@@ -939,6 +1176,46 @@ function fwddById(){
 	,"json");
 }
 
+function checkBddyddZt(){
+	var rows=tab1.datagrid("getSelections");
+	var ddztMc=rows[0].ddztMc;
+	var ddypzDdztMc='${requestScope.ddypzDdztMc}';
+	if(ddztMc==ddypzDdztMc)
+		return true;
+	else{
+		return false;
+	}
+}
+
+function changeDdztToDlc(){
+	var rows=tab1.datagrid("getSelections");
+	var id=rows[0].id;
+	var dlcDdztMc='${requestScope.dlcDdztMc}';
+	$.post(gkjPath+"editDingDan",
+		{id:id,ddztMc:dlcDdztMc},
+		function(result){
+			
+		}
+	,"json");
+}
+
+function createDysj(){
+	var date=new Date();
+	var year=date.getFullYear();
+	var month=date.getMonth();
+	month=month+1;
+	month=month<10?"0"+month:month;
+	var dateOfMonth=date.getDate();
+	dateOfMonth=dateOfMonth<10?"0"+dateOfMonth:dateOfMonth;
+	var hour=date.getHours();
+	var minute=date.getMinutes();
+	minute=minute<10?"0"+minute:minute;
+	var second=date.getSeconds();
+	second=second<10?"0"+second:second;
+	var dysj=year+"-"+month+"-"+dateOfMonth+" "+hour+":"+minute+":"+second;
+	return dysj;
+}
+
 function setFitWidthInParent(parent,self){
 	var space=0;
 	switch (self) {
@@ -950,6 +1227,7 @@ function setFitWidthInParent(parent,self){
 		break;
 	case "input_sfzh_dialog_div":
 	case "input_cph_dialog_div":
+	case "preview_bdxx_dialog_div":
 		space=50;
 		break;
 	case "input_sfzh_dialog_table":
@@ -1007,6 +1285,7 @@ function setFitWidthInParent(parent,self){
 				<a id="rgsbsfz_but">人工识别身份证</a>
 				<a id="rgsbcp_but">人工识别车牌</a>
 				<a id="ddfw_but">订单复位</a>
+				<a id="bddy_but">磅单打印</a>
 				<a id="add_but">添加</a>
 				<a id="remove_but">删除</a>
 			</div>
@@ -1070,6 +1349,13 @@ function setFitWidthInParent(parent,self){
 					</td>
 				  </tr>
 				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="preview_bdxx_bg_div" id="preview_bdxx_bg_div">
+		<div class="preview_bdxx_div" id="preview_bdxx_div">
+			<div class="preview_bdxx_dialog_div" id="preview_bdxx_dialog_div">
 			</div>
 		</div>
 	</div>

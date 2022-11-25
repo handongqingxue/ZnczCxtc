@@ -123,10 +123,11 @@ function initPreviewBDXXDialog(){
 }
 
 function initPreviewModuleHtmlStr(){
-	 appendStr="<div style=\"width: 100%;height:40px;line-height:40px;text-align: center;font-size: 20px;font-weight: bold;\">山东创新炭材料有限公司</div>";
-  	    appendStr+="<div style=\"width: 90%;height:30px;line-height:30px;margin:auto;\">";
+	appendStr="<div style=\"width: 100%;height:40px;line-height:40px;text-align: center;font-size: 20px;font-weight: bold;\">山东创新炭材料有限公司</div>";
+  	
+	appendStr+="<div style=\"width: 90%;height:30px;line-height:30px;margin:auto;\">";
 		appendStr+="<span class=\"dysj_key_td\" style=\"margin-left: 10px;\">打印时间：</span>";
-		appendStr+="<span id=\"dysj_val_span\" style=\"margin-left: 20px;\">2022-10-15 08:35:57</span>";
+		appendStr+="<span id=\"dysj_val_span\" style=\"margin-left: 20px;\"></span>";
 		appendStr+="<span id=\"gby_key_span\" style=\"margin-left: 20px;\">过磅员</span>";
 		appendStr+="<span id=\"gby_val_span\" style=\"margin-left: 20px;\"></span>";
 		appendStr+="<span id=\"dh_key_span\" style=\"margin-left: 120px;\">单号:</span>";
@@ -241,6 +242,7 @@ function openPreviewBDXXDialog(flag,row){
 		panelBody.append(appendStr);
 		
 		$("#preview_bdxx_bg_div").css("display","block");
+		$("#preview_bdxx_div #dysj_val_span").text(createDysj());
 		$("#preview_bdxx_div #gby_val_span").text(row.cysjXm);
 		$("#preview_bdxx_div #dh_val_span").text(row.ddh);
 		
@@ -265,6 +267,7 @@ function openPreviewBDXXDialog(flag,row){
 	}
 	else{
 		$("#preview_bdxx_bg_div").css("display","none");
+		$("#preview_bdxx_div #dysj_val_span").text("");
 		$("#preview_bdxx_div #gby_val_span").text("");
 		$("#preview_bdxx_div #dh_val_span").text("");
 		
@@ -287,6 +290,23 @@ function openPreviewBDXXDialog(flag,row){
 		$("#preview_bdxx_div table #cyclCph_val_td").text("");
 		$("#preview_bdxx_div table #bz_val_td").text("");
 	}
+}
+
+function createDysj(){
+	var date=new Date();
+	var year=date.getFullYear();
+	var month=date.getMonth();
+	month=month+1;
+	month=month<10?"0"+month:month;
+	var dateOfMonth=date.getDate();
+	dateOfMonth=dateOfMonth<10?"0"+dateOfMonth:dateOfMonth;
+	var hour=date.getHours();
+	var minute=date.getMinutes();
+	minute=minute<10?"0"+minute:minute;
+	var second=date.getSeconds();
+	second=second<10?"0"+second:second;
+	var dysj=year+"-"+month+"-"+dateOfMonth+" "+hour+":"+minute+":"+second;
+	return dysj;
 }
 
 function setFitWidthInParent(parent,self){

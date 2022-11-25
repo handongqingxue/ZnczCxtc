@@ -165,6 +165,24 @@ public class DingDan {
 	public void setCkcs(Integer ckcs) {
 		this.ckcs = ckcs;
 	}
+	public Float getPz() {
+		return pz;
+	}
+	public void setPz(Float pz) {
+		this.pz = pz;
+	}
+	public Float getMz() {
+		return mz;
+	}
+	public void setMz(Float mz) {
+		this.mz = mz;
+	}
+	public Float getJz() {
+		return jz;
+	}
+	public void setJz(Float jz) {
+		this.jz = jz;
+	}
 	public Float getDfgbpz() {
 		return dfgbpz;
 	}
@@ -376,6 +394,9 @@ public class DingDan {
 	private Integer bs;//包数
 	private Integer ks;//块数
 	private Integer ckcs;//出卡次数
+	private Float pz;//皮重
+	private Float mz;//毛重
+	private Float jz;//净重
 	private Float dfgbpz;//对方过磅皮重
 	private Float dfgbmz;//对方过磅毛重
 	private Float dfgbjz;//对方过磅净重

@@ -57,6 +57,9 @@
 		<if test="jcsjs!=''&amp;jcsjs!=null&amp;jcsje!=''&amp;jcsje!=null">
 			and cltz.jcsj between #{jcsjs} and #{jcsje}
 		</if>
+		<if test="ccsjs!=''&amp;ccsjs!=null&amp;ccsje!=''&amp;ccsje!=null">
+			and cltz.ccsj between #{ccsjs} and #{ccsje}
+		</if>
 	</select>
 	<select id="queryList" resultType="com.znczCxtc.entity.CheLiangTaiZhang">
 		select cltz.*,dd.ddh,ddzt.mc ddztMc,cl.cph cyclCph from che_liang_tai_zhang cltz left join ding_dan dd on cltz.ddId=dd.id left join ding_dan_zhuang_tai ddzt on dd.ddztId=ddzt.id left join che_liang cl on dd.cyclId=cl.id where 1=1
@@ -79,6 +82,9 @@
 		</if>
 		<if test="jcsjs!=''&amp;jcsjs!=null&amp;jcsje!=''&amp;jcsje!=null">
 			and cltz.jcsj between #{jcsjs} and #{jcsje}
+		</if>
+		<if test="ccsjs!=''&amp;ccsjs!=null&amp;ccsje!=''&amp;ccsje!=null">
+			and cltz.ccsj between #{ccsjs} and #{ccsje}
 		</if>
 		order by cltz.jcsj desc
 		limit #{rowNum},#{rows}
