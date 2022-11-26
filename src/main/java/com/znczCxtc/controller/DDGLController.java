@@ -620,8 +620,9 @@ public class DDGLController {
 	 */
 	public void setPushInRequest(HttpServletRequest request) {
 
-		request.setAttribute("pushCph", Constant.PUSH_CPH);
 		request.setAttribute("pushSfzh", Constant.PUSH_SFZH);
+		request.setAttribute("pushCph", Constant.PUSH_CPH);
+		request.setAttribute("pushEwm", Constant.PUSH_EWM);
 	}
 	
 	/**

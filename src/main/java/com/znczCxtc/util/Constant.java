@@ -56,7 +56,8 @@ public class Constant {
 	public static final String SAN_HAO_BANG_FANG_TEXT="三号磅房";
 	public static final String MEN_GANG_TEXT="门岗";
 	//地点标识end
-	
+
+	public static final String PUSH_EWM="pushEwm";
 	public static final String PUSH_CPH="pushCph";
 	public static final String PUSH_SFZH="pushSfzh";
 	

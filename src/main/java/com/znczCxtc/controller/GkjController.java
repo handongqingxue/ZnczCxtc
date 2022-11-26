@@ -526,68 +526,91 @@ public class GkjController {
 	@RequestMapping(value="/pushToClient")
 	@ResponseBody
 	public Map<String, Object> pushToClient(HttpServletRequest request) {
-		
-		Long ddId = Long.valueOf(request.getParameter("ddId"));
-		String pushFlag = request.getParameter("pushFlag");
-		
-		System.out.println("pushToClient.ddId==="+ddId);
-		System.out.println("pushToClient.pushFlag==="+pushFlag);
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		//ProxySet.sayToClient("鲁A9031", SocketProxy.YI_JIAN);
-		StringBuilder mesJOSB=new StringBuilder();
-		String mesJOStr=null;
-		mesJOSB.append("");
-		mesJOSB.append("");
-		mesJOSB.append("");
-		mesJOSB.append("");
-		
-		mesJOSB.append("{\"action\":\""+pushFlag+"\",");
-		if(Constant.PUSH_CPH.equals(pushFlag)) {
-			Integer placeFlag = Integer.valueOf(request.getParameter("placeFlag"));
-			System.out.println("pushToClient.placeFlag==="+placeFlag);
-			switch (placeFlag) {
-			case Constant.YI_HAO_BANG_FANG:
-			case Constant.ER_HAO_BANG_FANG:
-			case Constant.SAN_HAO_BANG_FANG:
-				Integer jyFlag = Integer.valueOf(request.getParameter("jyFlag"));
-				mesJOSB.append("jyFlag:"+jyFlag+",");
-				break;
-			case Constant.MEN_GANG:
-				Integer jccFlag = Integer.valueOf(request.getParameter("jccFlag"));
-				mesJOSB.append("jccFlag:"+jccFlag+",");
-				break;
-			}
-			String cph = request.getParameter("cph");
-			mesJOSB.append("\"cph\":\""+cph+"\"}");
-			mesJOStr=mesJOSB.toString();
-			ProxySet.sayToClient(mesJOStr, placeFlag);//推送给客户端工控机端人工抬杆
+		try {
+			Long ddId = Long.valueOf(request.getParameter("ddId"));
+			String pushFlag = request.getParameter("pushFlag");
 			
-			boolean exist=rglrCphJiLuService.checkIfExistByDdIdCph(ddId,cph);//验证同一个订单是否存在该车牌号，存在则说明之前录入过了，不需要再生成车牌号记录了，反之则需要生成
-			if(!exist) {
-				RglrCphJiLu rglrCphJiLu=new RglrCphJiLu();
-				rglrCphJiLu.setCph(cph);
-				rglrCphJiLu.setDdId(ddId);
-				rglrCphJiLuService.add(rglrCphJiLu);
-			}
-		}
-		else if(Constant.PUSH_SFZH.equals(pushFlag)) {
-			String sfzh = request.getParameter("sfzh");
-			mesJOSB.append("\"sfzh\":\""+sfzh+"\"}");
-			mesJOStr=mesJOSB.toString();
-			ProxySet.sayToClient(mesJOStr, Constant.MEN_GANG);//推送给客户端工控机端进入排队中
+			System.out.println("pushToClient.ddId==="+ddId);
+			System.out.println("pushToClient.pushFlag==="+pushFlag);
 			
-			boolean exist=rglrSfzhJiLuService.checkIfExistByDdIdSfzh(ddId,sfzh);//验证同一个订单是否存在该身份证号，存在则说明之前录入过了，不需要再生成身份证号记录了，反之则需要生成
-			if(!exist) {
-				RglrSfzhJiLu rglrSfzhJiLu=new RglrSfzhJiLu();
-				rglrSfzhJiLu.setSfzh(sfzh);
-				rglrSfzhJiLu.setDdId(ddId);
-				rglrSfzhJiLuService.add(rglrSfzhJiLu);
+			//ProxySet.sayToClient("鲁A9031", SocketProxy.YI_JIAN);
+			String mesJOStr=null;
+			StringBuilder mesJOSB=new StringBuilder();
+			mesJOSB.append("{\"action\":\""+pushFlag+"\",");
+			if(Constant.PUSH_EWM.equals(pushFlag)) {
+				Integer placeFlag = Integer.valueOf(request.getParameter("placeFlag"));
+				System.out.println("pushToClient.placeFlag==="+placeFlag);
+				switch (placeFlag) {
+				case Constant.YI_HAO_BANG_FANG:
+				case Constant.ER_HAO_BANG_FANG:
+				case Constant.SAN_HAO_BANG_FANG:
+					Integer jyFlag = Integer.valueOf(request.getParameter("jyFlag"));
+					mesJOSB.append("jyFlag:"+jyFlag+",");
+					break;
+				}
+				String cph = request.getParameter("cph");
+				mesJOSB.append("\"cph\":\""+cph+"\"}");
+				mesJOStr=mesJOSB.toString();
+				ProxySet.sayToClient(mesJOStr, placeFlag);//推送给客户端工控机端人工抬杆
+				
+				boolean exist=rglrCphJiLuService.checkIfExistByDdIdCph(ddId,cph);//验证同一个订单是否存在该车牌号，存在则说明之前录入过了，不需要再生成车牌号记录了，反之则需要生成
+				if(!exist) {
+					RglrCphJiLu rglrCphJiLu=new RglrCphJiLu();
+					rglrCphJiLu.setCph(cph);
+					rglrCphJiLu.setDdId(ddId);
+					rglrCphJiLuService.add(rglrCphJiLu);
+				}
 			}
+			else if(Constant.PUSH_CPH.equals(pushFlag)) {
+				Integer placeFlag = Integer.valueOf(request.getParameter("placeFlag"));
+				System.out.println("pushToClient.placeFlag==="+placeFlag);
+				switch (placeFlag) {
+				case Constant.YI_HAO_BANG_FANG:
+				case Constant.ER_HAO_BANG_FANG:
+				case Constant.SAN_HAO_BANG_FANG:
+					Integer jyFlag = Integer.valueOf(request.getParameter("jyFlag"));
+					mesJOSB.append("jyFlag:"+jyFlag+",");
+					break;
+				case Constant.MEN_GANG:
+					Integer jccFlag = Integer.valueOf(request.getParameter("jccFlag"));
+					mesJOSB.append("jccFlag:"+jccFlag+",");
+					break;
+				}
+				String cph = request.getParameter("cph");
+				mesJOSB.append("\"cph\":\""+cph+"\"}");
+				mesJOStr=mesJOSB.toString();
+				ProxySet.sayToClient(mesJOStr, placeFlag);//推送给客户端工控机端人工抬杆
+				
+				boolean exist=rglrCphJiLuService.checkIfExistByDdIdCph(ddId,cph);//验证同一个订单是否存在该车牌号，存在则说明之前录入过了，不需要再生成车牌号记录了，反之则需要生成
+				if(!exist) {
+					RglrCphJiLu rglrCphJiLu=new RglrCphJiLu();
+					rglrCphJiLu.setCph(cph);
+					rglrCphJiLu.setDdId(ddId);
+					rglrCphJiLuService.add(rglrCphJiLu);
+				}
+			}
+			else if(Constant.PUSH_SFZH.equals(pushFlag)) {
+				String sfzh = request.getParameter("sfzh");
+				mesJOSB.append("\"sfzh\":\""+sfzh+"\"}");
+				mesJOStr=mesJOSB.toString();
+				ProxySet.sayToClient(mesJOStr, Constant.MEN_GANG);//推送给客户端工控机端进入排队中
+				
+				boolean exist=rglrSfzhJiLuService.checkIfExistByDdIdSfzh(ddId,sfzh);//验证同一个订单是否存在该身份证号，存在则说明之前录入过了，不需要再生成身份证号记录了，反之则需要生成
+				if(!exist) {
+					RglrSfzhJiLu rglrSfzhJiLu=new RglrSfzhJiLu();
+					rglrSfzhJiLu.setSfzh(sfzh);
+					rglrSfzhJiLu.setDdId(ddId);
+					rglrSfzhJiLuService.add(rglrSfzhJiLu);
+				}
+			}
+			
+			jsonMap.put("status", "ok");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		jsonMap.put("status", "ok");
 		
 		return jsonMap;
 	}

@@ -141,6 +141,7 @@ var ehbfMc;
 var shbfMc;
 var mgMc;
 
+var pushEwm;
 var pushCph;
 var pushSfzh;
 
@@ -167,8 +168,8 @@ $(function(){
 	initTab1();
 	
 	initInputSfzhDialog();//0
-	initInputRGSBCPDialog();//1
-	initInputRGSBEWMDialog();//2
+	initInputRgsbcpDialog();//1
+	initInputRgsbewmDialog();//2
 	initPreviewBDXXDialog();//3
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
@@ -216,6 +217,7 @@ function initPlaceFlagVar(){
 }
 
 function initPushVar(){
+	pushEwm='${requestScope.pushEwm}';
 	pushCph='${requestScope.pushCph}';
 	pushSfzh='${requestScope.pushSfzh}';
 }
@@ -345,7 +347,7 @@ function initXzSfzhCBB(){
 	,"json");
 }
 
-function initInputRGSBCPDialog(){
+function initInputRgsbcpDialog(){
 	$("#input_cph_dialog_div").dialog({
 		title:"录入车牌号",
 		width:setFitWidthInParent("#input_cph_div","input_cph_dialog_div"),
@@ -391,13 +393,13 @@ function initInputRGSBCPDialog(){
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 
-	initRGSBCPPlaceCBB();
-	initRGSBCPXzCphCBB();
-	initRGSBCPLrSjcCBB();
-	initRGSBCPLrWscphCBB();
+	initRgsbcpPlaceCBB();
+	initRgsbcpXzCphCBB();
+	initRgsbcpLrSjcCBB();
+	initRgsbcpLrWscphCBB();
 }
 
-function initRGSBCPPlaceCBB(){
+function initRgsbcpPlaceCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择"});
 	data.push({"value":mg,"text":mgMc});
@@ -414,7 +416,7 @@ function initRGSBCPPlaceCBB(){
 	});
 }
 
-function initRGSBCPXzCphCBB(){
+function initRgsbcpXzCphCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择"});
 	$.post(ddglPath+"queryXzCphCBBList",
@@ -439,7 +441,7 @@ function initRGSBCPXzCphCBB(){
 	,"json");
 }
 
-function initRGSBCPLrSjcCBB(){
+function initRgsbcpLrSjcCBB(){
 	var data=[];
 	data.push({"value":"","text":"请录入"});
 	rgsbcpLrSjcCBB=$("#rgsbcp_lrSjc_cbb").combobox({
@@ -458,7 +460,7 @@ function initRGSBCPLrSjcCBB(){
 	});
 }
 
-function initRGSBCPLrWscphCBB(){
+function initRgsbcpLrWscphCBB(){
 	var data=[];
 	data.push({"value":"","text":"请录入"});
 	rgsbcpLrWscphCBB=$("#rgsbcp_lrWscph_cbb").combobox({
@@ -482,7 +484,7 @@ function initRGSBCPLrWscphCBB(){
 	});
 }
 
-function initInputRGSBEWMDialog(){
+function initInputRgsbewmDialog(){
 	$("#input_ewm_dialog_div").dialog({
 		title:"录入二维码信息",
 		width:setFitWidthInParent("#input_ewm_div","input_ewm_dialog_div"),
@@ -491,7 +493,7 @@ function initInputRGSBEWMDialog(){
 		left:dialogLeft,
 		buttons:[
            {text:"确定",id:"ok_but",iconCls:"icon-ok",handler:function(){
-        	   checkEwmxxToClient();
+        	   checkEwmToClient();
            }},
            {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
         	   openInputEwmDialog(false);
@@ -528,10 +530,94 @@ function initInputRGSBEWMDialog(){
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 
-	//initRGSBCPPlaceCBB();
-	//initRGSBCPXzCphCBB();
-	//initRGSBCPLrSjcCBB();
-	//initRGSBCPLrWscphCBB();
+	initRgsbewmPlaceCBB();
+	initRgsbewmXzCphCBB();
+	initRgsbewmLrSjcCBB();
+	initRgsbewmLrWscphCBB();
+}
+
+function initRgsbewmPlaceCBB(){
+	var data=[];
+	data.push({"value":"","text":"请选择"});
+	data.push({"value":yhbf,"text":yhbfMc});
+	data.push({"value":ehbf,"text":ehbfMc});
+	data.push({"value":shbf,"text":shbfMc});
+	
+	rgsbewmPlaceCBB=$("#rgsbewm_place_cbb").combobox({
+		width:120,
+		valueField:"value",
+		textField:"text",
+		//multiple:true,
+		data:data
+	});
+}
+
+function initRgsbewmXzCphCBB(){
+	var data=[];
+	data.push({"value":"","text":"请选择"});
+	$.post(ddglPath+"queryXzCphCBBList",
+		{page:1,rows:20,sort:"lrsj",order:"desc"},
+		function(result){
+			var rows=result.rows;
+			for(var i=0;i<rows.length;i++){
+				data.push({"value":rows[i],"text":rows[i]});
+			}
+			rgsbewmXzcphCBB=$("#rgsbewm_xzcph_cbb").combobox({
+				width:120,
+				valueField:"value",
+				textField:"text",
+				data:data,
+				onChange:function(){
+					var cph=rgsbewmXzcphCBB.combobox("getValue");
+					rgsbewmLrSjcCBB.combobox("setValue",cph.substring(0,1));
+					rgsbewmLrWscphCBB.combobox("setValue",cph.substring(1));
+				}
+			});
+		}
+	,"json");
+}
+
+function initRgsbewmLrSjcCBB(){
+	var data=[];
+	data.push({"value":"","text":"请录入"});
+	rgsbewmLrSjcCBB=$("#rgsbewm_lrSjc_cbb").combobox({
+		width:50,
+		valueField:"sjc",
+		textField:"sjc",
+		editable:true,
+        mode:'remote',
+        url:ddglPath+"queryLrSjcCBBList",
+        onBeforeLoad: function(param){
+    		param.page = 1;
+    		param.rows = 100;
+    		param.sort = "lrsj";
+    		param.order = "desc";
+    	}
+	});
+}
+
+function initRgsbewmLrWscphCBB(){
+	var data=[];
+	data.push({"value":"","text":"请录入"});
+	rgsbewmLrWscphCBB=$("#rgsbewm_lrWscph_cbb").combobox({
+		width:70,
+		valueField:"wscph",
+		textField:"wscph",
+		editable:true,
+        mode:'remote',
+        url:ddglPath+"queryLrWscphCBBList",
+        onBeforeLoad: function(param){
+        	var sjc=rgsbewmLrSjcCBB.combobox("getValue");
+        	if(sjc==null||sjc==""){
+        	  	return false;
+        	}
+    		param.sjc = sjc;
+    		param.page = 1;
+    		param.rows = 100;
+    		param.sort = "lrsj";
+    		param.order = "desc";
+    	}
+	});
 }
 
 function initPreviewBDXXDialog(){
@@ -709,14 +795,37 @@ function pushSfzhToClient(){
 }
 
 function checkCphToClient(){
-	if(checkRGSBCPPlace()){
-		if(checkRGSBCPRglrCph()){
-			pushRGSBCphToClient();
+	if(checkRgsbcpPlace()){
+		if(checkRgsbcpRglrCph()){
+			pushRgsbcphToClient();
 		}
 	}
 }
 
-function pushRGSBCphToClient(){
+//验证地点
+function checkRgsbcpPlace(){
+	var bfh=rgsbcpPlaceCBB.combobox("getValue");
+	if(bfh==null||bfh==""){
+	  	alert("请选择地点");
+	  	return false;
+	}
+	else
+		return true;
+}
+
+//验证人工录入车牌号
+function checkRgsbcpRglrCph(){
+	var sjc=rgsbcpLrSjcCBB.combobox("getValue");
+	var wscph=rgsbcpLrWscphCBB.combobox("getValue");
+	if(sjc==null||sjc==""||wscph==null||wscph==""){
+	  	alert("请录入车牌号");
+	  	return false;
+	}
+	else
+		return true;
+}
+
+function pushRgsbcphToClient(){
 	var rows=tab1.datagrid("getSelections");
 	var placeFlag=parseInt(rgsbcpPlaceCBB.combobox("getValue"));
 	var sjc=rgsbcpLrSjcCBB.combobox("getValue");
@@ -750,7 +859,7 @@ function pushRGSBCphToClient(){
 		break;
 	case mg:
 		var jccFlag=0;//进出厂标识
-		if(ddztMc=='${requestScope.yxdDdztMc}')//已下单
+		if(ddztMc=='${requestScope.drcDdztMc}')//待入厂
 			jccFlag=1;
 		else if(ddztMc=='${requestScope.ddypzDdztMc}'||ddztMc=='${requestScope.dlcDdztMc}')//待打印凭证或待离厂
 			jccFlag=2
@@ -776,9 +885,17 @@ function pushRGSBCphToClient(){
 	,"json");
 }
 
+function checkEwmToClient(){
+	if(checkRgsbewmPlace()){
+		if(checkRgsbewmRglrCph()){
+			pushRgsbewmToClient();
+		}
+	}
+}
+
 //验证地点
-function checkRGSBCPPlace(){
-	var bfh=rgsbcpPlaceCBB.combobox("getValue");
+function checkRgsbewmPlace(){
+	var bfh=rgsbewmPlaceCBB.combobox("getValue");
 	if(bfh==null||bfh==""){
 	  	alert("请选择地点");
 	  	return false;
@@ -787,16 +904,63 @@ function checkRGSBCPPlace(){
 		return true;
 }
 
-//验证人工录入车牌号
-function checkRGSBCPRglrCph(){
-	var sjc=rgsbcpLrSjcCBB.combobox("getValue");
-	var wscph=rgsbcpLrWscphCBB.combobox("getValue");
+//验证人工录入二维码车牌号
+function checkRgsbewmRglrCph(){
+	var sjc=rgsbewmLrSjcCBB.combobox("getValue");
+	var wscph=rgsbewmLrWscphCBB.combobox("getValue");
 	if(sjc==null||sjc==""||wscph==null||wscph==""){
 	  	alert("请录入车牌号");
 	  	return false;
 	}
 	else
 		return true;
+}
+
+function pushRgsbewmToClient(){
+	var rows=tab1.datagrid("getSelections");
+	var placeFlag=parseInt(rgsbewmPlaceCBB.combobox("getValue"));
+	var sjc=rgsbewmLrSjcCBB.combobox("getValue");
+	var wscph=rgsbewmLrWscphCBB.combobox("getValue");
+	var cph=sjc+wscph;
+	if(cph!=rows[0].cyclCph){
+		alert("输入的车牌号与订单里的车牌号不一致");
+		return false;
+	}
+	
+	var paramJO={};
+	paramJO.cph=cph;
+	paramJO.placeFlag=placeFlag;
+	paramJO.pushFlag=pushEwm;
+	
+	var ddztMc=rows[0].ddztMc;
+	switch (placeFlag) {
+	case yhbf:
+	case ehbf:
+	case shbf:
+		var jyFlag=0;
+		if(ddztMc=='${requestScope.yjdsmDdztMc}')//一检待扫码
+			jyFlag=1
+		else if(ddztMc=='${requestScope.ejdsmDdztMc}')//二检待扫码
+			jyFlag=2
+		else{
+			alert("该车辆非待扫码状态");
+			return false;
+		}
+		paramJO.jyFlag=jyFlag;
+		break;
+	}
+	
+	
+	var ddId=rows[0].id;
+	paramJO.ddId=ddId;
+	$.post(gkjPath+"pushToClient",
+		paramJO,
+		function(data){
+			if(data.status=="ok"){
+				openInputEwmDialog(false);
+			}
+		}
+	,"json");
 }
 
 function initDDZTCBB(){
