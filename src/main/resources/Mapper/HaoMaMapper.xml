@@ -104,7 +104,7 @@
 			<if test="ksjhsj!=null">
 				ksjhsj=#{ksjhsj},
 			</if>
-			<if test="jhcs!=null">
+			<if test="jhcs!=null&amp;jhcs!=0">
 				jhcs=#{jhcs},
 			</if>
 			<if test="ddId!=null">
@@ -129,6 +129,8 @@
 		<foreach collection="ymdDlIdList" item="ymdDlId" open=" and cast(dl.id as char) not in (" separator="," close=")">
 		#{ymdDlId}
 		</foreach>
+		UNION
+		select hm.* from hao_ma hm,ding_dan dd,hao_ma_zhuang_tai hmzt where hm.ddId=dd.id and hm.hmztId=hmzt.id and hmzt.mc='${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}'
 		  ORDER BY pdh LIMIT 0,1
 	</select>
 	<select id="getPdzList" resultType="com.znczCxtc.entity.HaoMa">

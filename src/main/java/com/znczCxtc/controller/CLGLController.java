@@ -45,6 +45,11 @@ public class CLGLController {
 		return MODULE_NAME+"/dsh/list";
 	}
 
+	/**
+	 * 跳转到车辆管理-待审核-详情页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/dsh/detail")
 	public String goDshDetail(HttpServletRequest request) {
 		
@@ -55,6 +60,11 @@ public class CLGLController {
 		return MODULE_NAME+"/dsh/detail";
 	}
 
+	/**
+	 * 跳转到车辆管理-综合查询-添加页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {
 		
@@ -91,6 +101,11 @@ public class CLGLController {
 		return MODULE_NAME+"/zhcx/list";
 	}
 
+	/**
+	 * 跳转到车辆管理-综合查询-详情页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/zhcx/detail")
 	public String goZhcxDetail(HttpServletRequest request) {
 		
@@ -124,6 +139,11 @@ public class CLGLController {
 		return MODULE_NAME+"/tzcx/list";
 	}
 
+	/**
+	 * 跳转到车辆管理-台账查询-详情页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/tzcx/detail")
 	public String goTzcxDetail(HttpServletRequest request) {
 		
