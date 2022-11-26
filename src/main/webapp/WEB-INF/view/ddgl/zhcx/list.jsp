@@ -11,7 +11,7 @@
 	position: fixed;
 }
 .tab1_div .toolbar{
-	height:96px;
+	height:128px;
 }
 .tab1_div .toolbar .row_div{
 	height:32px;
@@ -864,7 +864,7 @@ function pushRgsbcphToClient(){
 		else if(ddztMc=='${requestScope.ddypzDdztMc}'||ddztMc=='${requestScope.dlcDdztMc}')//待打印凭证或待离厂
 			jccFlag=2
 		else{
-			alert("该车辆非"+ddztMc+"状态");
+			alert("该车辆非待入厂或待离厂状态");
 			return false;
 		}
 		paramJO.jccFlag=jccFlag;
@@ -1530,6 +1530,8 @@ function setFitWidthInParent(parent,self){
 				-
 				<input id="ccsje_dtb"/>
 				<a class="search_but" id="search_but">查询</a>
+			</div>
+			<div class="row_div">
 				<a id="rgsbsfz_but">人工识别身份证</a>
 				<a id="rgsbcp_but">人工识别车牌</a>
 				<a id="rgsbewm_but">人工识别二维码</a>
