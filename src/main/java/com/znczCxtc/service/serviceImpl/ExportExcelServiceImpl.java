@@ -17,16 +17,35 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 	private ExportExcelMapper exportExcelDao;
 	
 	@Override
-	public List<GuoBangJiLu> queryGBJList(String ddh, String cyclCph, String gbsjks, String gbsjjs, Integer page,
+	public List<GuoBangJiLu> queryGBJLList(String ddh, String cyclCph, String gbsjks, String gbsjjs, Integer page,
 			Integer rows, int dcfw) {
 		// TODO Auto-generated method stub
 		List<GuoBangJiLu> list = null;
 		switch (dcfw) {
 		case Constant.DANG_QIAN_YE:
-			list = exportExcelDao.queryGBJList(ddh, cyclCph, gbsjks, gbsjjs, (page-1)*rows, rows, dcfw);
+			list = exportExcelDao.queryGBJLList(ddh, cyclCph, gbsjks, gbsjjs, (page-1)*rows, rows, dcfw);
 			break;
 		case Constant.SUO_YOU_YE:
-			list = exportExcelDao.queryGBJList(ddh, cyclCph, gbsjks, gbsjjs, dcfw);
+			list = exportExcelDao.queryGBJLList(ddh, cyclCph, gbsjks, gbsjjs, dcfw);
+			break;
+		}
+		return list;
+	}
+
+	@Override
+	public List<DingDan> queryDDZHCXList(String ddh, Integer ddztId, String ddztMc, String cyclCph, String jhysrq,
+			String yssMc, String wzMc, String fhdwMc, String shdwMc, String cysjXm, String cysjSfzh, String jcsjs,
+			String jcsje, String ccsjs, String ccsje, Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<DingDan> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryDDZHCXList(ddh, ddztId, ddztMc, cyclCph, jhysrq, yssMc, wzMc, fhdwMc, shdwMc, cysjXm, cysjSfzh, jcsjs,
+					jcsje, ccsjs, ccsje, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryDDZHCXList(ddh, ddztId, ddztMc, cyclCph, jhysrq, yssMc, wzMc, fhdwMc, shdwMc, cysjXm, cysjSfzh, jcsjs,
+					jcsje, ccsjs, ccsje, dcfw);
 			break;
 		}
 		return list;

@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,174 @@ public class ExportExcelController {
 	@Autowired
 	private ExportExcelService exportExcelService;
 	public static final String MODULE_NAME=Constant.EXPORT_EXCEL_MODULE_NAME;
+
+	@RequestMapping(value="/exportDDZHCXList")
+	public void exportDDZHCXList(String ddh,Integer ddztId,String ddztMc,String cyclCph,String jhysrq,String yssMc,String wzMc,
+			String fhdwMc,String shdwMc,String cysjXm,String cysjSfzh,String jcsjs,String jcsje,String ccsjs,String ccsje,
+			Integer page,Integer rows,int sheetFlag,int dcfw,HttpServletResponse response) {
+		try {
+			System.out.println("ddh="+ddh);
+			System.out.println("ddztId="+ddztId);
+			ddztMc=StringUtil.decode(ddztMc, "UTF-8");
+			System.out.println("ddztMc="+ddztMc);
+			System.out.println("cyclCph="+cyclCph);
+			System.out.println("jhysrq="+jhysrq);
+			System.out.println("yssMc="+yssMc);
+			System.out.println("wzMc="+wzMc);
+			System.out.println("fhdwMc="+fhdwMc);
+			System.out.println("shdwMc="+shdwMc);
+			System.out.println("cysjXm="+cysjXm);
+			System.out.println("cysjSfzh="+cysjSfzh);
+			System.out.println("jcsjs="+jcsjs);
+			System.out.println("jcsje="+jcsje);
+			System.out.println("ccsjs="+ccsjs);
+			System.out.println("ccsje="+ccsje);
+			System.out.println("page="+page);
+			System.out.println("rows="+rows);
+			System.out.println("sheetFlag="+sheetFlag);
+			System.out.println("dcfw="+dcfw);
+	
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			String sheetname = null;
+			switch (sheetFlag) {
+			case DingDanZhuangTai.DAI_SHEN_HE:
+				sheetname = "待审核订单";
+				break;
+			}
+			HSSFSheet sheet = wb.createSheet(sheetname);
+			
+			createDDZHCXSheetHeader(wb,sheet,rowNum,sheetFlag);
+			
+			List<DingDan> ddList = exportExcelService.queryDDZHCXList(ddh, ddztId,ddztMc,cyclCph,jhysrq,yssMc,wzMc,fhdwMc,shdwMc,cysjXm,cysjSfzh,jcsjs,jcsje,ccsjs,ccsje, page, rows, dcfw);
+			
+			createDDZHCXSheetBody(ddList,sheet,rowNum,sheetFlag);
+
+			String fileName = null;
+			switch (sheetFlag) {
+			case DingDanZhuangTai.DAI_SHEN_HE:
+				fileName = "待审核订单查询";
+				break;
+			}
+			download(fileName, wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void createDDZHCXSheetHeader(HSSFWorkbook wb,HSSFSheet sheet,int rowNum,int sheetFlag) {
+		HSSFRow row = sheet.createRow(rowNum);
+		HSSFCellStyle style = wb.createCellStyle();
+		
+		switch (sheetFlag) {
+		case DingDanZhuangTai.DAI_SHEN_HE:
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("订单号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("车牌号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("物资名称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("运输商");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("发货单位");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(5);
+			cell.setCellValue("收货单位");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(6);
+			cell.setCellValue("流向类型");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(7);
+			cell.setCellValue("计划运输日期");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(8);
+			cell.setCellValue("预装卸重量");
+			cell.setCellStyle(style);
+			break;
+		}
+	}
+	
+	public void createDDZHCXSheetBody(List<DingDan> ddList,HSSFSheet sheet,int rowNum,int sheetFlag) {
+		switch (sheetFlag) {
+		case DingDanZhuangTai.DAI_SHEN_HE:
+			for (int i = 0; i < ddList.size(); i++) {
+				DingDan dd = ddList.get(i);
+				HSSFRow row=sheet.createRow(++rowNum);
+	
+				HSSFCell cell = row.createCell(0);
+				String ddh1 = dd.getDdh();
+				if(ddh1!=""&&ddh1!=null)
+					cell.setCellValue(ddh1);
+				
+				cell = row.createCell(1);
+				String cyclCph1 = dd.getCyclCph();
+				if(cyclCph1!=""&&cyclCph1!=null)
+					cell.setCellValue(cyclCph1);
+				
+				cell = row.createCell(2);
+				String wzMc = dd.getWzMc();
+				if(wzMc!=null)
+					cell.setCellValue(wzMc);
+				
+				cell = row.createCell(3);
+				String yssMc = dd.getYssMc();
+				if(yssMc!=null)
+					cell.setCellValue(yssMc);
+				
+				cell = row.createCell(4);
+				String fhdwMc = dd.getFhdwMc();
+				if(fhdwMc!=null)
+					cell.setCellValue(fhdwMc);
+					
+				cell = row.createCell(5);
+				String shdwMc = dd.getShdwMc();
+				if(shdwMc!=""&&shdwMc!=null)
+					cell.setCellValue(shdwMc);
+				
+				cell = row.createCell(6);
+				Integer lxlx = dd.getLxlx();
+				if(lxlx!=null) {
+					String lxlxMc=null;
+					switch (lxlx) {
+					case DingDan.SONG_YUN:
+						lxlxMc=DingDan.SONG_YUN_TEXT;
+						break;
+					case DingDan.QU_YUN:
+						lxlxMc=DingDan.QU_YUN_TEXT;
+						break;
+					}
+					cell.setCellValue(lxlxMc);
+				}
+				
+				cell = row.createCell(7);
+				String jhysrq = dd.getJhysrq();
+				if(jhysrq!=""&&jhysrq!=null)
+					cell.setCellValue(jhysrq);
+				
+				cell = row.createCell(8);
+				Float yzxzl = dd.getYzxzl();
+				if(yzxzl!=null)
+					cell.setCellValue(yzxzl);
+			}
+			break;
+	}
+	}
 
 	@RequestMapping(value="/exportGBJLList")
 	public void exportGBJLList(String ddh,String cyclCph,String gbsjks,String gbsjjs,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
@@ -80,7 +249,7 @@ public class ExportExcelController {
 			cell.setCellValue("过磅时间");
 			cell.setCellStyle(style);
 			
-			List<GuoBangJiLu> gbjlList = exportExcelService.queryGBJList(ddh, cyclCph, gbsjks, gbsjjs, page, rows, dcfw);
+			List<GuoBangJiLu> gbjlList = exportExcelService.queryGBJLList(ddh, cyclCph, gbsjks, gbsjjs, page, rows, dcfw);
 			for (int i = 0; i < gbjlList.size(); i++) {
 				GuoBangJiLu gbjl = gbjlList.get(i);
 				row=sheet.createRow(++rowNum);

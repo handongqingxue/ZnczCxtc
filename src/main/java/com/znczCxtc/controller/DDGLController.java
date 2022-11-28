@@ -90,6 +90,8 @@ public class DDGLController {
 		Constant.setDdztInRequest(request);
 		Constant.setShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
+		Constant.setDcfwInRequest(request);
+		request.setAttribute("sheetFlag", DingDanZhuangTai.DAI_SHEN_HE);
 		
 		return MODULE_NAME+"/dsh/list";
 	}

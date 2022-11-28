@@ -65,11 +65,11 @@ public class DingDan {
 	/**
 	 * 送运标识
 	 */
-	public static final Integer SONG_YUN=1;
+	public static final int SONG_YUN=1;
 	/**
 	 * 取运标识
 	 */
-	public static final Integer QU_YUN=2;
+	public static final int QU_YUN=2;
 	
 	/**
 	 * 送运名称
