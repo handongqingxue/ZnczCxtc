@@ -74,6 +74,9 @@ public class ExportExcelController {
 			case DingDanZhuangTai.DAI_SHEN_HE:
 				sheetname = "待审核订单";
 				break;
+			case DingDanZhuangTai.DAI_JIAN_YAN:
+				sheetname = "待质检订单";
+				break;
 			}
 			HSSFSheet sheet = wb.createSheet(sheetname);
 			
@@ -88,6 +91,9 @@ public class ExportExcelController {
 			case DingDanZhuangTai.DAI_SHEN_HE:
 				fileName = "待审核订单查询";
 				break;
+			case DingDanZhuangTai.DAI_JIAN_YAN:
+				fileName = "待质检订单查询";
+				break;
 			}
 			download(fileName, wb, response);
 		} catch (Exception e) {
@@ -96,12 +102,20 @@ public class ExportExcelController {
 		}
 	}
 	
+	/**
+	 * 根据不同表格标识创建表头，调用同一个订单综合查询接口，只是表头显示的列不同，这里需要判断下
+	 * @param wb
+	 * @param sheet
+	 * @param rowNum
+	 * @param sheetFlag
+	 */
 	public void createDDZHCXSheetHeader(HSSFWorkbook wb,HSSFSheet sheet,int rowNum,int sheetFlag) {
 		HSSFRow row = sheet.createRow(rowNum);
 		HSSFCellStyle style = wb.createCellStyle();
 		
 		switch (sheetFlag) {
 		case DingDanZhuangTai.DAI_SHEN_HE:
+		case DingDanZhuangTai.DAI_JIAN_YAN:
 			HSSFCell cell = row.createCell(0);
 			cell.setCellValue("订单号");
 			cell.setCellStyle(style);
@@ -144,6 +158,7 @@ public class ExportExcelController {
 	public void createDDZHCXSheetBody(List<DingDan> ddList,HSSFSheet sheet,int rowNum,int sheetFlag) {
 		switch (sheetFlag) {
 		case DingDanZhuangTai.DAI_SHEN_HE:
+		case DingDanZhuangTai.DAI_JIAN_YAN:
 			for (int i = 0; i < ddList.size(); i++) {
 				DingDan dd = ddList.get(i);
 				HSSFRow row=sheet.createRow(++rowNum);

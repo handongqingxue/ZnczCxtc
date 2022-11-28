@@ -107,6 +107,8 @@ public class DDGLController {
 		Constant.setDdztInRequest(request);
 		Constant.setShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
+		Constant.setDcfwInRequest(request);
+		request.setAttribute("sheetFlag", DingDanZhuangTai.DAI_JIAN_YAN);
 		
 		return MODULE_NAME+"/dzj/list";
 	}
