@@ -13,9 +13,9 @@ public interface GuoBangJiLuMapper {
 
 	int edit(GuoBangJiLu gbjl);
 
-	int queryForInt(@Param("ddh") String ddh, @Param("cph") String cph, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs);
+	int queryForInt(@Param("ddh") String ddh, @Param("cyclCph") String cyclCph, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs);
 
-	List<GuoBangJiLu> queryList(@Param("ddh") String ddh, @Param("cph") String cph, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs, 
+	List<GuoBangJiLu> queryList(@Param("ddh") String ddh, @Param("cyclCph") String cyclCph, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs, 
 			@Param("rowNum") int rowNum, @Param("rows") int rows, String sort, String order);
 	
 	GuoBangJiLu selectById(@Param("id") String id);

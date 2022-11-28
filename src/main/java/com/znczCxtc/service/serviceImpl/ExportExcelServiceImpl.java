@@ -17,16 +17,16 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 	private ExportExcelMapper exportExcelDao;
 	
 	@Override
-	public List<GuoBangJiLu> queryGBJList(String ddh, String cph, String gbsjks, String gbsjjs, Integer page,
+	public List<GuoBangJiLu> queryGBJList(String ddh, String cyclCph, String gbsjks, String gbsjjs, Integer page,
 			Integer rows, int dcfw) {
 		// TODO Auto-generated method stub
 		List<GuoBangJiLu> list = null;
 		switch (dcfw) {
 		case Constant.DANG_QIAN_YE:
-			list = exportExcelDao.queryGBJList(ddh, cph, gbsjks, gbsjjs, (page-1)*rows, rows, dcfw);
+			list = exportExcelDao.queryGBJList(ddh, cyclCph, gbsjks, gbsjjs, (page-1)*rows, rows, dcfw);
 			break;
 		case Constant.SUO_YOU_YE:
-			
+			list = exportExcelDao.queryGBJList(ddh, cyclCph, gbsjks, gbsjjs, dcfw);
 			break;
 		}
 		return list;

@@ -10,9 +10,9 @@ public interface GuoBangJiLuService {
 
 	int edit(GuoBangJiLu gbjl);
 
-	int queryForInt(String ddh, String cph, String gbsjks, String gbsjjs);
+	int queryForInt(String ddh, String cyclCph, String gbsjks, String gbsjjs);
 
-	List<GuoBangJiLu> queryList(String ddh, String cph, String gbsjks, String gbsjjs, int page, int rows, String sort, String order);
+	List<GuoBangJiLu> queryList(String ddh, String cyclCph, String gbsjks, String gbsjjs, int page, int rows, String sort, String order);
 
 	GuoBangJiLu selectById(String id);
 

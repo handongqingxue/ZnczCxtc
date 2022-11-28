@@ -29,15 +29,15 @@ public class GuoBangJiLuServiceImpl implements GuoBangJiLuService {
 	}
 
 	@Override
-	public int queryForInt(String ddh, String cph, String gbsjks, String gbsjjs) {
+	public int queryForInt(String ddh, String cyclCph, String gbsjks, String gbsjjs) {
 		// TODO Auto-generated method stub
-		return guoBangJiLuDao.queryForInt(ddh, cph, gbsjks, gbsjjs);
+		return guoBangJiLuDao.queryForInt(ddh, cyclCph, gbsjks, gbsjjs);
 	}
 
 	@Override
-	public List<GuoBangJiLu> queryList(String ddh, String cph, String gbsjks, String gbsjjs, int page, int rows, String sort, String order) {
+	public List<GuoBangJiLu> queryList(String ddh, String cyclCph, String gbsjks, String gbsjjs, int page, int rows, String sort, String order) {
 		// TODO Auto-generated method stub
-		return guoBangJiLuDao.queryList(ddh, cph, gbsjks, gbsjjs, (page-1)*rows, rows, sort, order);
+		return guoBangJiLuDao.queryList(ddh, cyclCph, gbsjks, gbsjjs, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override

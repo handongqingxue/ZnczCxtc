@@ -6,7 +6,7 @@ import com.znczCxtc.entity.*;
 
 public interface ExportExcelService {
 
-	List<GuoBangJiLu> queryGBJList(String ddh, String cph, String gbsjks, String gbsjjs, Integer page, Integer rows,
+	List<GuoBangJiLu> queryGBJList(String ddh, String cyclCph, String gbsjks, String gbsjjs, Integer page, Integer rows,
 			int dcfw);
 
 }

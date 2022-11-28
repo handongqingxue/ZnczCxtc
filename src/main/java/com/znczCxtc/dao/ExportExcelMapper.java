@@ -8,6 +8,8 @@ import com.znczCxtc.entity.*;
 
 public interface ExportExcelMapper {
 
-	List<GuoBangJiLu> queryGBJList(@Param("ddh") String ddh, @Param("cph") String cph, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs,
+	List<GuoBangJiLu> queryGBJList(@Param("ddh") String ddh, @Param("cyclCph") String cyclCph, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs,
 			@Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<GuoBangJiLu> queryGBJList(@Param("ddh") String ddh, @Param("cyclCph") String cyclCph, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs, @Param("dcfw") int dcfw);
 }

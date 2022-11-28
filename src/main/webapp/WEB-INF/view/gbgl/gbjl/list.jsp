@@ -14,12 +14,12 @@
 	height:32px;
 }
 .tab1_div .toolbar .ddh_span,
-.tab1_div .toolbar .cph_span,
+.tab1_div .toolbar .cyclCph_span,
 .tab1_div .toolbar .gbsj_span{
 	margin-left: 13px;
 }
 .tab1_div .toolbar .ddh_inp,
-.tab1_div .toolbar .cph_inp{
+.tab1_div .toolbar .cyclCph_inp{
 	width: 120px;
 	height: 25px;
 }
@@ -135,11 +135,11 @@ function initOutputExcelDialog(){
         	   if(checkDcfw()){
         		   	var params="";
 	       			var ddh=$("#toolbar #ddh").val();
-	    			var cph=$("#toolbar #cph").val();
+	    			var cyclCph=$("#toolbar #cyclCph").val();
 	    			var gbsjks=gbsjksDTB.datetimebox("getValue");
 	    			var gbsjjs=gbsjjsDTB.datetimebox("getValue");
         			var dcfw=dcfwCBB.combobox("getValue");
-        			params+="ddh="+ddh+"&cph="+cph+"&gbsjks="+gbsjks+"&gbsjjs="+gbsjjs+"&dcfw="+dcfw;
+        			params+="ddh="+ddh+"&cyclCph="+cyclCph+"&gbsjks="+gbsjks+"&gbsjjs="+gbsjjs+"&dcfw="+dcfw;
         			if(dcfw==dqyDcfw){
 	        			var options=tab1.datagrid("getPager").data("pagination").options;
 	        			var page=options.pageNumber;
@@ -147,6 +147,7 @@ function initOutputExcelDialog(){
 	        			params+="&page="+page+"&rows="+rows;
         			}
         			location.href=exportExcelPath+"exportGBJLList?"+params;
+             	   	openOutputExcelDialog(false);
         	   }
            }},
            {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
@@ -228,10 +229,10 @@ function initSearchLB(){
 		iconCls:"icon-search",
 		onClick:function(){
 			var ddh=$("#toolbar #ddh").val();
-			var cph=$("#toolbar #cph").val();
+			var cyclCph=$("#toolbar #cyclCph").val();
 			var gbsjks=gbsjksDTB.datetimebox("getValue");
 			var gbsjjs=gbsjjsDTB.datetimebox("getValue");
-			tab1.datagrid("load",{ddh:ddh,cph:cph,gbsjks:gbsjks,gbsjjs:gbsjjs});
+			tab1.datagrid("load",{ddh:ddh,cyclCph:cyclCph,gbsjks:gbsjks,gbsjjs:gbsjjs});
 		}
 	});
 }
@@ -354,8 +355,8 @@ function setFitWidthInParent(parent,self){
 		<div class="toolbar" id="toolbar">
 			<span class="ddh_span">订单号：</span>
 			<input type="text" class="ddh_inp" id="ddh" placeholder="请输入订单号"/>
-			<span class="cph_span">车牌号：</span>
-			<input type="text" class="cph_inp" id="cph" placeholder="请输入车牌号"/>
+			<span class="cyclCph_span">车牌号：</span>
+			<input type="text" class="cyclCph_inp" id="cyclCph" placeholder="请输入车牌号"/>
 			<span class="gbsj_span">过磅时间：</span>
 			<input id="gbsjks_dtb"/>-
 			<input id="gbsjjs_dtb"/>

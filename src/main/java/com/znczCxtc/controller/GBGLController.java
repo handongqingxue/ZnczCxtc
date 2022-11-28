@@ -402,12 +402,12 @@ public class GBGLController {
 
 	@RequestMapping(value="/queryGBJLList")
 	@ResponseBody
-	public Map<String, Object> queryGBJLList(String ddh,String cph,String gbsjks,String gbsjjs,int page,int rows,String sort,String order) {
+	public Map<String, Object> queryGBJLList(String ddh,String cyclCph,String gbsjks,String gbsjjs,int page,int rows,String sort,String order) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		int count = guoBangJiLuService.queryForInt(ddh,cph,gbsjks,gbsjjs);
-		List<GuoBangJiLu> gbjlList=guoBangJiLuService.queryList(ddh, cph, gbsjks, gbsjjs, page, rows, sort, order);
+		int count = guoBangJiLuService.queryForInt(ddh,cyclCph,gbsjks,gbsjjs);
+		List<GuoBangJiLu> gbjlList=guoBangJiLuService.queryList(ddh, cyclCph, gbsjks, gbsjjs, page, rows, sort, order);
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", gbjlList);

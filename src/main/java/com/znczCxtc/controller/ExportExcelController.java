@@ -31,18 +31,18 @@ import com.znczCxtc.util.*;
 //https://www.cnblogs.com/RunningSnails/p/13275549.html
 //https://www.cnblogs.com/wangjuns8/p/7243342.html
 @Controller
-@RequestMapping("/"+ExportExcelAction.MODULE_NAME)
-public class ExportExcelAction {
+@RequestMapping("/"+ExportExcelController.MODULE_NAME)
+public class ExportExcelController {
 
 	@Autowired
 	private ExportExcelService exportExcelService;
 	public static final String MODULE_NAME=Constant.EXPORT_EXCEL_MODULE_NAME;
 
 	@RequestMapping(value="/exportGBJLList")
-	public void exportGBJLList(String ddh,String cph,String gbsjks,String gbsjjs,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+	public void exportGBJLList(String ddh,String cyclCph,String gbsjks,String gbsjjs,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
 		try {
 			System.out.println("ddh="+ddh);
-			System.out.println("cph="+cph);
+			System.out.println("cyclCph="+cyclCph);
 			System.out.println("gbsjks="+gbsjks);
 			System.out.println("gbsjjs="+gbsjjs);
 			System.out.println("page="+page);
@@ -80,7 +80,7 @@ public class ExportExcelAction {
 			cell.setCellValue("过磅时间");
 			cell.setCellStyle(style);
 			
-			List<GuoBangJiLu> gbjlList = exportExcelService.queryGBJList(ddh, cph, gbsjks, gbsjjs, page, rows, dcfw);
+			List<GuoBangJiLu> gbjlList = exportExcelService.queryGBJList(ddh, cyclCph, gbsjks, gbsjjs, page, rows, dcfw);
 			for (int i = 0; i < gbjlList.size(); i++) {
 				GuoBangJiLu gbjl = gbjlList.get(i);
 				row=sheet.createRow(++rowNum);
@@ -91,9 +91,9 @@ public class ExportExcelAction {
 					cell.setCellValue(ddh1);
 				
 				cell = row.createCell(1);
-				String cyclCph = gbjl.getCyclCph();
-				if(cyclCph!=""&&cyclCph!=null)
-					cell.setCellValue(cyclCph);
+				String cyclCph1 = gbjl.getCyclCph();
+				if(cyclCph1!=""&&cyclCph1!=null)
+					cell.setCellValue(cyclCph1);
 				
 				cell = row.createCell(2);
 				Float gbzl = gbjl.getGbzl();
@@ -103,12 +103,12 @@ public class ExportExcelAction {
 				cell = row.createCell(3);
 				Integer gbzt = gbjl.getGbzt();
 				if(gbzt!=null)
-					cell.setCellValue(gbzt==1?"正常":"异常");
+					cell.setCellValue(gbzt==GuoBangJiLu.ZHENG_CHANG?GuoBangJiLu.ZHENG_CHANG_TEXT:GuoBangJiLu.YI_CHANG_TEXT);
 				
 				cell = row.createCell(4);
 				Integer gblx = gbjl.getGblx();
 				if(gblx!=null)
-					cell.setCellValue(gblx==1?"入厂":"出厂");
+					cell.setCellValue(gblx==GuoBangJiLu.RU_CHANG_GUO_BANG?GuoBangJiLu.RU_CHANG_GUO_BANG_TEXT:GuoBangJiLu.CHU_CHANG_GUO_BANG_TEXT);
 				
 				cell = row.createCell(5);
 				String gbsj = gbjl.getGbsj();
