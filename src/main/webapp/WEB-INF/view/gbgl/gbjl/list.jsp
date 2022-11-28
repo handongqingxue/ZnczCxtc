@@ -38,7 +38,7 @@
 
 .output_excel_div{
 	width: 500px;
-	height: 260px;
+	height: 210px;
 	margin: 250px auto 0;
 	background-color: #fff;
 	border-radius:5px;
@@ -67,9 +67,16 @@ var ccgbGblx;
 
 var rcgbGblxMc;
 var ccgbGblxMc;
+
+var dqyDcfw;
+var syyDcfw;
+
+var dqyDcfwMc;
+var syyDcfwMc;
 $(function(){
 	initGbztVar();
 	initGblxVar();
+	initDcfwVar();
 	
 	initGBSJKSDTB();
 	initGBSJJSDTB();
@@ -99,6 +106,14 @@ function initGblxVar(){
 	ccgbGblxMc='${requestScope.ccgbGblxMc}';
 }
 
+function initDcfwVar(){
+	dqyDcfw=parseInt('${requestScope.dqyDcfw}');
+	syyDcfw=parseInt('${requestScope.syyDcfw}');
+
+	dqyDcfwMc='${requestScope.dqyDcfwMc}';
+	syyDcfwMc='${requestScope.syyDcfwMc}';
+}
+
 function initDialogPosition(){
 	var oedpw=$("body").find(".panel.window").eq(oedNum);
 	var oedws=$("body").find(".window-shadow").eq(oedNum);
@@ -112,12 +127,27 @@ function initOutputExcelDialog(){
 	$("#output_excel_dialog_div").dialog({
 		title:"导出excel",
 		width:setFitWidthInParent("#output_excel_div","output_excel_dialog_div"),
-		height:200,
+		height:150,
 		top:5,
 		left:dialogLeft,
 		buttons:[
            {text:"确定",id:"ok_but",iconCls:"icon-ok",handler:function(){
-        	   
+        	   if(checkDcfw()){
+        		   	var params="";
+	       			var ddh=$("#toolbar #ddh").val();
+	    			var cph=$("#toolbar #cph").val();
+	    			var gbsjks=gbsjksDTB.datetimebox("getValue");
+	    			var gbsjjs=gbsjjsDTB.datetimebox("getValue");
+        			var dcfw=dcfwCBB.combobox("getValue");
+        			params+="ddh="+ddh+"&cph="+cph+"&gbsjks="+gbsjks+"&gbsjjs="+gbsjjs+"&dcfw="+dcfw;
+        			if(dcfw==dqyDcfw){
+	        			var options=tab1.datagrid("getPager").data("pagination").options;
+	        			var page=options.pageNumber;
+	        			var rows=options.pageSize;
+	        			params+="&page="+page+"&rows="+rows;
+        			}
+        			location.href=exportExcelPath+"exportGBJLList?"+params;
+        	   }
            }},
            {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
         	   openOutputExcelDialog(false);
@@ -154,20 +184,31 @@ function initOutputExcelDialog(){
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 
-	initOutputScopeCBB();
+	initDcfwCBB();
 }
 
-function initOutputScopeCBB(){
+function initDcfwCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择"});
-	data.push({"value":1,"text":"当前页"});
-	data.push({"value":2,"text":"所有页"});
-	xzsfzhCBB=$("#output_scope_cbb").combobox({
+	data.push({"value":dqyDcfw,"text":dqyDcfwMc});
+	data.push({"value":syyDcfw,"text":syyDcfwMc});
+	dcfwCBB=$("#dcfw_cbb").combobox({
 		width:120,
 		valueField:"value",
 		textField:"text",
 		data:data
 	});
+}
+
+//验证导出范围
+function checkDcfw(){
+	var dcfw=dcfwCBB.combobox("getValue");
+	if(dcfw==null||dcfw==""){
+	  	alert("请选择导出范围");
+	  	return false;
+	}
+	else
+		return true;
 }
 
 function initGBSJKSDTB(){
@@ -208,7 +249,6 @@ function initOutputBut(){
 	opBut=$("#output_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){
-			//location.href=exportExcelPath+"exportGBJLList";
 			openOutputExcelDialog(true);
 		}
 	});
@@ -336,7 +376,7 @@ function setFitWidthInParent(parent,self){
 						导出范围
 					</td>
 					<td class="td2">
-						<input id="output_scope_cbb"/>
+						<input id="dcfw_cbb"/>
 					</td>
 				  </tr>
 				</table>

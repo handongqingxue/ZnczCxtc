@@ -158,6 +158,7 @@ public class GBGLController {
 		//publicService.selectNav(request);
 		Constant.setGblxInRequest(request);
 		Constant.setGbztInRequest(request);
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/gbjl/list";
 	}

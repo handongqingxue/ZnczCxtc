@@ -42,6 +42,10 @@ public class Constant {
 	 * 过磅管理模块类名
 	 */
 	public static final String GBGL_MODULE_NAME="gbgl";
+	/**
+	 * 导出excel模块类名
+	 */
+	public static final String EXPORT_EXCEL_MODULE_NAME="exportExcel";
 
 	//地点标识start
 	public static final int WEI_GUO_BANG=0;
@@ -60,6 +64,12 @@ public class Constant {
 	public static final String PUSH_EWM="pushEwm";
 	public static final String PUSH_CPH="pushCph";
 	public static final String PUSH_SFZH="pushSfzh";
+	
+	public static final int DANG_QIAN_YE=1;
+	public static final int SUO_YOU_YE=2;
+	
+	public static final String DANG_QIAN_YE_TEXT="当前页";
+	public static final String SUO_YOU_YE_TEXT="所有页";
 	
 	/**
 	 * 存放订单状态常量
@@ -167,5 +177,18 @@ public class Constant {
 		
 		request.setAttribute("zcGbztMc", GuoBangJiLu.ZHENG_CHANG_TEXT);
 		request.setAttribute("ycgbztMc", GuoBangJiLu.YI_CHANG_TEXT);
+	}
+	
+	/**
+	 * 存放导出范围常量
+	 * @param request
+	 */
+	public static void setDcfwInRequest(HttpServletRequest request) {
+
+		request.setAttribute("dqyDcfw", DANG_QIAN_YE);
+		request.setAttribute("syyDcfw", SUO_YOU_YE);
+		
+		request.setAttribute("dqyDcfwMc", DANG_QIAN_YE_TEXT);
+		request.setAttribute("syyDcfwMc", SUO_YOU_YE_TEXT);
 	}
 }
