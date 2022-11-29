@@ -91,7 +91,7 @@ public class DDGLController {
 		Constant.setShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
 		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", DingDanZhuangTai.DAI_SHEN_HE);
+		request.setAttribute("sheetFlag", DingDan.DAI_SHEN_HE_SHEET);
 		
 		return MODULE_NAME+"/dsh/list";
 	}
@@ -108,7 +108,7 @@ public class DDGLController {
 		Constant.setShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
 		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", DingDanZhuangTai.DAI_JIAN_YAN);
+		request.setAttribute("sheetFlag", DingDan.DAI_JIAN_YAN_SHEET);
 		
 		return MODULE_NAME+"/dzj/list";
 	}
@@ -126,7 +126,7 @@ public class DDGLController {
 		Constant.setShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
 		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", DingDanZhuangTai.DAI_ZHUANG_XIE_HUO);
+		request.setAttribute("sheetFlag", DingDan.DAI_ZHUANG_XIE_HUO_SHEET);
 		
 		return MODULE_NAME+"/drk/list";
 	}
@@ -166,6 +166,8 @@ public class DDGLController {
 		setGbztInRequest(request);
 		setPlaceInRequest(request);
 		setPushInRequest(request);
+		Constant.setDcfwInRequest(request);
+		request.setAttribute("sheetFlag", DingDan.ZONG_HE_CHA_XUN_SHEET);
 		
 		return MODULE_NAME+"/zhcx/list";
 	}

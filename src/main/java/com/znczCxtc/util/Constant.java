@@ -191,4 +191,79 @@ public class Constant {
 		request.setAttribute("dqyDcfwMc", DANG_QIAN_YE_TEXT);
 		request.setAttribute("syyDcfwMc", SUO_YOU_YE_TEXT);
 	}
+	
+	/**
+	 * 根据流向类型id获取流向类型名称
+	 * @param lxlxId
+	 * @return
+	 */
+	public static String getLxlxMcById(int lxlxId) {
+		String lxlxMc=null;
+		switch (lxlxId) {
+		case DingDan.SONG_YUN:
+			lxlxMc=DingDan.SONG_YUN_TEXT;
+			break;
+		case DingDan.QU_YUN:
+			lxlxMc=DingDan.QU_YUN_TEXT;
+			break;
+		}
+		return lxlxMc;
+	}
+
+	/**
+	 * 根据过磅状态id获取过磅状态名称
+	 * @param gbztId
+	 * @return
+	 */
+	public static String getGbztMcById(int gbztId){
+		String gbztMc=null;
+		switch (gbztId) {
+		case DingDan.DAI_SHANG_BANG:
+			gbztMc=DingDan.DAI_SHANG_BANG_TEXT;//待上磅
+			break;
+		case DingDan.SHANG_BANG_ZHONG:
+			gbztMc=DingDan.SHANG_BANG_ZHONG_TEXT;//上磅中
+			break;
+		case DingDan.DAI_CHENG_ZHONG:
+			gbztMc=DingDan.DAI_CHENG_ZHONG_TEXT;//待称重
+			break;
+		case DingDan.CHENG_ZHONG_ZHONG:
+			gbztMc=DingDan.CHENG_ZHONG_ZHONG_TEXT;//称重中
+			break;
+		case DingDan.DAI_XIA_BANG:
+			gbztMc=DingDan.DAI_XIA_BANG_TEXT;//待下磅
+			break;
+		case DingDan.XIA_BANG_ZHONG:
+			gbztMc=DingDan.XIA_BANG_ZHONG_TEXT;//下磅中
+			break;
+		case DingDan.YI_WAN_CHENG:
+			gbztMc=DingDan.YI_WAN_CHENG_TEXT;//已完成
+			break;
+		}
+		return gbztMc;
+	}
+
+	/**
+	 * 根据磅房号获取磅房名称
+	 * @param bfh
+	 * @return
+	 */
+	public static String getBfMcByBfh(int bfh){
+		String bfMc=null;
+		switch (bfh) {
+		case Constant.WEI_GUO_BANG:
+			bfMc=Constant.WEI_GUO_BANG_TEXT;
+			break;
+		case Constant.YI_HAO_BANG_FANG:
+			bfMc=Constant.YI_HAO_BANG_FANG_TEXT;
+			break;
+		case Constant.ER_HAO_BANG_FANG:
+			bfMc=Constant.ER_HAO_BANG_FANG_TEXT;
+			break;
+		case Constant.SAN_HAO_BANG_FANG:
+			bfMc=Constant.SAN_HAO_BANG_FANG_TEXT;
+			break;
+		}
+		return bfMc;
+	}
 }

@@ -6,31 +6,31 @@ public class DingDan {
 	/**
 	 * 待上磅过磅状态标识
 	 */
-	public static final Integer DAI_SHANG_BANG=1;
+	public static final int DAI_SHANG_BANG=1;
 	/**
 	 * 上磅中过磅状态标识
 	 */
-	public static final Integer SHANG_BANG_ZHONG=2;
+	public static final int SHANG_BANG_ZHONG=2;
 	/**
 	 * 待称重过磅状态标识
 	 */
-	public static final Integer DAI_CHENG_ZHONG=3;
+	public static final int DAI_CHENG_ZHONG=3;
 	/**
 	 * 称重中过磅状态标识
 	 */
-	public static final Integer CHENG_ZHONG_ZHONG=4;
+	public static final int CHENG_ZHONG_ZHONG=4;
 	/**
 	 * 待下磅过磅状态标识
 	 */
-	public static final Integer DAI_XIA_BANG=5;
+	public static final int DAI_XIA_BANG=5;
 	/**
 	 * 下磅中过磅状态标识
 	 */
-	public static final Integer XIA_BANG_ZHONG=6;
+	public static final int XIA_BANG_ZHONG=6;
 	/**
 	 * 已完成过磅状态标识
 	 */
-	public static final Integer YI_WAN_CHENG=7;
+	public static final int YI_WAN_CHENG=7;
 	
 	/**
 	 * 待上磅过磅状态名称
@@ -79,6 +79,11 @@ public class DingDan {
 	 * 取运名称
 	 */
 	public static final String QU_YUN_TEXT="取运";
+	
+	public static final int DAI_SHEN_HE_SHEET=1;
+	public static final int DAI_JIAN_YAN_SHEET=2;
+	public static final int DAI_ZHUANG_XIE_HUO_SHEET=3;
+	public static final int ZONG_HE_CHA_XUN_SHEET=4;
 	
 	private Long id;//订单id（主键）
 	public Long getId() {

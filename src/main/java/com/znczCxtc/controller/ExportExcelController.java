@@ -71,7 +71,7 @@ public class ExportExcelController {
 			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
 			String sheetname = null;
 			switch (sheetFlag) {
-			case DingDanZhuangTai.DAI_SHEN_HE:
+			case DingDan.DAI_SHEN_HE_SHEET:
 				sheetname = "待审核订单";
 				break;
 			case DingDanZhuangTai.DAI_JIAN_YAN:
@@ -80,7 +80,7 @@ public class ExportExcelController {
 			case DingDanZhuangTai.DAI_ZHUANG_XIE_HUO:
 				sheetname = "待入库订单";
 				break;
-			default:
+			case DingDan.ZONG_HE_CHA_XUN_SHEET:
 				sheetname = "订单综合查询";
 				break;
 			}
@@ -103,7 +103,7 @@ public class ExportExcelController {
 			case DingDanZhuangTai.DAI_ZHUANG_XIE_HUO:
 				fileName = "待入库订单查询";
 				break;
-			default:
+			case DingDan.ZONG_HE_CHA_XUN_SHEET:
 				fileName = "订单综合查询";
 				break;
 			}
@@ -127,8 +127,8 @@ public class ExportExcelController {
 		
 		HSSFCell cell = null;
 		switch (sheetFlag) {
-		case DingDanZhuangTai.DAI_SHEN_HE:
-		case DingDanZhuangTai.DAI_JIAN_YAN:
+		case DingDan.DAI_SHEN_HE_SHEET:
+		case DingDan.DAI_JIAN_YAN_SHEET:
 			cell = row.createCell(0);
 			cell.setCellValue("订单号");
 			cell.setCellStyle(style);
@@ -165,7 +165,7 @@ public class ExportExcelController {
 			cell.setCellValue("预装卸重量");
 			cell.setCellStyle(style);
 			break;
-		case DingDanZhuangTai.DAI_ZHUANG_XIE_HUO:
+		case DingDan.DAI_ZHUANG_XIE_HUO_SHEET:
 			cell = row.createCell(0);
 			cell.setCellValue("订单号");
 			cell.setCellStyle(style);
@@ -218,7 +218,7 @@ public class ExportExcelController {
 			cell.setCellValue("编辑时间");
 			cell.setCellStyle(style);
 			break;
-		default:
+		case DingDan.ZONG_HE_CHA_XUN_SHEET:
 			cell = row.createCell(0);
 			cell.setCellValue("订单号");
 			cell.setCellStyle(style);
@@ -324,8 +324,8 @@ public class ExportExcelController {
 	
 	public void createDDZHCXSheetBody(List<DingDan> ddList,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
 		switch (sheetFlag) {
-		case DingDanZhuangTai.DAI_SHEN_HE:
-		case DingDanZhuangTai.DAI_JIAN_YAN:
+		case DingDan.DAI_SHEN_HE_SHEET:
+		case DingDan.DAI_JIAN_YAN_SHEET:
 			for (int i = 0; i < ddList.size(); i++) {
 				DingDan dd = ddList.get(i);
 				HSSFRow row=sheet.createRow(++rowNum);
@@ -386,7 +386,7 @@ public class ExportExcelController {
 					cell.setCellValue(yzxzl);
 			}
 			break;
-		case DingDanZhuangTai.DAI_ZHUANG_XIE_HUO:
+		case DingDan.DAI_ZHUANG_XIE_HUO_SHEET:
 			for (int i = 0; i < ddList.size(); i++) {
 				DingDan dd = ddList.get(i);
 				HSSFRow row=sheet.createRow(++rowNum);
@@ -434,15 +434,7 @@ public class ExportExcelController {
 				cell = row.createCell(8);
 				Integer lxlx = dd.getLxlx();
 				if(lxlx!=null) {
-					String lxlxMc=null;
-					switch (lxlx) {
-					case DingDan.SONG_YUN:
-						lxlxMc=DingDan.SONG_YUN_TEXT;
-						break;
-					case DingDan.QU_YUN:
-						lxlxMc=DingDan.QU_YUN_TEXT;
-						break;
-					}
+					String lxlxMc=Constant.getLxlxMcById(lxlx);
 					cell.setCellValue(lxlxMc);
 				}
 				
@@ -467,7 +459,7 @@ public class ExportExcelController {
 					cell.setCellValue(bjsj);
 			}
 			break;
-		default:
+		case DingDan.ZONG_HE_CHA_XUN_SHEET:
 			for (int i = 0; i < ddList.size(); i++) {
 				DingDan dd = ddList.get(i);
 				HSSFRow row=sheet.createRow(++rowNum);
@@ -491,6 +483,121 @@ public class ExportExcelController {
 				String wzMc = dd.getWzMc();
 				if(wzMc!=null)
 					cell.setCellValue(wzMc);
+				
+				cell = row.createCell(3);
+				String cyclCph = dd.getCyclCph();
+				if(cyclCph!=""&&cyclCph!=null)
+					cell.setCellValue(cyclCph);
+				
+				cell = row.createCell(5);
+				String yssMc = dd.getYssMc();
+				if(yssMc!=null)
+					cell.setCellValue(yssMc);
+				
+				cell = row.createCell(6);
+				String fhdwMc = dd.getFhdwMc();
+				if(fhdwMc!=null)
+					cell.setCellValue(fhdwMc);
+					
+				cell = row.createCell(7);
+				String shdwMc = dd.getShdwMc();
+				if(shdwMc!=""&&shdwMc!=null)
+					cell.setCellValue(shdwMc);
+				
+				cell = row.createCell(8);
+				Integer lxlx = dd.getLxlx();
+				if(lxlx!=null) {
+					String lxlxMc=Constant.getLxlxMcById(lxlx);
+					cell.setCellValue(lxlxMc);
+				}
+				
+				cell = row.createCell(9);
+				String jhysrq = dd.getJhysrq();
+				if(jhysrq!=""&&jhysrq!=null)
+					cell.setCellValue(jhysrq);
+				
+				cell = row.createCell(10);
+				String ddztMc = dd.getDdztMc();
+				if(ddztMc!=""&&ddztMc!=null)
+					cell.setCellValue(ddztMc);
+				
+				cell = row.createCell(11);
+				Integer yjzt = dd.getYjzt();
+				if(yjzt!=null) {
+					String yjztMc=Constant.getGbztMcById(yjzt);
+					cell.setCellValue(yjztMc);
+				}
+				
+				cell = row.createCell(12);
+				Integer ejzt = dd.getEjzt();
+				if(ejzt!=null) {
+					String ejztMc=Constant.getGbztMcById(ejzt);
+					cell.setCellValue(ejztMc);
+				}
+				
+				cell = row.createCell(13);
+				Integer yjbfh = dd.getYjbfh();
+				if(yjbfh!=null) {
+					String yjbfhMc=Constant.getBfMcByBfh(yjbfh);
+					cell.setCellValue(yjbfhMc);
+				}
+				
+				cell = row.createCell(14);
+				Integer ejbfh = dd.getEjbfh();
+				if(ejbfh!=null) {
+					String ejbfhMc=Constant.getBfMcByBfh(ejbfh);
+					cell.setCellValue(ejbfhMc);
+				}
+				
+				cell = row.createCell(15);
+				Float yzxzl = dd.getYzxzl();
+				if(yzxzl!=null)
+					cell.setCellValue(yzxzl);
+				
+				cell = row.createCell(16);
+				String bjsj = dd.getBjsj();
+				if(bjsj!=""&&bjsj!=null)
+					cell.setCellValue(bjsj);
+				
+				cell = row.createCell(17);
+				String jcsj = dd.getJcsj();
+				if(jcsj!=""&&jcsj!=null)
+					cell.setCellValue(jcsj);
+				
+				cell = row.createCell(18);
+				String ccsj = dd.getCcsj();
+				if(ccsj!=""&&ccsj!=null)
+					cell.setCellValue(ccsj);
+				
+				cell = row.createCell(19);
+				Float mz = dd.getMz();
+				if(mz!=null)
+					cell.setCellValue(mz);
+				
+				cell = row.createCell(20);
+				Float pz = dd.getPz();
+				if(pz!=null)
+					cell.setCellValue(pz);
+				
+				cell = row.createCell(21);
+				Float sjzl = dd.getSjzl();
+				if(sjzl!=null)
+					cell.setCellValue(sjzl);
+				
+				cell = row.createCell(22);
+				Float dfgbpz = dd.getDfgbpz();
+				if(dfgbpz!=null)
+					cell.setCellValue(dfgbpz);
+				
+				cell = row.createCell(23);
+				Float dfgbmz = dd.getDfgbmz();
+				if(dfgbmz!=null)
+					cell.setCellValue(dfgbmz);
+				
+				cell = row.createCell(24);
+				Float dfgbjz = dd.getDfgbjz();
+				if(dfgbjz!=null)
+					cell.setCellValue(dfgbjz);
 			}
 			break;
 		}

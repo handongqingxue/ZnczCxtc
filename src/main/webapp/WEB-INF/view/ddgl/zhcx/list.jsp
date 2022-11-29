@@ -119,7 +119,9 @@ var icphdNum=1;
 var iewmdNum=2;
 var pbdxxdNum=3;
 var oedNum=4;
+
 var appendStr="";
+var sheetFlag='${requestScope.sheetFlag}';
 
 var syLxlx;
 var qyLxlx;
@@ -797,7 +799,7 @@ function initOutputExcelDialog(){
         		   	var params="";
         			var ddh=$("#toolbar #ddh").val();
         			var ddztId=ddztCBB.combobox("getValue");
-        			var cyclCph=encodeURIParam($("#toolbar #cyclCph").val();
+        			var cyclCph=encodeURIParam($("#toolbar #cyclCph").val());
         			var jhysrq=jhysrqDB.datebox("getValue");
         			var yssMc=encodeURIParam($("#toolbar #yssMc").val());
         			var wzMc=encodeURIParam($("#toolbar #wzMc").val());
@@ -809,7 +811,7 @@ function initOutputExcelDialog(){
         			var ccsjs=ccsjsDTB.datetimebox("getValue");
         			var ccsje=ccsjeDTB.datetimebox("getValue");
         			var dcfw=dcfwCBB.combobox("getValue");
-        			params+="ddh="+ddh+"&wzMc="+wzMc+"&yssMc="+yssMc+"&fhdwMc="+fhdwMc+"&shdwMc="+shdwMc+"&dcfw="+dcfw;
+        			params+="ddh="+ddh+"&wzMc="+wzMc+"&yssMc="+yssMc+"&fhdwMc="+fhdwMc+"&shdwMc="+shdwMc+"&sheetFlag="+sheetFlag+"&dcfw="+dcfw;
         			if(dcfw==dqyDcfw){
 	        			var options=tab1.datagrid("getPager").data("pagination").options;
 	        			var page=options.pageNumber;
