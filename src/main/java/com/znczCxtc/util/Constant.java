@@ -266,4 +266,31 @@ public class Constant {
 		}
 		return bfMc;
 	}
+
+	/**
+	 * 根据审核类型id获取审核类型名称
+	 * @param shlxId
+	 * @return
+	 */
+	public static String getDdShlxMcById(int shlxId){
+		String shlxMc=null;
+		switch (shlxId) {
+		case DingDanShenHeJiLu.XIA_DAN_SHEN_HE:
+			shlxMc=DingDanShenHeJiLu.XIA_DAN_SHEN_HE_TEXT;//下单审核
+			break;
+		case DingDanShenHeJiLu.ZHI_JIAN_SHEN_HE:
+			shlxMc=DingDanShenHeJiLu.ZHI_JIAN_SHEN_HE_TEXT;//质检审核
+			break;
+		case DingDanShenHeJiLu.YI_JIAN_SHEN_HE:
+			shlxMc=DingDanShenHeJiLu.YI_JIAN_SHEN_HE_TEXT;//一检审核
+			break;
+		case DingDanShenHeJiLu.RU_KU_SHEN_HE:
+			shlxMc=DingDanShenHeJiLu.RU_KU_SHEN_HE_TEXT;//入库审核
+			break;
+		case DingDanShenHeJiLu.ER_JIAN_SHEN_HE:
+			shlxMc=DingDanShenHeJiLu.ER_JIAN_SHEN_HE_TEXT;//二检审核
+			break;
+		}
+		return shlxMc;
+	}
 }

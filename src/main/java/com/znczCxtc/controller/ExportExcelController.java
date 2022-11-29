@@ -20,6 +20,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,10 +75,10 @@ public class ExportExcelController {
 			case DingDan.DAI_SHEN_HE_SHEET:
 				sheetname = "待审核订单";
 				break;
-			case DingDanZhuangTai.DAI_JIAN_YAN:
+			case DingDan.DAI_JIAN_YAN_SHEET:
 				sheetname = "待质检订单";
 				break;
-			case DingDanZhuangTai.DAI_ZHUANG_XIE_HUO:
+			case DingDan.DAI_ZHUANG_XIE_HUO_SHEET:
 				sheetname = "待入库订单";
 				break;
 			case DingDan.ZONG_HE_CHA_XUN_SHEET:
@@ -332,32 +333,32 @@ public class ExportExcelController {
 	
 				HSSFCell cell = row.createCell(0);
 				String ddh = dd.getDdh();
-				if(ddh!=""&&ddh!=null)
+				if(!StringUtils.isBlank(ddh))
 					cell.setCellValue(ddh);
 				
 				cell = row.createCell(1);
 				String cyclCph = dd.getCyclCph();
-				if(cyclCph!=""&&cyclCph!=null)
+				if(!StringUtils.isBlank(cyclCph))
 					cell.setCellValue(cyclCph);
 				
 				cell = row.createCell(2);
 				String wzMc = dd.getWzMc();
-				if(wzMc!=null)
+				if(!StringUtils.isBlank(wzMc))
 					cell.setCellValue(wzMc);
 				
 				cell = row.createCell(3);
 				String yssMc = dd.getYssMc();
-				if(yssMc!=null)
+				if(!StringUtils.isBlank(yssMc))
 					cell.setCellValue(yssMc);
 				
 				cell = row.createCell(4);
 				String fhdwMc = dd.getFhdwMc();
-				if(fhdwMc!=null)
+				if(!StringUtils.isBlank(fhdwMc))
 					cell.setCellValue(fhdwMc);
 					
 				cell = row.createCell(5);
 				String shdwMc = dd.getShdwMc();
-				if(shdwMc!=""&&shdwMc!=null)
+				if(!StringUtils.isBlank(shdwMc))
 					cell.setCellValue(shdwMc);
 				
 				cell = row.createCell(6);
@@ -377,7 +378,7 @@ public class ExportExcelController {
 				
 				cell = row.createCell(7);
 				String jhysrq = dd.getJhysrq();
-				if(jhysrq!=""&&jhysrq!=null)
+				if(!StringUtils.isBlank(jhysrq))
 					cell.setCellValue(jhysrq);
 				
 				cell = row.createCell(8);
@@ -393,42 +394,42 @@ public class ExportExcelController {
 	
 				HSSFCell cell = row.createCell(0);
 				String ddh = dd.getDdh();
-				if(ddh!=""&&ddh!=null)
+				if(!StringUtils.isBlank(ddh))
 					cell.setCellValue(ddh);
 				
 				cell = row.createCell(1);
 				String cysjSfzh = dd.getCysjSfzh();
-				if(cysjSfzh!=""&&cysjSfzh!=null)
+				if(!StringUtils.isBlank(cysjSfzh))
 					cell.setCellValue(cysjSfzh);
 				
 				cell = row.createCell(2);
 				String cysjXm = dd.getCysjXm();
-				if(cysjXm!=""&&cysjXm!=null)
+				if(!StringUtils.isBlank(cysjXm))
 					cell.setCellValue(cysjXm);
 				
 				cell = row.createCell(3);
 				String cyclCph = dd.getCyclCph();
-				if(cyclCph!=""&&cyclCph!=null)
+				if(!StringUtils.isBlank(cyclCph))
 					cell.setCellValue(cyclCph);
 				
 				cell = row.createCell(4);
 				String wzMc = dd.getWzMc();
-				if(wzMc!=null)
+				if(!StringUtils.isBlank(wzMc))
 					cell.setCellValue(wzMc);
 				
 				cell = row.createCell(5);
 				String yssMc = dd.getYssMc();
-				if(yssMc!=null)
+				if(!StringUtils.isBlank(yssMc))
 					cell.setCellValue(yssMc);
 				
 				cell = row.createCell(6);
 				String fhdwMc = dd.getFhdwMc();
-				if(fhdwMc!=null)
+				if(!StringUtils.isBlank(fhdwMc))
 					cell.setCellValue(fhdwMc);
 					
 				cell = row.createCell(7);
 				String shdwMc = dd.getShdwMc();
-				if(shdwMc!=""&&shdwMc!=null)
+				if(!StringUtils.isBlank(shdwMc))
 					cell.setCellValue(shdwMc);
 				
 				cell = row.createCell(8);
@@ -455,7 +456,7 @@ public class ExportExcelController {
 				
 				cell = row.createCell(12);
 				String bjsj = dd.getBjsj();
-				if(bjsj!=""&&bjsj!=null)
+				if(!StringUtils.isBlank(bjsj))
 					cell.setCellValue(bjsj);
 			}
 			break;
@@ -466,42 +467,42 @@ public class ExportExcelController {
 	
 				HSSFCell cell = row.createCell(0);
 				String ddh = dd.getDdh();
-				if(ddh!=""&&ddh!=null)
+				if(!StringUtils.isBlank(ddh))
 					cell.setCellValue(ddh);
 				
 				cell = row.createCell(1);
 				String cysjSfzh = dd.getCysjSfzh();
-				if(cysjSfzh!=""&&cysjSfzh!=null)
+				if(!StringUtils.isBlank(cysjSfzh))
 					cell.setCellValue(cysjSfzh);
 				
 				cell = row.createCell(2);
 				String wzlxMc = dd.getWzlxMc();
-				if(wzlxMc!=null)
+				if(!StringUtils.isBlank(wzlxMc))
 					cell.setCellValue(wzlxMc);
 				
 				cell = row.createCell(3);
 				String wzMc = dd.getWzMc();
-				if(wzMc!=null)
+				if(!StringUtils.isBlank(wzMc))
 					cell.setCellValue(wzMc);
 				
-				cell = row.createCell(3);
+				cell = row.createCell(4);
 				String cyclCph = dd.getCyclCph();
-				if(cyclCph!=""&&cyclCph!=null)
+				if(!StringUtils.isBlank(cyclCph))
 					cell.setCellValue(cyclCph);
 				
 				cell = row.createCell(5);
 				String yssMc = dd.getYssMc();
-				if(yssMc!=null)
+				if(!StringUtils.isBlank(yssMc))
 					cell.setCellValue(yssMc);
 				
 				cell = row.createCell(6);
 				String fhdwMc = dd.getFhdwMc();
-				if(fhdwMc!=null)
+				if(!StringUtils.isBlank(fhdwMc))
 					cell.setCellValue(fhdwMc);
 					
 				cell = row.createCell(7);
 				String shdwMc = dd.getShdwMc();
-				if(shdwMc!=""&&shdwMc!=null)
+				if(!StringUtils.isBlank(shdwMc))
 					cell.setCellValue(shdwMc);
 				
 				cell = row.createCell(8);
@@ -513,12 +514,12 @@ public class ExportExcelController {
 				
 				cell = row.createCell(9);
 				String jhysrq = dd.getJhysrq();
-				if(jhysrq!=""&&jhysrq!=null)
+				if(!StringUtils.isBlank(jhysrq))
 					cell.setCellValue(jhysrq);
 				
 				cell = row.createCell(10);
 				String ddztMc = dd.getDdztMc();
-				if(ddztMc!=""&&ddztMc!=null)
+				if(!StringUtils.isBlank(ddztMc))
 					cell.setCellValue(ddztMc);
 				
 				cell = row.createCell(11);
@@ -556,17 +557,17 @@ public class ExportExcelController {
 				
 				cell = row.createCell(16);
 				String bjsj = dd.getBjsj();
-				if(bjsj!=""&&bjsj!=null)
+				if(!StringUtils.isBlank(bjsj))
 					cell.setCellValue(bjsj);
 				
 				cell = row.createCell(17);
 				String jcsj = dd.getJcsj();
-				if(jcsj!=""&&jcsj!=null)
+				if(!StringUtils.isBlank(jcsj))
 					cell.setCellValue(jcsj);
 				
 				cell = row.createCell(18);
 				String ccsj = dd.getCcsj();
-				if(ccsj!=""&&ccsj!=null)
+				if(!StringUtils.isBlank(ccsj))
 					cell.setCellValue(ccsj);
 				
 				cell = row.createCell(19);
@@ -600,6 +601,127 @@ public class ExportExcelController {
 					cell.setCellValue(dfgbjz);
 			}
 			break;
+		}
+	}
+	
+	public void exportDDSHJLList(String ddh,Integer shlx,String shsjks,String shsjjs,String cyclCph,String shrYhm,
+			String yssMc,String wzMc,String fhdwMc,String shdwMc,String sjXm,String sjSfzh,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			System.out.println("ddh="+ddh);
+			System.out.println("shlx="+shlx);
+			System.out.println("shsjks="+shsjks);
+			System.out.println("shsjjs="+shsjjs);
+			System.out.println("cyclCph="+cyclCph);
+			System.out.println("shrYhm="+shrYhm);
+			System.out.println("yssMc="+yssMc);
+			System.out.println("wzMc="+wzMc);
+			System.out.println("fhdwMc="+fhdwMc);
+			System.out.println("shdwMc="+shdwMc);
+			System.out.println("sjXm="+sjXm);
+			System.out.println("sjSfzh="+sjSfzh);
+			System.out.println("page="+page);
+			System.out.println("rows="+rows);
+			System.out.println("dcfw="+dcfw);
+		
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("订单审核记录");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("订单号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("审核类型");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("审核时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("审核结果");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("审核人");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(5);
+			cell.setCellValue("司机身份证号");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(6);
+			cell.setCellValue("司机姓名");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(7);
+			cell.setCellValue("车牌号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(8);
+			cell.setCellValue("物资名称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(9);
+			cell.setCellValue("运输商");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(10);
+			cell.setCellValue("发货单位");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(11);
+			cell.setCellValue("收货单位");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(12);
+			cell.setCellValue("流向类型");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(13);
+			cell.setCellValue("预装卸重量");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(14);
+			cell.setCellValue("实际重量");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(15);
+			cell.setCellValue("重量差额比");
+			cell.setCellStyle(style);
+
+			List<DingDanShenHeJiLu> ddshjlList = exportExcelService.queryDDSHJLList(ddh,shlx,shsjks,shsjjs,cyclCph,shrYhm,yssMc,wzMc,fhdwMc,shdwMc,sjXm,sjSfzh, page, rows, dcfw);
+			for (int i = 0; i < ddshjlList.size(); i++) {
+				DingDanShenHeJiLu ddshjl = ddshjlList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String ddh1 = ddshjl.getDdh();
+				if(ddh1!=""&&ddh1!=null)
+					cell.setCellValue(ddh1);
+				
+				cell = row.createCell(1);
+				Integer shlx1 = ddshjl.getShlx();
+				if(shlx1!=null) {
+					String shlxMc=Constant.getDdShlxMcById(shlx1);
+					cell.setCellValue(shlxMc);
+				}
+				
+				cell = row.createCell(2);
+				String shsj = ddshjl.getShsj();
+				if(!StringUtils.isBlank(shsj))
+					cell.setCellValue(shsj);
+				
+			}
+			
+			download("订单审核记录查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

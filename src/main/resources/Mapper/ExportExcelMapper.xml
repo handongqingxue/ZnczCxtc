@@ -69,4 +69,46 @@
 			limit #{rowNum},#{rows}
 		</if>
 	</select>
+	<select id="queryDDSHJLList" resultType="com.znczCxtc.entity.DingDanShenHeJiLu">
+		select ddshjl.*,dd.ddh,sj.xm sjXm,sj.sfzh sjSfzh,cl.cph cyclCph,dd.lxlx,dd.yzxzl,dd.sjzl,dd.zlceb,wz.mc wzMc,yss.mc yssMc,fhdw.mc fhdwMc,shdw.mc shdwMc,shr.yhm shrYhm from ding_dan_shen_he_ji_lu ddshjl left join ding_dan dd on ddshjl.ddId=dd.id
+		 left join che_liang cl on dd.cyclId=cl.id left join si_ji sj on dd.cysjId=sj.id left join wu_zi wz on dd.wzId=wz.id left join yun_shu_shang yss on dd.yssId=yss.id left join fa_huo_dan_wei fhdw on dd.fhdwId=fhdw.id
+		 left join shou_huo_dan_wei shdw on dd.shdwId=shdw.id left join yong_hu shr on ddshjl.shrId=shr.id where 1=1
+		<if test="ddh!=''&amp;ddh!=null">
+			and dd.ddh like CONCAT('%',#{ddh},'%')
+		</if>
+		<if test="shlx!=''&amp;shlx!=null">
+			and ddshjl.shlx=#{shlx}
+		</if>
+		<if test="shsjks!=''&amp;shsjks!=null&amp;shsjjs!=''&amp;shsjjs!=null">
+			and ddshjl.shsj between #{shsjks} and #{shsjjs}
+		</if>
+		<if test="cyclCph!=''&amp;cyclCph!=null">
+			and cl.cph like CONCAT('%',#{cyclCph},'%')
+		</if>
+		<if test="shrYhm!=''&amp;shrYhm!=null">
+			and shr.yhm like CONCAT('%',#{shrYhm},'%')
+		</if>
+		<if test="yssMc!=''&amp;yssMc!=null">
+			and yss.mc like CONCAT('%',#{yssMc},'%')
+		</if>
+		<if test="wzMc!=''&amp;wzMc!=null">
+			and wz.mc like CONCAT('%',#{wzMc},'%')
+		</if>
+		<if test="fhdwMc!=''&amp;fhdwMc!=null">
+			and fhdw.mc like CONCAT('%',#{fhdwMc},'%')
+		</if>
+		<if test="shdwMc!=''&amp;shdwMc!=null">
+			and shdw.mc like CONCAT('%',#{shdwMc},'%')
+		</if>
+		<if test="sjXm!=''&amp;sjXm!=null">
+			and sj.xm like CONCAT('%',#{sjXm},'%')
+		</if>
+		<if test="sjSfzh!=''&amp;sjSfzh!=null">
+			and sj.sfzh like CONCAT('%',#{sjSfzh},'%')
+		</if>
+		order by ddshjl.shsj desc
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
 </mapper>

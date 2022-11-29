@@ -51,4 +51,22 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 		return list;
 	}
 
+	@Override
+	public List<DingDanShenHeJiLu> queryDDSHJLList(String ddh, Integer shlx, String shsjks, String shsjjs, String cyclCph,
+			String shrYhm, String yssMc, String wzMc, String fhdwMc, String shdwMc, String sjXm, String sjSfzh,
+			Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<DingDanShenHeJiLu> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryDDSHJLList(ddh, shlx, shsjks, shsjjs, cyclCph, shrYhm, yssMc, wzMc, fhdwMc, shdwMc, sjXm, sjSfzh,
+					(page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryDDSHJLList(ddh, shlx, shsjks, shsjjs, cyclCph, shrYhm, yssMc, wzMc, fhdwMc, shdwMc, sjXm, sjSfzh, dcfw);
+			break;
+		}
+		return list;
+	}
+
 }

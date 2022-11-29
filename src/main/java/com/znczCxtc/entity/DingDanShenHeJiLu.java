@@ -5,23 +5,23 @@ public class DingDanShenHeJiLu {
 	/**
 	 * 下单审核标识
 	 */
-	public static final Integer XIA_DAN_SHEN_HE=1;
+	public static final int XIA_DAN_SHEN_HE=1;
 	/**
 	 * 质检审核标识
 	 */
-	public static final Integer ZHI_JIAN_SHEN_HE=2;
+	public static final int ZHI_JIAN_SHEN_HE=2;
 	/**
 	 * 一检审核标识
 	 */
-	public static final Integer YI_JIAN_SHEN_HE=3;
+	public static final int YI_JIAN_SHEN_HE=3;
 	/**
 	 * 入库审核标识
 	 */
-	public static final Integer RU_KU_SHEN_HE=4;
+	public static final int RU_KU_SHEN_HE=4;
 	/**
 	 * 二检审核标识
 	 */
-	public static final Integer ER_JIAN_SHEN_HE=5;
+	public static final int ER_JIAN_SHEN_HE=5;
 
 	/**
 	 * 下单审核名称

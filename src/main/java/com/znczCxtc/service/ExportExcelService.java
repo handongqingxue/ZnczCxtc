@@ -13,4 +13,8 @@ public interface ExportExcelService {
 			String yssMc, String wzMc, String fhdwMc, String shdwMc, String cysjXm, String cysjSfzh, String jcsjs,
 			String jcsje, String ccsjs, String ccsje, Integer page, Integer rows, int dcfw);
 
+	List<DingDanShenHeJiLu> queryDDSHJLList(String ddh, Integer shlx, String shsjks, String shsjjs, String cyclCph,
+			String shrYhm, String yssMc, String wzMc, String fhdwMc, String shdwMc, String sjXm, String sjSfzh,
+			Integer page, Integer rows, int dcfw);
+
 }
