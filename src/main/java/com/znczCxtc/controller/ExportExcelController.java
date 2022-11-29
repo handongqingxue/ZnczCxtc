@@ -42,7 +42,7 @@ public class ExportExcelController {
 	@RequestMapping(value="/exportDDZHCXList")
 	public void exportDDZHCXList(String ddh,Integer ddztId,String ddztMc,String cyclCph,String jhysrq,String yssMc,String wzMc,
 			String fhdwMc,String shdwMc,String cysjXm,String cysjSfzh,String jcsjs,String jcsje,String ccsjs,String ccsje,
-			Integer page,Integer rows,int sheetFlag,int dcfw,HttpServletResponse response) {
+			Integer page,Integer rows,Integer sheetFlag,int dcfw,HttpServletResponse response) {
 		try {
 			System.out.println("ddh="+ddh);
 			System.out.println("ddztId="+ddztId);
@@ -77,6 +77,12 @@ public class ExportExcelController {
 			case DingDanZhuangTai.DAI_JIAN_YAN:
 				sheetname = "待质检订单";
 				break;
+			case DingDanZhuangTai.DAI_ZHUANG_XIE_HUO:
+				sheetname = "待入库订单";
+				break;
+			default:
+				sheetname = "订单综合查询";
+				break;
 			}
 			HSSFSheet sheet = wb.createSheet(sheetname);
 			
@@ -94,6 +100,12 @@ public class ExportExcelController {
 			case DingDanZhuangTai.DAI_JIAN_YAN:
 				fileName = "待质检订单查询";
 				break;
+			case DingDanZhuangTai.DAI_ZHUANG_XIE_HUO:
+				fileName = "待入库订单查询";
+				break;
+			default:
+				fileName = "订单综合查询";
+				break;
 			}
 			download(fileName, wb, response);
 		} catch (Exception e) {
@@ -109,14 +121,15 @@ public class ExportExcelController {
 	 * @param rowNum
 	 * @param sheetFlag
 	 */
-	public void createDDZHCXSheetHeader(HSSFWorkbook wb,HSSFSheet sheet,int rowNum,int sheetFlag) {
+	public void createDDZHCXSheetHeader(HSSFWorkbook wb,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
 		HSSFRow row = sheet.createRow(rowNum);
 		HSSFCellStyle style = wb.createCellStyle();
 		
+		HSSFCell cell = null;
 		switch (sheetFlag) {
 		case DingDanZhuangTai.DAI_SHEN_HE:
 		case DingDanZhuangTai.DAI_JIAN_YAN:
-			HSSFCell cell = row.createCell(0);
+			cell = row.createCell(0);
 			cell.setCellValue("订单号");
 			cell.setCellStyle(style);
 			
@@ -152,10 +165,164 @@ public class ExportExcelController {
 			cell.setCellValue("预装卸重量");
 			cell.setCellStyle(style);
 			break;
+		case DingDanZhuangTai.DAI_ZHUANG_XIE_HUO:
+			cell = row.createCell(0);
+			cell.setCellValue("订单号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("司机身份证号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("司机姓名");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("车牌号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("物资名称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(5);
+			cell.setCellValue("运输商");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(6);
+			cell.setCellValue("发货单位");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(7);
+			cell.setCellValue("收货单位");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(8);
+			cell.setCellValue("流向类型");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(9);
+			cell.setCellValue("预装卸重量");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(10);
+			cell.setCellValue("实际重量");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(11);
+			cell.setCellValue("重量差额比");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(12);
+			cell.setCellValue("编辑时间");
+			cell.setCellStyle(style);
+			break;
+		default:
+			cell = row.createCell(0);
+			cell.setCellValue("订单号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("司机身份证号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("物资类型");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("物资名称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("车牌号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(5);
+			cell.setCellValue("运输商");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(6);
+			cell.setCellValue("发货单位");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(7);
+			cell.setCellValue("收货单位");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(8);
+			cell.setCellValue("流向类型");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(9);
+			cell.setCellValue("计划运输日期");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(10);
+			cell.setCellValue("订单状态");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(11);
+			cell.setCellValue("一检状态");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(12);
+			cell.setCellValue("二检状态");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(13);
+			cell.setCellValue("一检地磅");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(14);
+			cell.setCellValue("二检地磅");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(15);
+			cell.setCellValue("预装卸重量");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(16);
+			cell.setCellValue("编辑时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(17);
+			cell.setCellValue("进厂时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(18);
+			cell.setCellValue("出厂时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(19);
+			cell.setCellValue("毛重");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(20);
+			cell.setCellValue("皮重");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(21);
+			cell.setCellValue("实际重量");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(22);
+			cell.setCellValue("对方过磅毛重");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(23);
+			cell.setCellValue("对方过磅皮重");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(24);
+			cell.setCellValue("对方过磅净重");
+			cell.setCellStyle(style);
+			break;
 		}
 	}
 	
-	public void createDDZHCXSheetBody(List<DingDan> ddList,HSSFSheet sheet,int rowNum,int sheetFlag) {
+	public void createDDZHCXSheetBody(List<DingDan> ddList,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
 		switch (sheetFlag) {
 		case DingDanZhuangTai.DAI_SHEN_HE:
 		case DingDanZhuangTai.DAI_JIAN_YAN:
@@ -164,14 +331,14 @@ public class ExportExcelController {
 				HSSFRow row=sheet.createRow(++rowNum);
 	
 				HSSFCell cell = row.createCell(0);
-				String ddh1 = dd.getDdh();
-				if(ddh1!=""&&ddh1!=null)
-					cell.setCellValue(ddh1);
+				String ddh = dd.getDdh();
+				if(ddh!=""&&ddh!=null)
+					cell.setCellValue(ddh);
 				
 				cell = row.createCell(1);
-				String cyclCph1 = dd.getCyclCph();
-				if(cyclCph1!=""&&cyclCph1!=null)
-					cell.setCellValue(cyclCph1);
+				String cyclCph = dd.getCyclCph();
+				if(cyclCph!=""&&cyclCph!=null)
+					cell.setCellValue(cyclCph);
 				
 				cell = row.createCell(2);
 				String wzMc = dd.getWzMc();
@@ -219,7 +386,114 @@ public class ExportExcelController {
 					cell.setCellValue(yzxzl);
 			}
 			break;
-	}
+		case DingDanZhuangTai.DAI_ZHUANG_XIE_HUO:
+			for (int i = 0; i < ddList.size(); i++) {
+				DingDan dd = ddList.get(i);
+				HSSFRow row=sheet.createRow(++rowNum);
+	
+				HSSFCell cell = row.createCell(0);
+				String ddh = dd.getDdh();
+				if(ddh!=""&&ddh!=null)
+					cell.setCellValue(ddh);
+				
+				cell = row.createCell(1);
+				String cysjSfzh = dd.getCysjSfzh();
+				if(cysjSfzh!=""&&cysjSfzh!=null)
+					cell.setCellValue(cysjSfzh);
+				
+				cell = row.createCell(2);
+				String cysjXm = dd.getCysjXm();
+				if(cysjXm!=""&&cysjXm!=null)
+					cell.setCellValue(cysjXm);
+				
+				cell = row.createCell(3);
+				String cyclCph = dd.getCyclCph();
+				if(cyclCph!=""&&cyclCph!=null)
+					cell.setCellValue(cyclCph);
+				
+				cell = row.createCell(4);
+				String wzMc = dd.getWzMc();
+				if(wzMc!=null)
+					cell.setCellValue(wzMc);
+				
+				cell = row.createCell(5);
+				String yssMc = dd.getYssMc();
+				if(yssMc!=null)
+					cell.setCellValue(yssMc);
+				
+				cell = row.createCell(6);
+				String fhdwMc = dd.getFhdwMc();
+				if(fhdwMc!=null)
+					cell.setCellValue(fhdwMc);
+					
+				cell = row.createCell(7);
+				String shdwMc = dd.getShdwMc();
+				if(shdwMc!=""&&shdwMc!=null)
+					cell.setCellValue(shdwMc);
+				
+				cell = row.createCell(8);
+				Integer lxlx = dd.getLxlx();
+				if(lxlx!=null) {
+					String lxlxMc=null;
+					switch (lxlx) {
+					case DingDan.SONG_YUN:
+						lxlxMc=DingDan.SONG_YUN_TEXT;
+						break;
+					case DingDan.QU_YUN:
+						lxlxMc=DingDan.QU_YUN_TEXT;
+						break;
+					}
+					cell.setCellValue(lxlxMc);
+				}
+				
+				cell = row.createCell(9);
+				Float yzxzl = dd.getYzxzl();
+				if(yzxzl!=null)
+					cell.setCellValue(yzxzl);
+				
+				cell = row.createCell(10);
+				Float sjzl = dd.getSjzl();
+				if(sjzl!=null)
+					cell.setCellValue(sjzl);
+				
+				cell = row.createCell(11);
+				Float zlceb = dd.getZlceb();
+				if(zlceb!=null)
+					cell.setCellValue(zlceb);
+				
+				cell = row.createCell(12);
+				String bjsj = dd.getBjsj();
+				if(bjsj!=""&&bjsj!=null)
+					cell.setCellValue(bjsj);
+			}
+			break;
+		default:
+			for (int i = 0; i < ddList.size(); i++) {
+				DingDan dd = ddList.get(i);
+				HSSFRow row=sheet.createRow(++rowNum);
+	
+				HSSFCell cell = row.createCell(0);
+				String ddh = dd.getDdh();
+				if(ddh!=""&&ddh!=null)
+					cell.setCellValue(ddh);
+				
+				cell = row.createCell(1);
+				String cysjSfzh = dd.getCysjSfzh();
+				if(cysjSfzh!=""&&cysjSfzh!=null)
+					cell.setCellValue(cysjSfzh);
+				
+				cell = row.createCell(2);
+				String wzlxMc = dd.getWzlxMc();
+				if(wzlxMc!=null)
+					cell.setCellValue(wzlxMc);
+				
+				cell = row.createCell(3);
+				String wzMc = dd.getWzMc();
+				if(wzMc!=null)
+					cell.setCellValue(wzMc);
+			}
+			break;
+		}
 	}
 
 	@RequestMapping(value="/exportGBJLList")

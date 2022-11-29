@@ -87,7 +87,7 @@ $(function(){
 	initSearchLB();
 	initTGLB();
 	initTHLB();
-	initOutputBut();
+	initOutputLB();
 	initTab1();
 	
 	initOutputExcelDialog();//0
@@ -242,7 +242,7 @@ function initTHLB(){
 	});
 }
 
-function initOutputBut(){
+function initOutputLB(){
 	opBut=$("#output_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){

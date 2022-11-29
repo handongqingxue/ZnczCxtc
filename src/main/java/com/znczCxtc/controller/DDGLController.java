@@ -125,6 +125,8 @@ public class DDGLController {
 		Constant.setDdztInRequest(request);
 		Constant.setShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
+		Constant.setDcfwInRequest(request);
+		request.setAttribute("sheetFlag", DingDanZhuangTai.DAI_ZHUANG_XIE_HUO);
 		
 		return MODULE_NAME+"/drk/list";
 	}
