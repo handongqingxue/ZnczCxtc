@@ -31,4 +31,11 @@ public interface ExportExcelMapper {
 			@Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
 
 	List<GuoBangJiLu> queryGBJLList(@Param("ddh") String ddh, @Param("cyclCph") String cyclCph, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs, @Param("dcfw") int dcfw);
+
+	List<GuoBangJiLu> queryDJYList(@Param("ddh") String ddh, @Param("ddztMc") String ddztMc, @Param("cysjXm") String cysjXm, @Param("cysjSfzh") String cysjSfzh, @Param("cyclCph") String cyclCph,
+			@Param("yssMc") String yssMc, @Param("fhdwMc") String fhdwMc, @Param("shdwMc") String shdwMc, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs, @Param("gblx") Integer gblx, 
+			@Param("rowNum") int rowNum, @Param("rows") Integer rows, @Param("dcfw") int dcfw);
+
+	List<GuoBangJiLu> queryDJYList(@Param("ddh") String ddh, @Param("ddztMc") String ddztMc, @Param("cysjXm") String cysjXm, @Param("cysjSfzh") String cysjSfzh, @Param("cyclCph") String cyclCph,
+			@Param("yssMc") String yssMc, @Param("fhdwMc") String fhdwMc, @Param("shdwMc") String shdwMc, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs, @Param("gblx") Integer gblx, @Param("dcfw") int dcfw);
 }

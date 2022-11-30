@@ -124,4 +124,41 @@
 			limit #{rowNum},#{rows}
 		</if>
 	</select>
+	<select id="queryDJYList" resultType="com.znczCxtc.entity.GuoBangJiLu">
+		select gbjl.*,sj.xm cysjXm,sj.sfzh cysjSfzh,dd.ddh,cl.cph cyclCph,dd.lxlx,yss.mc yssMc,fhdw.mc fhdwMc,shdw.mc shdwMc from guo_bang_ji_lu gbjl left join ding_dan dd on gbjl.ddId=dd.id
+		 left join ding_dan_zhuang_tai ddzt on dd.ddztId=ddzt.id left join yun_shu_shang yss on dd.yssId=yss.id left join fa_huo_dan_wei fhdw on dd.fhdwId=fhdw.id
+		 left join che_liang cl on dd.cyclId=cl.id left join si_ji sj on dd.cysjId=sj.id
+		 left join shou_huo_dan_wei shdw on dd.shdwId=shdw.id where ddzt.mc=#{ddztMc}
+		<if test="ddh!=''&amp;ddh!=null">
+			and dd.ddh like CONCAT('%',#{ddh},'%')
+		</if>
+		<if test="cysjXm!=''&amp;cysjXm!=null">
+			and sj.xm like CONCAT('%',#{cysjXm},'%')
+		</if>
+		<if test="cysjSfzh!=''&amp;cysjSfzh!=null">
+			and sj.sfzh like CONCAT('%',#{cysjSfzh},'%')
+		</if>
+		<if test="cyclCph!=''&amp;cyclCph!=null">
+			and cl.cph like CONCAT('%',#{cyclCph},'%')
+		</if>
+		<if test="yssMc!=''&amp;yssMc!=null">
+			and yss.mc like CONCAT('%',#{yssMc},'%')
+		</if>
+		<if test="fhdwMc!=''&amp;fhdwMc!=null">
+			and fhdw.mc like CONCAT('%',#{fhdwMc},'%')
+		</if>
+		<if test="shdwMc!=''&amp;shdwMc!=null">
+			and shdw.mc like CONCAT('%',#{shdwMc},'%')
+		</if>
+		<if test="gbsjks!=''&amp;gbsjks!=null&amp;gbsjjs!=''&amp;gbsjjs!=null">
+			and gbjl.gbsj between #{gbsjks} and #{gbsjjs}
+		</if>
+		<if test="gblx!=''&amp;gblx!=null">
+			and gbjl.gblx=#{gblx}
+		</if>
+		order by gbjl.gbsj desc
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
 </mapper>

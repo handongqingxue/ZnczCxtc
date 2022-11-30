@@ -211,11 +211,11 @@ public class Constant {
 	}
 
 	/**
-	 * 根据过磅状态id获取过磅状态名称
+	 * 根据订单过磅状态id获取过磅状态名称
 	 * @param gbztId
 	 * @return
 	 */
-	public static String getGbztMcById(int gbztId){
+	public static String getDdGbztMcById(int gbztId){
 		String gbztMc=null;
 		switch (gbztId) {
 		case DingDan.DAI_SHANG_BANG:
@@ -306,5 +306,23 @@ public class Constant {
 		else
 			shjgMc=DingDanShenHeJiLu.BU_HE_GE_TEXT;//不合格
 		return shjgMc;
+	}
+
+	/**
+	 * 根据过磅记录过磅状态id获取过磅状态名称
+	 * @param gbztId
+	 * @return
+	 */
+	public static String getGbjlGbztMcById(int gbztId){
+		String gbztMc=null;
+		switch (gbztId) {
+		case GuoBangJiLu.ZHENG_CHANG:
+			gbztMc=GuoBangJiLu.ZHENG_CHANG_TEXT;//正常
+			break;
+		case GuoBangJiLu.YI_CHANG:
+			gbztMc=GuoBangJiLu.YI_CHANG_TEXT;//异常
+			break;
+		}
+		return gbztMc;
 	}
 }

@@ -5,11 +5,11 @@ public class GuoBangJiLu {
 	/**
 	 * 正常标识
 	 */
-	public static final Integer ZHENG_CHANG=1;
+	public static final int ZHENG_CHANG=1;
 	/**
 	 * 异常标识
 	 */
-	public static final Integer YI_CHANG=2;
+	public static final int YI_CHANG=2;
 	
 	/**
 	 * 正常名称

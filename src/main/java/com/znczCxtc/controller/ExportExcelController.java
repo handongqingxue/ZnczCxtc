@@ -525,14 +525,14 @@ public class ExportExcelController {
 				cell = row.createCell(11);
 				Integer yjzt = dd.getYjzt();
 				if(yjzt!=null) {
-					String yjztMc=Constant.getGbztMcById(yjzt);
+					String yjztMc=Constant.getDdGbztMcById(yjzt);
 					cell.setCellValue(yjztMc);
 				}
 				
 				cell = row.createCell(12);
 				Integer ejzt = dd.getEjzt();
 				if(ejzt!=null) {
-					String ejztMc=Constant.getGbztMcById(ejzt);
+					String ejztMc=Constant.getDdGbztMcById(ejzt);
 					cell.setCellValue(ejztMc);
 				}
 				
@@ -766,7 +766,7 @@ public class ExportExcelController {
 				
 				cell = row.createCell(12);
 				Integer lxlx = ddshjl.getLxlx();
-				if(shjg!=null) {
+				if(lxlx!=null) {
 					String lxlxMc=Constant.getLxlxMcById(lxlx);
 					cell.setCellValue(lxlxMc);
 				}
@@ -946,6 +946,158 @@ public class ExportExcelController {
 			}
 			
 			download("过磅记录查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value="/exportDJYList")
+	public void exportDJYList(String ddh,String ddztMc,String cysjXm,String cysjSfzh,String cyclCph,String yssMc,String fhdwMc,
+			String shdwMc,String gbsjks,String gbsjjs,Integer gblx,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			System.out.println("ddh="+ddh);
+			ddztMc=StringUtil.decode(ddztMc, "UTF-8");
+			System.out.println("ddztMc="+ddztMc);
+			System.out.println("cysjXm="+cysjXm);
+			System.out.println("cysjSfzh="+cysjSfzh);
+			System.out.println("cyclCph="+cyclCph);
+			System.out.println("yssMc="+yssMc);
+			System.out.println("fhdwMc="+fhdwMc);
+			System.out.println("shdwMc="+shdwMc);
+			System.out.println("gbsjks="+gbsjks);
+			System.out.println("gbsjjs="+gbsjjs);
+			System.out.println("gblx="+gblx);
+			System.out.println("page="+page);
+			System.out.println("rows="+rows);
+			System.out.println("dcfw="+dcfw);
+		
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			
+			
+			String sheetname = null;
+			if(DingDanZhuangTai.YI_JIAN_DAI_SHEN_HE_TEXT.equals(ddztMc)&&GuoBangJiLu.RU_CHANG_GUO_BANG==gblx)
+				sheetname = "一检待审核";
+			HSSFSheet sheet = wb.createSheet(sheetname);
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("订单号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("司机姓名");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("司机身份证号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("车牌号");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(4);
+			cell.setCellValue("运输商");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(5);
+			cell.setCellValue("发货单位");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(6);
+			cell.setCellValue("收货单位");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(7);
+			cell.setCellValue("流向类型");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(8);
+			cell.setCellValue("过磅重量");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(9);
+			cell.setCellValue("过磅状态");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(10);
+			cell.setCellValue("过磅时间");
+			cell.setCellStyle(style);
+		
+			List<GuoBangJiLu> gbjlList = exportExcelService.queryDJYList(ddh,ddztMc,cysjXm,cysjSfzh,cyclCph,yssMc,fhdwMc,shdwMc,
+					gbsjks,gbsjjs,gblx,page, rows, dcfw);
+			for (int i = 0; i < gbjlList.size(); i++) {
+				GuoBangJiLu gbjl = gbjlList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String ddh1 = gbjl.getDdh();
+				if(ddh1!=""&&ddh1!=null)
+					cell.setCellValue(ddh1);
+				
+				cell = row.createCell(1);
+				String cysjXm1 = gbjl.getCysjXm();
+				if(!StringUtils.isBlank(cysjXm1))
+					cell.setCellValue(cysjXm1);
+				
+				cell = row.createCell(2);
+				String cysjSfzh1 = gbjl.getCysjSfzh();
+				if(!StringUtils.isBlank(cysjSfzh1))
+					cell.setCellValue(cysjSfzh1);
+				
+				cell = row.createCell(3);
+				String cyclCph1 = gbjl.getCyclCph();
+				if(!StringUtils.isBlank(cyclCph1))
+					cell.setCellValue(cyclCph1);
+				
+				cell = row.createCell(4);
+				String yssMc1 = gbjl.getYssMc();
+				if(!StringUtils.isBlank(yssMc1))
+					cell.setCellValue(yssMc1);
+				
+				cell = row.createCell(5);
+				String fhdwMc1 = gbjl.getFhdwMc();
+				if(!StringUtils.isBlank(fhdwMc1))
+					cell.setCellValue(fhdwMc1);
+				
+				cell = row.createCell(6);
+				String shdwMc1 = gbjl.getShdwMc();
+				if(!StringUtils.isBlank(shdwMc1))
+					cell.setCellValue(shdwMc1);
+				
+				cell = row.createCell(7);
+				Integer lxlx = gbjl.getLxlx();
+				if(lxlx!=null) {
+					String lxlxMc=Constant.getLxlxMcById(lxlx);
+					cell.setCellValue(lxlxMc);
+				}
+				
+				cell = row.createCell(8);
+				Float gbzl = gbjl.getGbzl();
+				if(gbzl!=null)
+					cell.setCellValue(gbzl);
+				
+				cell = row.createCell(9);
+				Integer gbzt = gbjl.getGbzt();
+				if(gbzt!=null) {
+					String gbztMc=Constant.getGbjlGbztMcById(gbzt);
+					cell.setCellValue(gbztMc);
+				}
+				
+				cell = row.createCell(10);
+				String gbsj = gbjl.getGbsj();
+				if(!StringUtils.isBlank(gbsj))
+					cell.setCellValue(gbsj);
+			}
+
+			String fileName = null;
+			if(DingDanZhuangTai.YI_JIAN_DAI_SHEN_HE_TEXT.equals(ddztMc)&&GuoBangJiLu.RU_CHANG_GUO_BANG==gblx)
+				fileName = "一检待审核查询";
+			download(fileName, wb, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

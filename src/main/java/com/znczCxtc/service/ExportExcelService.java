@@ -19,4 +19,8 @@ public interface ExportExcelService {
 	List<GuoBangJiLu> queryGBJLList(String ddh, String cyclCph, String gbsjks, String gbsjjs, Integer page, Integer rows,
 			int dcfw);
 
+	List<GuoBangJiLu> queryDJYList(String ddh, String ddztMc, String cysjXm, String cysjSfzh, String cyclCph,
+			String yssMc, String fhdwMc, String shdwMc, String gbsjks, String gbsjjs, Integer gblx, Integer page,
+			Integer rows, int dcfw);
+
 }
