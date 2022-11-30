@@ -71,6 +71,7 @@ public class GBGLController {
 		
 		//publicService.selectNav(request);
 		Constant.setDdztInRequest(request);
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/bdjl/list";
 	}

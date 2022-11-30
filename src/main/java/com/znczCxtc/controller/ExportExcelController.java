@@ -603,7 +603,8 @@ public class ExportExcelController {
 			break;
 		}
 	}
-	
+
+	@RequestMapping(value="/exportDDSHJLList")
 	public void exportDDSHJLList(String ddh,Integer shlx,String shsjks,String shsjjs,String cyclCph,String shrYhm,
 			String yssMc,String wzMc,String fhdwMc,String shdwMc,String sjXm,String sjSfzh,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
 		try {
@@ -716,9 +717,150 @@ public class ExportExcelController {
 				if(!StringUtils.isBlank(shsj))
 					cell.setCellValue(shsj);
 				
+				cell = row.createCell(3);
+				Boolean shjg = ddshjl.getShjg();
+				if(shjg!=null) {
+					String shjgMc=Constant.getDdShjgMcByJg(shjg);
+					cell.setCellValue(shjgMc);
+				}
+				
+				cell = row.createCell(4);
+				String shrYhm1 = ddshjl.getShrYhm();
+				if(!StringUtils.isBlank(shrYhm1))
+					cell.setCellValue(shrYhm1);
+				
+				cell = row.createCell(5);
+				String sjSfzh1 = ddshjl.getSjSfzh();
+				if(!StringUtils.isBlank(sjSfzh1))
+					cell.setCellValue(sjSfzh1);
+				
+				cell = row.createCell(6);
+				String sjXm1 = ddshjl.getSjXm();
+				if(!StringUtils.isBlank(sjXm1))
+					cell.setCellValue(sjXm1);
+				
+				cell = row.createCell(7);
+				String cyclCph1 = ddshjl.getCyclCph();
+				if(!StringUtils.isBlank(cyclCph1))
+					cell.setCellValue(cyclCph1);
+				
+				cell = row.createCell(8);
+				String wzMc1 = ddshjl.getWzMc();
+				if(!StringUtils.isBlank(wzMc1))
+					cell.setCellValue(wzMc1);
+				
+				cell = row.createCell(9);
+				String yssMc1 = ddshjl.getYssMc();
+				if(!StringUtils.isBlank(yssMc1))
+					cell.setCellValue(yssMc1);
+				
+				cell = row.createCell(10);
+				String fhdwMc1 = ddshjl.getFhdwMc();
+				if(!StringUtils.isBlank(fhdwMc1))
+					cell.setCellValue(fhdwMc1);
+				
+				cell = row.createCell(11);
+				String shdwMc1 = ddshjl.getShdwMc();
+				if(!StringUtils.isBlank(shdwMc1))
+					cell.setCellValue(shdwMc1);
+				
+				cell = row.createCell(12);
+				Integer lxlx = ddshjl.getLxlx();
+				if(shjg!=null) {
+					String lxlxMc=Constant.getLxlxMcById(lxlx);
+					cell.setCellValue(lxlxMc);
+				}
+				
+				cell = row.createCell(13);
+				Float yzxzl = ddshjl.getYzxzl();
+				if(yzxzl!=null)
+					cell.setCellValue(yzxzl);
+				
+				cell = row.createCell(14);
+				Float sjzl = ddshjl.getSjzl();
+				if(sjzl!=null)
+					cell.setCellValue(sjzl);
+				
+				cell = row.createCell(15);
+				Float zlceb = ddshjl.getZlceb();
+				if(zlceb!=null)
+					cell.setCellValue(zlceb);
 			}
 			
 			download("订单审核记录查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value="/exportBDJLList")
+	public void exportBDJLList(String ddh,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			System.out.println("ddh="+ddh);
+			System.out.println("page="+page);
+			System.out.println("rows="+rows);
+			System.out.println("dcfw="+dcfw);
+	
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("磅单记录");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("订单号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("毛重");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("皮重");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("净重");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("日期");
+			cell.setCellStyle(style);
+		
+			List<BangDanJiLu> bdjlList = exportExcelService.queryBDJLList(ddh, page, rows, dcfw);
+			for (int i = 0; i < bdjlList.size(); i++) {
+				BangDanJiLu bdjl = bdjlList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String ddh1 = bdjl.getDdh();
+				if(ddh1!=""&&ddh1!=null)
+					cell.setCellValue(ddh1);
+				
+				cell = row.createCell(1);
+				Float mz = bdjl.getMz();
+				if(mz!=null)
+					cell.setCellValue(mz);
+				
+				cell = row.createCell(2);
+				Float pz = bdjl.getPz();
+				if(pz!=null)
+					cell.setCellValue(pz);
+				
+				cell = row.createCell(3);
+				Float jz = bdjl.getJz();
+				if(jz!=null)
+					cell.setCellValue(jz);
+				
+				cell = row.createCell(4);
+				String rq = bdjl.getRq();
+				if(!StringUtils.isBlank(rq))
+					cell.setCellValue(rq);
+			}
+			
+			download("磅单记录查询", wb, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

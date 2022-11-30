@@ -201,6 +201,7 @@ public class DDGLController {
 		Constant.setShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
 		setShjgInRequest(request);
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/shjl/list";
 	}

@@ -293,4 +293,18 @@ public class Constant {
 		}
 		return shlxMc;
 	}
+	
+	/**
+	 * 根据订单审核标识，判断审核是否合格
+	 * @param shjg
+	 * @return
+	 */
+	public static String getDdShjgMcByJg(boolean shjg){
+		String shjgMc=null;
+		if(DingDanShenHeJiLu.HE_GE)
+			shjgMc=DingDanShenHeJiLu.HE_GE_TEXT;//合格
+		else
+			shjgMc=DingDanShenHeJiLu.BU_HE_GE_TEXT;//不合格
+		return shjgMc;
+	}
 }

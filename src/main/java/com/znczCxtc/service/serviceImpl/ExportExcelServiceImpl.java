@@ -15,22 +15,6 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 
 	@Autowired
 	private ExportExcelMapper exportExcelDao;
-	
-	@Override
-	public List<GuoBangJiLu> queryGBJLList(String ddh, String cyclCph, String gbsjks, String gbsjjs, Integer page,
-			Integer rows, int dcfw) {
-		// TODO Auto-generated method stub
-		List<GuoBangJiLu> list = null;
-		switch (dcfw) {
-		case Constant.DANG_QIAN_YE:
-			list = exportExcelDao.queryGBJLList(ddh, cyclCph, gbsjks, gbsjjs, (page-1)*rows, rows, dcfw);
-			break;
-		case Constant.SUO_YOU_YE:
-			list = exportExcelDao.queryGBJLList(ddh, cyclCph, gbsjks, gbsjjs, dcfw);
-			break;
-		}
-		return list;
-	}
 
 	@Override
 	public List<DingDan> queryDDZHCXList(String ddh, Integer ddztId, String ddztMc, String cyclCph, String jhysrq,
@@ -64,6 +48,37 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 			break;
 		case Constant.SUO_YOU_YE:
 			list = exportExcelDao.queryDDSHJLList(ddh, shlx, shsjks, shsjjs, cyclCph, shrYhm, yssMc, wzMc, fhdwMc, shdwMc, sjXm, sjSfzh, dcfw);
+			break;
+		}
+		return list;
+	}
+
+	@Override
+	public List<BangDanJiLu> queryBDJLList(String ddh, Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<BangDanJiLu> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryBDJLList(ddh, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryBDJLList(ddh, dcfw);
+			break;
+		}
+		return list;
+	}
+	
+	@Override
+	public List<GuoBangJiLu> queryGBJLList(String ddh, String cyclCph, String gbsjks, String gbsjjs, Integer page,
+			Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<GuoBangJiLu> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryGBJLList(ddh, cyclCph, gbsjks, gbsjjs, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryGBJLList(ddh, cyclCph, gbsjks, gbsjjs, dcfw);
 			break;
 		}
 		return list;

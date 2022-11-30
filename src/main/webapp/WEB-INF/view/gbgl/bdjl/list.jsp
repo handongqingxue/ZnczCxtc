@@ -23,7 +23,8 @@
 	margin-left: 13px;
 }
 
-.preview_bdxx_bg_div{
+.preview_bdxx_bg_div,
+.output_excel_bg_div{
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0,0,0,.45);
@@ -31,10 +32,22 @@
 	z-index: 9016;
 	display:none;
 }
+
 .preview_bdxx_div{
 	width: 1000px;
 	height: 570px;
 	margin: 100px auto 0;
+	background-color: #fff;
+	border-radius:5px;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+.output_excel_div{
+	width: 500px;
+	height: 210px;
+	margin: 250px auto 0;
 	background-color: #fff;
 	border-radius:5px;
 	position: absolute;
@@ -48,26 +61,54 @@
 var path='<%=basePath %>';
 var gbglPath=path+'gbgl/';
 var gkjPath=path+'gkj/';
+var exportExcelPath=path+'exportExcel/';
 var dialogTop=10;
 var dialogLeft=20;
 var pbdxxdNum=0;
+var oedNum=1;
+
 var appendStr="";
+
+var dqyDcfw;
+var syyDcfw;
+
+var dqyDcfwMc;
+var syyDcfwMc;
 $(function(){
+	initDcfwVar();
+	
 	initSearchLB();
 	initAddLB();
+	initOutputBut();
 	initTab1();
 	initPreviewBDXXDialog();//0
+	initOutputExcelDialog();//1
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
 });
 
+function initDcfwVar(){
+	dqyDcfw=parseInt('${requestScope.dqyDcfw}');
+	syyDcfw=parseInt('${requestScope.syyDcfw}');
+
+	dqyDcfwMc='${requestScope.dqyDcfwMc}';
+	syyDcfwMc='${requestScope.syyDcfwMc}';
+}
+
 function initDialogPosition(){
 	var pbdxxdpw=$("body").find(".panel.window").eq(pbdxxdNum);
 	var pbdxxdws=$("body").find(".window-shadow").eq(pbdxxdNum);
+	
+	var oedpw=$("body").find(".panel.window").eq(oedNum);
+	var oedws=$("body").find(".window-shadow").eq(oedNum);
 
 	var pbdxxdDiv=$("#preview_bdxx_div");
 	pbdxxdDiv.append(pbdxxdpw);
 	pbdxxdDiv.append(pbdxxdws);
+	
+	var oedDiv=$("#output_excel_div");
+	oedDiv.append(oedpw);
+	oedDiv.append(oedws);
 }
 
 function initPreviewBDXXDialog(){
@@ -186,6 +227,92 @@ function initPreviewModuleHtmlStr(){
 	appendStr+="</table>";
 }
 
+function initOutputExcelDialog(){
+	$("#output_excel_dialog_div").dialog({
+		title:"导出excel",
+		width:setFitWidthInParent("#output_excel_div","output_excel_dialog_div"),
+		height:150,
+		top:5,
+		left:dialogLeft,
+		buttons:[
+           {text:"确定",id:"ok_but",iconCls:"icon-ok",handler:function(){
+        	   if(checkDcfw()){
+        		   	var params="";
+	       			var ddh=$("#toolbar #ddh").val();
+        			var dcfw=dcfwCBB.combobox("getValue");
+        			params+="ddh="+ddh+"&dcfw="+dcfw;
+        			if(dcfw==dqyDcfw){
+	        			var options=tab1.datagrid("getPager").data("pagination").options;
+	        			var page=options.pageNumber;
+	        			var rows=options.pageSize;
+	        			params+="&page="+page+"&rows="+rows;
+        			}
+        			location.href=exportExcelPath+"exportBDJLList?"+params;
+             	   	openOutputExcelDialog(false);
+        	   }
+           }},
+           {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
+        	   openOutputExcelDialog(false);
+           }}
+        ]
+	});
+
+	$("#output_excel_dialog_div table").css("width",(setFitWidthInParent("#output_excel_div","output_excel_dialog_table"))+"px");
+	$("#output_excel_dialog_div table").css("magin","-100px");
+	$("#output_excel_dialog_div table td").css("padding-left","40px");
+	$("#output_excel_dialog_div table td").css("padding-right","20px");
+	$("#output_excel_dialog_div table td").css("font-size","15px");
+	$("#output_excel_dialog_div table .td1").css("width","30%");
+	$("#output_excel_dialog_div table .td2").css("width","60%");
+	$("#output_excel_dialog_div table tr").css("height","45px");
+
+	$(".panel.window").eq(oedNum).css("margin-top","20px");
+	$(".panel.window .panel-title").eq(oedNum).css("color","#000");
+	$(".panel.window .panel-title").eq(oedNum).css("font-size","15px");
+	$(".panel.window .panel-title").eq(oedNum).css("padding-left","10px");
+	
+	$(".panel-header, .panel-body").css("border-color","#ddd");
+	
+	//以下的是表格下面的面板
+	$(".window-shadow").eq(oedNum).css("margin-top","20px");
+	$(".window,.window .window-body").eq(oedNum).css("border-color","#ddd");
+
+	$("#output_excel_dialog_div #ok_but").css("left","30%");
+	$("#output_excel_dialog_div #ok_but").css("position","absolute");
+
+	$("#output_excel_dialog_div #cancel_but").css("left","50%");
+	$("#output_excel_dialog_div #cancel_but").css("position","absolute");
+	
+	$(".dialog-button").css("background-color","#fff");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+
+	initDcfwCBB();
+}
+
+function initDcfwCBB(){
+	var data=[];
+	data.push({"value":"","text":"请选择"});
+	data.push({"value":dqyDcfw,"text":dqyDcfwMc});
+	data.push({"value":syyDcfw,"text":syyDcfwMc});
+	dcfwCBB=$("#dcfw_cbb").combobox({
+		width:120,
+		valueField:"value",
+		textField:"text",
+		data:data
+	});
+}
+
+//验证导出范围
+function checkDcfw(){
+	var dcfw=dcfwCBB.combobox("getValue");
+	if(dcfw==null||dcfw==""){
+	  	alert("请选择导出范围");
+	  	return false;
+	}
+	else
+		return true;
+}
+
 function initSearchLB(){
 	$("#search_but").linkbutton({
 		iconCls:"icon-search",
@@ -201,6 +328,15 @@ function initAddLB(){
 		iconCls:"icon-add",
 		onClick:function(){
 			location.href=gbglPath+"bdjl/new";
+		}
+	});
+}
+
+function initOutputBut(){
+	opBut=$("#output_but").linkbutton({
+		iconCls:"icon-remove",
+		onClick:function(){
+			openOutputExcelDialog(true);
 		}
 	});
 }
@@ -240,6 +376,15 @@ function initTab1(){
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 		}
 	});
+}
+
+function openOutputExcelDialog(flag){
+	if(flag){
+		$("#output_excel_bg_div").css("display","block");
+	}
+	else{
+		$("#output_excel_bg_div").css("display","none");
+	}
 }
 
 function openPreviewBDXXDialog(flag,row){
@@ -352,7 +497,11 @@ function setFitWidthInParent(parent,self){
 		space=250;
 		break;
 	case "preview_bdxx_dialog_div":
+	case "output_excel_dialog_div":
 		space=50;
+		break;
+	case "output_excel_dialog_table":
+		space=68;
 		break;
 	case "panel_window":
 		space=355;
@@ -372,6 +521,7 @@ function setFitWidthInParent(parent,self){
 			<input type="text" class="ddh_inp" id="ddh" placeholder="请输入订单号"/>
 			<a class="search_but" id="search_but">查询</a>
 			<a id="add_but">添加</a>
+         	<a id="output_but">导出</a>
 		</div>
 		<table id="tab1">
 		</table>
@@ -380,6 +530,23 @@ function setFitWidthInParent(parent,self){
 	<div class="preview_bdxx_bg_div" id="preview_bdxx_bg_div">
 		<div class="preview_bdxx_div" id="preview_bdxx_div">
 			<div class="preview_bdxx_dialog_div" id="preview_bdxx_dialog_div">
+			</div>
+		</div>
+	</div>
+	
+	<div class="output_excel_bg_div" id="output_excel_bg_div">
+		<div class="output_excel_div" id="output_excel_div">
+			<div class="output_excel_dialog_div" id="output_excel_dialog_div">
+				<table>
+				  <tr>
+					<td class="td1" align="right">
+						导出范围
+					</td>
+					<td class="td2">
+						<input id="dcfw_cbb"/>
+					</td>
+				  </tr>
+				</table>
 			</div>
 		</div>
 	</div>
