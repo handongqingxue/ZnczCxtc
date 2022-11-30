@@ -44,6 +44,8 @@ public class WZGLController {
 	@RequestMapping(value="/wzlx/list")
 	public String goWzlxList(HttpServletRequest request) {
 		
+		Constant.setDcfwInRequest(request);
+		
 		return MODULE_NAME+"/wzlx/list";
 	}
 
@@ -75,6 +77,8 @@ public class WZGLController {
 	
 	@RequestMapping(value="/wzcx/list")
 	public String goWzcxList(HttpServletRequest request) {
+
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/wzcx/list";
 	}

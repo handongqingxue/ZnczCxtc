@@ -981,6 +981,8 @@ public class ExportExcelController {
 			String sheetname = null;
 			if(DingDanZhuangTai.YI_JIAN_DAI_SHEN_HE_TEXT.equals(ddztMc)&&GuoBangJiLu.RU_CHANG_GUO_BANG==gblx)
 				sheetname = "一检待审核";
+			else if(DingDanZhuangTai.ER_JIAN_DAI_SHEN_HE_TEXT.equals(ddztMc)&&GuoBangJiLu.CHU_CHANG_GUO_BANG==gblx)
+				sheetname = "二检待审核";
 			HSSFSheet sheet = wb.createSheet(sheetname);
 			HSSFRow row = sheet.createRow(rowNum);
 			HSSFCellStyle style = wb.createCellStyle();
@@ -1097,7 +1099,135 @@ public class ExportExcelController {
 			String fileName = null;
 			if(DingDanZhuangTai.YI_JIAN_DAI_SHEN_HE_TEXT.equals(ddztMc)&&GuoBangJiLu.RU_CHANG_GUO_BANG==gblx)
 				fileName = "一检待审核查询";
+			else if(DingDanZhuangTai.ER_JIAN_DAI_SHEN_HE_TEXT.equals(ddztMc)&&GuoBangJiLu.CHU_CHANG_GUO_BANG==gblx)
+				fileName = "二检待审核查询";
 			download(fileName, wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value="/exportWZLXList")
+	public void exportWZLXList(String mc,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			mc=StringUtil.decode(mc, "UTF-8");
+			System.out.println("mc="+mc);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("物资类型");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("类名");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("创建时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("编辑时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("排序");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("备注");
+			cell.setCellStyle(style);
+			
+			List<WuZiLeiXing> wzlxList = exportExcelService.queryWZLXList(mc,page, rows, dcfw);
+			for (int i = 0; i < wzlxList.size(); i++) {
+				WuZiLeiXing wzlx = wzlxList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String mc1 = wzlx.getMc();
+				if(!StringUtils.isBlank(mc1))
+					cell.setCellValue(mc1);
+				
+				cell = row.createCell(1);
+				String cjsj = wzlx.getCjsj();
+				if(!StringUtils.isBlank(cjsj))
+					cell.setCellValue(cjsj);
+				
+				cell = row.createCell(2);
+				String bjsj = wzlx.getBjsj();
+				if(!StringUtils.isBlank(bjsj))
+					cell.setCellValue(bjsj);
+				
+				cell = row.createCell(3);
+				Integer px = wzlx.getPx();
+				if(px!=null)
+					cell.setCellValue(px);
+				
+				cell = row.createCell(4);
+				String bz = wzlx.getBz();
+				if(!StringUtils.isBlank(bz))
+					cell.setCellValue(bz);
+			}
+	
+			download("物资类型查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value="/exportWuZiList")
+	public void exportWuZiList(String mc,String wzlxmc,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			mc=StringUtil.decode(mc, "UTF-8");
+			System.out.println("mc="+mc);
+			mc=StringUtil.decode(wzlxmc, "UTF-8");
+			System.out.println("wzlxmc="+wzlxmc);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("物资");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("名称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("物资类型");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("编辑时间");
+			cell.setCellStyle(style);
+		
+			List<WuZi> wzList = exportExcelService.queryWuZiList(mc,wzlxmc, page, rows, dcfw);
+			for (int i = 0; i < wzList.size(); i++) {
+				WuZi wz = wzList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String mc1 = wz.getMc();
+				if(!StringUtils.isBlank(mc1))
+					cell.setCellValue(mc1);
+				
+				cell = row.createCell(1);
+				String wzlxmc1 = wz.getWzlxmc();
+				if(!StringUtils.isBlank(wzlxmc1))
+					cell.setCellValue(wzlxmc1);
+				
+				cell = row.createCell(2);
+				String bjsj = wz.getBjsj();
+				if(!StringUtils.isBlank(bjsj))
+					cell.setCellValue(bjsj);
+			}
+			
+			download("物资查询", wb, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

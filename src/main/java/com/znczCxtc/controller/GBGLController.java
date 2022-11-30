@@ -215,6 +215,7 @@ public class GBGLController {
 		Constant.setShlxInRequest(request);
 		Constant.setGblxInRequest(request);
 		Constant.setGbztInRequest(request);
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/ejdsh/list";
 	}

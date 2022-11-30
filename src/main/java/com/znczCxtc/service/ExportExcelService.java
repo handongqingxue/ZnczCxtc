@@ -23,4 +23,8 @@ public interface ExportExcelService {
 			String yssMc, String fhdwMc, String shdwMc, String gbsjks, String gbsjjs, Integer gblx, Integer page,
 			Integer rows, int dcfw);
 
+	List<WuZiLeiXing> queryWZLXList(String mc, Integer page, Integer rows, int dcfw);
+
+	List<WuZi> queryWuZiList(String mc, String wzlxmc, Integer page, Integer rows, int dcfw);
+
 }

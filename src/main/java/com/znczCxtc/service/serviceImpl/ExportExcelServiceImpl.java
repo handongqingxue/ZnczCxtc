@@ -102,4 +102,34 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 		return list;
 	}
 
+	@Override
+	public List<WuZiLeiXing> queryWZLXList(String mc, Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<WuZiLeiXing> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryWZLXList(mc, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryWZLXList(mc, dcfw);
+			break;
+		}
+		return list;
+	}
+
+	@Override
+	public List<WuZi> queryWuZiList(String mc, String wzlxmc, Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<WuZi> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryWuZiList(mc, wzlxmc, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryWuZiList(mc, wzlxmc, dcfw);
+			break;
+		}
+		return list;
+	}
+
 }

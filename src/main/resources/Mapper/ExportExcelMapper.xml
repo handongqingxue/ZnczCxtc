@@ -161,4 +161,26 @@
 			limit #{rowNum},#{rows}
 		</if>
 	</select>
+	<select id="queryWZLXList" resultType="com.znczCxtc.entity.WuZiLeiXing">
+		select * from wu_zi_lei_xing where 1=1
+		<if test="mc!=''&amp;mc!=null">
+			and mc like CONCAT('%',#{mc},'%')
+		</if>
+		order by px
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
+	<select id="queryWuZiList" resultType="com.znczCxtc.entity.WuZi">
+		select wz.id,wz.mc,wzlx.mc wzlxmc,wz.bjsj from wu_zi_lei_xing wzlx,wu_zi wz where wzlx.id=wz.wzlxId
+		<if test="mc!=''&amp;mc!=null">
+			and wz.mc like CONCAT('%',#{mc},'%')
+		</if> 
+		<if test="wzlxmc!=''&amp;wzlxmc!=null">
+			and wzlx.mc like CONCAT('%',#{wzlxmc},'%')
+		</if> 
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
 </mapper>

@@ -38,4 +38,12 @@ public interface ExportExcelMapper {
 
 	List<GuoBangJiLu> queryDJYList(@Param("ddh") String ddh, @Param("ddztMc") String ddztMc, @Param("cysjXm") String cysjXm, @Param("cysjSfzh") String cysjSfzh, @Param("cyclCph") String cyclCph,
 			@Param("yssMc") String yssMc, @Param("fhdwMc") String fhdwMc, @Param("shdwMc") String shdwMc, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs, @Param("gblx") Integer gblx, @Param("dcfw") int dcfw);
+
+	List<WuZiLeiXing> queryWZLXList(@Param("mc") String mc, @Param("rowNum") int rowNum, @Param("rows") Integer rows, @Param("dcfw") int dcfw);
+
+	List<WuZiLeiXing> queryWZLXList(@Param("mc") String mc, @Param("dcfw") int dcfw);
+
+	List<WuZi> queryWuZiList(@Param("mc") String mc, @Param("wzlxmc") String wzlxmc, @Param("rowNum") int rowNum, @Param("rows") Integer rows, @Param("dcfw") int dcfw);
+
+	List<WuZi> queryWuZiList(@Param("mc") String mc, @Param("wzlxmc") String wzlxmc, @Param("dcfw") int dcfw);
 }
