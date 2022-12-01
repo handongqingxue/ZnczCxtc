@@ -132,4 +132,49 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 		return list;
 	}
 
+	@Override
+	public List<YunShuShang> queryYunShuShangList(String mc, Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<YunShuShang> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryYunShuShangList(mc, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryYunShuShangList(mc, dcfw);
+			break;
+		}
+		return list;
+	}
+
+	@Override
+	public List<FaHuoDanWei> queryFaHuoDanWeiList(String mc, Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<FaHuoDanWei> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryFaHuoDanWeiList(mc, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryFaHuoDanWeiList(mc, dcfw);
+			break;
+		}
+		return list;
+	}
+
+	@Override
+	public List<ShouHuoDanWei> queryShouHuoDanWeiList(String mc, Boolean ywdl, Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<ShouHuoDanWei> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryShouHuoDanWeiList(mc, ywdl, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryShouHuoDanWeiList(mc, ywdl, dcfw);
+			break;
+		}
+		return list;
+	}
+
 }

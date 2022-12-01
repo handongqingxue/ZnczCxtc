@@ -57,6 +57,7 @@ public class DWGLController {
 	public String goYssList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/yss/list";
 	}
@@ -110,6 +111,7 @@ public class DWGLController {
 	public String goFhdwList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/fhdw/list";
 	}
@@ -169,6 +171,7 @@ public class DWGLController {
 	public String goShdwList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/shdw/list";
 	}

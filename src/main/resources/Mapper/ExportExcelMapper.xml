@@ -183,4 +183,34 @@
 			limit #{rowNum},#{rows}
 		</if>
 	</select>
+	<select id="queryYunShuShangList" resultType="com.znczCxtc.entity.YunShuShang">
+		select * from yun_shu_shang where 1=1
+		<if test="mc!=''&amp;mc!=null">
+			and mc like CONCAT('%',#{mc},'%')
+		</if> 
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
+	<select id="queryFaHuoDanWeiList" resultType="com.znczCxtc.entity.FaHuoDanWei">
+		select * from fa_huo_dan_wei where 1=1
+		<if test="mc!=''&amp;mc!=null">
+			and mc like CONCAT('%',#{mc},'%')
+		</if> 
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
+	<select id="queryShouHuoDanWeiList" resultType="com.znczCxtc.entity.ShouHuoDanWei">
+		select shdw.*,dl.mc dlMc from shou_huo_dan_wei shdw left join dui_lie dl on shdw.dlId=dl.id where 1=1
+		<if test="mc!=''&amp;mc!=null">
+			and shdw.mc like CONCAT('%',#{mc},'%')
+		</if> 
+		<if test="(ywdl!='' or ywdl==0)&amp;ywdl!=null">
+			and shdw.ywdl=#{ywdl}
+		</if> 
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
 </mapper>

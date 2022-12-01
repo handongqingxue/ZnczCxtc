@@ -27,4 +27,10 @@ public interface ExportExcelService {
 
 	List<WuZi> queryWuZiList(String mc, String wzlxmc, Integer page, Integer rows, int dcfw);
 
+	List<YunShuShang> queryYunShuShangList(String mc, Integer page, Integer rows, int dcfw);
+
+	List<FaHuoDanWei> queryFaHuoDanWeiList(String mc, Integer page, Integer rows, int dcfw);
+
+	List<ShouHuoDanWei> queryShouHuoDanWeiList(String mc, Boolean ywdl, Integer page, Integer rows, int dcfw);
+
 }

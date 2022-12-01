@@ -1233,6 +1233,156 @@ public class ExportExcelController {
 			e.printStackTrace();
 		}
 	}
+
+	@RequestMapping(value="/exportYunShuShangList")
+	public void exportYunShuShangList(String mc,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			mc=StringUtil.decode(mc, "UTF-8");
+			System.out.println("mc="+mc);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("运输商");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("名称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("编辑时间");
+			cell.setCellStyle(style);
+			
+			List<YunShuShang> yssList = exportExcelService.queryYunShuShangList(mc, page, rows, dcfw);
+			for (int i = 0; i < yssList.size(); i++) {
+				YunShuShang yss = yssList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String mc1 = yss.getMc();
+				if(!StringUtils.isBlank(mc1))
+					cell.setCellValue(mc1);
+				
+				cell = row.createCell(1);
+				String bjsj = yss.getBjsj();
+				if(!StringUtils.isBlank(bjsj))
+					cell.setCellValue(bjsj);
+			}
+			
+			download("运输商查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value="/exportFaHuoDanWeiList")
+	public void exportFaHuoDanWeiList(String mc,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			mc=StringUtil.decode(mc, "UTF-8");
+			System.out.println("mc="+mc);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("发货单位");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("名称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("编辑时间");
+			cell.setCellStyle(style);
+			
+			List<FaHuoDanWei> fhdwList = exportExcelService.queryFaHuoDanWeiList(mc, page, rows, dcfw);
+			for (int i = 0; i < fhdwList.size(); i++) {
+				FaHuoDanWei fhdw = fhdwList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String mc1 = fhdw.getMc();
+				if(!StringUtils.isBlank(mc1))
+					cell.setCellValue(mc1);
+				
+				cell = row.createCell(1);
+				String bjsj = fhdw.getBjsj();
+				if(!StringUtils.isBlank(bjsj))
+					cell.setCellValue(bjsj);
+			}
+			
+			download("发货单位查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value="/exportShouHuoDanWeiList")
+	public void exportShouHuoDanWeiList(String mc,Boolean ywdl,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			mc=StringUtil.decode(mc, "UTF-8");
+			System.out.println("mc="+mc);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("收货单位");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("名称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("有无队列");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("队列名称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("编辑时间");
+			cell.setCellStyle(style);
+			
+			List<ShouHuoDanWei> shdwList = exportExcelService.queryShouHuoDanWeiList(mc,ywdl, page, rows, dcfw);
+			for (int i = 0; i < shdwList.size(); i++) {
+				ShouHuoDanWei shdw = shdwList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String mc1 = shdw.getMc();
+				if(!StringUtils.isBlank(mc1))
+					cell.setCellValue(mc1);
+				
+				cell = row.createCell(1);
+				Boolean ywdl1 = shdw.getYwdl();
+				if(ywdl1!=null)
+					cell.setCellValue(ywdl1?"有":"无");
+				
+				cell = row.createCell(2);
+				String dlMc = shdw.getDlMc();
+				if(!StringUtils.isBlank(dlMc))
+					cell.setCellValue(dlMc);
+				
+				cell = row.createCell(3);
+				String bjsj = shdw.getBjsj();
+				if(!StringUtils.isBlank(bjsj))
+					cell.setCellValue(bjsj);
+			}
+			
+			download("收货单位查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	private void download(String fileName, HSSFWorkbook wb, HttpServletResponse response) throws IOException {  
 	      ByteArrayOutputStream os = new ByteArrayOutputStream();

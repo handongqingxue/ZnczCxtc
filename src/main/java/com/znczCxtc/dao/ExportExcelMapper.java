@@ -43,7 +43,19 @@ public interface ExportExcelMapper {
 
 	List<WuZiLeiXing> queryWZLXList(@Param("mc") String mc, @Param("dcfw") int dcfw);
 
-	List<WuZi> queryWuZiList(@Param("mc") String mc, @Param("wzlxmc") String wzlxmc, @Param("rowNum") int rowNum, @Param("rows") Integer rows, @Param("dcfw") int dcfw);
+	List<WuZi> queryWuZiList(@Param("mc") String mc, @Param("wzlxmc") String wzlxmc, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
 
 	List<WuZi> queryWuZiList(@Param("mc") String mc, @Param("wzlxmc") String wzlxmc, @Param("dcfw") int dcfw);
+
+	List<YunShuShang> queryYunShuShangList(@Param("mc") String mc, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<YunShuShang> queryYunShuShangList(@Param("mc") String mc, @Param("dcfw") int dcfw);
+
+	List<FaHuoDanWei> queryFaHuoDanWeiList(@Param("mc") String mc, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<FaHuoDanWei> queryFaHuoDanWeiList(@Param("mc") String mc, @Param("dcfw") int dcfw);
+
+	List<ShouHuoDanWei> queryShouHuoDanWeiList(@Param("mc") String mc, @Param("ywdl") Boolean ywdl, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<ShouHuoDanWei> queryShouHuoDanWeiList(@Param("mc") String mc, @Param("ywdl") Boolean ywdl, @Param("dcfw") int dcfw);
 }
