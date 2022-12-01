@@ -1546,6 +1546,47 @@ public class ExportExcelController {
 			cell.setCellValue("备注");
 			cell.setCellStyle(style);
 			break;
+		case CheLiang.ZONG_HE_CHA_XUN_SHEET:
+			cell = row.createCell(0);
+			cell.setCellValue("车牌号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("品牌型号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("发动机号码");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("车辆识别代号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("注册日期");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(5);
+			cell.setCellValue("排放阶段");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(6);
+			cell.setCellValue("发证日期");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(7);
+			cell.setCellValue("是否在用");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(8);
+			cell.setCellValue("状态");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(9);
+			cell.setCellValue("备注");
+			cell.setCellStyle(style);
+			break;
 		}
 	}
 	
@@ -1604,6 +1645,145 @@ public class ExportExcelController {
 					cell.setCellValue(bz);
 			}
 			break;
+		case CheLiang.ZONG_HE_CHA_XUN_SHEET:
+			for (int i = 0; i < clList.size(); i++) {
+				CheLiang cl = clList.get(i);
+				HSSFRow row=sheet.createRow(++rowNum);
+	
+				HSSFCell cell = row.createCell(0);
+				String cph = cl.getCph();
+				if(!StringUtils.isBlank(cph))
+					cell.setCellValue(cph);
+				
+				cell = row.createCell(1);
+				String ppxh = cl.getPpxh();
+				if(!StringUtils.isBlank(ppxh))
+					cell.setCellValue(ppxh);
+				
+				cell = row.createCell(2);
+				String fdjhm = cl.getFdjhm();
+				if(!StringUtils.isBlank(fdjhm))
+					cell.setCellValue(fdjhm);
+				
+				cell = row.createCell(3);
+				String clsbdh = cl.getClsbdh();
+				if(!StringUtils.isBlank(clsbdh))
+					cell.setCellValue(clsbdh);
+				
+				cell = row.createCell(4);
+				String zcrq = cl.getZcrq();
+				if(!StringUtils.isBlank(zcrq))
+					cell.setCellValue(zcrq);
+				
+				cell = row.createCell(5);
+				Integer pfjd = cl.getPfjd();
+				if(pfjd!=null) {
+					String pfjdMc = Constant.getPfjdMcById(pfjd);
+					cell.setCellValue(pfjdMc);
+				}
+				
+				cell = row.createCell(6);
+				String fzrq = cl.getFzrq();
+				if(!StringUtils.isBlank(fzrq))
+					cell.setCellValue(fzrq);
+				
+				cell = row.createCell(7);
+				Boolean sfzy = cl.getSfzy();
+				if(sfzy!=null)
+					cell.setCellValue(sfzy?"是":"否");
+				
+				cell = row.createCell(8);
+				Integer shzt = cl.getShzt();
+				if(shzt!=null) {
+					String pfjdMc = Constant.getShztMcById(shzt);
+					cell.setCellValue(pfjdMc);
+				}
+				
+				cell = row.createCell(9);
+				String bz = cl.getBz();
+				if(!StringUtils.isBlank(bz))
+					cell.setCellValue(bz);
+			}
+			break;
+		}
+	}
+
+	@RequestMapping(value="/exportCLSHJLList")
+	public void exportCLSHJLList(String clCph,String shrYhm,String shsjks,String shsjjs,
+			Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			clCph=StringUtil.decode(clCph, "UTF-8");
+			System.out.println("clCph="+clCph);
+			shrYhm=StringUtil.decode(shrYhm, "UTF-8");
+			System.out.println("shrYhm="+shrYhm);
+			System.out.println("shsjks="+shsjks);
+			System.out.println("shsjjs="+shsjjs);
+			System.out.println("page="+page);
+			System.out.println("rows="+rows);
+			System.out.println("dcfw="+dcfw);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("车辆审核记录");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("车牌号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("审核人");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("审核时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("审核结果");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("备注");
+			cell.setCellStyle(style);
+			
+			List<CheLiangShenHeJiLu> clshjlList = exportExcelService.queryCLSHJLList(clCph,shrYhm,shsjks,shsjjs, page, rows, dcfw);
+			for (int i = 0; i < clshjlList.size(); i++) {
+				CheLiangShenHeJiLu clshjl = clshjlList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String clCph1 = clshjl.getClCph();
+				if(!StringUtils.isBlank(clCph1))
+					cell.setCellValue(clCph1);
+				
+				cell = row.createCell(1);
+				String shrYhm1 = clshjl.getShrYhm();
+				if(!StringUtils.isBlank(shrYhm1))
+					cell.setCellValue(shrYhm1);
+				
+				cell = row.createCell(2);
+				String shsj = clshjl.getShsj();
+				if(!StringUtils.isBlank(shsj))
+					cell.setCellValue(shsj);
+				
+				cell = row.createCell(3);
+				Boolean shjg = clshjl.getShjg();
+				if(shjg!=null)
+					cell.setCellValue(shjg?"合格":"不合格");
+				
+				cell = row.createCell(4);
+				String bz = clshjl.getBz();
+				if(!StringUtils.isBlank(bz))
+					cell.setCellValue(bz);
+			}
+			
+			download("车辆审核记录查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

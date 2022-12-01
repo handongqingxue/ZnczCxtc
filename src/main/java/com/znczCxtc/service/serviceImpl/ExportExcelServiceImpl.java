@@ -213,4 +213,20 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 		return list;
 	}
 
+	@Override
+	public List<CheLiangShenHeJiLu> queryCLSHJLList(String clCph, String shrYhm, String shsjks, String shsjjs,
+			Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<CheLiangShenHeJiLu> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryCLSHJLList(clCph, shrYhm, shsjks, shsjjs, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryCLSHJLList(clCph, shrYhm, shsjks, shsjjs, dcfw);
+			break;
+		}
+		return list;
+	}
+
 }

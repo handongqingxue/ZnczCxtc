@@ -67,4 +67,9 @@ public interface ExportExcelMapper {
 			@Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
 
 	List<CheLiang> queryCLZHCXList(@Param("cph") String cph, @Param("cllx") Integer cllx, @Param("sfzy") Boolean sfzy, @Param("pfjd") Integer pfjd, @Param("shztList") List<String> shztList, @Param("bz") String bz, @Param("dcfw") int dcfw);
+
+	List<CheLiangShenHeJiLu> queryCLSHJLList(@Param("clCph") String clCph, @Param("shrYhm") String shrYhm, @Param("shsjks") String shsjks, @Param("shsjjs") String shsjjs, 
+			@Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<CheLiangShenHeJiLu> queryCLSHJLList(@Param("clCph") String clCph, @Param("shrYhm") String shrYhm, @Param("shsjks") String shsjks, @Param("shsjjs") String shsjjs, @Param("dcfw") int dcfw);
 }

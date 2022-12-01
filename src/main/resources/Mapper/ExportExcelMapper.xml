@@ -249,4 +249,20 @@
 			limit #{rowNum},#{rows}
 		</if>
 	</select>
+	<select id="queryCLSHJLList" resultType="com.znczCxtc.entity.CheLiangShenHeJiLu">
+		select clshjl.*,cl.cph clCph,shr.yhm shrYhm from che_liang_shen_he_ji_lu clshjl left join che_liang cl on clshjl.clId=cl.id left join yong_hu shr on clshjl.shrId=shr.id where 1=1
+		<if test="clCph!=''&amp;clCph!=null">
+			and cl.cph like CONCAT('%',#{clCph},'%')
+		</if>
+		<if test="shrYhm!=''&amp;shrYhm!=null">
+			and shr.yhm like CONCAT('%',#{shrYhm},'%')
+		</if>
+		<if test="shsjks!=''&amp;shsjks!=null&amp;shsjjs!=''&amp;shsjjs!=null">
+			and clshjl.shsj between #{shsjks} and #{shsjjs}
+		</if>
+		order by clshjl.shsj desc
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
 </mapper>

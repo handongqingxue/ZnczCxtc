@@ -349,4 +349,25 @@ public class Constant {
 		}
 		return pfjdMc;
 	}
+	
+	/**
+	 * 根据审核状态id获取审核状态名称
+	 * @param shztId
+	 * @return
+	 */
+	public static String getShztMcById(int shztId){
+		String shztMc=null;
+		switch (shztId) {
+		case CheLiang.DAI_SHEN_HE:
+			shztMc=CheLiang.DAI_SHEN_HE_TEXT;//待审核
+			break;
+		case CheLiang.SHEN_HE_TONG_GUO:
+			shztMc=CheLiang.SHEN_HE_TONG_GUO_TEXT;//审核通过
+			break;
+		case CheLiang.BIAN_JI_ZHONG:
+			shztMc=CheLiang.BIAN_JI_ZHONG_TEXT;//编辑中
+			break;
+		}
+		return shztMc;
+	}
 }

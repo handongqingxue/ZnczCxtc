@@ -14,15 +14,28 @@ public class CheLiang {
 	/**
 	 * ´ýÉóºË
 	 */
-	public static final Integer DAI_SHEN_HE=1;
+	public static final int DAI_SHEN_HE=1;
 	/**
 	 * ÉóºËÍ¨¹ý
 	 */
-	public static final Integer SHEN_HE_TONG_GUO=2;
+	public static final int SHEN_HE_TONG_GUO=2;
 	/**
 	 * ±à¼­ÖÐ
 	 */
-	public static final Integer BIAN_JI_ZHONG=3;
+	public static final int BIAN_JI_ZHONG=3;
+	
+	/**
+	 * ´ýÉóºË
+	 */
+	public static final String DAI_SHEN_HE_TEXT="´ýÉóºË";
+	/**
+	 * ÉóºËÍ¨¹ý
+	 */
+	public static final String SHEN_HE_TONG_GUO_TEXT="ÉóºËÍ¨¹ý";
+	/**
+	 * ±à¼­ÖÐ
+	 */
+	public static final String BIAN_JI_ZHONG_TEXT="±à¼­ÖÐ";
 	
 	public static final int DAI_SHEN_HE_SHEET=1;
 	public static final int ZONG_HE_CHA_XUN_SHEET=2;
