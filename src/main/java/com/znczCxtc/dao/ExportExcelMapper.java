@@ -58,4 +58,13 @@ public interface ExportExcelMapper {
 	List<ShouHuoDanWei> queryShouHuoDanWeiList(@Param("mc") String mc, @Param("ywdl") Boolean ywdl, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
 
 	List<ShouHuoDanWei> queryShouHuoDanWeiList(@Param("mc") String mc, @Param("ywdl") Boolean ywdl, @Param("dcfw") int dcfw);
+
+	List<CangKu> queryCangKuList(@Param("mc") String mc, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<CangKu> queryCangKuList(@Param("mc") String mc, @Param("dcfw") int dcfw);
+
+	List<CheLiang> queryCLZHCXList(@Param("cph") String cph, @Param("cllx") Integer cllx, @Param("sfzy") Boolean sfzy, @Param("pfjd") Integer pfjd, @Param("shztList") List<String> shztList, @Param("bz") String bz, 
+			@Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<CheLiang> queryCLZHCXList(@Param("cph") String cph, @Param("cllx") Integer cllx, @Param("sfzy") Boolean sfzy, @Param("pfjd") Integer pfjd, @Param("shztList") List<String> shztList, @Param("bz") String bz, @Param("dcfw") int dcfw);
 }

@@ -211,6 +211,8 @@ public class DWGLController {
 	@RequestMapping(value="/ck/list")
 	public String goCkList(HttpServletRequest request) {
 		
+		Constant.setDcfwInRequest(request);
+		
 		return MODULE_NAME+"/ck/list";
 	}
 

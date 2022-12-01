@@ -213,4 +213,40 @@
 			limit #{rowNum},#{rows}
 		</if>
 	</select>
+	<select id="queryCangKuList" resultType="com.znczCxtc.entity.CangKu">
+		select * from cang_ku where 1=1
+		<if test="mc!=''&amp;mc!=null">
+			and mc like CONCAT('%',#{mc},'%')
+		</if>
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
+	<select id="queryCLZHCXList" resultType="com.znczCxtc.entity.CheLiang">
+		select * from che_liang where 1=1
+		<if test="cph!=''&amp;cph!=null">
+			and cph like CONCAT('%',#{cph},'%')
+		</if> 
+		<if test="cllx!=''&amp;cllx!=null">
+			and cllx=#{cllx}
+		</if>  
+		<if test="(sfzy!='' or sfzy==0)&amp;sfzy!=null">
+			and sfzy=#{sfzy}
+		</if> 
+		<if test="pfjd!=''&amp;pfjd!=null">
+			and pfjd=#{pfjd}
+		</if> 
+		<if test="shztList!=null">
+			<foreach collection="shztList" item="shzt" open=" and shzt in(" separator="," close=")">
+			#{shzt}
+			</foreach>
+		</if>
+		<if test="bz!=''&amp;bz!=null">
+			and bz like CONCAT('%',#{bz},'%')
+		</if> 
+		order by zcrq desc 
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
 </mapper>

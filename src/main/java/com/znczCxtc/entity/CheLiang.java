@@ -23,6 +23,20 @@ public class CheLiang {
 	 * 编辑中
 	 */
 	public static final Integer BIAN_JI_ZHONG=3;
+	
+	public static final int DAI_SHEN_HE_SHEET=1;
+	public static final int ZONG_HE_CHA_XUN_SHEET=2;
+	
+	public static final int GUO_WU_RAN_YOU=1;
+	public static final int GUO_WU_RAN_QI=2;
+	public static final int GUO_LIU_RAN_YOU=3;
+	public static final int GUO_LIU_RAN_QI=4;
+	
+	public static final String GUO_WU_RAN_YOU_TEXT="国五燃油";
+	public static final String GUO_WU_RAN_QI_TEXT="国五燃气";
+	public static final String GUO_LIU_RAN_YOU_TEXT="国六燃油";
+	public static final String GUO_LIU_RAN_QI_TEXT="国六燃气";
+	
 	private Integer id;//车辆id
 	public Integer getId() {
 		return id;

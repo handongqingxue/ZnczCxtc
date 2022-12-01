@@ -33,4 +33,9 @@ public interface ExportExcelService {
 
 	List<ShouHuoDanWei> queryShouHuoDanWeiList(String mc, Boolean ywdl, Integer page, Integer rows, int dcfw);
 
+	List<CangKu> queryCangKuList(String mc, Integer page, Integer rows, int dcfw);
+
+	List<CheLiang> queryCLZHCXList(String cph, Integer cllx, Boolean sfzy, Integer pfjd, String shzt, String bz,
+			Integer page, Integer rows, int dcfw);
+
 }

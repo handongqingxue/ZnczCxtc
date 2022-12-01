@@ -325,4 +325,28 @@ public class Constant {
 		}
 		return gbztMc;
 	}
+	
+	/**
+	 * 根据排放阶段id获取排放阶段名称
+	 * @param pfjdId
+	 * @return
+	 */
+	public static String getPfjdMcById(int pfjdId){
+		String pfjdMc=null;
+		switch (pfjdId) {
+		case CheLiang.GUO_WU_RAN_YOU:
+			pfjdMc=CheLiang.GUO_WU_RAN_YOU_TEXT;//国五燃油
+			break;
+		case CheLiang.GUO_WU_RAN_QI:
+			pfjdMc=CheLiang.GUO_WU_RAN_QI_TEXT;//国五燃气
+			break;
+		case CheLiang.GUO_LIU_RAN_YOU:
+			pfjdMc=CheLiang.GUO_LIU_RAN_YOU_TEXT;//国六燃油
+			break;
+		case CheLiang.GUO_LIU_RAN_QI:
+			pfjdMc=CheLiang.GUO_LIU_RAN_QI_TEXT;//国六燃气
+			break;
+		}
+		return pfjdMc;
+	}
 }

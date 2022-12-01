@@ -95,13 +95,13 @@ public class ExportExcelController {
 
 			String fileName = null;
 			switch (sheetFlag) {
-			case DingDanZhuangTai.DAI_SHEN_HE:
+			case DingDan.DAI_SHEN_HE_SHEET:
 				fileName = "待审核订单查询";
 				break;
-			case DingDanZhuangTai.DAI_JIAN_YAN:
+			case DingDan.DAI_JIAN_YAN_SHEET:
 				fileName = "待质检订单查询";
 				break;
-			case DingDanZhuangTai.DAI_ZHUANG_XIE_HUO:
+			case DingDan.DAI_ZHUANG_XIE_HUO_SHEET:
 				fileName = "待入库订单查询";
 				break;
 			case DingDan.ZONG_HE_CHA_XUN_SHEET:
@@ -1381,6 +1381,229 @@ public class ExportExcelController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value="/exportCangKuList")
+	public void exportCangKuList(String mc,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			mc=StringUtil.decode(mc, "UTF-8");
+			System.out.println("mc="+mc);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("仓库");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("名称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("位置");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("编辑时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("备注");
+			cell.setCellStyle(style);
+			
+			List<CangKu> ckList = exportExcelService.queryCangKuList(mc, page, rows, dcfw);
+			for (int i = 0; i < ckList.size(); i++) {
+				CangKu ck = ckList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String mc1 = ck.getMc();
+				if(!StringUtils.isBlank(mc1))
+					cell.setCellValue(mc1);
+				
+				cell = row.createCell(1);
+				String wz = ck.getWz();
+				if(!StringUtils.isBlank(wz))
+					cell.setCellValue(wz);
+				
+				cell = row.createCell(2);
+				String bjsj = ck.getBjsj();
+				if(!StringUtils.isBlank(bjsj))
+					cell.setCellValue(bjsj);
+				
+				cell = row.createCell(3);
+				String bz = ck.getBz();
+				if(!StringUtils.isBlank(bz))
+					cell.setCellValue(bz);
+			}
+			
+			download("仓库查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value="/exportCheLiangList")
+	public void exportCheLiangList(String cph,Integer cllx,Boolean sfzy,Integer pfjd,String shzt,String bz,
+			Integer page,Integer rows,Integer sheetFlag,int dcfw,HttpServletResponse response) {
+		try {
+			cph=StringUtil.decode(cph, "UTF-8");
+			System.out.println("cph="+cph);
+			System.out.println("cllx="+cllx);
+			System.out.println("sfzy="+sfzy);
+			System.out.println("pfjd="+pfjd);
+			System.out.println("shzt"+shzt);
+			bz=StringUtil.decode(bz, "UTF-8");
+			System.out.println("bz="+bz);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			String sheetname = null;
+			switch (sheetFlag) {
+			case CheLiang.DAI_SHEN_HE_SHEET:
+				sheetname = "待审核车辆";
+				break;
+			case CheLiang.ZONG_HE_CHA_XUN_SHEET:
+				sheetname = "车辆综合查询";
+				break;
+			}
+			HSSFSheet sheet = wb.createSheet(sheetname);
+			
+			createCLZHCXSheetHeader(wb,sheet,rowNum,sheetFlag);
+			
+			List<CheLiang> clList = exportExcelService.queryCLZHCXList(cph,cllx,sfzy,pfjd,shzt,bz, page, rows, dcfw);
+			
+			createCLZHCXSheetBody(clList,sheet,rowNum,sheetFlag);
+
+			String fileName = null;
+			switch (sheetFlag) {
+			case CheLiang.DAI_SHEN_HE_SHEET:
+				fileName = "待审核车辆查询";
+				break;
+			case CheLiang.ZONG_HE_CHA_XUN_SHEET:
+				fileName = "车辆综合查询";
+				break;
+			}
+			download(fileName, wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 根据不同表格标识创建表头，调用同一个车辆综合查询接口，只是表头显示的列不同，这里需要判断下
+	 * @param wb
+	 * @param sheet
+	 * @param rowNum
+	 * @param sheetFlag
+	 */
+	public void createCLZHCXSheetHeader(HSSFWorkbook wb,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
+		HSSFRow row = sheet.createRow(rowNum);
+		HSSFCellStyle style = wb.createCellStyle();
+		
+		HSSFCell cell = null;
+		switch (sheetFlag) {
+		case CheLiang.DAI_SHEN_HE_SHEET:
+			cell = row.createCell(0);
+			cell.setCellValue("车牌号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("品牌型号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("发动机号码");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("车辆识别代号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("注册日期");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(5);
+			cell.setCellValue("排放阶段");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(6);
+			cell.setCellValue("发证日期");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(7);
+			cell.setCellValue("是否在用");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(8);
+			cell.setCellValue("备注");
+			cell.setCellStyle(style);
+			break;
+		}
+	}
+	
+	public void createCLZHCXSheetBody(List<CheLiang> clList,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
+		switch (sheetFlag) {
+		case DingDan.DAI_SHEN_HE_SHEET:
+			for (int i = 0; i < clList.size(); i++) {
+				CheLiang cl = clList.get(i);
+				HSSFRow row=sheet.createRow(++rowNum);
+	
+				HSSFCell cell = row.createCell(0);
+				String cph = cl.getCph();
+				if(!StringUtils.isBlank(cph))
+					cell.setCellValue(cph);
+				
+				cell = row.createCell(1);
+				String ppxh = cl.getPpxh();
+				if(!StringUtils.isBlank(ppxh))
+					cell.setCellValue(ppxh);
+				
+				cell = row.createCell(2);
+				String fdjhm = cl.getFdjhm();
+				if(!StringUtils.isBlank(fdjhm))
+					cell.setCellValue(fdjhm);
+				
+				cell = row.createCell(3);
+				String clsbdh = cl.getClsbdh();
+				if(!StringUtils.isBlank(clsbdh))
+					cell.setCellValue(clsbdh);
+				
+				cell = row.createCell(4);
+				String zcrq = cl.getZcrq();
+				if(!StringUtils.isBlank(zcrq))
+					cell.setCellValue(zcrq);
+				
+				cell = row.createCell(5);
+				Integer pfjd = cl.getPfjd();
+				if(pfjd!=null) {
+					String pfjdMc = Constant.getPfjdMcById(pfjd);
+					cell.setCellValue(pfjdMc);
+				}
+				
+				cell = row.createCell(6);
+				String fzrq = cl.getFzrq();
+				if(!StringUtils.isBlank(fzrq))
+					cell.setCellValue(fzrq);
+				
+				cell = row.createCell(7);
+				Boolean sfzy = cl.getSfzy();
+				if(sfzy!=null)
+					cell.setCellValue(sfzy?"是":"否");
+				
+				cell = row.createCell(8);
+				String bz = cl.getBz();
+				if(!StringUtils.isBlank(bz))
+					cell.setCellValue(bz);
+			}
+			break;
 		}
 	}
 	

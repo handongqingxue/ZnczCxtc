@@ -113,7 +113,7 @@ function initOutputExcelDialog(){
         			var mc=encodeURIParam($("#toolbar #mc").val());
         			var ywdl=ywdlCBB.combobox("getValue");
         			var dcfw=dcfwCBB.combobox("getValue");
-        			params+="mc="+mc+"&dcfw="+dcfw;
+        			params+="mc="+mc+"&ywdl="+ywdl+"&dcfw="+dcfw;
         			if(dcfw==dqyDcfw){
 	        			var options=tab1.datagrid("getPager").data("pagination").options;
 	        			var page=options.pageNumber;

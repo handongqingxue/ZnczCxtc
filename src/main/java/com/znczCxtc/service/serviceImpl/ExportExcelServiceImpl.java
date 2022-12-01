@@ -1,9 +1,11 @@
 package com.znczCxtc.service.serviceImpl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.znczCxtc.dao.*;
 import com.znczCxtc.entity.*;
@@ -172,6 +174,40 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 			break;
 		case Constant.SUO_YOU_YE:
 			list = exportExcelDao.queryShouHuoDanWeiList(mc, ywdl, dcfw);
+			break;
+		}
+		return list;
+	}
+
+	@Override
+	public List<CangKu> queryCangKuList(String mc, Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<CangKu> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryCangKuList(mc, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryCangKuList(mc, dcfw);
+			break;
+		}
+		return list;
+	}
+
+	@Override
+	public List<CheLiang> queryCLZHCXList(String cph, Integer cllx, Boolean sfzy, Integer pfjd, String shzt, String bz,
+			Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<CheLiang> list = null;
+		List<String> shztList = null;
+		if(!StringUtils.isEmpty(shzt))
+			shztList = Arrays.asList(shzt.split(","));
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryCLZHCXList(cph, cllx, sfzy, pfjd, shztList, bz, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryCLZHCXList(cph, cllx, sfzy, pfjd, shztList, bz, dcfw);
 			break;
 		}
 		return list;
