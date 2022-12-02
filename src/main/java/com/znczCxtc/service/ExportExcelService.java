@@ -44,4 +44,7 @@ public interface ExportExcelService {
 	List<CheLiangTaiZhang> queryCLTZList(String ddh, String cph, String ddztIds, String ddztMcs, String jcsjs,
 			String jcsje, String ccsjs, String ccsje, Integer page, Integer rows, int dcfw);
 
+	List<SiJi> querySiJiList(String xm, String sjh, String sfzh, Integer zyzt, Integer shzt, Integer page, Integer rows,
+			int dcfw);
+
 }

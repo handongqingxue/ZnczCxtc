@@ -38,6 +38,8 @@ public class SJGLController {
 	public String goDshList(HttpServletRequest request) {
 
 		request.setAttribute("shzt", SiJi.DAI_SHEN_HE);
+		Constant.setDcfwInRequest(request);
+		request.setAttribute("sheetFlag", SiJi.DAI_SHEN_HE_SHEET);
 		
 		return MODULE_NAME+"/dsh/list";
 	}
@@ -78,6 +80,9 @@ public class SJGLController {
 	 */
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
+
+		Constant.setDcfwInRequest(request);
+		request.setAttribute("sheetFlag", SiJi.ZONG_HE_CHA_XUN_SHEET);
 		
 		return MODULE_NAME+"/zhcx/list";
 	}

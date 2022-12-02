@@ -14,15 +14,32 @@ public class SiJi {
 	/**
 	 * 待审核
 	 */
-	public static final Integer DAI_SHEN_HE=1;
+	public static final int DAI_SHEN_HE=1;
 	/**
 	 * 审核通过
 	 */
-	public static final Integer SHEN_HE_TONG_GUO=2;
+	public static final int SHEN_HE_TONG_GUO=2;
 	/**
 	 * 编辑中
 	 */
-	public static final Integer BIAN_JI_ZHONG=3;
+	public static final int BIAN_JI_ZHONG=3;
+	
+	/**
+	 * 待审核
+	 */
+	public static final String DAI_SHEN_HE_TEXT="待审核";
+	/**
+	 * 审核通过
+	 */
+	public static final String SHEN_HE_TONG_GUO_TEXT="审核通过";
+	/**
+	 * 编辑中
+	 */
+	public static final String BIAN_JI_ZHONG_TEXT="编辑中";
+	
+	public static final int DAI_SHEN_HE_SHEET=1;
+	public static final int ZONG_HE_CHA_XUN_SHEET=2;
+	
 	private Integer id;//司机id
 	public Integer getId() {
 		return id;

@@ -355,7 +355,7 @@ public class Constant {
 	 * @param shztId
 	 * @return
 	 */
-	public static String getShztMcById(int shztId){
+	public static String getCLShztMcById(int shztId){
 		String shztMc=null;
 		switch (shztId) {
 		case CheLiang.DAI_SHEN_HE:
@@ -366,6 +366,22 @@ public class Constant {
 			break;
 		case CheLiang.BIAN_JI_ZHONG:
 			shztMc=CheLiang.BIAN_JI_ZHONG_TEXT;//±à¼­ÖÐ
+			break;
+		}
+		return shztMc;
+	}
+	
+	public static String getSJShztMcById(int shztId){
+		String shztMc=null;
+		switch (shztId) {
+		case SiJi.DAI_SHEN_HE:
+			shztMc=SiJi.DAI_SHEN_HE_TEXT;//´ýÉóºË
+			break;
+		case SiJi.SHEN_HE_TONG_GUO:
+			shztMc=SiJi.SHEN_HE_TONG_GUO_TEXT;//ÉóºËÍ¨¹ý
+			break;
+		case CheLiang.BIAN_JI_ZHONG:
+			shztMc=SiJi.BIAN_JI_ZHONG_TEXT;//±à¼­ÖÐ
 			break;
 		}
 		return shztMc;

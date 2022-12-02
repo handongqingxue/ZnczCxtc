@@ -1695,7 +1695,7 @@ public class ExportExcelController {
 				cell = row.createCell(8);
 				Integer shzt = cl.getShzt();
 				if(shzt!=null) {
-					String pfjdMc = Constant.getShztMcById(shzt);
+					String pfjdMc = Constant.getCLShztMcById(shzt);
 					cell.setCellValue(pfjdMc);
 				}
 				
@@ -1947,6 +1947,197 @@ public class ExportExcelController {
 				String jcsj = cltz.getJcsj();
 				if(!StringUtils.isBlank(jcsj))
 					cell.setCellValue(jcsj);
+			}
+			break;
+		}
+	}
+
+	@RequestMapping(value="/exportSiJiList")
+	public void exportSiJiList(String xm,String sjh,String sfzh,Integer zyzt,Integer shzt,Integer page,Integer rows,Integer sheetFlag,int dcfw,HttpServletResponse response) {
+		try {
+			xm=StringUtil.decode(xm, "UTF-8");
+			System.out.println("xm="+xm);
+			System.out.println("sjh="+sjh);
+			System.out.println("sfzh="+sfzh);
+			System.out.println("zyzt="+zyzt);
+			System.out.println("shzt="+shzt);
+			System.out.println("page="+page);
+			System.out.println("rows="+rows);
+			System.out.println("sheetFlag="+sheetFlag);
+			System.out.println("dcfw="+dcfw);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			String sheetname = null;
+			switch (sheetFlag) {
+			case SiJi.DAI_SHEN_HE_SHEET:
+				sheetname = "待审核司机";
+				break;
+			case SiJi.ZONG_HE_CHA_XUN_SHEET:
+				sheetname = "司机综合查询";
+				break;
+			}
+			
+			HSSFSheet sheet = wb.createSheet(sheetname);
+			
+			createSJZHCXSheetHeader(wb,sheet,rowNum,sheetFlag);
+			
+			List<SiJi> sjList = exportExcelService.querySiJiList(xm,sjh,sfzh,zyzt,shzt, page, rows, dcfw);
+	
+			createSJZHCXSheetBody(sjList,sheet,rowNum,sheetFlag);
+	
+			String fileName = null;
+			switch (sheetFlag) {
+			case SiJi.DAI_SHEN_HE_SHEET:
+				fileName = "待审核司机查询";
+				break;
+			case SiJi.ZONG_HE_CHA_XUN_SHEET:
+				fileName = "司机综合查询";
+				break;
+			}
+			
+			download(fileName, wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void createSJZHCXSheetHeader(HSSFWorkbook wb,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
+		HSSFRow row = sheet.createRow(rowNum);
+		HSSFCellStyle style = wb.createCellStyle();
+		HSSFCell cell = null;
+		
+		switch (sheetFlag) {
+		case SiJi.DAI_SHEN_HE_SHEET:
+			cell = row.createCell(0);
+			cell.setCellValue("姓名");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(1);
+			cell.setCellValue("手机号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("身份证号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("驾证有效期至");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("资格证有效期至");
+			cell.setCellStyle(style);
+			break;
+		case SiJi.ZONG_HE_CHA_XUN_SHEET:
+			cell = row.createCell(0);
+			cell.setCellValue("姓名");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(1);
+			cell.setCellValue("手机号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("身份证号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("驾证有效期至");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("资格证有效期至");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(5);
+			cell.setCellValue("审核状态");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(6);
+			cell.setCellValue("在用状态");
+			cell.setCellStyle(style);
+			break;
+		}
+	}
+	
+	public void createSJZHCXSheetBody(List<SiJi> sjList,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
+		switch (sheetFlag) {
+		case SiJi.DAI_SHEN_HE_SHEET:
+			for (int i = 0; i < sjList.size(); i++) {
+				SiJi sj = sjList.get(i);
+				HSSFRow row=sheet.createRow(++rowNum);
+				
+				HSSFCell cell = row.createCell(0);
+				String xm = sj.getXm();
+				if(!StringUtils.isBlank(xm))
+					cell.setCellValue(xm);
+				
+				cell = row.createCell(1);
+				String sjh = sj.getSjh();
+				if(!StringUtils.isBlank(sjh))
+					cell.setCellValue(sjh);
+				
+				cell = row.createCell(2);
+				String sfzh = sj.getSfzh();
+				if(!StringUtils.isBlank(sfzh))
+					cell.setCellValue(sfzh);
+				
+				cell = row.createCell(3);
+				String jzyxqz = sj.getJzyxqz();
+				if(!StringUtils.isBlank(jzyxqz))
+					cell.setCellValue(jzyxqz);
+				
+				cell = row.createCell(4);
+				String zgzyxqz = sj.getZgzyxqz();
+				if(!StringUtils.isBlank(zgzyxqz))
+					cell.setCellValue(zgzyxqz);
+			}
+			break;
+		case SiJi.ZONG_HE_CHA_XUN_SHEET:
+			for (int i = 0; i < sjList.size(); i++) {
+				SiJi sj = sjList.get(i);
+				HSSFRow row=sheet.createRow(++rowNum);
+				
+				HSSFCell cell = row.createCell(0);
+				String xm = sj.getXm();
+				if(!StringUtils.isBlank(xm))
+					cell.setCellValue(xm);
+				
+				cell = row.createCell(1);
+				String sjh = sj.getSjh();
+				if(!StringUtils.isBlank(sjh))
+					cell.setCellValue(sjh);
+				
+				cell = row.createCell(2);
+				String sfzh = sj.getSfzh();
+				if(!StringUtils.isBlank(sfzh))
+					cell.setCellValue(sfzh);
+				
+				cell = row.createCell(3);
+				String jzyxqz = sj.getJzyxqz();
+				if(!StringUtils.isBlank(jzyxqz))
+					cell.setCellValue(jzyxqz);
+				
+				cell = row.createCell(4);
+				String zgzyxqz = sj.getZgzyxqz();
+				if(!StringUtils.isBlank(zgzyxqz))
+					cell.setCellValue(zgzyxqz);
+				
+				cell = row.createCell(5);
+				Integer shzt = sj.getShzt();
+				if(shzt!=null) {
+					String shztMc = Constant.getCLShztMcById(shzt);
+					cell.setCellValue(shztMc);
+				}
+
+				cell = row.createCell(6);
+				Boolean zyzt = sj.getZyzt();
+				if(zyzt!=null)
+					cell.setCellValue(zyzt?"是":"否");
 			}
 			break;
 		}

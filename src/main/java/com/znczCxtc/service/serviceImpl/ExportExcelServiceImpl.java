@@ -253,4 +253,20 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 		return list;
 	}
 
+	@Override
+	public List<SiJi> querySiJiList(String xm, String sjh, String sfzh, Integer zyzt, Integer shzt, Integer page,
+			Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<SiJi> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.querySiJiList(xm, sjh, sfzh, zyzt, shzt, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.querySiJiList(xm, sjh, sfzh, zyzt, shzt, dcfw);
+			break;
+		}
+		return list;
+	}
+
 }

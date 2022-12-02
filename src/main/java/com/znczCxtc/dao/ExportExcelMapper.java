@@ -78,4 +78,8 @@ public interface ExportExcelMapper {
 
 	List<CheLiangTaiZhang> queryCLTZList(@Param("ddh") String ddh, @Param("cph") String cph, @Param("ddztIdList") List<String> ddztIdList, @Param("ddztMcList") List<String> ddztMcList,
 			@Param("jcsjs") String jcsjs, @Param("jcsje") String jcsje, @Param("ccsjs") String ccsjs, @Param("ccsje") String ccsje, @Param("dcfw") int dcfw);
+
+	List<SiJi> querySiJiList(@Param("xm") String xm, @Param("sjh") String sjh, @Param("sfzh") String sfzh, @Param("zyzt") Integer zyzt, @Param("shzt") Integer shzt, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<SiJi> querySiJiList(@Param("xm") String xm, @Param("sjh") String sjh, @Param("sfzh") String sfzh, @Param("zyzt") Integer zyzt, @Param("shzt") Integer shzt, @Param("dcfw") int dcfw);
 }
