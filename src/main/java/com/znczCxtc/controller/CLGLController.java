@@ -174,6 +174,8 @@ public class CLGLController {
 	public String goCntzList(HttpServletRequest request) {
 		
 		Constant.setDdztInRequest(request);
+		Constant.setDcfwInRequest(request);
+		request.setAttribute("sheetFlag", CheLiangTaiZhang.CHANG_NEI_SHEET);
 		
 		return MODULE_NAME+"/cntz/list";
 	}

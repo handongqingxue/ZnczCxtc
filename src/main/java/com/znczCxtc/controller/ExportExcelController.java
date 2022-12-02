@@ -1844,11 +1844,13 @@ public class ExportExcelController {
 	}
 	
 	public void createCLTZZHCXSheetHeader(HSSFWorkbook wb,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
+		HSSFRow row = sheet.createRow(rowNum);
+		HSSFCellStyle style = wb.createCellStyle();
+		HSSFCell cell = null;
+		
 		switch (sheetFlag) {
 		case CheLiangTaiZhang.ZONG_HE_CHA_XUN_SHEET:
-			HSSFRow row = sheet.createRow(rowNum);
-			HSSFCellStyle style = wb.createCellStyle();
-			HSSFCell cell = row.createCell(0);
+			cell = row.createCell(0);
 			cell.setCellValue("订单号");
 			cell.setCellStyle(style);
 		
@@ -1866,6 +1868,23 @@ public class ExportExcelController {
 			
 			cell = row.createCell(4);
 			cell.setCellValue("出厂时间");
+			cell.setCellStyle(style);
+			break;
+		case CheLiangTaiZhang.CHANG_NEI_SHEET:
+			cell = row.createCell(0);
+			cell.setCellValue("订单号");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(1);
+			cell.setCellValue("车牌号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("订单状态");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("进厂时间");
 			cell.setCellStyle(style);
 			break;
 		}
@@ -1902,6 +1921,32 @@ public class ExportExcelController {
 				String ccsj = cltz.getCcsj();
 				if(!StringUtils.isBlank(ccsj))
 					cell.setCellValue(ccsj);
+			}
+			break;
+		case CheLiangTaiZhang.CHANG_NEI_SHEET:
+			for (int i = 0; i < cltzList.size(); i++) {
+				CheLiangTaiZhang cltz = cltzList.get(i);
+				HSSFRow row=sheet.createRow(++rowNum);
+				
+				HSSFCell cell = row.createCell(0);
+				String ddh1 = cltz.getDdh();
+				if(!StringUtils.isBlank(ddh1))
+					cell.setCellValue(ddh1);
+				
+				cell = row.createCell(1);
+				String cyclCph = cltz.getCyclCph();
+				if(!StringUtils.isBlank(cyclCph))
+					cell.setCellValue(cyclCph);
+				
+				cell = row.createCell(2);
+				String ddztMc = cltz.getDdztMc();
+				if(!StringUtils.isBlank(ddztMc))
+					cell.setCellValue(ddztMc);
+				
+				cell = row.createCell(3);
+				String jcsj = cltz.getJcsj();
+				if(!StringUtils.isBlank(jcsj))
+					cell.setCellValue(jcsj);
 			}
 			break;
 		}
