@@ -86,4 +86,8 @@ public interface ExportExcelMapper {
 	List<SiJiShenHeJiLu> querySJSHJLList(@Param("sjXm") String sjXm, @Param("shrYhm") String shrYhm, @Param("shsjks") String shsjks, @Param("shsjjs") String shsjjs, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
 
 	List<SiJiShenHeJiLu> querySJSHJLList(@Param("sjXm") String sjXm, @Param("shrYhm") String shrYhm, @Param("shsjks") String shsjks, @Param("shsjjs") String shsjjs, @Param("dcfw") int dcfw);
+
+	List<HaoMa> queryHaoMaList(@Param("dlMc") String dlMc, @Param("hm") String hm, @Param("pdh") String pdh, @Param("ztId") Integer ztId, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<HaoMa> queryHaoMaList(@Param("dlMc") String dlMc, @Param("hm") String hm, @Param("pdh") String pdh, @Param("ztId") Integer ztId, @Param("dcfw") int dcfw);
 }

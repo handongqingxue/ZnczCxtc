@@ -386,4 +386,17 @@ public class Constant {
 		}
 		return shztMc;
 	}
+	
+	public static String getHMFlMcById(int flId) {
+		String flMc=null;
+		switch (flId) {
+		case HaoMa.PU_TONG:
+			flMc=HaoMa.PU_TONG_TEXT;//∆’Õ®
+			break;
+		case HaoMa.QI_TA:
+			flMc=HaoMa.QI_TA_TEXT;//∆‰À˚
+			break;
+		}
+		return flMc;
+	}
 }

@@ -72,6 +72,8 @@ public class PDGLController {
 	 */
 	@RequestMapping(value="/hmcx/list")
 	public String goHmcxList(HttpServletRequest request) {
+
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/hmcx/list";
 	}

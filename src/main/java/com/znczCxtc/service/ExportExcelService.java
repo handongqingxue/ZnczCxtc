@@ -50,4 +50,6 @@ public interface ExportExcelService {
 	List<SiJiShenHeJiLu> querySJSHJLList(String sjXm, String shrYhm, String shsjks, String shsjjs, Integer page,
 			Integer rows, int dcfw);
 
+	List<HaoMa> queryHaoMaList(String dlMc, String hm, String pdh, Integer ztId, Integer page, Integer rows, int dcfw);
+
 }

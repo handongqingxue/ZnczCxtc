@@ -4,6 +4,9 @@ public class HaoMa {
 	
 	public static final int PU_TONG=1;
 	public static final int QI_TA=2;
+	
+	public static final String PU_TONG_TEXT="ÆÕÍ¨";
+	public static final String QI_TA_TEXT="ÆäËû";
 
 	private Long id;//ºÅÂëid
 	public Long getId() {

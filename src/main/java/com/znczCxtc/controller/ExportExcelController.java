@@ -2220,6 +2220,103 @@ public class ExportExcelController {
 			e.printStackTrace();
 		}
 	}
+
+	@RequestMapping(value="/exportHaoMaList")
+	public void exportHaoMaList(String dlMc,String hm,String pdh,Integer ztId,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			dlMc=StringUtil.decode(dlMc, "UTF-8");
+			System.out.println("dlMc="+dlMc);
+			System.out.println("hm="+hm);
+			System.out.println("pdh="+pdh);
+			System.out.println("ztId="+ztId);
+			System.out.println("page="+page);
+			System.out.println("rows="+rows);
+			System.out.println("dcfw="+dcfw);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("号码查询");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("号码");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("排队号");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(2);
+			cell.setCellValue("排入时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("分类");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("状态");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(5);
+			cell.setCellValue("开始叫号时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(6);
+			cell.setCellValue("叫号次数");
+			cell.setCellStyle(style);
+		
+			List<HaoMa> hmList = exportExcelService.queryHaoMaList(dlMc,hm,pdh,ztId, page, rows, dcfw);
+			for (int i = 0; i < hmList.size(); i++) {
+				HaoMa haoMa = hmList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				Integer hm1 = haoMa.getHm();
+				if(hm1!=null)
+					cell.setCellValue(hm1);
+				
+				cell = row.createCell(1);
+				Integer pdh1 = haoMa.getPdh();
+				if(pdh1!=null)
+					cell.setCellValue(pdh1);
+				
+				cell = row.createCell(2);
+				String prsj = haoMa.getPrsj();
+				if(!StringUtils.isBlank(prsj))
+					cell.setCellValue(prsj);
+				
+				cell = row.createCell(3);
+				Integer fl = haoMa.getFl();
+				if(fl!=null) {
+					String flMc = Constant.getHMFlMcById(fl);
+					cell.setCellValue(flMc);
+				}
+				
+				cell = row.createCell(4);
+				String hmztMc = haoMa.getHmztMc();
+				if(!StringUtils.isBlank(hmztMc))
+					cell.setCellValue(hmztMc);
+				
+				cell = row.createCell(5);
+				String ksjhsj = haoMa.getKsjhsj();
+				if(!StringUtils.isBlank(ksjhsj))
+					cell.setCellValue(ksjhsj);
+	
+				cell = row.createCell(6);
+				Integer jhcs = haoMa.getJhcs();
+				if(jhcs!=null)
+					cell.setCellValue(jhcs);
+			}
+			
+			download("号码查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	private void download(String fileName, HSSFWorkbook wb, HttpServletResponse response) throws IOException {  
 	      ByteArrayOutputStream os = new ByteArrayOutputStream();

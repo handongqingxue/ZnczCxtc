@@ -285,4 +285,20 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 		return list;
 	}
 
+	@Override
+	public List<HaoMa> queryHaoMaList(String dlMc, String hm, String pdh, Integer ztId, Integer page, Integer rows,
+			int dcfw) {
+		// TODO Auto-generated method stub
+		List<HaoMa> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryHaoMaList(dlMc, hm, pdh, ztId, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryHaoMaList(dlMc, hm, pdh, ztId, dcfw);
+			break;
+		}
+		return list;
+	}
+
 }
