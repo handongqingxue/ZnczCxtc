@@ -72,4 +72,10 @@ public interface ExportExcelMapper {
 			@Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
 
 	List<CheLiangShenHeJiLu> queryCLSHJLList(@Param("clCph") String clCph, @Param("shrYhm") String shrYhm, @Param("shsjks") String shsjks, @Param("shsjjs") String shsjjs, @Param("dcfw") int dcfw);
+
+	List<CheLiangTaiZhang> queryCLTZList(@Param("ddh") String ddh, @Param("cph") String cph, @Param("ddztIdList") List<String> ddztIdList, @Param("ddztMcList") List<String> ddztMcList, @Param("jcsjs") String jcsjs,
+			@Param("jcsje") String jcsje, @Param("ccsjs") String ccsjs, @Param("ccsje") String ccsje, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<CheLiangTaiZhang> queryCLTZList(@Param("ddh") String ddh, @Param("cph") String cph, @Param("ddztIdList") List<String> ddztIdList, @Param("ddztMcList") List<String> ddztMcList,
+			@Param("jcsjs") String jcsjs, @Param("jcsje") String jcsje, @Param("ccsjs") String ccsjs, @Param("ccsje") String ccsje, @Param("dcfw") int dcfw);
 }

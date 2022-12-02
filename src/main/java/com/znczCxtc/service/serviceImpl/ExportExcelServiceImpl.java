@@ -3,9 +3,9 @@ package com.znczCxtc.service.serviceImpl;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import com.znczCxtc.dao.*;
 import com.znczCxtc.entity.*;
@@ -224,6 +224,30 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 			break;
 		case Constant.SUO_YOU_YE:
 			list = exportExcelDao.queryCLSHJLList(clCph, shrYhm, shsjks, shsjjs, dcfw);
+			break;
+		}
+		return list;
+	}
+
+	@Override
+	public List<CheLiangTaiZhang> queryCLTZList(String ddh, String cph, String ddztIds, String ddztMcs, String jcsjs,
+			String jcsje, String ccsjs, String ccsje, Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<String> ddztIdList = null;
+		if(!StringUtils.isBlank(ddztIds))
+			ddztIdList = Arrays.asList(ddztIds.split(","));
+		
+		List<String> ddztMcList = null;
+		if(!StringUtils.isBlank(ddztMcs))
+			ddztMcList = Arrays.asList(ddztMcs.split(","));
+		
+		List<CheLiangTaiZhang> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryCLTZList(ddh, cph, ddztIdList, ddztMcList, jcsjs, jcsje, ccsjs, ccsje, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryCLTZList(ddh, cph, ddztIdList, ddztMcList, jcsjs, jcsje, ccsjs, ccsje, dcfw);
 			break;
 		}
 		return list;

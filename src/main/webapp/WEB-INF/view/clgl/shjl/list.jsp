@@ -313,9 +313,6 @@ function encodeURIParam(val){
 function setFitWidthInParent(parent,self){
 	var space=0;
 	switch (self) {
-	case "center_con_div":
-		space=205;
-		break;
 	case "tab1_div":
 		space=250;
 		break;

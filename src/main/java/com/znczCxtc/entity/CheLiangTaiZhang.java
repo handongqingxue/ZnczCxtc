@@ -4,6 +4,9 @@ public class CheLiangTaiZhang {
 	
 	public static final int JIN_CHANG=1;
 	public static final int CHU_CHANG=2;
+	
+	public static final int ZONG_HE_CHA_XUN_SHEET=1;
+	public static final int CHANG_NEI_SHEET=2;
 
 	private Long id;
 	public Long getId() {

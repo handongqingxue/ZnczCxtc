@@ -1786,6 +1786,126 @@ public class ExportExcelController {
 			e.printStackTrace();
 		}
 	}
+
+	@RequestMapping(value="/exportCLTZList")
+	public void exportCLTZList(String ddh,String cph,String ddztIds,String ddztMcs,String jcsjs,String jcsje,String ccsjs,String ccsje,
+			Integer page,Integer rows,Integer sheetFlag,int dcfw,HttpServletResponse response) {
+		try {
+			System.out.println("ddh="+ddh);
+			cph=StringUtil.decode(cph, "UTF-8");
+			System.out.println("cph="+cph);
+			System.out.println("ddztIds="+ddztIds);
+			System.out.println("ddztMcs="+ddztMcs);
+			System.out.println("jcsjs="+jcsjs);
+			System.out.println("jcsje="+jcsje);
+			System.out.println("ccsjs="+ccsjs);
+			System.out.println("ccsje="+ccsje);
+			System.out.println("page="+page);
+			System.out.println("rows="+rows);
+			System.out.println("sheetFlag="+sheetFlag);
+			System.out.println("dcfw="+dcfw);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			String sheetname = null;
+			switch (sheetFlag) {
+			case CheLiangTaiZhang.ZONG_HE_CHA_XUN_SHEET:
+				sheetname = "综合台账";
+				break;
+			case CheLiangTaiZhang.CHANG_NEI_SHEET:
+				sheetname = "厂内台账";
+				break;
+			}
+			HSSFSheet sheet = wb.createSheet(sheetname);
+			
+			createCLTZZHCXSheetHeader(wb,sheet,rowNum,sheetFlag);
+			
+			List<CheLiangTaiZhang> cltzList = exportExcelService.queryCLTZList(ddh,cph,ddztIds,ddztMcs,jcsjs,jcsje,ccsjs,ccsje, page, rows, dcfw);
+
+			createCLTZZHCXSheetBody(cltzList,sheet,rowNum,sheetFlag);
+
+			String fileName = null;
+			switch (sheetFlag) {
+			case CheLiangTaiZhang.ZONG_HE_CHA_XUN_SHEET:
+				fileName = "综合台账查询";
+				break;
+			case CheLiangTaiZhang.CHANG_NEI_SHEET:
+				fileName = "厂内台账查询";
+				break;
+			}
+			
+			download(fileName, wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void createCLTZZHCXSheetHeader(HSSFWorkbook wb,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
+		switch (sheetFlag) {
+		case CheLiangTaiZhang.ZONG_HE_CHA_XUN_SHEET:
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("订单号");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(1);
+			cell.setCellValue("车牌号");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("订单状态");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("进厂时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("出厂时间");
+			cell.setCellStyle(style);
+			break;
+		}
+	}
+	
+	public void createCLTZZHCXSheetBody(List<CheLiangTaiZhang> cltzList,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
+		switch (sheetFlag) {
+		case CheLiangTaiZhang.ZONG_HE_CHA_XUN_SHEET:
+			for (int i = 0; i < cltzList.size(); i++) {
+				CheLiangTaiZhang cltz = cltzList.get(i);
+				HSSFRow row=sheet.createRow(++rowNum);
+				
+				HSSFCell cell = row.createCell(0);
+				String ddh1 = cltz.getDdh();
+				if(!StringUtils.isBlank(ddh1))
+					cell.setCellValue(ddh1);
+				
+				cell = row.createCell(1);
+				String cyclCph = cltz.getCyclCph();
+				if(!StringUtils.isBlank(cyclCph))
+					cell.setCellValue(cyclCph);
+				
+				cell = row.createCell(2);
+				String ddztMc = cltz.getDdztMc();
+				if(!StringUtils.isBlank(ddztMc))
+					cell.setCellValue(ddztMc);
+				
+				cell = row.createCell(3);
+				String jcsj = cltz.getJcsj();
+				if(!StringUtils.isBlank(jcsj))
+					cell.setCellValue(jcsj);
+				
+				cell = row.createCell(4);
+				String ccsj = cltz.getCcsj();
+				if(!StringUtils.isBlank(ccsj))
+					cell.setCellValue(ccsj);
+			}
+			break;
+		}
+	}
 	
 	private void download(String fileName, HSSFWorkbook wb, HttpServletResponse response) throws IOException {  
 	      ByteArrayOutputStream os = new ByteArrayOutputStream();

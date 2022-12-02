@@ -265,4 +265,34 @@
 			limit #{rowNum},#{rows}
 		</if>
 	</select>
+	<select id="queryCLTZList" resultType="com.znczCxtc.entity.CheLiangTaiZhang">
+		select cltz.*,dd.ddh,ddzt.mc ddztMc,cl.cph cyclCph from che_liang_tai_zhang cltz left join ding_dan dd on cltz.ddId=dd.id left join ding_dan_zhuang_tai ddzt on dd.ddztId=ddzt.id left join che_liang cl on dd.cyclId=cl.id where 1=1
+		<if test="ddh!=''&amp;ddh!=null">
+			and dd.ddh like CONCAT('%',#{ddh},'%')
+		</if>
+		<if test="cph!=''&amp;cph!=null">
+			and cl.cph like CONCAT('%',#{cph},'%')
+		</if>
+		<if test="ddztIdList!=null">
+			and dd.ddztId=#{ddztId}
+			<foreach collection="ddztIdList" item="ddztId" open=" and cast(ddzt.id as char) in (" separator="," close=")">
+			#{ddztId}
+			</foreach>
+		</if>
+		<if test="ddztMcList!=null">
+			<foreach collection="ddztMcList" item="ddztMc" open=" and cast(ddzt.mc as char) in (" separator="," close=")">
+			#{ddztMc}
+			</foreach>
+		</if>
+		<if test="jcsjs!=''&amp;jcsjs!=null&amp;jcsje!=''&amp;jcsje!=null">
+			and cltz.jcsj between #{jcsjs} and #{jcsje}
+		</if>
+		<if test="ccsjs!=''&amp;ccsjs!=null&amp;ccsje!=''&amp;ccsje!=null">
+			and cltz.ccsj between #{ccsjs} and #{ccsje}
+		</if>
+		order by cltz.jcsj desc
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
 </mapper>

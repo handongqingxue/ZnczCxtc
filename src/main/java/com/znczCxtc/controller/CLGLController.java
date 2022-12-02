@@ -142,6 +142,9 @@ public class CLGLController {
 	 */
 	@RequestMapping(value="/tzcx/list")
 	public String goTzcxList(HttpServletRequest request) {
+
+		Constant.setDcfwInRequest(request);
+		request.setAttribute("sheetFlag", CheLiangTaiZhang.ZONG_HE_CHA_XUN_SHEET);
 		
 		return MODULE_NAME+"/tzcx/list";
 	}
