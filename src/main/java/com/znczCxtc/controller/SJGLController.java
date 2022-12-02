@@ -104,6 +104,8 @@ public class SJGLController {
 	 */
 	@RequestMapping(value="/shjl/list")
 	public String goShjlList(HttpServletRequest request) {
+
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/shjl/list";
 	}

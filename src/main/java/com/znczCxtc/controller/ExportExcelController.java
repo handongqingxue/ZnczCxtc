@@ -2142,6 +2142,84 @@ public class ExportExcelController {
 			break;
 		}
 	}
+
+	@RequestMapping(value="/exportSJSHJLList")
+	public void exportSJSHJLList(String sjXm,String shrYhm,String shsjks,String shsjjs,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			sjXm=StringUtil.decode(sjXm, "UTF-8");
+			System.out.println("sjXm="+sjXm);
+			shrYhm=StringUtil.decode(shrYhm, "UTF-8");
+			System.out.println("shrYhm="+shrYhm);
+			System.out.println("shsjks="+shsjks);
+			System.out.println("shsjjs="+shsjjs);
+			System.out.println("page="+page);
+			System.out.println("rows="+rows);
+			System.out.println("dcfw="+dcfw);
+			
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("司机审核记录");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("姓名");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("审核人");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("审核时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("审核结果");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("备注");
+			cell.setCellStyle(style);
+			
+			List<SiJiShenHeJiLu> sjshjlList = exportExcelService.querySJSHJLList(sjXm,shrYhm,shsjks,shsjjs, page, rows, dcfw);
+			for (int i = 0; i < sjshjlList.size(); i++) {
+				SiJiShenHeJiLu sjshjl = sjshjlList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String sjXm1 = sjshjl.getSjXm();
+				if(!StringUtils.isBlank(sjXm1))
+					cell.setCellValue(sjXm1);
+				
+				cell = row.createCell(1);
+				String shrYhm1 = sjshjl.getShrYhm();
+				if(!StringUtils.isBlank(shrYhm1))
+					cell.setCellValue(shrYhm1);
+				
+				cell = row.createCell(2);
+				String shsj = sjshjl.getShsj();
+				if(!StringUtils.isBlank(shsj))
+					cell.setCellValue(shsj);
+				
+				cell = row.createCell(3);
+				Boolean shjg = sjshjl.getShjg();
+				if(shjg!=null)
+					cell.setCellValue(shjg?"合格":"不合格");
+				
+				cell = row.createCell(4);
+				String bz = sjshjl.getBz();
+				if(!StringUtils.isBlank(bz))
+					cell.setCellValue(bz);
+			}
+			
+			download("司机审核记录查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	private void download(String fileName, HSSFWorkbook wb, HttpServletResponse response) throws IOException {  
 	      ByteArrayOutputStream os = new ByteArrayOutputStream();

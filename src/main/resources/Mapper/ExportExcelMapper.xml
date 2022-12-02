@@ -316,4 +316,20 @@
 		 	limit #{rowNum},#{rows}
 		</if>
 	</select>
+	<select id="querySJSHJLList" resultType="com.znczCxtc.entity.SiJiShenHeJiLu">
+		select sjshjl.*,sj.xm sjXm,shr.yhm shrYhm from si_ji_shen_he_ji_lu sjshjl left join si_ji sj on sjshjl.sjId=sj.id left join yong_hu shr on sjshjl.shrId=shr.id where 1=1
+		<if test="sjXm!=''&amp;sjXm!=null">
+			and sj.xm like CONCAT('%',#{sjXm},'%')
+		</if>
+		<if test="shrYhm!=''&amp;shrYhm!=null">
+			and shr.yhm like CONCAT('%',#{shrYhm},'%')
+		</if>
+		<if test="shsjks!=''&amp;shsjks!=null&amp;shsjjs!=''&amp;shsjjs!=null">
+			and sjshjl.shsj between #{shsjks} and #{shsjjs}
+		</if>
+		order by sjshjl.shsj desc
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
 </mapper>

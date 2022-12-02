@@ -47,4 +47,7 @@ public interface ExportExcelService {
 	List<SiJi> querySiJiList(String xm, String sjh, String sfzh, Integer zyzt, Integer shzt, Integer page, Integer rows,
 			int dcfw);
 
+	List<SiJiShenHeJiLu> querySJSHJLList(String sjXm, String shrYhm, String shsjks, String shsjjs, Integer page,
+			Integer rows, int dcfw);
+
 }

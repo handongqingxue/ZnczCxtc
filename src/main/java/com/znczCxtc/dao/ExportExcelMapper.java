@@ -82,4 +82,8 @@ public interface ExportExcelMapper {
 	List<SiJi> querySiJiList(@Param("xm") String xm, @Param("sjh") String sjh, @Param("sfzh") String sfzh, @Param("zyzt") Integer zyzt, @Param("shzt") Integer shzt, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
 
 	List<SiJi> querySiJiList(@Param("xm") String xm, @Param("sjh") String sjh, @Param("sfzh") String sfzh, @Param("zyzt") Integer zyzt, @Param("shzt") Integer shzt, @Param("dcfw") int dcfw);
+
+	List<SiJiShenHeJiLu> querySJSHJLList(@Param("sjXm") String sjXm, @Param("shrYhm") String shrYhm, @Param("shsjks") String shsjks, @Param("shsjjs") String shsjjs, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<SiJiShenHeJiLu> querySJSHJLList(@Param("sjXm") String sjXm, @Param("shrYhm") String shrYhm, @Param("shsjks") String shsjks, @Param("shsjjs") String shsjjs, @Param("dcfw") int dcfw);
 }
