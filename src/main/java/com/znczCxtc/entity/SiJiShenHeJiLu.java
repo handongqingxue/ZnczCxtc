@@ -2,6 +2,24 @@ package com.znczCxtc.entity;
 
 public class SiJiShenHeJiLu {
 
+	/**
+	 * 合格标识
+	 */
+	public static final Boolean HE_GE=true;
+	/**
+	 * 不合格标识
+	 */
+	public static final Boolean BU_HE_GE=false;
+	
+	/**
+	 * 合格名称
+	 */
+	public static final String HE_GE_TEXT="合格";
+	/**
+	 * 不合格名称
+	 */
+	public static final String BU_HE_GE_TEXT="不合格";
+	
 	private Integer id;
 	public Integer getId() {
 		return id;

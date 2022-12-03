@@ -55,12 +55,19 @@ var dialogTop=10;
 var dialogLeft=20;
 var oedNum=0;
 
+var hgShjg;
+var bhgShjg;
+
+var hgShjgMc;
+var bhgShjgMc;
+
 var dqyDcfw;
 var syyDcfw;
 
 var dqyDcfwMc;
 var syyDcfwMc;
 $(function(){
+	initShjgVar();
 	initDcfwVar();
 	
 	initSHSJKSDTB();
@@ -103,6 +110,14 @@ function initSHSJJSDTB(){
 	shsjjsDTB=$("#shsjjs_dtb").datetimebox({
         required:false
     });
+}
+
+function initShjgVar(){
+	hgShjg=Boolean('${requestScope.hgShjg}');
+	bhgShjg=Boolean('${requestScope.bhgShjg}');
+
+	hgShjgMc='${requestScope.hgShjgMc}';
+	bhgShjgMc='${requestScope.bhgShjgMc}';
 }
 
 function initDcfwVar(){
@@ -246,7 +261,7 @@ function initTab1(){
             {field:"shrYhm",title:"审核人",width:150},
             {field:"shsj",title:"审核时间",width:150},
 			{field:"shjg",title:"审核结果",width:100,formatter:function(value,row){
-            	return value==1?"合格":"不合格";
+            	return getShjgMcByJg(value);
             }},
             {field:"bz",title:"备注",width:300}
 	    ]],
@@ -272,6 +287,15 @@ function openOutputExcelDialog(flag){
 	else{
 		$("#output_excel_bg_div").css("display","none");
 	}
+}
+
+function getShjgMcByJg(shjg){
+	var str;
+	if(shjg)
+		str=hgShjgMc;//合格
+	else
+		str=bhgShjgMc;//不合格
+	return str;
 }
 
 function deleteByIds() {

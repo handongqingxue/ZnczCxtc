@@ -59,12 +59,19 @@ var dialogTop=10;
 var dialogLeft=20;
 var oedNum=0;
 
+var ptFl;
+var qtFl;
+
+var ptFlMc;
+var qtFlMc;
+
 var dqyDcfw;
 var syyDcfw;
 
 var dqyDcfwMc;
 var syyDcfwMc;
 $(function(){
+	initFlVar();
 	initDcfwVar();
 	
 	initHMZTCBB();
@@ -113,6 +120,14 @@ function initHMZTCBB(){
 			});
 		}
 	,"json");
+}
+
+function initFlVar(){
+	ptFl=parseInt('${requestScope.ptFl}');
+	qtFl=parseInt('${requestScope.qtFl}');
+
+	ptFlMc='${requestScope.ptFlMc}';
+	qtFlMc='${requestScope.qtFlMc}';
 }
 
 function initDcfwVar(){
@@ -256,16 +271,7 @@ function initTab1(){
             {field:"pdh",title:"排队号",width:200},
             {field:"prsj",title:"排入时间",width:200},
             {field:"fl",title:"分类",width:200,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="普通";
-					break;
-				case 2:
-					str="其他";
-					break;
-				}
-            	return str;
+            	return getFlMcById(value);
             }},
             {field:"hmztMc",title:"状态",width:100},
             {field:"ksjhsj",title:"开始叫号时间",width:200},
@@ -305,6 +311,19 @@ function openOutputExcelDialog(flag){
 	else{
 		$("#output_excel_bg_div").css("display","none");
 	}
+}
+
+function getFlMcById(flId){
+	var str;
+	switch (flId) {
+	case ptFl:
+		str=ptFlMc;//普通
+		break;
+	case qtFl:
+		str=qtFlMc;//其他
+		break;
+	}
+	return str;
 }
 
 function deleteByIds() {

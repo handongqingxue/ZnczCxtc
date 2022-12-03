@@ -163,9 +163,9 @@ public class DDGLController {
 
 		Constant.setLxlxInRequest(request);
 		Constant.setDdztInRequest(request);
-		setGbztInRequest(request);
-		setPlaceInRequest(request);
-		setPushInRequest(request);
+		Constant.setDdGbztInRequest(request);
+		Constant.setPlaceInRequest(request);
+		Constant.setPushInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", DingDan.ZONG_HE_CHA_XUN_SHEET);
 		
@@ -200,7 +200,7 @@ public class DDGLController {
 		
 		Constant.setShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
-		setShjgInRequest(request);
+		Constant.setDdShjgInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/shjl/list";
@@ -579,71 +579,5 @@ public class DDGLController {
 		List<RglrCphJiLu> cphList=rglrCphJiLuService.queryLrWscphCBBList(sjc, q, page, rows, sort, order);
 		
 		return cphList;
-	}
-	
-	/**
-	 * 存放过磅状态常量
-	 * @param request
-	 */
-	public void setGbztInRequest(HttpServletRequest request) {
-		
-		request.setAttribute("dsbGbzt", DingDan.DAI_SHANG_BANG);
-		request.setAttribute("sbzGbzt", DingDan.SHANG_BANG_ZHONG);
-		request.setAttribute("dczGbzt", DingDan.DAI_CHENG_ZHONG);
-		request.setAttribute("czzGbzt", DingDan.CHENG_ZHONG_ZHONG);
-		request.setAttribute("dxbGbzt", DingDan.DAI_XIA_BANG);
-		request.setAttribute("xbzGbzt", DingDan.XIA_BANG_ZHONG);
-		request.setAttribute("ywcGbzt", DingDan.YI_WAN_CHENG);
-		
-		request.setAttribute("dsbGbztMc", DingDan.DAI_SHANG_BANG_TEXT);
-		request.setAttribute("sbzGbztMc", DingDan.SHANG_BANG_ZHONG_TEXT);
-		request.setAttribute("dczGbztMc", DingDan.DAI_CHENG_ZHONG_TEXT);
-		request.setAttribute("czzGbztMc", DingDan.CHENG_ZHONG_ZHONG_TEXT);
-		request.setAttribute("dxbGbztMc", DingDan.DAI_XIA_BANG_TEXT);
-		request.setAttribute("xbzGbztMc", DingDan.XIA_BANG_ZHONG_TEXT);
-		request.setAttribute("ywcGbztMc", DingDan.YI_WAN_CHENG_TEXT);
-	}
-	
-	/**
-	 * 存放地点常量
-	 * @param request
-	 */
-	public void setPlaceInRequest(HttpServletRequest request) {
-
-		request.setAttribute("wgb", Constant.WEI_GUO_BANG);
-		request.setAttribute("yhbf", Constant.YI_HAO_BANG_FANG);
-		request.setAttribute("ehbf", Constant.ER_HAO_BANG_FANG);
-		request.setAttribute("shbf", Constant.SAN_HAO_BANG_FANG);
-		request.setAttribute("mg", Constant.MEN_GANG);
-
-		request.setAttribute("wgbMc", Constant.WEI_GUO_BANG_TEXT);
-		request.setAttribute("yhbfMc", Constant.YI_HAO_BANG_FANG_TEXT);
-		request.setAttribute("ehbfMc", Constant.ER_HAO_BANG_FANG_TEXT);
-		request.setAttribute("shbfMc", Constant.SAN_HAO_BANG_FANG_TEXT);
-		request.setAttribute("mgMc", Constant.MEN_GANG_TEXT);
-	}
-	
-	/**
-	 * 存放推送类型常量
-	 * @param request
-	 */
-	public void setPushInRequest(HttpServletRequest request) {
-
-		request.setAttribute("pushSfzh", Constant.PUSH_SFZH);
-		request.setAttribute("pushCph", Constant.PUSH_CPH);
-		request.setAttribute("pushEwm", Constant.PUSH_EWM);
-	}
-	
-	/**
-	 * 存放审核记录常量
-	 * @param request
-	 */
-	public void setShjgInRequest(HttpServletRequest request) {
-
-		request.setAttribute("hgShjg", DingDanShenHeJiLu.HE_GE);
-		request.setAttribute("bhgShjg", DingDanShenHeJiLu.BU_HE_GE);
-		
-		request.setAttribute("hgShjgMc", DingDanShenHeJiLu.HE_GE_TEXT);
-		request.setAttribute("bhgShjgMc", DingDanShenHeJiLu.BU_HE_GE_TEXT);
 	}
 }

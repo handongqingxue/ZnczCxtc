@@ -167,16 +167,151 @@ public class Constant {
 	}
 	
 	/**
-	 * 存放过磅状态常量
+	 * 存放过磅记录过磅状态常量
 	 * @param request
 	 */
-	public static void setGbztInRequest(HttpServletRequest request) {
+	public static void setGbjlGbztInRequest(HttpServletRequest request) {
 
 		request.setAttribute("zcGbzt", GuoBangJiLu.ZHENG_CHANG);
 		request.setAttribute("ycGbzt", GuoBangJiLu.YI_CHANG);
 		
 		request.setAttribute("zcGbztMc", GuoBangJiLu.ZHENG_CHANG_TEXT);
 		request.setAttribute("ycgbztMc", GuoBangJiLu.YI_CHANG_TEXT);
+	}
+	
+	/**
+	 * 存放订单审核结果常量
+	 * @param request
+	 */
+	public static void setDdShjgInRequest(HttpServletRequest request) {
+
+		request.setAttribute("hgShjg", DingDanShenHeJiLu.HE_GE);
+		request.setAttribute("bhgShjg", DingDanShenHeJiLu.BU_HE_GE);
+		
+		request.setAttribute("hgShjgMc", DingDanShenHeJiLu.HE_GE_TEXT);
+		request.setAttribute("bhgShjgMc", DingDanShenHeJiLu.BU_HE_GE_TEXT);
+	}
+	
+	/**
+	 * 存放司机审核结果常量
+	 * @param request
+	 */
+	public static void setSjShjgInRequest(HttpServletRequest request) {
+
+		request.setAttribute("hgShjg", SiJiShenHeJiLu.HE_GE);
+		request.setAttribute("bhgShjg", SiJiShenHeJiLu.BU_HE_GE);
+		
+		request.setAttribute("hgShjgMc", SiJiShenHeJiLu.HE_GE_TEXT);
+		request.setAttribute("bhgShjgMc", SiJiShenHeJiLu.BU_HE_GE_TEXT);
+	}
+	
+	/**
+	 * 存放订单过磅状态常量
+	 * @param request
+	 */
+	public static void setDdGbztInRequest(HttpServletRequest request) {
+		
+		request.setAttribute("dsbGbzt", DingDan.DAI_SHANG_BANG);
+		request.setAttribute("sbzGbzt", DingDan.SHANG_BANG_ZHONG);
+		request.setAttribute("dczGbzt", DingDan.DAI_CHENG_ZHONG);
+		request.setAttribute("czzGbzt", DingDan.CHENG_ZHONG_ZHONG);
+		request.setAttribute("dxbGbzt", DingDan.DAI_XIA_BANG);
+		request.setAttribute("xbzGbzt", DingDan.XIA_BANG_ZHONG);
+		request.setAttribute("ywcGbzt", DingDan.YI_WAN_CHENG);
+		
+		request.setAttribute("dsbGbztMc", DingDan.DAI_SHANG_BANG_TEXT);
+		request.setAttribute("sbzGbztMc", DingDan.SHANG_BANG_ZHONG_TEXT);
+		request.setAttribute("dczGbztMc", DingDan.DAI_CHENG_ZHONG_TEXT);
+		request.setAttribute("czzGbztMc", DingDan.CHENG_ZHONG_ZHONG_TEXT);
+		request.setAttribute("dxbGbztMc", DingDan.DAI_XIA_BANG_TEXT);
+		request.setAttribute("xbzGbztMc", DingDan.XIA_BANG_ZHONG_TEXT);
+		request.setAttribute("ywcGbztMc", DingDan.YI_WAN_CHENG_TEXT);
+	}
+	
+	/**
+	 * 存放号码分类常量
+	 * @param request
+	 */
+	public static void setHmFlInRequest(HttpServletRequest request) {
+		
+		request.setAttribute("ptFl", HaoMa.PU_TONG);
+		request.setAttribute("qtFl", HaoMa.QI_TA);
+
+		request.setAttribute("ptFlMc", HaoMa.PU_TONG_TEXT);
+		request.setAttribute("qtFlMc", HaoMa.QI_TA_TEXT);
+	}
+	
+	/**
+	 * 存放地点常量
+	 * @param request
+	 */
+	public static void setPlaceInRequest(HttpServletRequest request) {
+
+		request.setAttribute("wgb", Constant.WEI_GUO_BANG);
+		request.setAttribute("yhbf", Constant.YI_HAO_BANG_FANG);
+		request.setAttribute("ehbf", Constant.ER_HAO_BANG_FANG);
+		request.setAttribute("shbf", Constant.SAN_HAO_BANG_FANG);
+		request.setAttribute("mg", Constant.MEN_GANG);
+
+		request.setAttribute("wgbMc", Constant.WEI_GUO_BANG_TEXT);
+		request.setAttribute("yhbfMc", Constant.YI_HAO_BANG_FANG_TEXT);
+		request.setAttribute("ehbfMc", Constant.ER_HAO_BANG_FANG_TEXT);
+		request.setAttribute("shbfMc", Constant.SAN_HAO_BANG_FANG_TEXT);
+		request.setAttribute("mgMc", Constant.MEN_GANG_TEXT);
+	}
+	
+	/**
+	 * 存放推送类型常量
+	 * @param request
+	 */
+	public static void setPushInRequest(HttpServletRequest request) {
+
+		request.setAttribute("pushSfzh", Constant.PUSH_SFZH);
+		request.setAttribute("pushCph", Constant.PUSH_CPH);
+		request.setAttribute("pushEwm", Constant.PUSH_EWM);
+	}
+	
+	/**
+	 * 队列叫号形式常量
+	 * @param request
+	 */
+	public static void setDLJhxsInRequest(HttpServletRequest request) {
+
+		request.setAttribute("zdjhJhxs", DuiLie.ZI_DONG_JIAO_HAO);
+		request.setAttribute("sdjhJhxs", DuiLie.SHOU_DONG_JIAO_HAO);
+		
+		request.setAttribute("zdjhJhxsMc", DuiLie.ZI_DONG_JIAO_HAO_TEXT);
+		request.setAttribute("sdjhJhxsMc", DuiLie.SHOU_DONG_JIAO_HAO_TEXT);
+	}
+	
+	/**
+	 * 存放队列状态常量
+	 * @param request
+	 */
+	public static void setDLZtInRequest(HttpServletRequest request) {
+		
+		request.setAttribute("zyZt", DuiLie.ZAI_YONG);
+		request.setAttribute("ztZt", DuiLie.ZAN_TING);
+		request.setAttribute("fqZt", DuiLie.FEI_QI);
+		
+		request.setAttribute("zyZtMc", DuiLie.ZAI_YONG_TEXT);
+		request.setAttribute("ztZtMc", DuiLie.ZAN_TING_TEXT);
+		request.setAttribute("fqZtMc", DuiLie.FEI_QI_TEXT);
+	}
+	
+	/**
+	 * 存放司机审核状态常量
+	 * @param request
+	 */
+	public static void setSjShztInRequest(HttpServletRequest request) {
+		
+		request.setAttribute("dshShzt", SiJi.DAI_SHEN_HE);
+		request.setAttribute("shtgShzt", SiJi.SHEN_HE_TONG_GUO);
+		request.setAttribute("bjzShzt", SiJi.BIAN_JI_ZHONG);
+		
+		request.setAttribute("dshShztMc", SiJi.DAI_SHEN_HE_TEXT);
+		request.setAttribute("shtgShztMc", SiJi.SHEN_HE_TONG_GUO_TEXT);
+		request.setAttribute("bjzShztMc", SiJi.BIAN_JI_ZHONG_TEXT);
 	}
 	
 	/**
@@ -380,7 +515,7 @@ public class Constant {
 		case SiJi.SHEN_HE_TONG_GUO:
 			shztMc=SiJi.SHEN_HE_TONG_GUO_TEXT;//审核通过
 			break;
-		case CheLiang.BIAN_JI_ZHONG:
+		case SiJi.BIAN_JI_ZHONG:
 			shztMc=SiJi.BIAN_JI_ZHONG_TEXT;//编辑中
 			break;
 		}

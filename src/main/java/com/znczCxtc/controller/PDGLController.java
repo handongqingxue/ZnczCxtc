@@ -73,6 +73,7 @@ public class PDGLController {
 	@RequestMapping(value="/hmcx/list")
 	public String goHmcxList(HttpServletRequest request) {
 
+		Constant.setHmFlInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/hmcx/list";
@@ -104,6 +105,8 @@ public class PDGLController {
 	@RequestMapping(value="/dlcx/list")
 	public String goDlcxList(HttpServletRequest request) {
 
+		Constant.setDLJhxsInRequest(request);
+		Constant.setDLZtInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/dlcx/list";

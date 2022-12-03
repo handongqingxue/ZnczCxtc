@@ -81,6 +81,7 @@ public class SJGLController {
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
 
+		Constant.setSjShztInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", SiJi.ZONG_HE_CHA_XUN_SHEET);
 		
@@ -105,6 +106,7 @@ public class SJGLController {
 	@RequestMapping(value="/shjl/list")
 	public String goShjlList(HttpServletRequest request) {
 
+		Constant.setSjShjgInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/shjl/list";

@@ -54,12 +54,29 @@ var dialogTop=10;
 var dialogLeft=20;
 var oedNum=0;
 
+var zdjhJhxs;
+var sdjhJhxs;
+
+var zdjhJhxsMc;
+var sdjhJhxsMc;
+
+var zyZt;
+var ztZt;
+var fqZt;
+
+var zyZtMc;
+var ztZtMc;
+var fqZtMc;
+
 var dqyDcfw;
 var syyDcfw;
 
 var dqyDcfwMc;
 var syyDcfwMc;
+
 $(function(){
+	initJhxsVar();
+	initZtVar();
 	initDcfwVar();
 	
 	initZTCBB();
@@ -105,6 +122,24 @@ function initZTCBB(){
 		//multiple:true,
 		data:data
 	});
+}
+
+function initJhxsVar(){
+	zdjhJhxs=parseInt('${requestScope.zdjhJhxs}');
+	sdjhJhxs=parseInt('${requestScope.sdjhJhxs}');
+
+	zdjhJhxsMc='${requestScope.zdjhJhxsMc}';
+	sdjhJhxsMc='${requestScope.sdjhJhxsMc}';
+}
+
+function initZtVar(){
+	zyZt=parseInt('${requestScope.zyZt}');
+	ztZt=parseInt('${requestScope.ztZt}');
+	fqZt=parseInt('${requestScope.fqZt}');
+
+	zyZtMc='${requestScope.zyZtMc}';
+	ztZtMc='${requestScope.ztZtMc}';
+	fqZtMc='${requestScope.fqZtMc}';
 }
 
 function initDcfwVar(){
@@ -254,33 +289,11 @@ function initTab1(){
 			{field:"mc",title:"名称",width:200},
 			{field:"dm",title:"代码",width:150},
 			{field:"jhxs",title:"叫号形式",width:150,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="自动";
-					break;
-				case 2:
-					str="手动";
-					break;
-				}
-            	str+="叫号";
-            	return str;
+            	return getJhxsMcById(value);
             }},
 			{field:"jhyz",title:"叫号阈值",width:150},
             {field:"zt",title:"状态",width:100,formatter:function(value,row){
-            	var str;
-            	switch (value) {
-				case 1:
-					str="在用";
-					break;
-				case 2:
-					str="暂停";
-					break;
-				case 3:
-					str="废弃";
-					break;
-				}
-            	return str;
+            	return getZtMcById(value);
             }},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\""+pdglPath+"dlcx/detail?id="+value+"\">详情</a>"
@@ -318,6 +331,35 @@ function openOutputExcelDialog(flag){
 	else{
 		$("#output_excel_bg_div").css("display","none");
 	}
+}
+
+function getJhxsMcById(jhxsId){
+	var str;
+	switch (jhxsId) {
+	case zdjhJhxs:
+		str=zdjhJhxsMc;//自动叫号
+		break;
+	case sdjhJhxs:
+		str=sdjhJhxsMc;//手动叫号
+		break;
+	}
+	return str;
+}
+
+function getZtMcById(ztId){
+	var str;
+	switch (ztId) {
+	case zyZt:
+		str=zyZtMc;//在用
+		break;
+	case ztZt:
+		str=ztZtMc;//暂停
+		break;
+	case fqZt:
+		str=fqZtMc;//废弃
+		break;
+	}
+	return str;
 }
 
 function deleteByIds() {

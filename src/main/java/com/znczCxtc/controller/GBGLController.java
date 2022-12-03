@@ -158,7 +158,7 @@ public class GBGLController {
 		
 		//publicService.selectNav(request);
 		Constant.setGblxInRequest(request);
-		Constant.setGbztInRequest(request);
+		Constant.setGbjlGbztInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/gbjl/list";
@@ -194,7 +194,7 @@ public class GBGLController {
 		Constant.setLxlxInRequest(request);
 		Constant.setShlxInRequest(request);
 		Constant.setGblxInRequest(request);
-		Constant.setGbztInRequest(request);
+		Constant.setGbjlGbztInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/yjdsh/list";
@@ -214,7 +214,7 @@ public class GBGLController {
 		Constant.setLxlxInRequest(request);
 		Constant.setShlxInRequest(request);
 		Constant.setGblxInRequest(request);
-		Constant.setGbztInRequest(request);
+		Constant.setGbjlGbztInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/ejdsh/list";

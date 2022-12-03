@@ -64,12 +64,21 @@ var oedNum=0;
 
 var sheetFlag='${requestScope.sheetFlag}';
 
+var dshShzt;
+var shtgShzt;
+var bjzShzt;
+
+var dshShztMc;
+var shtgShztMc;
+var bjzShztMc;
+
 var dqyDcfw;
 var syyDcfw;
 
 var dqyDcfwMc;
 var syyDcfwMc;
 $(function(){
+	initShztVar();
 	initDcfwVar();
 	
 	initZYZTCBB();
@@ -114,6 +123,16 @@ function initZYZTCBB(){
 		//multiple:true,
 		data:data
 	});
+}
+
+function initShztVar(){
+	dshShzt=parseInt('${requestScope.dshShzt}');
+	shtgShzt=parseInt('${requestScope.shtgShzt}');
+	bjzShzt=parseInt('${requestScope.bjzShzt}');
+
+	dshShztMc='${requestScope.dshShztMc}';
+	shtgShztMc='${requestScope.shtgShztMc}';
+	bjzShztMc='${requestScope.bjzShztMc}';
 }
 
 function initDcfwVar(){
@@ -268,19 +287,7 @@ function initTab1(){
 			{field:"jzyxqz",title:"驾证有效期至",width:200},
 			{field:"zgzyxqz",title:"资格证有效期至",width:200},
 			{field:"shzt",title:"审核状态",width:200,formatter:function(value,row){
-				var str;
-				switch (value) {
-				case 1:
-					str="待审核";
-					break;
-				case 2:
-					str="审核通过";
-					break;
-				case 3:
-					str="编辑中";
-					break;
-				}
-				return str;
+				return getShztMcById(value);
 			}},
 			{field:"zyzt",title:"在用状态",width:200,formatter:function(value,row){
 				return value?"是":"否";
@@ -321,6 +328,22 @@ function openOutputExcelDialog(flag){
 	else{
 		$("#output_excel_bg_div").css("display","none");
 	}
+}
+
+function getShztMcById(shztId){
+	var str;
+	switch (shztId) {
+	case dshShzt:
+		str=dshShztMc;//待审核
+		break;
+	case shtgShzt:
+		str=shtgShztMc;//审核通过
+		break;
+	case bjzShzt:
+		str=bjzShztMc;//编辑中
+		break;
+	}
+	return str;
 }
 
 function deleteByIds() {
