@@ -61,12 +61,28 @@ var oedNum=0;
 
 var sheetFlag='${requestScope.sheetFlag}';
 
+var shiSfzy;
+var fouSfzy;
+
+var shiSfzyMc;
+var fouSfzyMc;
+
+var dshShzt;
+var shtgShzt;
+var bjzShzt;
+
+var dshShztMc;
+var shtgShztMc;
+var bjzShztMc;
+
 var dqyDcfw;
 var syyDcfw;
 
 var dqyDcfwMc;
 var syyDcfwMc;
 $(function(){
+	initSfzyVar();
+	initShztVar();
 	initDcfwVar();
 	
 	initCLLXCBB();
@@ -90,6 +106,24 @@ function showCompontByQx(){
 	if(yhm=="admin"){
 		removeLB.show();
 	}
+}
+
+function initSfzyVar(){
+	shiSfzy='${requestScope.shiSfzy}';
+	fouSfzy='${requestScope.fouSfzy}';
+
+	shiSfzyMc='${requestScope.shiSfzyMc}';
+	fouSfzyMc='${requestScope.fouSfzyMc}';
+}
+
+function initShztVar(){
+	dshShzt=parseInt('${requestScope.dshShzt}');
+	shtgShzt=parseInt('${requestScope.shtgShzt}');
+	bjzShzt=parseInt('${requestScope.bjzShzt}');
+
+	dshShztMc='${requestScope.dshShztMc}';
+	shtgShztMc='${requestScope.shtgShztMc}';
+	bjzShztMc='${requestScope.bjzShztMc}';
 }
 
 function initDcfwVar(){
@@ -313,22 +347,10 @@ function initTab1(){
 			}},
 			{field:"fzrq",title:"发证日期",width:200},
 			{field:"sfzy",title:"是否在用",width:100,formatter:function(value){
-				return value?"是":"否";
+				return getSfzyMcById(value);
 			}},
 			{field:"shzt",title:"状态",width:100,formatter:function(value){
-				var str;
-				switch (value) {
-				case 1:
-					str="待审核";
-					break;
-				case 2:
-					str="审核通过";
-					break;
-				case 3:
-					str="编辑中";
-					break;
-				}
-				return str;
+				return getShztMcById(value);
 			}},
 			{field:"bz",title:"备注",width:200},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
@@ -367,6 +389,31 @@ function openOutputExcelDialog(flag){
 	else{
 		$("#output_excel_bg_div").css("display","none");
 	}
+}
+
+function getSfzyMcById(sfzy){
+	var str;
+	if(sfzy)
+		str=shiSfzyMc;
+	else
+		str=fouSfzyMc;
+	return str;
+}
+
+function getShztMcById(shztId){
+	var str;
+	switch (shztId) {
+	case dshShzt:
+		str=dshShztMc;//待审核
+		break;
+	case shtgShzt:
+		str=shtgShztMc;//审核通过
+		break;
+	case bjzShzt:
+		str=bjzShztMc;//编辑中
+		break;
+	}
+	return str;
 }
 
 function deleteByIds() {

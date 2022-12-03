@@ -100,6 +100,8 @@ public class CLGLController {
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
 		
+		Constant.setClSfzyInRequest(request);
+		Constant.setClShztInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", CheLiang.ZONG_HE_CHA_XUN_SHEET);
 		
@@ -129,7 +131,8 @@ public class CLGLController {
 	 */
 	@RequestMapping(value="/shjl/list")
 	public String goShjlList(HttpServletRequest request) {
-		
+
+		Constant.setClShjgInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/shjl/list";

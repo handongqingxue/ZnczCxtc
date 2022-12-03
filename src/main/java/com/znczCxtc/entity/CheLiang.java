@@ -5,11 +5,38 @@ public class CheLiang {
 	/**
 	 * 是
 	 */
-	public static final Integer SHI=1;
+	public static final boolean SHI=true;
 	/**
 	 * 否
 	 */
-	public static final Integer FOU=0;
+	public static final boolean FOU=false;
+
+	/**
+	 * 是
+	 */
+	public static final String SHI_TEXT="是";
+	/**
+	 * 否
+	 */
+	public static final String FOU_TEXT="否";
+	
+	/**
+	 * 合格
+	 */
+	public static final boolean HE_GE=true;
+	/**
+	 * 不合格
+	 */
+	public static final boolean BU_HE_GE=false;
+	
+	/**
+	 * 合格
+	 */
+	public static final String HE_GE_TEXT="合格";
+	/**
+	 * 不合格
+	 */
+	public static final String BU_HE_GE_TEXT="不合格";
 	
 	/**
 	 * 待审核

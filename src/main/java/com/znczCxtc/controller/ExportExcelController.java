@@ -1689,8 +1689,10 @@ public class ExportExcelController {
 				
 				cell = row.createCell(7);
 				Boolean sfzy = cl.getSfzy();
-				if(sfzy!=null)
-					cell.setCellValue(sfzy?"是":"否");
+				if(sfzy!=null) {
+					String sfzyMc = Constant.getCLSfzyMcById(sfzy);
+					cell.setCellValue(sfzyMc);
+				}
 				
 				cell = row.createCell(8);
 				Integer shzt = cl.getShzt();
@@ -1771,8 +1773,10 @@ public class ExportExcelController {
 				
 				cell = row.createCell(3);
 				Boolean shjg = clshjl.getShjg();
-				if(shjg!=null)
-					cell.setCellValue(shjg?"合格":"不合格");
+				if(shjg!=null) {
+					String shjgMc=Constant.getCLShjgMcById(shjg);
+					cell.setCellValue(shjgMc);
+				}
 				
 				cell = row.createCell(4);
 				String bz = clshjl.getBz();
@@ -2136,8 +2140,10 @@ public class ExportExcelController {
 
 				cell = row.createCell(6);
 				Boolean zyzt = sj.getZyzt();
-				if(zyzt!=null)
-					cell.setCellValue(zyzt?"是":"否");
+				if(zyzt!=null) {
+					String zyztMc = Constant.getSJZyztMcById(zyzt);
+					cell.setCellValue(zyztMc);
+				}
 			}
 			break;
 		}
@@ -2205,8 +2211,10 @@ public class ExportExcelController {
 				
 				cell = row.createCell(3);
 				Boolean shjg = sjshjl.getShjg();
-				if(shjg!=null)
-					cell.setCellValue(shjg?"合格":"不合格");
+				if(shjg!=null) {
+					String shjgMc=Constant.getSJShjgMcById(shjg);
+					cell.setCellValue(shjgMc);
+				}
 				
 				cell = row.createCell(4);
 				String bz = sjshjl.getBz();

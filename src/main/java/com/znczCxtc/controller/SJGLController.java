@@ -82,6 +82,7 @@ public class SJGLController {
 	public String goZhcxList(HttpServletRequest request) {
 
 		Constant.setSjShztInRequest(request);
+		Constant.setSjZyztInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", SiJi.ZONG_HE_CHA_XUN_SHEET);
 		

@@ -72,13 +72,21 @@ var dshShztMc;
 var shtgShztMc;
 var bjzShztMc;
 
+var shiZyzt;
+var fouZyzt;
+
+var shiZyztMc;
+var fouZyztMc;
+
 var dqyDcfw;
 var syyDcfw;
 
 var dqyDcfwMc;
 var syyDcfwMc;
+
 $(function(){
 	initShztVar();
+	initZyztVar();
 	initDcfwVar();
 	
 	initZYZTCBB();
@@ -133,6 +141,14 @@ function initShztVar(){
 	dshShztMc='${requestScope.dshShztMc}';
 	shtgShztMc='${requestScope.shtgShztMc}';
 	bjzShztMc='${requestScope.bjzShztMc}';
+}
+
+function initZyztVar(){
+	shiZyzt='${requestScope.shiZyzt}';
+	fouZyzt='${requestScope.fouZyzt}';
+
+	shiZyztMc='${requestScope.shiZyztMc}';
+	fouZyztMc='${requestScope.fouZyztMc}';
 }
 
 function initDcfwVar(){
@@ -290,7 +306,7 @@ function initTab1(){
 				return getShztMcById(value);
 			}},
 			{field:"zyzt",title:"在用状态",width:200,formatter:function(value,row){
-				return value?"是":"否";
+				return getZyztMcById(value);
 			}},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\""+sjglPath+"zhcx/detail?id="+value+"\">详情</a>"
@@ -343,6 +359,15 @@ function getShztMcById(shztId){
 		str=bjzShztMc;//编辑中
 		break;
 	}
+	return str;
+}
+
+function getZyztMcById(zyzt){
+	var str;
+	if(zyzt)
+		str=shiZyztMc;
+	else
+		str=fouZyztMc;
 	return str;
 }
 

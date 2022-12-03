@@ -206,6 +206,19 @@ public class Constant {
 	}
 	
 	/**
+	 * 存放车辆审核结果常量
+	 * @param request
+	 */
+	public static void setClShjgInRequest(HttpServletRequest request) {
+
+		request.setAttribute("hgShjg", CheLiangShenHeJiLu.HE_GE);
+		request.setAttribute("bhgShjg", CheLiangShenHeJiLu.BU_HE_GE);
+		
+		request.setAttribute("hgShjgMc", CheLiangShenHeJiLu.HE_GE_TEXT);
+		request.setAttribute("bhgShjgMc", CheLiangShenHeJiLu.BU_HE_GE_TEXT);
+	}
+	
+	/**
 	 * 存放订单过磅状态常量
 	 * @param request
 	 */
@@ -312,6 +325,47 @@ public class Constant {
 		request.setAttribute("dshShztMc", SiJi.DAI_SHEN_HE_TEXT);
 		request.setAttribute("shtgShztMc", SiJi.SHEN_HE_TONG_GUO_TEXT);
 		request.setAttribute("bjzShztMc", SiJi.BIAN_JI_ZHONG_TEXT);
+	}
+	
+	/**
+	 * 存放车辆审核状态常量
+	 * @param request
+	 */
+	public static void setClShztInRequest(HttpServletRequest request) {
+		
+		request.setAttribute("dshShzt", CheLiang.DAI_SHEN_HE);
+		request.setAttribute("shtgShzt", CheLiang.SHEN_HE_TONG_GUO);
+		request.setAttribute("bjzShzt", CheLiang.BIAN_JI_ZHONG);
+		
+		request.setAttribute("dshShztMc", CheLiang.DAI_SHEN_HE_TEXT);
+		request.setAttribute("shtgShztMc", CheLiang.SHEN_HE_TONG_GUO_TEXT);
+		request.setAttribute("bjzShztMc", CheLiang.BIAN_JI_ZHONG_TEXT);
+	}
+	
+	/**
+	 * 存放司机在用状态常量
+	 * @param request
+	 */
+	public static void setSjZyztInRequest(HttpServletRequest request) {
+
+		request.setAttribute("shiZyzt", SiJi.SHI);
+		request.setAttribute("fouZyzt", SiJi.FOU);
+		
+		request.setAttribute("shiZyztMc", SiJi.SHI_TEXT);
+		request.setAttribute("fouZyztMc", SiJi.FOU_TEXT);
+	}
+	
+	/**
+	 * 存放车辆是否在用常量
+	 * @param request
+	 */
+	public static void setClSfzyInRequest(HttpServletRequest request) {
+
+		request.setAttribute("shiSfzy", CheLiang.SHI);
+		request.setAttribute("fouSfzy", CheLiang.FOU);
+		
+		request.setAttribute("shiSfzyMc", CheLiang.SHI_TEXT);
+		request.setAttribute("fouSfzyMc", CheLiang.FOU_TEXT);
 	}
 	
 	/**
@@ -520,6 +574,22 @@ public class Constant {
 			break;
 		}
 		return shztMc;
+	}
+	
+	public static String getSJZyztMcById(boolean zyzt) {
+		return zyzt==SiJi.SHI?SiJi.SHI_TEXT:SiJi.FOU_TEXT;
+	}
+	
+	public static String getSJShjgMcById(boolean shjg) {
+		return shjg==SiJi.HE_GE?SiJi.HE_GE_TEXT:SiJi.BU_HE_GE_TEXT;
+	}
+	
+	public static String getCLSfzyMcById(boolean sfzy) {
+		return sfzy==CheLiang.SHI?CheLiang.SHI_TEXT:CheLiang.FOU_TEXT;
+	}
+	
+	public static String getCLShjgMcById(boolean shjg) {
+		return shjg==CheLiang.HE_GE?CheLiang.HE_GE_TEXT:CheLiang.BU_HE_GE_TEXT;
 	}
 	
 	public static String getHMFlMcById(int flId) {
