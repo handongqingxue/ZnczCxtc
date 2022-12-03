@@ -67,7 +67,7 @@ var syyDcfwMc;
 $(function(){
 	initDcfwVar();
 	
-	initZTCBB();
+	initHMZTCBB();
 	initSearchLB();
 	initRemoveLB();
 	initOutputBut();
@@ -96,7 +96,7 @@ function initDialogPosition(){
 	oedDiv.append(oedws);
 }
 
-function initZTCBB(){
+function initHMZTCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择状态"});
 	$.post(pdglPath+"queryHaoMaZhuangTaiCBBList",
@@ -105,7 +105,7 @@ function initZTCBB(){
 			for(var i=0;i<rows.length;i++){
 				data.push({"value":rows[i].id,"text":rows[i].mc});
 			}
-			ztCBB=$("#zt_cbb").combobox({
+			hmztCBB=$("#hmzt_cbb").combobox({
 				valueField:"value",
 				textField:"text",
 				//multiple:true,
@@ -137,9 +137,9 @@ function initOutputExcelDialog(){
         			var dlMc=encodeURIParam($("#toolbar #dlMc").val());
         			var hm=$("#toolbar #hm").val();
         			var pdh=$("#toolbar #pdh").val();
-        			var ddztId=ztCBB.combobox("getValue");
+        			var hmztId=hmztCBB.combobox("getValue");
         			var dcfw=dcfwCBB.combobox("getValue");
-        			params+="dlMc="+dlMc+"&hm="+hm+"&pdh="+pdh+"&ddztId="+ddztId+"&dcfw="+dcfw;
+        			params+="dlMc="+dlMc+"&hm="+hm+"&pdh="+pdh+"&hmztId="+hmztId+"&dcfw="+dcfw;
         			if(dcfw==dqyDcfw){
 	        			var options=tab1.datagrid("getPager").data("pagination").options;
 	        			var page=options.pageNumber;
@@ -219,8 +219,8 @@ function initSearchLB(){
 			var dlMc=$("#toolbar #dlMc").val();
 			var hm=$("#toolbar #hm").val();
 			var pdh=$("#toolbar #pdh").val();
-			var ddztId=ztCBB.combobox("getValue");
-			tab1.datagrid("load",{dlMc:dlMc,hm:hm,pdh:pdh,ddztId:ddztId});
+			var hmztId=hmztCBB.combobox("getValue");
+			tab1.datagrid("load",{dlMc:dlMc,hm:hm,pdh:pdh,hmztId:hmztId});
 		}
 	});
 }
@@ -377,7 +377,7 @@ function setFitWidthInParent(parent,self){
 			<span class="pdh_span">排队号：</span>
 			<input type="text" class="pdh_inp" id="pdh" placeholder="请输入排队号"/>
 			<span class="zt_span">状态：</span>
-			<input id="zt_cbb"/>
+			<input id="hmzt_cbb"/>
 			<a class="search_but" id="search_but">查询</a>
 			<a id="remove_but">删除</a>
          	<a id="output_but">导出</a>

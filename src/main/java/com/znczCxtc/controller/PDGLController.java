@@ -80,6 +80,8 @@ public class PDGLController {
 
 	@RequestMapping(value="/dlcx/new")
 	public String goDlcxNew(HttpServletRequest request) {
+
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/dlcx/new";
 	}
@@ -101,6 +103,8 @@ public class PDGLController {
 	 */
 	@RequestMapping(value="/dlcx/list")
 	public String goDlcxList(HttpServletRequest request) {
+
+		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/dlcx/list";
 	}
@@ -173,12 +177,12 @@ public class PDGLController {
 
 	@RequestMapping(value="/queryHaoMaList")
 	@ResponseBody
-	public Map<String, Object> queryHaoMaList(String dlMc,String hm,String pdh,Integer ztId,int page,int rows,String sort,String order) {
+	public Map<String, Object> queryHaoMaList(String dlMc,String hm,String pdh,Integer hmztId,int page,int rows,String sort,String order) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		int count = haoMaService.queryForInt(dlMc, hm, pdh, ztId);
-		List<HaoMa> hmList=haoMaService.queryList(dlMc, hm, pdh, ztId, page, rows, sort, order);
+		int count = haoMaService.queryForInt(dlMc, hm, pdh, hmztId);
+		List<HaoMa> hmList=haoMaService.queryList(dlMc, hm, pdh, hmztId, page, rows, sort, order);
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", hmList);

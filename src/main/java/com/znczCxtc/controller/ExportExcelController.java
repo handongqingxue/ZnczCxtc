@@ -2222,13 +2222,13 @@ public class ExportExcelController {
 	}
 
 	@RequestMapping(value="/exportHaoMaList")
-	public void exportHaoMaList(String dlMc,String hm,String pdh,Integer ztId,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+	public void exportHaoMaList(String dlMc,String hm,String pdh,Integer hmztId,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
 		try {
 			dlMc=StringUtil.decode(dlMc, "UTF-8");
 			System.out.println("dlMc="+dlMc);
 			System.out.println("hm="+hm);
 			System.out.println("pdh="+pdh);
-			System.out.println("ztId="+ztId);
+			System.out.println("hmztId="+hmztId);
 			System.out.println("page="+page);
 			System.out.println("rows="+rows);
 			System.out.println("dcfw="+dcfw);
@@ -2268,7 +2268,7 @@ public class ExportExcelController {
 			cell.setCellValue("叫号次数");
 			cell.setCellStyle(style);
 		
-			List<HaoMa> hmList = exportExcelService.queryHaoMaList(dlMc,hm,pdh,ztId, page, rows, dcfw);
+			List<HaoMa> hmList = exportExcelService.queryHaoMaList(dlMc,hm,pdh,hmztId, page, rows, dcfw);
 			for (int i = 0; i < hmList.size(); i++) {
 				HaoMa haoMa = hmList.get(i);
 				row=sheet.createRow(++rowNum);
@@ -2312,6 +2312,87 @@ public class ExportExcelController {
 			}
 			
 			download("号码查询", wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value="/exportDuiLieList")
+	public void exportDuiLieList(String mc,String dm,Integer zt,Integer page,Integer rows,int dcfw,HttpServletResponse response) {
+		try {
+			mc=StringUtil.decode(mc, "UTF-8");
+			System.out.println("mc="+mc);
+			dm=StringUtil.decode(dm, "UTF-8");
+			System.out.println("dm="+dm);
+			System.out.println("zt="+zt);
+			System.out.println("page="+page);
+			System.out.println("rows="+rows);
+			System.out.println("dcfw="+dcfw);
+	
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			HSSFSheet sheet = wb.createSheet("队列查询");
+			HSSFRow row = sheet.createRow(rowNum);
+			HSSFCellStyle style = wb.createCellStyle();
+			HSSFCell cell = row.createCell(0);
+			cell.setCellValue("名称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(1);
+			cell.setCellValue("代码");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(2);
+			cell.setCellValue("叫号形式");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(3);
+			cell.setCellValue("叫号阈值");
+			cell.setCellStyle(style);
+	
+			cell = row.createCell(4);
+			cell.setCellValue("状态");
+			cell.setCellStyle(style);
+		
+			List<DuiLie> dlList = exportExcelService.queryDuiLieList(mc,dm,zt, page, rows, dcfw);
+			for (int i = 0; i < dlList.size(); i++) {
+				DuiLie dl = dlList.get(i);
+				row=sheet.createRow(++rowNum);
+				
+				cell = row.createCell(0);
+				String mc1 = dl.getMc();
+				if(!StringUtils.isBlank(mc1))
+					cell.setCellValue(mc1);
+				
+				cell = row.createCell(1);
+				String dm1 = dl.getDm();
+				if(!StringUtils.isBlank(dm1))
+					cell.setCellValue(dm1);
+				
+				cell = row.createCell(2);
+				Integer jhxs = dl.getJhxs();
+				if(jhxs!=null) {
+					String jhxsMc = Constant.getDLJhxsMcById(jhxs);
+					cell.setCellValue(jhxsMc);
+				}
+				
+				cell = row.createCell(3);
+				Integer jhyz = dl.getJhyz();
+				if(jhyz!=null)
+					cell.setCellValue(jhyz);
+				
+				cell = row.createCell(4);
+				Integer zt1 = dl.getZt();
+				if(zt1!=null) {
+					String zt1Mc = Constant.getDLZtMcById(zt1);
+					cell.setCellValue(zt1Mc);
+				}
+			}
+			
+			download("队列查询", wb, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

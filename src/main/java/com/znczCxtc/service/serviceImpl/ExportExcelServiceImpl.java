@@ -286,16 +286,31 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 	}
 
 	@Override
-	public List<HaoMa> queryHaoMaList(String dlMc, String hm, String pdh, Integer ztId, Integer page, Integer rows,
+	public List<HaoMa> queryHaoMaList(String dlMc, String hm, String pdh, Integer hmztId, Integer page, Integer rows,
 			int dcfw) {
 		// TODO Auto-generated method stub
 		List<HaoMa> list = null;
 		switch (dcfw) {
 		case Constant.DANG_QIAN_YE:
-			list = exportExcelDao.queryHaoMaList(dlMc, hm, pdh, ztId, (page-1)*rows, rows, dcfw);
+			list = exportExcelDao.queryHaoMaList(dlMc, hm, pdh, hmztId, (page-1)*rows, rows, dcfw);
 			break;
 		case Constant.SUO_YOU_YE:
-			list = exportExcelDao.queryHaoMaList(dlMc, hm, pdh, ztId, dcfw);
+			list = exportExcelDao.queryHaoMaList(dlMc, hm, pdh, hmztId, dcfw);
+			break;
+		}
+		return list;
+	}
+
+	@Override
+	public List<DuiLie> queryDuiLieList(String mc, String dm, Integer zt, Integer page, Integer rows, int dcfw) {
+		// TODO Auto-generated method stub
+		List<DuiLie> list = null;
+		switch (dcfw) {
+		case Constant.DANG_QIAN_YE:
+			list = exportExcelDao.queryDuiLieList(mc, dm, zt, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryDuiLieList(mc, dm, zt, dcfw);
 			break;
 		}
 		return list;

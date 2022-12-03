@@ -399,4 +399,33 @@ public class Constant {
 		}
 		return flMc;
 	}
+	
+	public static String getDLJhxsMcById(int jhxsId) {
+		String jhxsMc=null;
+		switch (jhxsId) {
+		case DuiLie.ZI_DONG_JIAO_HAO:
+			jhxsMc=DuiLie.ZI_DONG_JIAO_HAO_TEXT;//自动叫号
+			break;
+		case DuiLie.SHOU_DONG_JIAO_HAO:
+			jhxsMc=DuiLie.SHOU_DONG_JIAO_HAO_TEXT;//手动叫号
+			break;
+		}
+		return jhxsMc;
+	}
+	
+	public static String getDLZtMcById(int ztId) {
+		String ztMc=null;
+		switch (ztId) {
+		case DuiLie.ZAI_YONG:
+			ztMc=DuiLie.ZAI_YONG_TEXT;//在用
+			break;
+		case DuiLie.ZAN_TING:
+			ztMc=DuiLie.ZAN_TING_TEXT;//暂停
+			break;
+		case DuiLie.FEI_QI:
+			ztMc=DuiLie.FEI_QI_TEXT;//废弃
+			break;
+		}
+		return ztMc;
+	}
 }

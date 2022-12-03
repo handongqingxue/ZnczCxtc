@@ -87,7 +87,11 @@ public interface ExportExcelMapper {
 
 	List<SiJiShenHeJiLu> querySJSHJLList(@Param("sjXm") String sjXm, @Param("shrYhm") String shrYhm, @Param("shsjks") String shsjks, @Param("shsjjs") String shsjjs, @Param("dcfw") int dcfw);
 
-	List<HaoMa> queryHaoMaList(@Param("dlMc") String dlMc, @Param("hm") String hm, @Param("pdh") String pdh, @Param("ztId") Integer ztId, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+	List<HaoMa> queryHaoMaList(@Param("dlMc") String dlMc, @Param("hm") String hm, @Param("pdh") String pdh, @Param("hmztId") Integer hmztId, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
 
-	List<HaoMa> queryHaoMaList(@Param("dlMc") String dlMc, @Param("hm") String hm, @Param("pdh") String pdh, @Param("ztId") Integer ztId, @Param("dcfw") int dcfw);
+	List<HaoMa> queryHaoMaList(@Param("dlMc") String dlMc, @Param("hm") String hm, @Param("pdh") String pdh, @Param("hmztId") Integer hmztId, @Param("dcfw") int dcfw);
+
+	List<DuiLie> queryDuiLieList(@Param("mc") String mc, @Param("dm") String dm, @Param("zt") Integer zt, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<DuiLie> queryDuiLieList(@Param("mc") String mc, @Param("dm") String dm, @Param("zt") Integer zt, @Param("dcfw") int dcfw);
 }

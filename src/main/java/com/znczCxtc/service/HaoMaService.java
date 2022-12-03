@@ -7,9 +7,9 @@ import com.znczCxtc.entity.*;
 public interface HaoMaService {
 
 
-	public int queryForInt(String dlMc, String hm, String pdh, Integer ztId);
+	public int queryForInt(String dlMc, String hm, String pdh, Integer hmztId);
 
-	public List<HaoMa> queryList(String dlMc, String hm, String pdh, Integer ztId, int page, int rows, String sort,
+	public List<HaoMa> queryList(String dlMc, String hm, String pdh, Integer hmztId, int page, int rows, String sort,
 			String order);
 
 	public int add(HaoMa hm);

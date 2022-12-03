@@ -1,19 +1,38 @@
 package com.znczCxtc.entity;
 
 public class DuiLie {
+	
+	public static final int ZI_DONG_JIAO_HAO=1;
+	public static final int SHOU_DONG_JIAO_HAO=2;
+	
+	public static final String ZI_DONG_JIAO_HAO_TEXT="自动叫号";
+	public static final String SHOU_DONG_JIAO_HAO_TEXT="手动叫号";
 
 	/**
 	 * 在用
 	 */
-	public static final Integer ZAI_YONG=1;
+	public static final int ZAI_YONG=1;
 	/**
 	 * 暂停
 	 */
-	public static final Integer ZAN_TING=2;
+	public static final int ZAN_TING=2;
 	/**
 	 * 废弃
 	 */
-	public static final Integer FEI_QI=3;
+	public static final int FEI_QI=3;
+
+	/**
+	 * 在用
+	 */
+	public static final String ZAI_YONG_TEXT="在用";
+	/**
+	 * 暂停
+	 */
+	public static final String ZAN_TING_TEXT="暂停";
+	/**
+	 * 废弃
+	 */
+	public static final String FEI_QI_TEXT="废弃";
 	
 	private Integer id;//队列id
 	public Integer getId() {

@@ -351,4 +351,19 @@
 			limit #{rowNum},#{rows}
 		</if>
 	</select>
+	<select id="queryDuiLieList" resultType="com.znczCxtc.entity.DuiLie">
+		select * from dui_lie where 1=1
+		<if test="mc!=''&amp;mc!=null">
+			and mc like CONCAT('%',#{mc},'%')
+		</if>
+		<if test="dm!=''&amp;dm!=null">
+			and dm like CONCAT('%',#{dm},'%')
+		</if> 
+		<if test="zt!=''&amp;zt!=null">
+			and zt like CONCAT('%',#{zt},'%')
+		</if> 
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
 </mapper>

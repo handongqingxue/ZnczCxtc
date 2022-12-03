@@ -25,16 +25,16 @@ public class HaoMaServiceImpl implements HaoMaService {
 	private DingDanZhuangTaiMapper dingDanZhuangTaiDao;
 
 	@Override
-	public int queryForInt(String dlMc, String hm, String pdh, Integer ztId) {
+	public int queryForInt(String dlMc, String hm, String pdh, Integer hmztId) {
 		// TODO Auto-generated method stub
-		return haoMaDao.queryForInt(dlMc,hm,pdh,ztId);
+		return haoMaDao.queryForInt(dlMc,hm,pdh,hmztId);
 	}
 
 	@Override
-	public List<HaoMa> queryList(String dlMc, String hm, String pdh, Integer ztId, int page, int rows, String sort,
+	public List<HaoMa> queryList(String dlMc, String hm, String pdh, Integer hmztId, int page, int rows, String sort,
 			String order) {
 		// TODO Auto-generated method stub
-		return haoMaDao.queryList(dlMc, hm, pdh, ztId, (page-1)*rows, rows, sort, order);
+		return haoMaDao.queryList(dlMc, hm, pdh, hmztId, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override
