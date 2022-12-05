@@ -49,6 +49,24 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/editYongHu")
+	@ResponseBody
+	public Map<String, Object> editYongHu(YongHu yh) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=yongHuService.edit(yh);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑用户信息成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑用户信息失败！");
+		}
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/updateMmByYhId")
 	@ResponseBody
 	public String updateMmByYhId(String mm) {

@@ -9,6 +9,27 @@
 	<select id="getMmByYhm" resultType="String">
 		select mm from yong_hu where yhm=#{yhm}
 	</select>
+	<update id="edit" parameterType="com.znczCxtc.entity.YongHu">
+		update yong_hu set 
+		<trim suffixOverrides=",">
+			<if test="nc!=null">
+				nc=#{nc},
+			</if>
+			<if test="xm!=null">
+				xm=#{xm},
+			</if>
+			<if test="mm!=null">
+				mm=#{mm},
+			</if>
+			<if test="js!=null">
+				js=#{js},
+			</if>
+			<if test="jsIds!=null">
+				jsIds=#{jsIds},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
 	<update id="updateMmById">
 		update yong_hu set mm=#{mm} where id=#{id}
 	</update>

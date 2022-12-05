@@ -11,5 +11,7 @@ public interface YongHuMapper {
 
 	String getMmByYhm(@Param("yhm") String yhm);
 
+	int edit(YongHu yh);
+
 	int updateMmById(@Param("mm") String mm, @Param("id") Integer id);
 }

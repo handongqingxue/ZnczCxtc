@@ -34,7 +34,8 @@
 	margin-left: 100px;
 }
 
-.xgmm_bg_div{
+.xgmm_bg_div,
+.xgyhxx_bg_div{
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0,0,0,.45);
@@ -53,6 +54,17 @@
 	left: 0;
 	right: 0;
 }
+
+.xgyhxx_div{
+	width: 500px;
+	height: 350px;
+	margin: 220px auto 0;
+	background-color: #fff;
+	border-radius:5px;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
 </style>
 <script type="text/javascript">
 var path='<%=basePath %>';
@@ -62,10 +74,13 @@ var dialogTop=70;
 var dialogLeft=20;
 var yhxxdNum=0;
 var xgmmdNum=1;
+var xgyhxxdNum=2;
 $(function(){
 	initYhxxDialog();//0
 	
 	initXgmmDialog();//1
+	
+	initXgyhxxDialog();//2
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
 });
@@ -77,15 +92,22 @@ function initDialogPosition(){
 	
 	var xgmmdpw=$("body").find(".panel.window").eq(xgmmdNum);
 	var xgmmdws=$("body").find(".window-shadow").eq(xgmmdNum);
+	
+	var xgyhxxdpw=$("body").find(".panel.window").eq(xgyhxxdNum);
+	var xgyhxxdws=$("body").find(".window-shadow").eq(xgyhxxdNum);
 
 	var ccDiv=$("#center_con_div");
 	ccDiv.append(yhxxdpw);
 	ccDiv.append(yhxxws);
 	ccDiv.css("width",setFitWidthInParent("body","center_con_div")+"px");
 
-	var oedDiv=$("#xgmm_div");
-	oedDiv.append(xgmmdpw);
-	oedDiv.append(xgmmdws);
+	var xgmmdDiv=$("#xgmm_div");
+	xgmmdDiv.append(xgmmdpw);
+	xgmmdDiv.append(xgmmdws);
+
+	var xgyhxxdDiv=$("#xgyhxx_div");
+	xgyhxxdDiv.append(xgyhxxdpw);
+	xgyhxxdDiv.append(xgyhxxdws);
 }
 
 function initYhxxDialog(){
@@ -98,7 +120,7 @@ function initYhxxDialog(){
 		left:dialogLeft,
 		buttons:[
            {text:"修改用户信息",id:"xgyhxx_but",iconCls:"icon-save",handler:function(){
-        	   	//checkEdit();
+        	   openXgyhxxDialog(true);
            }}
         ]
 	});
@@ -138,6 +160,15 @@ function openXgmmDialog(flag){
 	}
 	else{
 		$("#xgmm_bg_div").css("display","none");
+	}
+}
+
+function openXgyhxxDialog(flag){
+	if(flag){
+		$("#xgyhxx_bg_div").css("display","block");
+	}
+	else{
+		$("#xgyhxx_bg_div").css("display","none");
 	}
 }
 
@@ -183,6 +214,54 @@ function initXgmmDialog(){
 
 	$("#xgmm_dialog_div #cancel_but").css("left","50%");
 	$("#xgmm_dialog_div #cancel_but").css("position","absolute");
+	
+	$(".dialog-button").css("background-color","#fff");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+
+}
+
+function initXgyhxxDialog(){
+	$("#xgyhxx_dialog_div").dialog({
+		title:"修改用户信息",
+		width:setFitWidthInParent("#xgyhxx_div","xgyhxx_dialog_div"),
+		height:290,
+		top:5,
+		left:dialogLeft,
+		buttons:[
+           {text:"确定",id:"ok_but",iconCls:"icon-ok",handler:function(){
+        	   checkEditYhxx();
+           }},
+           {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
+        	   openXgyhxxDialog(false);
+           }}
+        ]
+	});
+
+	$("#xgyhxx_dialog_div table").css("width",(setFitWidthInParent("#xgyhxx_div","xgyhxx_dialog_table"))+"px");
+	$("#xgyhxx_dialog_div table").css("magin","-100px");
+	$("#xgyhxx_dialog_div table td").css("padding-left","40px");
+	$("#xgyhxx_dialog_div table td").css("padding-right","20px");
+	$("#xgyhxx_dialog_div table td").css("font-size","15px");
+	$("#xgyhxx_dialog_div table .td1").css("width","30%");
+	$("#xgyhxx_dialog_div table .td2").css("width","60%");
+	$("#xgyhxx_dialog_div table tr").css("height","45px");
+
+	$(".panel.window").eq(xgyhxxdNum).css("margin-top","20px");
+	$(".panel.window .panel-title").eq(xgyhxxdNum).css("color","#000");
+	$(".panel.window .panel-title").eq(xgyhxxdNum).css("font-size","15px");
+	$(".panel.window .panel-title").eq(xgyhxxdNum).css("padding-left","10px");
+	
+	$(".panel-header, .panel-body").css("border-color","#ddd");
+	
+	//以下的是表格下面的面板
+	$(".window-shadow").eq(xgyhxxdNum).css("margin-top","20px");
+	$(".window,.window .window-body").eq(xgyhxxdNum).css("border-color","#ddd");
+
+	$("#xgyhxx_dialog_div #ok_but").css("left","30%");
+	$("#xgyhxx_dialog_div #ok_but").css("position","absolute");
+
+	$("#xgyhxx_dialog_div #cancel_but").css("left","50%");
+	$("#xgyhxx_dialog_div #cancel_but").css("position","absolute");
 	
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
@@ -283,6 +362,79 @@ function checkXmm2(){
 		return true;
 }
 
+function checkEditYhxx(){
+	if(checkNc()){
+		if(checkXm()){
+			var id='${sessionScope.yongHu.id}';
+			var nc = $("#nc").val();
+			var xm = $("#xm").val();
+			var js = $("#js").val();
+			$.post(xtglPath+"editYongHu",
+				{id:id,nc:nc,xm:xm,js:js},
+				function(data){
+					openXgyhxxDialog(false);
+					if(data.message=="ok"){
+						$.messager.defaults.ok = "是";
+					    $.messager.defaults.cancel = "否";
+					    $.messager.defaults.width = 350;//更改消息框宽度
+					    $.messager.confirm(
+					    	"提示",
+					    	"编辑用户信息成功，重新登录生效！是否重新登录？"
+					        ,function(r){    
+					            if (r){    
+					                location.href=mainPath+"exit";
+					            }
+					        }); 
+					}
+					else{
+						$.messager.alert("提示","编辑用户信息失败","warning");
+					}
+				}
+			);
+		}
+	}
+}
+
+function focusNc(){
+	var nc = $("#nc").val();
+	if(nc=="昵称不能为空"){
+		$("#nc").val("");
+		$("#nc").css("color", "#555555");
+	}
+}
+
+//验证昵称
+function checkNc(){
+	var nc = $("#nc").val();
+	if(nc==null||nc==""||nc=="昵称不能为空"){
+		$("#nc").css("color","#E15748");
+	  	$("#nc").val("昵称不能为空");
+	  	return false;
+	}
+	else
+		return true;
+}
+
+function focusXm(){
+	var xm = $("#xm").val();
+	if(xm=="姓名不能为空"){
+		$("#xm").val("");
+		$("#xm").css("color", "#555555");
+	}
+}
+
+//验证姓名
+function checkXm(){
+	var xm = $("#xm").val();
+	if(xm==null||xm==""||xm=="姓名不能为空"){
+		$("#xm").css("color","#E15748");
+	  	$("#xm").val("姓名不能为空");
+	  	return false;
+	}
+	else
+		return true;
+}
+
 function setFitWidthInParent(parent,self){
 	var space=0;
 	switch (self) {
@@ -297,9 +449,11 @@ function setFitWidthInParent(parent,self){
 		space=355;
 		break;
 	case "xgmm_dialog_div":
+	case "xgyhxx_dialog_div":
 		space=50;
 		break;
 	case "xgmm_dialog_table":
+	case "xgyhxx_dialog_table":
 		space=68;
 		break;
 	}
@@ -391,6 +545,39 @@ function setFitWidthInParent(parent,self){
 					</td>
 					<td class="td2">
 						<input type="password" id="xmm2" placeholder="确认密码"/>
+					</td>
+				  </tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="xgyhxx_bg_div" id="xgyhxx_bg_div">
+		<div class="xgyhxx_div" id="xgyhxx_div">
+			<div class="xgyhxx_dialog_div" id="xgyhxx_dialog_div">
+				<table>
+				  <tr>
+					<td class="td1" align="right">
+						昵称
+					</td>
+					<td class="td2">
+						<input type="text" id="nc" value="${requestScope.yongHu.nc }" placeholder="昵称" onfocus="focusNc()" onblur="checkNc()"/>
+					</td>
+				  </tr>
+				  <tr>
+					<td class="td1" align="right">
+						姓名
+					</td>
+					<td class="td2">
+						<input type="text" id="xm" value="${requestScope.yongHu.xm }" placeholder="姓名" onfocus="focusXm()" onblur="checkXm()"/>
+					</td>
+				  </tr>
+				  <tr>
+					<td class="td1" align="right">
+						简述
+					</td>
+					<td class="td2">
+						<textarea id="js" rows="3" cols="30" placeholder="请输入简述">${requestScope.yongHu.js }</textarea>
 					</td>
 				  </tr>
 				</table>
