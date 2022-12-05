@@ -1,6 +1,7 @@
 package com.znczCxtc.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,14 @@ public class XTGLController {
 		request.setAttribute("yongHu", yongHu);
 		
 		return MODULE_NAME+"/yhxx";
+	}
+	
+	@RequestMapping(value="/yhcx/list")
+	public String goYhcxList(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		
+		return MODULE_NAME+"/yhcx/list";
 	}
 	
 	@RequestMapping(value="/checkMm")
@@ -64,6 +73,21 @@ public class XTGLController {
 			jsonMap.put("message", "no");
 			jsonMap.put("info", "编辑用户信息失败！");
 		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryYongHuList")
+	@ResponseBody
+	public Map<String, Object> queryYongHuList(String yhm,Boolean check,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = yongHuService.queryForInt(yhm,check);
+		List<YongHu> yhList=yongHuService.queryList(yhm, check, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", yhList);
+		
 		return jsonMap;
 	}
 	

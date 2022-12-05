@@ -9,6 +9,48 @@
 	<select id="getMmByYhm" resultType="String">
 		select mm from yong_hu where yhm=#{yhm}
 	</select>
+	<insert id="add" parameterType="com.znczCxtc.entity.YongHu">
+		insert into yong_hu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="yhm!=null">
+				yhm,
+			</if>
+			<if test="mm!=null">
+				mm,
+			</if>
+			<if test="nc!=null">
+				nc,
+			</if>
+			<if test="xm!=null">
+				xm,
+			</if>
+				cjsj,
+				`check`,
+			<if test="jsIds!=null">
+				jsIds,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="yhm!=null">
+				#{yhm},
+			</if>
+			<if test="mm!=null">
+				#{mm},
+			</if>
+			<if test="nc!=null">
+				#{nc},
+			</if>
+			<if test="xm!=null">
+				#{xm},
+			</if>
+				now(),
+				0,
+			<if test="jsIds!=null">
+				#{jsIds},
+			</if>
+		</trim>
+	</insert>
 	<update id="edit" parameterType="com.znczCxtc.entity.YongHu">
 		update yong_hu set 
 		<trim suffixOverrides=",">
@@ -30,6 +72,26 @@
 		</trim>
 		where id=#{id}
 	</update>
+	<select id="queryForInt" resultType="java.lang.Integer">
+		select count(*) from yong_hu where yhm!='admin'
+		<if test="yhm!=''&amp;yhm!=null">
+			and yhm like CONCAT('%',#{yhm},'%')
+		</if>
+		<if test="check!=null">
+			and `check`=#{check}
+		</if>
+	</select>
+	<select id="queryList" resultType="com.znczCxtc.entity.YongHu">
+		select * from yong_hu where yhm!='admin'
+		<if test="yhm!=''&amp;yhm!=null">
+			and yhm like CONCAT('%',#{yhm},'%')
+		</if>
+		<if test="check!=null">
+			and `check`=#{check}
+		</if>
+		order by cjsj
+		limit #{rowNum},#{rows}
+	</select>
 	<update id="updateMmById">
 		update yong_hu set mm=#{mm} where id=#{id}
 	</update>

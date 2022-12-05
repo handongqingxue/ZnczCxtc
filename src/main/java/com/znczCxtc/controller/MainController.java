@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.znczCxtc.entity.*;
+import com.znczCxtc.service.YongHuService;
 import com.znczCxtc.socket.*;
 import com.znczCxtc.util.*;
 
@@ -29,7 +30,9 @@ import com.znczCxtc.util.*;
 @Controller
 @RequestMapping("/"+MainController.MODULE_NAME)
 public class MainController {
-	
+
+	@Autowired
+	private YongHuService yongHuService;
 	static final String MODULE_NAME=Constant.MAIN_MODULE_NAME;
 	
 	static {
@@ -45,6 +48,37 @@ public class MainController {
 	public String goLogin() {
 		//http://localhost:8080/ZnczCxtc/main/goLogin
 		return "login";
+	}
+	
+	@RequestMapping(value="/goRegist")
+	public String goRegist(HttpServletRequest request) {
+		
+		return "regist";
+	}
+	
+	/**
+	 * 注册信息处理接口
+	 * @param yh
+	 * @return
+	 */
+	@RequestMapping(value = "/regist" , method = RequestMethod.POST,produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String regist(YongHu yh) {
+		
+		PlanResult plan=new PlanResult();
+		int count=yongHuService.add(yh);
+		if(count==0) {
+			plan.setStatus(count);
+			plan.setMsg("系统错误，请联系维护人员");
+			return JsonUtil.getJsonFromObject(plan);
+		}else {
+			plan.setStatus(0);
+			plan.setMsg("注册成功");
+			plan.setData(yh);
+			plan.setUrl("/main/goLogin");
+		}
+		
+		return JsonUtil.getJsonFromObject(plan);
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST,produces="plain/text; charset=UTF-8")

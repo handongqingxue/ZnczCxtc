@@ -70,6 +70,10 @@ function login(){
 		}
 	}
 }
+
+function goRegist(){
+	location.href=path+"main/goRegist";
+}
 </script>
 <title>登录</title>
 <style type="text/css">
@@ -84,7 +88,7 @@ body{
 }
 .login_div{
 	width: 310px;
-	height:220px;
+	height:250px;
 	background: #fff;
 	border-radius: 5px;
 	margin: 215px auto 0;
@@ -103,17 +107,22 @@ body{
 	height:25px;
 	margin-top: 25px;
 }
-.login_but_div{
+.but_div{
 	width: 100%;
 	height:35px;
 	line-height:35px;
-	margin-top: 25px;
 	text-align:center;
 	font-size: 14px;
 	color: #fff;
 	background-color: #1890ff;
 	border-radius: 4px;
 	cursor: pointer;
+}
+.login_but_div{
+	margin-top: 25px;
+}
+.regist_but_div{
+	margin-top: 10px;
 }
 </style>
 </head>
@@ -123,7 +132,8 @@ body{
 		<h3 class="hydl_h3">欢迎登录</h3>
 		<input class="yhm_inp" id="yhm_inp" type="text" placeholder="用户名" onfocus="focusYHM();" onblur="checkYHM();"/>
 		<input class="mm_inp" id="mm_inp" type="password" placeholder="密码" onblur="checkMM()"/>
-		<div class="login_but_div" onclick="login()">登录</div>
+		<div class="but_div login_but_div" onclick="login()">登录</div>
+		<div class="but_div regist_but_div" onclick="goRegist()">注册</div>
 	</div>
 </div>
 </body>
