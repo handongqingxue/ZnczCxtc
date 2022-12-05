@@ -6,4 +6,10 @@
 	<select id="getYongHu" resultType="com.znczCxtc.entity.YongHu">
 		select * from yong_hu where yhm=#{yhm} and mm=#{mm}
 	</select>
+	<select id="getMmByYhm" resultType="String">
+		select mm from yong_hu where yhm=#{yhm}
+	</select>
+	<update id="updateMmById">
+		update yong_hu set mm=#{mm} where id=#{id}
+	</update>
 </mapper>

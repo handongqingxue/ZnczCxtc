@@ -43,6 +43,10 @@ public class Constant {
 	 */
 	public static final String GBGL_MODULE_NAME="gbgl";
 	/**
+	 * 系统管理模块类名
+	 */
+	public static final String XTGL_MODULE_NAME="xtgl";
+	/**
 	 * 导出excel模块类名
 	 */
 	public static final String EXPORT_EXCEL_MODULE_NAME="exportExcel";
@@ -216,6 +220,25 @@ public class Constant {
 		
 		request.setAttribute("hgShjgMc", CheLiangShenHeJiLu.HE_GE_TEXT);
 		request.setAttribute("bhgShjgMc", CheLiangShenHeJiLu.BU_HE_GE_TEXT);
+	}
+	
+	/**
+	 * 存放车辆排放阶段常量
+	 * @param request
+	 */
+	public static void setClPfjdInRequest(HttpServletRequest request) {
+
+		request.setAttribute("gwryPfjd", CheLiang.GUO_WU_RAN_YOU);
+		request.setAttribute("gwrqPfjd", CheLiang.GUO_WU_RAN_QI);
+		request.setAttribute("glryPfjd", CheLiang.GUO_LIU_RAN_YOU);
+		request.setAttribute("glrqPfjd", CheLiang.GUO_LIU_RAN_QI);
+		request.setAttribute("ddPfjd", CheLiang.DIAN_DONG);
+		
+		request.setAttribute("gwryPfjdMc", CheLiang.GUO_WU_RAN_YOU_TEXT);
+		request.setAttribute("gwrqPfjdMc", CheLiang.GUO_WU_RAN_QI_TEXT);
+		request.setAttribute("glryPfjdMc", CheLiang.GUO_LIU_RAN_YOU_TEXT);
+		request.setAttribute("glrqPfjdMc", CheLiang.GUO_LIU_RAN_QI_TEXT);
+		request.setAttribute("ddPfjdMc", CheLiang.DIAN_DONG_TEXT);
 	}
 	
 	/**
@@ -534,6 +557,9 @@ public class Constant {
 			break;
 		case CheLiang.GUO_LIU_RAN_QI:
 			pfjdMc=CheLiang.GUO_LIU_RAN_QI_TEXT;//国六燃气
+			break;
+		case CheLiang.DIAN_DONG:
+			pfjdMc=CheLiang.DIAN_DONG_TEXT;//电动
 			break;
 		}
 		return pfjdMc;

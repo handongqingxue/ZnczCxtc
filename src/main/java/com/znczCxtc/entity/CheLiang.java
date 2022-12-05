@@ -71,11 +71,13 @@ public class CheLiang {
 	public static final int GUO_WU_RAN_QI=2;
 	public static final int GUO_LIU_RAN_YOU=3;
 	public static final int GUO_LIU_RAN_QI=4;
+	public static final int DIAN_DONG=5;
 	
 	public static final String GUO_WU_RAN_YOU_TEXT="国五燃油";
 	public static final String GUO_WU_RAN_QI_TEXT="国五燃气";
 	public static final String GUO_LIU_RAN_YOU_TEXT="国六燃油";
 	public static final String GUO_LIU_RAN_QI_TEXT="国六燃气";
+	public static final String DIAN_DONG_TEXT="电动";
 	
 	private Integer id;//车辆id
 	public Integer getId() {

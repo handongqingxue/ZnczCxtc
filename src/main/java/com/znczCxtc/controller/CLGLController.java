@@ -99,7 +99,8 @@ public class CLGLController {
 	 */
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
-		
+
+		Constant.setClPfjdInRequest(request);
 		Constant.setClSfzyInRequest(request);
 		Constant.setClShztInRequest(request);
 		Constant.setDcfwInRequest(request);

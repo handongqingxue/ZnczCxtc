@@ -80,4 +80,12 @@ public class MainController {
 		plan.setUrl("ddgl/zhcx/list");
 		return JsonUtil.getJsonFromObject(plan);
 	}
+
+	@RequestMapping(value="/exit")
+	public String exit(HttpSession session) {
+		System.out.println("ÍË³ö½Ó¿Ú");
+		Subject currentUser = SecurityUtils.getSubject();       
+	    currentUser.logout();    
+		return "login";
+	}
 }
