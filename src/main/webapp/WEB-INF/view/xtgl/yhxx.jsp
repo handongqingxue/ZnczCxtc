@@ -305,7 +305,7 @@ function checkEditMm(){
 //验证原密码
 function checkMm(){
 	var flag=false;
-	var yhm='${sessionScope.yongHu.yhm}';
+	var yhm='${sessionScope.yh.yhm}';
 	var mm = $("#mm").val();
 	if(mm==null||mm==""){
   	alert("原密码不能为空");
@@ -314,8 +314,7 @@ function checkMm(){
 	else{
 		$.ajaxSetup({async:false});
 		$.post(xtglPath+"checkMm",
-			//{passWord:MD5(passWord).toUpperCase(),yhm:yhm},
-			{mm:mm,yhm:yhm},
+			{mm:MD5(mm).toUpperCase(),yhm:yhm},
 			function(data){
 				if(data.status=="ok"){
 					flag=true;
@@ -365,7 +364,7 @@ function checkXmm2(){
 function checkEditYhxx(){
 	if(checkNc()){
 		if(checkXm()){
-			var id='${sessionScope.yongHu.id}';
+			var id='${sessionScope.yh.id}';
 			var nc = $("#nc").val();
 			var xm = $("#xm").val();
 			var js = $("#js").val();
@@ -476,13 +475,13 @@ function setFitWidthInParent(parent,self){
 					用户名
 				</td>
 				<td class="td2">
-					${requestScope.yongHu.yhm }
+					${requestScope.yh.yhm }
 				</td>
 				<td class="td1" align="right">
 					昵称
 				</td>
 				<td class="td2">
-					${requestScope.yongHu.nc }
+					${requestScope.yh.nc }
 				</td>
 			  </tr>
 			  <tr>
@@ -490,7 +489,7 @@ function setFitWidthInParent(parent,self){
 					姓名
 				</td>
 				<td class="td2">
-					${requestScope.yongHu.xm }
+					${requestScope.yh.xm }
 				</td>
 				<td class="td1" align="right">
 					密码
@@ -505,7 +504,7 @@ function setFitWidthInParent(parent,self){
 					简述
 				</td>
 				<td class="td2">
-					${requestScope.yongHu.js }
+					${requestScope.yh.js }
 				</td>
 				<td class="td1" align="right">
 				</td>
@@ -561,7 +560,7 @@ function setFitWidthInParent(parent,self){
 						昵称
 					</td>
 					<td class="td2">
-						<input type="text" id="nc" value="${requestScope.yongHu.nc }" placeholder="昵称" onfocus="focusNc()" onblur="checkNc()"/>
+						<input type="text" id="nc" value="${requestScope.yh.nc }" placeholder="昵称" onfocus="focusNc()" onblur="checkNc()"/>
 					</td>
 				  </tr>
 				  <tr>
@@ -569,7 +568,7 @@ function setFitWidthInParent(parent,self){
 						姓名
 					</td>
 					<td class="td2">
-						<input type="text" id="xm" value="${requestScope.yongHu.xm }" placeholder="姓名" onfocus="focusXm()" onblur="checkXm()"/>
+						<input type="text" id="xm" value="${requestScope.yh.xm }" placeholder="姓名" onfocus="focusXm()" onblur="checkXm()"/>
 					</td>
 				  </tr>
 				  <tr>
@@ -577,7 +576,7 @@ function setFitWidthInParent(parent,self){
 						简述
 					</td>
 					<td class="td2">
-						<textarea id="js" rows="3" cols="30" placeholder="请输入简述">${requestScope.yongHu.js }</textarea>
+						<textarea id="js" rows="3" cols="30" placeholder="请输入简述">${requestScope.yh.js }</textarea>
 					</td>
 				  </tr>
 				</table>

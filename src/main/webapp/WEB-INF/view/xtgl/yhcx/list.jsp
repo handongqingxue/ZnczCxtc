@@ -53,7 +53,8 @@ function initTab1(){
 		columns:[[
 			{field:"yhm",title:"用户名",width:150},
 			{field:"nc",title:"昵称",width:150},
-			{field:"zsxm",title:"真实姓名",width:150},
+			{field:"xm",title:"真实姓名",width:150},
+			{field:"zt",title:"状态",width:100},
 			{field:"cjsj",title:"创建时间",width:150},
 			{field:"check",title:"审核状态",width:100,formatter:function(value,row){
             	return value?"已审核":"未审核";
@@ -67,7 +68,7 @@ function initTab1(){
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{yhm:"<div style=\"text-align:center;\">暂无信息<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"yhm",colspan:6});
+				$(this).datagrid("mergeCells",{index:0,field:"yhm",colspan:7});
 				data.total=0;
 			}
 			

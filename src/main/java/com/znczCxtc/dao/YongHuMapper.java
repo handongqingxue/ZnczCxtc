@@ -21,5 +21,7 @@ public interface YongHuMapper {
 	
 	List<YongHu> queryList(@Param("yhm") String yhm, @Param("check") Boolean check, @Param("rowNum") int rowNum, @Param("rows") int rows, String sort, String order);
 
+	YongHu selectById(@Param("id") String id);
+	
 	int updateMmById(@Param("mm") String mm, @Param("id") Integer id);
 }

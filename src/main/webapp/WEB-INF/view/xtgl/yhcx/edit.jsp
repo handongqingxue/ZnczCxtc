@@ -94,7 +94,7 @@ function initEditDialog(){
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 
 	initCheckCBB();
-	initQXCBB();
+	initJSCBB();
 }
 
 function initCheckCBB(){
@@ -113,22 +113,22 @@ function initCheckCBB(){
 	});
 }
 
-function initQXCBB(){
+function initJSCBB(){
 	var data=[];
-	data.push({"value":"","text":"请选择权限"});
-	$.post(xtglPath+"queryQuanXianCBBList",
+	data.push({"value":"","text":"请选择角色"});
+	$.post(xtglPath+"queryJueSeCBBList",
 		function(result){
 			var rows=result.rows;
 			for(var i=0;i<rows.length;i++){
 				data.push({"value":rows[i].id,"text":rows[i].mc});
 			}
-			qxCBB=$("#edit_div #qx_cbb").combobox({
+			jsCBB=$("#edit_div #js_cbb").combobox({
 				valueField:"value",
 				textField:"text",
 				data:data,
 				multiple:true,
 				onLoadSuccess:function(){
-					$(this).combobox("setValues",'${requestScope.yh.qxIds }'.split(","));
+					$(this).combobox("setValues",'${requestScope.yh.jsIds }'.split(","));
 				}
 			});
 		}
@@ -142,12 +142,12 @@ function checkEdit(){
 function editYongHu(){
 	var check=checkCBB.combobox("getValue");
 	$("#edit_div #check").val(check);
-	var qxIdsArr=qxCBB.combobox("getValues");
-	var qxIds=qxIdsArr.sort().toString();
-	if(qxIds.substring(0,1)==",")
-		qxIds=qxIds.substring(1);
-	qxCBB.combobox("setValues",qxIds.split(","));
-	$("#edit_div #qxIds").val(qxIds);
+	var jsIdsArr=jsCBB.combobox("getValues");
+	var jsIds=jsIdsArr.sort().toString();
+	if(jsIds.substring(0,1)==",")
+		jsIds=jsIds.substring(1);
+	jsCBB.combobox("setValues",jsIds.split(","));
+	$("#edit_div #jsIds").val(jsIds);
 	
 	var formData = new FormData($("#form1")[0]);
 	$.ajax({
@@ -210,7 +210,7 @@ function setFitWidthInParent(parent,self){
 					真实姓名
 				</td>
 				<td class="td2">
-					<input type="text" class="zsxm_inp" id="zsxm" name="zsxm" value="${requestScope.yh.zsxm }"/>
+					<input type="text" class="zsxm_inp" id="zsxm" name="zsxm" value="${requestScope.yh.xm }"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -236,11 +236,11 @@ function setFitWidthInParent(parent,self){
 					<input type="text" class="js_inp" id="js" name="js" value="${requestScope.yh.js }"/>
 				</td>
 				<td class="td1" align="right">
-					权限
+					角色
 				</td>
 				<td class="td2">
-					<input id="qx_cbb"/>
-					<input type="hidden" id="qxIds" name="qxIds" value="${requestScope.yh.qxIds }"/>
+					<input id="js_cbb"/>
+					<input type="hidden" id="jsIds" name="jsIds" value="${requestScope.yh.jsIds }"/>
 				</td>
 			  </tr>
 			</table>

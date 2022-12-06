@@ -26,6 +26,9 @@
 			</if>
 				cjsj,
 				`check`,
+			<if test="js!=null">
+				js,
+			</if>
 			<if test="jsIds!=null">
 				jsIds,
 			</if>
@@ -46,6 +49,9 @@
 			</if>
 				now(),
 				0,
+			<if test="js!=null">
+				#{js},
+			</if>
 			<if test="jsIds!=null">
 				#{jsIds},
 			</if>
@@ -91,6 +97,9 @@
 		</if>
 		order by cjsj
 		limit #{rowNum},#{rows}
+	</select>
+	<select id="selectById" resultType="com.znczCxtc.entity.YongHu">
+		select * from yong_hu where id=#{id}
 	</select>
 	<update id="updateMmById">
 		update yong_hu set mm=#{mm} where id=#{id}

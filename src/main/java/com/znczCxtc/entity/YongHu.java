@@ -47,6 +47,18 @@ public class YongHu {
 	public void setMm(String mm) {
 		this.mm = mm;
 	}
+	public String getCjsj() {
+		return cjsj;
+	}
+	public void setCjsj(String cjsj) {
+		this.cjsj = cjsj;
+	}
+	public Boolean getCheck() {
+		return check;
+	}
+	public void setCheck(Boolean check) {
+		this.check = check;
+	}
 	public String getJs() {
 		return js;
 	}
@@ -81,6 +93,8 @@ public class YongHu {
 	private String xm;
 	private Integer zt;//1.新增2.正常使用3.废弃4.有误
 	private String mm;
+	private String cjsj;
+	private Boolean check;
 	private String js;
 	private String jsIds;
 	private String qxIds;

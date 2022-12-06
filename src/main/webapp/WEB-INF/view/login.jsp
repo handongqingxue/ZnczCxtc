@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="<%=basePath %>resource/js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="<%=basePath %>resource/js/MD5.js"></script>
 <script type="text/javascript">
 var path='<%=basePath %>';
 function focusYHM(){
@@ -57,7 +58,7 @@ function login(){
 			var mm=$("#mm_inp").val();
 			//var loginVCode=$("#loginVCode").val();
 			$.post(path+"main/login",
-				{yhm:yhm,mm:mm},
+				{yhm:yhm,mm:MD5(mm).toUpperCase()},
 				function(json){
 		        	console.log(json)
 		        	if(json.status==0){

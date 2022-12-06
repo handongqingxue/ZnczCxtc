@@ -40,6 +40,12 @@ public class YongHuServiceImpl implements YongHuService {
 	}
 
 	@Override
+	public YongHu selectById(String id) {
+		// TODO Auto-generated method stub
+		return yongHuDao.selectById(id);
+	}
+
+	@Override
 	public boolean checkMm(String mm, String yhm) {
 		// TODO Auto-generated method stub
 

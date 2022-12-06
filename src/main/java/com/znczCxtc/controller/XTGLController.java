@@ -22,15 +22,28 @@ public class XTGLController {
 
 	@Autowired
 	private YongHuService yongHuService;
+	@Autowired
+	private JueSeService jueSeService;
 	static final String MODULE_NAME=Constant.XTGL_MODULE_NAME;
 	
 	@RequestMapping(value="/yhxx")
 	public String goYhxx(HttpServletRequest request) {
 		
-		YongHu yongHu=(YongHu)SecurityUtils.getSubject().getPrincipal();
-		request.setAttribute("yongHu", yongHu);
+		YongHu yh=(YongHu)SecurityUtils.getSubject().getPrincipal();
+		request.setAttribute("yh", yh);
 		
 		return MODULE_NAME+"/yhxx";
+	}
+
+	@RequestMapping(value="/yhcx/edit")
+	public String goYhcxEdit(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		String id = request.getParameter("id");
+		YongHu yh=yongHuService.selectById(id);
+		request.setAttribute("yh", yh);
+		
+		return MODULE_NAME+"/yhcx/edit";
 	}
 	
 	@RequestMapping(value="/yhcx/list")
@@ -106,5 +119,18 @@ public class XTGLController {
 			plan.setStatus(1);
 		}
 		return JsonUtil.getJsonFromObject(plan);
+	}
+	
+	@RequestMapping(value="/queryJueSeCBBList")
+	@ResponseBody
+	public Map<String, Object> queryJueSeCBBList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<JueSe> jsList=jueSeService.queryCBBList();
+		
+		jsonMap.put("rows", jsList);
+		
+		return jsonMap;
 	}
 }

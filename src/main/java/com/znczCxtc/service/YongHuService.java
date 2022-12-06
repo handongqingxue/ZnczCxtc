@@ -16,6 +16,8 @@ public interface YongHuService {
 
 	List<YongHu> queryList(String yhm, Boolean check, int page, int rows, String sort, String order);
 
+	YongHu selectById(String id);
+
 	int updateMmById(String mm, Integer id);
 
 }
