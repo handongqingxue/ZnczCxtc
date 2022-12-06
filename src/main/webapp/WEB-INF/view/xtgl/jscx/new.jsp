@@ -52,7 +52,7 @@ function initNewDialog(){
 	$("#new_div").dialog({
 		title:"角色信息",
 		width:setFitWidthInParent("body","new_div"),
-		height:200,
+		height:240,
 		top:dialogTop,
 		left:dialogLeft,
 		buttons:[
@@ -70,7 +70,14 @@ function initNewDialog(){
 	$("#new_div table .td1").css("width","15%");
 	$("#new_div table .td2").css("width","30%");
 	$("#new_div table tr").css("border-bottom","#CAD9EA solid 1px");
-	$("#new_div table tr").eq(0).css("height","90px");
+	$("#new_div table tr").each(function(i){
+		var height;
+		if(i==1)
+			height=90;
+		else
+			height=45;
+		$(this).css("height",height+"px");
+	});
 
 	$(".panel.window").eq(ndNum).css("margin-top","20px");
 	$(".panel.window .panel-title").eq(ndNum).css("color","#000");
@@ -172,6 +179,16 @@ function setFitWidthInParent(parent,self){
 				</td>
 				<td class="td2">
 					<input type="text" class="mc_inp" id="mc" name="mc" placeholder="请输入名称" onfocus="focusMC()" onblur="checkMC()"/>
+				</td>
+				<td class="td1" align="right">
+				</td>
+				<td class="td2">
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
+				</td>
+				<td class="td2">
 				</td>
 				<td class="td1" align="right">
 					描述
