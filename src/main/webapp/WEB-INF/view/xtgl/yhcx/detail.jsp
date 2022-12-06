@@ -139,8 +139,10 @@ function setFitWidthInParent(parent,self){
 					${requestScope.yh.js }
 				</td>
 				<td class="td1" align="right">
+					角色
 				</td>
 				<td class="td2">
+					${requestScope.yh.jsMcs }
 				</td>
 			  </tr>
 			</table>

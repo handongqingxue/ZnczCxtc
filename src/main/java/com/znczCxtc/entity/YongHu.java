@@ -91,6 +91,12 @@ public class YongHu {
 	public void setJsIds(String jsIds) {
 		this.jsIds = jsIds;
 	}
+	public String getJsMcs() {
+		return jsMcs;
+	}
+	public void setJsMcs(String jsMcs) {
+		this.jsMcs = jsMcs;
+	}
 	public String getQxIds() {
 		return qxIds;
 	}
@@ -116,6 +122,7 @@ public class YongHu {
 	private String cjsj;
 	private String js;
 	private String jsIds;
+	private String jsMcs;
 	private String qxIds;
 
 }

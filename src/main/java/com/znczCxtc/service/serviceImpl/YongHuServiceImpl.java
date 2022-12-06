@@ -14,6 +14,8 @@ public class YongHuServiceImpl implements YongHuService {
 
 	@Autowired
 	private YongHuMapper yongHuDao;
+	@Autowired
+	private JueSeMapper jueSeDao;
 
 	@Override
 	public int add(YongHu yh) {
@@ -42,7 +44,23 @@ public class YongHuServiceImpl implements YongHuService {
 	@Override
 	public YongHu selectById(String id) {
 		// TODO Auto-generated method stub
-		return yongHuDao.selectById(id);
+		YongHu yh = yongHuDao.selectById(id);
+		List<JueSe> jsList = jueSeDao.queryCBBList();
+		String jsIds = yh.getJsIds();
+		String[] jsIdArr = jsIds.split(",");
+		String jsMcs = "";
+		for (String jsIdStr : jsIdArr) {
+			int jsId = Integer.valueOf(jsIdStr);
+			for (int j = 0; j < jsList.size(); j++) {
+				JueSe js = jsList.get(j);
+				if(jsId==js.getId()) {
+					jsMcs+=","+js.getMc();
+					break;
+				}
+			}
+		}
+		yh.setJsMcs(jsMcs.substring(1));
+		return yh;
 	}
 
 	@Override
