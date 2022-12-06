@@ -54,6 +54,22 @@ public class XTGLController {
 		return MODULE_NAME+"/yhcx/list";
 	}
 	
+	@RequestMapping(value="/jscx/new")
+	public String goJscxNew(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		
+		return MODULE_NAME+"/jscx/new";
+	}
+	
+	@RequestMapping(value="/jscx/list")
+	public String goJscxList(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		
+		return MODULE_NAME+"/jscx/list";
+	}
+	
 	@RequestMapping(value="/checkMm")
 	@ResponseBody
 	public Map<String, Object> checkMm(String mm, String yhm) {
@@ -100,6 +116,21 @@ public class XTGLController {
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", yhList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryJueSeList")
+	@ResponseBody
+	public Map<String, Object> queryJueSeList(String mc,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = jueSeService.queryForInt(mc);
+		List<JueSe> jsList=jueSeService.queryList(mc, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", jsList);
 		
 		return jsonMap;
 	}

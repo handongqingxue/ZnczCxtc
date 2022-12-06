@@ -16,6 +16,18 @@ public class JueSeServiceImpl implements JueSeService {
 	private JueSeMapper jueSeDao;
 
 	@Override
+	public int queryForInt(String mc) {
+		// TODO Auto-generated method stub
+		return jueSeDao.queryForInt(mc);
+	}
+
+	@Override
+	public List<JueSe> queryList(String mc, int page, int rows, String sort, String order) {
+		// TODO Auto-generated method stub
+		return jueSeDao.queryList(mc, (page-1)*rows, rows, sort, order);
+	}
+
+	@Override
 	public List<JueSe> queryCBBList() {
 		// TODO Auto-generated method stub
 		return jueSeDao.queryCBBList();

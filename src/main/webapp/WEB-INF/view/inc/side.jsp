@@ -459,7 +459,7 @@ function showLeftMenuByQx(){
 					<div class="line_div"></div>
 					<li class="layui-nav-item">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
-						<a href="<%=basePath%>background/bus/busStop/list">
+						<a href="<%=basePath%>xtgl/jscx/list">
 							&nbsp;&nbsp;&nbsp;角色查询
 						</a>
 					</li>
