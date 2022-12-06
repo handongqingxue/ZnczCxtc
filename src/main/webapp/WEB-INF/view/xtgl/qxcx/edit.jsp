@@ -19,12 +19,8 @@
 	margin-left: 20px;
 	font-size: 18px;
 }
-.zsxm_inp{
+.mc_inp,.px_inp{
 	width: 150px;
-	height:30px;
-}
-.js_inp{
-	width: 180px;
 	height:30px;
 }
 </style>
@@ -54,9 +50,9 @@ function initDialogPosition(){
 function initEditDialog(){
 	dialogTop+=20;
 	$("#edit_div").dialog({
-		title:"用户信息",
+		title:"权限信息",
 		width:setFitWidthInParent("body","edit_div"),
-		height:250,
+		height:200,
 		top:dialogTop,
 		left:dialogLeft,
 		buttons:[
@@ -74,7 +70,9 @@ function initEditDialog(){
 	$("#edit_div table .td1").css("width","15%");
 	$("#edit_div table .td2").css("width","30%");
 	$("#edit_div table tr").css("border-bottom","#CAD9EA solid 1px");
-	$("#edit_div table tr").css("height","45px");
+	$("#edit_div table tr").each(function(i){
+		$(this).css("height",(i==0?90:45)+"px");
+	});
 
 	$(".panel.window").eq(edNum).css("margin-top","20px");
 	$(".panel.window .panel-title").eq(edNum).css("color","#000");
@@ -92,48 +90,19 @@ function initEditDialog(){
 	
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
-
-	initJSIdsCBB();
-}
-
-function initJSIdsCBB(){
-	var data=[];
-	data.push({"value":"","text":"请选择角色"});
-	$.post(xtglPath+"queryJueSeCBBList",
-		function(result){
-			var rows=result.rows;
-			for(var i=0;i<rows.length;i++){
-				data.push({"value":rows[i].id,"text":rows[i].mc});
-			}
-			jsIdsCBB=$("#edit_div #jsIds_cbb").combobox({
-				valueField:"value",
-				textField:"text",
-				data:data,
-				multiple:true,
-				onLoadSuccess:function(){
-					$(this).combobox("setValues",'${requestScope.yh.jsIds }'.split(","));
-				}
-			});
-		}
-	,"json");
 }
 
 function checkEdit(){
-	editYongHu();
+	if(checkMC()){
+		editQuanXian();
+	}
 }
 
-function editYongHu(){
-	var jsIdsArr=jsIdsCBB.combobox("getValues");
-	var jsIds=jsIdsArr.sort().toString();
-	if(jsIds.substring(0,1)==",")
-		jsIds=jsIds.substring(1);
-	jsIdsCBB.combobox("setValues",jsIds.split(","));
-	$("#edit_div #jsIds").val(jsIds);
-	
+function editQuanXian(){
 	var formData = new FormData($("#form1")[0]);
 	$.ajax({
 		type:"post",
-		url:xtglPath+"editYongHu",
+		url:xtglPath+"editQuanXian",
 		dataType: "json",
 		data:formData,
 		cache: false,
@@ -145,10 +114,30 @@ function editYongHu(){
 				history.go(-1);
 			}
 			else{
-				alert(data.msg);
+				alert(data.info);
 			}
 		}
 	});
+}
+
+function focusMC(){
+	var mc = $("#mc").val();
+	if(mc=="名称不能为空"){
+		$("#mc").val("");
+		$("#mc").css("color", "#555555");
+	}
+}
+
+//验证名称
+function checkMC(){
+	var mc = $("#mc").val();
+	if(mc==null||mc==""||mc=="名称不能为空"){
+		$("#mc").css("color","#E15748");
+    	$("#mc").val("名称不能为空");
+    	return false;
+	}
+	else
+		return true;
 }
 
 function setFitWidthInParent(parent,self){
@@ -174,55 +163,24 @@ function setFitWidthInParent(parent,self){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../inc/side.jsp"%>
 	<div class="center_con_div" id="center_con_div">
-		<div class="page_location_div">用户-编辑</div>
+		<div class="page_location_div">权限-编辑</div>
 		
 		<div id="edit_div">
 			<form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
-			<input type="hidden" id="id" name="id" value="${requestScope.yh.id }"/>
+			<input type="hidden" id="id" name="id" value="${requestScope.qx.id }"/>
 			<table>
 			  <tr>
 				<td class="td1" align="right">
-					用户名
+					名称
 				</td>
 				<td class="td2">
-					${requestScope.yh.yhm }
+					<input type="text" class="mc_inp" id="mc" name="mc" value="${requestScope.qx.mc }" placeholder="请输入名称" onfocus="focusMC()" onblur="checkMC()"/>
 				</td>
 				<td class="td1" align="right">
-					真实姓名
+					描述
 				</td>
 				<td class="td2">
-					<input type="text" class="zsxm_inp" id="zsxm" name="zsxm" value="${requestScope.yh.xm }"/>
-				</td>
-			  </tr>
-			  <tr>
-				<td class="td1" align="right">
-					创建时间
-				</td>
-				<td class="td2">
-					${requestScope.yh.cjsj }
-				</td>
-				<td class="td1" align="right">
-					审核状态
-				</td>
-				<td class="td2">
-					<c:if test="${requestScope.yh.shzt eq requestScope.dshShzt }">${requestScope.dshShztMc }</c:if>
-					<c:if test="${requestScope.yh.shzt eq requestScope.shtgShzt }">${requestScope.shtgShztMc}</c:if>
-					<c:if test="${requestScope.yh.shzt eq requestScope.bjzShzt }">${requestScope.bjzShztMc}</c:if>
-				</td>
-			  </tr>
-			  <tr>
-				<td class="td1" align="right">
-					简述
-				</td>
-				<td class="td2">
-					<input type="text" class="js_inp" id="js" name="js" value="${requestScope.yh.js }"/>
-				</td>
-				<td class="td1" align="right">
-					角色
-				</td>
-				<td class="td2">
-					<input id="jsIds_cbb"/>
-					<input type="hidden" id="jsIds" name="jsIds" value="${requestScope.yh.jsIds }"/>
+					<textarea id="ms" name="ms" rows="3" cols="30" placeholder="请输入描述">${requestScope.qx.ms }</textarea>
 				</td>
 			  </tr>
 			</table>

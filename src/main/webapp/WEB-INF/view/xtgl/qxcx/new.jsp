@@ -50,9 +50,9 @@ function initDialogPosition(){
 function initNewDialog(){
 	dialogTop+=20;
 	$("#new_div").dialog({
-		title:"角色信息",
+		title:"权限信息",
 		width:setFitWidthInParent("body","new_div"),
-		height:240,
+		height:200,
 		top:dialogTop,
 		left:dialogLeft,
 		buttons:[
@@ -70,14 +70,7 @@ function initNewDialog(){
 	$("#new_div table .td1").css("width","15%");
 	$("#new_div table .td2").css("width","30%");
 	$("#new_div table tr").css("border-bottom","#CAD9EA solid 1px");
-	$("#new_div table tr").each(function(i){
-		var height;
-		if(i==1)
-			height=90;
-		else
-			height=45;
-		$(this).css("height",height+"px");
-	});
+	$("#new_div table tr").eq(0).css("height","90px");
 
 	$(".panel.window").eq(ndNum).css("margin-top","20px");
 	$(".panel.window .panel-title").eq(ndNum).css("color","#000");
@@ -95,67 +88,19 @@ function initNewDialog(){
 	
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
-
-	initZtCBB();
-	initQXCBB();
-}
-
-function initZtCBB(){
-	var data=[];
-	data.push({"value":"","text":"请选择"});
-	data.push({"value":1,"text":"新增"});
-	data.push({"value":2,"text":"正常使用"});
-	data.push({"value":3,"text":"废弃"});
-	data.push({"value":4,"text":"有误"});
-	
-	ztCBB=$("#new_div #zt_cbb").combobox({
-		valueField:"value",
-		textField:"text",
-		data:data
-	});
-}
-
-function initQXCBB(){
-	var data=[];
-	data.push({"value":"","text":"请选择"});
-	$.post(xtglPath+"queryQuanXianCBBList",
-		function(result){
-			var rows=result.rows;
-			for(var i=0;i<rows.length;i++){
-				data.push({"value":rows[i].id,"text":rows[i].mc});
-			}
-			qxCBB=$("#new_div #qx_cbb").combobox({
-				valueField:"value",
-				textField:"text",
-				data:data,
-				multiple:true
-			});
-		}
-	,"json");
 }
 
 function checkNew(){
 	if(checkMC()){
-		if(checkZtId()){
-			newQuanXian();
-		}
+		newQuanXian();
 	}
 }
 
 function newQuanXian(){
-	var ztId=ztCBB.combobox("getValue");
-	$("#ztId").val(ztId);
-	var qxIdsArr=qxCBB.combobox("getValues");
-	var qxIds=qxIdsArr.sort().toString();
-	if(qxIds.substring(0,1)==",")
-		qxIds=qxIds.substring(1);
-	qxCBB.combobox("setValues",qxIds.split(","));
-	$("#new_div #qxIds").val(qxIds);
-	
 	var formData = new FormData($("#form1")[0]);
 	$.ajax({
 		type:"post",
-		url:xtglPath+"newJueSe",
+		url:xtglPath+"newQuanXian",
 		dataType: "json",
 		data:formData,
 		cache: false,
@@ -193,17 +138,6 @@ function checkMC(){
 		return true;
 }
 
-//验证状态
-function checkZtId(){
-	var ztId=ztCBB.combobox("getValue");
-	if(ztId==null||ztId==""){
-	  	alert("请选择状态");
-	  	return false;
-	}
-	else
-		return true;
-}
-
 function setFitWidthInParent(parent,self){
 	var space=0;
 	switch (self) {
@@ -227,7 +161,7 @@ function setFitWidthInParent(parent,self){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../inc/side.jsp"%>
 	<div class="center_con_div" id="center_con_div">
-		<div class="page_location_div">角色-添加</div>
+		<div class="page_location_div">权限-添加</div>
 		
 		<div id="new_div">
 			<form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
@@ -238,22 +172,6 @@ function setFitWidthInParent(parent,self){
 				</td>
 				<td class="td2">
 					<input type="text" class="mc_inp" id="mc" name="mc" placeholder="请输入名称" onfocus="focusMC()" onblur="checkMC()"/>
-				</td>
-				<td class="td1" align="right">
-					状态
-				</td>
-				<td class="td2">
-					<input id="zt_cbb"/>
-					<input type="hidden" id="ztId" name="ztId"/>
-				</td>
-			  </tr>
-			  <tr>
-				<td class="td1" align="right">
-					权限
-				</td>
-				<td class="td2">
-					<input id="qx_cbb"/>
-					<input type="hidden" id="qxIds" name="qxIds"/>
 				</td>
 				<td class="td1" align="right">
 					描述

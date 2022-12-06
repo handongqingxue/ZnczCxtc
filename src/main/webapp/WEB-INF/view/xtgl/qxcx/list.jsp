@@ -12,10 +12,10 @@
 .tab1_div .toolbar{
 	height:32px;
 }
-.tab1_div .toolbar .yhm_span{
+.tab1_div .toolbar .mc_span{
 	margin-left: 13px;
 }
-.tab1_div .toolbar .yhm_inp{
+.tab1_div .toolbar .mc_inp{
 	width: 120px;height: 25px;
 }
 .tab1_div .toolbar .search_but{
@@ -27,67 +27,51 @@
 <script type="text/javascript">
 var path='<%=basePath %>';
 var xtglPath=path+'xtgl/';
-
-var dshShzt;
-var shtgShzt;
-var bjzShzt;
-
-var dshShztMc;
-var shtgShztMc;
-var bjzShztMc;
 $(function(){
-	initShztVar();
-	
 	initSearchLB();
+	initAddLB();
 	initTab1();
 });
-
-function initShztVar(){
-	dshShzt=parseInt('${requestScope.dshShzt}');
-	shtgShzt=parseInt('${requestScope.shtgShzt}');
-	bjzShzt=parseInt('${requestScope.bjzShzt}');
-
-	dshShztMc='${requestScope.dshShztMc}';
-	shtgShztMc='${requestScope.shtgShztMc}';
-	bjzShztMc='${requestScope.bjzShztMc}';
-}
 
 function initSearchLB(){
 	$("#search_but").linkbutton({
 		iconCls:"icon-search",
 		onClick:function(){
-			var yhm=$("#toolbar #yhm").val();
-			tab1.datagrid("load",{yhm:yhm});
+			var mc=$("#toolbar #mc").val();
+			tab1.datagrid("load",{mc:mc});
+		}
+	});
+}
+
+function initAddLB(){
+	$("#add_but").linkbutton({
+		iconCls:"icon-add",
+		onClick:function(){
+			location.href=xtglPath+"qxcx/new";
 		}
 	});
 }
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"系统管理-用户查询-列表",
-		url:xtglPath+"queryYongHuList",
+		title:"权限查询",
+		url:xtglPath+"queryQuanXianList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
 		pagination:true,
 		pageSize:10,
 		columns:[[
-			{field:"yhm",title:"用户名",width:150},
-			{field:"nc",title:"昵称",width:150},
-			{field:"xm",title:"真实姓名",width:150},
-			{field:"cjsj",title:"创建时间",width:150},
-			{field:"shzt",title:"审核状态",width:100,formatter:function(value,row){
-            	return getShztMcById(value);
-			}},
-            {field:"id",title:"操作",width:110,formatter:function(value,row){
-            	var str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
-            		+"<a href=\"detail?id="+value+"\">详情</a>";
+			{field:"mc",title:"名称",width:150},
+			{field:"ms",title:"描述",width:300},
+            {field:"id",title:"操作",width:50,formatter:function(value,row){
+            	var str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;";
             	return str;
             }}
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{yhm:"<div style=\"text-align:center;\">暂无信息<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"yhm",colspan:6});
+				$(this).datagrid("appendRow",{mc:"<div style=\"text-align:center;\">暂无信息<div>"});
+				$(this).datagrid("mergeCells",{index:0,field:"mc",colspan:3});
 				data.total=0;
 			}
 			
@@ -97,22 +81,6 @@ function initTab1(){
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 		}
 	});
-}
-
-function getShztMcById(shztId){
-	var str;
-	switch (shztId) {
-	case dshShzt:
-		str=dshShztMc;//待审核
-		break;
-	case shtgShzt:
-		str=shtgShztMc;//审核通过
-		break;
-	case bjzShzt:
-		str=bjzShztMc;//编辑中
-		break;
-	}
-	return str;
 }
 
 function setFitWidthInParent(o){
@@ -126,9 +94,10 @@ function setFitWidthInParent(o){
 	<%@include file="../../inc/side.jsp"%>
 	<div class="tab1_div" id="tab1_div">
 		<div class="toolbar" id="toolbar">
-			<span class="yhm_span">用户名：</span>
-			<input type="text" class="yhm_inp" id="yhm" placeholder="请输入用户名"/>
+			<span class="mc_span">名称：</span>
+			<input type="text" class="mc_inp" id="mc" placeholder="请输入名称"/>
 			<a class="search_but" id="search_but">查询</a>
+			<a id="add_but">添加</a>
 		</div>
 		<table id="tab1">
 		</table>

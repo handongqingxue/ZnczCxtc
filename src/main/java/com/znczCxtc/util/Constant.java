@@ -336,6 +336,21 @@ public class Constant {
 	}
 	
 	/**
+	 * 存放用户审核状态常量
+	 * @param request
+	 */
+	public static void setYhShztInRequest(HttpServletRequest request) {
+		
+		request.setAttribute("dshShzt", YongHu.DAI_SHEN_HE);
+		request.setAttribute("shtgShzt", YongHu.SHEN_HE_TONG_GUO);
+		request.setAttribute("bjzShzt", YongHu.BIAN_JI_ZHONG);
+		
+		request.setAttribute("dshShztMc", YongHu.DAI_SHEN_HE_TEXT);
+		request.setAttribute("shtgShztMc", YongHu.SHEN_HE_TONG_GUO_TEXT);
+		request.setAttribute("bjzShztMc", YongHu.BIAN_JI_ZHONG_TEXT);
+	}
+	
+	/**
 	 * 存放司机审核状态常量
 	 * @param request
 	 */

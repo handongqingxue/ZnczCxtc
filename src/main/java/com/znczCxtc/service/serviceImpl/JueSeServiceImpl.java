@@ -16,6 +16,12 @@ public class JueSeServiceImpl implements JueSeService {
 	private JueSeMapper jueSeDao;
 
 	@Override
+	public int add(JueSe js) {
+		// TODO Auto-generated method stub
+		return jueSeDao.add(js);
+	}
+
+	@Override
 	public int queryForInt(String mc) {
 		// TODO Auto-generated method stub
 		return jueSeDao.queryForInt(mc);

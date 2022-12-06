@@ -24,6 +24,8 @@ public class XTGLController {
 	private YongHuService yongHuService;
 	@Autowired
 	private JueSeService jueSeService;
+	@Autowired
+	private QuanXianService quanXianService;
 	static final String MODULE_NAME=Constant.XTGL_MODULE_NAME;
 	
 	@RequestMapping(value="/yhxx")
@@ -43,6 +45,8 @@ public class XTGLController {
 		YongHu yh=yongHuService.selectById(id);
 		request.setAttribute("yh", yh);
 		
+		Constant.setYhShztInRequest(request);
+		
 		return MODULE_NAME+"/yhcx/edit";
 	}
 	
@@ -50,8 +54,22 @@ public class XTGLController {
 	public String goYhcxList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhShztInRequest(request);
 		
 		return MODULE_NAME+"/yhcx/list";
+	}
+
+	@RequestMapping(value="/yhcx/detail")
+	public String goYhcxDetail(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		String id = request.getParameter("id");
+		YongHu yh=yongHuService.selectById(id);
+		request.setAttribute("yh", yh);
+		
+		Constant.setYhShztInRequest(request);
+		
+		return MODULE_NAME+"/yhcx/detail";
 	}
 	
 	@RequestMapping(value="/jscx/new")
@@ -68,6 +86,33 @@ public class XTGLController {
 		//publicService.selectNav(request);
 		
 		return MODULE_NAME+"/jscx/list";
+	}
+	
+	@RequestMapping(value="/qxcx/new")
+	public String goQxcxNew(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		
+		return MODULE_NAME+"/qxcx/new";
+	}
+
+	@RequestMapping(value="/qxcx/edit")
+	public String goQxcxEdit(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		String id = request.getParameter("id");
+		QuanXian qx=quanXianService.selectById(id);
+		request.setAttribute("qx", qx);
+		
+		return MODULE_NAME+"/qxcx/edit";
+	}
+	
+	@RequestMapping(value="/qxcx/list")
+	public String goQxcxList(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		
+		return MODULE_NAME+"/qxcx/list";
 	}
 	
 	@RequestMapping(value="/checkMm")
@@ -120,6 +165,24 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/newJueSe")
+	@ResponseBody
+	public Map<String, Object> newJueSe(JueSe js) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=jueSeService.add(js);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建角色成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建角色失败！");
+		}
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/queryJueSeList")
 	@ResponseBody
 	public Map<String, Object> queryJueSeList(String mc,int page,int rows,String sort,String order) {
@@ -132,6 +195,57 @@ public class XTGLController {
 		jsonMap.put("total", count);
 		jsonMap.put("rows", jsList);
 		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryQuanXianList")
+	@ResponseBody
+	public Map<String, Object> queryQuanXianList(String mc,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = quanXianService.queryForInt(mc);
+		List<QuanXian> qxList=quanXianService.queryList(mc, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", qxList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/newQuanXian")
+	@ResponseBody
+	public Map<String, Object> newQuanXian(QuanXian qx) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=quanXianService.add(qx);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建权限成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建权限失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/editQuanXian")
+	@ResponseBody
+	public Map<String, Object> editQuanXian(QuanXian qx) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=quanXianService.edit(qx);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑权限成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑权限失败！");
+		}
 		return jsonMap;
 	}
 	
@@ -161,6 +275,19 @@ public class XTGLController {
 		List<JueSe> jsList=jueSeService.queryCBBList();
 		
 		jsonMap.put("rows", jsList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryQuanXianCBBList")
+	@ResponseBody
+	public Map<String, Object> queryQuanXianCBBList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<QuanXian> qxList=quanXianService.queryCBBList();
+		
+		jsonMap.put("rows", qxList);
 		
 		return jsonMap;
 	}

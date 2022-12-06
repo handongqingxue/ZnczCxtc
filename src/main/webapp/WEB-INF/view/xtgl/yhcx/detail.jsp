@@ -61,9 +61,7 @@ function initDetailDialog(){
 	$("#detail_div table .td1").css("width","15%");
 	$("#detail_div table .td2").css("width","30%");
 	$("#detail_div table tr").css("border-bottom","#CAD9EA solid 1px");
-	$("#detail_div table tr").each(function(i){
-		$(this).css("height",(i==3?90:45)+"px");
-	});
+	$("#detail_div table tr").css("height","45px");
 
 	$(".panel.window").eq(ddNum).css("margin-top","20px");
 	$(".panel.window .panel-title").eq(ddNum).css("color","#000");
@@ -114,7 +112,7 @@ function setFitWidthInParent(parent,self){
 					真实姓名
 				</td>
 				<td class="td2">
-					${requestScope.yh.zsxm }
+					${requestScope.yh.xm }
 				</td>
 			  </tr>
 			  <tr>
@@ -128,7 +126,9 @@ function setFitWidthInParent(parent,self){
 					审核状态
 				</td>
 				<td class="td2">
-					${requestScope.yh.check?'已审核':'未审核' }
+					<c:if test="${requestScope.yh.shzt eq requestScope.dshShzt }">${requestScope.dshShztMc }</c:if>
+					<c:if test="${requestScope.yh.shzt eq requestScope.shtgShzt }">${requestScope.shtgShztMc}</c:if>
+					<c:if test="${requestScope.yh.shzt eq requestScope.bjzShzt }">${requestScope.bjzShztMc}</c:if>
 				</td>
 			  </tr>
 			  <tr>

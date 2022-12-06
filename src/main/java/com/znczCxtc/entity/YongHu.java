@@ -3,6 +3,32 @@ package com.znczCxtc.entity;
 import java.io.Serializable;
 
 public class YongHu {
+	
+	/**
+	 * 待审核
+	 */
+	public static final int DAI_SHEN_HE=1;
+	/**
+	 * 审核通过
+	 */
+	public static final int SHEN_HE_TONG_GUO=2;
+	/**
+	 * 编辑中
+	 */
+	public static final int BIAN_JI_ZHONG=3;
+	
+	/**
+	 * 待审核
+	 */
+	public static final String DAI_SHEN_HE_TEXT="待审核";
+	/**
+	 * 审核通过
+	 */
+	public static final String SHEN_HE_TONG_GUO_TEXT="审核通过";
+	/**
+	 * 编辑中
+	 */
+	public static final String BIAN_JI_ZHONG_TEXT="编辑中";
 
 	private Integer id;
 	public Integer getId() {
@@ -35,11 +61,11 @@ public class YongHu {
 	public void setXm(String xm) {
 		this.xm = xm;
 	}
-	public Integer getZt() {
-		return zt;
+	public Integer getShzt() {
+		return shzt;
 	}
-	public void setZt(Integer zt) {
-		this.zt = zt;
+	public void setShzt(Integer shzt) {
+		this.shzt = shzt;
 	}
 	public String getMm() {
 		return mm;
@@ -52,12 +78,6 @@ public class YongHu {
 	}
 	public void setCjsj(String cjsj) {
 		this.cjsj = cjsj;
-	}
-	public Boolean getCheck() {
-		return check;
-	}
-	public void setCheck(Boolean check) {
-		this.check = check;
 	}
 	public String getJs() {
 		return js;
@@ -91,10 +111,9 @@ public class YongHu {
 	private String nc;
 	private String tx;
 	private String xm;
-	private Integer zt;//1.新增2.正常使用3.废弃4.有误
+	private Integer shzt;//审核状态：1.待审核 2.审核通过 3.编辑中
 	private String mm;
 	private String cjsj;
-	private Boolean check;
 	private String js;
 	private String jsIds;
 	private String qxIds;
