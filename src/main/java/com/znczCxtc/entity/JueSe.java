@@ -1,6 +1,16 @@
 package com.znczCxtc.entity;
 
 public class JueSe {
+	
+	public static final int XIN_ZENG=1;
+	public static final int ZHENG_CHANG_SHI_YONG=2;
+	public static final int FEI_QI=3;
+	public static final int YOU_WU=4;
+	
+	public static final String XIN_ZENG_TEXT="新增";
+	public static final String ZHENG_CHANG_SHI_YONG_TEXT="正常使用";
+	public static final String FEI_QI_TEXT="废弃";
+	public static final String YOU_WU_TEXT="有误";
 
 	private Integer id;//角色id
 	public Integer getId() {

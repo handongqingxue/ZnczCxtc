@@ -62,6 +62,7 @@ function initTab1(){
 		pageSize:10,
 		columns:[[
 			{field:"mc",title:"名称",width:150},
+			{field:"zt",title:"状态",width:100},
 			{field:"ms",title:"描述",width:300},
             {field:"id",title:"操作",width:50,formatter:function(value,row){
             	var str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;";
@@ -71,7 +72,7 @@ function initTab1(){
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{mc:"<div style=\"text-align:center;\">暂无信息<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"mc",colspan:3});
+				$(this).datagrid("mergeCells",{index:0,field:"mc",colspan:4});
 				data.total=0;
 			}
 			
