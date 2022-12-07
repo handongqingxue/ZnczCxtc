@@ -30,7 +30,19 @@ var xtglPath=path+'xtgl/';
 var dialogTop=70;
 var dialogLeft=20;
 var ndNum=0;
+
+var xzZt;
+var zcsyZt;
+var fqZt;
+var ywZt;
+
+var xzZtMc;
+var zcsyZtMc;
+var fqZtMc;
+var ywZtMc;
 $(function(){
+	initZtVar();
+	
 	initNewDialog();//0
 
 	initDialogPosition();//将不同窗体移动到主要内容区域
@@ -45,6 +57,18 @@ function initDialogPosition(){
 	ccDiv.append(ndpw);
 	ccDiv.append(ndws);
 	ccDiv.css("width",setFitWidthInParent("body","center_con_div")+"px");
+}
+
+function initZtVar(){
+	xzZt=parseInt('${requestScope.xzZt}');
+	zcsyZt=parseInt('${requestScope.zcsyZt}');
+	fqZt=parseInt('${requestScope.fqZt}');
+	ywZt=parseInt('${requestScope.ywZt}');
+
+	xzZtMc='${requestScope.xzZtMc}';
+	zcsyZtMc='${requestScope.zcsyZtMc}';
+	fqZtMc='${requestScope.fqZtMc}';
+	ywZtMc='${requestScope.ywZtMc}';
 }
 
 function initNewDialog(){
@@ -103,10 +127,10 @@ function initNewDialog(){
 function initZtCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择"});
-	data.push({"value":1,"text":"新增"});
-	data.push({"value":2,"text":"正常使用"});
-	data.push({"value":3,"text":"废弃"});
-	data.push({"value":4,"text":"有误"});
+	data.push({"value":xzZt,"text":xzZtMc});
+	data.push({"value":zcsyZt,"text":zcsyZtMc});
+	data.push({"value":fqZt,"text":fqZtMc});
+	data.push({"value":ywZt,"text":ywZtMc});
 	
 	ztCBB=$("#new_div #zt_cbb").combobox({
 		valueField:"value",
@@ -227,7 +251,7 @@ function setFitWidthInParent(parent,self){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../inc/side.jsp"%>
 	<div class="center_con_div" id="center_con_div">
-		<div class="page_location_div">角色-添加</div>
+		<div class="page_location_div">系统管理-角色-添加</div>
 		
 		<div id="new_div">
 			<form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">

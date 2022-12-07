@@ -46,7 +46,7 @@ function initDialogPosition(){
 function initDetailDialog(){
 	dialogTop+=20;
 	$("#detail_div").dialog({
-		title:"用户信息",
+		title:"角色信息",
 		width:setFitWidthInParent("body","detail_div"),
 		height:200,
 		top:dialogTop,
@@ -61,7 +61,9 @@ function initDetailDialog(){
 	$("#detail_div table .td1").css("width","15%");
 	$("#detail_div table .td2").css("width","30%");
 	$("#detail_div table tr").css("border-bottom","#CAD9EA solid 1px");
-	$("#detail_div table tr").css("height","45px");
+	$("#detail_div table tr").each(function(i){
+		$(this).css("height",(i==1?90:45)+"px");
+	});
 
 	$(".panel.window").eq(ddNum).css("margin-top","20px");
 	$(".panel.window .panel-title").eq(ddNum).css("color","#000");
@@ -98,51 +100,38 @@ function setFitWidthInParent(parent,self){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../inc/side.jsp"%>
 	<div class="center_con_div" id="center_con_div">
-		<div class="page_location_div">系统管理-用户-详情</div>
+		<div class="page_location_div">系统管理-角色-详情</div>
 		<div id="detail_div">
 			<table>
 			  <tr>
 				<td class="td1" align="right">
-					用户名
+					名称
 				</td>
 				<td class="td2">
-					${requestScope.yh.yhm }
+					${requestScope.js.mc }
 				</td>
 				<td class="td1" align="right">
-					真实姓名
+					状态
 				</td>
 				<td class="td2">
-					${requestScope.yh.xm }
+					<c:if test="${requestScope.js.zt eq requestScope.xzZt }">${requestScope.xzZtMc }</c:if>
+					<c:if test="${requestScope.js.zt eq requestScope.zcsyZt }">${requestScope.zcsyZtMc}</c:if>
+					<c:if test="${requestScope.js.zt eq requestScope.fqZt }">${requestScope.fqZtMc}</c:if>
+					<c:if test="${requestScope.js.zt eq requestScope.ywZt }">${requestScope.ywZtMc}</c:if>
 				</td>
 			  </tr>
 			  <tr>
 				<td class="td1" align="right">
-					创建时间
+					权限
 				</td>
 				<td class="td2">
-					${requestScope.yh.cjsj }
+					${requestScope.js.qxMcs }
 				</td>
 				<td class="td1" align="right">
-					审核状态
+					描述
 				</td>
 				<td class="td2">
-					<c:if test="${requestScope.yh.shzt eq requestScope.dshShzt }">${requestScope.dshShztMc }</c:if>
-					<c:if test="${requestScope.yh.shzt eq requestScope.shtgShzt }">${requestScope.shtgShztMc}</c:if>
-					<c:if test="${requestScope.yh.shzt eq requestScope.bjzShzt }">${requestScope.bjzShztMc}</c:if>
-				</td>
-			  </tr>
-			  <tr>
-				<td class="td1" align="right">
-					简述
-				</td>
-				<td class="td2">
-					${requestScope.yh.js }
-				</td>
-				<td class="td1" align="right">
-					角色
-				</td>
-				<td class="td2">
-					${requestScope.yh.jsMcs }
+					${requestScope.js.ms }
 				</td>
 			  </tr>
 			</table>

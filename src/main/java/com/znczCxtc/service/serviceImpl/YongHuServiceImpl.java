@@ -30,15 +30,15 @@ public class YongHuServiceImpl implements YongHuService {
 	}
 
 	@Override
-	public int queryForInt(String yhm,Boolean check) {
+	public int queryForInt(String yhm,Integer shzt) {
 		// TODO Auto-generated method stub
-		return yongHuDao.queryForInt(yhm,check);
+		return yongHuDao.queryForInt(yhm,shzt);
 	}
 
 	@Override
-	public List<YongHu> queryList(String yhm, Boolean check, int page, int rows, String sort, String order) {
+	public List<YongHu> queryList(String yhm, Integer shzt, int page, int rows, String sort, String order) {
 		// TODO Auto-generated method stub
-		return yongHuDao.queryList(yhm, check, (page-1)*rows, rows, sort, order);
+		return yongHuDao.queryList(yhm, shzt, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override
@@ -51,8 +51,8 @@ public class YongHuServiceImpl implements YongHuService {
 		String jsMcs = "";
 		for (String jsIdStr : jsIdArr) {
 			int jsId = Integer.valueOf(jsIdStr);
-			for (int j = 0; j < jsList.size(); j++) {
-				JueSe js = jsList.get(j);
+			for (int i = 0; i < jsList.size(); i++) {
+				JueSe js = jsList.get(i);
 				if(jsId==js.getId()) {
 					jsMcs+=","+js.getMc();
 					break;

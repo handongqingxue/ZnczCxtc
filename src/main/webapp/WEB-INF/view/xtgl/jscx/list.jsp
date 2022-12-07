@@ -78,7 +78,7 @@ function initAddLB(){
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"角色查询",
+		title:"系统管理-角色查询-列表",
 		url:xtglPath+"queryJueSeList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
@@ -90,8 +90,9 @@ function initTab1(){
 				return getZtMcById(value);
 			}},
 			{field:"ms",title:"描述",width:300},
-            {field:"id",title:"操作",width:50,formatter:function(value,row){
-            	var str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;";
+            {field:"id",title:"操作",width:110,formatter:function(value,row){
+            	var str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
+        			+"<a href=\"detail?id="+value+"\">详情</a>";
             	return str;
             }}
 	    ]],

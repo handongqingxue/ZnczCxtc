@@ -17,9 +17,9 @@ public interface YongHuMapper {
 
 	int edit(YongHu yh);
 
-	int queryForInt(@Param("yhm") String yhm,@Param("check") Boolean check);
+	int queryForInt(@Param("yhm") String yhm,@Param("shzt") Integer shzt);
 	
-	List<YongHu> queryList(@Param("yhm") String yhm, @Param("check") Boolean check, @Param("rowNum") int rowNum, @Param("rows") int rows, String sort, String order);
+	List<YongHu> queryList(@Param("yhm") String yhm, @Param("shzt") Integer shzt, @Param("rowNum") int rowNum, @Param("rows") int rows, String sort, String order);
 
 	YongHu selectById(@Param("id") String id);
 	

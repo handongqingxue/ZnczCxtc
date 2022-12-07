@@ -12,9 +12,9 @@ public interface YongHuService {
 
 	boolean checkMm(String mm, String yhm);
 
-	int queryForInt(String yhm,Boolean check);
+	int queryForInt(String yhm,Integer shzt);
 
-	List<YongHu> queryList(String yhm, Boolean check, int page, int rows, String sort, String order);
+	List<YongHu> queryList(String yhm, Integer shzt, int page, int rows, String sort, String order);
 
 	YongHu selectById(String id);
 

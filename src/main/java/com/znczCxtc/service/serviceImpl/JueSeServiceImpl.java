@@ -51,8 +51,8 @@ public class JueSeServiceImpl implements JueSeService {
 		String qxMcs = "";
 		for (String qxIdStr : qxIdArr) {
 			int qxId = Integer.valueOf(qxIdStr);
-			for (int j = 0; j < qxList.size(); j++) {
-				QuanXian qx = qxList.get(j);
+			for (int i = 0; i < qxList.size(); i++) {
+				QuanXian qx = qxList.get(i);
 				if(qxId==qx.getId()) {
 					qxMcs+=","+qx.getMc();
 					break;

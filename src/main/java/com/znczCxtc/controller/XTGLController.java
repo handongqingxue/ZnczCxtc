@@ -77,6 +77,8 @@ public class XTGLController {
 		
 		//publicService.selectNav(request);
 		
+		Constant.setJsZtInRequest(request);
+		
 		return MODULE_NAME+"/jscx/new";
 	}
 
@@ -100,6 +102,19 @@ public class XTGLController {
 		Constant.setJsZtInRequest(request);
 		
 		return MODULE_NAME+"/jscx/list";
+	}
+
+	@RequestMapping(value="/jscx/detail")
+	public String goJscxDetail(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		String id = request.getParameter("id");
+		JueSe js=jueSeService.selectById(id);
+		request.setAttribute("js", js);
+		
+		Constant.setJsZtInRequest(request);
+		
+		return MODULE_NAME+"/jscx/detail";
 	}
 	
 	@RequestMapping(value="/qxcx/new")
@@ -166,12 +181,12 @@ public class XTGLController {
 	
 	@RequestMapping(value="/queryYongHuList")
 	@ResponseBody
-	public Map<String, Object> queryYongHuList(String yhm,Boolean check,int page,int rows,String sort,String order) {
+	public Map<String, Object> queryYongHuList(String yhm,Integer shzt,int page,int rows,String sort,String order) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		int count = yongHuService.queryForInt(yhm,check);
-		List<YongHu> yhList=yongHuService.queryList(yhm, check, page, rows, sort, order);
+		int count = yongHuService.queryForInt(yhm,shzt);
+		List<YongHu> yhList=yongHuService.queryList(yhm, shzt, page, rows, sort, order);
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", yhList);

@@ -48,7 +48,7 @@
 				#{xm},
 			</if>
 				now(),
-				0,
+				${@com.znczCxtc.entity.YongHu@DAI_SHEN_HE},
 			<if test="js!=null">
 				#{js},
 			</if>
@@ -83,8 +83,8 @@
 		<if test="yhm!=''&amp;yhm!=null">
 			and yhm like CONCAT('%',#{yhm},'%')
 		</if>
-		<if test="check!=null">
-			and `check`=#{check}
+		<if test="shzt!=''&amp;shzt!=null">
+			and shzt=#{shzt}
 		</if>
 	</select>
 	<select id="queryList" resultType="com.znczCxtc.entity.YongHu">
@@ -92,8 +92,8 @@
 		<if test="yhm!=''&amp;yhm!=null">
 			and yhm like CONCAT('%',#{yhm},'%')
 		</if>
-		<if test="check!=null">
-			and `check`=#{check}
+		<if test="shzt!=''&amp;shzt!=null">
+			and shzt=#{shzt}
 		</if>
 		order by cjsj
 		limit #{rowNum},#{rows}
