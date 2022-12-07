@@ -79,6 +79,19 @@ public class XTGLController {
 		
 		return MODULE_NAME+"/jscx/new";
 	}
+
+	@RequestMapping(value="/jscx/edit")
+	public String goJscxEdit(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		String id = request.getParameter("id");
+		YongHu yh=jueSeService.selectById(id);
+		request.setAttribute("yh", yh);
+		
+		Constant.setYhShztInRequest(request);
+		
+		return MODULE_NAME+"/jscx/edit";
+	}
 	
 	@RequestMapping(value="/jscx/list")
 	public String goJscxList(HttpServletRequest request) {

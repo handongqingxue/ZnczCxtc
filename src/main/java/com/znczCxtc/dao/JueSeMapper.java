@@ -14,5 +14,7 @@ public interface JueSeMapper {
 
 	List<JueSe> queryList(@Param("mc") String mc, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("sort") String sort, @Param("order") String order);
 
+	JueSe selectById(@Param("id") String id);
+	
 	List<JueSe> queryCBBList();
 }

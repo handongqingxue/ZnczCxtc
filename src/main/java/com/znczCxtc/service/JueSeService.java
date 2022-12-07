@@ -12,5 +12,7 @@ public interface JueSeService {
 
 	List<JueSe> queryList(String mc, int page, int rows, String sort, String order);
 
+	JueSe selectById(String id);
+
 	List<JueSe> queryCBBList();
 }

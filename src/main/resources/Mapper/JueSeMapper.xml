@@ -48,6 +48,9 @@
 		</if>
 		limit #{rowNum},#{rows}
 	</select>
+	<select id="selectById" resultType="com.znczCxtc.entity.JueSe">
+		select * from jue_se where id=#{id}
+	</select>
 	<select id="queryCBBList" resultType="com.znczCxtc.entity.JueSe">
 		select id,mc from jue_se
 	</select>
