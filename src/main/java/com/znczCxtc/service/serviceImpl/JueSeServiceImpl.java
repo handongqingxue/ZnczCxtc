@@ -24,6 +24,12 @@ public class JueSeServiceImpl implements JueSeService {
 	}
 
 	@Override
+	public int edit(JueSe js) {
+		// TODO Auto-generated method stub
+		return jueSeDao.edit(js);
+	}
+
+	@Override
 	public int queryForInt(String mc) {
 		// TODO Auto-generated method stub
 		return jueSeDao.queryForInt(mc);
@@ -43,18 +49,18 @@ public class JueSeServiceImpl implements JueSeService {
 		String qxIds = js.getQxIds();
 		String[] qxIdArr = qxIds.split(",");
 		String qxMcs = "";
-		for (String jsIdStr : jsIdArr) {
-			int jsId = Integer.valueOf(jsIdStr);
-			for (int j = 0; j < jsList.size(); j++) {
-				JueSe js = jsList.get(j);
-				if(jsId==js.getId()) {
-					jsMcs+=","+js.getMc();
+		for (String qxIdStr : qxIdArr) {
+			int qxId = Integer.valueOf(qxIdStr);
+			for (int j = 0; j < qxList.size(); j++) {
+				QuanXian qx = qxList.get(j);
+				if(qxId==qx.getId()) {
+					qxMcs+=","+qx.getMc();
 					break;
 				}
 			}
 		}
-		yh.setJsMcs(jsMcs.substring(1));
-		return yh;
+		js.setQxMcs(qxMcs.substring(1));
+		return js;
 	}
 
 	@Override

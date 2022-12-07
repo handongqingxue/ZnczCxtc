@@ -43,8 +43,15 @@ public class JueSe {
 	public void setQxIds(String qxIds) {
 		this.qxIds = qxIds;
 	}
+	public String getQxMcs() {
+		return qxMcs;
+	}
+	public void setQxMcs(String qxMcs) {
+		this.qxMcs = qxMcs;
+	}
 	private String mc;//名称
 	private Integer zt;//状态:1.新增2.正常使用3.废弃4.有误
 	private String ms;//描述
 	private String qxIds;//直接权限id
+	private String qxMcs;
 }

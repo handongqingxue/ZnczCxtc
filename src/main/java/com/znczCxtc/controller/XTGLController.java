@@ -85,10 +85,10 @@ public class XTGLController {
 		
 		//publicService.selectNav(request);
 		String id = request.getParameter("id");
-		YongHu yh=jueSeService.selectById(id);
-		request.setAttribute("yh", yh);
+		JueSe js=jueSeService.selectById(id);
+		request.setAttribute("js", js);
 		
-		Constant.setYhShztInRequest(request);
+		Constant.setJsZtInRequest(request);
 		
 		return MODULE_NAME+"/jscx/edit";
 	}
@@ -193,6 +193,24 @@ public class XTGLController {
 		else {
 			jsonMap.put("message", "no");
 			jsonMap.put("info", "´´½¨½ÇÉ«Ê§°Ü£¡");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/editJueSe")
+	@ResponseBody
+	public Map<String, Object> editJueSe(JueSe js) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=jueSeService.edit(js);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "±à¼­½ÇÉ«³É¹¦£¡");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "±à¼­½ÇÉ«Ê§°Ü£¡");
 		}
 		return jsonMap;
 	}

@@ -35,6 +35,24 @@
 			</if>
 		</trim>
 	</insert>
+	<update id="edit" parameterType="com.znczCxtc.entity.JueSe">
+		update jue_se set 
+		<trim suffixOverrides=",">
+			<if test="mc!=null">
+				mc=#{mc},
+			</if>
+			<if test="zt!=null">
+				zt=#{zt},
+			</if>
+			<if test="ms!=null">
+				ms=#{ms},
+			</if>
+			<if test="qxIds!=null">
+				qxIds=#{qxIds},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
 	<select id="queryForInt" resultType="java.lang.Integer">
 		select count(*) from jue_se where 1=1
 		<if test="mc!=''&amp;mc!=null">
