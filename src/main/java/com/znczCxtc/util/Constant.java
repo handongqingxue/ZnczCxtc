@@ -184,6 +184,19 @@ public class Constant {
 	}
 	
 	/**
+	 * 存放用户审核结果常量
+	 * @param request
+	 */
+	public static void setYhShjgInRequest(HttpServletRequest request) {
+
+		request.setAttribute("hgShjg", YongHuShenHeJiLu.HE_GE);
+		request.setAttribute("bhgShjg", YongHuShenHeJiLu.BU_HE_GE);
+		
+		request.setAttribute("hgShjgMc", YongHuShenHeJiLu.HE_GE_TEXT);
+		request.setAttribute("bhgShjgMc", YongHuShenHeJiLu.BU_HE_GE_TEXT);
+	}
+	
+	/**
 	 * 存放订单审核结果常量
 	 * @param request
 	 */

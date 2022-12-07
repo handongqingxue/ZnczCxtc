@@ -37,4 +37,30 @@
 			</if>
 		</trim>
 	</insert>
+	<select id="queryForInt" resultType="java.lang.Integer">
+		select count(*) from yong_hu_shen_he_ji_lu yhshjl left join yong_hu yh on yhshjl.yhId=yh.id left join yong_hu shr on yhshjl.shrId=shr.id where 1=1
+		<if test="yhm!=''&amp;yhm!=null">
+			and yh.yhm like CONCAT('%',#{yhm},'%')
+		</if>
+		<if test="shrYhm!=''&amp;shrYhm!=null">
+			and shr.yhm like CONCAT('%',#{shrYhm},'%')
+		</if>
+		<if test="shsjks!=''&amp;shsjks!=null&amp;shsjjs!=''&amp;shsjjs!=null">
+			and yhshjl.shsj between #{shsjks} and #{shsjjs}
+		</if>
+	</select>
+	<select id="queryList" resultType="com.znczCxtc.entity.YongHuShenHeJiLu">
+		select yhshjl.*,yh.yhm,shr.yhm shrYhm from yong_hu_shen_he_ji_lu yhshjl left join yong_hu yh on yhshjl.yhId=yh.id left join yong_hu shr on yhshjl.shrId=shr.id where 1=1
+		<if test="yhm!=''&amp;yhm!=null">
+			and yh.yhm like CONCAT('%',#{yhm},'%')
+		</if>
+		<if test="shrYhm!=''&amp;shrYhm!=null">
+			and shr.yhm like CONCAT('%',#{shrYhm},'%')
+		</if>
+		<if test="shsjks!=''&amp;shsjks!=null&amp;shsjjs!=''&amp;shsjjs!=null">
+			and yhshjl.shsj between #{shsjks} and #{shsjjs}
+		</if>
+		order by yhshjl.shsj desc
+		limit #{rowNum},#{rows}
+	</select>
 </mapper>

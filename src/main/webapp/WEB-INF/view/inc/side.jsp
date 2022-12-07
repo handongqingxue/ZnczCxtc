@@ -457,6 +457,13 @@ function showLeftMenuByQx(){
 						</a>
 					</li>
 					<div class="line_div"></div>
+					<li class="layui-nav-item dshyh_item_li">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
+						<a href="<%=basePath%>xtgl/yhshjl/list">
+							&nbsp;&nbsp;&nbsp;用户审核记录
+						</a>
+					</li>
+					<div class="line_div"></div>
 					<li class="layui-nav-item">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>xtgl/jscx/list">

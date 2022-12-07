@@ -33,6 +33,12 @@ public class YongHuShenHeJiLu {
 	public void setYhId(Integer yhId) {
 		this.yhId = yhId;
 	}
+	public String getYhm() {
+		return yhm;
+	}
+	public void setYhm(String yhm) {
+		this.yhm = yhm;
+	}
 	public String getShsj() {
 		return shsj;
 	}
@@ -64,6 +70,7 @@ public class YongHuShenHeJiLu {
 		this.bz = bz;
 	}
 	private Integer yhId;
+	private String yhm;
 	private String shsj;//审核时间
 	private Boolean shjg;//审核结果
 	private Integer shrId;//审核人id

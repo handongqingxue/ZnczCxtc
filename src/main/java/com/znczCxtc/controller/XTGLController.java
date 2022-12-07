@@ -23,6 +23,8 @@ public class XTGLController {
 	@Autowired
 	private YongHuService yongHuService;
 	@Autowired
+	private YongHuShenHeJiLuService yongHuShenHeJiLuService;
+	@Autowired
 	private JueSeService jueSeService;
 	@Autowired
 	private QuanXianService quanXianService;
@@ -80,6 +82,20 @@ public class XTGLController {
 		Constant.setYhShztInRequest(request);
 		
 		return MODULE_NAME+"/dshyh/list";
+	}
+
+	/**
+	 * 跳转到系统管理-用户审核记录-列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/yhshjl/list")
+	public String goYhshjlList(HttpServletRequest request) {
+
+		Constant.setYhShjgInRequest(request);
+		Constant.setDcfwInRequest(request);
+		
+		return MODULE_NAME+"/yhshjl/list";
 	}
 	
 	@RequestMapping(value="/jscx/new")
@@ -345,6 +361,26 @@ public class XTGLController {
 		List<QuanXian> qxList=quanXianService.queryCBBList();
 		
 		jsonMap.put("rows", qxList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryYHSHJLList")
+	@ResponseBody
+	public Map<String, Object> queryYHSHJLList(String yhm,String shrYhm,String shsjks,String shsjjs,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = yongHuShenHeJiLuService.queryForInt(yhm,shrYhm,shsjks,shsjjs);
+			List<YongHuShenHeJiLu> yhshjlList=yongHuShenHeJiLuService.queryList(yhm, shrYhm, shsjks, shsjjs, page, rows, sort, order);
+			
+			jsonMap.put("total", count);
+			jsonMap.put("rows", yhshjlList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return jsonMap;
 	}
