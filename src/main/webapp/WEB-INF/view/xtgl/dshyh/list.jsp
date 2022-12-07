@@ -28,66 +28,66 @@
 var path='<%=basePath %>';
 var xtglPath=path+'xtgl/';
 
-var dshShzt;
-var shtgShzt;
-var bjzShzt;
+var defaultShzt='${requestScope.shzt}';
 
-var dshShztMc;
-var shtgShztMc;
-var bjzShztMc;
 $(function(){
-	initShztVar();
-	
 	initSearchLB();
+	initSHTGLB();
+	initTuiHuiLB();
 	initTab1();
 });
-
-function initShztVar(){
-	dshShzt=parseInt('${requestScope.dshShzt}');
-	shtgShzt=parseInt('${requestScope.shtgShzt}');
-	bjzShzt=parseInt('${requestScope.bjzShzt}');
-
-	dshShztMc='${requestScope.dshShztMc}';
-	shtgShztMc='${requestScope.shtgShztMc}';
-	bjzShztMc='${requestScope.bjzShztMc}';
-}
 
 function initSearchLB(){
 	$("#search_but").linkbutton({
 		iconCls:"icon-search",
 		onClick:function(){
 			var yhm=$("#toolbar #yhm").val();
-			tab1.datagrid("load",{yhm:yhm});
+			tab1.datagrid("load",{yhm:yhm,shzt:defaultShzt});
+		}
+	});
+}
+
+//初始化审核通过按钮
+function initSHTGLB(){
+	$("#shtg_but").linkbutton({
+		iconCls:"icon-ok",
+		onClick:function(){
+			checkByIds(true);
+		}
+	});
+}
+
+function initTuiHuiLB(){
+	$("#tuiHui_but").linkbutton({
+		iconCls:"icon-back",
+		onClick:function(){
+			checkByIds(false);
 		}
 	});
 }
 
 function initTab1(){
 	tab1=$("#tab1").datagrid({
-		title:"系统管理-用户查询-列表",
+		title:"系统管理-待审核用户-列表",
 		url:xtglPath+"queryYongHuList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
 		pagination:true,
 		pageSize:10,
+		queryParams:{shzt:defaultShzt},
 		columns:[[
 			{field:"yhm",title:"用户名",width:150},
 			{field:"nc",title:"昵称",width:150},
 			{field:"xm",title:"真实姓名",width:150},
 			{field:"cjsj",title:"创建时间",width:150},
-			{field:"shzt",title:"审核状态",width:100,formatter:function(value,row){
-            	return getShztMcById(value);
-			}},
-            {field:"id",title:"操作",width:110,formatter:function(value,row){
-            	var str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
-            		+"<a href=\"detail?id="+value+"\">详情</a>";
-            	return str;
+            {field:"id",title:"操作",width:50,formatter:function(value,row){
+            	return "";
             }}
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{yhm:"<div style=\"text-align:center;\">暂无信息<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"yhm",colspan:6});
+				$(this).datagrid("mergeCells",{index:0,field:"yhm",colspan:5});
 				data.total=0;
 			}
 			
@@ -99,20 +99,44 @@ function initTab1(){
 	});
 }
 
-function getShztMcById(shztId){
-	var str;
-	switch (shztId) {
-	case dshShzt:
-		str=dshShztMc;//待审核
-		break;
-	case shtgShzt:
-		str=shtgShztMc;//审核通过
-		break;
-	case bjzShzt:
-		str=bjzShztMc;//编辑中
-		break;
+function checkByIds(shjg) {
+	var tsStr;
+	if(shjg)
+		tsStr="审核";
+	else
+		tsStr="退回";
+	
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要"+tsStr+"的信息！","warning");
+		return false;
 	}
-	return str;
+	
+	$.messager.confirm("提示","确定要"+tsStr+"吗？",function(r){
+		if(r){
+			var ids = "";
+			for (var i = 0; i < rows.length; i++) {
+				ids += "," + rows[i].id;
+			}
+			ids=ids.substring(1);
+
+			var shrId='${sessionScope.yongHu.id}';
+			$.ajaxSetup({async:false});
+			$.post(xtglPath + "checkYongHuByIds",
+				{ids:ids,shjg:shjg,shrId:shrId},
+				function(result){
+					if(result.status==1){
+						alert(result.msg);
+						tab1.datagrid("load");
+					}
+					else{
+						alert(result.msg);
+					}
+				}
+			,"json");
+			
+		}
+	});
 }
 
 function setFitWidthInParent(o){
@@ -129,6 +153,8 @@ function setFitWidthInParent(o){
 			<span class="yhm_span">用户名：</span>
 			<input type="text" class="yhm_inp" id="yhm" placeholder="请输入用户名"/>
 			<a class="search_but" id="search_but">查询</a>
+			<a id="shtg_but">审核通过</a>
+			<a id="tuiHui_but">退回</a>
 		</div>
 		<table id="tab1">
 		</table>

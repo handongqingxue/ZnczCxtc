@@ -24,4 +24,6 @@ public interface YongHuMapper {
 	YongHu selectById(@Param("id") String id);
 	
 	int updateMmById(@Param("mm") String mm, @Param("id") Integer id);
+
+	public int checkByIds(@Param("idList") List<String> idList, @Param("shjg") Boolean shjg);
 }

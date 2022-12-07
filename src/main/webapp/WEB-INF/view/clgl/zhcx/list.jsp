@@ -184,8 +184,8 @@ function initCLLXCBB(){
 function initSFZYCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择是否在用"});
-	data.push({"value":"1","text":"是"});
-	data.push({"value":"0","text":"否"});
+	data.push({"value":shiSfzy,"text":shiSfzyMc});
+	data.push({"value":fouSfzy,"text":fouSfzyMc});
 	sfzyCBB=$("#sfzy_cbb").combobox({
 		valueField:"value",
 		textField:"text",
@@ -196,9 +196,9 @@ function initSFZYCBB(){
 function initSHZTCBB(){
 	var data=[];
 	data.push({"value":"","text":"请选择审核状态"});
-	data.push({"value":"1","text":"待审核 "});
-	data.push({"value":"2","text":"审核通过"});
-	data.push({"value":"3","text":"编辑中"});
+	data.push({"value":dshShzt,"text":dshShztMc});
+	data.push({"value":shtgShzt,"text":shtgShztMc});
+	data.push({"value":bjzShzt,"text":bjzShztMc});
 	shztCBB=$("#shzt_cbb").combobox({
 		valueField:"value",
 		textField:"text",

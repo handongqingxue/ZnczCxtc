@@ -3,6 +3,24 @@ package com.znczCxtc.entity;
 import java.io.Serializable;
 
 public class YongHu {
+
+	/**
+	 * 是
+	 */
+	public static final boolean SHI=true;
+	/**
+	 * 否
+	 */
+	public static final boolean FOU=false;
+
+	/**
+	 * 是
+	 */
+	public static final String SHI_TEXT="是";
+	/**
+	 * 否
+	 */
+	public static final String FOU_TEXT="否";
 	
 	/**
 	 * 待审核
@@ -61,6 +79,12 @@ public class YongHu {
 	public void setXm(String xm) {
 		this.xm = xm;
 	}
+	public Boolean getSfzy() {
+		return sfzy;
+	}
+	public void setSfzy(Boolean sfzy) {
+		this.sfzy = sfzy;
+	}
 	public Integer getShzt() {
 		return shzt;
 	}
@@ -117,6 +141,7 @@ public class YongHu {
 	private String nc;
 	private String tx;
 	private String xm;
+	private Boolean sfzy;//是否在用
 	private Integer shzt;//审核状态：1.待审核 2.审核通过 3.编辑中
 	private String mm;
 	private String cjsj;

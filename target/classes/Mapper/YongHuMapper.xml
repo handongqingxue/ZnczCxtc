@@ -104,4 +104,19 @@
 	<update id="updateMmById">
 		update yong_hu set mm=#{mm} where id=#{id}
 	</update>
+	<update id="checkByIds">
+		update yong_hu set 
+		<choose>
+			<when test="shjg">
+				sfzy=${@com.znczCxtc.entity.YongHu@SHI},shzt=${@com.znczCxtc.entity.YongHu@SHEN_HE_TONG_GUO}
+			</when>
+			<otherwise>
+				sfzy=${@com.znczCxtc.entity.YongHu@FOU},shzt=${@com.znczCxtc.entity.YongHu@BIAN_JI_ZHONG}
+			</otherwise>
+		</choose>
+		where 1=1
+		<foreach collection="idList" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</update>
 </mapper>

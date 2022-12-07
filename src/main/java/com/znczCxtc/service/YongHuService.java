@@ -20,4 +20,6 @@ public interface YongHuService {
 
 	int updateMmById(String mm, Integer id);
 
+	public int checkByIds(String ids,YongHuShenHeJiLu yhshjl);
+
 }

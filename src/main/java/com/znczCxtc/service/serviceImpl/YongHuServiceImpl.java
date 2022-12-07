@@ -1,5 +1,6 @@
 package com.znczCxtc.service.serviceImpl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class YongHuServiceImpl implements YongHuService {
 
 	@Autowired
 	private YongHuMapper yongHuDao;
+	@Autowired
+	private YongHuShenHeJiLuMapper yongHuShenHeJiLuDao;
 	@Autowired
 	private JueSeMapper jueSeDao;
 
@@ -79,5 +82,20 @@ public class YongHuServiceImpl implements YongHuService {
 	public int updateMmById(String mm, Integer id) {
 		// TODO Auto-generated method stub
 		return yongHuDao.updateMmById(mm,id);
+	}
+
+	@Override
+	public int checkByIds(String ids,YongHuShenHeJiLu yhshjl) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		if(yongHuDao.checkByIds(idList,yhshjl.getShjg())>0) {
+			for (String idStr : idList) {
+				Integer yhId = Integer.valueOf(idStr);
+				yhshjl.setYhId(yhId);
+				count+=yongHuShenHeJiLuDao.add(yhshjl);
+			}
+		}
+		return count;
 	}
 }

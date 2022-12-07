@@ -41,6 +41,8 @@ public class CLGLController {
 	public String goDshList(HttpServletRequest request) {
 
 		request.setAttribute("shzt", CheLiang.DAI_SHEN_HE);
+		Constant.setClPfjdInRequest(request);
+		Constant.setClSfzyInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", CheLiang.DAI_SHEN_HE_SHEET);
 		

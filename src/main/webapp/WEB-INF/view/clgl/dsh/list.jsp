@@ -58,12 +58,32 @@ var oedNum=0;
 var defaultShzt='${requestScope.shzt}';
 var sheetFlag='${requestScope.sheetFlag}';
 
+var gwryPfjd;
+var gwrqPfjd;
+var glryPfjd;
+var glrqPfjd;
+var ddPfjd;
+
+var gwryPfjdMc;
+var gwrqPfjdMc;
+var glryPfjdMc;
+var glrqPfjdMc;
+var ddPfjdMc;
+
+var shiSfzy;
+var fouSfzy;
+
+var shiSfzyMc;
+var fouSfzyMc;
+
 var dqyDcfw;
 var syyDcfw;
 
 var dqyDcfwMc;
 var syyDcfwMc;
 $(function(){
+	initPfjdVar();
+	initSfzyVar();
 	initDcfwVar();
 	
 	initCLLXCBB();
@@ -85,6 +105,28 @@ function showCompontByQx(){
 	if(yhm=="admin"){
 		removeLB.show();
 	}
+}
+
+function initPfjdVar(){
+	gwryPfjd=parseInt('${requestScope.gwryPfjd}');
+	gwrqPfjd=parseInt('${requestScope.gwrqPfjd}');
+	glryPfjd=parseInt('${requestScope.glryPfjd}');
+	glrqPfjd=parseInt('${requestScope.glrqPfjd}');
+	ddPfjd=parseInt('${requestScope.ddPfjd}');
+
+	gwryPfjdMc='${requestScope.gwryPfjdMc}';
+	gwrqPfjdMc='${requestScope.gwrqPfjdMc}';
+	glryPfjdMc='${requestScope.glryPfjdMc}';
+	glrqPfjdMc='${requestScope.glrqPfjdMc}';
+	ddPfjdMc='${requestScope.ddPfjdMc}';
+}
+
+function initSfzyVar(){
+	shiSfzy='${requestScope.shiSfzy}';
+	fouSfzy='${requestScope.fouSfzy}';
+
+	shiSfzyMc='${requestScope.shiSfzyMc}';
+	fouSfzyMc='${requestScope.fouSfzyMc}';
 }
 
 function initDcfwVar(){
@@ -257,29 +299,11 @@ function initTab1(){
 			{field:"clsbdh",title:"车辆识别代号",width:200},
 			{field:"zcrq",title:"注册日期",width:200},
 			{field:"pfjd",title:"排放阶段",width:200,formatter:function(value){
-				var str;
-				switch (value) {
-				case 1:
-					str="国五燃油";
-					break;
-				case 2:
-					str="国五燃气";
-					break;
-				case 3:
-					str="国六燃油";
-					break;
-				case 4:
-					str="国六燃气";
-					break;
-				case 5:
-					str="电动";
-					break;
-				}
-				return str;
+				return getPfjdMcById(value);
 			}},
 			{field:"fzrq",title:"发证日期",width:200},
 			{field:"sfzy",title:"是否在用",width:200,formatter:function(value){
-				return value?"是":"否";
+				return getSfzyMcById(value);
 			}},
 			{field:"bz",title:"备注",width:200},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
@@ -317,6 +341,37 @@ function openOutputExcelDialog(flag){
 	else{
 		$("#output_excel_bg_div").css("display","none");
 	}
+}
+
+function getPfjdMcById(pfjdId){
+	var str;
+	switch (pfjdId) {
+	case gwryPfjd:
+		str=gwryPfjdMc;//国五燃油
+		break;
+	case gwrqPfjd:
+		str=gwrqPfjdMc;//国五燃气
+		break;
+	case glryPfjd:
+		str=glryPfjdMc;//国六燃油
+		break;
+	case glrqPfjd:
+		str=glrqPfjdMc;//国六燃气
+		break;
+	case ddPfjd:
+		str=ddPfjdMc;//电动
+		break;
+	}
+	return str;
+}
+
+function getSfzyMcById(sfzy){
+	var str;
+	if(sfzy)
+		str=shiSfzyMc;
+	else
+		str=fouSfzyMc;
+	return str;
 }
 
 function checkByIds(shjg) {

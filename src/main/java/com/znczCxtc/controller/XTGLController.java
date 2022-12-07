@@ -72,6 +72,16 @@ public class XTGLController {
 		return MODULE_NAME+"/yhcx/detail";
 	}
 	
+	@RequestMapping(value="/dshyh/list")
+	public String goDshyhcxList(HttpServletRequest request) {
+		
+		//publicService.selectNav(request);
+		request.setAttribute("shzt", YongHu.DAI_SHEN_HE);
+		Constant.setYhShztInRequest(request);
+		
+		return MODULE_NAME+"/dshyh/list";
+	}
+	
 	@RequestMapping(value="/jscx/new")
 	public String goJscxNew(HttpServletRequest request) {
 		
@@ -337,5 +347,32 @@ public class XTGLController {
 		jsonMap.put("rows", qxList);
 		
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/checkYongHuByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkYongHuByIds(String ids, YongHuShenHeJiLu yhshjl) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=yongHuService.checkByIds(ids,yhshjl);
+		PlanResult plan=new PlanResult();
+		String tsStr=null;
+		Boolean shjg = yhshjl.getShjg();
+		if(shjg)
+			tsStr="审核";
+		else
+			tsStr="退回";
+		
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg(tsStr+"用户信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg(tsStr+"用户信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 }
