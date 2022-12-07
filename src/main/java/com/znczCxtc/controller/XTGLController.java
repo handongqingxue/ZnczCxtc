@@ -84,6 +84,7 @@ public class XTGLController {
 	public String goJscxList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setJsZtInRequest(request);
 		
 		return MODULE_NAME+"/jscx/list";
 	}

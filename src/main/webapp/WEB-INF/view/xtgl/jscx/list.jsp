@@ -27,11 +27,35 @@
 <script type="text/javascript">
 var path='<%=basePath %>';
 var xtglPath=path+'xtgl/';
+
+var xzZt;
+var zcsyZt;
+var fqZt;
+var ywZt;
+
+var xzZtMc;
+var zcsyZtMc;
+var fqZtMc;
+var ywZtMc;
 $(function(){
+	initZtVar();
+	
 	initSearchLB();
 	initAddLB();
 	initTab1();
 });
+
+function initZtVar(){
+	xzZt=parseInt('${requestScope.xzZt}');
+	zcsyZt=parseInt('${requestScope.zcsyZt}');
+	fqZt=parseInt('${requestScope.fqZt}');
+	ywZt=parseInt('${requestScope.ywZt}');
+
+	xzZtMc='${requestScope.xzZtMc}';
+	zcsyZtMc='${requestScope.zcsyZtMc}';
+	fqZtMc='${requestScope.fqZtMc}';
+	ywZtMc='${requestScope.ywZtMc}';
+}
 
 function initSearchLB(){
 	$("#search_but").linkbutton({
@@ -62,7 +86,9 @@ function initTab1(){
 		pageSize:10,
 		columns:[[
 			{field:"mc",title:"名称",width:150},
-			{field:"zt",title:"状态",width:100},
+			{field:"zt",title:"状态",width:100,formatter:function(value){
+				return getZtMcById(value);
+			}},
 			{field:"ms",title:"描述",width:300},
             {field:"id",title:"操作",width:50,formatter:function(value,row){
             	var str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;";
@@ -82,6 +108,25 @@ function initTab1(){
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 		}
 	});
+}
+
+function getZtMcById(ztId){
+	var str;
+	switch (ztId) {
+	case xzZt:
+		str=xzZtMc;//新增
+		break;
+	case zcsyZt:
+		str=zcsyZtMc;//正常使用
+		break;
+	case fqZt:
+		str=fqZtMc;//废弃
+		break;
+	case ywZt:
+		str=ywZtMc;//有误
+		break;
+	}
+	return str;
 }
 
 function setFitWidthInParent(o){

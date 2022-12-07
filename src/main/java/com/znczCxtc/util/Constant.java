@@ -407,6 +407,23 @@ public class Constant {
 	}
 	
 	/**
+	 * 存放角色状态常量
+	 * @param request
+	 */
+	public static void setJsZtInRequest(HttpServletRequest request) {
+
+		request.setAttribute("xzZt", JueSe.XIN_ZENG);
+		request.setAttribute("zcsyZt", JueSe.ZHENG_CHANG_SHI_YONG);
+		request.setAttribute("fqZt", JueSe.FEI_QI);
+		request.setAttribute("ywZt", JueSe.YOU_WU);
+		
+		request.setAttribute("xzZtMc", JueSe.XIN_ZENG_TEXT);
+		request.setAttribute("zcsyZtMc", JueSe.ZHENG_CHANG_SHI_YONG_TEXT);
+		request.setAttribute("fqZtMc", JueSe.FEI_QI_TEXT);
+		request.setAttribute("ywZtMc", JueSe.YOU_WU_TEXT);
+	}
+	
+	/**
 	 * 存放导出范围常量
 	 * @param request
 	 */
