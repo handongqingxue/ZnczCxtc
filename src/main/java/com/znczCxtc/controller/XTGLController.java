@@ -72,6 +72,8 @@ public class XTGLController {
 		
 		//publicService.selectNav(request);
 		Constant.setYhShztInRequest(request);
+		Constant.setDcfwInRequest(request);
+		request.setAttribute("sheetFlag", YongHu.ZONG_HE_CHA_XUN_SHEET);
 		
 		return MODULE_NAME+"/yhcx/list";
 	}

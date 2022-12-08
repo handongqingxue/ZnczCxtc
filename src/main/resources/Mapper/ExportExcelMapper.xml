@@ -366,4 +366,17 @@
 			limit #{rowNum},#{rows}
 		</if>
 	</select>
+	<select id="queryYongHuList" resultType="com.znczCxtc.entity.YongHu">
+		select * from yong_hu where yhm!='admin'
+		<if test="yhm!=''&amp;yhm!=null">
+			and yhm like CONCAT('%',#{yhm},'%')
+		</if>
+		<if test="shzt!=''&amp;shzt!=null">
+			and shzt=#{shzt}
+		</if>
+		order by cjsj
+		<if test="dcfw==@com.znczCxtc.util.Constant@DANG_QIAN_YE">
+			limit #{rowNum},#{rows}
+		</if>
+	</select>
 </mapper>

@@ -48,6 +48,9 @@ public class YongHu {
 	 */
 	public static final String BIAN_JI_ZHONG_TEXT="±à¼­ÖÐ";
 
+	public static final int ZONG_HE_CHA_XUN_SHEET=1;
+	public static final int DAI_SHEN_HE_SHEET=2;
+
 	private Integer id;
 	public Integer getId() {
 		return id;

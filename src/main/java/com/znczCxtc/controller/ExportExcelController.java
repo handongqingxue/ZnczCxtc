@@ -2406,6 +2406,122 @@ public class ExportExcelController {
 			e.printStackTrace();
 		}
 	}
+
+	@RequestMapping(value="/exportYongHuList")
+	public void exportYongHuList(String yhm,Integer shzt,Integer page,Integer rows,Integer sheetFlag,int dcfw,HttpServletResponse response) {
+		try {
+			yhm=StringUtil.decode(yhm, "UTF-8");
+			System.out.println("yhm="+yhm);
+			System.out.println("page="+page);
+			System.out.println("rows="+rows);
+			System.out.println("sheetFlag="+sheetFlag);
+			System.out.println("dcfw="+dcfw);
+		
+			int rowNum=0;
+			//第一步，创建一个Workbook，对应一个Excel文件
+			HSSFWorkbook wb=new HSSFWorkbook();
+			//第二步，在Workbook里添加一个sheet，对应Excel文件里的sheet
+			String sheetname = null;
+			switch (sheetFlag) {
+			case YongHu.ZONG_HE_CHA_XUN_SHEET:
+				sheetname = "综合查询";
+				break;
+			case YongHu.DAI_SHEN_HE_SHEET:
+				sheetname = "待审核用户";
+				break;
+			}
+			HSSFSheet sheet = wb.createSheet(sheetname);
+		
+			createYHZHCXSheetHeader(wb,sheet,rowNum,sheetFlag);
+			
+			List<YongHu> yhList = exportExcelService.queryYongHuList(yhm, shzt, page, rows, dcfw);
+	
+			createYHZHCXSheetBody(yhList,sheet,rowNum,sheetFlag);
+	
+			String fileName = null;
+			switch (sheetFlag) {
+			case YongHu.ZONG_HE_CHA_XUN_SHEET:
+				fileName = "用户综合查询";
+				break;
+			case YongHu.DAI_SHEN_HE_SHEET:
+				fileName = "待审核用户查询";
+				break;
+			}
+			
+			download(fileName, wb, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void createYHZHCXSheetHeader(HSSFWorkbook wb,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
+		HSSFRow row = sheet.createRow(rowNum);
+		HSSFCellStyle style = wb.createCellStyle();
+		HSSFCell cell = null;
+		
+		switch (sheetFlag) {
+		case YongHu.ZONG_HE_CHA_XUN_SHEET:
+			cell = row.createCell(0);
+			cell.setCellValue("用户名");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(1);
+			cell.setCellValue("昵称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("真实姓名");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("创建时间");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(4);
+			cell.setCellValue("审核状态");
+			cell.setCellStyle(style);
+			break;
+		}
+	}
+	
+	public void createYHZHCXSheetBody(List<YongHu> yhList,HSSFSheet sheet,int rowNum,Integer sheetFlag) {
+		switch (sheetFlag) {
+		case YongHu.ZONG_HE_CHA_XUN_SHEET:
+			for (int i = 0; i < yhList.size(); i++) {
+				YongHu yh = yhList.get(i);
+				HSSFRow row=sheet.createRow(++rowNum);
+				
+				HSSFCell cell = row.createCell(0);
+				String yhm = yh.getYhm();
+				if(!StringUtils.isBlank(yhm))
+					cell.setCellValue(yhm);
+				
+				cell = row.createCell(1);
+				String nc = yh.getNc();
+				if(!StringUtils.isBlank(nc))
+					cell.setCellValue(nc);
+				
+				cell = row.createCell(2);
+				String xm = yh.getXm();
+				if(!StringUtils.isBlank(xm))
+					cell.setCellValue(xm);
+				
+				cell = row.createCell(3);
+				String cjsj = yh.getCjsj();
+				if(!StringUtils.isBlank(cjsj))
+					cell.setCellValue(cjsj);
+				
+				cell = row.createCell(4);
+				Integer shzt = yh.getShzt();
+				if(shzt!=null) {
+					String shztMc = Constant.getYHShztMcById(shzt);
+					cell.setCellValue(shztMc);
+				}
+			}
+			break;
+		}
+	}
 	
 	private void download(String fileName, HSSFWorkbook wb, HttpServletResponse response) throws IOException {  
 	      ByteArrayOutputStream os = new ByteArrayOutputStream();

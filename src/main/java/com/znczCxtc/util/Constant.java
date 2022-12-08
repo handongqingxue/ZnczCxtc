@@ -704,6 +704,27 @@ public class Constant {
 	}
 	
 	/**
+	 * 根据用户审核状态id获取审核状态名称
+	 * @param shztId
+	 * @return
+	 */
+	public static String getYHShztMcById(int shztId){
+		String shztMc=null;
+		switch (shztId) {
+		case YongHu.DAI_SHEN_HE:
+			shztMc=YongHu.DAI_SHEN_HE_TEXT;//待审核
+			break;
+		case YongHu.SHEN_HE_TONG_GUO:
+			shztMc=YongHu.SHEN_HE_TONG_GUO_TEXT;//审核通过
+			break;
+		case YongHu.BIAN_JI_ZHONG:
+			shztMc=YongHu.BIAN_JI_ZHONG_TEXT;//编辑中
+			break;
+		}
+		return shztMc;
+	}
+	
+	/**
 	 * 根据司机在用状态标识获取在用状态名称
 	 * @param zyzt
 	 * @return

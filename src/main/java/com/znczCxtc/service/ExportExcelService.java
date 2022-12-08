@@ -54,4 +54,6 @@ public interface ExportExcelService {
 
 	List<DuiLie> queryDuiLieList(String mc, String dm, Integer zt, Integer page, Integer rows, int dcfw);
 
+	List<YongHu> queryYongHuList(String yhm, Integer shzt, int page, int rows, int dcfw);
+
 }
