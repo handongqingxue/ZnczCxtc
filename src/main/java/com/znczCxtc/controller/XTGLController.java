@@ -107,6 +107,8 @@ public class XTGLController {
 		//publicService.selectNav(request);
 		request.setAttribute("shzt", YongHu.DAI_SHEN_HE);
 		Constant.setYhShztInRequest(request);
+		Constant.setDcfwInRequest(request);
+		request.setAttribute("sheetFlag", YongHu.DAI_SHEN_HE_SHEET);
 		
 		return MODULE_NAME+"/dshyh/list";
 	}

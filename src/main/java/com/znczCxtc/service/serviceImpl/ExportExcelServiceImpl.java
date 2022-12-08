@@ -317,12 +317,15 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 	}
 
 	@Override
-	public List<YongHu> queryYongHuList(String yhm, Integer shzt, int page, int rows, int dcfw) {
+	public List<YongHu> queryYongHuList(String yhm, Integer shzt, Integer page, Integer rows, int dcfw) {
 		// TODO Auto-generated method stub
 		List<YongHu> list = null;
 		switch (dcfw) {
 		case Constant.DANG_QIAN_YE:
 			list = exportExcelDao.queryYongHuList(yhm, shzt, (page-1)*rows, rows, dcfw);
+			break;
+		case Constant.SUO_YOU_YE:
+			list = exportExcelDao.queryYongHuList(yhm, shzt, dcfw);
 			break;
 		}
 		return list;

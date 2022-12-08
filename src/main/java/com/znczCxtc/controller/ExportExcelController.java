@@ -2482,6 +2482,23 @@ public class ExportExcelController {
 			cell.setCellValue("审核状态");
 			cell.setCellStyle(style);
 			break;
+		case YongHu.DAI_SHEN_HE_SHEET:
+			cell = row.createCell(0);
+			cell.setCellValue("用户名");
+			cell.setCellStyle(style);
+		
+			cell = row.createCell(1);
+			cell.setCellValue("昵称");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(2);
+			cell.setCellValue("真实姓名");
+			cell.setCellStyle(style);
+			
+			cell = row.createCell(3);
+			cell.setCellValue("创建时间");
+			cell.setCellStyle(style);
+			break;
 		}
 	}
 	
@@ -2518,6 +2535,32 @@ public class ExportExcelController {
 					String shztMc = Constant.getYHShztMcById(shzt);
 					cell.setCellValue(shztMc);
 				}
+			}
+			break;
+		case YongHu.DAI_SHEN_HE_SHEET:
+			for (int i = 0; i < yhList.size(); i++) {
+				YongHu yh = yhList.get(i);
+				HSSFRow row=sheet.createRow(++rowNum);
+				
+				HSSFCell cell = row.createCell(0);
+				String yhm = yh.getYhm();
+				if(!StringUtils.isBlank(yhm))
+					cell.setCellValue(yhm);
+				
+				cell = row.createCell(1);
+				String nc = yh.getNc();
+				if(!StringUtils.isBlank(nc))
+					cell.setCellValue(nc);
+				
+				cell = row.createCell(2);
+				String xm = yh.getXm();
+				if(!StringUtils.isBlank(xm))
+					cell.setCellValue(xm);
+				
+				cell = row.createCell(3);
+				String cjsj = yh.getCjsj();
+				if(!StringUtils.isBlank(cjsj))
+					cell.setCellValue(cjsj);
 			}
 			break;
 		}

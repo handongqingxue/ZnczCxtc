@@ -96,4 +96,6 @@ public interface ExportExcelMapper {
 	List<DuiLie> queryDuiLieList(@Param("mc") String mc, @Param("dm") String dm, @Param("zt") Integer zt, @Param("dcfw") int dcfw);
 	
 	List<YongHu> queryYongHuList(@Param("yhm") String yhm, @Param("shzt") Integer shzt, @Param("rowNum") int rowNum, @Param("rows") int rows, @Param("dcfw") int dcfw);
+
+	List<YongHu> queryYongHuList(@Param("yhm") String yhm, @Param("shzt") Integer shzt, @Param("dcfw") int dcfw);
 }
