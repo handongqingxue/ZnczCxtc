@@ -11,4 +11,5 @@ public interface YongHuShenHeJiLuService {
 	List<YongHuShenHeJiLu> queryList(String yhm, String shrYhm, String shsjks, String shsjjs, int page, int rows,
 			String sort, String order);
 
+	int deleteByIds(String ids);
 }

@@ -30,6 +30,11 @@ public class XTGLController {
 	private QuanXianService quanXianService;
 	static final String MODULE_NAME=Constant.XTGL_MODULE_NAME;
 	
+	/**
+	 * 跳转到系统管理-用户信息页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/yhxx")
 	public String goYhxx(HttpServletRequest request) {
 		
@@ -39,6 +44,11 @@ public class XTGLController {
 		return MODULE_NAME+"/yhxx";
 	}
 
+	/**
+	 * 跳转到系统管理-用户查询-编辑页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/yhcx/edit")
 	public String goYhcxEdit(HttpServletRequest request) {
 		
@@ -52,6 +62,11 @@ public class XTGLController {
 		return MODULE_NAME+"/yhcx/edit";
 	}
 	
+	/**
+	 * 跳转到系统管理-用户查询-列表页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/yhcx/list")
 	public String goYhcxList(HttpServletRequest request) {
 		
@@ -61,6 +76,11 @@ public class XTGLController {
 		return MODULE_NAME+"/yhcx/list";
 	}
 
+	/**
+	 * 跳转到系统管理-用户查询-详情页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/yhcx/detail")
 	public String goYhcxDetail(HttpServletRequest request) {
 		
@@ -74,6 +94,11 @@ public class XTGLController {
 		return MODULE_NAME+"/yhcx/detail";
 	}
 	
+	/**
+	 * 跳转到系统管理-待审核用户-列表页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/dshyh/list")
 	public String goDshyhcxList(HttpServletRequest request) {
 		
@@ -98,6 +123,11 @@ public class XTGLController {
 		return MODULE_NAME+"/yhshjl/list";
 	}
 	
+	/**
+	 * 跳转到角色查询-添加页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/jscx/new")
 	public String goJscxNew(HttpServletRequest request) {
 		
@@ -108,6 +138,11 @@ public class XTGLController {
 		return MODULE_NAME+"/jscx/new";
 	}
 
+	/**
+	 * 跳转到角色查询-编辑页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/jscx/edit")
 	public String goJscxEdit(HttpServletRequest request) {
 		
@@ -121,6 +156,11 @@ public class XTGLController {
 		return MODULE_NAME+"/jscx/edit";
 	}
 	
+	/**
+	 * 跳转到角色查询-列表页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/jscx/list")
 	public String goJscxList(HttpServletRequest request) {
 		
@@ -130,6 +170,11 @@ public class XTGLController {
 		return MODULE_NAME+"/jscx/list";
 	}
 
+	/**
+	 * 跳转到角色查询-详情页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/jscx/detail")
 	public String goJscxDetail(HttpServletRequest request) {
 		
@@ -143,6 +188,11 @@ public class XTGLController {
 		return MODULE_NAME+"/jscx/detail";
 	}
 	
+	/**
+	 * 跳转到权限查询-添加页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/qxcx/new")
 	public String goQxcxNew(HttpServletRequest request) {
 		
@@ -151,6 +201,11 @@ public class XTGLController {
 		return MODULE_NAME+"/qxcx/new";
 	}
 
+	/**
+	 * 跳转到权限查询-编辑页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/qxcx/edit")
 	public String goQxcxEdit(HttpServletRequest request) {
 		
@@ -162,6 +217,11 @@ public class XTGLController {
 		return MODULE_NAME+"/qxcx/edit";
 	}
 	
+	/**
+	 * 跳转到权限查询-列表页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/qxcx/list")
 	public String goQxcxList(HttpServletRequest request) {
 		
@@ -170,6 +230,12 @@ public class XTGLController {
 		return MODULE_NAME+"/qxcx/list";
 	}
 	
+	/**
+	 * 根据用户名验证原密码
+	 * @param mm
+	 * @param yhm
+	 * @return
+	 */
 	@RequestMapping(value="/checkMm")
 	@ResponseBody
 	public Map<String, Object> checkMm(String mm, String yhm) {
@@ -187,6 +253,11 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 编辑用户
+	 * @param yh
+	 * @return
+	 */
 	@RequestMapping(value="/editYongHu")
 	@ResponseBody
 	public Map<String, Object> editYongHu(YongHu yh) {
@@ -205,6 +276,16 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 查询用户
+	 * @param yhm
+	 * @param shzt
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
 	@RequestMapping(value="/queryYongHuList")
 	@ResponseBody
 	public Map<String, Object> queryYongHuList(String yhm,Integer shzt,int page,int rows,String sort,String order) {
@@ -220,6 +301,11 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 添加角色
+	 * @param js
+	 * @return
+	 */
 	@RequestMapping(value="/newJueSe")
 	@ResponseBody
 	public Map<String, Object> newJueSe(JueSe js) {
@@ -238,6 +324,11 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 编辑角色
+	 * @param js
+	 * @return
+	 */
 	@RequestMapping(value="/editJueSe")
 	@ResponseBody
 	public Map<String, Object> editJueSe(JueSe js) {
@@ -256,6 +347,15 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 查询角色
+	 * @param mc
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
 	@RequestMapping(value="/queryJueSeList")
 	@ResponseBody
 	public Map<String, Object> queryJueSeList(String mc,int page,int rows,String sort,String order) {
@@ -271,6 +371,15 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 查询权限
+	 * @param mc
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
 	@RequestMapping(value="/queryQuanXianList")
 	@ResponseBody
 	public Map<String, Object> queryQuanXianList(String mc,int page,int rows,String sort,String order) {
@@ -286,6 +395,11 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 添加权限
+	 * @param qx
+	 * @return
+	 */
 	@RequestMapping(value="/newQuanXian")
 	@ResponseBody
 	public Map<String, Object> newQuanXian(QuanXian qx) {
@@ -304,6 +418,11 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 编辑权限
+	 * @param qx
+	 * @return
+	 */
 	@RequestMapping(value="/editQuanXian")
 	@ResponseBody
 	public Map<String, Object> editQuanXian(QuanXian qx) {
@@ -322,6 +441,11 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 根据用户id修改密码
+	 * @param mm
+	 * @return
+	 */
 	@RequestMapping(value="/updateMmByYhId")
 	@ResponseBody
 	public String updateMmByYhId(String mm) {
@@ -339,6 +463,10 @@ public class XTGLController {
 		return JsonUtil.getJsonFromObject(plan);
 	}
 	
+	/**
+	 * 查询下拉框角色
+	 * @return
+	 */
 	@RequestMapping(value="/queryJueSeCBBList")
 	@ResponseBody
 	public Map<String, Object> queryJueSeCBBList() {
@@ -352,6 +480,10 @@ public class XTGLController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 查询下拉框权限
+	 * @return
+	 */
 	@RequestMapping(value="/queryQuanXianCBBList")
 	@ResponseBody
 	public Map<String, Object> queryQuanXianCBBList() {
@@ -364,7 +496,44 @@ public class XTGLController {
 		
 		return jsonMap;
 	}
+
+	/**
+	 * 删除用户审核记录
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(value="/deleteYongHuShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteYongHuShenHeJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=yongHuShenHeJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除用户审核记录失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除用户审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
 	
+	/**
+	 * 用户审核记录查询
+	 * @param yhm
+	 * @param shrYhm
+	 * @param shsjks
+	 * @param shsjjs
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
 	@RequestMapping(value="/queryYHSHJLList")
 	@ResponseBody
 	public Map<String, Object> queryYHSHJLList(String yhm,String shrYhm,String shsjks,String shsjjs,int page,int rows,String sort,String order) {
@@ -385,6 +554,12 @@ public class XTGLController {
 		return jsonMap;
 	}
 
+	/**
+	 * 审核用户
+	 * @param ids
+	 * @param yhshjl
+	 * @return
+	 */
 	@RequestMapping(value="/checkYongHuByIds",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String checkYongHuByIds(String ids, YongHuShenHeJiLu yhshjl) {

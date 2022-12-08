@@ -63,4 +63,10 @@
 		order by yhshjl.shsj desc
 		limit #{rowNum},#{rows}
 	</select>
+	<delete id="deleteByIds">
+		delete from yong_hu_shen_he_ji_lu where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
 </mapper>

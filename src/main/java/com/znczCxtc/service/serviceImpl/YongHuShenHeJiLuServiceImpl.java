@@ -1,5 +1,6 @@
 package com.znczCxtc.service.serviceImpl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,14 @@ public class YongHuShenHeJiLuServiceImpl implements YongHuShenHeJiLuService {
 			String sort, String order) {
 		// TODO Auto-generated method stub
 		return yongHuShenHeJiLuDao.queryList(yhm, shrYhm, shsjks, shsjjs, (page-1)*rows, rows, sort, order);
+	}
+
+	@Override
+	public int deleteByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=yongHuShenHeJiLuDao.deleteByIds(idList);
+		return count;
 	}
 }

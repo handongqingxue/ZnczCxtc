@@ -313,7 +313,7 @@ function deleteByIds() {
 			}
 			ids=ids.substring(1);
 			
-			$.post(clglPath + "deleteShenHeJiLu",
+			$.post(xtglPath + "deleteYongHuShenHeJiLu",
 				{ids:ids},
 				function(result){
 					if(result.status==1){

@@ -52,27 +52,78 @@ public class Constant {
 	public static final String EXPORT_EXCEL_MODULE_NAME="exportExcel";
 
 	//地点标识start
+	/**
+	 * 未过磅标识
+	 */
 	public static final int WEI_GUO_BANG=0;
+	/**
+	 * 一号磅房标识
+	 */
 	public static final int YI_HAO_BANG_FANG=1;
+	/**
+	 * 二号磅房标识
+	 */
 	public static final int ER_HAO_BANG_FANG=2;
+	/**
+	 * 三号磅房标识
+	 */
 	public static final int SAN_HAO_BANG_FANG=3;
+	/**
+	 * 门岗标识
+	 */
 	public static final int MEN_GANG=4;
 
+	/**
+	 * 未过磅名称
+	 */
 	public static final String WEI_GUO_BANG_TEXT="未过磅";
+	/**
+	 * 一号磅房名称
+	 */
 	public static final String YI_HAO_BANG_FANG_TEXT="一号磅房";
+	/**
+	 * 二号磅房名称
+	 */
 	public static final String ER_HAO_BANG_FANG_TEXT="二号磅房";
+	/**
+	 * 三号磅房名称
+	 */
 	public static final String SAN_HAO_BANG_FANG_TEXT="三号磅房";
+	/**
+	 * 门岗名称
+	 */
 	public static final String MEN_GANG_TEXT="门岗";
 	//地点标识end
 
+	/**
+	 * 推送二维码
+	 */
 	public static final String PUSH_EWM="pushEwm";
+	/**
+	 * 推送车牌号
+	 */
 	public static final String PUSH_CPH="pushCph";
+	/**
+	 * 推送身份证号
+	 */
 	public static final String PUSH_SFZH="pushSfzh";
 	
+	/**
+	 * 当前页标识
+	 */
 	public static final int DANG_QIAN_YE=1;
+	/**
+	 * 所有页标识
+	 */
 	public static final int SUO_YOU_YE=2;
 	
+	/**
+	 * 当前页名称
+	 */
 	public static final String DANG_QIAN_YE_TEXT="当前页";
+	/**
+	 * 所有页名称
+	 */
 	public static final String SUO_YOU_YE_TEXT="所有页";
 	
 	/**
@@ -611,7 +662,7 @@ public class Constant {
 	}
 	
 	/**
-	 * 根据审核状态id获取审核状态名称
+	 * 根据车辆审核状态id获取审核状态名称
 	 * @param shztId
 	 * @return
 	 */
@@ -631,6 +682,11 @@ public class Constant {
 		return shztMc;
 	}
 	
+	/**
+	 * 根据司机审核状态id获取审核状态名称
+	 * @param shztId
+	 * @return
+	 */
 	public static String getSJShztMcById(int shztId){
 		String shztMc=null;
 		switch (shztId) {
@@ -647,22 +703,47 @@ public class Constant {
 		return shztMc;
 	}
 	
-	public static String getSJZyztMcById(boolean zyzt) {
+	/**
+	 * 根据司机在用状态标识获取在用状态名称
+	 * @param zyzt
+	 * @return
+	 */
+	public static String getSJZyztMcByIf(boolean zyzt) {
 		return zyzt==SiJi.SHI?SiJi.SHI_TEXT:SiJi.FOU_TEXT;
 	}
 	
-	public static String getSJShjgMcById(boolean shjg) {
+	/**
+	 * 根据司机审核结果标识获取审核结果名称
+	 * @param shjg
+	 * @return
+	 */
+	public static String getSJShjgMcByIf(boolean shjg) {
 		return shjg==SiJi.HE_GE?SiJi.HE_GE_TEXT:SiJi.BU_HE_GE_TEXT;
 	}
 	
-	public static String getCLSfzyMcById(boolean sfzy) {
+	/**
+	 * 根据车辆是否在用标识获取是否在用名称
+	 * @param sfzy
+	 * @return
+	 */
+	public static String getCLSfzyMcByIf(boolean sfzy) {
 		return sfzy==CheLiang.SHI?CheLiang.SHI_TEXT:CheLiang.FOU_TEXT;
 	}
 	
-	public static String getCLShjgMcById(boolean shjg) {
+	/**
+	 * 根据车辆审核结果标识获取审核结果名称
+	 * @param shjg
+	 * @return
+	 */
+	public static String getCLShjgMcByIf(boolean shjg) {
 		return shjg==CheLiang.HE_GE?CheLiang.HE_GE_TEXT:CheLiang.BU_HE_GE_TEXT;
 	}
 	
+	/**
+	 * 根据号码分类标识获取号码分类名称
+	 * @param flId
+	 * @return
+	 */
 	public static String getHMFlMcById(int flId) {
 		String flMc=null;
 		switch (flId) {
@@ -676,6 +757,11 @@ public class Constant {
 		return flMc;
 	}
 	
+	/**
+	 * 根据队列叫号形式标识获取叫号形式名称
+	 * @param jhxsId
+	 * @return
+	 */
 	public static String getDLJhxsMcById(int jhxsId) {
 		String jhxsMc=null;
 		switch (jhxsId) {
@@ -689,6 +775,11 @@ public class Constant {
 		return jhxsMc;
 	}
 	
+	/**
+	 * 根据队列状态标识获取队列状态名称
+	 * @param ztId
+	 * @return
+	 */
 	public static String getDLZtMcById(int ztId) {
 		String ztMc=null;
 		switch (ztId) {

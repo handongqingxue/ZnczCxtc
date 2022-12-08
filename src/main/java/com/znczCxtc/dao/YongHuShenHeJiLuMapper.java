@@ -14,4 +14,6 @@ public interface YongHuShenHeJiLuMapper {
 
 	List<YongHuShenHeJiLu> queryList(@Param("yhm") String yhm, @Param("shrYhm") String shrYhm, @Param("shsjks") String shsjks, @Param("shsjjs") String shsjjs, 
 			@Param("rowNum") int rowNum, @Param("rows") int rows, String sort, String order);
+	
+	int deleteByIds(List<String> idList);
 }

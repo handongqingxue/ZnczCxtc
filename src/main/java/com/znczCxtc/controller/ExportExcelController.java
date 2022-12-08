@@ -1690,7 +1690,7 @@ public class ExportExcelController {
 				cell = row.createCell(7);
 				Boolean sfzy = cl.getSfzy();
 				if(sfzy!=null) {
-					String sfzyMc = Constant.getCLSfzyMcById(sfzy);
+					String sfzyMc = Constant.getCLSfzyMcByIf(sfzy);
 					cell.setCellValue(sfzyMc);
 				}
 				
@@ -1774,7 +1774,7 @@ public class ExportExcelController {
 				cell = row.createCell(3);
 				Boolean shjg = clshjl.getShjg();
 				if(shjg!=null) {
-					String shjgMc=Constant.getCLShjgMcById(shjg);
+					String shjgMc=Constant.getCLShjgMcByIf(shjg);
 					cell.setCellValue(shjgMc);
 				}
 				
@@ -2141,7 +2141,7 @@ public class ExportExcelController {
 				cell = row.createCell(6);
 				Boolean zyzt = sj.getZyzt();
 				if(zyzt!=null) {
-					String zyztMc = Constant.getSJZyztMcById(zyzt);
+					String zyztMc = Constant.getSJZyztMcByIf(zyzt);
 					cell.setCellValue(zyztMc);
 				}
 			}
@@ -2212,7 +2212,7 @@ public class ExportExcelController {
 				cell = row.createCell(3);
 				Boolean shjg = sjshjl.getShjg();
 				if(shjg!=null) {
-					String shjgMc=Constant.getSJShjgMcById(shjg);
+					String shjgMc=Constant.getSJShjgMcByIf(shjg);
 					cell.setCellValue(shjgMc);
 				}
 				
