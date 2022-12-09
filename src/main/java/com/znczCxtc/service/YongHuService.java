@@ -22,4 +22,6 @@ public interface YongHuService {
 
 	public int checkByIds(String ids,YongHuShenHeJiLu yhshjl);
 
+	YongHu get(String yhm, String mm);
+
 }

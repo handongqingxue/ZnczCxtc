@@ -98,4 +98,11 @@ public class YongHuServiceImpl implements YongHuService {
 		}
 		return count;
 	}
+
+	@Override
+	public YongHu get(String yhm, String mm) {
+		// TODO Auto-generated method stub
+		YongHu yh=new YongHu(yhm,mm);
+		return yongHuDao.getYongHu(yh);
+	}
 }

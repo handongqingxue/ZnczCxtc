@@ -11,6 +11,10 @@ public class Constant {
 	 */
 	public static final String GKJ_MODULE_NAME="gkj";
 	/**
+	 * 小程序模块类名
+	 */
+	public static final String PHONE_MODULE_NAME="phone";
+	/**
 	 * 登录、注销模块类名
 	 */
 	public static final String MAIN_MODULE_NAME="main";
