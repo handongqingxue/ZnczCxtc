@@ -1,6 +1,7 @@
 package com.znczCxtc.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class PhoneController {
 
 	@Autowired
 	private YongHuService yongHuService;
+	@Autowired
+	private DingDanZhuangTaiService dingDanZhuangTaiService;
 	static final String MODULE_NAME=Constant.PHONE_MODULE_NAME;
 
 	@RequestMapping(value="/login")
@@ -37,6 +40,33 @@ public class PhoneController {
 		else {
 			jsonMap.put("status", "ok");
 			jsonMap.put("yongHu", yongHu);
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryDDZTList")
+	@ResponseBody
+	public Map<String, Object> queryDDZTList(String mc,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = dingDanZhuangTaiService.queryForInt(mc);
+			List<DingDanZhuangTai> ddztList=dingDanZhuangTaiService.queryList(mc, page, rows, null, null);
+			
+			jsonMap.put("total", count);
+			if(count==0) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("list", ddztList);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return jsonMap;
