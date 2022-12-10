@@ -63,6 +63,48 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/editDingDanZhuangTai")
+	@ResponseBody
+	public Map<String, Object> editDingDanZhuangTai(DingDanZhuangTai ddzt) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=dingDanZhuangTaiService.edit(ddzt);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "±à¼­¶©µ¥×´Ì¬³É¹¦£¡");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "±à¼­¶©µ¥×´Ì¬Ê§°Ü£¡");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getDDZT")
+	@ResponseBody
+	public Map<String, Object> getDDZT(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			DingDanZhuangTai ddzt=dingDanZhuangTaiService.selectById(id);
+			if(ddzt==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("ddzt", ddzt);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/queryDDZTList")
 	@ResponseBody
 	public Map<String, Object> queryDDZTList(String mc,int page,int rows) {
