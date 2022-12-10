@@ -45,6 +45,24 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/newDingDanZhuangTai")
+	@ResponseBody
+	public Map<String, Object> newDingDanZhuangTai(DingDanZhuangTai ddzt) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=dingDanZhuangTaiService.add(ddzt);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建订单状态成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建订单状态失败！");
+		}
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/queryDDZTList")
 	@ResponseBody
 	public Map<String, Object> queryDDZTList(String mc,int page,int rows) {
