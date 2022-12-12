@@ -163,6 +163,18 @@ public class PhoneController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/getConstantFlagMap")
+	@ResponseBody
+	public Map<String, Object> getConstantFlagMap(){
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("lxlx", Constant.LXLX);
+		jsonMap.put("ddzt", Constant.DDZT);
+		
+		return jsonMap;
+	}
+
 	@RequestMapping(value="/getConstantMap")
 	@ResponseBody
 	public Map<String, Object> getConstantMap(String flags) {
@@ -176,6 +188,10 @@ public class PhoneController {
 			case Constant.LXLX:
 				Map<String, Object> lxlxMap = Constant.getLxlxMap();
 				jsonMap.put("lxlxMap", lxlxMap);
+				break;
+			case Constant.DDZT:
+				Map<String, Object> ddztMap = Constant.getDdztMap();
+				jsonMap.put("ddztMap", ddztMap);
 				break;
 			}
 		}

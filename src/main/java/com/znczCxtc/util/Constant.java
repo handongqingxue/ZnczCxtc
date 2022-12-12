@@ -134,6 +134,7 @@ public class Constant {
 	public static final String SUO_YOU_YE_TEXT="所有页";
 	
 	public static final int LXLX=1;
+	public static final int DDZT=2;
 	
 	/**
 	 * 存放订单状态常量
@@ -183,6 +184,55 @@ public class Constant {
 		request.setAttribute("ycDdztMc", DingDanZhuangTai.YI_CHANG_TEXT);//异常
 		request.setAttribute("yfqDdztMc", DingDanZhuangTai.YI_FEI_QI_TEXT);//已废弃
 		
+	}
+	
+	public static Map<String, Object> getDdztMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("dshDdzt", DingDanZhuangTai.DAI_SHEN_HE);
+		jsonMap.put("bjzDdzt", DingDanZhuangTai.BIAN_JI_ZHONG);
+		jsonMap.put("yxdDdzt", DingDanZhuangTai.YI_XIA_DAN);
+		jsonMap.put("pdzDdzt", DingDanZhuangTai.PAI_DUI_ZHONG);
+		jsonMap.put("drcDdzt", DingDanZhuangTai.DAI_RU_CHANG);
+		jsonMap.put("djyDdzt", DingDanZhuangTai.DAI_JIAN_YAN);
+		jsonMap.put("yjdsmDdzt", DingDanZhuangTai.YI_JIAN_DAI_SAO_MA);
+		jsonMap.put("yjdsbDdzt", DingDanZhuangTai.YI_JIAN_DAI_SHANG_BANG);
+		jsonMap.put("yjzDdzt", DingDanZhuangTai.YI_JIAN_ZHONG);
+		jsonMap.put("yjdshDdzt", DingDanZhuangTai.YI_JIAN_DAI_SHEN_HE);
+		jsonMap.put("dzxhDdzt", DingDanZhuangTai.DAI_ZHUANG_XIE_HUO);
+		jsonMap.put("ejdsmDdzt", DingDanZhuangTai.ER_JIAN_DAI_SAO_MA);
+		jsonMap.put("ejdsbDdzt", DingDanZhuangTai.ER_JIAN_DAI_SHANG_BANG);
+		jsonMap.put("ejzDdzt", DingDanZhuangTai.ER_JIAN_ZHONG);
+		jsonMap.put("ejdshDdzt", DingDanZhuangTai.ER_JIAN_DAI_SHEN_HE);
+		jsonMap.put("ddypzDdzt", DingDanZhuangTai.DAI_DA_YIN_PING_ZHENG);
+		jsonMap.put("dlcDdzt", DingDanZhuangTai.DAI_LI_CHANG);
+		jsonMap.put("ywcDdzt", DingDanZhuangTai.YI_WAN_CHENG);
+		jsonMap.put("ycDdzt", DingDanZhuangTai.YI_CHANG);
+		jsonMap.put("yfqDdzt", DingDanZhuangTai.YI_FEI_QI);
+		
+		jsonMap.put("dshDdztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);
+		jsonMap.put("bjzDdztMc", DingDanZhuangTai.BIAN_JI_ZHONG_TEXT);
+		jsonMap.put("yxdDdztMc", DingDanZhuangTai.YI_XIA_DAN_TEXT);
+		jsonMap.put("pdzDdztMc", DingDanZhuangTai.PAI_DUI_ZHONG_TEXT);
+		jsonMap.put("drcDdztMc", DingDanZhuangTai.DAI_RU_CHANG_TEXT);
+		jsonMap.put("djyDdztMc", DingDanZhuangTai.DAI_JIAN_YAN_TEXT);
+		jsonMap.put("yjdsmDdztMc", DingDanZhuangTai.YI_JIAN_DAI_SAO_MA_TEXT);
+		jsonMap.put("yjdsbDdztMc", DingDanZhuangTai.YI_JIAN_DAI_SHANG_BANG_TEXT);
+		jsonMap.put("yjzDdztMc", DingDanZhuangTai.YI_JIAN_ZHONG_TEXT);
+		jsonMap.put("yjdshDdztMc", DingDanZhuangTai.YI_JIAN_DAI_SHEN_HE_TEXT);
+		jsonMap.put("dzxhDdztMc", DingDanZhuangTai.DAI_ZHUANG_XIE_HUO_TEXT);
+		jsonMap.put("ejdsmDdztMc", DingDanZhuangTai.ER_JIAN_DAI_SAO_MA);
+		jsonMap.put("ejdsbDdztMc", DingDanZhuangTai.ER_JIAN_DAI_SHANG_BANG_TEXT);
+		jsonMap.put("ejzDdztMc", DingDanZhuangTai.ER_JIAN_ZHONG_TEXT);
+		jsonMap.put("ejdshDdztMc", DingDanZhuangTai.ER_JIAN_DAI_SHEN_HE_TEXT);
+		jsonMap.put("ddypzDdztMc", DingDanZhuangTai.DAI_DA_YIN_PING_ZHENG_TEXT);
+		jsonMap.put("dlcDdztMc", DingDanZhuangTai.DAI_LI_CHANG_TEXT);
+		jsonMap.put("ywcDdztMc", DingDanZhuangTai.YI_WAN_CHENG_TEXT);
+		jsonMap.put("ycDdztMc", DingDanZhuangTai.YI_CHANG_TEXT);
+		jsonMap.put("yfqDdztMc", DingDanZhuangTai.YI_FEI_QI_TEXT);
+		
+		return jsonMap;
 	}
 	
 	/**
