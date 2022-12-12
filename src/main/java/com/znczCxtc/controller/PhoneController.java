@@ -20,6 +20,8 @@ public class PhoneController {
 	@Autowired
 	private YongHuService yongHuService;
 	@Autowired
+	private DingDanService dingDanService;
+	@Autowired
 	private DingDanZhuangTaiService dingDanZhuangTaiService;
 	static final String MODULE_NAME=Constant.PHONE_MODULE_NAME;
 
@@ -105,9 +107,9 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
-	@RequestMapping(value="/queryDDZTList")
+	@RequestMapping(value="/getDDZTList")
 	@ResponseBody
-	public Map<String, Object> queryDDZTList(String mc,int page,int rows) {
+	public Map<String, Object> getDDZTList(String mc,int page,int rows) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
@@ -127,6 +129,55 @@ public class PhoneController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getZHCXList")
+	@ResponseBody
+	public Map<String, Object> getZHCXList(String ddh,Integer ddztId,String ddztMc,String cyclCph,String jhysrq,String yssMc,String wzMc,
+			String fhdwMc,String shdwMc,String cysjXm,String cysjSfzh,String jcsjs,String jcsje,String ccsjs,String ccsje,
+			int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = dingDanService.queryForInt(ddh,ddztId,ddztMc,cyclCph,jhysrq,yssMc,wzMc,fhdwMc,shdwMc,cysjXm,cysjSfzh,jcsjs,jcsje,ccsjs,ccsje);
+			List<DingDan> zhglList=dingDanService.queryList(ddh,ddztId,ddztMc,cyclCph,jhysrq,yssMc,wzMc,fhdwMc,shdwMc,cysjXm,cysjSfzh,jcsjs,jcsje,ccsjs,ccsje, page, rows, null, null);
+			
+			jsonMap.put("total", count);
+			if(count==0) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("list", zhglList);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/getConstantMap")
+	@ResponseBody
+	public Map<String, Object> getConstantMap(String flags) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		String[] flagArr = flags.split(",");
+		for (String flag : flagArr) {
+			Integer flagInt = Integer.valueOf(flag);
+			switch (flagInt) {
+			case Constant.LXLX:
+				Map<String, Object> lxlxMap = Constant.getLxlxMap();
+				jsonMap.put("lxlxMap", lxlxMap);
+				break;
+			}
 		}
 		
 		return jsonMap;

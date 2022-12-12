@@ -1,5 +1,8 @@
 package com.znczCxtc.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.znczCxtc.entity.*;
@@ -130,6 +133,8 @@ public class Constant {
 	 */
 	public static final String SUO_YOU_YE_TEXT="所有页";
 	
+	public static final int LXLX=1;
+	
 	/**
 	 * 存放订单状态常量
 	 * @param request
@@ -223,6 +228,19 @@ public class Constant {
 		
 		request.setAttribute("syLxlxMc", DingDan.SONG_YUN_TEXT);
 		request.setAttribute("qyLxlxMc", DingDan.QU_YUN_TEXT);
+	}
+	
+	public static Map<String, Object> getLxlxMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("syLxlx", DingDan.SONG_YUN);
+		jsonMap.put("qyLxlx", DingDan.QU_YUN);
+		
+		jsonMap.put("syLxlxMc", DingDan.SONG_YUN_TEXT);
+		jsonMap.put("qyLxlxMc", DingDan.QU_YUN_TEXT);
+		
+		return jsonMap;
 	}
 	
 	/**
