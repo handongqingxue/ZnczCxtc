@@ -198,4 +198,17 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getDingDanZhuangTaiSelectList")
+	@ResponseBody
+	public Map<String, Object> getDingDanZhuangTaiSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<DingDanZhuangTai> ddztList=dingDanZhuangTaiService.queryCBBList();
+		
+		jsonMap.put("list", ddztList);
+		
+		return jsonMap;
+	}
 }
