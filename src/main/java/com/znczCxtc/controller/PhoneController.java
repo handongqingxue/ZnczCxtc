@@ -23,6 +23,20 @@ public class PhoneController {
 	private DingDanService dingDanService;
 	@Autowired
 	private DingDanZhuangTaiService dingDanZhuangTaiService;
+	@Autowired
+	private YunShuShangService yunShuShangService;
+	@Autowired
+	private WuZiLeiXingService wuZiLeiXingService;
+	@Autowired
+	private WuZiService wuZiService;
+	@Autowired
+	private FaHuoDanWeiService faHuoDanWeiService;
+	@Autowired
+    private ShouHuoDanWeiService shouHuoDanWeiService;
+	@Autowired
+	private CheLiangService cheLiangService;
+	@Autowired
+    private SiJiService siJiService;
 	static final String MODULE_NAME=Constant.PHONE_MODULE_NAME;
 
 	@RequestMapping(value="/login")
@@ -171,6 +185,8 @@ public class PhoneController {
 		
 		jsonMap.put("lxlx", Constant.LXLX);
 		jsonMap.put("ddzt", Constant.DDZT);
+		jsonMap.put("ddGbzt", Constant.DDGBZT);
+		jsonMap.put("place", Constant.PLACE);
 		
 		return jsonMap;
 	}
@@ -193,6 +209,14 @@ public class PhoneController {
 				Map<String, Object> ddztMap = Constant.getDdztMap();
 				jsonMap.put("ddztMap", ddztMap);
 				break;
+			case Constant.DDGBZT:
+				Map<String, Object> ddGbztMap = Constant.getDdGbztMap();
+				jsonMap.put("ddGbztMap", ddGbztMap);
+				break;
+			case Constant.PLACE:
+				Map<String, Object> placeMap = Constant.getPlaceMap();
+				jsonMap.put("placeMap", placeMap);
+				break;
 			}
 		}
 		
@@ -208,6 +232,97 @@ public class PhoneController {
 		List<DingDanZhuangTai> ddztList=dingDanZhuangTaiService.queryCBBList();
 		
 		jsonMap.put("list", ddztList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getYunShuShangSelectList")
+	@ResponseBody
+	public Map<String, Object> getYunShuShangSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<YunShuShang> yssList=yunShuShangService.queryCBBList();
+		
+		jsonMap.put("list", yssList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getWuZiLeiXingSelectList")
+	@ResponseBody
+	public Map<String, Object> getWuZiLeiXingSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<WuZiLeiXing> wzlxList=wuZiLeiXingService.queryCBBList();
+		
+		jsonMap.put("list", wzlxList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getWuZiSelectList")
+	@ResponseBody
+	public Map<String, Object> queryWuZiCBBList(String wzlxId) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<WuZi> wzList=wuZiService.queryCBBList(wzlxId);
+		
+		jsonMap.put("list", wzList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getFaHuoDanWeiSelectList")
+	@ResponseBody
+	public Map<String, Object> getFaHuoDanWeiSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<FaHuoDanWei> fhdwList=faHuoDanWeiService.queryCBBList();
+		
+		jsonMap.put("list", fhdwList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getShouHuoDanWeiSelectList")
+	@ResponseBody
+	public Map<String, Object> getShouHuoDanWeiSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<ShouHuoDanWei> shdwList=shouHuoDanWeiService.queryCBBList();
+		
+		jsonMap.put("list", shdwList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getCheLiangSelectList")
+	@ResponseBody
+	public Map<String, Object> getCheLiangSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<CheLiang> clList=cheLiangService.queryCBBList();
+		
+		jsonMap.put("list", clList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getSiJiSelectList")
+	@ResponseBody
+	public Map<String, Object> getSiJiSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<SiJi> sjList=siJiService.queryCBBList();
+		
+		jsonMap.put("list", sjList);
 		
 		return jsonMap;
 	}

@@ -135,6 +135,8 @@ public class Constant {
 	
 	public static final int LXLX=1;
 	public static final int DDZT=2;
+	public static final int DDGBZT=3;
+	public static final int PLACE=4;
 	
 	/**
 	 * 存放订单状态常量
@@ -400,6 +402,29 @@ public class Constant {
 		request.setAttribute("ywcGbztMc", DingDan.YI_WAN_CHENG_TEXT);
 	}
 	
+	public static Map<String, Object> getDdGbztMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("dsbGbzt", DingDan.DAI_SHANG_BANG);
+		jsonMap.put("sbzGbzt", DingDan.SHANG_BANG_ZHONG);
+		jsonMap.put("dczGbzt", DingDan.DAI_CHENG_ZHONG);
+		jsonMap.put("czzGbzt", DingDan.CHENG_ZHONG_ZHONG);
+		jsonMap.put("dxbGbzt", DingDan.DAI_XIA_BANG);
+		jsonMap.put("xbzGbzt", DingDan.XIA_BANG_ZHONG);
+		jsonMap.put("ywcGbzt", DingDan.YI_WAN_CHENG);
+		
+		jsonMap.put("dsbGbztMc", DingDan.DAI_SHANG_BANG_TEXT);
+		jsonMap.put("sbzGbztMc", DingDan.SHANG_BANG_ZHONG_TEXT);
+		jsonMap.put("dczGbztMc", DingDan.DAI_CHENG_ZHONG_TEXT);
+		jsonMap.put("czzGbztMc", DingDan.CHENG_ZHONG_ZHONG_TEXT);
+		jsonMap.put("dxbGbztMc", DingDan.DAI_XIA_BANG_TEXT);
+		jsonMap.put("xbzGbztMc", DingDan.XIA_BANG_ZHONG_TEXT);
+		jsonMap.put("ywcGbztMc", DingDan.YI_WAN_CHENG_TEXT);
+		
+		return jsonMap;
+	}
+	
 	/**
 	 * 存放号码分类常量
 	 * @param request
@@ -430,6 +455,25 @@ public class Constant {
 		request.setAttribute("ehbfMc", Constant.ER_HAO_BANG_FANG_TEXT);
 		request.setAttribute("shbfMc", Constant.SAN_HAO_BANG_FANG_TEXT);
 		request.setAttribute("mgMc", Constant.MEN_GANG_TEXT);
+	}
+	
+	public static Map<String, Object> getPlaceMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("wgb", Constant.WEI_GUO_BANG);
+		jsonMap.put("yhbf", Constant.YI_HAO_BANG_FANG);
+		jsonMap.put("ehbf", Constant.ER_HAO_BANG_FANG);
+		jsonMap.put("shbf", Constant.SAN_HAO_BANG_FANG);
+		jsonMap.put("mg", Constant.MEN_GANG);
+
+		jsonMap.put("wgbMc", Constant.WEI_GUO_BANG_TEXT);
+		jsonMap.put("yhbfMc", Constant.YI_HAO_BANG_FANG_TEXT);
+		jsonMap.put("ehbfMc", Constant.ER_HAO_BANG_FANG_TEXT);
+		jsonMap.put("shbfMc", Constant.SAN_HAO_BANG_FANG_TEXT);
+		jsonMap.put("mgMc", Constant.MEN_GANG_TEXT);
+		
+		return jsonMap;
 	}
 	
 	/**
