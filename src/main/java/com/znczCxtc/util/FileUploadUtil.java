@@ -19,38 +19,21 @@ import java.net.SocketException;
 public class FileUploadUtil {
 
 	private static Class<? extends Object> cls = FileUploadUtil.class;
-	
-	//资讯内容上传的图�?(by 石超)
+
+	//资讯内容上传的文件(by 石超)
 	public static String appUploadContentImg(MultipartFile myFile, String folder) throws Exception {
 		try {
-			//重置文件�?
+			//重置文件名
 			long time = System.currentTimeMillis();
 			String timeStr = String.valueOf(time);
 			String[] originalFileName = myFile.getOriginalFilename().split("\\.");
 			String fileName = timeStr + "." + originalFileName[1];
-			String name=myFile.getOriginalFilename().substring(myFile.getOriginalFilename().lastIndexOf(".")+1);
-				//            FTPClient client = getFTPClient("", 1,"","");
-//			String writeTempPath = "D:\\resource";
-				//            String writeTempPath = "/home/terabithia";
-
-				
 			String avaPath ="/ZnczCxtc/upload/"+folder+"/"+fileName;
-//			String writeTempPath = request.getSession().getServletContext().getRealPath("/");
 			String realPath="D:\\resource\\ZnczCxtc\\"+folder+"\\";
 			System.out.println(avaPath);
-				/**
-				 * @author 马鹏�?
-				 * @desc 裁剪图片
-				 */
-				
-//			File storeFile =  new File(writeTempPath + "uploads/", fileName);
 			File storeFile =  new File(realPath, fileName);
 			FileUtils.copyInputStreamToFile(myFile.getInputStream(),storeFile );
-				//			uploadFileForFTP(client, fileName, writeTempPath + "\\" + fileName, "Resource\\htkApp\\upload\\" + folder);
-				//			uploadFileForFTP(client, fileName, writeTempPath + "/" + fileName, "Resource\\htkApp\\upload\\" + folder);
-				//			String avaPath = OtherUtils.getRootDirectory() + Globals.PROJECT_URL + Globals.PHOTO_URL + folder + fileName;
-				//			String avaPath = OtherUtils.getRootDirectory() + Globals.PROJECT_URL + Globals.PHOTO_URL + folder + newName;
-				//			String rjson = "{\"code\": 0,\"msg\": \"成功\",\"data\": {\"src\": \"" + avaPath + "\"}}";
+			
 			JSONObject map = new JSONObject();
 			map.put("code", 0);
 			map.put("msg", "成功");

@@ -158,6 +158,32 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/getDingDan")
+	@ResponseBody
+	public Map<String, Object> getDingDan(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			DingDan dd=dingDanService.selectById(id);
+			if(dd==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				DuiFangGuoBangJiLu dfgbjl=duiFangGuoBangJiLuService.selectByDdId(id);
+				jsonMap.put("status", "ok");
+				jsonMap.put("dd", dd);
+				jsonMap.put("dfgbjl", dfgbjl);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/getZHCXList")
 	@ResponseBody
 	public Map<String, Object> getZHCXList(String ddh,Integer ddztId,String ddztMc,String cyclCph,String jhysrq,String yssMc,String wzMc,
@@ -215,6 +241,46 @@ public class PhoneController {
 			else {
 				jsonMap.put("message", "no");
 				jsonMap.put("info", "创建订单失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/editDingDan")
+	@ResponseBody
+	public Map<String, Object> editDingDan(DingDan dd, DuiFangGuoBangJiLu dfgbjl) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			Long ddId = dd.getId();
+			String cph = dd.getCyclCph();
+			boolean existDd=dingDanService.checkIfExistByIdCph(ddId,cph);//在修改订单信息前根据订单id和现在的车牌号验证订单表里是否存在订单，一定要在修改订单之前验证，因为这时车牌号就算待变更也还没变成新的
+			int count=dingDanService.edit(dd);
+			if(count>0) {
+				boolean existDfgbjl=duiFangGuoBangJiLuService.checkIfExistByDdId(ddId);
+				if(existDfgbjl) {
+					duiFangGuoBangJiLuService.editByDdId(dfgbjl);
+				}
+				else {
+					duiFangGuoBangJiLuService.add(dfgbjl);
+				}
+				
+				if(!existDd) {//订单id都是一个id，若不存在，说明编辑订单信息时车牌号也变更了，则需要给该订单再加条录入车牌号记录
+					RglrCphJiLu rglrCphJiLu=new RglrCphJiLu();
+					rglrCphJiLu.setCph(cph);
+					rglrCphJiLu.setDdId(ddId);
+					rglrCphJiLuService.add(rglrCphJiLu);
+				}
+				
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "编辑订单成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "编辑订单失败！");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
