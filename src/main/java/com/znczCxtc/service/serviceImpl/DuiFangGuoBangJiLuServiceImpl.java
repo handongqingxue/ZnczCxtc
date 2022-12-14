@@ -37,4 +37,10 @@ public class DuiFangGuoBangJiLuServiceImpl implements DuiFangGuoBangJiLuService 
 		int count=duiFangGuoBangJiLuDao.getCountByDdId(ddId);
 		return count==0?false:true;
 	}
+
+	@Override
+	public int updateFileByDdId(DuiFangGuoBangJiLu dfgbjl) {
+		// TODO Auto-generated method stub
+		return duiFangGuoBangJiLuDao.updateFileByDdId(dfgbjl);
+	}
 }

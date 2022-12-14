@@ -297,8 +297,7 @@ public class GkjController {
 	@RequestMapping(value="/uploadCheLiangTaiZhang")
 	@ResponseBody
 	public Map<String, Object> uploadCheLiangTaiZhang(CheLiangTaiZhang cltz, int actionFlag,
-			@RequestParam(value = "zp_file", required = false) MultipartFile zp_file,
-			HttpServletRequest request) {
+			@RequestParam(value = "zp_file", required = false) MultipartFile zp_file) {
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
@@ -322,7 +321,7 @@ public class GkjController {
 							}
 							break;
 						}
-						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						jsonStr = FileUploadUtil.appUploadContentImg(fileArr[i],folder);
 						JSONObject fileJson = JSONObject.fromObject(jsonStr);
 						if("成功".equals(fileJson.get("msg"))) {
 							JSONObject dataJO = (JSONObject)fileJson.get("data");
@@ -460,8 +459,7 @@ public class GkjController {
 	public Map<String, Object> newGuoBangJiLu(GuoBangJiLu gbjl,
 			@RequestParam(value="zp1_file",required=false) MultipartFile zp1_file,
 			@RequestParam(value="zp2_file",required=false) MultipartFile zp2_file,
-			@RequestParam(value="zp3_file",required=false) MultipartFile zp3_file,
-			HttpServletRequest request) {
+			@RequestParam(value="zp3_file",required=false) MultipartFile zp3_file) {
 
 		Map<String, Object> jsonMap=new HashMap<String, Object>();
 		try {
@@ -485,7 +483,7 @@ public class GkjController {
 							folder+="Zp3";//照片3
 							break;
 						}
-						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						jsonStr = FileUploadUtil.appUploadContentImg(fileArr[i],folder);
 						JSONObject fileJson = JSONObject.fromObject(jsonStr);
 						if("成功".equals(fileJson.get("msg"))) {
 							JSONObject dataJO = (JSONObject)fileJson.get("data");

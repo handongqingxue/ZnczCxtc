@@ -118,8 +118,7 @@ public class SJGLController {
 	public Map<String, Object> newSiJi(SiJi sj,
 			@RequestParam(value="sfzzp_file",required=false) MultipartFile sfzzp_file,
 			@RequestParam(value="jz_file",required=false) MultipartFile jz_file,
-			@RequestParam(value="zgzs_file",required=false) MultipartFile zgzs_file,
-			HttpServletRequest request) {
+			@RequestParam(value="zgzs_file",required=false) MultipartFile zgzs_file) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
@@ -144,7 +143,7 @@ public class SJGLController {
 							folder+="Zgzs";//资格证书
 							break;
 						}
-						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						jsonStr = FileUploadUtil.appUploadContentImg(fileArr[i],folder);
 						JSONObject fileJson = JSONObject.fromObject(jsonStr);
 						if("成功".equals(fileJson.get("msg"))) {
 							JSONObject dataJO = (JSONObject)fileJson.get("data");
@@ -205,8 +204,7 @@ public class SJGLController {
 	public Map<String, Object> editSiJi(SiJi sj,
 			@RequestParam(value="sfzzp_file",required=false) MultipartFile sfzzp_file,
 			@RequestParam(value="jz_file",required=false) MultipartFile jz_file,
-			@RequestParam(value="zgzs_file",required=false) MultipartFile zgzs_file,
-			HttpServletRequest request) {
+			@RequestParam(value="zgzs_file",required=false) MultipartFile zgzs_file) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
@@ -230,7 +228,7 @@ public class SJGLController {
 							folder+="Zgzs";//资格证书
 							break;
 						}
-						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						jsonStr = FileUploadUtil.appUploadContentImg(fileArr[i],folder);
 						JSONObject fileJson = JSONObject.fromObject(jsonStr);
 						if("成功".equals(fileJson.get("msg"))) {
 							JSONObject dataJO = (JSONObject)fileJson.get("data");

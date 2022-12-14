@@ -13,4 +13,6 @@ public interface DuiFangGuoBangJiLuMapper {
 	DuiFangGuoBangJiLu selectByDdId(@Param("ddId") String ddId);
 
 	int getCountByDdId(@Param("ddId") Long ddId);
+
+	int updateFileByDdId(DuiFangGuoBangJiLu dfgbjl);
 }

@@ -265,8 +265,7 @@ public class DDGLController {
 	@RequestMapping(value="/newDingDan")
 	@ResponseBody
 	public Map<String, Object> newDingDan(DingDan dd, DuiFangGuoBangJiLu dfgbjl, 
-			@RequestParam(value="dfbdzp_file",required=false) MultipartFile dfbdzp_file,
-			HttpServletRequest request) {
+			@RequestParam(value="dfbdzp_file",required=false) MultipartFile dfbdzp_file) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
@@ -282,7 +281,7 @@ public class DDGLController {
 							folder+="Dfbdzp";//对方榜单照片
 							break;
 						}
-						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						jsonStr = FileUploadUtil.appUploadContentImg(fileArr[i],folder);
 						JSONObject fileJson = JSONObject.fromObject(jsonStr);
 						if("成功".equals(fileJson.get("msg"))) {
 							JSONObject dataJO = (JSONObject)fileJson.get("data");
@@ -328,8 +327,7 @@ public class DDGLController {
 	@RequestMapping(value="/editDingDan")
 	@ResponseBody
 	public Map<String, Object> editDingDan(DingDan dd, DuiFangGuoBangJiLu dfgbjl,
-			@RequestParam(value="dfbdzp_file",required=false) MultipartFile dfbdzp_file,
-			HttpServletRequest request) {
+			@RequestParam(value="dfbdzp_file",required=false) MultipartFile dfbdzp_file) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
@@ -345,7 +343,7 @@ public class DDGLController {
 							folder+="Dfbdzp";//对方榜单照片
 							break;
 						}
-						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						jsonStr = FileUploadUtil.appUploadContentImg(fileArr[i],folder);
 						JSONObject fileJson = JSONObject.fromObject(jsonStr);
 						if("成功".equals(fileJson.get("msg"))) {
 							JSONObject dataJO = (JSONObject)fileJson.get("data");

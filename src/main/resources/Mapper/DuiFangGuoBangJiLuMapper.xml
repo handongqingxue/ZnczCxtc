@@ -74,4 +74,13 @@
 	<select id="getCountByDdId" resultType="java.lang.Integer">
 		select count(*) from dui_fang_guo_bang_ji_lu where ddId=#{ddId}
 	</select>
+	<update id="updateFileByDdId" parameterType="com.znczCxtc.entity.DuiFangGuoBangJiLu">
+		update dui_fang_guo_bang_ji_lu set 
+		<trim suffixOverrides=",">
+			<if test="dfbdzp!=null">
+				dfbdzp=#{dfbdzp},
+			</if>
+		</trim>
+		where ddId=#{ddId}
+	</update>
 </mapper>

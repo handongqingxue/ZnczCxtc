@@ -21,7 +21,7 @@ public class FileUploadUtil {
 	private static Class<? extends Object> cls = FileUploadUtil.class;
 	
 	//资讯内容上传的图�?(by 石超)
-	public static String appUploadContentImg(HttpServletRequest request, MultipartFile myFile, String folder) throws Exception {
+	public static String appUploadContentImg(MultipartFile myFile, String folder) throws Exception {
 		try {
 			//重置文件�?
 			long time = System.currentTimeMillis();

@@ -11,4 +11,6 @@ public interface DuiFangGuoBangJiLuService {
 	DuiFangGuoBangJiLu selectByDdId(String ddId);
 
 	boolean checkIfExistByDdId(Long ddId);
+
+	int updateFileByDdId(DuiFangGuoBangJiLu dfgbjl);
 }

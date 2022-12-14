@@ -204,8 +204,7 @@ public class CLGLController {
 			@RequestParam(value="zp_file",required=false) MultipartFile zp_file,
 			@RequestParam(value="xsz_file",required=false) MultipartFile xsz_file,
 			@RequestParam(value="scqd_file",required=false) MultipartFile scqd_file,
-			@RequestParam(value="pfjdcxjt_file",required=false) MultipartFile pfjdcxjt_file,
-			HttpServletRequest request) {
+			@RequestParam(value="pfjdcxjt_file",required=false) MultipartFile pfjdcxjt_file) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
@@ -234,7 +233,7 @@ public class CLGLController {
 							folder+="Pfjdcxjt";//排放阶段查询截图
 							break;
 						}
-						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						jsonStr = FileUploadUtil.appUploadContentImg(fileArr[i],folder);
 						JSONObject fileJson = JSONObject.fromObject(jsonStr);
 						if("成功".equals(fileJson.get("msg"))) {
 							JSONObject dataJO = (JSONObject)fileJson.get("data");
@@ -299,8 +298,7 @@ public class CLGLController {
 			@RequestParam(value="zp_file",required=false) MultipartFile zp_file,
 			@RequestParam(value="xsz_file",required=false) MultipartFile xsz_file,
 			@RequestParam(value="scqd_file",required=false) MultipartFile scqd_file,
-			@RequestParam(value="pfjdcxjt_file",required=false) MultipartFile pfjdcxjt_file,
-			HttpServletRequest request) {
+			@RequestParam(value="pfjdcxjt_file",required=false) MultipartFile pfjdcxjt_file) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
@@ -328,7 +326,7 @@ public class CLGLController {
 							folder+="Pfjdcxjt";//排放阶段查询截图
 							break;
 						}
-						jsonStr = FileUploadUtil.appUploadContentImg(request,fileArr[i],folder);
+						jsonStr = FileUploadUtil.appUploadContentImg(fileArr[i],folder);
 						JSONObject fileJson = JSONObject.fromObject(jsonStr);
 						if("成功".equals(fileJson.get("msg"))) {
 							JSONObject dataJO = (JSONObject)fileJson.get("data");

@@ -4,14 +4,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.znczCxtc.entity.*;
 import com.znczCxtc.service.*;
 import com.znczCxtc.util.*;
+
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/"+PhoneController.MODULE_NAME)
@@ -37,6 +43,10 @@ public class PhoneController {
 	private CheLiangService cheLiangService;
 	@Autowired
     private SiJiService siJiService;
+	@Autowired
+	private DuiFangGuoBangJiLuService duiFangGuoBangJiLuService;
+	@Autowired
+	private RglrCphJiLuService rglrCphJiLuService;
 	static final String MODULE_NAME=Constant.PHONE_MODULE_NAME;
 
 	@RequestMapping(value="/login")
@@ -174,6 +184,78 @@ public class PhoneController {
 			e.printStackTrace();
 		}
 		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/newDingDan")
+	@ResponseBody
+	public Map<String, Object> newDingDan(DingDan dd, DuiFangGuoBangJiLu dfgbjl) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			String ddh=dingDanService.createDdhByDateYMD();
+			dd.setDdh(ddh);
+	        
+			int count=dingDanService.add(dd);
+			if(count>0) {
+				long ddId=dingDanService.getIdByDdh(ddh);//因为新订单之前添加到订单表前没有id，添加完成后才生成id，这里在添加完成后，要根据订单号获取订单id
+				
+				dfgbjl.setDdId(ddId);
+				duiFangGuoBangJiLuService.add(dfgbjl);
+				
+				RglrCphJiLu rglrCphJiLu=new RglrCphJiLu();
+				rglrCphJiLu.setCph(dd.getCyclCph());
+				rglrCphJiLu.setDdId(ddId);//获取订单id后，生成人工录入车牌号记录，与订单id关联。这里的车牌号只是车牌号记录，后面业务部人员在订单里录入的车牌号可能会根据运输商情况变更
+				rglrCphJiLuService.add(rglrCphJiLu);
+				
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "创建订单成功！");
+				jsonMap.put("ddId", ddId);
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "创建订单失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/uploadDuiFangGuoBangJiLuFile")
+	@ResponseBody
+	public Map<String, Object> uploadDuiFangGuoBangJiLuFile(DuiFangGuoBangJiLu dfgbjl,
+			@RequestParam(value="file",required=false) MultipartFile file) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			String jsonStr = null;
+			if(file!=null) {
+				if(file.getSize()>0) {
+					jsonStr = FileUploadUtil.appUploadContentImg(file,"DuiFangGuoBangJiLu/Dfbdzp/");
+					JSONObject fileJson = JSONObject.fromObject(jsonStr);
+					if("成功".equals(fileJson.get("msg"))) {
+						JSONObject dataJO = (JSONObject)fileJson.get("data");
+						dfgbjl.setDfbdzp(dataJO.get("src").toString());
+					}
+				}
+			}
+			
+			int count=duiFangGuoBangJiLuService.updateFileByDdId(dfgbjl);
+			System.out.println("count==="+count);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "上传成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "上传失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return jsonMap;
 	}
 
