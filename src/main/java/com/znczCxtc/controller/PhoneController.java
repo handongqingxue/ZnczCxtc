@@ -415,6 +415,8 @@ public class PhoneController {
 		jsonMap.put("place", Constant.PLACE);
 		jsonMap.put("ddShlx", Constant.DDSHLX);
 		jsonMap.put("ddShjg", Constant.DDSHJG);
+		jsonMap.put("gbjlGbzt", Constant.GBJLGBZT);
+		jsonMap.put("gblx", Constant.GBLX);
 		
 		return jsonMap;
 	}
@@ -452,6 +454,14 @@ public class PhoneController {
 			case Constant.DDSHJG:
 				Map<String, Object> ddShjgMap = Constant.getDdShjgMap();
 				jsonMap.put("ddShjgMap", ddShjgMap);
+				break;
+			case Constant.GBJLGBZT:
+				Map<String, Object> gbjlGbztMap = Constant.getGbjlGbztMap();
+				jsonMap.put("gbjlGbztMap", gbjlGbztMap);
+				break;
+			case Constant.GBLX:
+				Map<String, Object> gblxMap = Constant.getGblxMap();
+				jsonMap.put("gblxMap", gblxMap);
 				break;
 			}
 		}

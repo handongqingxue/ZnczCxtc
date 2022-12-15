@@ -139,6 +139,8 @@ public class Constant {
 	public static final int PLACE=4;
 	public static final int DDSHLX=5;
 	public static final int DDSHJG=6;
+	public static final int GBJLGBZT=7;
+	public static final int GBLX=8;
 	
 	/**
 	 * 存放订单状态常量
@@ -290,6 +292,19 @@ public class Constant {
 		request.setAttribute("ccgbGblxMc", GuoBangJiLu.CHU_CHANG_GUO_BANG_TEXT);
 	}
 	
+	public static Map<String, Object> getGblxMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("rcgbGblx", GuoBangJiLu.RU_CHANG_GUO_BANG);
+		jsonMap.put("ccgbGblx", GuoBangJiLu.CHU_CHANG_GUO_BANG);
+		
+		jsonMap.put("rcgbGblxMc", GuoBangJiLu.RU_CHANG_GUO_BANG_TEXT);
+		jsonMap.put("ccgbGblxMc", GuoBangJiLu.CHU_CHANG_GUO_BANG_TEXT);
+		
+		return jsonMap;
+	}
+	
 	/**
 	 * 存放流向类型常量
 	 * @param request
@@ -327,6 +342,19 @@ public class Constant {
 		
 		request.setAttribute("zcGbztMc", GuoBangJiLu.ZHENG_CHANG_TEXT);
 		request.setAttribute("ycgbztMc", GuoBangJiLu.YI_CHANG_TEXT);
+	}
+	
+	public static Map<String, Object> getGbjlGbztMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("zcGbzt", GuoBangJiLu.ZHENG_CHANG);
+		jsonMap.put("ycgbzt", GuoBangJiLu.YI_CHANG);
+		
+		jsonMap.put("zcGbztMc", GuoBangJiLu.ZHENG_CHANG_TEXT);
+		jsonMap.put("ycgbztMc", GuoBangJiLu.YI_CHANG_TEXT);
+		
+		return jsonMap;
 	}
 	
 	/**
