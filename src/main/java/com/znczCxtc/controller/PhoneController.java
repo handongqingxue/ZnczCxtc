@@ -49,6 +49,10 @@ public class PhoneController {
 	private RglrCphJiLuService rglrCphJiLuService;
 	@Autowired
 	private DingDanShenHeJiLuService dingDanShenHeJiLuService;
+	@Autowired
+	private BangDanJiLuService bangDanJiLuService;
+	@Autowired
+	private GuoBangJiLuService guoBangJiLuService;
 	static final String MODULE_NAME=Constant.PHONE_MODULE_NAME;
 
 	@RequestMapping(value="/login")
@@ -350,6 +354,50 @@ public class PhoneController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/getBDJLList")
+	@ResponseBody
+	public Map<String, Object> getBDJLList(String ddh,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = bangDanJiLuService.queryForInt(ddh);
+		List<BangDanJiLu> bdjlList=bangDanJiLuService.queryList(ddh, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", bdjlList);
+		}
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/getGBJLList")
+	@ResponseBody
+	public Map<String, Object> getGBJLList(String ddh,String cyclCph,String gbsjks,String gbsjjs,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = guoBangJiLuService.queryForInt(ddh,cyclCph,gbsjks,gbsjjs);
+		List<GuoBangJiLu> gbjlList=guoBangJiLuService.queryList(ddh, cyclCph, gbsjks, gbsjjs, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", gbjlList);
 		}
 		
 		return jsonMap;
