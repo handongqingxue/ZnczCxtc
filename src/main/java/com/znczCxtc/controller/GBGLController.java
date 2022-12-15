@@ -192,7 +192,7 @@ public class GBGLController {
 		
 		Constant.setDdztInRequest(request);
 		Constant.setLxlxInRequest(request);
-		Constant.setShlxInRequest(request);
+		Constant.setDdShlxInRequest(request);
 		Constant.setGblxInRequest(request);
 		Constant.setGbjlGbztInRequest(request);
 		Constant.setDcfwInRequest(request);
@@ -212,7 +212,7 @@ public class GBGLController {
 		
 		Constant.setDdztInRequest(request);
 		Constant.setLxlxInRequest(request);
-		Constant.setShlxInRequest(request);
+		Constant.setDdShlxInRequest(request);
 		Constant.setGblxInRequest(request);
 		Constant.setGbjlGbztInRequest(request);
 		Constant.setDcfwInRequest(request);

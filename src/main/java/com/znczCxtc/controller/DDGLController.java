@@ -88,7 +88,7 @@ public class DDGLController {
 	public String goDshList(HttpServletRequest request) {
 		
 		Constant.setDdztInRequest(request);
-		Constant.setShlxInRequest(request);
+		Constant.setDdShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", DingDan.DAI_SHEN_HE_SHEET);
@@ -105,7 +105,7 @@ public class DDGLController {
 	public String goDzjList(HttpServletRequest request) {
 		
 		Constant.setDdztInRequest(request);
-		Constant.setShlxInRequest(request);
+		Constant.setDdShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", DingDan.DAI_JIAN_YAN_SHEET);
@@ -123,7 +123,7 @@ public class DDGLController {
 		
 		//publicService.selectNav(request);
 		Constant.setDdztInRequest(request);
-		Constant.setShlxInRequest(request);
+		Constant.setDdShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", DingDan.DAI_ZHUANG_XIE_HUO_SHEET);
@@ -198,7 +198,7 @@ public class DDGLController {
 	@RequestMapping(value="/shjl/list")
 	public String goShjlList(HttpServletRequest request) {
 		
-		Constant.setShlxInRequest(request);
+		Constant.setDdShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
 		Constant.setDdShjgInRequest(request);
 		Constant.setDcfwInRequest(request);

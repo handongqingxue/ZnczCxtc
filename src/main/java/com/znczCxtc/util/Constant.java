@@ -137,6 +137,8 @@ public class Constant {
 	public static final int DDZT=2;
 	public static final int DDGBZT=3;
 	public static final int PLACE=4;
+	public static final int DDSHLX=5;
+	public static final int DDSHJG=6;
 	
 	/**
 	 * 存放订单状态常量
@@ -241,7 +243,7 @@ public class Constant {
 	 * 存放审核类型常量
 	 * @param request
 	 */
-	public static void setShlxInRequest(HttpServletRequest request) {
+	public static void setDdShlxInRequest(HttpServletRequest request) {
 
 		request.setAttribute("xdshShlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
 		request.setAttribute("zjshShlx", DingDanShenHeJiLu.ZHI_JIAN_SHEN_HE);
@@ -254,6 +256,25 @@ public class Constant {
 		request.setAttribute("yjshShlxMc", DingDanShenHeJiLu.YI_JIAN_SHEN_HE_TEXT);
 		request.setAttribute("rkshShlxMc", DingDanShenHeJiLu.RU_KU_SHEN_HE_TEXT);
 		request.setAttribute("ejshShlxMc", DingDanShenHeJiLu.ER_JIAN_SHEN_HE_TEXT);
+	}
+	
+	public static Map<String, Object> getDdShlxMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("xdshShlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
+		jsonMap.put("zjshShlx", DingDanShenHeJiLu.ZHI_JIAN_SHEN_HE);
+		jsonMap.put("yjshShlx", DingDanShenHeJiLu.YI_JIAN_SHEN_HE);
+		jsonMap.put("rkshShlx", DingDanShenHeJiLu.RU_KU_SHEN_HE);
+		jsonMap.put("ejshShlx", DingDanShenHeJiLu.ER_JIAN_SHEN_HE);
+
+		jsonMap.put("xdshShlxMc", DingDanShenHeJiLu.XIA_DAN_SHEN_HE_TEXT);
+		jsonMap.put("zjshShlxMc", DingDanShenHeJiLu.ZHI_JIAN_SHEN_HE_TEXT);
+		jsonMap.put("yjshShlxMc", DingDanShenHeJiLu.YI_JIAN_SHEN_HE_TEXT);
+		jsonMap.put("rkshShlxMc", DingDanShenHeJiLu.RU_KU_SHEN_HE_TEXT);
+		jsonMap.put("ejshShlxMc", DingDanShenHeJiLu.ER_JIAN_SHEN_HE_TEXT);
+		
+		return jsonMap;
 	}
 	
 	/**
@@ -332,6 +353,19 @@ public class Constant {
 		
 		request.setAttribute("hgShjgMc", DingDanShenHeJiLu.HE_GE_TEXT);
 		request.setAttribute("bhgShjgMc", DingDanShenHeJiLu.BU_HE_GE_TEXT);
+	}
+	
+	public static Map<String, Object> getDdShjgMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("hgShjg", DingDanShenHeJiLu.HE_GE);
+		jsonMap.put("bhgShjg", DingDanShenHeJiLu.BU_HE_GE);
+		
+		jsonMap.put("hgShjgMc", DingDanShenHeJiLu.HE_GE_TEXT);
+		jsonMap.put("bhgShjgMc", DingDanShenHeJiLu.BU_HE_GE_TEXT);
+		
+		return jsonMap;
 	}
 	
 	/**
