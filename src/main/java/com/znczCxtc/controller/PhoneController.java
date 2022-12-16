@@ -380,6 +380,30 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getGBJL")
+	@ResponseBody
+	public Map<String, Object> getGBJL(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			GuoBangJiLu gbjl=guoBangJiLuService.selectById(id);
+			if(gbjl==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("gbjl", gbjl);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/getGBJLList")
 	@ResponseBody

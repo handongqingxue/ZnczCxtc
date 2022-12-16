@@ -177,6 +177,9 @@ public class GBGLController {
 		GuoBangJiLu gbjl=guoBangJiLuService.selectById(id);
 		request.setAttribute("gbjl", gbjl);
 		
+		Constant.setGbjlGbztInRequest(request);
+		Constant.setGblxInRequest(request);
+		
 		return MODULE_NAME+"/gbjl/detail";
 	}
 	

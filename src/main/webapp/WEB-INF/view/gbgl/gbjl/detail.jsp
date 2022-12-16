@@ -145,8 +145,8 @@ function setFitWidthInParent(parent,self){
 				</td>
 				<td class="td2">
 					<c:choose>
-						<c:when test="${requestScope.gbjl.gbzt eq 1 }">正常</c:when>
-						<c:otherwise>异常</c:otherwise>
+						<c:when test="${requestScope.gbjl.gbzt eq requestScope.zcGbzt }">${requestScope.zcGbztMc }</c:when>
+						<c:otherwise>${requestScope.ycgbztMc }</c:otherwise>
 					</c:choose>
 				</td>
 			  </tr>
@@ -155,9 +155,8 @@ function setFitWidthInParent(parent,self){
 					过磅类型
 				</td>
 				<td class="td2">
-					<c:if test="${requestScope.gbjl.gblx eq 1 }">入厂</c:if>
-					<c:if test="${requestScope.gbjl.gblx eq 2 }">出厂</c:if>
-					过磅
+					<c:if test="${requestScope.gbjl.gblx eq requestScope.rcgbGblx }">${requestScope.rcgbGblxMc }</c:if>
+					<c:if test="${requestScope.gbjl.gblx eq requestScope.ccgbGblx }">${requestScope.ccgbGblxMc }</c:if>
 				</td>
 				<td class="td1" align="right">
 					照片1
