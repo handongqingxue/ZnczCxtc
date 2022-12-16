@@ -427,6 +427,116 @@ public class PhoneController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/getDJYList")
+	@ResponseBody
+	public Map<String, Object> getDJYList(String ddh,String ddztMc,String cysjXm,String cysjSfzh,String cyclCph,String yssMc,String fhdwMc,
+			String shdwMc,String gbsjks,String gbsjjs,Integer gblx,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = guoBangJiLuService.queryDJYForInt(ddh,ddztMc,cysjXm,cysjSfzh,cyclCph,yssMc,fhdwMc,shdwMc,gbsjks,gbsjjs,gblx);
+		List<GuoBangJiLu> jyjlList=guoBangJiLuService.queryDJYList(ddh, ddztMc, cysjXm, cysjSfzh, cyclCph, yssMc, fhdwMc, shdwMc, gbsjks, gbsjjs, gblx, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", jyjlList);
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/newWuZiLeiXing")
+	@ResponseBody
+	public Map<String, Object> newWuZiLeiXing(WuZiLeiXing wzlx) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=wuZiLeiXingService.add(wzlx);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建物资类型成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建物资类型失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/editWuZiLeiXing")
+	@ResponseBody
+	public Map<String, Object> editWuZiLeiXing(WuZiLeiXing wzlx) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=wuZiLeiXingService.edit(wzlx);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑物资类型成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑物资类型失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getWZLX")
+	@ResponseBody
+	public Map<String, Object> getWZLX(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			WuZiLeiXing wzlx=wuZiLeiXingService.selectById(id);
+			if(wzlx==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("wzlx", wzlx);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getWZLXList")
+	@ResponseBody
+	public Map<String, Object> getWZLXList(String mc,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = wuZiLeiXingService.queryForInt(mc);
+			List<WuZiLeiXing> wzlxList=wuZiLeiXingService.queryList(mc, page, rows, null, null);
+			
+			jsonMap.put("total", count);
+			if(count==0) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("list", wzlxList);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody
 	public Map<String, Object> getConstantFlagMap(){
