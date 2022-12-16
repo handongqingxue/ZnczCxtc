@@ -485,6 +485,24 @@ public class PhoneController {
 		}
 		return jsonMap;
 	}
+
+	@RequestMapping(value="/newWuZi")
+	@ResponseBody
+	public Map<String, Object> newWuZi(WuZi wz) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=wuZiService.add(wz);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建物资成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建物资失败！");
+		}
+		return jsonMap;
+	}
 	
 	@RequestMapping(value="/getWZLX")
 	@ResponseBody
@@ -532,6 +550,28 @@ public class PhoneController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getWuZiList")
+	@ResponseBody
+	public Map<String, Object> getWuZiList(String mc,String wzlxmc,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = wuZiService.queryForInt(mc,wzlxmc);
+		List<WuZi> wzList=wuZiService.queryList(mc, wzlxmc, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", wzList);
 		}
 		
 		return jsonMap;
