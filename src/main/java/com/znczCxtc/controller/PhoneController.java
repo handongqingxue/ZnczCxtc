@@ -485,24 +485,6 @@ public class PhoneController {
 		}
 		return jsonMap;
 	}
-
-	@RequestMapping(value="/newWuZi")
-	@ResponseBody
-	public Map<String, Object> newWuZi(WuZi wz) {
-		
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		int count=wuZiService.add(wz);
-		if(count>0) {
-			jsonMap.put("message", "ok");
-			jsonMap.put("info", "创建物资成功！");
-		}
-		else {
-			jsonMap.put("message", "no");
-			jsonMap.put("info", "创建物资失败！");
-		}
-		return jsonMap;
-	}
 	
 	@RequestMapping(value="/getWZLX")
 	@ResponseBody
@@ -554,6 +536,66 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+
+	@RequestMapping(value="/newWuZi")
+	@ResponseBody
+	public Map<String, Object> newWuZi(WuZi wz) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=wuZiService.add(wz);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建物资成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建物资失败！");
+		}
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/editWuZi")
+	@ResponseBody
+	public Map<String, Object> editWuZi(WuZi wz) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=wuZiService.edit(wz);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑物资成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑物资失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getWuZi")
+	@ResponseBody
+	public Map<String, Object> getWuZi(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			WuZi wz=wuZiService.selectById(id);
+			if(wz==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("wz", wz);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
 	
 	@RequestMapping(value="/getWuZiList")
 	@ResponseBody
@@ -576,6 +618,52 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getCheLiang")
+	@ResponseBody
+	public Map<String, Object> getCheLiang(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			CheLiang cl=cheLiangService.selectById(id);
+			if(cl==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("cl", cl);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getCheLiangList")
+	@ResponseBody
+	public Map<String, Object> getCheLiangList(String cph,Integer cllx,Boolean sfzy,Integer pfjd,String shzt,String bz,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = cheLiangService.queryForInt(cph,cllx,sfzy,pfjd,shzt,bz);
+		List<CheLiang> clList=cheLiangService.queryList(cph, cllx, sfzy, pfjd, shzt, bz, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", clList);
+		}
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody
@@ -591,6 +679,10 @@ public class PhoneController {
 		jsonMap.put("ddShjg", Constant.DDSHJG);
 		jsonMap.put("gbjlGbzt", Constant.GBJLGBZT);
 		jsonMap.put("gblx", Constant.GBLX);
+		jsonMap.put("clPfjd", Constant.CLPFJD);
+		jsonMap.put("clShzt", Constant.CLSHZT);
+		jsonMap.put("clSfzy", Constant.CLSFZY);
+		jsonMap.put("clYslx", Constant.CLYSLX);
 		
 		return jsonMap;
 	}
@@ -636,6 +728,22 @@ public class PhoneController {
 			case Constant.GBLX:
 				Map<String, Object> gblxMap = Constant.getGblxMap();
 				jsonMap.put("gblxMap", gblxMap);
+				break;
+			case Constant.CLPFJD:
+				Map<String, Object> clPfjdMap = Constant.getClPfjdMap();
+				jsonMap.put("clPfjdMap", clPfjdMap);
+				break;
+			case Constant.CLSHZT:
+				Map<String, Object> clShztMap = Constant.getClShztMap();
+				jsonMap.put("clShztMap", clShztMap);
+				break;
+			case Constant.CLSFZY:
+				Map<String, Object> clSfzyMap = Constant.getClSfzyMap();
+				jsonMap.put("clSfzyMap", clSfzyMap);
+				break;
+			case Constant.CLYSLX:
+				Map<String, Object> clYslxMap = Constant.getClyslxMap();
+				jsonMap.put("clYslxMap", clYslxMap);
 				break;
 			}
 		}

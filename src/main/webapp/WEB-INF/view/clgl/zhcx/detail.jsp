@@ -141,7 +141,7 @@ function setFitWidthInParent(parent,self){
 					注册日期
 				</td>
 				<td class="td2">
-					${requestScope.cl.fzrq }
+					${requestScope.cl.zcrq }
 				</td>
 			  </tr>
 			  <tr>
@@ -149,19 +149,19 @@ function setFitWidthInParent(parent,self){
 					排放阶段
 				</td>
 				<td class="td2">
-					<c:if test="${requestScope.cl.pfjd eq 1 }">国五燃油</c:if>
-					<c:if test="${requestScope.cl.pfjd eq 2 }">国五燃气</c:if>
-					<c:if test="${requestScope.cl.pfjd eq 3 }">国六燃油</c:if>
-					<c:if test="${requestScope.cl.pfjd eq 4 }">国六燃气</c:if>
-					<c:if test="${requestScope.cl.pfjd eq 5 }">电动</c:if>
+					<c:if test="${requestScope.cl.pfjd eq requestScope.gwryPfjd }">${requestScope.gwryPfjdMc }</c:if>
+					<c:if test="${requestScope.cl.pfjd eq requestScope.gwrqPfjd }">${requestScope.gwrqPfjdMc }</c:if>
+					<c:if test="${requestScope.cl.pfjd eq requestScope.glryPfjd }">${requestScope.glryPfjdMc }</c:if>
+					<c:if test="${requestScope.cl.pfjd eq requestScope.glrqPfjd }">${requestScope.glrqPfjdMc }</c:if>
+					<c:if test="${requestScope.cl.pfjd eq requestScope.ddPfjd }">${requestScope.ddPfjdMc }</c:if>
 				</td>
 				<td class="td1" align="right">
 					车辆运输类型
 				</td>
 				<td class="td2">
-					<c:if test="${requestScope.cl.clyslx eq 1 }">普货运输</c:if>
-					<c:if test="${requestScope.cl.clyslx eq 2 }">厂内运输</c:if>
-					<c:if test="${requestScope.cl.clyslx eq 3 }">危化品运输</c:if>
+					<c:if test="${requestScope.cl.clyslx eq requestScope.physYslx }">${requestScope.physYslxMc }</c:if>
+					<c:if test="${requestScope.cl.clyslx eq requestScope.cnysYslx }">${requestScope.cnysYslxMc }</c:if>
+					<c:if test="${requestScope.cl.clyslx eq requestScope.whpysYslx }">${requestScope.whpysYslxMc }</c:if>
 				</td>
 			  </tr>
 			  <tr>
@@ -242,9 +242,9 @@ function setFitWidthInParent(parent,self){
 					审核状态
 				</td>
 				<td class="td2">
-					<c:if test="${requestScope.cl.shzt eq 1 }">待审核</c:if>
-					<c:if test="${requestScope.cl.shzt eq 2 }">审核通过</c:if>
-					<c:if test="${requestScope.cl.shzt eq 3 }">编辑中</c:if>
+					<c:if test="${requestScope.cl.shzt eq requestScope.dshShzt }">${requestScope.dshShztMc }</c:if>
+					<c:if test="${requestScope.cl.shzt eq requestScope.shtgShzt }">${requestScope.shtgShztMc }</c:if>
+					<c:if test="${requestScope.cl.shzt eq requestScope.bjzShzt }">${requestScope.bjzShztMc }</c:if>
 				</td>
 				<td class="td1" align="right">
 					备注

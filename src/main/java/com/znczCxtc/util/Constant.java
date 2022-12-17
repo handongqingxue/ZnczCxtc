@@ -141,6 +141,10 @@ public class Constant {
 	public static final int DDSHJG=6;
 	public static final int GBJLGBZT=7;
 	public static final int GBLX=8;
+	public static final int CLPFJD=9;
+	public static final int CLSHZT=10;
+	public static final int CLSFZY=11;
+	public static final int CLYSLX=12;
 	
 	/**
 	 * 存放订单状态常量
@@ -441,6 +445,51 @@ public class Constant {
 		request.setAttribute("ddPfjdMc", CheLiang.DIAN_DONG_TEXT);
 	}
 	
+	public static Map<String, Object> getClPfjdMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("gwryPfjd", CheLiang.GUO_WU_RAN_YOU);
+		jsonMap.put("gwrqPfjd", CheLiang.GUO_WU_RAN_QI);
+		jsonMap.put("glryPfjd", CheLiang.GUO_LIU_RAN_YOU);
+		jsonMap.put("glrqPfjd", CheLiang.GUO_LIU_RAN_QI);
+		jsonMap.put("ddPfjd", CheLiang.DIAN_DONG);
+		
+		jsonMap.put("gwryPfjdMc", CheLiang.GUO_WU_RAN_YOU_TEXT);
+		jsonMap.put("gwrqPfjdMc", CheLiang.GUO_WU_RAN_QI_TEXT);
+		jsonMap.put("glryPfjdMc", CheLiang.GUO_LIU_RAN_YOU_TEXT);
+		jsonMap.put("glrqPfjdMc", CheLiang.GUO_LIU_RAN_QI_TEXT);
+		jsonMap.put("ddPfjdMc", CheLiang.DIAN_DONG_TEXT);
+		
+		return jsonMap;
+	}
+	
+	public static void setClyslxInRequest(HttpServletRequest request) {
+
+		request.setAttribute("physYslx", CheLiang.PU_HUO_YUN_SHU);
+		request.setAttribute("cnysYslx", CheLiang.CHANG_NEI_YUN_SHU);
+		request.setAttribute("whpysYslx", CheLiang.WEI_HUA_PIN_YUN_SHU);
+		
+		request.setAttribute("physYslxMc", CheLiang.PU_HUO_YUN_SHU_TEXT);
+		request.setAttribute("cnysYslxMc", CheLiang.CHANG_NEI_YUN_SHU_TEXT);
+		request.setAttribute("whpysYslxMc", CheLiang.WEI_HUA_PIN_YUN_SHU_TEXT);
+	}
+	
+	public static Map<String, Object> getClyslxMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("physYslx", CheLiang.PU_HUO_YUN_SHU);
+		jsonMap.put("cnysYslx", CheLiang.CHANG_NEI_YUN_SHU);
+		jsonMap.put("whpysYslx", CheLiang.WEI_HUA_PIN_YUN_SHU);
+		
+		jsonMap.put("physYslxMc", CheLiang.PU_HUO_YUN_SHU_TEXT);
+		jsonMap.put("cnysYslxMc", CheLiang.CHANG_NEI_YUN_SHU_TEXT);
+		jsonMap.put("whpysYslxMc", CheLiang.WEI_HUA_PIN_YUN_SHU_TEXT);
+		
+		return jsonMap;
+	}
+	
 	/**
 	 * 存放订单过磅状态常量
 	 * @param request
@@ -622,6 +671,21 @@ public class Constant {
 		request.setAttribute("bjzShztMc", CheLiang.BIAN_JI_ZHONG_TEXT);
 	}
 	
+	public static Map<String, Object> getClShztMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("dshShzt", CheLiang.DAI_SHEN_HE);
+		jsonMap.put("shtgShzt", CheLiang.SHEN_HE_TONG_GUO);
+		jsonMap.put("bjzShzt", CheLiang.BIAN_JI_ZHONG);
+		
+		jsonMap.put("dshShztMc", CheLiang.DAI_SHEN_HE_TEXT);
+		jsonMap.put("shtgShztMc", CheLiang.SHEN_HE_TONG_GUO_TEXT);
+		jsonMap.put("bjzShztMc", CheLiang.BIAN_JI_ZHONG_TEXT);
+		
+		return jsonMap;
+	}
+	
 	/**
 	 * 存放司机在用状态常量
 	 * @param request
@@ -646,6 +710,19 @@ public class Constant {
 		
 		request.setAttribute("shiSfzyMc", CheLiang.SHI_TEXT);
 		request.setAttribute("fouSfzyMc", CheLiang.FOU_TEXT);
+	}
+	
+	public static Map<String, Object> getClSfzyMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("shiSfzy", CheLiang.SHI);
+		jsonMap.put("fouSfzy", CheLiang.FOU);
+		
+		jsonMap.put("shiSfzyMc", CheLiang.SHI_TEXT);
+		jsonMap.put("fouSfzyMc", CheLiang.FOU_TEXT);
+		
+		return jsonMap;
 	}
 	
 	/**

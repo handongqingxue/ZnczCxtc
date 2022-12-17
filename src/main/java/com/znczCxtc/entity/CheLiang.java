@@ -79,6 +79,14 @@ public class CheLiang {
 	public static final String GUO_LIU_RAN_QI_TEXT="国六燃气";
 	public static final String DIAN_DONG_TEXT="电动";
 	
+	public static final int PU_HUO_YUN_SHU=1;
+	public static final int CHANG_NEI_YUN_SHU=2;
+	public static final int WEI_HUA_PIN_YUN_SHU=3;
+	
+	public static final String PU_HUO_YUN_SHU_TEXT="普货运输";
+	public static final String CHANG_NEI_YUN_SHU_TEXT="厂内运输";
+	public static final String WEI_HUA_PIN_YUN_SHU_TEXT="危化品运输";
+	
 	private Integer id;//车辆id
 	public Integer getId() {
 		return id;

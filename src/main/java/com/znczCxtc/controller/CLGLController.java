@@ -61,6 +61,9 @@ public class CLGLController {
 		CheLiang cl=cheLiangService.selectById(id);
 		request.setAttribute("cl", cl);
 		
+		Constant.setClPfjdInRequest(request);
+		Constant.setClyslxInRequest(request);
+		
 		return MODULE_NAME+"/dsh/detail";
 	}
 
@@ -123,6 +126,10 @@ public class CLGLController {
 		String id = request.getParameter("id");
 		CheLiang cl=cheLiangService.selectById(id);
 		request.setAttribute("cl", cl);
+		
+		Constant.setClPfjdInRequest(request);
+		Constant.setClyslxInRequest(request);
+		Constant.setClShztInRequest(request);
 		
 		return MODULE_NAME+"/zhcx/detail";
 	}
