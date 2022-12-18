@@ -619,6 +619,84 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/newCheLiang")
+	@ResponseBody
+	public Map<String, Object> newCheLiang(CheLiang cl) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count=cheLiangService.add(cl);
+			if(count>0) {
+				int clId=cheLiangService.getIdByCph(cl.getCph());
+				
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "创建车辆信息成功！");
+				jsonMap.put("clId", clId);
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "创建车辆信息失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
+
+	aaa
+	@RequestMapping(value="/uploadCheLiangFile")
+	@ResponseBody
+	public Map<String, Object> uploadCheLiangFile(CheLiang cl,
+			@RequestParam(value="file",required=false) MultipartFile file) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			String jsonStr = null;
+			if(file!=null) {
+				if(file.getSize()>0) {
+					jsonStr = FileUploadUtil.appUploadContentImg(file,"DuiFangGuoBangJiLu/Dfbdzp/");
+					JSONObject fileJson = JSONObject.fromObject(jsonStr);
+					if("成功".equals(fileJson.get("msg"))) {
+						JSONObject dataJO = (JSONObject)fileJson.get("data");
+						String src = dataJO.get("src").toString();
+						switch (cl.getWjlx()) {
+						case CheLiang.ZHAO_PIAN:
+							cl.setZp(src);
+							break;
+						case 2:
+							dppr.setPhotoUrl2(src);
+							break;
+						case 3:
+							dppr.setPhotoUrl3(src);
+							break;
+						case 4:
+							dppr.setVideoUrl1(src);
+							break;
+						}
+					}
+				}
+			}
+			
+			int count=duiFangGuoBangJiLuService.updateFileByDdId(dfgbjl);
+			int count1=cheLiangService.updateFileById(cl);
+			System.out.println("count==="+count);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "上传成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "上传失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/getCheLiang")
 	@ResponseBody
 	public Map<String, Object> getCheLiang(String id) {
@@ -683,6 +761,7 @@ public class PhoneController {
 		jsonMap.put("clShzt", Constant.CLSHZT);
 		jsonMap.put("clSfzy", Constant.CLSFZY);
 		jsonMap.put("clYslx", Constant.CLYSLX);
+		jsonMap.put("clWjlx", Constant.CLWJLX);
 		
 		return jsonMap;
 	}
@@ -744,6 +823,10 @@ public class PhoneController {
 			case Constant.CLYSLX:
 				Map<String, Object> clYslxMap = Constant.getClYslxMap();
 				jsonMap.put("clYslxMap", clYslxMap);
+				break;
+			case Constant.CLWJLX:
+				Map<String, Object> clWjlxMap = Constant.getClWjlxMap();
+				jsonMap.put("clWjlxMap", clWjlxMap);
 				break;
 			}
 		}

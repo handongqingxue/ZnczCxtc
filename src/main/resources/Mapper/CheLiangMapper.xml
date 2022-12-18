@@ -250,4 +250,7 @@
 	<select id="queryCBBList" resultType="com.znczCxtc.entity.CheLiang">
 		select id,cph from che_liang
 	</select>
+	<select id="getIdByCph" resultType="java.lang.Integer">
+		select id from che_liang where cph=#{cph}
+	</select>
 </mapper>

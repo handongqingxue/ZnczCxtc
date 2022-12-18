@@ -23,4 +23,6 @@ public interface CheLiangMapper {
 	public CheLiang selectById(String id);
 
 	public List<CheLiang> queryCBBList();
+
+	public int getIdByCph(@Param("cph") String cph);
 }

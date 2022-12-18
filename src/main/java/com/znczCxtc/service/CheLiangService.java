@@ -21,4 +21,6 @@ public interface CheLiangService {
 	public CheLiang selectById(String id);
 
 	public List<CheLiang> queryCBBList();
+
+	public int getIdByCph(String cph);
 }

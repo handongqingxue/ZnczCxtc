@@ -84,4 +84,10 @@ public class CheLiangServiceImpl implements CheLiangService {
 		// TODO Auto-generated method stub
 		return cheLiangDao.queryCBBList();
 	}
+
+	@Override
+	public int getIdByCph(String cph) {
+		// TODO Auto-generated method stub
+		return cheLiangDao.getIdByCph(cph);
+	}
 }

@@ -145,6 +145,7 @@ public class Constant {
 	public static final int CLSHZT=10;
 	public static final int CLSFZY=11;
 	public static final int CLYSLX=12;
+	public static final int CLWJLX=13;
 	
 	/**
 	 * 存放订单状态常量
@@ -486,6 +487,18 @@ public class Constant {
 		jsonMap.put("physYslxMc", CheLiang.PU_HUO_YUN_SHU_TEXT);
 		jsonMap.put("cnysYslxMc", CheLiang.CHANG_NEI_YUN_SHU_TEXT);
 		jsonMap.put("whpysYslxMc", CheLiang.WEI_HUA_PIN_YUN_SHU_TEXT);
+		
+		return jsonMap;
+	}
+	
+	public static Map<String, Object> getClWjlxMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("zpWjlx", CheLiang.ZHAO_PIAN);
+		jsonMap.put("xszWjlx", CheLiang.XING_SHI_ZHENG);
+		jsonMap.put("scqdWjlx", CheLiang.SUI_CHE_QING_DAN);
+		jsonMap.put("pfjdcxjtWjlx", CheLiang.PAI_FANG_JIE_DUAN_CHA_XUN_JIE_TU);
 		
 		return jsonMap;
 	}

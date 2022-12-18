@@ -396,7 +396,7 @@
 	<select id="getByCphJL" resultType="com.znczCxtc.entity.DingDan">
 		select * from ding_dan where id in (select rcjl.ddId from(select ddId from rglr_cph_ji_lu where cph=#{cph} order by lrsj desc LIMIT 0,1)as rcjl)
 	</select>
-	<select id="getIdByDdh" resultType="java.lang.Integer">
+	<select id="getIdByDdh" resultType="java.lang.Long">
 		select id from ding_dan where ddh=#{ddh}
 	</select>
 	<select id="getCountByIdCph" resultType="java.lang.Integer">

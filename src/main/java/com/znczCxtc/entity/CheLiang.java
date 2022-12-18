@@ -87,6 +87,11 @@ public class CheLiang {
 	public static final String CHANG_NEI_YUN_SHU_TEXT="厂内运输";
 	public static final String WEI_HUA_PIN_YUN_SHU_TEXT="危化品运输";
 	
+	public static final int ZHAO_PIAN=1;
+	public static final int XING_SHI_ZHENG=2;
+	public static final int SUI_CHE_QING_DAN=3;
+	public static final int PAI_FANG_JIE_DUAN_CHA_XUN_JIE_TU=4;
+	
 	private Integer id;//车辆id
 	public Integer getId() {
 		return id;
@@ -202,6 +207,12 @@ public class CheLiang {
 	public void setBz(String bz) {
 		this.bz = bz;
 	}
+	public Integer getWjlx() {
+		return wjlx;
+	}
+	public void setWjlx(Integer wjlx) {
+		this.wjlx = wjlx;
+	}
 	private String cph;//车牌号
 	private String czxx;//车主信息
 	private Float pz;//皮重
@@ -220,4 +231,5 @@ public class CheLiang {
 	private String scqd;//随车清单
 	private String pfjdcxjt;//排放阶段查询截图
 	private String bz;//备注
+	private Integer wjlx;//文件类型
 }
