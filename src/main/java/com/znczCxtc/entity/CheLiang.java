@@ -172,11 +172,11 @@ public class CheLiang {
 	public void setShzt(Integer shzt) {
 		this.shzt = shzt;
 	}
-	public Integer getClyslx() {
-		return clyslx;
+	public Integer getYslx() {
+		return yslx;
 	}
-	public void setClyslx(Integer clyslx) {
-		this.clyslx = clyslx;
+	public void setYslx(Integer yslx) {
+		this.yslx = yslx;
 	}
 	public String getXsz() {
 		return xsz;
@@ -215,7 +215,7 @@ public class CheLiang {
 	private String fzrq;//发证日期
 	private Boolean sfzy;//是否在用
 	private Integer shzt;//审核状态：1.待审核 2.审核通过 3.编辑中
-	private Integer clyslx;//车辆运输类型：1.普货运输 2.厂内运输 3.危化品运输
+	private Integer yslx;//运输类型：1.普货运输 2.厂内运输 3.危化品运输
 	private String xsz;//行驶证
 	private String scqd;//随车清单
 	private String pfjdcxjt;//排放阶段查询截图

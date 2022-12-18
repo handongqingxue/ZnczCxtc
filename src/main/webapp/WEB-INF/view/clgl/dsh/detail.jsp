@@ -156,12 +156,12 @@ function setFitWidthInParent(parent,self){
 					<c:if test="${requestScope.cl.pfjd eq requestScope.ddPfjd }">${requestScope.ddPfjdMc }</c:if>
 				</td>
 				<td class="td1" align="right">
-					车辆运输类型
+					运输类型
 				</td>
 				<td class="td2">
-					<c:if test="${requestScope.cl.clyslx eq requestScope.physYslx }">${requestScope.physYslxMc }</c:if>
-					<c:if test="${requestScope.cl.clyslx eq requestScope.cnysYslx }">${requestScope.cnysYslxMc }</c:if>
-					<c:if test="${requestScope.cl.clyslx eq requestScope.whpysYslx }">${requestScope.whpysYslxMc }</c:if>
+					<c:if test="${requestScope.cl.yslx eq requestScope.physYslx }">${requestScope.physYslxMc }</c:if>
+					<c:if test="${requestScope.cl.yslx eq requestScope.cnysYslx }">${requestScope.cnysYslxMc }</c:if>
+					<c:if test="${requestScope.cl.yslx eq requestScope.whpysYslx }">${requestScope.whpysYslxMc }</c:if>
 				</td>
 			  </tr>
 			  <tr>

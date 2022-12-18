@@ -62,7 +62,7 @@ public class CLGLController {
 		request.setAttribute("cl", cl);
 		
 		Constant.setClPfjdInRequest(request);
-		Constant.setClyslxInRequest(request);
+		Constant.setClYslxInRequest(request);
 		
 		return MODULE_NAME+"/dsh/detail";
 	}
@@ -128,7 +128,7 @@ public class CLGLController {
 		request.setAttribute("cl", cl);
 		
 		Constant.setClPfjdInRequest(request);
-		Constant.setClyslxInRequest(request);
+		Constant.setClYslxInRequest(request);
 		Constant.setClShztInRequest(request);
 		
 		return MODULE_NAME+"/zhcx/detail";

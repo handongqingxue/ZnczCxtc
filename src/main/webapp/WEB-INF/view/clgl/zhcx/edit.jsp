@@ -131,7 +131,7 @@ function initEditDialog(){
 
 	initZCRQDB();
 	initPFJDCBB();
-	initCLYSLXCBB();
+	initYSLXCBB();
 	initFZRQDB();
 	initCLLXCBB();
 	initSFZYCBB();
@@ -171,21 +171,21 @@ function initPFJDCBB(){
 	});
 }
 
-function initCLYSLXCBB(){
+function initYSLXCBB(){
 	var data=[];
-	data.push({"value":"","text":"请选择车辆运输类型"});
+	data.push({"value":"","text":"请选择运输类型"});
 	data.push({"value":"1","text":"普货运输"});
 	data.push({"value":"2","text":"厂内运输"});
 	data.push({"value":"3","text":"危化品运输"});
-	clyslxCBB=$("#clyslx_cbb").combobox({
+	yslxCBB=$("#yslx_cbb").combobox({
 		valueField:"value",
 		textField:"text",
 		data:data,
 		onLoadSuccess:function(){
-			$(this).combobox("setValue",'${requestScope.cl.clyslx }');
+			$(this).combobox("setValue",'${requestScope.cl.yslx }');
 		},
 		onSelect:function(){
-			$("#clyslx").val($(this).combobox("getValue"));
+			$("#yslx").val($(this).combobox("getValue"));
 		}
 	});
 }
@@ -242,7 +242,7 @@ function checkEdit(){
 	if(checkCPH()){
 		if(checkZCRQ()){
 			if(checkPFJD()){
-				if(checkCLYSLX()){
+				if(checkYSLX()){
 					if(checkPPXH()){
 						if(checkFZRQ()){
 							if(checkCLLX()){
@@ -326,11 +326,11 @@ function checkPFJD(){
 		return true;
 }
 
-//验证车辆运输类型
-function checkCLYSLX(){
-	var clyslx=clyslxCBB.combobox("getValue");
-	if(clyslx==null||clyslx==""){
-	  	alert("请选择车辆运输类型");
+//验证运输类型
+function checkYSLX(){
+	var yslx=yslxCBB.combobox("getValue");
+	if(yslx==null||yslx==""){
+	  	alert("请选择运输类型");
 	  	return false;
 	}
 	else
@@ -559,11 +559,11 @@ function setFitWidthInParent(parent,self){
 					<input type="hidden" id="pfjd" name="pfjd"/>
 				</td>
 				<td class="td1" align="right">
-					车辆运输类型
+					运输类型
 				</td>
 				<td class="td2">
-					<input id="clyslx_cbb"/>
-					<input type="hidden" id="clyslx" name="clyslx"/>
+					<input id="yslx_cbb"/>
+					<input type="hidden" id="yslx" name="yslx"/>
 				</td>
 			  </tr>
 			  <tr>

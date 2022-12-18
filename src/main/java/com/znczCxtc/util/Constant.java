@@ -464,7 +464,7 @@ public class Constant {
 		return jsonMap;
 	}
 	
-	public static void setClyslxInRequest(HttpServletRequest request) {
+	public static void setClYslxInRequest(HttpServletRequest request) {
 
 		request.setAttribute("physYslx", CheLiang.PU_HUO_YUN_SHU);
 		request.setAttribute("cnysYslx", CheLiang.CHANG_NEI_YUN_SHU);
@@ -475,7 +475,7 @@ public class Constant {
 		request.setAttribute("whpysYslxMc", CheLiang.WEI_HUA_PIN_YUN_SHU_TEXT);
 	}
 	
-	public static Map<String, Object> getClyslxMap() {
+	public static Map<String, Object> getClYslxMap() {
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		

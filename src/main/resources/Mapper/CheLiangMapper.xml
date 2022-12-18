@@ -43,8 +43,8 @@
 			<if test="shzt!=null">
 				shzt,
 			</if>
-			<if test="clyslx!=null">
-				clyslx,
+			<if test="yslx!=null">
+				yslx,
 			</if>
 			<if test="xsz!=null">
 				xsz,
@@ -98,8 +98,8 @@
 			<if test="shzt!=null">
 				#{shzt},
 			</if>
-			<if test="clyslx!=null">
-				#{clyslx},
+			<if test="yslx!=null">
+				#{yslx},
 			</if>
 			<if test="xsz!=null">
 				#{xsz},
@@ -178,8 +178,8 @@
 			<if test="shzt!=null">
 				shzt=#{shzt},
 			</if>
-			<if test="clyslx!=null">
-				clyslx=#{clyslx},
+			<if test="yslx!=null">
+				yslx=#{yslx},
 			</if>
 			<if test="xsz!=null">
 				xsz=#{xsz},

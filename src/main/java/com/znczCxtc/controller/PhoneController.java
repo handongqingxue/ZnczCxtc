@@ -742,7 +742,7 @@ public class PhoneController {
 				jsonMap.put("clSfzyMap", clSfzyMap);
 				break;
 			case Constant.CLYSLX:
-				Map<String, Object> clYslxMap = Constant.getClyslxMap();
+				Map<String, Object> clYslxMap = Constant.getClYslxMap();
 				jsonMap.put("clYslxMap", clYslxMap);
 				break;
 			}
