@@ -25,4 +25,6 @@ public interface CheLiangMapper {
 	public List<CheLiang> queryCBBList();
 
 	public int getIdByCph(@Param("cph") String cph);
+
+	public int updateFileById(CheLiang cl);
 }

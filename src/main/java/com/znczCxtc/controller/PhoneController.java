@@ -645,7 +645,6 @@ public class PhoneController {
 		return jsonMap;
 	}
 
-	aaa
 	@RequestMapping(value="/uploadCheLiangFile")
 	@ResponseBody
 	public Map<String, Object> uploadCheLiangFile(CheLiang cl,
@@ -656,7 +655,22 @@ public class PhoneController {
 			String jsonStr = null;
 			if(file!=null) {
 				if(file.getSize()>0) {
-					jsonStr = FileUploadUtil.appUploadContentImg(file,"DuiFangGuoBangJiLu/Dfbdzp/");
+					String folder="CheLiang/";
+					switch (cl.getWjlx()) {
+					case CheLiang.ZHAO_PIAN:
+						folder+="Zp";//照片
+						break;
+					case CheLiang.XING_SHI_ZHENG:
+						folder+="Xsz";//行驶证
+						break;
+					case CheLiang.SUI_CHE_QING_DAN:
+						folder+="Scqd";//随车清单
+						break;
+					case CheLiang.PAI_FANG_JIE_DUAN_CHA_XUN_JIE_TU:
+						folder+="Pfjdcxjt";//排放阶段查询截图
+						break;
+					}
+					jsonStr = FileUploadUtil.appUploadContentImg(file,folder);
 					JSONObject fileJson = JSONObject.fromObject(jsonStr);
 					if("成功".equals(fileJson.get("msg"))) {
 						JSONObject dataJO = (JSONObject)fileJson.get("data");
@@ -665,22 +679,21 @@ public class PhoneController {
 						case CheLiang.ZHAO_PIAN:
 							cl.setZp(src);
 							break;
-						case 2:
-							dppr.setPhotoUrl2(src);
+						case CheLiang.XING_SHI_ZHENG:
+							cl.setXsz(src);
 							break;
-						case 3:
-							dppr.setPhotoUrl3(src);
+						case CheLiang.SUI_CHE_QING_DAN:
+							cl.setScqd(src);
 							break;
-						case 4:
-							dppr.setVideoUrl1(src);
+						case CheLiang.PAI_FANG_JIE_DUAN_CHA_XUN_JIE_TU:
+							cl.setPfjdcxjt(src);
 							break;
 						}
 					}
 				}
 			}
 			
-			int count=duiFangGuoBangJiLuService.updateFileByDdId(dfgbjl);
-			int count1=cheLiangService.updateFileById(cl);
+			int count=cheLiangService.updateFileById(cl);
 			System.out.println("count==="+count);
 			if(count>0) {
 				jsonMap.put("message", "ok");

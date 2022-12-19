@@ -90,4 +90,10 @@ public class CheLiangServiceImpl implements CheLiangService {
 		// TODO Auto-generated method stub
 		return cheLiangDao.getIdByCph(cph);
 	}
+
+	@Override
+	public int updateFileById(CheLiang cl) {
+		// TODO Auto-generated method stub
+		return cheLiangDao.updateFileById(cl);
+	}
 }

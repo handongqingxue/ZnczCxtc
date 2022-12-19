@@ -23,4 +23,6 @@ public interface CheLiangService {
 	public List<CheLiang> queryCBBList();
 
 	public int getIdByCph(String cph);
+
+	public int updateFileById(CheLiang cl);
 }

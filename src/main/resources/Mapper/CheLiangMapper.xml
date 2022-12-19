@@ -253,4 +253,22 @@
 	<select id="getIdByCph" resultType="java.lang.Integer">
 		select id from che_liang where cph=#{cph}
 	</select>
+	<update id="updateFileById" parameterType="com.znczCxtc.entity.CheLiang">
+		update che_liang set 
+		<trim suffixOverrides=",">
+			<if test="zp!=null">
+				zp=#{zp},
+			</if>
+			<if test="xsz!=null">
+				xsz=#{xsz},
+			</if>
+			<if test="scqd!=null">
+				scqd=#{scqd},
+			</if>
+			<if test="pfjdcxjt!=null">
+				pfjdcxjt=#{pfjdcxjt},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
 </mapper>
