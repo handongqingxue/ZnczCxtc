@@ -547,7 +547,7 @@ function setFitWidthInParent(parent,self){
 				</td>
 				<td class="td2">
 					<input id="zcrq_db"/>
-					<input type="hidden" id="zcrq" name="zcrq" value="${requestScope.cl.fzrq }"/>
+					<input type="hidden" id="zcrq" name="zcrq" value="${requestScope.cl.zcrq }"/>
 				</td>
 			  </tr>
 			  <tr>

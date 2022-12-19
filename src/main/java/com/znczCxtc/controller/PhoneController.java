@@ -645,6 +645,28 @@ public class PhoneController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/editCheLiang")
+	@ResponseBody
+	public Map<String, Object> editCheLiang(CheLiang cl) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			int count=cheLiangService.edit(cl);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "编辑车辆信息成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "编辑车辆信息失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
+
 	@RequestMapping(value="/uploadCheLiangFile")
 	@ResponseBody
 	public Map<String, Object> uploadCheLiangFile(CheLiang cl,
