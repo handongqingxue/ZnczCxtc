@@ -53,6 +53,10 @@ public class PhoneController {
 	private BangDanJiLuService bangDanJiLuService;
 	@Autowired
 	private GuoBangJiLuService guoBangJiLuService;
+	@Autowired
+	private CheLiangShenHeJiLuService cheLiangShenHeJiLuService;
+	@Autowired
+    private CheLiangTaiZhangService cheLiangTaiZhangService;
 	static final String MODULE_NAME=Constant.PHONE_MODULE_NAME;
 
 	@RequestMapping(value="/login")
@@ -777,6 +781,56 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getCLSHJLList")
+	@ResponseBody
+	public Map<String, Object> getCLSHJLList(String clCph,String shrYhm,String shsjks,String shsjjs,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = cheLiangShenHeJiLuService.queryForInt(clCph,shrYhm,shsjks,shsjjs);
+			List<CheLiangShenHeJiLu> clshjlList=cheLiangShenHeJiLuService.queryList(clCph, shrYhm, shsjks, shsjjs, page, rows, null, null);
+			
+			jsonMap.put("total", count);
+			if(count==0) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("list", clshjlList);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getCLTZList")
+	@ResponseBody
+	public Map<String, Object> getCLTZList(String ddh,String cph,String ddztIds,String ddztMcs,String jcsjs,String jcsje,String ccsjs,String ccsje,
+			int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = cheLiangTaiZhangService.queryForInt(ddh,cph,ddztIds,ddztMcs,jcsjs,jcsje,ccsjs,ccsje);
+		List<CheLiangTaiZhang> cltzList=cheLiangTaiZhangService.queryList(ddh, cph, ddztIds, ddztMcs, jcsjs, jcsje, ccsjs, ccsje, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", cltzList);
+		}
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody
@@ -797,6 +851,7 @@ public class PhoneController {
 		jsonMap.put("clSfzy", Constant.CLSFZY);
 		jsonMap.put("clYslx", Constant.CLYSLX);
 		jsonMap.put("clWjlx", Constant.CLWJLX);
+		jsonMap.put("clShjg", Constant.CLSHJG);
 		
 		return jsonMap;
 	}
@@ -862,6 +917,10 @@ public class PhoneController {
 			case Constant.CLWJLX:
 				Map<String, Object> clWjlxMap = Constant.getClWjlxMap();
 				jsonMap.put("clWjlxMap", clWjlxMap);
+				break;
+			case Constant.CLSHJG:
+				Map<String, Object> clShjgMap = Constant.getClShjgMap();
+				jsonMap.put("clShjgMap", clShjgMap);
 				break;
 			}
 		}
