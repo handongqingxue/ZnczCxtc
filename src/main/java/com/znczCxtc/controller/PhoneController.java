@@ -809,6 +809,30 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/getCLTZ")
+	@ResponseBody
+	public Map<String, Object> getCLTZ(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			CheLiangTaiZhang cltz=cheLiangTaiZhangService.selectById(id);
+			if(cltz==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("cltz", cltz);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/getCLTZList")
 	@ResponseBody
 	public Map<String, Object> getCLTZList(String ddh,String cph,String ddztIds,String ddztMcs,String jcsjs,String jcsje,String ccsjs,String ccsje,
