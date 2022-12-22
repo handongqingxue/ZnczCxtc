@@ -856,6 +856,28 @@ public class PhoneController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/getSiJiList")
+	@ResponseBody
+	public Map<String, Object> getSiJiList(String xm,String sjh,String sfzh,Integer zyzt,Integer shzt,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = siJiService.queryForInt(xm,sjh,sfzh,zyzt,shzt);
+		List<SiJi> sjList=siJiService.queryList(xm,sjh,sfzh,zyzt, shzt, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", sjList);
+		}
+		
+		return jsonMap;
+	}
+
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody
 	public Map<String, Object> getConstantFlagMap(){
@@ -876,6 +898,7 @@ public class PhoneController {
 		jsonMap.put("clYslx", Constant.CLYSLX);
 		jsonMap.put("clWjlx", Constant.CLWJLX);
 		jsonMap.put("clShjg", Constant.CLSHJG);
+		jsonMap.put("sjShzt", Constant.SJSHZT);
 		
 		return jsonMap;
 	}
@@ -945,6 +968,10 @@ public class PhoneController {
 			case Constant.CLSHJG:
 				Map<String, Object> clShjgMap = Constant.getClShjgMap();
 				jsonMap.put("clShjgMap", clShjgMap);
+				break;
+			case Constant.SJSHZT:
+				Map<String, Object> sjShztMap = Constant.getSjShztMap();
+				jsonMap.put("sjShztMap", sjShztMap);
 				break;
 			}
 		}
