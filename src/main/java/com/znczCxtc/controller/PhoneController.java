@@ -855,6 +855,30 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getSiJi")
+	@ResponseBody
+	public Map<String, Object> getSiJi(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			SiJi sj=siJiService.selectById(id);
+			if(sj==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("sj", sj);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/getSiJiList")
 	@ResponseBody
