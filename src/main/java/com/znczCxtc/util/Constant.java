@@ -149,6 +149,7 @@ public class Constant {
 	public static final int CLSHJG=14;
 	public static final int SJSHZT=15;
 	public static final int SJZYZT=16;
+	public static final int SJWJLX=17;
 	
 	/**
 	 * 存放订单状态常量
@@ -752,6 +753,17 @@ public class Constant {
 		
 		jsonMap.put("shiZyztMc", SiJi.SHI_TEXT);
 		jsonMap.put("fouZyztMc", SiJi.FOU_TEXT);
+		
+		return jsonMap;
+	}
+	
+	public static Map<String, Object> getSjWjlxMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("zpWjlx", SiJi.ZHAO_PIAN);
+		jsonMap.put("zgzsWjlx", SiJi.ZI_GE_ZHENG_SHU);
+		jsonMap.put("jzWjlx", SiJi.JIA_ZHENG);
 		
 		return jsonMap;
 	}

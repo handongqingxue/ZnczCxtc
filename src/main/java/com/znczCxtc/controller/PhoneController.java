@@ -924,6 +924,7 @@ public class PhoneController {
 		jsonMap.put("clShjg", Constant.CLSHJG);
 		jsonMap.put("sjShzt", Constant.SJSHZT);
 		jsonMap.put("sjZyzt", Constant.SJZYZT);
+		jsonMap.put("sjWjlx", Constant.SJWJLX);
 		
 		return jsonMap;
 	}
@@ -1001,6 +1002,10 @@ public class PhoneController {
 			case Constant.SJZYZT:
 				Map<String, Object> sjZyztMap = Constant.getSjZyztMap();
 				jsonMap.put("sjZyztMap", sjZyztMap);
+				break;
+			case Constant.SJWJLX:
+				Map<String, Object> sjWjlxMap = Constant.getSjWjlxMap();
+				jsonMap.put("sjWjlxMap", sjWjlxMap);
 				break;
 			}
 		}

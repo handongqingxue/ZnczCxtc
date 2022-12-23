@@ -67,6 +67,10 @@ public class SiJi {
 	public static final int DAI_SHEN_HE_SHEET=1;
 	public static final int ZONG_HE_CHA_XUN_SHEET=2;
 	
+	public static final int ZHAO_PIAN=1;
+	public static final int ZI_GE_ZHENG_SHU=2;
+	public static final int JIA_ZHENG=3;
+	
 	private Integer id;//Ë¾»úid
 	public Integer getId() {
 		return id;
