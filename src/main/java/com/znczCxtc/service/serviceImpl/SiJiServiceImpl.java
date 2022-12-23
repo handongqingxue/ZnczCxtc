@@ -78,4 +78,16 @@ public class SiJiServiceImpl implements SiJiService {
 		// TODO Auto-generated method stub
 		return siJiDao.queryCBBList();
 	}
+
+	@Override
+	public int getIdBySfzh(String sfzh) {
+		// TODO Auto-generated method stub
+		return siJiDao.getIdBySfzh(sfzh);
+	}
+
+	@Override
+	public int updateFileById(SiJi sj) {
+		// TODO Auto-generated method stub
+		return siJiDao.updateFileById(sj);
+	}
 }

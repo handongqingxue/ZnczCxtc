@@ -180,4 +180,22 @@
 	<select id="queryCBBList" resultType="com.znczCxtc.entity.SiJi">
 		select id,xm from si_ji
 	</select>
+	<select id="getIdBySfzh" resultType="java.lang.Integer">
+		select id from si_ji where sfzh=#{sfzh}
+	</select>
+	<update id="updateFileById" parameterType="com.znczCxtc.entity.SiJi">
+		update si_ji set 
+		<trim suffixOverrides=",">
+			<if test="sfzzp!=null">
+				sfzzp=#{sfzzp},
+			</if>
+			<if test="zgzs!=null">
+				zgzs=#{zgzs},
+			</if>
+			<if test="jz!=null">
+				jz=#{jz},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
 </mapper>

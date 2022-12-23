@@ -761,7 +761,7 @@ public class Constant {
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		jsonMap.put("zpWjlx", SiJi.ZHAO_PIAN);
+		jsonMap.put("sfzzpWjlx", SiJi.SHEN_FEN_ZHENG_ZHAO_PIAN);
 		jsonMap.put("zgzsWjlx", SiJi.ZI_GE_ZHENG_SHU);
 		jsonMap.put("jzWjlx", SiJi.JIA_ZHENG);
 		

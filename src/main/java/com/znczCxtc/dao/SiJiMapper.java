@@ -23,4 +23,8 @@ public interface SiJiMapper {
 	public int checkByIds(@Param("idList") List<String> idList, @Param("shjg") Boolean shjg);
 
 	public List<SiJi> queryCBBList();
+
+	public int getIdBySfzh(@Param("sfzh") String sfzh);
+
+	public int updateFileById(SiJi sj);
 }

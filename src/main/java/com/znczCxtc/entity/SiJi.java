@@ -67,7 +67,7 @@ public class SiJi {
 	public static final int DAI_SHEN_HE_SHEET=1;
 	public static final int ZONG_HE_CHA_XUN_SHEET=2;
 	
-	public static final int ZHAO_PIAN=1;
+	public static final int SHEN_FEN_ZHENG_ZHAO_PIAN=1;
 	public static final int ZI_GE_ZHENG_SHU=2;
 	public static final int JIA_ZHENG=3;
 	
@@ -144,6 +144,12 @@ public class SiJi {
 	public void setGlyhId(Integer glyhId) {
 		this.glyhId = glyhId;
 	}
+	public Integer getWjlx() {
+		return wjlx;
+	}
+	public void setWjlx(Integer wjlx) {
+		this.wjlx = wjlx;
+	}
 	private String xm;//姓名
 	private String sjh;//手机号
 	private String sfzzp;//身份证照片
@@ -155,4 +161,5 @@ public class SiJi {
 	private Integer shzt;//审核状态 1.编辑中2.待审核3.审核通过
 	private Boolean zyzt;//在用状态
 	private Integer glyhId;
+	private Integer wjlx;//文件类型
 }

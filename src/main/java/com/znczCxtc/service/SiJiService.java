@@ -21,4 +21,8 @@ public interface SiJiService {
 	public int checkByIds(String ids, SiJiShenHeJiLu sjshjl);
 
 	public List<SiJi> queryCBBList();
+
+	public int getIdBySfzh(String sfzh);
+
+	public int updateFileById(SiJi sj);
 }

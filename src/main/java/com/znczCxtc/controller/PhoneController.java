@@ -856,6 +856,91 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/newSiJi")
+	@ResponseBody
+	public Map<String, Object> newSiJi(SiJi sj) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count=siJiService.add(sj);
+			if(count>0) {
+				int sjId=siJiService.getIdBySfzh(sj.getSfzh());
+				
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "创建司机信息成功！");
+				jsonMap.put("sjId", sjId);
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "创建司机信息失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/uploadSiJiFile")
+	@ResponseBody
+	public Map<String, Object> uploadSiJiFile(SiJi sj,
+			@RequestParam(value="file",required=false) MultipartFile file) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			String jsonStr = null;
+			if(file!=null) {
+				if(file.getSize()>0) {
+					String folder="SiJi/";
+					switch (sj.getWjlx()) {
+					case SiJi.SHEN_FEN_ZHENG_ZHAO_PIAN:
+						folder+="Sfzzp";//身份证照片
+						break;
+					case SiJi.ZI_GE_ZHENG_SHU:
+						folder+="Zgzs";//资格证书
+						break;
+					case SiJi.JIA_ZHENG:
+						folder+="Jz";//驾证
+						break;
+					}
+					jsonStr = FileUploadUtil.appUploadContentImg(file,folder);
+					JSONObject fileJson = JSONObject.fromObject(jsonStr);
+					if("成功".equals(fileJson.get("msg"))) {
+						JSONObject dataJO = (JSONObject)fileJson.get("data");
+						String src = dataJO.get("src").toString();
+						switch (sj.getWjlx()) {
+						case SiJi.SHEN_FEN_ZHENG_ZHAO_PIAN:
+							sj.setSfzzp(src);
+							break;
+						case SiJi.ZI_GE_ZHENG_SHU:
+							sj.setZgzs(src);
+							break;
+						case SiJi.JIA_ZHENG:
+							sj.setJz(src);
+							break;
+						}
+					}
+				}
+			}
+			
+			int count=siJiService.updateFileById(sj);
+			System.out.println("count==="+count);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "上传成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "上传失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/getSiJi")
 	@ResponseBody
 	public Map<String, Object> getSiJi(String id) {
