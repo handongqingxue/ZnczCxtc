@@ -881,6 +881,28 @@ public class PhoneController {
 		}
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/editSiJi")
+	@ResponseBody
+	public Map<String, Object> editSiJi(SiJi sj) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			int count=siJiService.edit(sj);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "编辑司机信息成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "编辑司机信息失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/uploadSiJiFile")
 	@ResponseBody
