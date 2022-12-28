@@ -19,4 +19,6 @@ public interface JueSeMapper {
 	JueSe selectById(@Param("id") String id);
 	
 	List<JueSe> queryCBBList();
+
+	List<String> getQxIdsListByIdList(@Param("idList") List<String> idList);
 }

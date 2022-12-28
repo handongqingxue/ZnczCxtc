@@ -17,4 +17,6 @@ public interface JueSeService {
 	JueSe selectById(String id);
 
 	List<JueSe> queryCBBList();
+
+	String getQxIdsByIds(String ids);
 }

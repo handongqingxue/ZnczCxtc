@@ -1,5 +1,6 @@
 package com.znczCxtc.service.serviceImpl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +68,16 @@ public class JueSeServiceImpl implements JueSeService {
 	public List<JueSe> queryCBBList() {
 		// TODO Auto-generated method stub
 		return jueSeDao.queryCBBList();
+	}
+
+	@Override
+	public String getQxIdsByIds(String ids) {
+		// TODO Auto-generated method stub
+		String[] jsIdArr = ids.split(",");
+		List<String> jsIdList = Arrays.asList(jsIdArr);
+		System.out.println("size==="+jsIdList.size());
+		List<String> qxIdsList=jueSeDao.getQxIdsListByIdList(jsIdList);
+		System.out.println("qxIdsListSize==="+qxIdsList.size());
+		return null;
 	}
 }

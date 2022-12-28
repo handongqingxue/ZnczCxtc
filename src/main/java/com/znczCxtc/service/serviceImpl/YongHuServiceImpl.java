@@ -3,6 +3,7 @@ package com.znczCxtc.service.serviceImpl;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,19 +51,21 @@ public class YongHuServiceImpl implements YongHuService {
 		YongHu yh = yongHuDao.selectById(id);
 		List<JueSe> jsList = jueSeDao.queryCBBList();
 		String jsIds = yh.getJsIds();
-		String[] jsIdArr = jsIds.split(",");
-		String jsMcs = "";
-		for (String jsIdStr : jsIdArr) {
-			int jsId = Integer.valueOf(jsIdStr);
-			for (int i = 0; i < jsList.size(); i++) {
-				JueSe js = jsList.get(i);
-				if(jsId==js.getId()) {
-					jsMcs+=","+js.getMc();
-					break;
+		if(!StringUtils.isEmpty(jsIds)) {
+			String[] jsIdArr = jsIds.split(",");
+			String jsMcs = "";
+			for (String jsIdStr : jsIdArr) {
+				int jsId = Integer.valueOf(jsIdStr);
+				for (int i = 0; i < jsList.size(); i++) {
+					JueSe js = jsList.get(i);
+					if(jsId==js.getId()) {
+						jsMcs+=","+js.getMc();
+						break;
+					}
 				}
 			}
+			yh.setJsMcs(jsMcs.substring(1));
 		}
-		yh.setJsMcs(jsMcs.substring(1));
 		return yh;
 	}
 

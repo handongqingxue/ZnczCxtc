@@ -86,17 +86,17 @@ $(function(){
 function showLeftMenuByQx(){
 	$(".ddgl_first_div").css("display","none");
 	$(".ddzt_item_li").css("display","none");
+	$(".dsh_item_li").css("display","none");
+	$(".dzj_item_li").css("display","none");
+	$(".drk_item_li").css("display","none");
 	$(".ddgl_first_div .zhcx_item_li").css("display","none");
-
-	$(".clgl_first_div").css("display","none");
-	$(".mscl_item_li").css("display","none");
-	$(".dsbcl_item_li").css("display","none");
-	$(".ysbcl_item_li").css("display","none");
-	$(".clgl_first_div .zhcx_item_li").css("display","none");
+	$(".ddgl_first_div .shjl_item_li").css("display","none");
 
 	$(".gbgl_first_div").css("display","none");
 	$(".bdjl_item_li").css("display","none");
 	$(".gbjl_item_li").css("display","none");
+	$(".yjdsh_item_li").css("display","none");
+	$(".ejdsh_item_li").css("display","none");
 	
 	$(".wzgl_first_div").css("display","none");
 	$(".wzlx_item_li").css("display","none");
@@ -106,27 +106,47 @@ function showLeftMenuByQx(){
 	$(".yss_item_li").css("display","none");
 	$(".fhdw_item_li").css("display","none");
 	$(".shdw_item_li").css("display","none");
+	$(".ck_item_li").css("display","none");
+
+	$(".clgl_first_div").css("display","none");
+	$(".clgl_first_div .dsh_item_li").css("display","none");
+	$(".clgl_first_div .zhcx_item_li").css("display","none");
+	$(".clgl_first_div .shjl_item_li").css("display","none");
+	$(".tzcx_item_li").css("display","none");
+	$(".cntz_item_li").css("display","none");
+
+	$(".sjgl_first_div").css("display","none");
+	$(".sjgl_first_div .dsh_item_li").css("display","none");
+	$(".sjgl_first_div .zhcx_item_li").css("display","none");
+	$(".sjgl_first_div .shjl_item_li").css("display","none");
+
+	$(".pdgl_first_div").css("display","none");
+	$(".pdgl_first_div .hmzt_item_li").css("display","none");
+	$(".pdgl_first_div .hmcx_item_li").css("display","none");
+	$(".pdgl_first_div .ldcx_item_li").css("display","none");
 
 	$(".xtgl_first_div").css("display","none");
-	$(".yhcx_item_li").css("display","none");
-	$(".dshyh_item_li").css("display","none");
-	$(".qxcx_item_li").css("display","none");
+	$(".xtgl_first_div .yhxx_item_li").css("display","none");
+	$(".xtgl_first_div .yhcx_item_li").css("display","none");
+	$(".xtgl_first_div .dshyh_item_li").css("display","none");
+	$(".xtgl_first_div .yhshjl_item_li").css("display","none");
+	$(".xtgl_first_div .jscx_item_li").css("display","none");
+	$(".xtgl_first_div .qxcx_item_li").css("display","none");
 	
 	if(yhm=="admin"){
 		$(".ddgl_first_div").css("display","block");
 		$(".ddzt_item_li").css("display","block");
+		$(".dsh_item_li").css("display","block");
+		$(".dzj_item_li").css("display","block");
 		$(".drk_item_li").css("display","block");
-		$(".zhcx_item_li").css("display","block");
-
-		$(".clgl_first_div").css("display","block");
-		$(".mscl_item_li").css("display","block");
-		$(".dsbcl_item_li").css("display","block");
-		$(".ysbcl_item_li").css("display","block");
-		$(".clgl_first_div .zhcx_item_li").css("display","block");
+		$(".ddgl_first_div .zhcx_item_li").css("display","block");
+		$(".ddgl_first_div .shjl_item_li").css("display","block");
 
 		$(".gbgl_first_div").css("display","block");
 		$(".bdjl_item_li").css("display","block");
 		$(".gbjl_item_li").css("display","block");
+		$(".yjdsh_item_li").css("display","block");
+		$(".ejdsh_item_li").css("display","block");
 
 		$(".wzgl_first_div").css("display","block");
 		$(".wzlx_item_li").css("display","block");
@@ -136,11 +156,32 @@ function showLeftMenuByQx(){
 		$(".yss_item_li").css("display","block");
 		$(".fhdw_item_li").css("display","block");
 		$(".shdw_item_li").css("display","block");
+		$(".ck_item_li").css("display","block");
+
+		$(".clgl_first_div").css("display","block");
+		$(".clgl_first_div .dsh_item_li").css("display","block");
+		$(".clgl_first_div .zhcx_item_li").css("display","block");
+		$(".clgl_first_div .shjl_item_li").css("display","block");
+		$(".tzcx_item_li").css("display","block");
+		$(".cntz_item_li").css("display","block");
+
+		$(".sjgl_first_div").css("display","block");
+		$(".sjgl_first_div .dsh_item_li").css("display","block");
+		$(".sjgl_first_div .zhcx_item_li").css("display","block");
+		$(".sjgl_first_div .shjl_item_li").css("display","block");
+
+		$(".pdgl_first_div").css("display","block");
+		$(".pdgl_first_div .hmzt_item_li").css("display","block");
+		$(".pdgl_first_div .hmcx_item_li").css("display","block");
+		$(".pdgl_first_div .ldcx_item_li").css("display","block");
 		
 		$(".xtgl_first_div").css("display","block");
-		$(".yhcx_item_li").css("display","block");
-		$(".dshyh_item_li").css("display","block");
-		$(".qxcx_item_li").css("display","block");
+		$(".xtgl_first_div .yhxx_item_li").css("display","block");
+		$(".xtgl_first_div .yhcx_item_li").css("display","block");
+		$(".xtgl_first_div .dshyh_item_li").css("display","block");
+		$(".xtgl_first_div .yhshjl_item_li").css("display","block");
+		$(".xtgl_first_div .jscx_item_li").css("display","block");
+		$(".xtgl_first_div .qxcx_item_li").css("display","block");
 	}
 	else{
 		var qxIdsArr=qxIds.split(",");
@@ -205,14 +246,14 @@ function showLeftMenuByQx(){
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item drk_item_li">
+					<li class="layui-nav-item dsh_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>ddgl/dsh/list">
 							&nbsp;&nbsp;&nbsp;待审核
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item drk_item_li">
+					<li class="layui-nav-item dzj_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>ddgl/dzj/list">
 							&nbsp;&nbsp;&nbsp;待质检
@@ -261,14 +302,14 @@ function showLeftMenuByQx(){
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item dyjsh_item_li">
+					<li class="layui-nav-item yjdsh_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>gbgl/yjdsh/list">
 							&nbsp;&nbsp;&nbsp;一检待审核
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item dejsh_item_li">
+					<li class="layui-nav-item ejdsh_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>gbgl/ejdsh/list">
 							&nbsp;&nbsp;&nbsp;二检待审核
@@ -324,7 +365,7 @@ function showLeftMenuByQx(){
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item shdw_item_li">
+					<li class="layui-nav-item ck_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>dwgl/ck/list">
 							&nbsp;&nbsp;&nbsp;仓库
@@ -338,7 +379,7 @@ function showLeftMenuByQx(){
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item mscl_item_li">
+					<li class="layui-nav-item dsh_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>clgl/dsh/list">
 							&nbsp;&nbsp;&nbsp;待审核
@@ -359,28 +400,28 @@ function showLeftMenuByQx(){
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item zhcx_item_li">
+					<li class="layui-nav-item tzcx_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>clgl/tzcx/list">
 							&nbsp;&nbsp;&nbsp;台账查询
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item zhcx_item_li">
+					<li class="layui-nav-item cntz_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>clgl/cntz/list">
 							&nbsp;&nbsp;&nbsp;厂内台账
 						</a>
 					</li>
 				</div>
-				<div class="first-level-div clgl_first_div">
+				<div class="first-level-div sjgl_first_div">
 					<li class="layui-nav-item first-level">
 						<a>
 							司机管理
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item mscl_item_li">
+					<li class="layui-nav-item dsh_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>sjgl/dsh/list">
 							&nbsp;&nbsp;&nbsp;待审核
@@ -401,28 +442,28 @@ function showLeftMenuByQx(){
 						</a>
 					</li>
 				</div>
-				<div class="first-level-div clgl_first_div">
+				<div class="first-level-div pdgl_first_div">
 					<li class="layui-nav-item first-level">
 						<a>
 							排队管理
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item mscl_item_li">
+					<li class="layui-nav-item hmzt_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>pdgl/hmzt/list">
 							&nbsp;&nbsp;&nbsp;号码状态
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item mscl_item_li">
+					<li class="layui-nav-item hmcx_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>pdgl/hmcx/list">
 							&nbsp;&nbsp;&nbsp;号码查询
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item zhcx_item_li">
+					<li class="layui-nav-item dlcx_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>pdgl/dlcx/list">
 							&nbsp;&nbsp;&nbsp;队列查询
@@ -436,7 +477,7 @@ function showLeftMenuByQx(){
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item yhcx_item_li">
+					<li class="layui-nav-item yhxx_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>xtgl/yhxx">
 							&nbsp;&nbsp;&nbsp;用户信息
@@ -457,14 +498,14 @@ function showLeftMenuByQx(){
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item dshyh_item_li">
+					<li class="layui-nav-item yhshjl_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>xtgl/yhshjl/list">
 							&nbsp;&nbsp;&nbsp;用户审核记录
 						</a>
 					</li>
 					<div class="line_div"></div>
-					<li class="layui-nav-item">
+					<li class="layui-nav-item jscx_item_li">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
 						<a href="<%=basePath%>xtgl/jscx/list">
 							&nbsp;&nbsp;&nbsp;角色查询

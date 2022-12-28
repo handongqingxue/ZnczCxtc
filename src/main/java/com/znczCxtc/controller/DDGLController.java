@@ -161,6 +161,7 @@ public class DDGLController {
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
 
+		Constant.setYhQxInRequest(request);
 		Constant.setLxlxInRequest(request);
 		Constant.setDdztInRequest(request);
 		Constant.setDdGbztInRequest(request);

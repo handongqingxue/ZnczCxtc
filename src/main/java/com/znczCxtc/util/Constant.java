@@ -152,6 +152,16 @@ public class Constant {
 	public static final int SJWJLX=17;
 	
 	/**
+	 * 存放用户权限常量
+	 * @param request
+	 */
+	public static void setYhQxInRequest(HttpServletRequest request) {
+
+		request.setAttribute("ddztcxQx", QuanXian.DDZTCX);
+		
+	}
+	
+	/**
 	 * 存放订单状态常量
 	 * @param request
 	 */

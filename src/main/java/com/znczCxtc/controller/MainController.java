@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.servlet.http.*;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.znczCxtc.entity.*;
-import com.znczCxtc.service.YongHuService;
+import com.znczCxtc.service.*;
 import com.znczCxtc.socket.*;
 import com.znczCxtc.util.*;
 
@@ -33,6 +34,8 @@ public class MainController {
 
 	@Autowired
 	private YongHuService yongHuService;
+	@Autowired
+	private JueSeService jueSeService;
 	static final String MODULE_NAME=Constant.MAIN_MODULE_NAME;
 	
 	static {
@@ -107,6 +110,11 @@ public class MainController {
 			return JsonUtil.getJsonFromObject(plan);
 		}
 		YongHu yongHu=(YongHu)SecurityUtils.getSubject().getPrincipal();
+		String jsIds = yongHu.getJsIds();
+		if(!StringUtils.isEmpty(jsIds)) {
+			String qxIds=jueSeService.getQxIdsByIds(jsIds);
+			System.out.println("qxIds==="+qxIds);
+		}
 		session.setAttribute("yongHu", yongHu);
 		
 		plan.setStatus(0);

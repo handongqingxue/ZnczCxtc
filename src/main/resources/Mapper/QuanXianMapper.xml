@@ -9,6 +9,9 @@
 			<if test="mc!=null">
 				mc,
 			</if>
+			<if test="px!=null">
+				px,
+			</if>
 			<if test="ms!=null">
 				ms,
 			</if>
@@ -18,13 +21,16 @@
 			<if test="mc!=null">
 				#{mc},
 			</if>
+			<if test="px!=null">
+				#{px},
+			</if>
 			<if test="ms!=null">
 				#{ms},
 			</if>
 		</trim>
 	</insert>
 	<update id="edit" parameterType="com.znczCxtc.entity.QuanXian">
-		update quan_xian set mc=#{mc},ms=#{ms} where id=#{id}
+		update quan_xian set mc=#{mc},px=#{px},ms=#{ms} where id=#{id}
 	</update>
 	<select id="queryForInt" resultType="java.lang.Integer">
 		select count(*) from quan_xian where 1=1
@@ -37,6 +43,7 @@
 		<if test="mc!=''&amp;mc!=null">
 			and mc like CONCAT('%',#{mc},'%')
 		</if>
+		order by px
 		limit #{rowNum},#{rows}
 	</select>
 	<select id="selectById" resultType="com.znczCxtc.entity.QuanXian">

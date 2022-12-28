@@ -52,7 +52,7 @@ function initEditDialog(){
 	$("#edit_div").dialog({
 		title:"权限信息",
 		width:setFitWidthInParent("body","edit_div"),
-		height:200,
+		height:231,
 		top:dialogTop,
 		left:dialogLeft,
 		buttons:[
@@ -71,7 +71,7 @@ function initEditDialog(){
 	$("#edit_div table .td2").css("width","30%");
 	$("#edit_div table tr").css("border-bottom","#CAD9EA solid 1px");
 	$("#edit_div table tr").each(function(i){
-		$(this).css("height",(i==0?90:45)+"px");
+		$(this).css("height",(i==1?90:45)+"px");
 	});
 
 	$(".panel.window").eq(edNum).css("margin-top","20px");
@@ -177,10 +177,22 @@ function setFitWidthInParent(parent,self){
 					<input type="text" class="mc_inp" id="mc" name="mc" value="${requestScope.qx.mc }" placeholder="请输入名称" onfocus="focusMC()" onblur="checkMC()"/>
 				</td>
 				<td class="td1" align="right">
+					排序
+				</td>
+				<td class="td2">
+					<input type="number" class="px_inp" id="px" name="px" value="${requestScope.qx.px }"/>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="td1" align="right">
 					描述
 				</td>
 				<td class="td2">
 					<textarea id="ms" name="ms" rows="3" cols="30" placeholder="请输入描述">${requestScope.qx.ms }</textarea>
+				</td>
+				<td class="td1" align="right">
+				</td>
+				<td class="td2">
 				</td>
 			  </tr>
 			</table>
