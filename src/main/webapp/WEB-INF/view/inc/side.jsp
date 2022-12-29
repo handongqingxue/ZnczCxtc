@@ -184,11 +184,27 @@ function showLeftMenuByQx(){
 		$(".xtgl_first_div .qxcx_item_li").css("display","block");
 	}
 	else{
-		var qxIdsArr=qxIds.split(",");
-		for(var i=0;i<qxIdsArr.length;i++){
-			if(qxIdsArr[i]==1){
+		var ddztcxQx='${requestScope.ddztcxQx}';
+		var xdshQx='${requestScope.xdshQx}';
+		var zjshQx='${requestScope.zjshQx}';
+		var cxddQx='${requestScope.cxddQx}';
+		var zxhshQx='${requestScope.zxhshQx}';
+		var cxbdjlQx='${requestScope.cxbdjlQx}';
+		var cxgbjlQx='${requestScope.cxgbjlQx}';
+		var yjshQx='${requestScope.yjshQx}';
+		var ejshQx='${requestScope.ejshQx}';
+		var cxwzlxQx='${requestScope.cxwzlxQx}';
+		var cxwzQx='${requestScope.cxwzQx}';
+		var cxyssQx='${requestScope.cxyssQx}';
+		var cxfhdwQx='${requestScope.cxfhdwQx}';
+		var cxshdwQx='${requestScope.cxshdwQx}';
+		var cxckQx='${requestScope.cxckQx}';
+		//alert(cxbdjlQx)
+		var qxIdArr=qxIds.split(",");
+		for(var i=0;i<qxIdArr.length;i++){
+			if(qxIdArr[i]==ddztcxQx){
 				$(".ddgl_first_div").css("display","block");
-				$(".zhcx_item_li").css("display","block");
+				$(".ddgl_first_div .ddzt_item_li").css("display","block");
 
 				$(".clgl_first_div").css("display","block");
 				$(".mscl_item_li").css("display","block");
@@ -196,13 +212,62 @@ function showLeftMenuByQx(){
 				$(".ysbcl_item_li").css("display","block");
 				$(".clgl_first_div .zhcx_item_li").css("display","block");
 			}
-			if(qxIdsArr[i]==2){
+			if(qxIdArr[i]==xdshQx){
 				$(".ddgl_first_div").css("display","block");
-				$(".zhcx_item_li").css("display","block");
-
+				$(".ddgl_first_div .dsh_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==zjshQx){
+				$(".ddgl_first_div").css("display","block");
+				$(".ddgl_first_div .dzj_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxddQx){
+				$(".ddgl_first_div").css("display","block");
+				$(".ddgl_first_div .zhcx_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==zxhshQx){
+				$(".ddgl_first_div").css("display","block");
+				$(".ddgl_first_div .drk_item_li").css("display","block");
+				$(".ddgl_first_div .shjl_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxbdjlQx){
 				$(".gbgl_first_div").css("display","block");
 				$(".bdjl_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxgbjlQx){
+				$(".gbgl_first_div").css("display","block");
 				$(".gbjl_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==yjshQx){
+				$(".gbgl_first_div").css("display","block");
+				$(".yjdsh_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==ejshQx){
+				$(".gbgl_first_div").css("display","block");
+				$(".ejdsh_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxwzlxQx){
+				$(".wzgl_first_div").css("display","block");
+				$(".wzlx_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxwzQx){
+				$(".wzgl_first_div").css("display","block");
+				$(".wzcx_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxyssQx){
+				$(".dwgl_first_div").css("display","block");
+				$(".yss_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxfhdwQx){
+				$(".dwgl_first_div").css("display","block");
+				$(".fhdw_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxshdwQx){
+				$(".dwgl_first_div").css("display","block");
+				$(".shdw_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxckQx){
+				$(".dwgl_first_div").css("display","block");
+				$(".ck_item_li").css("display","block");
 			}
 		}
 	}

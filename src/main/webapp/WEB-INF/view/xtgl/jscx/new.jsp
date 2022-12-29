@@ -160,15 +160,15 @@ function initQXCBB(){
 
 function checkNew(){
 	if(checkMC()){
-		if(checkZtId()){
+		if(checkZt()){
 			newQuanXian();
 		}
 	}
 }
 
 function newQuanXian(){
-	var ztId=ztCBB.combobox("getValue");
-	$("#ztId").val(ztId);
+	var zt=ztCBB.combobox("getValue");
+	$("#zt").val(zt);
 	var qxIdsArr=qxCBB.combobox("getValues");
 	var qxIds=qxIdsArr.sort().toString();
 	if(qxIds.substring(0,1)==",")
@@ -218,9 +218,9 @@ function checkMC(){
 }
 
 //验证状态
-function checkZtId(){
-	var ztId=ztCBB.combobox("getValue");
-	if(ztId==null||ztId==""){
+function checkZt(){
+	var zt=ztCBB.combobox("getValue");
+	if(zt==null||zt==""){
 	  	alert("请选择状态");
 	  	return false;
 	}
@@ -268,7 +268,7 @@ function setFitWidthInParent(parent,self){
 				</td>
 				<td class="td2">
 					<input id="zt_cbb"/>
-					<input type="hidden" id="ztId" name="ztId"/>
+					<input type="hidden" id="zt" name="zt"/>
 				</td>
 			  </tr>
 			  <tr>

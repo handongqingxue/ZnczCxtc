@@ -157,7 +157,26 @@ public class Constant {
 	 */
 	public static void setYhQxInRequest(HttpServletRequest request) {
 
-		request.setAttribute("ddztcxQx", QuanXian.DDZTCX);
+		request.setAttribute("tjddQx", QuanXian.TIAN_JIA_DING_DAN);
+		request.setAttribute("xgddQx", QuanXian.XIU_GAI_DING_DAN);
+		request.setAttribute("scddQx", QuanXian.SHAN_CHU_DING_DAN);
+		request.setAttribute("cxddQx", QuanXian.CHA_XUN_DING_DAN);
+		request.setAttribute("xdshQx", QuanXian.XIA_DAN_SHEN_HE);
+		request.setAttribute("zjshQx", QuanXian.ZHI_JIAN_SHEN_HE);
+		request.setAttribute("yjshQx", QuanXian.YI_JIAN_SHEN_HE);
+		request.setAttribute("ejshQx", QuanXian.ER_JIAN_SHEN_HE);
+		request.setAttribute("zxhshQx", QuanXian.ZHUANG_XIE_HUO_SHEN_HE);
+		request.setAttribute("scgbjlQx", QuanXian.SHAN_CHU_GUO_BANG_JI_LU);
+		request.setAttribute("scbdjlQx", QuanXian.SHAN_CHU_BANG_DAN_JI_LU);
+		request.setAttribute("ddztcxQx", QuanXian.DING_DAN_ZHUANG_TAI_CHA_XUN);
+		request.setAttribute("cxbdjlQx", QuanXian.CHA_XUN_BANG_DAN_JI_LU);
+		request.setAttribute("cxgbjlQx", QuanXian.CHA_XUN_GUO_BANG_JI_LU);
+		request.setAttribute("cxwzlxQx", QuanXian.CHA_XUN_WU_ZI_LEI_XING);
+		request.setAttribute("cxwzQx", QuanXian.CHA_XUN_WU_ZI);
+		request.setAttribute("cxyssQx", QuanXian.CHA_XUN_YUN_SHU_SHANG);
+		request.setAttribute("cxfhdwQx", QuanXian.CHA_XUN_FA_HUO_DAN_WEI);
+		request.setAttribute("cxshdwQx", QuanXian.CHA_XUN_SHOU_HUO_DAN_WEI);
+		request.setAttribute("cxckQx", QuanXian.CHA_XUN_CANG_KU);
 		
 	}
 	

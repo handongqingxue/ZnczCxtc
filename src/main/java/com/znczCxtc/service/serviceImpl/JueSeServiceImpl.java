@@ -1,5 +1,6 @@
 package com.znczCxtc.service.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,10 +75,37 @@ public class JueSeServiceImpl implements JueSeService {
 	public String getQxIdsByIds(String ids) {
 		// TODO Auto-generated method stub
 		String[] jsIdArr = ids.split(",");
+		List<String> qxIdList=new ArrayList<String>();
 		List<String> jsIdList = Arrays.asList(jsIdArr);
-		System.out.println("size==="+jsIdList.size());
 		List<String> qxIdsList=jueSeDao.getQxIdsListByIdList(jsIdList);
-		System.out.println("qxIdsListSize==="+qxIdsList.size());
-		return null;
+		for (int i = 0; i < qxIdsList.size(); i++) {
+			String qxIds = qxIdsList.get(i);
+			String[] qxIdArr = qxIds.split(",");
+			for (int j = 0; j < qxIdArr.length; j++) {
+				String qxId=qxIdArr[j];
+				boolean exist=checkQxIdExistInList(qxId,qxIdList);
+				if(!exist)
+					qxIdList.add(qxId);
+			}
+		}
+		String qxIds="";
+		for (int i = 0; i < qxIdList.size(); i++) {
+			String qxId = qxIdList.get(i);
+			qxIds+=","+qxId;
+		}
+		return qxIds.substring(1);
+	}
+
+	private boolean checkQxIdExistInList(String checkQxId, List<String> qxIdList) {
+		// TODO Auto-generated method stub
+		boolean exist=false;
+		for (int i = 0; i < qxIdList.size(); i++) {
+			String qxId = qxIdList.get(i);
+			if(checkQxId.equals(qxId)) {
+				exist=true;
+				break;
+			}
+		}
+		return exist;
 	}
 }

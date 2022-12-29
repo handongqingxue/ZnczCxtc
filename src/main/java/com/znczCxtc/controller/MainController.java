@@ -114,6 +114,7 @@ public class MainController {
 		if(!StringUtils.isEmpty(jsIds)) {
 			String qxIds=jueSeService.getQxIdsByIds(jsIds);
 			System.out.println("qxIds==="+qxIds);
+			yongHu.setQxIds(qxIds);
 		}
 		session.setAttribute("yongHu", yongHu);
 		
