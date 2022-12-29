@@ -37,7 +37,8 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/yhxx")
 	public String goYhxx(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		YongHu yh=(YongHu)SecurityUtils.getSubject().getPrincipal();
 		request.setAttribute("yh", yh);
 		

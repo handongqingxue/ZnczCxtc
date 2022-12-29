@@ -82,6 +82,114 @@ public class QuanXian {
 	 * 查询仓库
 	 */
 	public static final int CHA_XUN_CANG_KU=36;
+	/**
+	 * 添加车辆
+	 */
+	public static final int TIAN_JIA_CHE_LIANG=37;
+	/**
+	 * 修改车辆
+	 */
+	public static final int XIU_GAI_CHE_LIANG=38;
+	/**
+	 * 删除车辆
+	 */
+	public static final int SHAN_CHU_CHE_LIANG=39;
+	/**
+	 * 查询车辆
+	 */
+	public static final int CHA_XUN_CHE_LIANG=40;
+	/**
+	 * 审核车辆
+	 */
+	public static final int SHEN_HE_CHE_LIANG=41;
+	/**
+	 * 查询车辆台账
+	 */
+	public static final int CHA_XUN_CHE_LIANG_TAI_ZHANG=42;
+	/**
+	 * 查询车辆审核记录
+	 */
+	public static final int CHA_XUN_CHE_LIANG_SHEN_HE_JI_LU=43;
+	/**
+	 * 添加司机
+	 */
+	public static final int TIAN_JIA_SI_JI=44;
+	/**
+	 * 修改司机
+	 */
+	public static final int XIU_GAI_SI_JI=45;
+	/**
+	 * 删除司机
+	 */
+	public static final int SHAN_CHU_SI_JI=46;
+	/**
+	 * 查询司机
+	 */
+	public static final int CHA_XUN_SI_JI=47;
+	/**
+	 * 审核司机
+	 */
+	public static final int SHEN_HE_SI_JI=48;
+	/**
+	 * 查询司机审核记录
+	 */
+	public static final int CHA_XUN_SI_JI_SHEN_HE_JI_LU=49;
+	/**
+	 * 查询排队号码
+	 */
+	public static final int CHA_XUN_PAI_DUI_HAO_MA=50;
+	/**
+	 * 删除排队号码
+	 */
+	public static final int SHAN_CHU_PAI_DUI_HAO_MA=51;
+	/**
+	 * 添加队列
+	 */
+	public static final int TIAN_JIA_DUI_LIE=52;
+	/**
+	 * 修改队列
+	 */
+	public static final int XIU_GAI_DUI_LIE=53;
+	/**
+	 * 删除队列
+	 */
+	public static final int SHAN_CHU_DUI_LIE=54;
+	/**
+	 * 查询队列
+	 */
+	public static final int CHA_XUN_DUI_LIE=55;
+	/**
+	 * 查询用户
+	 */
+	public static final int CHA_XUN_YONG_HU=56;
+	/**
+	 * 修改用户
+	 */
+	public static final int XIU_GAI_YONG_HU=57;
+	/**
+	 * 审核用户
+	 */
+	public static final int SHEN_HE_YONG_HU=58;
+	/**
+	 * 查询用户审核记录
+	 */
+	public static final int CHA_XUN_YONG_HU_SHEN_HE_JI_LU=59;
+	/**
+	 * 添加角色
+	 */
+	public static final int TIAN_JIA_JUE_SE=60;
+	/**
+	 * 修改角色
+	 */
+	public static final int XIU_GAI_JUE_SE=61;
+	/**
+	 * 删除角色
+	 */
+	public static final int SHAN_CHU_JUE_SE=62;
+	/**
+	 * 查询角色
+	 */
+	public static final int CHA_XUN_JUE_SE=63;
 	
 	private Integer id;
 	public Integer getId() {

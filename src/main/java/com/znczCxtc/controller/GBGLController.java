@@ -70,6 +70,7 @@ public class GBGLController {
 	public String goBdjlList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		Constant.setDdztInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
@@ -157,6 +158,7 @@ public class GBGLController {
 	public String goGbjlList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		Constant.setGblxInRequest(request);
 		Constant.setGbjlGbztInRequest(request);
 		Constant.setDcfwInRequest(request);
@@ -192,7 +194,8 @@ public class GBGLController {
 	public String goYjdshList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
-		
+
+		Constant.setYhQxInRequest(request);
 		Constant.setDdztInRequest(request);
 		Constant.setLxlxInRequest(request);
 		Constant.setDdShlxInRequest(request);
@@ -212,7 +215,8 @@ public class GBGLController {
 	public String goEjdshList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
-		
+
+		Constant.setYhQxInRequest(request);
 		Constant.setDdztInRequest(request);
 		Constant.setLxlxInRequest(request);
 		Constant.setDdShlxInRequest(request);

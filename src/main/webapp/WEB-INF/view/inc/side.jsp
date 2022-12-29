@@ -75,6 +75,48 @@
 	width: 101px;
 	height: 57px;
 }
+
+.ddgl_first_div,
+.ddgl_first_div .ddzt_item_li,
+.ddgl_first_div .dsh_item_li,
+.ddgl_first_div .dzj_item_li,
+.ddgl_first_div .drk_item_li,
+.ddgl_first_div .zhcx_item_li,
+.ddgl_first_div .shjl_item_li,
+.gbgl_first_div,
+.gbgl_first_div .bdjl_item_li,
+.gbgl_first_div .gbjl_item_li,
+.gbgl_first_div .yjdsh_item_li,
+.gbgl_first_div .ejdsh_item_li,
+.wzgl_first_div,
+.wzgl_first_div .wzlx_item_li,
+.wzgl_first_div .wzcx_item_li,
+.dwgl_first_div,
+.dwgl_first_div .yss_item_li,
+.dwgl_first_div .fhdw_item_li,
+.dwgl_first_div .shdw_item_li,
+.dwgl_first_div .ck_item_li,
+.clgl_first_div,
+.clgl_first_div .dsh_item_li,
+.clgl_first_div .zhcx_item_li,
+.clgl_first_div .shjl_item_li,
+.clgl_first_div .tzcx_item_li,
+.clgl_first_div .cntz_item_li,
+.sjgl_first_div,
+.sjgl_first_div .dsh_item_li,
+.sjgl_first_div .zhcx_item_li,
+.sjgl_first_div .shjl_item_li,
+.pdgl_first_div,
+.pdgl_first_div .hmzt_item_li,
+.pdgl_first_div .hmcx_item_li,
+.pdgl_first_div .dlcx_item_li,
+.xtgl_first_div .yhcx_item_li,
+.xtgl_first_div .dshyh_item_li,
+.xtgl_first_div .yhshjl_item_li,
+.xtgl_first_div .jscx_item_li,
+.xtgl_first_div .qxcx_item_li{
+	display:none;
+}
 </style>
 <script type="text/javascript">
 var yhm='${sessionScope.yongHu.yhm}';
@@ -84,6 +126,7 @@ $(function(){
 });
 
 function showLeftMenuByQx(){
+	/*
 	$(".ddgl_first_div").css("display","none");
 	$(".ddzt_item_li").css("display","none");
 	$(".dsh_item_li").css("display","none");
@@ -123,7 +166,7 @@ function showLeftMenuByQx(){
 	$(".pdgl_first_div").css("display","none");
 	$(".pdgl_first_div .hmzt_item_li").css("display","none");
 	$(".pdgl_first_div .hmcx_item_li").css("display","none");
-	$(".pdgl_first_div .ldcx_item_li").css("display","none");
+	$(".pdgl_first_div .dlcx_item_li").css("display","none");
 
 	$(".xtgl_first_div").css("display","none");
 	$(".xtgl_first_div .yhxx_item_li").css("display","none");
@@ -132,6 +175,7 @@ function showLeftMenuByQx(){
 	$(".xtgl_first_div .yhshjl_item_li").css("display","none");
 	$(".xtgl_first_div .jscx_item_li").css("display","none");
 	$(".xtgl_first_div .qxcx_item_li").css("display","none");
+	*/
 	
 	if(yhm=="admin"){
 		$(".ddgl_first_div").css("display","block");
@@ -173,7 +217,7 @@ function showLeftMenuByQx(){
 		$(".pdgl_first_div").css("display","block");
 		$(".pdgl_first_div .hmzt_item_li").css("display","block");
 		$(".pdgl_first_div .hmcx_item_li").css("display","block");
-		$(".pdgl_first_div .ldcx_item_li").css("display","block");
+		$(".pdgl_first_div .dlcx_item_li").css("display","block");
 		
 		$(".xtgl_first_div").css("display","block");
 		$(".xtgl_first_div .yhxx_item_li").css("display","block");
@@ -199,7 +243,20 @@ function showLeftMenuByQx(){
 		var cxfhdwQx='${requestScope.cxfhdwQx}';
 		var cxshdwQx='${requestScope.cxshdwQx}';
 		var cxckQx='${requestScope.cxckQx}';
-		//alert(cxbdjlQx)
+		var shclQx='${requestScope.shclQx}';
+		var cxclQx='${requestScope.cxclQx}';
+		var cxclshjlQx='${requestScope.cxclshjlQx}';
+		var cxcltzQx='${requestScope.cxcltzQx}';
+		var shsjQx='${requestScope.shsjQx}';
+		var cxsjQx='${requestScope.cxsjQx}';
+		var cxsjshjlQx='${requestScope.cxsjshjlQx}';
+		var cxpdhmQx='${requestScope.cxpdhmQx}';
+		var cxdlQx='${requestScope.cxdlQx}';
+		var cxyhQx='${requestScope.cxyhQx}';
+		var shyhQx='${requestScope.shyhQx}';
+		var cxyhshjlQx='${requestScope.cxyhshjlQx}';
+		var cxjsQx='${requestScope.cxjsQx}';
+		//alert(cxsjshjlQx)
 		var qxIdArr=qxIds.split(",");
 		for(var i=0;i<qxIdArr.length;i++){
 			if(qxIdArr[i]==ddztcxQx){
@@ -268,6 +325,59 @@ function showLeftMenuByQx(){
 			if(qxIdArr[i]==cxckQx){
 				$(".dwgl_first_div").css("display","block");
 				$(".ck_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==shclQx){
+				$(".clgl_first_div").css("display","block");
+				$(".clgl_first_div .dsh_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxclQx){
+				$(".clgl_first_div").css("display","block");
+				$(".clgl_first_div .zhcx_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxclshjlQx){
+				$(".clgl_first_div").css("display","block");
+				$(".clgl_first_div .shjl_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxcltzQx){
+				$(".clgl_first_div").css("display","block");
+				$(".clgl_first_div .tzcx_item_li").css("display","block");
+				$(".clgl_first_div .cntz_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==shsjQx){
+				$(".sjgl_first_div").css("display","block");
+				$(".sjgl_first_div .dsh_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxsjQx){
+				$(".sjgl_first_div").css("display","block");
+				$(".sjgl_first_div .zhcx_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxsjshjlQx){
+				$(".sjgl_first_div").css("display","block");
+				$(".sjgl_first_div .shjl_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxpdhmQx){
+				$(".pdgl_first_div").css("display","block");
+				$(".pdgl_first_div .hmcx_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxdlQx){
+				$(".pdgl_first_div").css("display","block");
+				$(".pdgl_first_div .dlcx_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxyhQx){
+				$(".xtgl_first_div").css("display","block");
+				$(".xtgl_first_div .yhcx_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==shyhQx){
+				$(".xtgl_first_div").css("display","block");
+				$(".xtgl_first_div .dshyh_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxyhshjlQx){
+				$(".xtgl_first_div").css("display","block");
+				$(".xtgl_first_div .yhshjl_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxjsQx){
+				$(".xtgl_first_div").css("display","block");
+				$(".xtgl_first_div .jscx_item_li").css("display","block");
 			}
 		}
 	}

@@ -86,7 +86,8 @@ public class DDGLController {
 	 */
 	@RequestMapping(value="/dsh/list")
 	public String goDshList(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		Constant.setDdztInRequest(request);
 		Constant.setDdShlxInRequest(request);
 		Constant.setLxlxInRequest(request);
