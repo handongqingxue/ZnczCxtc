@@ -135,12 +135,15 @@ public class DDGLController {
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {
 		
+		Constant.setYhQxInRequest(request);
+		
 		return MODULE_NAME+"/zhcx/new";
 	}
 	
 	@RequestMapping(value="/zhcx/edit")
 	public String goZhcxEdit(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		DingDan dd=dingDanService.selectById(id);
 		request.setAttribute("dd", dd);
@@ -176,7 +179,8 @@ public class DDGLController {
 	
 	@RequestMapping(value="/zhcx/detail")
 	public String goZhcxDetail(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		DingDan dd=dingDanService.selectById(id);
 		request.setAttribute("dd", dd);

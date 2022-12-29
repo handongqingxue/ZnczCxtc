@@ -41,6 +41,7 @@ public class CLGLController {
 	public String goDshList(HttpServletRequest request) {
 
 		request.setAttribute("shzt", CheLiang.DAI_SHEN_HE);
+		Constant.setYhQxInRequest(request);
 		Constant.setClPfjdInRequest(request);
 		Constant.setClSfzyInRequest(request);
 		Constant.setDcfwInRequest(request);
@@ -56,7 +57,8 @@ public class CLGLController {
 	 */
 	@RequestMapping(value="/dsh/detail")
 	public String goDshDetail(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		CheLiang cl=cheLiangService.selectById(id);
 		request.setAttribute("cl", cl);
@@ -74,6 +76,8 @@ public class CLGLController {
 	 */
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {
+
+		Constant.setYhQxInRequest(request);
 		
 		return MODULE_NAME+"/zhcx/new";
 	}
@@ -87,6 +91,7 @@ public class CLGLController {
 	public String goZhcxEdit(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		CheLiang cl=cheLiangService.selectById(id);
 		request.setAttribute("cl", cl);
@@ -105,6 +110,7 @@ public class CLGLController {
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
 
+		Constant.setYhQxInRequest(request);
 		Constant.setClPfjdInRequest(request);
 		Constant.setClSfzyInRequest(request);
 		Constant.setClShztInRequest(request);
@@ -123,6 +129,7 @@ public class CLGLController {
 	public String goZhcxDetail(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		CheLiang cl=cheLiangService.selectById(id);
 		request.setAttribute("cl", cl);
@@ -142,6 +149,7 @@ public class CLGLController {
 	@RequestMapping(value="/shjl/list")
 	public String goShjlList(HttpServletRequest request) {
 
+		Constant.setYhQxInRequest(request);
 		Constant.setClShjgInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
@@ -156,6 +164,7 @@ public class CLGLController {
 	@RequestMapping(value="/tzcx/list")
 	public String goTzcxList(HttpServletRequest request) {
 
+		Constant.setYhQxInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", CheLiangTaiZhang.ZONG_HE_CHA_XUN_SHEET);
 		
@@ -171,6 +180,7 @@ public class CLGLController {
 	public String goTzcxDetail(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		CheLiangTaiZhang cltz=cheLiangTaiZhangService.selectById(id);
 		request.setAttribute("cltz", cltz);
@@ -185,7 +195,8 @@ public class CLGLController {
 	 */
 	@RequestMapping(value="/cntz/list")
 	public String goCntzList(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		Constant.setDdztInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", CheLiangTaiZhang.CHANG_NEI_SHEET);
@@ -197,6 +208,7 @@ public class CLGLController {
 	public String goCntzDetail(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		CheLiangTaiZhang cltz=cheLiangTaiZhangService.selectById(id);
 		request.setAttribute("cltz", cltz);

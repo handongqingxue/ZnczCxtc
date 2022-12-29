@@ -73,6 +73,7 @@ public class PDGLController {
 	@RequestMapping(value="/hmcx/list")
 	public String goHmcxList(HttpServletRequest request) {
 
+		Constant.setYhQxInRequest(request);
 		Constant.setHmFlInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
@@ -82,6 +83,7 @@ public class PDGLController {
 	@RequestMapping(value="/dlcx/new")
 	public String goDlcxNew(HttpServletRequest request) {
 
+		Constant.setYhQxInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/dlcx/new";
@@ -89,7 +91,8 @@ public class PDGLController {
 
 	@RequestMapping(value="/dlcx/edit")
 	public String goDlcxEdit(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		DuiLie dl=duiLieService.selectById(id);
 		request.setAttribute("dl", dl);
@@ -105,6 +108,7 @@ public class PDGLController {
 	@RequestMapping(value="/dlcx/list")
 	public String goDlcxList(HttpServletRequest request) {
 
+		Constant.setYhQxInRequest(request);
 		Constant.setDLJhxsInRequest(request);
 		Constant.setDLZtInRequest(request);
 		Constant.setDcfwInRequest(request);
@@ -114,7 +118,8 @@ public class PDGLController {
 
 	@RequestMapping(value="/dlcx/detail")
 	public String goDlcxDetail(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		DuiLie dl=duiLieService.selectById(id);
 		request.setAttribute("dl", dl);

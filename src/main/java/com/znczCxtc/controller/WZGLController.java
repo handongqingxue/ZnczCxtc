@@ -27,13 +27,16 @@ public class WZGLController {
 	
 	@RequestMapping(value="/wzlx/new")
 	public String goWzlxNew(HttpServletRequest request) {
+
+		Constant.setYhQxInRequest(request);
 		
 		return MODULE_NAME+"/wzlx/new";
 	}
 
 	@RequestMapping(value="/wzlx/edit")
 	public String goWzlxEdit(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		WuZiLeiXing wzlx=wuZiLeiXingService.selectById(id);
 		request.setAttribute("wzlx", wzlx);
@@ -52,7 +55,8 @@ public class WZGLController {
 
 	@RequestMapping(value="/wzlx/detail")
 	public String goWzlxDetail(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		WuZiLeiXing wzlx=wuZiLeiXingService.selectById(id);
 		request.setAttribute("wzlx", wzlx);
@@ -62,13 +66,16 @@ public class WZGLController {
 	
 	@RequestMapping(value="/wzcx/new")
 	public String goWzcxNew(HttpServletRequest request) {
+
+		Constant.setYhQxInRequest(request);
 		
 		return MODULE_NAME+"/wzcx/new";
 	}
 
 	@RequestMapping(value="/wzcx/edit")
 	public String goWzcxEdit(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		WuZi wz=wuZiService.selectById(id);
 		request.setAttribute("wz", wz);
@@ -87,7 +94,8 @@ public class WZGLController {
 
 	@RequestMapping(value="/wzcx/detail")
 	public String goWzcxDetail(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		WuZi wz=wuZiService.selectById(id);
 		request.setAttribute("wz", wz);

@@ -33,6 +33,7 @@ public class DWGLController {
 	public String goYssNew(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		
 		return MODULE_NAME+"/yss/new";
 	}
@@ -41,6 +42,7 @@ public class DWGLController {
 	public String goYssEdit(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		YunShuShang yss=yunShuShangService.selectById(id);
 		request.setAttribute("yss", yss);
@@ -67,6 +69,7 @@ public class DWGLController {
 	public String goYssDetail(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		YunShuShang yss=yunShuShangService.selectById(id);
 		request.setAttribute("yss", yss);
@@ -83,6 +86,7 @@ public class DWGLController {
 	public String goFhdwNew(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		
 		return MODULE_NAME+"/fhdw/new";
 	}
@@ -96,6 +100,7 @@ public class DWGLController {
 	public String goFhdwEdit(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		FaHuoDanWei fhdw=faHuoDanWeiService.selectById(id);
 		request.setAttribute("fhdw", fhdw);
@@ -127,6 +132,7 @@ public class DWGLController {
 	public String goFhdwDetail(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		FaHuoDanWei fhdw=faHuoDanWeiService.selectById(id);
 		request.setAttribute("fhdw", fhdw);
@@ -141,7 +147,8 @@ public class DWGLController {
 	 */
 	@RequestMapping(value="/shdw/new")
 	public String goShdwNew(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		request.setAttribute("dlzt", DuiLie.ZAI_YONG);
 		
 		return MODULE_NAME+"/shdw/new";
@@ -156,6 +163,7 @@ public class DWGLController {
 	public String goShdwEdit(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		ShouHuoDanWei shdw=shouHuoDanWeiService.selectById(id);
 		request.setAttribute("shdw", shdw);
@@ -188,6 +196,7 @@ public class DWGLController {
 	public String goShdwDetail(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		ShouHuoDanWei shdw=shouHuoDanWeiService.selectById(id);
 		request.setAttribute("shdw", shdw);
@@ -197,13 +206,16 @@ public class DWGLController {
 
 	@RequestMapping(value="/ck/new")
 	public String goCkNew(HttpServletRequest request) {
+		
+		Constant.setYhQxInRequest(request);
 
 		return MODULE_NAME+"/ck/new";
 	}
 
 	@RequestMapping(value="/ck/edit")
 	public String goCkEdit(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		CangKu ck=cangKuService.selectById(id);
 		request.setAttribute("ck", ck);
@@ -213,7 +225,8 @@ public class DWGLController {
 	
 	@RequestMapping(value="/ck/list")
 	public String goCkList(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
 		return MODULE_NAME+"/ck/list";
@@ -221,7 +234,8 @@ public class DWGLController {
 
 	@RequestMapping(value="/ck/detail")
 	public String goCkDetail(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		CangKu ck=cangKuService.selectById(id);
 		request.setAttribute("ck", ck);

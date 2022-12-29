@@ -54,6 +54,7 @@ public class XTGLController {
 	public String goYhcxEdit(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		YongHu yh=yongHuService.selectById(id);
 		request.setAttribute("yh", yh);
@@ -72,6 +73,7 @@ public class XTGLController {
 	public String goYhcxList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		Constant.setYhShztInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", YongHu.ZONG_HE_CHA_XUN_SHEET);
@@ -88,6 +90,7 @@ public class XTGLController {
 	public String goYhcxDetail(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		YongHu yh=yongHuService.selectById(id);
 		request.setAttribute("yh", yh);
@@ -107,6 +110,7 @@ public class XTGLController {
 		
 		//publicService.selectNav(request);
 		request.setAttribute("shzt", YongHu.DAI_SHEN_HE);
+		Constant.setYhQxInRequest(request);
 		Constant.setYhShztInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", YongHu.DAI_SHEN_HE_SHEET);
@@ -122,6 +126,7 @@ public class XTGLController {
 	@RequestMapping(value="/yhshjl/list")
 	public String goYhshjlList(HttpServletRequest request) {
 
+		Constant.setYhQxInRequest(request);
 		Constant.setYhShjgInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
@@ -137,7 +142,7 @@ public class XTGLController {
 	public String goJscxNew(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
-		
+		Constant.setYhQxInRequest(request);
 		Constant.setJsZtInRequest(request);
 		
 		return MODULE_NAME+"/jscx/new";
@@ -152,6 +157,7 @@ public class XTGLController {
 	public String goJscxEdit(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		JueSe js=jueSeService.selectById(id);
 		request.setAttribute("js", js);
@@ -170,6 +176,7 @@ public class XTGLController {
 	public String goJscxList(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		Constant.setJsZtInRequest(request);
 		
 		return MODULE_NAME+"/jscx/list";
@@ -184,6 +191,7 @@ public class XTGLController {
 	public String goJscxDetail(HttpServletRequest request) {
 		
 		//publicService.selectNav(request);
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		JueSe js=jueSeService.selectById(id);
 		request.setAttribute("js", js);

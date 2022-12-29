@@ -82,7 +82,7 @@ $(function(){
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
 	
-	showCompontByQx();
+	//showCompontByQx();
 });
 
 function showCompontByQx(){

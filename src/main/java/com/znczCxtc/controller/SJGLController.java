@@ -38,6 +38,7 @@ public class SJGLController {
 	public String goDshList(HttpServletRequest request) {
 
 		request.setAttribute("shzt", SiJi.DAI_SHEN_HE);
+		Constant.setYhQxInRequest(request);
 		Constant.setDcfwInRequest(request);
 		request.setAttribute("sheetFlag", SiJi.DAI_SHEN_HE_SHEET);
 		
@@ -46,7 +47,8 @@ public class SJGLController {
 
 	@RequestMapping(value="/dsh/detail")
 	public String goDshDetail(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		SiJi sj=siJiService.selectById(id);
 		request.setAttribute("sj", sj);
@@ -57,12 +59,15 @@ public class SJGLController {
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {
 		
+		Constant.setYhQxInRequest(request);
+		
 		return MODULE_NAME+"/zhcx/new";
 	}
 
 	@RequestMapping(value="/zhcx/edit")
 	public String goZhcxEdit(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		SiJi sj=siJiService.selectById(id);
 		request.setAttribute("sj", sj);
@@ -81,6 +86,7 @@ public class SJGLController {
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
 
+		Constant.setYhQxInRequest(request);
 		Constant.setSjShztInRequest(request);
 		Constant.setSjZyztInRequest(request);
 		Constant.setDcfwInRequest(request);
@@ -91,7 +97,8 @@ public class SJGLController {
 
 	@RequestMapping(value="/zhcx/detail")
 	public String goZhcxDetail(HttpServletRequest request) {
-		
+
+		Constant.setYhQxInRequest(request);
 		String id = request.getParameter("id");
 		SiJi sj=siJiService.selectById(id);
 		request.setAttribute("sj", sj);
@@ -107,6 +114,7 @@ public class SJGLController {
 	@RequestMapping(value="/shjl/list")
 	public String goShjlList(HttpServletRequest request) {
 
+		Constant.setYhQxInRequest(request);
 		Constant.setSjShjgInRequest(request);
 		Constant.setDcfwInRequest(request);
 		
