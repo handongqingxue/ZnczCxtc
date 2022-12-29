@@ -190,6 +190,26 @@ public class QuanXian {
 	 * 查询角色
 	 */
 	public static final int CHA_XUN_JUE_SE=63;
+	/**
+	 * 人工识别身份证
+	 */
+	public static final int REN_GONG_SHI_BIE_SHEN_FEN_ZHENG=64;
+	/**
+	 * 人工识别车牌
+	 */
+	public static final int REN_GONG_SHI_BIE_CHE_PAI=65;
+	/**
+	 * 人工识别二维码
+	 */
+	public static final int REN_GONG_SHI_BIE_ER_WEI_MA=66;
+	/**
+	 * 订单复位
+	 */
+	public static final int DING_DAN_FU_WEI=67;
+	/**
+	 * 磅单打印
+	 */
+	public static final int BANG_DAN_DA_YIN=68;
 	
 	private Integer id;
 	public Integer getId() {

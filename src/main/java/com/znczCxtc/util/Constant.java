@@ -204,6 +204,11 @@ public class Constant {
 		request.setAttribute("xgjsQx", QuanXian.XIU_GAI_JUE_SE);//61
 		request.setAttribute("scjsQx", QuanXian.SHAN_CHU_JUE_SE);//62
 		request.setAttribute("cxjsQx", QuanXian.CHA_XUN_JUE_SE);//63
+		request.setAttribute("rgsbsfzQx", QuanXian.REN_GONG_SHI_BIE_SHEN_FEN_ZHENG);//64
+		request.setAttribute("rgsbcpQx", QuanXian.REN_GONG_SHI_BIE_CHE_PAI);//65
+		request.setAttribute("rgsbewmQx", QuanXian.REN_GONG_SHI_BIE_ER_WEI_MA);//66
+		request.setAttribute("ddfwQx", QuanXian.DING_DAN_FU_WEI);//67
+		request.setAttribute("bddyQx", QuanXian.BANG_DAN_DA_YIN);//68
 		
 	}
 	

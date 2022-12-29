@@ -42,7 +42,7 @@
 	width: 120px;
 	height: 25px;
 }
-.tab1_div .check_a{
+.tab1_div .edit_a{
 	visibility: hidden;
 }
 
@@ -198,7 +198,7 @@ $(function(){
 	initOutputExcelDialog();//4
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
-	//showCompontByQx();
+	showCompontByQx();
 });
 
 function initLxlxVar(){
@@ -256,22 +256,67 @@ function initDcfwVar(){
 }
 
 function showCompontByQx(){
+	rgsbsfzLB.hide();
 	rgsbcpLB.hide();
+	rgsbewmLB.hide();
+	ddfwLB.hide();
+	bddyLB.hide();
+	addLB.hide();
 	removeLB.hide();
 	if(yhm=="admin"){
+		rgsbsfzLB.show();
 		rgsbcpLB.show();
+		rgsbewmLB.show();
+		ddfwLB.show();
+		bddyLB.show();
+		addLB.show();
 		removeLB.show();
 	}
 	else{
+		var rgsbsfzQx='${requestScope.rgsbsfzQx}';
+		var rgsbcpQx='${requestScope.rgsbcpQx}';
+		var rgsbewmQx='${requestScope.rgsbewmQx}';
+		var ddfwQx='${requestScope.ddfwQx}';
+		var bddyQx='${requestScope.bddyQx}';
+		var tjddQx='${requestScope.tjddQx}';
+		var scddQx='${requestScope.scddQx}';
 		var qxIdsArr=qxIds.split(",");
 		for(var i=0;i<qxIdsArr.length;i++){
-			if(qxIdsArr[i]==1){//仓储员
-				setTimeout(function(){
-					$(".tab1_div .check_a").css("visibility","visible");
-				},2000)
+			if(qxIdsArr[i]==rgsbsfzQx){
+				rgsbsfzLB.show();
 			}
-			if(qxIdsArr[i]==2){//磅房人员
+			if(qxIdsArr[i]==rgsbcpQx){
 				rgsbcpLB.show();
+			}
+			if(qxIdsArr[i]==rgsbewmQx){
+				rgsbewmLB.show();
+			}
+			if(qxIdsArr[i]==ddfwQx){
+				ddfwLB.show();
+			}
+			if(qxIdsArr[i]==bddyQx){
+				bddyLB.show();
+			}
+			if(qxIdsArr[i]==tjddQx){
+				addLB.show();
+			}
+			if(qxIdsArr[i]==scddQx){
+				removeLB.show();
+			}
+		}
+	}
+}
+
+function showOptionButByQx(){
+	if(yhm=="admin"){
+		$(".tab1_div .edit_a").css("visibility","visible");
+	}
+	else{
+		var xgddQx='${requestScope.xgddQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==xgddQx){
+				$(".tab1_div .edit_a").css("visibility","visible");
 			}
 		}
 	}
@@ -1270,7 +1315,7 @@ function initTab1(){
             {field:"id",title:"操作",width:100,formatter:function(value,row){
             	var str;
            		if(row.id!="<div style=\"text-align:center;\">暂无信息<div>"){
-	            	str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
+	            	str="<a class=\"edit_a\" href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
 	            	   +"<a href=\"detail?id="+value+"\">详情</a>&nbsp;&nbsp;";
            		}
            		else
@@ -1324,6 +1369,8 @@ function initTab1(){
 			$(".panel-header .panel-title").css("font-size","15px");
 			$(".panel-header .panel-title").css("padding-left","10px");
 			$(".panel-header, .panel-body").css("border-color","#ddd");
+			
+			showOptionButByQx();
 		}
 	});
 }
