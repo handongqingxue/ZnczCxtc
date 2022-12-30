@@ -47,6 +47,42 @@ public class QuanXian {
 	 */
 	public static final int SHAN_CHU_BANG_DAN_JI_LU=11;
 	/**
+	 * 添加物资类型
+	 */
+	public static final int TIAN_JIA_WU_ZI_LEI_XING=12;
+	/**
+	 * 修改物资类型
+	 */
+	public static final int XIU_GAI_WU_ZI_LEI_XING=13;
+	/**
+	 * 删除物资类型
+	 */
+	public static final int SHAN_CHU_WU_ZI_LEI_XING=14;
+	/**
+	 * 添加物资
+	 */
+	public static final int TIAN_JIA_WU_ZI=15;
+	/**
+	 * 修改物资
+	 */
+	public static final int XIU_GAI_WU_ZI=16;
+	/**
+	 * 删除物资
+	 */
+	public static final int SHAN_CHU_WU_ZI=17;
+	/**
+	 * 添加运输商
+	 */
+	public static final int TIAN_JIA_YUN_SHU_SHANG=18;
+	/**
+	 * 修改运输商
+	 */
+	public static final int XIU_GAI_YUN_SHU_SHANG=19;
+	/**
+	 * 删除运输商
+	 */
+	public static final int SHAN_CHU_YUN_SHU_SHANG=20;
+	/**
 	 * 订单状态查询
 	 */
 	public static final int DING_DAN_ZHUANG_TAI_CHA_XUN=28;
@@ -210,6 +246,14 @@ public class QuanXian {
 	 * 磅单打印
 	 */
 	public static final int BANG_DAN_DA_YIN=68;
+	/**
+	 * 查询订单审核记录
+	 */
+	public static final int CHA_XUN_DING_DAN_SHEN_HE_JI_LU=69;
+	/**
+	 * 删除订单审核记录
+	 */
+	public static final int SHAN_CHU_DING_DAN_SHEN_HE_JI_LU=70;
 	
 	private Integer id;
 	public Integer getId() {

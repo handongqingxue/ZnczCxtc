@@ -31,23 +31,35 @@ public class DWGLController {
 
 	@RequestMapping(value="/yss/new")
 	public String goYssNew(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_YUN_SHU_SHANG,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			url=MODULE_NAME+"/yss/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		
-		return MODULE_NAME+"/yss/new";
+		return url;
 	}
 
 	@RequestMapping(value="/yss/edit")
 	public String goYssEdit(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_YUN_SHU_SHANG,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			YunShuShang yss=yunShuShangService.selectById(id);
+			request.setAttribute("yss", yss);
+			url=MODULE_NAME+"/yss/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		YunShuShang yss=yunShuShangService.selectById(id);
-		request.setAttribute("yss", yss);
-		
-		return MODULE_NAME+"/yss/edit";
+		return url;
 	}
 	
 	/**
@@ -57,24 +69,36 @@ public class DWGLController {
 	 */
 	@RequestMapping(value="/yss/list")
 	public String goYssList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_YUN_SHU_SHANG,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/yss/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		Constant.setDcfwInRequest(request);
-		
-		return MODULE_NAME+"/yss/list";
+		return url;
 	}
 
 	@RequestMapping(value="/yss/detail")
 	public String goYssDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_YUN_SHU_SHANG,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			YunShuShang yss=yunShuShangService.selectById(id);
+			request.setAttribute("yss", yss);
+			url=MODULE_NAME+"/yss/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		YunShuShang yss=yunShuShangService.selectById(id);
-		request.setAttribute("yss", yss);
-		
-		return MODULE_NAME+"/yss/detail";
+		return url;
 	}
 
 	/**

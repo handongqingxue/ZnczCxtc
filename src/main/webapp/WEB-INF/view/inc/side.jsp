@@ -256,6 +256,7 @@ function showLeftMenuByQx(){
 		var shyhQx='${requestScope.shyhQx}';
 		var cxyhshjlQx='${requestScope.cxyhshjlQx}';
 		var cxjsQx='${requestScope.cxjsQx}';
+		var cxddshjlQx='${requestScope.cxddshjlQx}';
 		//alert(cxsjshjlQx)
 		var qxIdArr=qxIds.split(",");
 		for(var i=0;i<qxIdArr.length;i++){
@@ -272,12 +273,10 @@ function showLeftMenuByQx(){
 			if(qxIdArr[i]==xdshQx){
 				$(".ddgl_first_div").css("display","block");
 				$(".ddgl_first_div .dsh_item_li").css("display","block");
-				$(".ddgl_first_div .shjl_item_li").css("display","block");
 			}
 			if(qxIdArr[i]==zjshQx){
 				$(".ddgl_first_div").css("display","block");
 				$(".ddgl_first_div .dzj_item_li").css("display","block");
-				$(".ddgl_first_div .shjl_item_li").css("display","block");
 			}
 			if(qxIdArr[i]==cxddQx){
 				$(".ddgl_first_div").css("display","block");
@@ -286,6 +285,9 @@ function showLeftMenuByQx(){
 			if(qxIdArr[i]==zxhshQx){
 				$(".ddgl_first_div").css("display","block");
 				$(".ddgl_first_div .drk_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==cxddshjlQx){
+				$(".ddgl_first_div").css("display","block");
 				$(".ddgl_first_div .shjl_item_li").css("display","block");
 			}
 			if(qxIdArr[i]==cxbdjlQx){

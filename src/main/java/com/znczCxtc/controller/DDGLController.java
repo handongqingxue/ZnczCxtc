@@ -243,11 +243,8 @@ public class DDGLController {
 	public String goShjlList(HttpServletRequest request) {
 
 		String url=null;
-		if(Constant.checkIfExistQx(QuanXian.XIA_DAN_SHEN_HE,request)||
-		   Constant.checkIfExistQx(QuanXian.ZHI_JIAN_SHEN_HE,request)||
-		   Constant.checkIfExistQx(QuanXian.YI_JIAN_SHEN_HE,request)||
-		   Constant.checkIfExistQx(QuanXian.ZHUANG_XIE_HUO_SHEN_HE,request)||
-		   Constant.checkIfExistQx(QuanXian.ER_JIAN_SHEN_HE,request)) {//只要具备这五种审核中的任一一种权限，就可以查看审核记录
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_DING_DAN_SHEN_HE_JI_LU,request)) {
+			Constant.setYhQxInRequest(request);
 			Constant.setDdShlxInRequest(request);
 			Constant.setLxlxInRequest(request);
 			Constant.setDdShjgInRequest(request);

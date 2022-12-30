@@ -28,79 +28,127 @@ public class WZGLController {
 	@RequestMapping(value="/wzlx/new")
 	public String goWzlxNew(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_WU_ZI_LEI_XING,request)) {
+			Constant.setYhQxInRequest(request);
+			url=MODULE_NAME+"/wzlx/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/wzlx/new";
+		return url;
 	}
 
 	@RequestMapping(value="/wzlx/edit")
 	public String goWzlxEdit(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		WuZiLeiXing wzlx=wuZiLeiXingService.selectById(id);
-		request.setAttribute("wzlx", wzlx);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_WU_ZI_LEI_XING,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			WuZiLeiXing wzlx=wuZiLeiXingService.selectById(id);
+			request.setAttribute("wzlx", wzlx);
+			url=MODULE_NAME+"/wzlx/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/wzlx/edit";
+		return url;
 	}
 	
 	@RequestMapping(value="/wzlx/list")
 	public String goWzlxList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setDcfwInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_WU_ZI_LEI_XING,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/wzlx/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/wzlx/list";
+		return url;
 	}
 
 	@RequestMapping(value="/wzlx/detail")
 	public String goWzlxDetail(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		WuZiLeiXing wzlx=wuZiLeiXingService.selectById(id);
-		request.setAttribute("wzlx", wzlx);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_WU_ZI_LEI_XING,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			WuZiLeiXing wzlx=wuZiLeiXingService.selectById(id);
+			request.setAttribute("wzlx", wzlx);
+			url=MODULE_NAME+"/wzlx/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/wzlx/detail";
+		return url;
 	}
 	
 	@RequestMapping(value="/wzcx/new")
 	public String goWzcxNew(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_WU_ZI,request)) {
+			Constant.setYhQxInRequest(request);
+			url=MODULE_NAME+"/wzcx/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/wzcx/new";
+		return url;
 	}
 
 	@RequestMapping(value="/wzcx/edit")
 	public String goWzcxEdit(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		WuZi wz=wuZiService.selectById(id);
-		request.setAttribute("wz", wz);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_WU_ZI,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			WuZi wz=wuZiService.selectById(id);
+			request.setAttribute("wz", wz);
+			url=MODULE_NAME+"/wzcx/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/wzcx/edit";
+		return url;
 	}
 	
 	@RequestMapping(value="/wzcx/list")
 	public String goWzcxList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setDcfwInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_WU_ZI,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/wzcx/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/wzcx/list";
+		return url;
 	}
 
 	@RequestMapping(value="/wzcx/detail")
 	public String goWzcxDetail(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		WuZi wz=wuZiService.selectById(id);
-		request.setAttribute("wz", wz);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_WU_ZI,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			WuZi wz=wuZiService.selectById(id);
+			request.setAttribute("wz", wz);
+			url=MODULE_NAME+"/wzcx/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/wzcx/detail";
+		return url;
 	}
 	
 	@RequestMapping(value="/queryWZLXList")
