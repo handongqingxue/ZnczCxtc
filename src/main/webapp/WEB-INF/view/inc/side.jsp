@@ -250,6 +250,7 @@ function showLeftMenuByQx(){
 		var shsjQx='${requestScope.shsjQx}';
 		var cxsjQx='${requestScope.cxsjQx}';
 		var cxsjshjlQx='${requestScope.cxsjshjlQx}';
+		var pdhmztcxQx='${requestScope.pdhmztcxQx}';
 		var cxpdhmQx='${requestScope.cxpdhmQx}';
 		var cxdlQx='${requestScope.cxdlQx}';
 		var cxyhQx='${requestScope.cxyhQx}';
@@ -364,6 +365,10 @@ function showLeftMenuByQx(){
 			if(qxIdArr[i]==cxsjshjlQx){
 				$(".sjgl_first_div").css("display","block");
 				$(".sjgl_first_div .shjl_item_li").css("display","block");
+			}
+			if(qxIdArr[i]==pdhmztcxQx){
+				$(".pdgl_first_div").css("display","block");
+				$(".pdgl_first_div .hmzt_item_li").css("display","block");
 			}
 			if(qxIdArr[i]==cxpdhmQx){
 				$(".pdgl_first_div").css("display","block");

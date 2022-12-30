@@ -29,19 +29,31 @@ public class PDGLController {
 	
 	@RequestMapping(value="/hmzt/new")
 	public String goHmztNew(HttpServletRequest request) {
-		
-		return MODULE_NAME+"/hmzt/new";
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.PAI_DUI_HAO_MA_ZHUANG_TAI_CHA_XUN,request)) {
+			url=MODULE_NAME+"/hmzt/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
+		return url;
 	}
 	
 	@RequestMapping(value="/hmzt/edit")
 	public String goHmztEdit(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.PAI_DUI_HAO_MA_ZHUANG_TAI_CHA_XUN,request)) {
+			//publicService.selectNav(request);
+			String id = request.getParameter("id");
+			HaoMaZhuangTai hmzt=haoMaZhuangTaiService.selectById(id);
+			request.setAttribute("hmzt", hmzt);
+			url=MODULE_NAME+"/hmzt/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		String id = request.getParameter("id");
-		HaoMaZhuangTai hmzt=haoMaZhuangTaiService.selectById(id);
-		request.setAttribute("hmzt", hmzt);
-		
-		return MODULE_NAME+"/hmzt/edit";
+		return url;
 	}
 
 	/**
@@ -51,18 +63,30 @@ public class PDGLController {
 	 */
 	@RequestMapping(value="/hmzt/list")
 	public String goHmztList(HttpServletRequest request) {
-		
-		return MODULE_NAME+"/hmzt/list";
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.PAI_DUI_HAO_MA_ZHUANG_TAI_CHA_XUN,request)) {
+			url=MODULE_NAME+"/hmzt/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
+		return url;
 	}
 	
 	@RequestMapping(value="/hmzt/detail")
 	public String goHmztDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.PAI_DUI_HAO_MA_ZHUANG_TAI_CHA_XUN,request)) {
+			String id = request.getParameter("id");
+			HaoMaZhuangTai hmzt=haoMaZhuangTaiService.selectById(id);
+			request.setAttribute("hmzt", hmzt);
+			url=MODULE_NAME+"/hmzt/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		String id = request.getParameter("id");
-		HaoMaZhuangTai hmzt=haoMaZhuangTaiService.selectById(id);
-		request.setAttribute("hmzt", hmzt);
-		
-		return MODULE_NAME+"/hmzt/detail";
+		return url;
 	}
 
 	/**
@@ -73,31 +97,49 @@ public class PDGLController {
 	@RequestMapping(value="/hmcx/list")
 	public String goHmcxList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setHmFlInRequest(request);
-		Constant.setDcfwInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_PAI_DUI_HAO_MA,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setHmFlInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/hmcx/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/hmcx/list";
+		return url;
 	}
 
 	@RequestMapping(value="/dlcx/new")
 	public String goDlcxNew(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setDcfwInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_DUI_LIE,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/dlcx/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/dlcx/new";
+		return url;
 	}
 
 	@RequestMapping(value="/dlcx/edit")
 	public String goDlcxEdit(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		DuiLie dl=duiLieService.selectById(id);
-		request.setAttribute("dl", dl);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_DUI_LIE,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			DuiLie dl=duiLieService.selectById(id);
+			request.setAttribute("dl", dl);
+			url=MODULE_NAME+"/dlcx/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/dlcx/edit";
+		return url;
 	}
 
 	/**
@@ -108,23 +150,35 @@ public class PDGLController {
 	@RequestMapping(value="/dlcx/list")
 	public String goDlcxList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setDLJhxsInRequest(request);
-		Constant.setDLZtInRequest(request);
-		Constant.setDcfwInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_DUI_LIE,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setDLJhxsInRequest(request);
+			Constant.setDLZtInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/dlcx/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/dlcx/list";
+		return url;
 	}
 
 	@RequestMapping(value="/dlcx/detail")
 	public String goDlcxDetail(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		DuiLie dl=duiLieService.selectById(id);
-		request.setAttribute("dl", dl);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_DUI_LIE,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			DuiLie dl=duiLieService.selectById(id);
+			request.setAttribute("dl", dl);
+			url=MODULE_NAME+"/dlcx/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/dlcx/detail";
+		return url;
 	}
 	
 	@RequestMapping(value="/newHaoMaZhuangTai")

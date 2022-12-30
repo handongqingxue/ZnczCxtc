@@ -298,6 +298,10 @@ public class QuanXian {
 	 * É¾³ý³µÁ¾Ì¨ÕË
 	 */
 	public static final int SHAN_CHU_CHE_LIANG_TAI_ZHANG=74;
+	/**
+	 * ÅÅ¶ÓºÅÂë×´Ì¬²éÑ¯
+	 */
+	public static final int PAI_DUI_HAO_MA_ZHUANG_TAI_CHA_XUN=75;
 	
 	private Integer id;
 	public Integer getId() {
