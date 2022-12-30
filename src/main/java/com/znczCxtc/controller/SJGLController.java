@@ -37,45 +37,69 @@ public class SJGLController {
 	@RequestMapping(value="/dsh/list")
 	public String goDshList(HttpServletRequest request) {
 
-		request.setAttribute("shzt", SiJi.DAI_SHEN_HE);
-		Constant.setYhQxInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", SiJi.DAI_SHEN_HE_SHEET);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.SHEN_HE_SI_JI,request)) {
+			request.setAttribute("shzt", SiJi.DAI_SHEN_HE);
+			Constant.setYhQxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", SiJi.DAI_SHEN_HE_SHEET);
+			url=MODULE_NAME+"/dsh/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/dsh/list";
+		return url;
 	}
 
 	@RequestMapping(value="/dsh/detail")
 	public String goDshDetail(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		SiJi sj=siJiService.selectById(id);
-		request.setAttribute("sj", sj);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.SHEN_HE_SI_JI,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			SiJi sj=siJiService.selectById(id);
+			request.setAttribute("sj", sj);
+			url=MODULE_NAME+"/dsh/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/dsh/detail";
+		return url;
 	}
 
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_SI_JI,request)) {
+			Constant.setYhQxInRequest(request);
+			url=MODULE_NAME+"/zhcx/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		Constant.setYhQxInRequest(request);
-		
-		return MODULE_NAME+"/zhcx/new";
+		return url;
 	}
 
 	@RequestMapping(value="/zhcx/edit")
 	public String goZhcxEdit(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		SiJi sj=siJiService.selectById(id);
-		request.setAttribute("sj", sj);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_SI_JI,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			SiJi sj=siJiService.selectById(id);
+			request.setAttribute("sj", sj);
+			
+			request.setAttribute("dshShzt", SiJi.DAI_SHEN_HE);
+			request.setAttribute("bjzShzt", SiJi.BIAN_JI_ZHONG);
+			url=MODULE_NAME+"/zhcx/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		request.setAttribute("dshShzt", SiJi.DAI_SHEN_HE);
-		request.setAttribute("bjzShzt", SiJi.BIAN_JI_ZHONG);
-		
-		return MODULE_NAME+"/zhcx/edit";
+		return url;
 	}
 
 	/**
@@ -86,24 +110,36 @@ public class SJGLController {
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setSjShztInRequest(request);
-		Constant.setSjZyztInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", SiJi.ZONG_HE_CHA_XUN_SHEET);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_SI_JI,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setSjShztInRequest(request);
+			Constant.setSjZyztInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", SiJi.ZONG_HE_CHA_XUN_SHEET);
+			url=MODULE_NAME+"/zhcx/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/zhcx/list";
+		return url;
 	}
 
 	@RequestMapping(value="/zhcx/detail")
 	public String goZhcxDetail(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		SiJi sj=siJiService.selectById(id);
-		request.setAttribute("sj", sj);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_SI_JI,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			SiJi sj=siJiService.selectById(id);
+			request.setAttribute("sj", sj);
+			url=MODULE_NAME+"/zhcx/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/zhcx/detail";
+		return url;
 	}
 
 	/**
@@ -114,11 +150,17 @@ public class SJGLController {
 	@RequestMapping(value="/shjl/list")
 	public String goShjlList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setSjShjgInRequest(request);
-		Constant.setDcfwInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_SI_JI_SHEN_HE_JI_LU,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setSjShjgInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/shjl/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/shjl/list";
+		return url;
 	}
 	
 	@RequestMapping(value="/newSiJi")

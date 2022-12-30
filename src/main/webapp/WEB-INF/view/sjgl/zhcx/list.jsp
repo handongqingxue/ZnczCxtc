@@ -31,6 +31,9 @@
 .tab1_div .toolbar .search_but{
 	margin-left: 13px;
 }
+.tab1_div .edit_a{
+	visibility: hidden;
+}
 
 .output_excel_bg_div{
 	width: 100%;
@@ -104,9 +107,39 @@ $(function(){
 });
 
 function showCompontByQx(){
+	addLB.hide();
 	removeLB.hide();
 	if(yhm=="admin"){
+		addLB.show();
 		removeLB.show();
+	}
+	else{
+		var tjsjQx='${requestScope.tjsjQx}';
+		var scsjQx='${requestScope.scsjQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==tjsjQx){
+				addLB.show();
+			}
+			if(qxIdsArr[i]==scsjQx){
+				removeLB.show();
+			}
+		}
+	}
+}
+
+function showOptionButByQx(){
+	if(yhm=="admin"){
+		$(".tab1_div .edit_a").css("visibility","visible");
+	}
+	else{
+		var xgsjQx='${requestScope.xgsjQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==xgsjQx){
+				$(".tab1_div .edit_a").css("visibility","visible");
+			}
+		}
 	}
 }
 
@@ -262,7 +295,7 @@ function initSearchLB(){
 }
 
 function initAddLB(){
-	$("#add_but").linkbutton({
+	addLB=$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
 			location.href=sjglPath+"zhcx/new";
@@ -310,7 +343,7 @@ function initTab1(){
 			}},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\""+sjglPath+"zhcx/detail?id="+value+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\""+sjglPath+"zhcx/edit?id="+value+"\">修改</a>";
+            	+"&nbsp;|&nbsp;<a class=\"edit_a\" href=\""+sjglPath+"zhcx/edit?id="+value+"\">修改</a>";
             	return str;
             }}
 	    ]],
@@ -333,6 +366,8 @@ function initTab1(){
 				var html=$(this).html();
 				$(this).html("<span style=\"margin-left:11px;\">"+html+"</span>");
 			});
+			
+			showOptionButByQx();
 		}
 	});
 }
