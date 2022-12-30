@@ -68,13 +68,19 @@ public class GBGLController {
 	 */
 	@RequestMapping(value="/bdjl/list")
 	public String goBdjlList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_BANG_DAN_JI_LU,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			Constant.setDdztInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/bdjl/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		Constant.setDdztInRequest(request);
-		Constant.setDcfwInRequest(request);
-		
-		return MODULE_NAME+"/bdjl/list";
+		return url;
 	}
 
 	/**
@@ -84,16 +90,22 @@ public class GBGLController {
 	 */
 	@RequestMapping(value="/bdjl/detail")
 	public String goBdjlDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_BANG_DAN_JI_LU,request)) {
+			//publicService.selectNav(request);
+			String id = request.getParameter("id");
+			BangDanJiLu bdjl=bangDanJiLuService.selectById(id);
+			request.setAttribute("bdjl", bdjl);
+			
+			DingDan dd=dingDanService.selectById(bdjl.getDdId().toString());
+			request.setAttribute("dd", dd);
+			url=MODULE_NAME+"/bdjl/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		String id = request.getParameter("id");
-		BangDanJiLu bdjl=bangDanJiLuService.selectById(id);
-		request.setAttribute("bdjl", bdjl);
-		
-		DingDan dd=dingDanService.selectById(bdjl.getDdId().toString());
-		request.setAttribute("dd", dd);
-		
-		return MODULE_NAME+"/bdjl/detail";
+		return url;
 	}
 
 	@RequestMapping(value="/bdjl/print")
@@ -156,14 +168,20 @@ public class GBGLController {
 	 */
 	@RequestMapping(value="/gbjl/list")
 	public String goGbjlList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_GUO_BANG_JI_LU,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			Constant.setGblxInRequest(request);
+			Constant.setGbjlGbztInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/gbjl/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		Constant.setGblxInRequest(request);
-		Constant.setGbjlGbztInRequest(request);
-		Constant.setDcfwInRequest(request);
-		
-		return MODULE_NAME+"/gbjl/list";
+		return url;
 	}
 
 	/**
@@ -173,16 +191,22 @@ public class GBGLController {
 	 */
 	@RequestMapping(value="/gbjl/detail")
 	public String goGbjlDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_GUO_BANG_JI_LU,request)) {
+			//publicService.selectNav(request);
+			String id = request.getParameter("id");
+			GuoBangJiLu gbjl=guoBangJiLuService.selectById(id);
+			request.setAttribute("gbjl", gbjl);
+			
+			Constant.setGbjlGbztInRequest(request);
+			Constant.setGblxInRequest(request);
+			url=MODULE_NAME+"/gbjl/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		String id = request.getParameter("id");
-		GuoBangJiLu gbjl=guoBangJiLuService.selectById(id);
-		request.setAttribute("gbjl", gbjl);
-		
-		Constant.setGbjlGbztInRequest(request);
-		Constant.setGblxInRequest(request);
-		
-		return MODULE_NAME+"/gbjl/detail";
+		return url;
 	}
 	
 	/**
@@ -192,18 +216,24 @@ public class GBGLController {
 	 */
 	@RequestMapping(value="/yjdsh/list")
 	public String goYjdshList(HttpServletRequest request) {
-		
-		//publicService.selectNav(request);
 
-		Constant.setYhQxInRequest(request);
-		Constant.setDdztInRequest(request);
-		Constant.setLxlxInRequest(request);
-		Constant.setDdShlxInRequest(request);
-		Constant.setGblxInRequest(request);
-		Constant.setGbjlGbztInRequest(request);
-		Constant.setDcfwInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.YI_JIAN_SHEN_HE,request)) {
+			//publicService.selectNav(request);
+	
+			Constant.setYhQxInRequest(request);
+			Constant.setDdztInRequest(request);
+			Constant.setLxlxInRequest(request);
+			Constant.setDdShlxInRequest(request);
+			Constant.setGblxInRequest(request);
+			Constant.setGbjlGbztInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/yjdsh/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/yjdsh/list";
+		return url;
 	}
 	
 	/**
@@ -213,18 +243,24 @@ public class GBGLController {
 	 */
 	@RequestMapping(value="/ejdsh/list")
 	public String goEjdshList(HttpServletRequest request) {
-		
-		//publicService.selectNav(request);
 
-		Constant.setYhQxInRequest(request);
-		Constant.setDdztInRequest(request);
-		Constant.setLxlxInRequest(request);
-		Constant.setDdShlxInRequest(request);
-		Constant.setGblxInRequest(request);
-		Constant.setGbjlGbztInRequest(request);
-		Constant.setDcfwInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.ER_JIAN_SHEN_HE,request)) {
+			//publicService.selectNav(request);
+	
+			Constant.setYhQxInRequest(request);
+			Constant.setDdztInRequest(request);
+			Constant.setLxlxInRequest(request);
+			Constant.setDdShlxInRequest(request);
+			Constant.setGblxInRequest(request);
+			Constant.setGbjlGbztInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/ejdsh/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/ejdsh/list";
+		return url;
 	}
 
 	@RequestMapping(value="/newBangDanJiLu")

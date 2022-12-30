@@ -93,6 +93,7 @@ $(function(){
 	initOutputExcelDialog();//0
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
+	showCompontByQx();
 });
 
 function initLxlxVar(){
@@ -118,6 +119,25 @@ function initDialogPosition(){
 	var oedDiv=$("#output_excel_div");
 	oedDiv.append(oedpw);
 	oedDiv.append(oedws);
+}
+
+function showCompontByQx(){
+	tgLB.hide();
+	thLB.hide();
+	if(yhm=="admin"){
+		tgLB.show();
+		thLB.show();
+	}
+	else{
+		var xdshQx='${requestScope.xdshQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==xdshQx){
+				tgLB.show();
+				thLB.show();
+			}
+		}
+	}
 }
 
 function initOutputExcelDialog(){
@@ -225,7 +245,7 @@ function initSearchLB(){
 }
 
 function initTGLB(){
-	$("#tg_but").linkbutton({
+	tgLB=$("#tg_but").linkbutton({
 		iconCls:"icon-ok",
 		onClick:function(){
 			checkByIds(true);
@@ -234,7 +254,7 @@ function initTGLB(){
 }
 
 function initTHLB(){
-	$("#th_but").linkbutton({
+	thLB=$("#th_but").linkbutton({
 		iconCls:"icon-back",
 		onClick:function(){
 			checkByIds(false);
@@ -243,7 +263,7 @@ function initTHLB(){
 }
 
 function initOutputLB(){
-	opBut=$("#output_but").linkbutton({
+	opLB=$("#output_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){
 			openOutputExcelDialog(true);

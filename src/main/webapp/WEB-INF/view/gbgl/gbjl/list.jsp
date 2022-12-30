@@ -26,6 +26,9 @@
 .tab1_div .toolbar .search_but{
 	margin-left: 13px;
 }
+.tab1_div .edit_a{
+	visibility: hidden;
+}
 
 .output_excel_bg_div{
 	width: 100%;
@@ -88,6 +91,7 @@ $(function(){
 	initOutputExcelDialog();//0
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
+	showCompontByQx();
 });
 
 function initGbztVar(){
@@ -121,6 +125,19 @@ function initDialogPosition(){
 	var oedDiv=$("#output_excel_div");
 	oedDiv.append(oedpw);
 	oedDiv.append(oedws);
+}
+
+function showCompontByQx(){
+	addLB.hide();
+	if(yhm=="admin"){
+		addLB.show();
+	}
+}
+
+function showOptionButByQx(){
+	if(yhm=="admin"){
+		$(".tab1_div .edit_a").css("visibility","visible");
+	}
 }
 
 function initOutputExcelDialog(){
@@ -238,7 +255,7 @@ function initSearchLB(){
 }
 
 function initAddLB(){
-	$("#add_but").linkbutton({
+	addLB=$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
 			location.href=gbglPath+"gbjl/new";
@@ -275,7 +292,7 @@ function initTab1(){
             }},
             {field:"gbsj",title:"过磅时间",width:150},
             {field:"id",title:"操作",width:110,formatter:function(value,row){
-            	var str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
+            	var str="<a class=\"edit_a\" href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
             		+"<a href=\"detail?id="+value+"\">详情</a>";
             	return str;
             }}
@@ -291,6 +308,8 @@ function initTab1(){
 			$(".panel-header .panel-title").css("font-size","15px");
 			$(".panel-header .panel-title").css("padding-left","10px");
 			$(".panel-header, .panel-body").css("border-color","#ddd");
+			
+			showOptionButByQx();
 		}
 	});
 }

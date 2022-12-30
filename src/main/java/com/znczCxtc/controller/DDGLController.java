@@ -50,12 +50,18 @@ public class DDGLController {
 	
 	@RequestMapping(value="/ddzt/edit")
 	public String goDdztEdit(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.DING_DAN_ZHUANG_TAI_CHA_XUN,request)) {
+			String id = request.getParameter("id");
+			DingDanZhuangTai ddzt=dingDanZhuangTaiService.selectById(id);
+			request.setAttribute("ddzt", ddzt);
+			url=MODULE_NAME+"/ddzt/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		String id = request.getParameter("id");
-		DingDanZhuangTai ddzt=dingDanZhuangTaiService.selectById(id);
-		request.setAttribute("ddzt", ddzt);
-		
-		return MODULE_NAME+"/ddzt/edit";
+		return url;
 	}
 
 	/**
@@ -65,18 +71,31 @@ public class DDGLController {
 	 */
 	@RequestMapping(value="/ddzt/list")
 	public String goDdztList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.DING_DAN_ZHUANG_TAI_CHA_XUN,request)) {
+			url=MODULE_NAME+"/ddzt/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/ddzt/list";
+		return url;
 	}
 	
 	@RequestMapping(value="/ddzt/detail")
 	public String goDdztDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.DING_DAN_ZHUANG_TAI_CHA_XUN,request)) {
+			String id = request.getParameter("id");
+			DingDanZhuangTai ddzt=dingDanZhuangTaiService.selectById(id);
+			request.setAttribute("ddzt", ddzt);
+			url=MODULE_NAME+"/ddzt/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		String id = request.getParameter("id");
-		DingDanZhuangTai ddzt=dingDanZhuangTaiService.selectById(id);
-		request.setAttribute("ddzt", ddzt);
-		
-		return MODULE_NAME+"/ddzt/detail";
+		return url;
 	}
 
 	/**
@@ -87,14 +106,20 @@ public class DDGLController {
 	@RequestMapping(value="/dsh/list")
 	public String goDshList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setDdztInRequest(request);
-		Constant.setDdShlxInRequest(request);
-		Constant.setLxlxInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", DingDan.DAI_SHEN_HE_SHEET);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIA_DAN_SHEN_HE,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setDdztInRequest(request);
+			Constant.setDdShlxInRequest(request);
+			Constant.setLxlxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", DingDan.DAI_SHEN_HE_SHEET);
+			url=MODULE_NAME+"/dsh/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/dsh/list";
+		return url;
 	}
 
 	/**
@@ -104,14 +129,21 @@ public class DDGLController {
 	 */
 	@RequestMapping(value="/dzj/list")
 	public String goDzjList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.ZHI_JIAN_SHEN_HE,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setDdztInRequest(request);
+			Constant.setDdShlxInRequest(request);
+			Constant.setLxlxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", DingDan.DAI_JIAN_YAN_SHEET);
+			url=MODULE_NAME+"/dzj/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		Constant.setDdztInRequest(request);
-		Constant.setDdShlxInRequest(request);
-		Constant.setLxlxInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", DingDan.DAI_JIAN_YAN_SHEET);
-		
-		return MODULE_NAME+"/dzj/list";
+		return url;
 	}
 
 	/**
@@ -121,15 +153,21 @@ public class DDGLController {
 	 */
 	@RequestMapping(value="/drk/list")
 	public String goDrkList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.ZHUANG_XIE_HUO_SHEN_HE,request)) {
+			//publicService.selectNav(request);
+			Constant.setDdztInRequest(request);
+			Constant.setDdShlxInRequest(request);
+			Constant.setLxlxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", DingDan.DAI_ZHUANG_XIE_HUO_SHEET);
+			url=MODULE_NAME+"/drk/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setDdztInRequest(request);
-		Constant.setDdShlxInRequest(request);
-		Constant.setLxlxInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", DingDan.DAI_ZHUANG_XIE_HUO_SHEET);
-		
-		return MODULE_NAME+"/drk/list";
+		return url;
 	}
 	
 	@RequestMapping(value="/zhcx/new")
@@ -203,13 +241,23 @@ public class DDGLController {
 	 */
 	@RequestMapping(value="/shjl/list")
 	public String goShjlList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIA_DAN_SHEN_HE,request)||
+		   Constant.checkIfExistQx(QuanXian.ZHI_JIAN_SHEN_HE,request)||
+		   Constant.checkIfExistQx(QuanXian.YI_JIAN_SHEN_HE,request)||
+		   Constant.checkIfExistQx(QuanXian.ZHUANG_XIE_HUO_SHEN_HE,request)||
+		   Constant.checkIfExistQx(QuanXian.ER_JIAN_SHEN_HE,request)) {//只要具备这五种审核中的任一一种权限，就可以查看审核记录
+			Constant.setDdShlxInRequest(request);
+			Constant.setLxlxInRequest(request);
+			Constant.setDdShjgInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/shjl/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		Constant.setDdShlxInRequest(request);
-		Constant.setLxlxInRequest(request);
-		Constant.setDdShjgInRequest(request);
-		Constant.setDcfwInRequest(request);
-		
-		return MODULE_NAME+"/shjl/list";
+		return url;
 	}
 	
 	@RequestMapping(value="/newDingDanZhuangTai")

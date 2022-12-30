@@ -31,7 +31,15 @@ $(function(){
 	initSearchLB();
 	initAddLB();
 	initTab1();
+	showCompontByQx();
 });
+
+function showCompontByQx(){
+	addLB.hide();
+	if(yhm=="admin"){
+		addLB.show();
+	}
+}
 
 function initSearchLB(){
 	$("#search_but").linkbutton({
@@ -44,7 +52,7 @@ function initSearchLB(){
 }
 
 function initAddLB(){
-	$("#add_but").linkbutton({
+	addLB=$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
 			location.href=ddglPath+"ddzt/new";

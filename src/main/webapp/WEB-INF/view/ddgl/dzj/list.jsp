@@ -82,6 +82,7 @@ $(function(){
 	initOutputExcelDialog();//0
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
+	showCompontByQx();
 });
 
 function initLxlxVar(){
@@ -107,6 +108,22 @@ function initDialogPosition(){
 	var oedDiv=$("#output_excel_div");
 	oedDiv.append(oedpw);
 	oedDiv.append(oedws);
+}
+
+function showCompontByQx(){
+	tgLB.hide();
+	if(yhm=="admin"){
+		tgLB.show();
+	}
+	else{
+		var zjshQx='${requestScope.zjshQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==zjshQx){
+				tgLB.show();
+			}
+		}
+	}
 }
 
 function initOutputExcelDialog(){
@@ -208,7 +225,7 @@ function initSearchLB(){
 }
 
 function initTGLB(){
-	$("#tg_but").linkbutton({
+	tgLB=$("#tg_but").linkbutton({
 		iconCls:"icon-ok",
 		onClick:function(){
 			checkByIds(true);

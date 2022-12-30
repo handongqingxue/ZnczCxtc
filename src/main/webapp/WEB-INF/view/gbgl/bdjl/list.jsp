@@ -22,6 +22,9 @@
 .tab1_div .toolbar .search_but{
 	margin-left: 13px;
 }
+.tab1_div .edit_a{
+	visibility: hidden;
+}
 
 .preview_bdxx_bg_div,
 .output_excel_bg_div{
@@ -85,6 +88,7 @@ $(function(){
 	initOutputExcelDialog();//1
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
+	showCompontByQx();
 });
 
 function initDcfwVar(){
@@ -109,6 +113,19 @@ function initDialogPosition(){
 	var oedDiv=$("#output_excel_div");
 	oedDiv.append(oedpw);
 	oedDiv.append(oedws);
+}
+
+function showCompontByQx(){
+	addLB.hide();
+	if(yhm=="admin"){
+		addLB.show();
+	}
+}
+
+function showOptionButByQx(){
+	if(yhm=="admin"){
+		$(".tab1_div .edit_a").css("visibility","visible");
+	}
 }
 
 function initPreviewBDXXDialog(){
@@ -324,7 +341,7 @@ function initSearchLB(){
 }
 
 function initAddLB(){
-	$("#add_but").linkbutton({
+	addLB=$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
 			location.href=gbglPath+"bdjl/new";
@@ -357,7 +374,7 @@ function initTab1(){
             {field:"rq",title:"日期",width:150},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
        			var rowJson = JSON.stringify(row).replace(/"/g, '&quot;');
-            	var str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
+            	var str="<a class=\"edit_a\" href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
             		+"<a href=\"detail?id="+value+"\">详情</a>&nbsp;&nbsp;"
             		+"<a onclick=\"openPreviewBDXXDialog(true,"+rowJson+")\">预览</a>";
             	return str;
@@ -374,6 +391,8 @@ function initTab1(){
 			$(".panel-header .panel-title").css("font-size","15px");
 			$(".panel-header .panel-title").css("padding-left","10px");
 			$(".panel-header, .panel-body").css("border-color","#ddd");
+			
+			showOptionButByQx();
 		}
 	});
 }

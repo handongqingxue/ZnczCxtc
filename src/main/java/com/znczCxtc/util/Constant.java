@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.znczCxtc.entity.*;
 
 public class Constant {
 
+	public static final String NO_QX_RETURN_URL="login";
 	/**
 	 * 工控机模块类名
 	 */
@@ -150,6 +152,35 @@ public class Constant {
 	public static final int SJSHZT=15;
 	public static final int SJZYZT=16;
 	public static final int SJWJLX=17;
+	
+	/**
+	 * 验证用户是否拥有权限
+	 * @param checkQxId
+	 * @param request
+	 * @return
+	 */
+	public static boolean checkIfExistQx(int checkQxId,HttpServletRequest request) {
+		boolean flag=false;
+		HttpSession session = request.getSession();
+		YongHu yongHu=(YongHu)session.getAttribute("yongHu");
+		String yhm = yongHu.getYhm();
+		if("admin".equals(yhm)) {
+			flag=true;
+		}
+		else {
+			String qxIds = yongHu.getQxIds();
+			String[] qxIdArr = qxIds.split(",");
+			for (int i = 0; i < qxIdArr.length; i++) {
+				String qxId = qxIdArr[i];
+				int qxIdInt = Integer.valueOf(qxId);
+				if(qxIdInt==checkQxId) {
+					flag=true;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
 	
 	/**
 	 * 存放用户权限常量
