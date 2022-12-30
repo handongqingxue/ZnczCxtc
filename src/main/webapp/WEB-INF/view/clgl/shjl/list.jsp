@@ -89,6 +89,15 @@ function showCompontByQx(){
 	if(yhm=="admin"){
 		removeLB.show();
 	}
+	else{
+		var scclshjlQx='${requestScope.scclshjlQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==scclshjlQx){
+				removeLB.show();
+			}
+		}
+	}
 }
 
 function initShjgVar(){

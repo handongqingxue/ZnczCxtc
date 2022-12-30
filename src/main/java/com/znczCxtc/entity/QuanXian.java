@@ -83,6 +83,34 @@ public class QuanXian {
 	 */
 	public static final int SHAN_CHU_YUN_SHU_SHANG=20;
 	/**
+	 * 添加发货单位
+	 */
+	public static final int TIAN_JIA_FA_HUO_DAN_WEI=21;
+	/**
+	 * 修改发货单位
+	 */
+	public static final int XIU_GAI_FA_HUO_DAN_WEI=22;
+	/**
+	 * 删除发货单位
+	 */
+	public static final int SHAN_CHU_FA_HUO_DAN_WEI=23;
+	/**
+	 * 添加收货单位
+	 */
+	public static final int TIAN_JIA_SHOU_HUO_DAN_WEI=24;
+	/**
+	 * 修改收货单位
+	 */
+	public static final int XIU_GAI_SHOU_HUO_DAN_WEI=25;
+	/**
+	 * 删除收货单位
+	 */
+	public static final int SHAN_CHU_SHOU_HUO_DAN_WEI=26;
+	/**
+	 * 添加仓库
+	 */
+	public static final int TIAN_JIA_CANG_KU=27;
+	/**
 	 * 订单状态查询
 	 */
 	public static final int DING_DAN_ZHUANG_TAI_CHA_XUN=28;
@@ -254,6 +282,22 @@ public class QuanXian {
 	 * 删除订单审核记录
 	 */
 	public static final int SHAN_CHU_DING_DAN_SHEN_HE_JI_LU=70;
+	/**
+	 * 修改仓库
+	 */
+	public static final int XIU_GAI_CANG_KU=71;
+	/**
+	 * 删除仓库
+	 */
+	public static final int SHAN_CHU_CANG_KU=72;
+	/**
+	 * 删除车辆审核记录
+	 */
+	public static final int SHAN_CHU_CHE_LIANG_SHEN_HE_JI_LU=73;
+	/**
+	 * 删除车辆台账
+	 */
+	public static final int SHAN_CHU_CHE_LIANG_TAI_ZHANG=74;
 	
 	private Integer id;
 	public Integer getId() {

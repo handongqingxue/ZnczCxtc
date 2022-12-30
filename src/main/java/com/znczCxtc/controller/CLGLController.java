@@ -40,14 +40,20 @@ public class CLGLController {
 	@RequestMapping(value="/dsh/list")
 	public String goDshList(HttpServletRequest request) {
 
-		request.setAttribute("shzt", CheLiang.DAI_SHEN_HE);
-		Constant.setYhQxInRequest(request);
-		Constant.setClPfjdInRequest(request);
-		Constant.setClSfzyInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", CheLiang.DAI_SHEN_HE_SHEET);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.SHEN_HE_CHE_LIANG,request)) {
+			request.setAttribute("shzt", CheLiang.DAI_SHEN_HE);
+			Constant.setYhQxInRequest(request);
+			Constant.setClPfjdInRequest(request);
+			Constant.setClSfzyInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", CheLiang.DAI_SHEN_HE_SHEET);
+			url=MODULE_NAME+"/dsh/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/dsh/list";
+		return url;
 	}
 
 	/**
@@ -58,15 +64,21 @@ public class CLGLController {
 	@RequestMapping(value="/dsh/detail")
 	public String goDshDetail(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		CheLiang cl=cheLiangService.selectById(id);
-		request.setAttribute("cl", cl);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.SHEN_HE_CHE_LIANG,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			CheLiang cl=cheLiangService.selectById(id);
+			request.setAttribute("cl", cl);
+			
+			Constant.setClPfjdInRequest(request);
+			Constant.setClYslxInRequest(request);
+			url=MODULE_NAME+"/dsh/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		Constant.setClPfjdInRequest(request);
-		Constant.setClYslxInRequest(request);
-		
-		return MODULE_NAME+"/dsh/detail";
+		return url;
 	}
 
 	/**
@@ -77,9 +89,15 @@ public class CLGLController {
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_CHE_LIANG,request)) {
+			Constant.setYhQxInRequest(request);
+			url=MODULE_NAME+"/zhcx/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/zhcx/new";
+		return url;
 	}
 
 	/**
@@ -89,17 +107,23 @@ public class CLGLController {
 	 */
 	@RequestMapping(value="/zhcx/edit")
 	public String goZhcxEdit(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_CHE_LIANG,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			CheLiang cl=cheLiangService.selectById(id);
+			request.setAttribute("cl", cl);
+			
+			request.setAttribute("dshShzt", CheLiang.DAI_SHEN_HE);
+			request.setAttribute("bjzShzt", CheLiang.BIAN_JI_ZHONG);
+			url=MODULE_NAME+"/zhcx/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		CheLiang cl=cheLiangService.selectById(id);
-		request.setAttribute("cl", cl);
-		
-		request.setAttribute("dshShzt", CheLiang.DAI_SHEN_HE);
-		request.setAttribute("bjzShzt", CheLiang.BIAN_JI_ZHONG);
-		
-		return MODULE_NAME+"/zhcx/edit";
+		return url;
 	}
 
 	/**
@@ -110,14 +134,20 @@ public class CLGLController {
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setClPfjdInRequest(request);
-		Constant.setClSfzyInRequest(request);
-		Constant.setClShztInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", CheLiang.ZONG_HE_CHA_XUN_SHEET);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_CHE_LIANG,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setClPfjdInRequest(request);
+			Constant.setClSfzyInRequest(request);
+			Constant.setClShztInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", CheLiang.ZONG_HE_CHA_XUN_SHEET);
+			url=MODULE_NAME+"/zhcx/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/zhcx/list";
+		return url;
 	}
 
 	/**
@@ -127,18 +157,24 @@ public class CLGLController {
 	 */
 	@RequestMapping(value="/zhcx/detail")
 	public String goZhcxDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_CHE_LIANG,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			CheLiang cl=cheLiangService.selectById(id);
+			request.setAttribute("cl", cl);
+			
+			Constant.setClPfjdInRequest(request);
+			Constant.setClYslxInRequest(request);
+			Constant.setClShztInRequest(request);
+			url=MODULE_NAME+"/zhcx/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		CheLiang cl=cheLiangService.selectById(id);
-		request.setAttribute("cl", cl);
-		
-		Constant.setClPfjdInRequest(request);
-		Constant.setClYslxInRequest(request);
-		Constant.setClShztInRequest(request);
-		
-		return MODULE_NAME+"/zhcx/detail";
+		return url;
 	}
 
 	/**
@@ -149,11 +185,17 @@ public class CLGLController {
 	@RequestMapping(value="/shjl/list")
 	public String goShjlList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setClShjgInRequest(request);
-		Constant.setDcfwInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_CHE_LIANG_SHEN_HE_JI_LU,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setClShjgInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/shjl/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/shjl/list";
+		return url;
 	}
 
 	/**
@@ -164,11 +206,17 @@ public class CLGLController {
 	@RequestMapping(value="/tzcx/list")
 	public String goTzcxList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", CheLiangTaiZhang.ZONG_HE_CHA_XUN_SHEET);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_CHE_LIANG_TAI_ZHANG,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", CheLiangTaiZhang.ZONG_HE_CHA_XUN_SHEET);
+			url=MODULE_NAME+"/tzcx/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/tzcx/list";
+		return url;
 	}
 
 	/**
@@ -178,14 +226,20 @@ public class CLGLController {
 	 */
 	@RequestMapping(value="/tzcx/detail")
 	public String goTzcxDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_CHE_LIANG_TAI_ZHANG,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			CheLiangTaiZhang cltz=cheLiangTaiZhangService.selectById(id);
+			request.setAttribute("cltz", cltz);
+			url=MODULE_NAME+"/tzcx/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		CheLiangTaiZhang cltz=cheLiangTaiZhangService.selectById(id);
-		request.setAttribute("cltz", cltz);
-		
-		return MODULE_NAME+"/tzcx/detail";
+		return url;
 	}
 
 	/**
@@ -196,24 +250,36 @@ public class CLGLController {
 	@RequestMapping(value="/cntz/list")
 	public String goCntzList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setDdztInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", CheLiangTaiZhang.CHANG_NEI_SHEET);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_CHE_LIANG_TAI_ZHANG,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setDdztInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", CheLiangTaiZhang.CHANG_NEI_SHEET);
+			url=MODULE_NAME+"/cntz/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/cntz/list";
+		return url;
 	}
 
 	@RequestMapping(value="/cntz/detail")
 	public String goCntzDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_CHE_LIANG_TAI_ZHANG,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			CheLiangTaiZhang cltz=cheLiangTaiZhangService.selectById(id);
+			request.setAttribute("cltz", cltz);
+			url=MODULE_NAME+"/cntz/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		CheLiangTaiZhang cltz=cheLiangTaiZhangService.selectById(id);
-		request.setAttribute("cltz", cltz);
-		
-		return MODULE_NAME+"/cntz/detail";
+		return url;
 	}
 
 	

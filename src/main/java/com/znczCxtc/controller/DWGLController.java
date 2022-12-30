@@ -108,11 +108,17 @@ public class DWGLController {
 	 */
 	@RequestMapping(value="/fhdw/new")
 	public String goFhdwNew(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_FA_HUO_DAN_WEI,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			url=MODULE_NAME+"/fhdw/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		
-		return MODULE_NAME+"/fhdw/new";
+		return url;
 	}
 
 	/**
@@ -122,14 +128,20 @@ public class DWGLController {
 	 */
 	@RequestMapping(value="/fhdw/edit")
 	public String goFhdwEdit(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_FA_HUO_DAN_WEI,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			FaHuoDanWei fhdw=faHuoDanWeiService.selectById(id);
+			request.setAttribute("fhdw", fhdw);
+			url=MODULE_NAME+"/fhdw/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		FaHuoDanWei fhdw=faHuoDanWeiService.selectById(id);
-		request.setAttribute("fhdw", fhdw);
-		
-		return MODULE_NAME+"/fhdw/edit";
+		return url;
 	}
 	
 	/**
@@ -139,12 +151,18 @@ public class DWGLController {
 	 */
 	@RequestMapping(value="/fhdw/list")
 	public String goFhdwList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_FA_HUO_DAN_WEI,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/fhdw/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		Constant.setDcfwInRequest(request);
-		
-		return MODULE_NAME+"/fhdw/list";
+		return url;
 	}
 
 	/**
@@ -154,14 +172,20 @@ public class DWGLController {
 	 */
 	@RequestMapping(value="/fhdw/detail")
 	public String goFhdwDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_FA_HUO_DAN_WEI,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			FaHuoDanWei fhdw=faHuoDanWeiService.selectById(id);
+			request.setAttribute("fhdw", fhdw);
+			url=MODULE_NAME+"/fhdw/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		FaHuoDanWei fhdw=faHuoDanWeiService.selectById(id);
-		request.setAttribute("fhdw", fhdw);
-		
-		return MODULE_NAME+"/fhdw/detail";
+		return url;
 	}
 
 	/**
@@ -172,10 +196,16 @@ public class DWGLController {
 	@RequestMapping(value="/shdw/new")
 	public String goShdwNew(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		request.setAttribute("dlzt", DuiLie.ZAI_YONG);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_SHOU_HUO_DAN_WEI,request)) {
+			Constant.setYhQxInRequest(request);
+			request.setAttribute("dlzt", DuiLie.ZAI_YONG);
+			url=MODULE_NAME+"/shdw/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/shdw/new";
+		return url;
 	}
 
 	/**
@@ -185,15 +215,21 @@ public class DWGLController {
 	 */
 	@RequestMapping(value="/shdw/edit")
 	public String goShdwEdit(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_SHOU_HUO_DAN_WEI,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			ShouHuoDanWei shdw=shouHuoDanWeiService.selectById(id);
+			request.setAttribute("shdw", shdw);
+			request.setAttribute("dlzt", DuiLie.ZAI_YONG);
+			url=MODULE_NAME+"/shdw/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		ShouHuoDanWei shdw=shouHuoDanWeiService.selectById(id);
-		request.setAttribute("shdw", shdw);
-		request.setAttribute("dlzt", DuiLie.ZAI_YONG);
-		
-		return MODULE_NAME+"/shdw/edit";
+		return url;
 	}
 	
 	/**
@@ -203,12 +239,18 @@ public class DWGLController {
 	 */
 	@RequestMapping(value="/shdw/list")
 	public String goShdwList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_SHOU_HUO_DAN_WEI,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/shdw/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		Constant.setDcfwInRequest(request);
-		
-		return MODULE_NAME+"/shdw/list";
+		return url;
 	}
 
 	/**
@@ -218,53 +260,83 @@ public class DWGLController {
 	 */
 	@RequestMapping(value="/shdw/detail")
 	public String goShdwDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_SHOU_HUO_DAN_WEI,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			ShouHuoDanWei shdw=shouHuoDanWeiService.selectById(id);
+			request.setAttribute("shdw", shdw);
+			url=MODULE_NAME+"/shdw/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		ShouHuoDanWei shdw=shouHuoDanWeiService.selectById(id);
-		request.setAttribute("shdw", shdw);
-		
-		return MODULE_NAME+"/shdw/detail";
+		return url;
 	}
 
 	@RequestMapping(value="/ck/new")
 	public String goCkNew(HttpServletRequest request) {
-		
-		Constant.setYhQxInRequest(request);
 
-		return MODULE_NAME+"/ck/new";
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_CANG_KU,request)) {
+			Constant.setYhQxInRequest(request);
+			url=MODULE_NAME+"/ck/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
+
+		return url;
 	}
 
 	@RequestMapping(value="/ck/edit")
 	public String goCkEdit(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		CangKu ck=cangKuService.selectById(id);
-		request.setAttribute("ck", ck);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_CANG_KU,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			CangKu ck=cangKuService.selectById(id);
+			request.setAttribute("ck", ck);
+			url=MODULE_NAME+"/ck/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/ck/edit";
+		return url;
 	}
 	
 	@RequestMapping(value="/ck/list")
 	public String goCkList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setDcfwInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_CANG_KU,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/ck/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/ck/list";
+		return url;
 	}
 
 	@RequestMapping(value="/ck/detail")
 	public String goCkDetail(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		CangKu ck=cangKuService.selectById(id);
-		request.setAttribute("ck", ck);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_CANG_KU,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			CangKu ck=cangKuService.selectById(id);
+			request.setAttribute("ck", ck);
+			url=MODULE_NAME+"/ck/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/ck/detail";
+		return url;
 	}
 
 	@RequestMapping(value="/newYunShuShang")

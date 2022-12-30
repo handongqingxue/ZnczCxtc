@@ -22,6 +22,9 @@
 .tab1_div .toolbar .search_but{
 	margin-left: 13px;
 }
+.tab1_div .edit_a{
+	visibility: hidden;
+}
 
 .output_excel_bg_div{
 	width: 100%;
@@ -75,9 +78,39 @@ $(function(){
 });
 
 function showCompontByQx(){
+	addLB.hide();
 	removeLB.hide();
 	if(yhm=="admin"){
+		addLB.show();
 		removeLB.show();
+	}
+	else{
+		var tjfhdwQx='${requestScope.tjfhdwQx}';
+		var scfhdwQx='${requestScope.scfhdwQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==tjfhdwQx){
+				addLB.show();
+			}
+			if(qxIdsArr[i]==scfhdwQx){
+				removeLB.show();
+			}
+		}
+	}
+}
+
+function showOptionButByQx(){
+	if(yhm=="admin"){
+		$(".tab1_div .edit_a").css("visibility","visible");
+	}
+	else{
+		var xgfhdwQx='${requestScope.xgfhdwQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==xgfhdwQx){
+				$(".tab1_div .edit_a").css("visibility","visible");
+			}
+		}
 	}
 }
 
@@ -195,7 +228,7 @@ function initSearchLB(){
 }
 
 function initAddLB(){
-	$("#add_but").linkbutton({
+	addLB=$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
 			location.href=dwglPath+"fhdw/new";
@@ -234,7 +267,7 @@ function initTab1(){
             {field:"bjsj",title:"编辑时间",width:200},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\""+dwglPath+"fhdw/detail?id="+value+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\""+dwglPath+"fhdw/edit?id="+value+"\">修改</a>";
+            	+"&nbsp;|&nbsp;<a class=\"edit_a\" href=\""+dwglPath+"fhdw/edit?id="+value+"\">修改</a>";
             	return str;
             }}
 	    ]],
@@ -257,6 +290,8 @@ function initTab1(){
 				var html=$(this).html();
 				$(this).html("<span style=\"margin-left:11px;\">"+html+"</span>");
 			});
+			
+			showOptionButByQx();
 		}
 	});
 }

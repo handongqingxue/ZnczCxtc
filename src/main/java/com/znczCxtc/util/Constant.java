@@ -208,7 +208,13 @@ public class Constant {
 		request.setAttribute("tjyssQx", QuanXian.TIAN_JIA_YUN_SHU_SHANG);//18
 		request.setAttribute("xgyssQx", QuanXian.XIU_GAI_YUN_SHU_SHANG);//19
 		request.setAttribute("scyssQx", QuanXian.SHAN_CHU_YUN_SHU_SHANG);//20
-		
+		request.setAttribute("tjfhdwQx", QuanXian.TIAN_JIA_FA_HUO_DAN_WEI);//21
+		request.setAttribute("xgfhdwQx", QuanXian.XIU_GAI_FA_HUO_DAN_WEI);//22
+		request.setAttribute("scfhdwQx", QuanXian.SHAN_CHU_FA_HUO_DAN_WEI);//23
+		request.setAttribute("tjshdwQx", QuanXian.TIAN_JIA_SHOU_HUO_DAN_WEI);//24
+		request.setAttribute("xgshdwQx", QuanXian.XIU_GAI_SHOU_HUO_DAN_WEI);//25
+		request.setAttribute("scshdwQx", QuanXian.SHAN_CHU_SHOU_HUO_DAN_WEI);//26
+		request.setAttribute("tjckQx", QuanXian.TIAN_JIA_CANG_KU);//27
 		request.setAttribute("ddztcxQx", QuanXian.DING_DAN_ZHUANG_TAI_CHA_XUN);//28
 		request.setAttribute("cxbdjlQx", QuanXian.CHA_XUN_BANG_DAN_JI_LU);//29
 		request.setAttribute("cxgbjlQx", QuanXian.CHA_XUN_GUO_BANG_JI_LU);//30
@@ -252,6 +258,10 @@ public class Constant {
 		request.setAttribute("bddyQx", QuanXian.BANG_DAN_DA_YIN);//68
 		request.setAttribute("cxddshjlQx", QuanXian.CHA_XUN_DING_DAN_SHEN_HE_JI_LU);//69
 		request.setAttribute("scddshjlQx", QuanXian.SHAN_CHU_DING_DAN_SHEN_HE_JI_LU);//70
+		request.setAttribute("xgckQx", QuanXian.XIU_GAI_CANG_KU);//71
+		request.setAttribute("scckQx", QuanXian.SHAN_CHU_CANG_KU);//72
+		request.setAttribute("scclshjlQx", QuanXian.SHAN_CHU_CHE_LIANG_SHEN_HE_JI_LU);//73
+		request.setAttribute("sccltzQx", QuanXian.SHAN_CHU_CHE_LIANG_TAI_ZHANG);//74
 		
 	}
 	

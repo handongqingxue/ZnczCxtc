@@ -22,6 +22,9 @@
 .tab1_div .toolbar .search_but{
 	margin-left: 13px;
 }
+.tab1_div .edit_a{
+	visibility: hidden;
+}
 
 .output_excel_bg_div{
 	width: 100%;
@@ -43,7 +46,7 @@
 	right: 0;
 }
 </style>
-<title>司机信息</title>
+<title>仓库列表</title>
 <%@include file="../../inc/js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
@@ -75,9 +78,39 @@ $(function(){
 });
 
 function showCompontByQx(){
+	addLB.hide();
 	removeLB.hide();
 	if(yhm=="admin"){
+		addLB.show();
 		removeLB.show();
+	}
+	else{
+		var tjckQx='${requestScope.tjckQx}';
+		var scckQx='${requestScope.scckQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==tjckQx){
+				addLB.show();
+			}
+			if(qxIdsArr[i]==scckQx){
+				removeLB.show();
+			}
+		}
+	}
+}
+
+function showOptionButByQx(){
+	if(yhm=="admin"){
+		$(".tab1_div .edit_a").css("visibility","visible");
+	}
+	else{
+		var xgckQx='${requestScope.xgckQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==xgckQx){
+				$(".tab1_div .edit_a").css("visibility","visible");
+			}
+		}
 	}
 }
 
@@ -195,7 +228,7 @@ function initSearchLB(){
 }
 
 function initAddLB(){
-	$("#add_but").linkbutton({
+	addLB=$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
 			location.href=dwglPath+"ck/new";
@@ -236,7 +269,7 @@ function initTab1(){
 			{field:"bz",title:"备注",width:200},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\""+dwglPath+"ck/detail?id="+value+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\""+dwglPath+"ck/edit?id="+value+"\">修改</a>";
+            	+"&nbsp;|&nbsp;<a class=\"edit_a\" href=\""+dwglPath+"ck/edit?id="+value+"\">修改</a>";
             	return str;
             }}
 	    ]],
@@ -259,6 +292,8 @@ function initTab1(){
 				var html=$(this).html();
 				$(this).html("<span style=\"margin-left:11px;\">"+html+"</span>");
 			});
+			
+			showOptionButByQx();
 		}
 	});
 }
