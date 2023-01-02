@@ -1,5 +1,6 @@
 package com.znczCxtc.service.serviceImpl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -20,6 +21,15 @@ public class GuoBangJiLuServiceImpl implements GuoBangJiLuService {
 	public int add(GuoBangJiLu gbjl) {
 		// TODO Auto-generated method stub
 		return guoBangJiLuDao.add(gbjl);
+	}
+
+	@Override
+	public int deleteByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=guoBangJiLuDao.deleteByIds(idList);
+		return count;
 	}
 
 	@Override

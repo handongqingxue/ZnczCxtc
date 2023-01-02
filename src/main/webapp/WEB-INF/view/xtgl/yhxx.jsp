@@ -305,11 +305,11 @@ function checkEditMm(){
 //验证原密码
 function checkMm(){
 	var flag=false;
-	var yhm='${sessionScope.yh.yhm}';
+	var yhm='${sessionScope.yongHu.yhm}';
 	var mm = $("#mm").val();
 	if(mm==null||mm==""){
-  	alert("原密码不能为空");
-  	flag=false;
+	  	alert("原密码不能为空");
+	  	flag=false;
 	}
 	else{
 		$.ajaxSetup({async:false});
@@ -364,12 +364,17 @@ function checkXmm2(){
 function checkEditYhxx(){
 	if(checkNc()){
 		if(checkXm()){
-			var id='${sessionScope.yh.id}';
+			var id='${sessionScope.yongHu.id}';
 			var nc = $("#nc").val();
 			var xm = $("#xm").val();
 			var js = $("#js").val();
+			var shzt='${requestScope.yh.shzt }';
+			var dshShzt='${requestScope.dshShzt }';
+			var bjzShzt='${requestScope.bjzShzt }';
+			if(shzt==bjzShzt)
+				shzt=dshShzt;
 			$.post(xtglPath+"editYongHu",
-				{id:id,nc:nc,xm:xm,js:js},
+				{id:id,nc:nc,xm:xm,js:js,shzt:shzt},
 				function(data){
 					openXgyhxxDialog(false);
 					if(data.message=="ok"){

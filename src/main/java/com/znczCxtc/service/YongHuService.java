@@ -24,4 +24,6 @@ public interface YongHuService {
 
 	YongHu get(String yhm, String mm);
 
+	boolean checkYhmIfExist(String yhm);
+
 }

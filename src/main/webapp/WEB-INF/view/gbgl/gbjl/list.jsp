@@ -85,6 +85,7 @@ $(function(){
 	initGBSJJSDTB();
 	initSearchLB();
 	initAddLB();
+	initRemoveLB();
 	initOutputBut();
 	initTab1();
 	
@@ -263,6 +264,15 @@ function initAddLB(){
 	});
 }
 
+function initRemoveLB(){
+	removeLB=$("#remove_but").linkbutton({
+		iconCls:"icon-remove",
+		onClick:function(){
+			deleteByIds();
+		}
+	});
+}
+
 function initOutputBut(){
 	opBut=$("#output_but").linkbutton({
 		iconCls:"icon-remove",
@@ -310,6 +320,38 @@ function initTab1(){
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 			
 			showOptionButByQx();
+		}
+	});
+}
+
+function deleteByIds() {
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要删除的信息！","warning");
+		return false;
+	}
+	
+	$.messager.confirm("提示","确定要删除吗？",function(r){
+		if(r){
+			var ids = "";
+			for (var i = 0; i < rows.length; i++) {
+				ids += "," + rows[i].id;
+			}
+			ids=ids.substring(1);
+			
+			$.post(gbglPath + "deleteDingDan",
+				{ids:ids},
+				function(result){
+					if(result.status==1){
+						alert(result.msg);
+						tab1.datagrid("load");
+					}
+					else{
+						alert(result.msg);
+					}
+				}
+			,"json");
+			
 		}
 	});
 }
@@ -381,6 +423,7 @@ function setFitWidthInParent(parent,self){
 			<input id="gbsjjs_dtb"/>
 			<a class="search_but" id="search_but">查询</a>
 			<a id="add_but">添加</a>
+			<a id="remove_but">删除</a>
          	<a id="output_but">导出</a>
 		</div>
 		<table id="tab1">

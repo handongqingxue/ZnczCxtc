@@ -120,8 +120,26 @@ public class MainController {
 		
 		plan.setStatus(0);
 		plan.setMsg("验证通过");
-		plan.setUrl("ddgl/zhcx/list");
+		plan.setUrl("xtgl/yhxx");
 		return JsonUtil.getJsonFromObject(plan);
+	}
+
+	@RequestMapping(value="/checkYhmIfExist",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkYhmIfExist(String yhm) {
+		boolean exist=yongHuService.checkYhmIfExist(yhm);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(exist) {
+			plan.setStatus(0);
+			plan.setMsg("用户名已存在");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 
 	@RequestMapping(value="/exit")

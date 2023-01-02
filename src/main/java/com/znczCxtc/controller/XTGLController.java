@@ -39,6 +39,7 @@ public class XTGLController {
 	public String goYhxx(HttpServletRequest request) {
 
 		Constant.setYhQxInRequest(request);
+		Constant.setYhShztInRequest(request);
 		YongHu yh=(YongHu)SecurityUtils.getSubject().getPrincipal();
 		request.setAttribute("yh", yh);
 		

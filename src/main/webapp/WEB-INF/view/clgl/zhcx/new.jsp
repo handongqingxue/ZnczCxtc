@@ -279,7 +279,7 @@ function newCheLiang(){
 
 function focusCPH(){
 	var cph = $("#cph").val();
-	if(cph=="车牌号不能为空"){
+	if(cph=="车牌号不能为空"||cph=="车牌号已存在"){
 		$("#cph").val("");
 		$("#cph").css("color", "#555555");
 	}
@@ -287,14 +287,34 @@ function focusCPH(){
 
 //验证车牌号
 function checkCPH(){
-	var mc = $("#cph").val();
-	if(mc==null||mc==""||mc=="车牌号不能为空"){
+	var flag=false;
+	var cph = $("#cph").val();
+	if(cph==null||cph==""||cph=="车牌号不能为空"){
 		$("#cph").css("color","#E15748");
     	$("#cph").val("车牌号不能为空");
-    	return false;
+    	flag=false;
 	}
-	else
-		return true;
+	else if(cph=="车牌号已存在"){
+		$("#cph").css("color","#E15748");
+    	$("#cph").val("车牌号已存在");
+    	flag=false;
+	}
+	else{
+		$.ajaxSetup({async:false});
+		$.post(clglPath+"checkCphIfExist",
+			{cph:cph},
+			function(data){
+				if(data.status==1)
+			    	flag=true;
+				else{
+					$("#cph").css("color","#E15748");
+			    	$("#cph").val(data.msg);
+			    	flag=false;
+				}
+			}
+		,"json");
+	}
+	return flag;
 }
 
 //验证注册日期

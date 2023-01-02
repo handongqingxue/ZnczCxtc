@@ -69,6 +69,9 @@
 			<if test="mm!=null">
 				mm=#{mm},
 			</if>
+			<if test="shzt!=null">
+				shzt=#{shzt},
+			</if>
 			<if test="js!=null">
 				js=#{js},
 			</if>
@@ -119,4 +122,7 @@
 		#{id}
 		</foreach>
 	</update>
+	<select id="getCountByYhm" resultType="java.lang.Integer">
+		select count(*) from yong_hu where yhm=#{yhm}
+	</select>
 </mapper>

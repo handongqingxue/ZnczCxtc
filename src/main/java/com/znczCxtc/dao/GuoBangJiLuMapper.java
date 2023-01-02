@@ -11,6 +11,8 @@ public interface GuoBangJiLuMapper {
 
 	int add(GuoBangJiLu gbjl);
 
+	int deleteByIds(List<String> idList);
+
 	int edit(GuoBangJiLu gbjl);
 
 	int queryForInt(@Param("ddh") String ddh, @Param("cyclCph") String cyclCph, @Param("gbsjks") String gbsjks, @Param("gbsjjs") String gbsjjs);

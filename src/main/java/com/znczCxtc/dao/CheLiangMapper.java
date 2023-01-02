@@ -27,4 +27,6 @@ public interface CheLiangMapper {
 	public int getIdByCph(@Param("cph") String cph);
 
 	public int updateFileById(CheLiang cl);
+
+	int getCountByCph(@Param("cph") String cph);
 }

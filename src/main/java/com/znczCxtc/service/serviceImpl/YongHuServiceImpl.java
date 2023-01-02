@@ -108,4 +108,11 @@ public class YongHuServiceImpl implements YongHuService {
 		YongHu yh=new YongHu(yhm,mm);
 		return yongHuDao.getYongHu(yh);
 	}
+
+	@Override
+	public boolean checkYhmIfExist(String yhm) {
+		// TODO Auto-generated method stub
+		int count=yongHuDao.getCountByYhm(yhm);
+		return count==0?false:true;
+	}
 }

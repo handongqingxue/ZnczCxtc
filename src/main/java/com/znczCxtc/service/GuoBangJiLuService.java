@@ -8,6 +8,8 @@ public interface GuoBangJiLuService {
 
 	int add(GuoBangJiLu gbjl);
 
+	int deleteByIds(String ids);
+
 	int edit(GuoBangJiLu gbjl);
 
 	int queryForInt(String ddh, String cyclCph, String gbsjks, String gbsjjs);

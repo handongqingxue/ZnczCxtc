@@ -271,4 +271,7 @@
 		</trim>
 		where id=#{id}
 	</update>
+	<select id="getCountByCph" resultType="java.lang.Integer">
+		select count(*) from che_liang where cph=#{cph}
+	</select>
 </mapper>

@@ -90,4 +90,11 @@ public class SiJiServiceImpl implements SiJiService {
 		// TODO Auto-generated method stub
 		return siJiDao.updateFileById(sj);
 	}
+
+	@Override
+	public boolean checkSfzhIfExist(String sfzh) {
+		// TODO Auto-generated method stub
+		int count=siJiDao.getCountBySfzh(sfzh);
+		return count==0?false:true;
+	}
 }

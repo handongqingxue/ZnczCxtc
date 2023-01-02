@@ -198,4 +198,7 @@
 		</trim>
 		where id=#{id}
 	</update>
+	<select id="getCountBySfzh" resultType="java.lang.Integer">
+		select count(*) from si_ji where sfzh=#{sfzh}
+	</select>
 </mapper>

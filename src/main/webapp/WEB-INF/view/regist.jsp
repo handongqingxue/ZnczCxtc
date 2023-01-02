@@ -75,7 +75,7 @@ body .beg-login-bg {
 				<div class="layui-form-item">
 					<label class="layui-form-label">用户名</label>
 					<div class="layui-input-inline">
-						<input type="text" name="yhm" required lay-verify="required"
+						<input type="text" name="yhm" required lay-verify="required|yhm"
 							placeholder="请输入用户名" autocomplete="off" class="layui-input">
 					</div>
 					<div class="layui-form-mid layui-word-aux">该用户名将作为登录账号使用</div>
@@ -151,6 +151,24 @@ body .beg-login-bg {
 				return false
 			});
 			 form.verify({
+					yhm:function(value){
+						var flag=false;
+						var msg;
+						$.ajaxSetup({async:false});
+						$.post(baseUrl+"/main/checkYhmIfExist",
+							{yhm:value},
+							function(data){
+								if(data.status==1)
+							    	flag=true;
+								else{
+							    	msg=data.msg;
+							    	flag=false;
+								}
+							}
+						,"json");
+						if(!flag)
+							return msg;
+					},
 		            //验证密码是否一样
 		            same_mm: function (value) {
 		                var pass1 = $("#mm").val();

@@ -1,5 +1,6 @@
 package com.znczCxtc.service.serviceImpl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,15 @@ public class BangDanJiLuServiceImpl implements BangDanJiLuService {
 	public int add(BangDanJiLu bdjl) {
 		// TODO Auto-generated method stub
 		return bangDanJiLuDao.add(bdjl);
+	}
+
+	@Override
+	public int deleteByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=bangDanJiLuDao.deleteByIds(idList);
+		return count;
 	}
 
 	@Override

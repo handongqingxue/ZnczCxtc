@@ -25,4 +25,6 @@ public interface CheLiangService {
 	public int getIdByCph(String cph);
 
 	public int updateFileById(CheLiang cl);
+
+	boolean checkCphIfExist(String cph);
 }

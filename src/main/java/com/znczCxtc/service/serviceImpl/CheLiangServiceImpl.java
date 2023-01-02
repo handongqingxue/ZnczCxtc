@@ -96,4 +96,11 @@ public class CheLiangServiceImpl implements CheLiangService {
 		// TODO Auto-generated method stub
 		return cheLiangDao.updateFileById(cl);
 	}
+
+	@Override
+	public boolean checkCphIfExist(String cph) {
+		// TODO Auto-generated method stub
+		int count=cheLiangDao.getCountByCph(cph);
+		return count==0?false:true;
+	}
 }

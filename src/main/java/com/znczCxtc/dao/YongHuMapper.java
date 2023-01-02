@@ -26,4 +26,6 @@ public interface YongHuMapper {
 	int updateMmById(@Param("mm") String mm, @Param("id") Integer id);
 
 	public int checkByIds(@Param("idList") List<String> idList, @Param("shjg") Boolean shjg);
+
+	int getCountByYhm(@Param("yhm") String yhm);
 }

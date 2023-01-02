@@ -258,7 +258,7 @@ function showLeftMenuByQx(){
 		var cxyhshjlQx='${requestScope.cxyhshjlQx}';
 		var cxjsQx='${requestScope.cxjsQx}';
 		var cxddshjlQx='${requestScope.cxddshjlQx}';
-		//alert(cxsjshjlQx)
+		//alert(qxIds)
 		var qxIdArr=qxIds.split(",");
 		for(var i=0;i<qxIdArr.length;i++){
 			if(qxIdArr[i]==ddztcxQx){

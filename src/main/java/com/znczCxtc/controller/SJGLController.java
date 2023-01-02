@@ -328,6 +328,24 @@ public class SJGLController {
 		
 		return jsonMap;
 	}
+
+	@RequestMapping(value="/checkSfzhIfExist",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkSfzhIfExist(String sfzh) {
+		boolean exist=siJiService.checkSfzhIfExist(sfzh);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(exist) {
+			plan.setStatus(0);
+			plan.setMsg("身份证号已存在");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
 	
 	@RequestMapping(value="/querySHJLList")
 	@ResponseBody

@@ -185,7 +185,7 @@ function initSHZTCBB(){
 function checkNew(){
 	if(checkXM()){
 		if(checkSJH()){
-			if(checkSFZH()){
+			if(checkSfzh()){
 				if(checkZYZT()){
 					if(checkSHZT()){
 						newSiJi();
@@ -258,24 +258,44 @@ function checkSJH(){
 		return true;
 }
 
-function focusSFZH(){
+function focusSfzh(){
 	var sfzh = $("#sfzh").val();
-	if(sfzh=="身份证号不能为空"){
+	if(sfzh=="身份证号不能为空"||sfzh=="身份证号已存在"){
 		$("#sfzh").val("");
 		$("#sfzh").css("color", "#555555");
 	}
 }
 
 //验证身份证号
-function checkSFZH(){
+function checkSfzh(){
+	var flag=false;
 	var sfzh = $("#sfzh").val();
 	if(sfzh==null||sfzh==""||sfzh=="身份证号不能为空"){
 		$("#sfzh").css("color","#E15748");
     	$("#sfzh").val("身份证号不能为空");
-    	return false;
+    	flag=false;
 	}
-	else
-		return true;
+	else if(sfzh=="身份证号已存在"){
+		$("#sfzh").css("color","#E15748");
+    	$("#sfzh").val("身份证号已存在");
+    	flag=false;
+	}
+	else{
+		$.ajaxSetup({async:false});
+		$.post(sjglPath+"checkSfzhIfExist",
+			{sfzh:sfzh},
+			function(data){
+				if(data.status==1)
+			    	flag=true;
+				else{
+					$("#sfzh").css("color","#E15748");
+			    	$("#sfzh").val(data.msg);
+			    	flag=false;
+				}
+			}
+		,"json");
+	}
+	return flag;
 }
 
 //验证在用状态
@@ -431,7 +451,7 @@ function setFitWidthInParent(parent,self){
 					身份证号
 				</td>
 				<td class="td2">
-					<input type="text" class="sfzh_inp" id="sfzh" name="sfzh" placeholder="请输入身份证号" onfocus="focusSFZH()" onblur="checkSFZH()"/>
+					<input type="text" class="sfzh_inp" id="sfzh" name="sfzh" placeholder="请输入身份证号" onfocus="focusSfzh()" onblur="checkSfzh()"/>
 				</td>
 			  </tr>
 			  <tr>

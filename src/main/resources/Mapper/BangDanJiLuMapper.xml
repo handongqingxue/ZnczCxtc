@@ -43,6 +43,12 @@
 			</if>
 		</trim>
 	</insert>
+	<delete id="deleteByIds">
+		delete from bang_dan_ji_lu where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
 	<update id="edit" parameterType="com.znczCxtc.entity.BangDanJiLu">
 		update bang_dan_ji_lu set 
 		<trim suffixOverrides=",">

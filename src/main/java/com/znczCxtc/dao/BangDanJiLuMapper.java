@@ -10,6 +10,8 @@ public interface BangDanJiLuMapper {
 
 	int add(BangDanJiLu bdjl);
 
+	int deleteByIds(List<String> idList);
+
 	int edit(BangDanJiLu bdjl);
 
 	int queryForInt(@Param("ddh") String ddh);

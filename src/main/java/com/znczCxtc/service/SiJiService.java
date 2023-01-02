@@ -25,4 +25,6 @@ public interface SiJiService {
 	public int getIdBySfzh(String sfzh);
 
 	public int updateFileById(SiJi sj);
+
+	boolean checkSfzhIfExist(String sfzh);
 }

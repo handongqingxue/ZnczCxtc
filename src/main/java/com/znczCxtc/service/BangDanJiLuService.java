@@ -8,6 +8,8 @@ public interface BangDanJiLuService {
 
 	int add(BangDanJiLu bdjl);
 
+	int deleteByIds(String ids);
+
 	int edit(BangDanJiLu bdjl);
 
 	int queryForInt(String ddh);

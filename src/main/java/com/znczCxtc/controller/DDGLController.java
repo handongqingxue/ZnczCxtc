@@ -179,27 +179,39 @@ public class DDGLController {
 	
 	@RequestMapping(value="/zhcx/new")
 	public String goZhcxNew(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_DING_DAN,request)) {
+			Constant.setYhQxInRequest(request);
+			url=MODULE_NAME+"/zhcx/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		Constant.setYhQxInRequest(request);
-		
-		return MODULE_NAME+"/zhcx/new";
+		return url;
 	}
 	
 	@RequestMapping(value="/zhcx/edit")
 	public String goZhcxEdit(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		DingDan dd=dingDanService.selectById(id);
-		request.setAttribute("dd", dd);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_DING_DAN,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			DingDan dd=dingDanService.selectById(id);
+			request.setAttribute("dd", dd);
+			
+			DuiFangGuoBangJiLu dfgbjl=duiFangGuoBangJiLuService.selectByDdId(id);
+			request.setAttribute("dfgbjl", dfgbjl);
+			
+			request.setAttribute("dshDdztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);
+			request.setAttribute("bjzDdztMc", DingDanZhuangTai.BIAN_JI_ZHONG_TEXT);
+			url=MODULE_NAME+"/zhcx/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		DuiFangGuoBangJiLu dfgbjl=duiFangGuoBangJiLuService.selectByDdId(id);
-		request.setAttribute("dfgbjl", dfgbjl);
-		
-		request.setAttribute("dshDdztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);
-		request.setAttribute("bjzDdztMc", DingDanZhuangTai.BIAN_JI_ZHONG_TEXT);
-		
-		return MODULE_NAME+"/zhcx/edit";
+		return url;
 	}
 
 	/**
@@ -210,35 +222,47 @@ public class DDGLController {
 	@RequestMapping(value="/zhcx/list")
 	public String goZhcxList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setLxlxInRequest(request);
-		Constant.setDdztInRequest(request);
-		Constant.setDdGbztInRequest(request);
-		Constant.setPlaceInRequest(request);
-		Constant.setPushInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", DingDan.ZONG_HE_CHA_XUN_SHEET);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_DING_DAN,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setLxlxInRequest(request);
+			Constant.setDdztInRequest(request);
+			Constant.setDdGbztInRequest(request);
+			Constant.setPlaceInRequest(request);
+			Constant.setPushInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", DingDan.ZONG_HE_CHA_XUN_SHEET);
+			url=MODULE_NAME+"/zhcx/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/zhcx/list";
+		return url;
 	}
 	
 	@RequestMapping(value="/zhcx/detail")
 	public String goZhcxDetail(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		DingDan dd=dingDanService.selectById(id);
-		request.setAttribute("dd", dd);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_DING_DAN,request)) {
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			DingDan dd=dingDanService.selectById(id);
+			request.setAttribute("dd", dd);
+			
+			DuiFangGuoBangJiLu dfgbjl=duiFangGuoBangJiLuService.selectByDdId(id);
+			request.setAttribute("dfgbjl", dfgbjl);
+	
+			request.setAttribute("dshDdztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);
+			request.setAttribute("bjzDdztMc", DingDanZhuangTai.BIAN_JI_ZHONG_TEXT);
+			request.setAttribute("yxdDdztMc", DingDanZhuangTai.YI_XIA_DAN_TEXT);
+			request.setAttribute("shlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
+			url=MODULE_NAME+"/zhcx/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		DuiFangGuoBangJiLu dfgbjl=duiFangGuoBangJiLuService.selectByDdId(id);
-		request.setAttribute("dfgbjl", dfgbjl);
-
-		request.setAttribute("dshDdztMc", DingDanZhuangTai.DAI_SHEN_HE_TEXT);
-		request.setAttribute("bjzDdztMc", DingDanZhuangTai.BIAN_JI_ZHONG_TEXT);
-		request.setAttribute("yxdDdztMc", DingDanZhuangTai.YI_XIA_DAN_TEXT);
-		request.setAttribute("shlx", DingDanShenHeJiLu.XIA_DAN_SHEN_HE);
-		
-		return MODULE_NAME+"/zhcx/detail";
+		return url;
 	}
 
 	/**

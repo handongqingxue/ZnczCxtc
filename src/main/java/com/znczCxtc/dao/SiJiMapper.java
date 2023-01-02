@@ -27,4 +27,6 @@ public interface SiJiMapper {
 	public int getIdBySfzh(@Param("sfzh") String sfzh);
 
 	public int updateFileById(SiJi sj);
+
+	int getCountBySfzh(@Param("sfzh") String sfzh);
 }
