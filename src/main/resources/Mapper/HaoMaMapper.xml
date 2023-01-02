@@ -34,6 +34,7 @@
 		<if test="hmztId!=''&amp;hmztId!=null">
 			and hmztId=#{hmztId}
 		</if>
+		order by hm.prsj desc
 		limit #{rowNum},#{rows}
 	</select>
 	<insert id="add" parameterType="com.znczCxtc.entity.HaoMa">

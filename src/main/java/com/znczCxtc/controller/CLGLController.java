@@ -465,6 +465,11 @@ public class CLGLController {
 		return jsonMap;
 	}
 
+	/**
+	 * 验证车牌号是否存在
+	 * @param cph
+	 * @return
+	 */
 	@RequestMapping(value="/checkCphIfExist",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String checkCphIfExist(String cph) {

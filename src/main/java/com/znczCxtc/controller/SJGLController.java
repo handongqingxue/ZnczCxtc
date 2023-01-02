@@ -329,6 +329,11 @@ public class SJGLController {
 		return jsonMap;
 	}
 
+	/**
+	 * 验证身份证号是否存在
+	 * @param sfzh
+	 * @return
+	 */
 	@RequestMapping(value="/checkSfzhIfExist",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String checkSfzhIfExist(String sfzh) {

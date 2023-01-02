@@ -422,7 +422,7 @@ function deleteByIds() {
 			}
 			ids=ids.substring(1);
 			
-			$.post(gbglPath + "deleteWuZi",
+			$.post(gbglPath + "deleteBangDanJiLu",
 				{ids:ids},
 				function(result){
 					if(result.status==1){

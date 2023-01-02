@@ -124,6 +124,11 @@ public class MainController {
 		return JsonUtil.getJsonFromObject(plan);
 	}
 
+	/**
+	 * 验证用户名是否存在
+	 * @param yhm
+	 * @return
+	 */
 	@RequestMapping(value="/checkYhmIfExist",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String checkYhmIfExist(String yhm) {
