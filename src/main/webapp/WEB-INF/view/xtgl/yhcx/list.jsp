@@ -22,6 +22,9 @@
 .tab1_div .toolbar .search_but{
 	margin-left: 13px;
 }
+.tab1_div .edit_a{
+	visibility: hidden;
+}
 
 .output_excel_bg_div{
 	width: 100%;
@@ -80,6 +83,21 @@ $(function(){
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
 });
+
+function showOptionButByQx(){
+	if(yhm=="admin"){
+		$(".tab1_div .edit_a").css("visibility","visible");
+	}
+	else{
+		var cxyhQx='${requestScope.cxyhQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==cxyhQx){
+				$(".tab1_div .edit_a").css("visibility","visible");
+			}
+		}
+	}
+}
 
 function initDialogPosition(){
 	var oedpw=$("body").find(".panel.window").eq(oedNum);
@@ -230,7 +248,7 @@ function initTab1(){
             	return getShztMcById(value);
 			}},
             {field:"id",title:"操作",width:110,formatter:function(value,row){
-            	var str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
+            	var str="<a class=\"edit_a\" href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
             		+"<a href=\"detail?id="+value+"\">详情</a>";
             	return str;
             }}
@@ -246,6 +264,8 @@ function initTab1(){
 			$(".panel-header .panel-title").css("font-size","15px");
 			$(".panel-header .panel-title").css("padding-left","10px");
 			$(".panel-header, .panel-body").css("border-color","#ddd");
+			
+			showOptionButByQx();
 		}
 	});
 }

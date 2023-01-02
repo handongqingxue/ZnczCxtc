@@ -44,8 +44,15 @@ public class DDGLController {
 	
 	@RequestMapping(value="/ddzt/new")
 	public String goDdztNew(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.DING_DAN_ZHUANG_TAI_CHA_XUN,request)) {
+			url=MODULE_NAME+"/ddzt/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/ddzt/new";
+		return url;
 	}
 	
 	@RequestMapping(value="/ddzt/edit")

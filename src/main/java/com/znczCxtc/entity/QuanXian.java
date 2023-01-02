@@ -302,6 +302,14 @@ public class QuanXian {
 	 * 排队号码状态查询
 	 */
 	public static final int PAI_DUI_HAO_MA_ZHUANG_TAI_CHA_XUN=75;
+	/**
+	 * 删除用户审核记录
+	 */
+	public static final int SHAN_CHU_YONG_HU_SHEN_HE_JI_LU=76;
+	/**
+	 * 权限查询
+	 */
+	public static final int QUAN_XIAN_CHA_XUN=77;
 	
 	private Integer id;
 	public Integer getId() {

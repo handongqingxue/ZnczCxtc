@@ -50,6 +50,6 @@
 		select * from quan_xian where id=#{id}
 	</select>
 	<select id="queryCBBList" resultType="com.znczCxtc.entity.QuanXian">
-		select id,mc from quan_xian
+		select id,mc from quan_xian order by px
 	</select>
 </mapper>

@@ -21,6 +21,9 @@
 .tab1_div .toolbar .search_but{
 	margin-left: 13px;
 }
+.tab1_div .edit_a{
+	visibility: hidden;
+}
 </style>
 <title>Insert title here</title>
 <%@include file="../../inc/js.jsp"%>
@@ -43,7 +46,46 @@ $(function(){
 	initSearchLB();
 	initAddLB();
 	initTab1();
+	
+	showCompontByQx();
 });
+
+function showCompontByQx(){
+	addLB.hide();
+	//removeLB.hide();
+	if(yhm=="admin"){
+		addLB.show();
+		//removeLB.show();
+	}
+	else{
+		var tjjsQx='${requestScope.tjjsQx}';
+		var scjsQx='${requestScope.scjsQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==tjjsQx){
+				addLB.show();
+			}
+			if(qxIdsArr[i]==scjsQx){
+				//removeLB.show();
+			}
+		}
+	}
+}
+
+function showOptionButByQx(){
+	if(yhm=="admin"){
+		$(".tab1_div .edit_a").css("visibility","visible");
+	}
+	else{
+		var xgjsQx='${requestScope.xgjsQx}';
+		var qxIdsArr=qxIds.split(",");
+		for(var i=0;i<qxIdsArr.length;i++){
+			if(qxIdsArr[i]==xgjsQx){
+				$(".tab1_div .edit_a").css("visibility","visible");
+			}
+		}
+	}
+}
 
 function initZtVar(){
 	xzZt=parseInt('${requestScope.xzZt}');
@@ -68,7 +110,7 @@ function initSearchLB(){
 }
 
 function initAddLB(){
-	$("#add_but").linkbutton({
+	addLB=$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
 			location.href=xtglPath+"jscx/new";
@@ -91,7 +133,7 @@ function initTab1(){
 			}},
 			{field:"ms",title:"描述",width:300},
             {field:"id",title:"操作",width:110,formatter:function(value,row){
-            	var str="<a href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
+            	var str="<a class=\"edit_a\" href=\"edit?id="+value+"\">编辑</a>&nbsp;&nbsp;"
         			+"<a href=\"detail?id="+value+"\">详情</a>";
             	return str;
             }}
@@ -107,6 +149,8 @@ function initTab1(){
 			$(".panel-header .panel-title").css("font-size","15px");
 			$(".panel-header .panel-title").css("padding-left","10px");
 			$(".panel-header, .panel-body").css("border-color","#ddd");
+			
+			showOptionButByQx();
 		}
 	});
 }

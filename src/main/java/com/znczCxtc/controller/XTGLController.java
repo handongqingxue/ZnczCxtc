@@ -52,16 +52,22 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/yhcx/edit")
 	public String goYhcxEdit(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_YONG_HU,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			YongHu yh=yongHuService.selectById(id);
+			request.setAttribute("yh", yh);
+			
+			Constant.setYhShztInRequest(request);
+			url=MODULE_NAME+"/yhcx/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		YongHu yh=yongHuService.selectById(id);
-		request.setAttribute("yh", yh);
-		
-		Constant.setYhShztInRequest(request);
-		
-		return MODULE_NAME+"/yhcx/edit";
+		return url;
 	}
 	
 	/**
@@ -71,14 +77,20 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/yhcx/list")
 	public String goYhcxList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_YONG_HU,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			Constant.setYhShztInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", YongHu.ZONG_HE_CHA_XUN_SHEET);
+			url=MODULE_NAME+"/yhcx/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		Constant.setYhShztInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", YongHu.ZONG_HE_CHA_XUN_SHEET);
-		
-		return MODULE_NAME+"/yhcx/list";
+		return url;
 	}
 
 	/**
@@ -88,16 +100,22 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/yhcx/detail")
 	public String goYhcxDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_YONG_HU,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			YongHu yh=yongHuService.selectById(id);
+			request.setAttribute("yh", yh);
+			
+			Constant.setYhShztInRequest(request);
+			url=MODULE_NAME+"/yhcx/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		YongHu yh=yongHuService.selectById(id);
-		request.setAttribute("yh", yh);
-		
-		Constant.setYhShztInRequest(request);
-		
-		return MODULE_NAME+"/yhcx/detail";
+		return url;
 	}
 	
 	/**
@@ -107,15 +125,21 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/dshyh/list")
 	public String goDshyhcxList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.SHEN_HE_YONG_HU,request)) {
+			//publicService.selectNav(request);
+			request.setAttribute("shzt", YongHu.DAI_SHEN_HE);
+			Constant.setYhQxInRequest(request);
+			Constant.setYhShztInRequest(request);
+			Constant.setDcfwInRequest(request);
+			request.setAttribute("sheetFlag", YongHu.DAI_SHEN_HE_SHEET);
+			url=MODULE_NAME+"/dshyh/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		request.setAttribute("shzt", YongHu.DAI_SHEN_HE);
-		Constant.setYhQxInRequest(request);
-		Constant.setYhShztInRequest(request);
-		Constant.setDcfwInRequest(request);
-		request.setAttribute("sheetFlag", YongHu.DAI_SHEN_HE_SHEET);
-		
-		return MODULE_NAME+"/dshyh/list";
+		return url;
 	}
 
 	/**
@@ -126,11 +150,17 @@ public class XTGLController {
 	@RequestMapping(value="/yhshjl/list")
 	public String goYhshjlList(HttpServletRequest request) {
 
-		Constant.setYhQxInRequest(request);
-		Constant.setYhShjgInRequest(request);
-		Constant.setDcfwInRequest(request);
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_YONG_HU_SHEN_HE_JI_LU,request)) {
+			Constant.setYhQxInRequest(request);
+			Constant.setYhShjgInRequest(request);
+			Constant.setDcfwInRequest(request);
+			url=MODULE_NAME+"/yhshjl/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		return MODULE_NAME+"/yhshjl/list";
+		return url;
 	}
 	
 	/**
@@ -140,12 +170,18 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/jscx/new")
 	public String goJscxNew(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_JUE_SE,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			Constant.setJsZtInRequest(request);
+			url=MODULE_NAME+"/jscx/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		Constant.setJsZtInRequest(request);
-		
-		return MODULE_NAME+"/jscx/new";
+		return url;
 	}
 
 	/**
@@ -155,16 +191,22 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/jscx/edit")
 	public String goJscxEdit(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.XIU_GAI_JUE_SE,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			JueSe js=jueSeService.selectById(id);
+			request.setAttribute("js", js);
+			
+			Constant.setJsZtInRequest(request);
+			url=MODULE_NAME+"/jscx/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		JueSe js=jueSeService.selectById(id);
-		request.setAttribute("js", js);
-		
-		Constant.setJsZtInRequest(request);
-		
-		return MODULE_NAME+"/jscx/edit";
+		return url;
 	}
 	
 	/**
@@ -174,12 +216,18 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/jscx/list")
 	public String goJscxList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_JUE_SE,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			Constant.setJsZtInRequest(request);
+			url=MODULE_NAME+"/jscx/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		Constant.setJsZtInRequest(request);
-		
-		return MODULE_NAME+"/jscx/list";
+		return url;
 	}
 
 	/**
@@ -189,16 +237,22 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/jscx/detail")
 	public String goJscxDetail(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_JUE_SE,request)) {
+			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
+			String id = request.getParameter("id");
+			JueSe js=jueSeService.selectById(id);
+			request.setAttribute("js", js);
+			
+			Constant.setJsZtInRequest(request);
+			url=MODULE_NAME+"/jscx/detail";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		Constant.setYhQxInRequest(request);
-		String id = request.getParameter("id");
-		JueSe js=jueSeService.selectById(id);
-		request.setAttribute("js", js);
-		
-		Constant.setJsZtInRequest(request);
-		
-		return MODULE_NAME+"/jscx/detail";
+		return url;
 	}
 	
 	/**
@@ -208,10 +262,16 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/qxcx/new")
 	public String goQxcxNew(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.QUAN_XIAN_CHA_XUN,request)) {
+			//publicService.selectNav(request);
+			url=MODULE_NAME+"/qxcx/new";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		
-		return MODULE_NAME+"/qxcx/new";
+		return url;
 	}
 
 	/**
@@ -221,13 +281,19 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/qxcx/edit")
 	public String goQxcxEdit(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.QUAN_XIAN_CHA_XUN,request)) {
+			//publicService.selectNav(request);
+			String id = request.getParameter("id");
+			QuanXian qx=quanXianService.selectById(id);
+			request.setAttribute("qx", qx);
+			url=MODULE_NAME+"/qxcx/edit";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		String id = request.getParameter("id");
-		QuanXian qx=quanXianService.selectById(id);
-		request.setAttribute("qx", qx);
-		
-		return MODULE_NAME+"/qxcx/edit";
+		return url;
 	}
 	
 	/**
@@ -237,10 +303,16 @@ public class XTGLController {
 	 */
 	@RequestMapping(value="/qxcx/list")
 	public String goQxcxList(HttpServletRequest request) {
+
+		String url=null;
+		if(Constant.checkIfExistQx(QuanXian.QUAN_XIAN_CHA_XUN,request)) {
+			//publicService.selectNav(request);
+			url=MODULE_NAME+"/qxcx/list";
+		}
+		else
+			url=Constant.NO_QX_RETURN_URL;
 		
-		//publicService.selectNav(request);
-		
-		return MODULE_NAME+"/qxcx/list";
+		return url;
 	}
 	
 	/**
