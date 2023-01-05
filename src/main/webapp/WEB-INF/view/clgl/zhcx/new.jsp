@@ -133,7 +133,6 @@ function initNewDialog(){
 	initFZRQDB();
 	initCLLXCBB();
 	initSFZYCBB();
-	initSHZTCBB();
 }
 
 function initZCRQDB(){
@@ -217,22 +216,6 @@ function initSFZYCBB(){
 	});
 }
 
-function initSHZTCBB(){
-	var data=[];
-	data.push({"value":"","text":"请选择审核状态"});
-	data.push({"value":"1","text":"待审核"});
-	data.push({"value":"2","text":"审核通过"});
-	data.push({"value":"3","text":"编辑中"});
-	shztCBB=$("#shzt_cbb").combobox({
-		valueField:"value",
-		textField:"text",
-		data:data,
-		onSelect:function(){
-			$("#shzt").val($(this).combobox("getValue"));
-		}
-	});
-}
-
 function checkNew(){
 	if(checkCPH()){
 		if(checkZCRQ()){
@@ -242,9 +225,7 @@ function checkNew(){
 						if(checkFZRQ()){
 							if(checkCLLX()){
 								if(checkSFZY()){
-									if(checkSHZT()){
-										newCheLiang();
-									}
+									newCheLiang();
 								}
 							}
 						}
@@ -397,17 +378,6 @@ function checkSFZY(){
 	var sfzy=sfzyCBB.combobox("getValue");
 	if(sfzy==null||sfzy==""){
 	  	alert("请选择是否在用");
-	  	return false;
-	}
-	else
-		return true;
-}
-
-//验证审核状态
-function checkSHZT(){
-	var shzt=shztCBB.combobox("getValue");
-	if(shzt==null||shzt==""){
-	  	alert("请选择审核状态");
 	  	return false;
 	}
 	else
@@ -672,17 +642,14 @@ function setFitWidthInParent(parent,self){
 			  </tr>
 			  <tr>
 				<td class="td1" align="right">
-					审核状态
-				</td>
-				<td class="td2">
-					<input id="shzt_cbb"/>
-					<input type="hidden" id="shzt" name="shzt"/>
-				</td>
-				<td class="td1" align="right">
 					备注
 				</td>
 				<td class="td2">
 					<textarea rows="3" cols="30" id="bz" name="bz" placeholder="请输入备注"></textarea>
+				</td>
+				<td class="td1" align="right">
+				</td>
+				<td class="td2">
 				</td>
 			  </tr>
 			</table>

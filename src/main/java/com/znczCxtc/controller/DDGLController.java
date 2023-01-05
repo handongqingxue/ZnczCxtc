@@ -164,6 +164,7 @@ public class DDGLController {
 		String url=null;
 		if(Constant.checkIfExistQx(QuanXian.ZHUANG_XIE_HUO_SHEN_HE,request)) {
 			//publicService.selectNav(request);
+			Constant.setYhQxInRequest(request);
 			Constant.setDdztInRequest(request);
 			Constant.setDdShlxInRequest(request);
 			Constant.setLxlxInRequest(request);

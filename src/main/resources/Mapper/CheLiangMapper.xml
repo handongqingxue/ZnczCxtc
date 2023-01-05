@@ -40,9 +40,7 @@
 			<if test="sfzy!=null">
 				sfzy,
 			</if>
-			<if test="shzt!=null">
 				shzt,
-			</if>
 			<if test="yslx!=null">
 				yslx,
 			</if>
@@ -95,9 +93,7 @@
 			<if test="sfzy!=null">
 				#{sfzy},
 			</if>
-			<if test="shzt!=null">
-				#{shzt},
-			</if>
+				${@com.znczCxtc.entity.CheLiang@DAI_SHEN_HE},
 			<if test="yslx!=null">
 				#{yslx},
 			</if>

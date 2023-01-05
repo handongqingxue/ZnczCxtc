@@ -120,7 +120,6 @@ function initNewDialog(){
 	initZGZYXQZDB();
 	initJZYXQZDB();
 	initZYZTCBB();
-	initSHZTCBB();
 }
 
 function initZGZYXQZDB(){
@@ -166,30 +165,12 @@ function initZYZTCBB(){
 	});
 }
 
-function initSHZTCBB(){
-	var data=[];
-	data.push({"value":"","text":"请选择审核状态"});
-	data.push({"value":"1","text":"编辑中"});
-	data.push({"value":"2","text":"待审核"});
-	data.push({"value":"3","text":"审核通过"});
-	shztCBB=$("#shzt_cbb").combobox({
-		valueField:"value",
-		textField:"text",
-		data:data,
-		onSelect:function(){
-			$("#shzt").val($(this).combobox("getValue"));
-		}
-	});
-}
-
 function checkNew(){
 	if(checkXM()){
-		if(checkSJH()){
+		if(checkSjh()){
 			if(checkSfzh()){
 				if(checkZYZT()){
-					if(checkSHZT()){
-						newSiJi();
-					}
+					newSiJi();
 				}
 			}
 		}
@@ -238,16 +219,16 @@ function checkXM(){
 		return true;
 }
 
-function focusSJH(){
+function focusSjh(){
 	var sjh = $("#sjh").val();
-	if(sfzh=="手机号不能为空"){
+	if(sjh=="手机号不能为空"){
 		$("#sjh").val("");
 		$("#sjh").css("color", "#555555");
 	}
 }
 
 //验证手机号
-function checkSJH(){
+function checkSjh(){
 	var sjh = $("#sjh").val();
 	if(sjh==null||sjh==""||sjh=="手机号不能为空"){
 		$("#sjh").css("color","#E15748");
@@ -303,17 +284,6 @@ function checkZYZT(){
 	var zyzt=zyztCBB.combobox("getValue");
 	if(zyzt==null||zyzt==""){
 	  	alert("请选择在用状态");
-	  	return false;
-	}
-	else
-		return true;
-}
-
-//验证审核状态
-function checkSHZT(){
-	var shzt=shztCBB.combobox("getValue");
-	if(shzt==null||shzt==""){
-	  	alert("请选择审核状态");
 	  	return false;
 	}
 	else
@@ -435,7 +405,7 @@ function setFitWidthInParent(parent,self){
 					手机号
 				</td>
 				<td class="td2">
-					<input type="text" class="sjh_inp" id="sjh" name="sjh" placeholder="请输入手机号" onfocus="focusSJH()" onblur="checkSJH()"/>
+					<input type="text" class="sjh_inp" id="sjh" name="sjh" placeholder="请输入手机号" onfocus="focusSjh()" onblur="checkSjh()"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -497,11 +467,8 @@ function setFitWidthInParent(parent,self){
 					<input type="hidden" id="zyzt" name="zyzt"/>
 				</td>
 				<td class="td1" align="right">
-					审核状态
 				</td>
 				<td class="td2">
-					<input id="shzt_cbb"/>
-					<input type="hidden" id="shzt" name="shzt"/>
 				</td>
 			  </tr>
 			</table>

@@ -300,16 +300,10 @@ function showLeftMenuByQx(){
 				$(".gbjl_item_li").css("display","block");
 			}
 			if(qxIdArr[i]==yjshQx){
-				$(".ddgl_first_div").css("display","block");
-				$(".ddgl_first_div .shjl_item_li").css("display","block");
-				
 				$(".gbgl_first_div").css("display","block");
 				$(".yjdsh_item_li").css("display","block");
 			}
 			if(qxIdArr[i]==ejshQx){
-				$(".ddgl_first_div").css("display","block");
-				$(".ddgl_first_div .shjl_item_li").css("display","block");
-				
 				$(".gbgl_first_div").css("display","block");
 				$(".ejdsh_item_li").css("display","block");
 			}

@@ -94,22 +94,23 @@ public class MainController {
 		HttpSession session=request.getSession();
 		
 		//TODO在这附近添加登录储存信息步骤，将用户的账号以及密码储存到shiro框架的管理配置当中方便后续查询
+		Subject currentUser = null;
 		try {
 			System.out.println("验证码一致");
 			UsernamePasswordToken token = new UsernamePasswordToken(yhm,mm); 
-			Subject currentUser = SecurityUtils.getSubject();  
-			if (!currentUser.isAuthenticated()){
+			currentUser = SecurityUtils.getSubject();  
+			//if (!currentUser.isAuthenticated()){//去掉这个条件判断，不管之前的用户有没有注销，都替换成当前登录用户
 				//使用shiro来验证  
 				token.setRememberMe(true);  
 				currentUser.login(token);//验证角色和权限  
-			}
+			//}
 		}catch (Exception e) {
 			e.printStackTrace();
 			plan.setStatus(1);
 			plan.setMsg("登陆失败");
 			return JsonUtil.getJsonFromObject(plan);
 		}
-		YongHu yongHu=(YongHu)SecurityUtils.getSubject().getPrincipal();
+		YongHu yongHu=(YongHu)currentUser.getPrincipal();
 		String jsIds = yongHu.getJsIds();
 		if(!StringUtils.isEmpty(jsIds)) {
 			String qxIds=jueSeService.getQxIdsByIds(jsIds);
@@ -148,9 +149,9 @@ public class MainController {
 	}
 
 	@RequestMapping(value="/exit")
-	public String exit(HttpSession session) {
+	public String exit() {
 		System.out.println("退出接口");
-		Subject currentUser = SecurityUtils.getSubject();       
+		Subject currentUser = SecurityUtils.getSubject();
 	    currentUser.logout();    
 		return "login";
 	}

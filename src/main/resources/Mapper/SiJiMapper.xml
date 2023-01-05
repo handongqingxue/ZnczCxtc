@@ -30,9 +30,7 @@
 			<if test="jzyxqz!=null">
 				jzyxqz,
 			</if>
-			<if test="shzt!=null">
 				shzt,
-			</if>
 			<if test="zyzt!=null">
 				zyzt,
 			</if>
@@ -66,9 +64,7 @@
 			<if test="jzyxqz!=null">
 				#{jzyxqz},
 			</if>
-			<if test="shzt!=null">
-				#{shzt},
-			</if>
+				${@com.znczCxtc.entity.SiJi@DAI_SHEN_HE},
 			<if test="zyzt!=null">
 				#{zyzt},
 			</if>
