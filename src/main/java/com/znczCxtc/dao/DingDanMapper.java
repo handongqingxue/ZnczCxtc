@@ -51,4 +51,6 @@ public interface DingDanMapper {
 
 	Integer getMaxDdhNumByDdhDate(@Param("ddhDate") String ddhDate);
 
+	int changeZtByIdList(@Param("ddztId") int ddztId, @Param("idList") List<Long> idList);
+
 }

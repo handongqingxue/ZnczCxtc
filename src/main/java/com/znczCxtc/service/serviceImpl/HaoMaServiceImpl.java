@@ -1,8 +1,10 @@
 package com.znczCxtc.service.serviceImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +99,7 @@ public class HaoMaServiceImpl implements HaoMaService {
 				ymdDlIdList.add(dlId);
 			}
 		}
-		HaoMa firstHm=haoMaDao.getFirstWmdPdz(ymdDlIdList);
+		HaoMa firstHm=haoMaDao.getFirstWmdPdz(ymdDlIdList);//获取第一个未满队行列里的号码
 		if(firstHm!=null) {
 			Long id = firstHm.getId();
 			Long ddId = firstHm.getDdId();
@@ -118,6 +120,81 @@ public class HaoMaServiceImpl implements HaoMaService {
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public Map<String, Object> changeToJhzByIds(String ids, String hms, String ddIds) {
+		// TODO Auto-generated method stub
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		List<Integer> ymdDlIdList=new ArrayList<Integer>();//已满队列表
+		List<HaoMa> slzHmList=haoMaDao.getSlzList();
+		for (HaoMa slzHm : slzHmList) {
+			Integer slzsl = slzHm.getSlzsl();
+			Integer dlJhyz = slzHm.getDlJhyz();
+			if(slzsl==dlJhyz) {//若受理中数量等于队列叫号阈值，就判断该队列已满队，不再继续叫号
+				Integer dlId = slzHm.getDlId();
+				ymdDlIdList.add(dlId);
+			}
+		}
+
+		List<Long> wmdIdList=new ArrayList<>();
+		List<String> ymdHmList=new ArrayList<>();
+		List<Long> ddIdList=new ArrayList<>();
+		String[] idArr = ids.split(",");
+		String[] hmArr = hms.split(",");
+		String[] ddIdArr = ddIds.split(",");
+		List<HaoMa> hmList=haoMaDao.getWmdPdzList(ymdDlIdList);
+		for (int i = 0; i < idArr.length; i++) {
+			boolean exist=false;
+			long idInt = Long.valueOf(idArr[i]);
+			for (int j = 0; j < hmList.size(); j++) {
+				HaoMa hm = hmList.get(j);
+				if(idInt==hm.getId()) {
+					exist=true;
+					wmdIdList.add(idInt);
+					long ddIdInt = Long.valueOf(ddIdArr[i]);
+					ddIdList.add(ddIdInt);
+					break;
+				}
+			}
+			if(!exist) {
+				String ymdHm = hmArr[i];
+				ymdHmList.add(ymdHm);
+			}
+		}
+
+		int count=0;
+		if(ymdHmList.size()>0) {
+			String ymdHmsStr="";
+			for (int i = 0; i < ymdHmList.size(); i++) {
+				String ymdHm = ymdHmList.get(i);
+				ymdHmsStr=","+ymdHm;
+			}
+			if(wmdIdList.size()>0) {
+				int jhzHmztId = haoMaZhuangTaiDao.getIdByMc(HaoMaZhuangTai.JIAO_HAO_ZHONG_TEXT);
+				count=haoMaDao.changeZtByIdList(jhzHmztId,wmdIdList);
+				if(count>0) {
+					int drcDdztId = dingDanZhuangTaiDao.getIdByMc(DingDanZhuangTai.DAI_RU_CHANG_TEXT);
+					count=dingDanDao.changeZtByIdList(drcDdztId,ddIdList);
+				}
+			}
+			jsonMap.put("status", "partFinish");
+			jsonMap.put("message", "号码:"+ymdHmsStr.substring(1)+"所属队列已满队，稍后再叫号");
+		}
+		else {
+			if(wmdIdList.size()>0) {
+				int jhzHmztId = haoMaZhuangTaiDao.getIdByMc(HaoMaZhuangTai.JIAO_HAO_ZHONG_TEXT);
+				count=haoMaDao.changeZtByIdList(jhzHmztId,wmdIdList);
+				if(count>0) {
+					int drcDdztId = dingDanZhuangTaiDao.getIdByMc(DingDanZhuangTai.DAI_RU_CHANG_TEXT);
+					count=dingDanDao.changeZtByIdList(drcDdztId,ddIdList);
+				}
+			}
+			jsonMap.put("status", "allFinish");
+			jsonMap.put("message", "叫号成功");
+		}
+		
+		return jsonMap;
 	}
 
 	@Override

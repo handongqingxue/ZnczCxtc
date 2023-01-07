@@ -322,6 +322,23 @@ public class PDGLController {
 		
 		return jsonMap;
 	}
+
+
+	@RequestMapping(value="/zxjhByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> zxjhByIds(String ids,String hms,String ddIds) {
+		//TODO 针对分类的动态进行实时调整更新
+		
+		Map<String, Object> jsonMap=null;
+		try {
+			jsonMap = haoMaService.changeToJhzByIds(ids,hms,ddIds);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
 	
 	@RequestMapping(value="/queryDuiLieCBBList")
 	@ResponseBody

@@ -134,10 +134,25 @@
 		select hm.* from hao_ma hm,ding_dan dd,hao_ma_zhuang_tai hmzt where hm.ddId=dd.id and hm.hmztId=hmzt.id and hmzt.mc='${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}'
 		  ORDER BY pdh LIMIT 0,1
 	</select>
+	<select id="getWmdPdzList" resultType="com.znczCxtc.entity.HaoMa">
+		select hm.* from hao_ma hm,ding_dan dd,hao_ma_zhuang_tai hmzt,shou_huo_dan_wei shdw,dui_lie dl where hm.ddId=dd.id and dd.shdwId=shdw.id
+		 and shdw.dlId=dl.id and hm.hmztId=hmzt.id and hmzt.mc='${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}'
+		<foreach collection="ymdDlIdList" item="ymdDlId" open=" and cast(dl.id as char) not in (" separator="," close=")">
+		#{ymdDlId}
+		</foreach>
+		UNION
+		select hm.* from hao_ma hm,ding_dan dd,hao_ma_zhuang_tai hmzt where hm.ddId=dd.id and hm.hmztId=hmzt.id and hmzt.mc='${@com.znczCxtc.entity.DingDanZhuangTai@PAI_DUI_ZHONG_TEXT}'
+	</select>
 	<select id="getPdzList" resultType="com.znczCxtc.entity.HaoMa">
 		select hm.* from hao_ma hm,hao_ma_zhuang_tai hmzt where hm.hmztId=hmzt.id and hmzt.mc='${@com.znczCxtc.entity.HaoMaZhuangTai@PAI_DUI_ZHONG_TEXT}' ORDER BY hm.hm
 	</select>
 	<select id="getLastByDdId" resultType="com.znczCxtc.entity.HaoMa">
 		select * from hao_ma where ddId=#{ddId} order by prsj desc LIMIT 0,1
 	</select>
+	<update id="changeZtByIdList">
+		update hao_ma set hmztId=#{hmztId} where 
+		<foreach collection="idList" item="id" open=" id in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</update>
 </mapper>

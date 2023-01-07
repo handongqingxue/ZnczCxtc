@@ -1,6 +1,7 @@
 package com.znczCxtc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.znczCxtc.entity.*;
 
@@ -41,4 +42,6 @@ public interface HaoMaService {
 	public int sortPdzHm();
 
 	public HaoMa getLastByDdId(Long ddId);
+
+	public Map<String, Object> changeToJhzByIds(String ids, String hms, String ddIds);
 }

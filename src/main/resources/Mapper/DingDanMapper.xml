@@ -405,4 +405,10 @@
 	<select id="getMaxDdhNumByDdhDate" resultType="java.lang.Integer">
 		select substring(MAX(ddh),11,4) from ding_dan where ddh like CONCAT(#{ddhDate},'%')
 	</select>
+	<update id="changeZtByIdList">
+		update ding_dan set ddztId=#{ddztId} where 
+		<foreach collection="idList" item="id" open=" id in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</update>
 </mapper>

@@ -77,6 +77,8 @@ $(function(){
 	initHMZTCBB();
 	initSearchLB();
 	initRemoveLB();
+	initZXJHLB();
+	initZXGHLB();
 	initOutputBut();
 	initTab1();
 	
@@ -249,6 +251,24 @@ function initRemoveLB(){
 	});
 }
 
+function initZXJHLB(){
+	zxjhLB=$("#zxjh_but").linkbutton({
+		iconCls:"icon-back",
+		onClick:function(){
+			zxjhByIds();
+		}
+	});
+}
+
+function initZXGHLB(){
+	zxghLB=$("#zxgh_but").linkbutton({
+		iconCls:"icon-back",
+		onClick:function(){
+			
+		}
+	});
+}
+
 function initOutputBut(){
 	opBut=$("#output_but").linkbutton({
 		iconCls:"icon-remove",
@@ -359,6 +379,51 @@ function deleteByIds() {
 	});
 }
 
+function zxjhByIds() {
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要叫号的信息！","warning");
+		return false;
+	}
+	
+	var ids = "";
+	var hms = "";
+	var fpdzHm = "";
+	var ddIds = "";
+	for (var i = 0; i < rows.length; i++) {
+		var hmztMc=rows[i].hmztMc;
+		if(hmztMc!="排队中"){
+			fpdzHm+=","+rows[i].hm;
+			continue;
+		}
+		ids += "," + rows[i].id;
+		hms += "," + rows[i].hm;
+		ddIds += "," + rows[i].ddId;
+	}
+	if(fpdzHm!=""){
+		alert("号码:"+fpdzHm.substring(1)+"非排队中号码");
+	}
+	if(ids!=""){
+		ids=ids.substring(1);
+		hms=hms.substring(1);
+		ddIds=ddIds.substring(1);
+		alert(ids)
+		
+		$.post(pdglPath + "zxjhByIds",
+			{ids:ids,hms:hms,ddIds:ddIds},
+			function(result){
+				//if(result.status==1){
+					alert(result.message);
+					tab1.datagrid("load");
+				//}
+				//else{
+					//alert(result.message);
+				//}
+			}
+		,"json");
+	}
+}
+
 function encodeURIParam(val){
 	return encodeURI(encodeURI(val));
 }
@@ -399,6 +464,8 @@ function setFitWidthInParent(parent,self){
 			<input id="hmzt_cbb"/>
 			<a class="search_but" id="search_but">查询</a>
 			<a id="remove_but">删除</a>
+			<a id="zxjh_but">执行叫号</a>
+			<a id="zxgh_but">执行过号</a>
          	<a id="output_but">导出</a>
 		</div>
 		<table id="tab1">

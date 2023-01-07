@@ -33,7 +33,11 @@ public interface HaoMaMapper {
 	 */
 	public HaoMa getFirstWmdPdz(@Param("ymdDlIdList") List<Integer> ymdDlIdList);
 
+	public List<HaoMa> getWmdPdzList(@Param("ymdDlIdList") List<Integer> ymdDlIdList);
+
 	public List<HaoMa> getPdzList();
 
 	public HaoMa getLastByDdId(@Param("ddId") Long ddId);
+
+	public int changeZtByIdList(@Param("hmztId") int hmztId, @Param("idList") List<Long> idList);
 }
