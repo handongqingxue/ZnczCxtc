@@ -1,6 +1,7 @@
 package com.znczCxtc.service.serviceImpl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -198,6 +199,32 @@ public class HaoMaServiceImpl implements HaoMaService {
 	}
 
 	@Override
+	public int changeToGhzByIds(String ids, String ddIds) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<Long> idList=new ArrayList<>();
+		String[] idArr = ids.split(",");
+		for (String idStr : idArr) {
+			long idInt = Long.valueOf(idStr);
+			idList.add(idInt);
+		}
+		
+		List<Long> ddIdList=new ArrayList<>();
+		String[] ddIdArr = ddIds.split(",");
+		for (String ddIdStr : ddIdArr) {
+			long ddIdInt = Long.valueOf(ddIdStr);
+			ddIdList.add(ddIdInt);
+		}
+		int yghHmztId = haoMaZhuangTaiDao.getIdByMc(HaoMaZhuangTai.YI_GUO_HAO_TEXT);
+		count=haoMaDao.changeZtByIdList(yghHmztId,idList);
+		if(count>0) {
+			int yxdDdztId = dingDanZhuangTaiDao.getIdByMc(DingDanZhuangTai.YI_XIA_DAN_TEXT);
+			count=dingDanDao.changeZtByIdList(yxdDdztId,ddIdList);
+		}
+		return count;
+	}
+
+	@Override
 	public int sortPdzHm() {
 		// TODO Auto-generated method stub
 		int count=0;
@@ -214,5 +241,14 @@ public class HaoMaServiceImpl implements HaoMaService {
 	public HaoMa getLastByDdId(Long ddId) {
 		// TODO Auto-generated method stub
 		return haoMaDao.getLastByDdId(ddId);
+	}
+
+	@Override
+	public int deleteByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count = haoMaDao.deleteByIds(idList);
+		return count;
 	}
 }

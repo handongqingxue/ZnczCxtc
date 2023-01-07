@@ -942,6 +942,20 @@ public class Constant {
 	}
 	
 	/**
+	 * 存放号码状态常量
+	 * @param request
+	 */
+	public static void setHmztInRequest(HttpServletRequest request) {
+		
+		request.setAttribute("pdzHmztMc", HaoMaZhuangTai.PAI_DUI_ZHONG_TEXT);//排队中
+		request.setAttribute("jhzHmztMc", HaoMaZhuangTai.JIAO_HAO_ZHONG_TEXT);//叫号中
+		request.setAttribute("yghHmztMc", HaoMaZhuangTai.YI_GUO_HAO_TEXT);//已过号
+		request.setAttribute("slzHmztMc", HaoMaZhuangTai.SHOU_LI_ZHONG_TEXT);//受理中
+		request.setAttribute("ywcHmztMc", HaoMaZhuangTai.YI_WAN_CHENG_TEXT);//已完成
+		request.setAttribute("qxHmztMc", HaoMaZhuangTai.QU_XIAO_TEXT);//取消
+	}
+	
+	/**
 	 * 根据流向类型id获取流向类型名称
 	 * @param lxlxId
 	 * @return

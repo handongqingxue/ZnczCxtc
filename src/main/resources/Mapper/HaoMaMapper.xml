@@ -79,6 +79,12 @@
 			</if>
 		</trim>
 	</insert>
+	<delete id="deleteByIds">
+		delete from hao_ma where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in(" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
 	<select id="selectHaoMaById" resultType="com.znczCxtc.entity.HaoMa">
 		select * from hao_ma where id=#{id}
 	</select>

@@ -99,6 +99,7 @@ public class PDGLController {
 
 		String url=null;
 		if(Constant.checkIfExistQx(QuanXian.CHA_XUN_PAI_DUI_HAO_MA,request)) {
+			Constant.setHmztInRequest(request);
 			Constant.setYhQxInRequest(request);
 			Constant.setHmFlInRequest(request);
 			Constant.setDcfwInRequest(request);
@@ -323,8 +324,28 @@ public class PDGLController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/deleteHaoMa",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteHaoMa(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=haoMaService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除号码失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除号码成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
 
-	@RequestMapping(value="/zxjhByIds",produces="plain/text; charset=UTF-8")
+
+	@RequestMapping(value="/zxjhByIds")
 	@ResponseBody
 	public Map<String, Object> zxjhByIds(String ids,String hms,String ddIds) {
 		//TODO 针对分类的动态进行实时调整更新
@@ -337,6 +358,26 @@ public class PDGLController {
 			e.printStackTrace();
 		}
 		
+		return jsonMap;
+	}
+
+
+	@RequestMapping(value="/zxghByIds")
+	@ResponseBody
+	public Map<String, Object> zxghByIds(String ids,String ddIds) {
+		//TODO 针对分类的动态进行实时调整更新
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		int count=haoMaService.changeToGhzByIds(ids,ddIds);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "过号成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "过号失败！");
+		}
 		return jsonMap;
 	}
 	

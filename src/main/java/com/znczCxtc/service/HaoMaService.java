@@ -44,4 +44,8 @@ public interface HaoMaService {
 	public HaoMa getLastByDdId(Long ddId);
 
 	public Map<String, Object> changeToJhzByIds(String ids, String hms, String ddIds);
+
+	public int changeToGhzByIds(String ids, String ddIds);
+
+	int deleteByIds(String ids);
 }

@@ -59,6 +59,10 @@ var dialogTop=10;
 var dialogLeft=20;
 var oedNum=0;
 
+var pdzHmztMc;
+var jhzHmztMc;
+var yghHmztMc;
+
 var ptFl;
 var qtFl;
 
@@ -71,6 +75,7 @@ var syyDcfw;
 var dqyDcfwMc;
 var syyDcfwMc;
 $(function(){
+	initHmztVar();
 	initFlVar();
 	initDcfwVar();
 	
@@ -122,6 +127,12 @@ function initHMZTCBB(){
 			});
 		}
 	,"json");
+}
+
+function initHmztVar(){
+	pdzHmztMc='${requestScope.pdzHmztMc}';
+	jhzHmztMc='${requestScope.jhzHmztMc}';
+	yghHmztMc='${requestScope.yghHmztMc}';
 }
 
 function initFlVar(){
@@ -264,7 +275,7 @@ function initZXGHLB(){
 	zxghLB=$("#zxgh_but").linkbutton({
 		iconCls:"icon-back",
 		onClick:function(){
-			
+			zxghByIds();
 		}
 	});
 }
@@ -392,7 +403,7 @@ function zxjhByIds() {
 	var ddIds = "";
 	for (var i = 0; i < rows.length; i++) {
 		var hmztMc=rows[i].hmztMc;
-		if(hmztMc!="排队中"){
+		if(hmztMc!=pdzHmztMc){
 			fpdzHm+=","+rows[i].hm;
 			continue;
 		}
@@ -401,13 +412,12 @@ function zxjhByIds() {
 		ddIds += "," + rows[i].ddId;
 	}
 	if(fpdzHm!=""){
-		alert("号码:"+fpdzHm.substring(1)+"非排队中号码");
+		alert("号码:"+fpdzHm.substring(1)+"非"+pdzHmztMc+"号码");
 	}
 	if(ids!=""){
 		ids=ids.substring(1);
 		hms=hms.substring(1);
 		ddIds=ddIds.substring(1);
-		alert(ids)
 		
 		$.post(pdglPath + "zxjhByIds",
 			{ids:ids,hms:hms,ddIds:ddIds},
@@ -419,6 +429,47 @@ function zxjhByIds() {
 				//else{
 					//alert(result.message);
 				//}
+			}
+		,"json");
+	}
+}
+
+function zxghByIds() {
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要过号的信息！","warning");
+		return false;
+	}
+	
+	var ids = "";
+	var fpdzHm = "";
+	var ddIds = "";
+	for (var i = 0; i < rows.length; i++) {
+		var hmztMc=rows[i].hmztMc;
+		if(hmztMc!=jhzHmztMc){
+			fpdzHm+=","+rows[i].hm;
+			continue;
+		}
+		ids += "," + rows[i].id;
+		ddIds += "," + rows[i].ddId;
+	}
+	if(fpdzHm!=""){
+		alert("号码:"+fpdzHm.substring(1)+"非"+jhzHmztMc+"号码");
+	}
+	if(ids!=""){
+		ids=ids.substring(1);
+		ddIds=ddIds.substring(1);
+		
+		$.post(pdglPath + "zxghByIds",
+			{ids:ids,ddIds:ddIds},
+			function(result){
+				if(result.message=="ok"){
+					alert(result.info);
+					tab1.datagrid("load");
+				}
+				else{
+					alert(result.info);
+				}
 			}
 		,"json");
 	}
