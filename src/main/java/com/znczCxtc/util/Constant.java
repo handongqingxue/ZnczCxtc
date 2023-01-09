@@ -152,6 +152,8 @@ public class Constant {
 	public static final int SJSHZT=15;
 	public static final int SJZYZT=16;
 	public static final int SJWJLX=17;
+	public static final int HMZT=18;
+	public static final int HMFL=19;
 	
 	/**
 	 * 验证用户是否拥有权限
@@ -696,6 +698,19 @@ public class Constant {
 		request.setAttribute("qtFlMc", HaoMa.QI_TA_TEXT);
 	}
 	
+	public static Map<String, Object> getHmFlMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		jsonMap.put("ptFl", HaoMa.PU_TONG);
+		jsonMap.put("qtFl", HaoMa.QI_TA);
+
+		jsonMap.put("ptFlMc", HaoMa.PU_TONG_TEXT);
+		jsonMap.put("qtFlMc", HaoMa.QI_TA_TEXT);
+		
+		return jsonMap;
+	}
+	
 	/**
 	 * 存放地点常量
 	 * @param request
@@ -947,12 +962,40 @@ public class Constant {
 	 */
 	public static void setHmztInRequest(HttpServletRequest request) {
 		
+		request.setAttribute("pdzHmzt", HaoMaZhuangTai.PAI_DUI_ZHONG);//排队中
+		request.setAttribute("jhzHmzt", HaoMaZhuangTai.JIAO_HAO_ZHONG);//叫号中
+		request.setAttribute("yghHmzt", HaoMaZhuangTai.YI_GUO_HAO);//已过号
+		request.setAttribute("slzHmzt", HaoMaZhuangTai.SHOU_LI_ZHONG);//受理中
+		request.setAttribute("ywcHmzt", HaoMaZhuangTai.YI_WAN_CHENG);//已完成
+		request.setAttribute("qxHmzt", HaoMaZhuangTai.QU_XIAO);//取消
+		
 		request.setAttribute("pdzHmztMc", HaoMaZhuangTai.PAI_DUI_ZHONG_TEXT);//排队中
 		request.setAttribute("jhzHmztMc", HaoMaZhuangTai.JIAO_HAO_ZHONG_TEXT);//叫号中
 		request.setAttribute("yghHmztMc", HaoMaZhuangTai.YI_GUO_HAO_TEXT);//已过号
 		request.setAttribute("slzHmztMc", HaoMaZhuangTai.SHOU_LI_ZHONG_TEXT);//受理中
 		request.setAttribute("ywcHmztMc", HaoMaZhuangTai.YI_WAN_CHENG_TEXT);//已完成
 		request.setAttribute("qxHmztMc", HaoMaZhuangTai.QU_XIAO_TEXT);//取消
+	}
+	
+	public static Map<String, Object> getHmztMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("pdzHmzt", HaoMaZhuangTai.PAI_DUI_ZHONG);//排队中
+		jsonMap.put("jhzHmzt", HaoMaZhuangTai.JIAO_HAO_ZHONG);//叫号中
+		jsonMap.put("yghHmzt", HaoMaZhuangTai.YI_GUO_HAO);//已过号
+		jsonMap.put("slzHmzt", HaoMaZhuangTai.SHOU_LI_ZHONG);//受理中
+		jsonMap.put("ywcHmzt", HaoMaZhuangTai.YI_WAN_CHENG);//已完成
+		jsonMap.put("qxHmzt", HaoMaZhuangTai.QU_XIAO);//取消
+		
+		jsonMap.put("pdzHmztMc", HaoMaZhuangTai.PAI_DUI_ZHONG_TEXT);//排队中
+		jsonMap.put("jhzHmztMc", HaoMaZhuangTai.JIAO_HAO_ZHONG_TEXT);//叫号中
+		jsonMap.put("yghHmztMc", HaoMaZhuangTai.YI_GUO_HAO_TEXT);//已过号
+		jsonMap.put("slzHmztMc", HaoMaZhuangTai.SHOU_LI_ZHONG_TEXT);//受理中
+		jsonMap.put("ywcHmztMc", HaoMaZhuangTai.YI_WAN_CHENG_TEXT);//已完成
+		jsonMap.put("qxHmztMc", HaoMaZhuangTai.QU_XIAO_TEXT);//取消
+		
+		return jsonMap;
 	}
 	
 	/**

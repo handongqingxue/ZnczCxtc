@@ -57,6 +57,12 @@ public class PhoneController {
 	private CheLiangShenHeJiLuService cheLiangShenHeJiLuService;
 	@Autowired
     private CheLiangTaiZhangService cheLiangTaiZhangService;
+	@Autowired
+    private SiJiShenHeJiLuService siJiShenHeJiLuService;
+	@Autowired
+    private HaoMaZhuangTaiService haoMaZhuangTaiService;
+	@Autowired
+    private HaoMaService haoMaService;
 	static final String MODULE_NAME=Constant.PHONE_MODULE_NAME;
 
 	@RequestMapping(value="/login")
@@ -1008,6 +1014,142 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getSJSHJLList")
+	@ResponseBody
+	public Map<String, Object> getSJSHJLList(String sjXm,String shrYhm,String shsjks,String shsjjs,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = siJiShenHeJiLuService.queryForInt(sjXm,shrYhm,shsjks,shsjjs);
+			List<SiJiShenHeJiLu> sjshjlList=siJiShenHeJiLuService.queryList(sjXm, shrYhm, shsjks, shsjjs, page, rows, null, null);
+			
+			jsonMap.put("total", count);
+			if(count==0) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("list", sjshjlList);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/newHaoMaZhuangTai")
+	@ResponseBody
+	public Map<String, Object> newHaoMaZhuangTai(HaoMaZhuangTai hmzt) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=haoMaZhuangTaiService.add(hmzt);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建号码状态成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建号码状态失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/editHaoMaZhuangTai")
+	@ResponseBody
+	public Map<String, Object> editHaoMaZhuangTai(HaoMaZhuangTai hmzt) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=haoMaZhuangTaiService.edit(hmzt);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑号码状态成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑号码状态失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getHMZT")
+	@ResponseBody
+	public Map<String, Object> getHMZT(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			HaoMaZhuangTai hmzt=haoMaZhuangTaiService.selectById(id);
+			if(hmzt==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("hmzt", hmzt);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getHMZTList")
+	@ResponseBody
+	public Map<String, Object> getHMZTList(String mc,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = haoMaZhuangTaiService.queryForInt(mc);
+			List<HaoMaZhuangTai> hmztList=haoMaZhuangTaiService.queryList(mc, page, rows, null, null);
+			
+			jsonMap.put("total", count);
+			if(count==0) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("list", hmztList);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/getHaoMaList")
+	@ResponseBody
+	public Map<String, Object> getHaoMaList(String dlMc,String hm,String pdh,Integer hmztId,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = haoMaService.queryForInt(dlMc, hm, pdh, hmztId);
+		List<HaoMa> hmList=haoMaService.queryList(dlMc, hm, pdh, hmztId, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", hmList);
+		}
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody
@@ -1032,6 +1174,8 @@ public class PhoneController {
 		jsonMap.put("sjShzt", Constant.SJSHZT);
 		jsonMap.put("sjZyzt", Constant.SJZYZT);
 		jsonMap.put("sjWjlx", Constant.SJWJLX);
+		jsonMap.put("hmzt", Constant.HMZT);
+		jsonMap.put("hmFl", Constant.HMFL);
 		
 		return jsonMap;
 	}
@@ -1114,6 +1258,14 @@ public class PhoneController {
 				Map<String, Object> sjWjlxMap = Constant.getSjWjlxMap();
 				jsonMap.put("sjWjlxMap", sjWjlxMap);
 				break;
+			case Constant.HMZT:
+				Map<String, Object> hmztMap = Constant.getHmztMap();
+				jsonMap.put("hmztMap", hmztMap);
+				break;
+			case Constant.HMFL:
+				Map<String, Object> hmFlMap = Constant.getHmFlMap();
+				jsonMap.put("hmFlMap", hmFlMap);
+				break;
 			}
 		}
 		
@@ -1129,6 +1281,23 @@ public class PhoneController {
 		List<DingDanZhuangTai> ddztList=dingDanZhuangTaiService.queryCBBList();
 		
 		jsonMap.put("list", ddztList);
+		
+		return jsonMap;
+	}
+
+	/**
+	 * 查询号码状态下拉框信息
+	 * @return
+	 */
+	@RequestMapping(value="/getHaoMaZhuangTaiSelectList")
+	@ResponseBody
+	public Map<String, Object> getHaoMaZhuangTaiSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<HaoMaZhuangTai> hmztList=haoMaZhuangTaiService.queryHaoMaZhuangTaiCBBList();
+		
+		jsonMap.put("list", hmztList);
 		
 		return jsonMap;
 	}
