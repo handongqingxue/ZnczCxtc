@@ -63,6 +63,8 @@ public class PhoneController {
     private HaoMaZhuangTaiService haoMaZhuangTaiService;
 	@Autowired
     private HaoMaService haoMaService;
+	@Autowired
+    private DuiLieService duiLieService;
 	static final String MODULE_NAME=Constant.PHONE_MODULE_NAME;
 
 	@RequestMapping(value="/login")
@@ -1151,6 +1153,28 @@ public class PhoneController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/getDuiLieList")
+	@ResponseBody
+	public Map<String, Object> getDuiLieList(String mc,String dm,Integer zt,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = duiLieService.queryForInt(mc,dm,zt);
+		List<DuiLie> dlList=duiLieService.queryList(mc, dm, zt, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", dlList);
+		}
+		
+		return jsonMap;
+	}
+
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody
 	public Map<String, Object> getConstantFlagMap(){
@@ -1176,6 +1200,7 @@ public class PhoneController {
 		jsonMap.put("sjWjlx", Constant.SJWJLX);
 		jsonMap.put("hmzt", Constant.HMZT);
 		jsonMap.put("hmFl", Constant.HMFL);
+		jsonMap.put("dlZt", Constant.DLZT);
 		
 		return jsonMap;
 	}
@@ -1265,6 +1290,10 @@ public class PhoneController {
 			case Constant.HMFL:
 				Map<String, Object> hmFlMap = Constant.getHmFlMap();
 				jsonMap.put("hmFlMap", hmFlMap);
+				break;
+			case Constant.DLZT:
+				Map<String, Object> dlZtMap = Constant.getDLZtMap();
+				jsonMap.put("dlZtMap", dlZtMap);
 				break;
 			}
 		}
