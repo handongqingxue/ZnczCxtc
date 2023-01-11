@@ -264,6 +264,7 @@ public class GkjController {
 		if(count>0) {
 			jsonMap.put("message", "ok");
 			jsonMap.put("info", "Ìí¼ÓºÅÂë³É¹¦£¡");
+			jsonMap.put("pdh", hm.getPdh());
 		}
 		else {
 			jsonMap.put("message", "no");
