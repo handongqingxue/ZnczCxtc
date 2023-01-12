@@ -155,6 +155,7 @@ public class Constant {
 	public static final int HMZT=18;
 	public static final int HMFL=19;
 	public static final int DLZT=20;
+	public static final int DLJHXS=21;
 	
 	/**
 	 * 验证用户是否拥有权限
@@ -772,6 +773,19 @@ public class Constant {
 		
 		request.setAttribute("zdjhJhxsMc", DuiLie.ZI_DONG_JIAO_HAO_TEXT);
 		request.setAttribute("sdjhJhxsMc", DuiLie.SHOU_DONG_JIAO_HAO_TEXT);
+	}
+	
+	public static Map<String, Object> getDLJhxsMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("zdjhJhxs", DuiLie.ZI_DONG_JIAO_HAO);//自动叫号
+		jsonMap.put("sdjhJhxs", DuiLie.SHOU_DONG_JIAO_HAO);//手动叫号
+		
+		jsonMap.put("zdjhJhxsMc", DuiLie.ZI_DONG_JIAO_HAO_TEXT);//自动叫号
+		jsonMap.put("sdjhJhxsMc", DuiLie.SHOU_DONG_JIAO_HAO_TEXT);//手动叫号
+		
+		return jsonMap;
 	}
 	
 	/**

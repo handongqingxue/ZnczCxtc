@@ -243,6 +243,7 @@ function initTab1(){
 			{field:"yhm",title:"用户名",width:150},
 			{field:"nc",title:"昵称",width:150},
 			{field:"xm",title:"真实姓名",width:150},
+			{field:"jsMcs",title:"角色",width:150},
 			{field:"cjsj",title:"创建时间",width:150},
 			{field:"shzt",title:"审核状态",width:100,formatter:function(value,row){
             	return getShztMcById(value);
@@ -256,7 +257,7 @@ function initTab1(){
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{yhm:"<div style=\"text-align:center;\">暂无信息<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"yhm",colspan:6});
+				$(this).datagrid("mergeCells",{index:0,field:"yhm",colspan:7});
 				data.total=0;
 			}
 			

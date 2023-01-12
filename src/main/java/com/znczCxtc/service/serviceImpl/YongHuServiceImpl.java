@@ -42,7 +42,28 @@ public class YongHuServiceImpl implements YongHuService {
 	@Override
 	public List<YongHu> queryList(String yhm, Integer shzt, int page, int rows, String sort, String order) {
 		// TODO Auto-generated method stub
-		return yongHuDao.queryList(yhm, shzt, (page-1)*rows, rows, sort, order);
+		List<YongHu> yhList = yongHuDao.queryList(yhm, shzt, (page-1)*rows, rows, sort, order);
+		List<JueSe> jsList = jueSeDao.queryCBBList();
+		for (int i = 0; i < yhList.size(); i++) {
+			YongHu yh = yhList.get(i);
+			String jsIds = yh.getJsIds();
+			if(!StringUtils.isEmpty(jsIds)) {
+				String[] jsIdArr = jsIds.split(",");
+				String jsMcs = "";
+				for (String jsIdStr : jsIdArr) {
+					int jsId = Integer.valueOf(jsIdStr);
+					for (int j = 0; j < jsList.size(); j++) {
+						JueSe js = jsList.get(j);
+						if(jsId==js.getId()) {
+							jsMcs+=","+js.getMc();
+							break;
+						}
+					}
+				}
+				yh.setJsMcs(jsMcs.substring(1));
+			}
+		}
+		return yhList;
 	}
 
 	@Override

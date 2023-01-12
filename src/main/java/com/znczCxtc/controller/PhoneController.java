@@ -1201,6 +1201,7 @@ public class PhoneController {
 		jsonMap.put("hmzt", Constant.HMZT);
 		jsonMap.put("hmFl", Constant.HMFL);
 		jsonMap.put("dlZt", Constant.DLZT);
+		jsonMap.put("dlJhxs", Constant.DLJHXS);
 		
 		return jsonMap;
 	}
@@ -1294,6 +1295,10 @@ public class PhoneController {
 			case Constant.DLZT:
 				Map<String, Object> dlZtMap = Constant.getDLZtMap();
 				jsonMap.put("dlZtMap", dlZtMap);
+				break;
+			case Constant.DLJHXS:
+				Map<String, Object> dlJhxsMap = Constant.getDLJhxsMap();
+				jsonMap.put("dlJhxsMap", dlJhxsMap);
 				break;
 			}
 		}
