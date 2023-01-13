@@ -1153,6 +1153,66 @@ public class PhoneController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/newDuiLie")
+	@ResponseBody
+	public Map<String, Object> newDuiLie(DuiLie dl) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=duiLieService.add(dl);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建队列成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建队列失败！");
+		}
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/editDuiLie")
+	@ResponseBody
+	public Map<String, Object> editDuiLie(DuiLie dl) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=duiLieService.edit(dl);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑队列成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑队列失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getDuiLie")
+	@ResponseBody
+	public Map<String, Object> getDuiLie(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			DuiLie dl=duiLieService.selectById(id);
+			if(dl==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("dl", dl);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+
 	@RequestMapping(value="/getDuiLieList")
 	@ResponseBody
 	public Map<String, Object> getDuiLieList(String mc,String dm,Integer zt,int page,int rows) {
