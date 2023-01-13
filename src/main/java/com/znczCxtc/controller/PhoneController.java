@@ -1235,6 +1235,28 @@ public class PhoneController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/getYunShuShangList")
+	@ResponseBody
+	public Map<String, Object> getYunShuShangList(String mc,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = yunShuShangService.queryForInt(mc);
+		List<YunShuShang> yssList=yunShuShangService.queryList(mc, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", yssList);
+		}
+		
+		return jsonMap;
+	}
+
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody
 	public Map<String, Object> getConstantFlagMap(){

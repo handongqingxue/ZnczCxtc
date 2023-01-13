@@ -46,7 +46,7 @@
 	right: 0;
 }
 </style>
-<title>司机信息</title>
+<title>运输商</title>
 <%@include file="../../inc/js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
