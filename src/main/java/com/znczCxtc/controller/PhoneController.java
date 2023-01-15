@@ -1235,6 +1235,66 @@ public class PhoneController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/newYunShuShang")
+	@ResponseBody
+	public Map<String, Object> newYunShuShang(YunShuShang yss) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=yunShuShangService.add(yss);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建运输商成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建运输商失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/editYunShuShang")
+	@ResponseBody
+	public Map<String, Object> editYunShuShang(YunShuShang yss) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=yunShuShangService.edit(yss);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑运输商成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑运输商失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getYunShuShang")
+	@ResponseBody
+	public Map<String, Object> getYunShuShang(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			YunShuShang yss=yunShuShangService.selectById(id);
+			if(yss==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("yss", yss);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+
 	@RequestMapping(value="/getYunShuShangList")
 	@ResponseBody
 	public Map<String, Object> getYunShuShangList(String mc,int page,int rows) {
@@ -1252,6 +1312,129 @@ public class PhoneController {
 		else {
 			jsonMap.put("status", "ok");
 			jsonMap.put("list", yssList);
+		}
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/newFaHuoDanWei")
+	@ResponseBody
+	public Map<String, Object> newFaHuoDanWei(FaHuoDanWei fhdw) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=faHuoDanWeiService.add(fhdw);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建发货单位成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建发货单位失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/editFaHuoDanWei")
+	@ResponseBody
+	public Map<String, Object> editFaHuoDanWei(FaHuoDanWei fhdw) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=faHuoDanWeiService.edit(fhdw);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑发货单位成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑发货单位失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getFaHuoDanWei")
+	@ResponseBody
+	public Map<String, Object> getFaHuoDanWei(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			FaHuoDanWei fhdw=faHuoDanWeiService.selectById(id);
+			if(fhdw==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("fhdw", fhdw);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/getFaHuoDanWeiList")
+	@ResponseBody
+	public Map<String, Object> getFaHuoDanWeiList(String mc,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = faHuoDanWeiService.queryForInt(mc);
+		List<FaHuoDanWei> fhdwList=faHuoDanWeiService.queryList(mc, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", fhdwList);
+		}
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/newShouHuoDanWei")
+	@ResponseBody
+	public Map<String, Object> newShouHuoDanWei(ShouHuoDanWei shdw) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=shouHuoDanWeiService.add(shdw);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建收货单位成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建收货单位失败！");
+		}
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/getShouHuoDanWeiList")
+	@ResponseBody
+	public Map<String, Object> getShouHuoDanWeiList(String mc,Boolean ywdl,int page,int rows) {
+		
+		//https://moyifeng.blog.csdn.net/article/details/95060416?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-95060416-blog-91444712.pc_relevant_multi_platform_whitelistv3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-95060416-blog-91444712.pc_relevant_multi_platform_whitelistv3&utm_relevant_index=2
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = shouHuoDanWeiService.queryForInt(mc,ywdl);
+		List<ShouHuoDanWei> shdwList=shouHuoDanWeiService.queryList(mc, ywdl, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", shdwList);
 		}
 		
 		return jsonMap;
@@ -1505,6 +1688,19 @@ public class PhoneController {
 		List<SiJi> sjList=siJiService.queryCBBList();
 		
 		jsonMap.put("list", sjList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getDuiLieSelectList")
+	@ResponseBody
+	public Map<String, Object> getDuiLieSelectList(Integer zt) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<DuiLie> dlList=duiLieService.queryCBBList(zt);
+		
+		jsonMap.put("list", dlList);
 		
 		return jsonMap;
 	}

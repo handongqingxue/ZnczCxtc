@@ -30,7 +30,7 @@ var pdglPath=path+'pdgl/';
 var dialogTop=70;
 var dialogLeft=20;
 var ndNum=0;
-var dlzt='${requestScope.dlzt}';
+var dlzt='${requestScope.zyZt}';
 $(function(){
 	initNewDialog();
 

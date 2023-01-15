@@ -199,7 +199,7 @@ public class DWGLController {
 		String url=null;
 		if(Constant.checkIfExistQx(QuanXian.TIAN_JIA_SHOU_HUO_DAN_WEI,request)) {
 			Constant.setYhQxInRequest(request);
-			request.setAttribute("dlzt", DuiLie.ZAI_YONG);
+			Constant.setDLZtInRequest(request);
 			url=MODULE_NAME+"/shdw/new";
 		}
 		else
