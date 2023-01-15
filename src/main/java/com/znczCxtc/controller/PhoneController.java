@@ -65,6 +65,8 @@ public class PhoneController {
     private HaoMaService haoMaService;
 	@Autowired
     private DuiLieService duiLieService;
+	@Autowired
+    private CangKuService cangKuService;
 	static final String MODULE_NAME=Constant.PHONE_MODULE_NAME;
 
 	@RequestMapping(value="/login")
@@ -1417,6 +1419,48 @@ public class PhoneController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/editShouHuoDanWei")
+	@ResponseBody
+	public Map<String, Object> editShouHuoDanWei(ShouHuoDanWei shdw) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=shouHuoDanWeiService.edit(shdw);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑收货单位成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑收货单位失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getShouHuoDanWei")
+	@ResponseBody
+	public Map<String, Object> getShouHuoDanWei(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			ShouHuoDanWei shdw=shouHuoDanWeiService.selectById(id);
+			if(shdw==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("shdw", shdw);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+
 	@RequestMapping(value="/getShouHuoDanWeiList")
 	@ResponseBody
 	public Map<String, Object> getShouHuoDanWeiList(String mc,Boolean ywdl,int page,int rows) {
@@ -1435,6 +1479,28 @@ public class PhoneController {
 		else {
 			jsonMap.put("status", "ok");
 			jsonMap.put("list", shdwList);
+		}
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/getCangKuList")
+	@ResponseBody
+	public Map<String, Object> getCangKuList(String mc,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = cangKuService.queryForInt(mc);
+		List<CangKu> ckList=cangKuService.queryList(mc, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", ckList);
 		}
 		
 		return jsonMap;
