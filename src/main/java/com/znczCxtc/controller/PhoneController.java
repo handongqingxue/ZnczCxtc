@@ -67,6 +67,8 @@ public class PhoneController {
     private DuiLieService duiLieService;
 	@Autowired
     private CangKuService cangKuService;
+	@Autowired
+	private JueSeService jueSeService;
 	static final String MODULE_NAME=Constant.PHONE_MODULE_NAME;
 
 	@RequestMapping(value="/login")
@@ -1565,6 +1567,52 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getYongHu")
+	@ResponseBody
+	public Map<String, Object> getYongHu(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			YongHu yh=yongHuService.selectById(id);
+			if(yh==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("yh", yh);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getYongHuList")
+	@ResponseBody
+	public Map<String, Object> getYongHuList(String yhm,Integer shzt,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = yongHuService.queryForInt(yhm,shzt);
+		List<YongHu> yhList=yongHuService.queryList(yhm, shzt, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", yhList);
+		}
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody
@@ -1593,6 +1641,7 @@ public class PhoneController {
 		jsonMap.put("hmFl", Constant.HMFL);
 		jsonMap.put("dlZt", Constant.DLZT);
 		jsonMap.put("dlJhxs", Constant.DLJHXS);
+		jsonMap.put("yhShzt", Constant.YHSHZT);
 		
 		return jsonMap;
 	}
@@ -1690,6 +1739,10 @@ public class PhoneController {
 			case Constant.DLJHXS:
 				Map<String, Object> dlJhxsMap = Constant.getDLJhxsMap();
 				jsonMap.put("dlJhxsMap", dlJhxsMap);
+				break;
+			case Constant.YHSHZT:
+				Map<String, Object> yhShztMap = Constant.getYhShztMap();
+				jsonMap.put("yhShztMap", yhShztMap);
 				break;
 			}
 		}
@@ -1827,6 +1880,19 @@ public class PhoneController {
 		List<DuiLie> dlList=duiLieService.queryCBBList(zt);
 		
 		jsonMap.put("list", dlList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getJueSeSelectList")
+	@ResponseBody
+	public Map<String, Object> getJueSeSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<JueSe> jsList=jueSeService.queryCBBList();
+		
+		jsonMap.put("list", jsList);
 		
 		return jsonMap;
 	}

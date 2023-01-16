@@ -156,6 +156,7 @@ public class Constant {
 	public static final int HMFL=19;
 	public static final int DLZT=20;
 	public static final int DLJHXS=21;
+	public static final int YHSHZT=22;
 	
 	/**
 	 * 验证用户是否拥有权限
@@ -831,6 +832,21 @@ public class Constant {
 		request.setAttribute("dshShztMc", YongHu.DAI_SHEN_HE_TEXT);
 		request.setAttribute("shtgShztMc", YongHu.SHEN_HE_TONG_GUO_TEXT);
 		request.setAttribute("bjzShztMc", YongHu.BIAN_JI_ZHONG_TEXT);
+	}
+	
+	public static Map<String, Object> getYhShztMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("dshShzt", YongHu.DAI_SHEN_HE);//待审核
+		jsonMap.put("shtgShzt", YongHu.SHEN_HE_TONG_GUO);//审核通过
+		jsonMap.put("bjzShzt", YongHu.BIAN_JI_ZHONG);//编辑中
+		
+		jsonMap.put("dshShztMc", YongHu.DAI_SHEN_HE_TEXT);//待审核
+		jsonMap.put("shtgShztMc", YongHu.SHEN_HE_TONG_GUO_TEXT);//审核通过
+		jsonMap.put("bjzShztMc", YongHu.BIAN_JI_ZHONG_TEXT);//编辑中
+		
+		return jsonMap;
 	}
 	
 	/**
