@@ -1483,6 +1483,66 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/newCangKu")
+	@ResponseBody
+	public Map<String, Object> newCangKu(CangKu ck) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=cangKuService.add(ck);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建仓库成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建仓库失败！");
+		}
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/editCangKu")
+	@ResponseBody
+	public Map<String, Object> editCangKu(CangKu ck) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=cangKuService.edit(ck);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑仓库成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑仓库失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getCangKu")
+	@ResponseBody
+	public Map<String, Object> getCangKu(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			CangKu ck=cangKuService.selectById(id);
+			if(ck==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("ck", ck);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/getCangKuList")
 	@ResponseBody
