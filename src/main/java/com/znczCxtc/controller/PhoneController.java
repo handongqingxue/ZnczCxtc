@@ -69,6 +69,10 @@ public class PhoneController {
     private CangKuService cangKuService;
 	@Autowired
 	private JueSeService jueSeService;
+	@Autowired
+	private QuanXianService quanXianService;
+	@Autowired
+	private YongHuShenHeJiLuService yongHuShenHeJiLuService;
 	static final String MODULE_NAME=Constant.PHONE_MODULE_NAME;
 
 	@RequestMapping(value="/login")
@@ -1567,6 +1571,24 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+
+	@RequestMapping(value="/editYongHu")
+	@ResponseBody
+	public Map<String, Object> editYongHu(YongHu yh) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=yongHuService.edit(yh);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑用户成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑用户失败！");
+		}
+		return jsonMap;
+	}
 	
 	@RequestMapping(value="/getYongHu")
 	@ResponseBody
@@ -1613,6 +1635,97 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getYHSHJLList")
+	@ResponseBody
+	public Map<String, Object> getYHSHJLList(String yhm,String shrYhm,String shsjks,String shsjjs,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count = yongHuShenHeJiLuService.queryForInt(yhm,shrYhm,shsjks,shsjjs);
+			List<YongHuShenHeJiLu> yhshjlList=yongHuShenHeJiLuService.queryList(yhm, shrYhm, shsjks, shsjjs, page, rows, null, null);
+			
+			jsonMap.put("total", count);
+			if(count==0) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("list", yhshjlList);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/newJueSe")
+	@ResponseBody
+	public Map<String, Object> newJueSe(JueSe js) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=jueSeService.add(js);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建角色成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建角色失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getJueSe")
+	@ResponseBody
+	public Map<String, Object> getJueSe(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			JueSe js=jueSeService.selectById(id);
+			if(js==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("js", js);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getJueSeList")
+	@ResponseBody
+	public Map<String, Object> getJueSeList(String mc,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = jueSeService.queryForInt(mc);
+		List<JueSe> jsList=jueSeService.queryList(mc, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", jsList);
+		}
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody
@@ -1642,6 +1755,8 @@ public class PhoneController {
 		jsonMap.put("dlZt", Constant.DLZT);
 		jsonMap.put("dlJhxs", Constant.DLJHXS);
 		jsonMap.put("yhShzt", Constant.YHSHZT);
+		jsonMap.put("yhShjg", Constant.YHSHJG);
+		jsonMap.put("jsZt", Constant.JSZT);
 		
 		return jsonMap;
 	}
@@ -1743,6 +1858,14 @@ public class PhoneController {
 			case Constant.YHSHZT:
 				Map<String, Object> yhShztMap = Constant.getYhShztMap();
 				jsonMap.put("yhShztMap", yhShztMap);
+				break;
+			case Constant.YHSHJG:
+				Map<String, Object> yhShjgMap = Constant.getYhShjgMap();
+				jsonMap.put("yhShjgMap", yhShjgMap);
+				break;
+			case Constant.JSZT:
+				Map<String, Object> jsZtMap = Constant.getJsZtMap();
+				jsonMap.put("jsZtMap", jsZtMap);
 				break;
 			}
 		}
@@ -1893,6 +2016,19 @@ public class PhoneController {
 		List<JueSe> jsList=jueSeService.queryCBBList();
 		
 		jsonMap.put("list", jsList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getQuanXianSelectList")
+	@ResponseBody
+	public Map<String, Object> getQuanXianSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<QuanXian> qxList=quanXianService.queryCBBList();
+		
+		jsonMap.put("list", qxList);
 		
 		return jsonMap;
 	}

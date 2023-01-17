@@ -55,7 +55,7 @@ var oedNum=0;
 
 var sheetFlag='${requestScope.sheetFlag}';
 
-var defaultShzt='${requestScope.shzt}';
+var defaultShzt='${requestScope.dshShzt}';
 
 var dqyDcfw;
 var syyDcfw;

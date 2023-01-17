@@ -130,7 +130,6 @@ public class XTGLController {
 		String url=null;
 		if(Constant.checkIfExistQx(QuanXian.SHEN_HE_YONG_HU,request)) {
 			//publicService.selectNav(request);
-			request.setAttribute("shzt", YongHu.DAI_SHEN_HE);
 			Constant.setYhQxInRequest(request);
 			Constant.setYhShztInRequest(request);
 			Constant.setDcfwInRequest(request);

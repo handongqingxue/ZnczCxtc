@@ -157,6 +157,8 @@ public class Constant {
 	public static final int DLZT=20;
 	public static final int DLJHXS=21;
 	public static final int YHSHZT=22;
+	public static final int YHSHJG=23;
+	public static final int JSZT=24;
 	
 	/**
 	 * 验证用户是否拥有权限
@@ -499,6 +501,19 @@ public class Constant {
 		
 		request.setAttribute("hgShjgMc", YongHuShenHeJiLu.HE_GE_TEXT);
 		request.setAttribute("bhgShjgMc", YongHuShenHeJiLu.BU_HE_GE_TEXT);
+	}
+	
+	public static Map<String, Object> getYhShjgMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("hgShjg", YongHuShenHeJiLu.HE_GE);
+		jsonMap.put("bhgShjg", YongHuShenHeJiLu.BU_HE_GE);
+		
+		jsonMap.put("hgShjgMc", YongHuShenHeJiLu.HE_GE_TEXT);
+		jsonMap.put("bhgShjgMc", YongHuShenHeJiLu.BU_HE_GE_TEXT);
+		
+		return jsonMap;
 	}
 	
 	/**
@@ -987,6 +1002,23 @@ public class Constant {
 		request.setAttribute("zcsyZtMc", JueSe.ZHENG_CHANG_SHI_YONG_TEXT);
 		request.setAttribute("fqZtMc", JueSe.FEI_QI_TEXT);
 		request.setAttribute("ywZtMc", JueSe.YOU_WU_TEXT);
+	}
+	
+	public static Map<String, Object> getJsZtMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("xzZt", JueSe.XIN_ZENG);
+		jsonMap.put("zcsyZt", JueSe.ZHENG_CHANG_SHI_YONG);
+		jsonMap.put("fqZt", JueSe.FEI_QI);
+		jsonMap.put("ywZt", JueSe.YOU_WU);
+		
+		jsonMap.put("xzZtMc", JueSe.XIN_ZENG_TEXT);
+		jsonMap.put("zcsyZtMc", JueSe.ZHENG_CHANG_SHI_YONG_TEXT);
+		jsonMap.put("fqZtMc", JueSe.FEI_QI_TEXT);
+		jsonMap.put("ywZtMc", JueSe.YOU_WU_TEXT);
+		
+		return jsonMap;
 	}
 	
 	/**
