@@ -1681,6 +1681,24 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/editJueSe")
+	@ResponseBody
+	public Map<String, Object> editJueSe(JueSe js) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=jueSeService.edit(js);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑角色成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑角色失败！");
+		}
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/getJueSe")
 	@ResponseBody
 	public Map<String, Object> getJueSe(String id) {
@@ -1722,6 +1740,88 @@ public class PhoneController {
 		else {
 			jsonMap.put("status", "ok");
 			jsonMap.put("list", jsList);
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/newQuanXian")
+	@ResponseBody
+	public Map<String, Object> newQuanXian(QuanXian qx) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=quanXianService.add(qx);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "创建权限成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建权限失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/editQuanXian")
+	@ResponseBody
+	public Map<String, Object> editQuanXian(QuanXian qx) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=quanXianService.edit(qx);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑权限成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑权限失败！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getQuanXian")
+	@ResponseBody
+	public Map<String, Object> getQuanXian(String id) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		try {
+			QuanXian qx=quanXianService.selectById(id);
+			if(qx==null) {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "暂无数据");
+			}
+			else {
+				jsonMap.put("status", "ok");
+				jsonMap.put("qx", qx);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getQuanXianList")
+	@ResponseBody
+	public Map<String, Object> getQuanXianList(String mc,int page,int rows) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = quanXianService.queryForInt(mc);
+		List<QuanXian> qxList=quanXianService.queryList(mc, page, rows, null, null);
+		
+		jsonMap.put("total", count);
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", qxList);
 		}
 		
 		return jsonMap;
