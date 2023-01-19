@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -1824,6 +1825,42 @@ public class PhoneController {
 			jsonMap.put("list", qxList);
 		}
 		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/updateMmByYhId")
+	@ResponseBody
+	public Map<String, Object> updateMmByYhId(String mm,Integer id) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = yongHuService.updateMmById(mm,id);
+		
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "修改密码失败");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("message", "修改密码成功，重新登录生效！是否重新登录？");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/checkMm")
+	@ResponseBody
+	public Map<String, Object> checkMm(String mm, String yhm) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		boolean bool=yongHuService.checkMm(mm,yhm);
+		
+		if(bool) {
+			jsonMap.put("status", "ok");
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "原密码错误！");
+		}
 		return jsonMap;
 	}
 
