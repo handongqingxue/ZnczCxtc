@@ -356,6 +356,7 @@ function deleteByIds() {
 			}
 			ids=ids.substring(1);
 			
+			/*
 			$.ajaxSetup({async:false});
 			$.post(clglPath + "deleteCheLiang",
 				{ids:ids},
@@ -369,6 +370,7 @@ function deleteByIds() {
 					}
 				}
 			,"json");
+			*/
 			
 		}
 	});

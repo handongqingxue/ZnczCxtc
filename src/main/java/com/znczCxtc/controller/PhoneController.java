@@ -2031,6 +2031,200 @@ public class PhoneController {
 		return json;
 	}
 
+	@RequestMapping(value="/deleteYunShuShang",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteYunShuShang(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=yunShuShangService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除运输商失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除运输商成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteFaHuoDanWei",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteFaHuoDanWei(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=faHuoDanWeiService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除发货单位失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除发货单位成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteShouHuoDanWei",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteShouHuoDanWei(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=shouHuoDanWeiService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除收货单位失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除收货单位成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteCangKu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteCangKu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cangKuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除仓库失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除仓库成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/checkCheLiangByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkCheLiangByIds(String ids, CheLiangShenHeJiLu clshjl) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cheLiangService.checkByIds(ids,clshjl);
+		PlanResult plan=new PlanResult();
+		String tsStr=null;
+		Boolean shjg = clshjl.getShjg();
+		if(shjg)
+			tsStr="审核";
+		else
+			tsStr="退回";
+		
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg(tsStr+"车辆信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg(tsStr+"车辆信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteCheLiang",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteCheLiang(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cheLiangService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除车辆信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除车辆信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteCheLiangShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteCheLiangShenHeJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cheLiangShenHeJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除审核记录失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/checkSiJiByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkSiJiByIds(String ids, SiJiShenHeJiLu sjshjl) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=siJiService.checkByIds(ids,sjshjl);
+		PlanResult plan=new PlanResult();
+		String tsStr=null;
+		Boolean shjg = sjshjl.getShjg();
+		if(shjg)
+			tsStr="审核";
+		else
+			tsStr="退回";
+		
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg(tsStr+"司机信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg(tsStr+"司机信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	@RequestMapping(value="/deleteSiJi",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteSiJi(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=siJiService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除司机信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除司机信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody
 	public Map<String, Object> getConstantFlagMap(){
