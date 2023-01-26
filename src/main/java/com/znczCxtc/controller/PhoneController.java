@@ -1,5 +1,6 @@
 package com.znczCxtc.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1582,7 +1583,7 @@ public class PhoneController {
 		int count=yongHuService.edit(yh);
 		if(count>0) {
 			jsonMap.put("message", "ok");
-			jsonMap.put("info", "编辑用户成功！");
+			jsonMap.put("info", "编辑用户成功,重新登录生效！是否重新登录？");
 		}
 		else {
 			jsonMap.put("message", "no");
@@ -1862,6 +1863,172 @@ public class PhoneController {
 			jsonMap.put("message", "原密码错误！");
 		}
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/checkDingDanByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkDingDanByIds(String ids, String ddztMc, Integer jyFlag, DingDanShenHeJiLu shjl) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=dingDanService.checkByIds(ids,ddztMc,jyFlag,shjl);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("审核订单失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("审核订单成功");
+			json=JsonUtil.getJsonFromObject(plan);
+			
+			if(!shjl.getShjg()) {//这块代码是在一检审核或二检审核不通过情况下，把订单状态还原到之前的待扫码。与下单审核、入库审核无关
+				List<String> idList = Arrays.asList(ids.split(","));
+				for (String idStr : idList) {
+					Long ddId = Long.valueOf(idStr);
+					DingDan dd=new DingDan();
+					dd.setId(ddId);
+					if(shjl.getShlx()==DingDanShenHeJiLu.YI_JIAN_SHEN_HE) {
+						dd.setDdztMc(DingDanZhuangTai.YI_JIAN_DAI_SAO_MA_TEXT);
+						dd.setYjzt(DingDan.DAI_SHANG_BANG);
+					}
+					else if(shjl.getShlx()==DingDanShenHeJiLu.ER_JIAN_SHEN_HE) {
+						dd.setDdztMc(DingDanZhuangTai.ER_JIAN_DAI_SAO_MA_TEXT);
+						dd.setEjzt(DingDan.DAI_SHANG_BANG);
+					}
+					dingDanService.edit(dd);
+				}
+			}
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteShenHeJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=dingDanShenHeJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除审核记录失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteBangDanJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteBangDanJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=bangDanJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除磅单信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除磅单信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteGuoBangJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteGuoBangJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=guoBangJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除过磅信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除过磅信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	@RequestMapping(value="/checkIfExistWuZiByLxIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkIfExistWuZiByLxIds(String lxIds,String lxMcs) {
+		//TODO 针对分类的动态进行实时调整更新
+		List<WuZiLeiXing> wzlxList=wuZiService.checkIfExistByLxIds(lxIds,lxMcs);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(wzlxList.size()>0) {
+			plan.setStatus(1);
+			StringBuilder msgSB=new StringBuilder();
+			for (int i = 0; i < wzlxList.size(); i++) {
+				WuZiLeiXing wzlx = wzlxList.get(i);
+				msgSB.append(",");
+				msgSB.append(wzlx.getMc());
+			}
+			msgSB.append("类型下有物资，请先删除物资");
+			String msgStr = msgSB.toString();
+			plan.setMsg(msgStr.substring(1, msgStr.length()));
+			plan.setData(wzlxList);
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(0);
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteWuZiLeiXing",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteWuZiLeiXing(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=wuZiLeiXingService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除物资类型失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除物资类型成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteWuZi",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteWuZi(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=wuZiService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除物资失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除物资成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 
 	@RequestMapping(value="/getConstantFlagMap")
