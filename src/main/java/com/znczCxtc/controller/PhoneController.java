@@ -1903,9 +1903,9 @@ public class PhoneController {
 		return json;
 	}
 
-	@RequestMapping(value="/deleteShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@RequestMapping(value="/deleteDingDanShenHeJiLu",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String deleteShenHeJiLu(String ids) {
+	public String deleteDingDanShenHeJiLu(String ids) {
 		//TODO 针对分类的动态进行实时调整更新
 		int count=dingDanShenHeJiLuService.deleteByIds(ids);
 		PlanResult plan=new PlanResult();
@@ -2220,6 +2220,79 @@ public class PhoneController {
 		else {
 			plan.setStatus(1);
 			plan.setMsg("删除司机信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteHaoMa",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteHaoMa(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=haoMaService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除号码失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除号码成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteDuiLie",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteDuiLie(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=duiLieService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除队列失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除队列成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	/**
+	 * 审核用户
+	 * @param ids
+	 * @param yhshjl
+	 * @return
+	 */
+	@RequestMapping(value="/checkYongHuByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkYongHuByIds(String ids, YongHuShenHeJiLu yhshjl) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=yongHuService.checkByIds(ids,yhshjl);
+		PlanResult plan=new PlanResult();
+		String tsStr=null;
+		Boolean shjg = yhshjl.getShjg();
+		if(shjg)
+			tsStr="审核";
+		else
+			tsStr="退回";
+		
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg(tsStr+"用户信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg(tsStr+"用户信息成功");
 			json=JsonUtil.getJsonFromObject(plan);
 		}
 		return json;
