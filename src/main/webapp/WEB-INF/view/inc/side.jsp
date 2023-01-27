@@ -266,9 +266,9 @@ function showLeftMenuByQx(){
 				$(".ddgl_first_div .ddzt_item_li").css("display","block");
 
 				$(".clgl_first_div").css("display","block");
-				$(".mscl_item_li").css("display","block");
-				$(".dsbcl_item_li").css("display","block");
-				$(".ysbcl_item_li").css("display","block");
+				//$(".mscl_item_li").css("display","block");
+				//$(".dsbcl_item_li").css("display","block");
+				//$(".ysbcl_item_li").css("display","block");
 				$(".clgl_first_div .zhcx_item_li").css("display","block");
 			}
 			if(qxIdArr[i]==xdshQx){

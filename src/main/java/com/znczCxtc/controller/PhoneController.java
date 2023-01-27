@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -92,6 +93,13 @@ public class PhoneController {
 			jsonMap.put("status", "no");
 		}
 		else {
+			String jsIds = yongHu.getJsIds();
+			if(!StringUtils.isEmpty(jsIds)) {
+				String qxIds=jueSeService.getQxIdsByIds(jsIds);
+				System.out.println("qxIds==="+qxIds);
+				yongHu.setQxIds(qxIds);
+			}
+			
 			jsonMap.put("status", "ok");
 			jsonMap.put("yongHu", yongHu);
 		}
