@@ -2298,6 +2298,31 @@ public class PhoneController {
 		return json;
 	}
 
+	/**
+	 * 删除用户审核记录
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(value="/deleteYongHuShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteYongHuShenHeJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=yongHuShenHeJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除用户审核记录失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除用户审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody
 	public Map<String, Object> getConstantFlagMap(){
@@ -2328,6 +2353,7 @@ public class PhoneController {
 		jsonMap.put("yhShzt", Constant.YHSHZT);
 		jsonMap.put("yhShjg", Constant.YHSHJG);
 		jsonMap.put("jsZt", Constant.JSZT);
+		jsonMap.put("yhQx", Constant.YHQX);
 		
 		return jsonMap;
 	}
@@ -2437,6 +2463,10 @@ public class PhoneController {
 			case Constant.JSZT:
 				Map<String, Object> jsZtMap = Constant.getJsZtMap();
 				jsonMap.put("jsZtMap", jsZtMap);
+				break;
+			case Constant.YHQX:
+				Map<String, Object> yhQxMap = Constant.getYhQxMap();
+				jsonMap.put("yhQxMap", yhQxMap);
 				break;
 			}
 		}

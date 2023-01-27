@@ -159,6 +159,7 @@ public class Constant {
 	public static final int YHSHZT=22;
 	public static final int YHSHJG=23;
 	public static final int JSZT=24;
+	public static final int YHQX=25;
 	
 	/**
 	 * 验证用户是否拥有权限
@@ -273,6 +274,91 @@ public class Constant {
 		request.setAttribute("scyhshjlQx", QuanXian.SHAN_CHU_YONG_HU_SHEN_HE_JI_LU);//76
 		request.setAttribute("qxcxQx", QuanXian.QUAN_XIAN_CHA_XUN);//77
 		
+	}
+	
+	public static Map<String, Object> getYhQxMap() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("tjddQx", QuanXian.TIAN_JIA_DING_DAN);//1
+		jsonMap.put("xgddQx", QuanXian.XIU_GAI_DING_DAN);//2
+		jsonMap.put("scddQx", QuanXian.SHAN_CHU_DING_DAN);//3
+		jsonMap.put("cxddQx", QuanXian.CHA_XUN_DING_DAN);//4
+		jsonMap.put("xdshQx", QuanXian.XIA_DAN_SHEN_HE);//5
+		jsonMap.put("zjshQx", QuanXian.ZHI_JIAN_SHEN_HE);//6
+		jsonMap.put("yjshQx", QuanXian.YI_JIAN_SHEN_HE);//7
+		jsonMap.put("ejshQx", QuanXian.ER_JIAN_SHEN_HE);//8
+		jsonMap.put("zxhshQx", QuanXian.ZHUANG_XIE_HUO_SHEN_HE);//9
+		jsonMap.put("scgbjlQx", QuanXian.SHAN_CHU_GUO_BANG_JI_LU);//10
+		jsonMap.put("scbdjlQx", QuanXian.SHAN_CHU_BANG_DAN_JI_LU);//11
+		jsonMap.put("tjwzlxQx", QuanXian.TIAN_JIA_WU_ZI_LEI_XING);//12
+		jsonMap.put("xgwzlxQx", QuanXian.XIU_GAI_WU_ZI_LEI_XING);//13
+		jsonMap.put("scwzlxQx", QuanXian.SHAN_CHU_WU_ZI_LEI_XING);//14
+		jsonMap.put("tjwzQx", QuanXian.TIAN_JIA_WU_ZI);//15
+		jsonMap.put("xgwzQx", QuanXian.XIU_GAI_WU_ZI);//16);
+		jsonMap.put("scwzQx", QuanXian.SHAN_CHU_WU_ZI);//17
+		jsonMap.put("tjyssQx", QuanXian.TIAN_JIA_YUN_SHU_SHANG);//18
+		jsonMap.put("xgyssQx", QuanXian.XIU_GAI_YUN_SHU_SHANG);//19
+		jsonMap.put("scyssQx", QuanXian.SHAN_CHU_YUN_SHU_SHANG);//20
+		jsonMap.put("tjfhdwQx", QuanXian.TIAN_JIA_FA_HUO_DAN_WEI);//21
+		jsonMap.put("xgfhdwQx", QuanXian.XIU_GAI_FA_HUO_DAN_WEI);//22
+		jsonMap.put("scfhdwQx", QuanXian.SHAN_CHU_FA_HUO_DAN_WEI);//23
+		jsonMap.put("tjshdwQx", QuanXian.TIAN_JIA_SHOU_HUO_DAN_WEI);//24
+		jsonMap.put("xgshdwQx", QuanXian.XIU_GAI_SHOU_HUO_DAN_WEI);//25);
+		jsonMap.put("scshdwQx", QuanXian.SHAN_CHU_SHOU_HUO_DAN_WEI);//26
+		jsonMap.put("tjckQx", QuanXian.TIAN_JIA_CANG_KU);//27
+		jsonMap.put("ddztcxQx", QuanXian.DING_DAN_ZHUANG_TAI_CHA_XUN);//28
+		jsonMap.put("cxbdjlQx", QuanXian.CHA_XUN_BANG_DAN_JI_LU);//29
+		jsonMap.put("cxgbjlQx", QuanXian.CHA_XUN_GUO_BANG_JI_LU);//30
+		jsonMap.put("cxwzlxQx", QuanXian.CHA_XUN_WU_ZI_LEI_XING);//31
+		jsonMap.put("cxwzQx", QuanXian.CHA_XUN_WU_ZI);//32
+		jsonMap.put("cxyssQx", QuanXian.CHA_XUN_YUN_SHU_SHANG);//33
+		jsonMap.put("cxfhdwQx", QuanXian.CHA_XUN_FA_HUO_DAN_WEI);//34
+		jsonMap.put("cxshdwQx", QuanXian.CHA_XUN_SHOU_HUO_DAN_WEI);//35
+		jsonMap.put("cxckQx", QuanXian.CHA_XUN_CANG_KU);//36
+		jsonMap.put("tjclQx", QuanXian.TIAN_JIA_CHE_LIANG);//37
+		jsonMap.put("xgclQx", QuanXian.XIU_GAI_CHE_LIANG);//38
+		jsonMap.put("scclQx", QuanXian.SHAN_CHU_CHE_LIANG);//39
+		jsonMap.put("cxclQx", QuanXian.CHA_XUN_CHE_LIANG);//40
+		jsonMap.put("shclQx", QuanXian.SHEN_HE_CHE_LIANG);//41
+		jsonMap.put("cxcltzQx", QuanXian.CHA_XUN_CHE_LIANG_TAI_ZHANG);//42
+		jsonMap.put("cxclshjlQx", QuanXian.CHA_XUN_CHE_LIANG_SHEN_HE_JI_LU);//43
+		jsonMap.put("tjsjQx", QuanXian.TIAN_JIA_SI_JI);//44
+		jsonMap.put("xgsjQx", QuanXian.XIU_GAI_SI_JI);//45
+		jsonMap.put("scsjQx", QuanXian.SHAN_CHU_SI_JI);//46
+		jsonMap.put("cxsjQx", QuanXian.CHA_XUN_SI_JI);//47
+		jsonMap.put("shsjQx", QuanXian.SHEN_HE_SI_JI);//48
+		jsonMap.put("cxsjshjlQx", QuanXian.CHA_XUN_SI_JI_SHEN_HE_JI_LU);//49
+		jsonMap.put("cxpdhmQx", QuanXian.CHA_XUN_PAI_DUI_HAO_MA);//50
+		jsonMap.put("scpdhmQx", QuanXian.SHAN_CHU_PAI_DUI_HAO_MA);//51
+		jsonMap.put("tjdlQx", QuanXian.TIAN_JIA_DUI_LIE);//52
+		jsonMap.put("xgdlQx", QuanXian.XIU_GAI_DUI_LIE);//53
+		jsonMap.put("scdlQx", QuanXian.SHAN_CHU_DUI_LIE);//54
+		jsonMap.put("cxdlQx", QuanXian.CHA_XUN_DUI_LIE);//55
+		jsonMap.put("cxyhQx", QuanXian.CHA_XUN_YONG_HU);//56
+		jsonMap.put("xgyhQx", QuanXian.XIU_GAI_YONG_HU);//57
+		jsonMap.put("shyhQx", QuanXian.SHEN_HE_YONG_HU);//58
+		jsonMap.put("cxyhshjlQx", QuanXian.CHA_XUN_YONG_HU_SHEN_HE_JI_LU);//59
+		jsonMap.put("tjjsQx", QuanXian.TIAN_JIA_JUE_SE);//60
+		jsonMap.put("xgjsQx", QuanXian.XIU_GAI_JUE_SE);//61
+		jsonMap.put("scjsQx", QuanXian.SHAN_CHU_JUE_SE);//62
+		jsonMap.put("cxjsQx", QuanXian.CHA_XUN_JUE_SE);//63
+		jsonMap.put("rgsbsfzQx", QuanXian.REN_GONG_SHI_BIE_SHEN_FEN_ZHENG);//64
+		jsonMap.put("rgsbcpQx", QuanXian.REN_GONG_SHI_BIE_CHE_PAI);//65
+		jsonMap.put("rgsbewmQx", QuanXian.REN_GONG_SHI_BIE_ER_WEI_MA);//66
+		jsonMap.put("ddfwQx", QuanXian.DING_DAN_FU_WEI);//67
+		jsonMap.put("bddyQx", QuanXian.BANG_DAN_DA_YIN);//68
+		jsonMap.put("cxddshjlQx", QuanXian.CHA_XUN_DING_DAN_SHEN_HE_JI_LU);//69
+		jsonMap.put("scddshjlQx", QuanXian.SHAN_CHU_DING_DAN_SHEN_HE_JI_LU);//70
+		jsonMap.put("xgckQx", QuanXian.XIU_GAI_CANG_KU);//71
+		jsonMap.put("scckQx", QuanXian.SHAN_CHU_CANG_KU);//72
+		jsonMap.put("scclshjlQx", QuanXian.SHAN_CHU_CHE_LIANG_SHEN_HE_JI_LU);//73
+		jsonMap.put("sccltzQx", QuanXian.SHAN_CHU_CHE_LIANG_TAI_ZHANG);//74
+		jsonMap.put("pdhmztcxQx", QuanXian.PAI_DUI_HAO_MA_ZHUANG_TAI_CHA_XUN);//75
+		jsonMap.put("scyhshjlQx", QuanXian.SHAN_CHU_YONG_HU_SHEN_HE_JI_LU);//76
+		jsonMap.put("qxcxQx", QuanXian.QUAN_XIAN_CHA_XUN);//77
+		
+		return jsonMap;
 	}
 	
 	/**
