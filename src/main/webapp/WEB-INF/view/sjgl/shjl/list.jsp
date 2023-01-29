@@ -14,13 +14,13 @@
 	height:32px;
 }
 .tab1_div .toolbar .sjXm_span,
-.tab1_div .toolbar .shr_span,
+.tab1_div .toolbar .shrYhm_span,
 .tab1_div .toolbar .shsj_span,
 .tab1_div .toolbar .search_but{
 	margin-left: 13px;
 }
 .tab1_div .toolbar .sjXm_inp,
-.tab1_div .toolbar .shr_inp{
+.tab1_div .toolbar .shrYhm_inp{
 	width: 120px;
 	height: 25px;
 }
@@ -140,7 +140,7 @@ function initOutputExcelDialog(){
         	   if(checkDcfw()){
         		   	var params="";
         			var sjXm=encodeURIParam($("#toolbar #sjXm").val());
-        			var shrYhm=encodeURIParam($("#toolbar #shr").val());
+        			var shrYhm=encodeURIParam($("#toolbar #shrYhm").val());
         			var shsjks=shsjksDTB.datetimebox("getValue");
         			var shsjjs=shsjjsDTB.datetimebox("getValue");
         			var dcfw=dcfwCBB.combobox("getValue");
@@ -222,7 +222,7 @@ function initSearchLB(){
 		iconCls:"icon-search",
 		onClick:function(){
 			var sjXm=$("#toolbar #sjXm").val();
-			var shrYhm=$("#toolbar #shr").val();
+			var shrYhm=$("#toolbar #shrYhm").val();
 			var shsjks=shsjksDTB.datetimebox("getValue");
 			var shsjjs=shsjjsDTB.datetimebox("getValue");
 			tab1.datagrid("load",{sjXm:sjXm,shrYhm:shrYhm,shsjks:shsjks,shsjjs:shsjjs});
@@ -362,8 +362,8 @@ function setFitWidthInParent(parent,self){
 		<div class="toolbar" id="toolbar">
 			<span class="sjXm_span">姓名：</span>
 			<input type="text" class="sjXm_inp" id="sjXm" placeholder="请输入姓名"/>
-			<span class="shr_span">审核人：</span>
-			<input type="text" class="shr_inp" id="shr" placeholder="请输入审核人"/>
+			<span class="shrYhm_span">审核人：</span>
+			<input type="text" class="shrYhm_inp" id="shrYhm" placeholder="请输入审核人"/>
 			<span class="shsj_span">审核时间：</span>
 			<input id="shsjks_dtb"/>-
 			<input id="shsjjs_dtb"/>

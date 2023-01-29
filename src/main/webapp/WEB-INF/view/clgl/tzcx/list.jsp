@@ -25,7 +25,7 @@
 	margin-left: 13px;
 }
 .tab1_div .toolbar .row_div .ddh_inp,
-.tab1_div .toolbar .row_div .cph_inp{
+.tab1_div .toolbar .row_div .cyclCph_inp{
 	width: 120px;
 	height: 25px;
 }
@@ -176,14 +176,14 @@ function initOutputExcelDialog(){
         	   if(checkDcfw()){
         		   	var params="";
         			var ddh=$("#toolbar #ddh").val();
-        			var cph=encodeURIParam($("#toolbar #cph").val());
+        			var cyclCph=encodeURIParam($("#toolbar #cyclCph").val());
         			var ddztId=ddztCBB.combobox("getValue");
         			var jcsjs=jcsjsDTB.datetimebox("getValue");
         			var jcsje=jcsjeDTB.datetimebox("getValue");
         			var ccsjs=ccsjsDTB.datetimebox("getValue");
         			var ccsje=ccsjeDTB.datetimebox("getValue");
         			var dcfw=dcfwCBB.combobox("getValue");
-        			params+="ddh="+ddh+"&cph="+cph+"&ddztId="+ddztId+"&jcsjs="+jcsjs+"&jcsje="+jcsje+"&ccsjs="+ccsjs+"&ccsje="+ccsje+"&sheetFlag="+sheetFlag+"&dcfw="+dcfw;
+        			params+="ddh="+ddh+"&cyclCph="+cyclCph+"&ddztIds="+ddztId+"&jcsjs="+jcsjs+"&jcsje="+jcsje+"&ccsjs="+ccsjs+"&ccsje="+ccsje+"&sheetFlag="+sheetFlag+"&dcfw="+dcfw;
         			if(dcfw==dqyDcfw){
 	        			var options=tab1.datagrid("getPager").data("pagination").options;
 	        			var page=options.pageNumber;
@@ -261,13 +261,13 @@ function initSearchLB(){
 		iconCls:"icon-search",
 		onClick:function(){
 			var ddh=$("#toolbar #ddh").val();
-			var cph=$("#toolbar #cph").val();
+			var cyclCph=$("#toolbar #cyclCph").val();
 			var ddztId=ddztCBB.combobox("getValue");
 			var jcsjs=jcsjsDTB.datetimebox("getValue");
 			var jcsje=jcsjeDTB.datetimebox("getValue");
 			var ccsjs=ccsjsDTB.datetimebox("getValue");
 			var ccsje=ccsjeDTB.datetimebox("getValue");
-			tab1.datagrid("load",{ddh:ddh,cph:cph,ddztId:ddztId,jcsjs:jcsjs,jcsje:jcsje,ccsjs:ccsjs,ccsje:ccsje});
+			tab1.datagrid("load",{ddh:ddh,cyclCph:cyclCph,ddztIds:ddztId,jcsjs:jcsjs,jcsje:jcsje,ccsjs:ccsjs,ccsje:ccsje});
 		}
 	});
 }
@@ -410,7 +410,7 @@ function setFitWidthInParent(parent,self){
 				<span class="ddh_span">订单号：</span>
 				<input type="text" class="ddh_inp" id="ddh" placeholder="请输入订单号"/>
 				<span class="cph_span">车牌号：</span>
-				<input type="text" class="cph_inp" id="cph" placeholder="请输入车牌号"/>
+				<input type="text" class="cyclCph_inp" id="cyclCph" placeholder="请输入车牌号"/>
 				<span class="ddzt_span">订单状态：</span>
 				<input id="ddzt_cbb"/>
 			</div>

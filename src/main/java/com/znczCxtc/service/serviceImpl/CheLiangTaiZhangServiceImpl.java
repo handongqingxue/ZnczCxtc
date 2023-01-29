@@ -30,7 +30,7 @@ public class CheLiangTaiZhangServiceImpl implements CheLiangTaiZhangService {
 	}
 
 	@Override
-	public int queryForInt(String ddh, String cph, String ddztIds, String ddztMcs, String jcsjs, String jcsje,
+	public int queryForInt(String ddh, String cyclCph, String ddztIds, String ddztMcs, String jcsjs, String jcsje,
 			String ccsjs, String ccsje) {
 		// TODO Auto-generated method stub
 		List<String> ddztIdList = null;
@@ -40,7 +40,7 @@ public class CheLiangTaiZhangServiceImpl implements CheLiangTaiZhangService {
 		List<String> ddztMcList = null;
 		if(!StringUtils.isBlank(ddztMcs))
 			ddztMcList = Arrays.asList(ddztMcs.split(","));
-		return cheLiangTaiZhangDao.queryForInt(ddh, cph, ddztIdList, ddztMcList, jcsjs, jcsje, ccsjs, ccsje);
+		return cheLiangTaiZhangDao.queryForInt(ddh, cyclCph, ddztIdList, ddztMcList, jcsjs, jcsje, ccsjs, ccsje);
 	}
 
 	@Override

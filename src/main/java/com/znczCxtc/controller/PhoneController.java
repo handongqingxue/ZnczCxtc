@@ -861,13 +861,13 @@ public class PhoneController {
 	
 	@RequestMapping(value="/getCLTZList")
 	@ResponseBody
-	public Map<String, Object> getCLTZList(String ddh,String cph,String ddztIds,String ddztMcs,String jcsjs,String jcsje,String ccsjs,String ccsje,
+	public Map<String, Object> getCLTZList(String ddh,String cyclCph,String ddztIds,String ddztMcs,String jcsjs,String jcsje,String ccsjs,String ccsje,
 			int page,int rows,String sort,String order) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		int count = cheLiangTaiZhangService.queryForInt(ddh,cph,ddztIds,ddztMcs,jcsjs,jcsje,ccsjs,ccsje);
-		List<CheLiangTaiZhang> cltzList=cheLiangTaiZhangService.queryList(ddh, cph, ddztIds, ddztMcs, jcsjs, jcsje, ccsjs, ccsje, page, rows, sort, order);
+		int count = cheLiangTaiZhangService.queryForInt(ddh,cyclCph,ddztIds,ddztMcs,jcsjs,jcsje,ccsjs,ccsje);
+		List<CheLiangTaiZhang> cltzList=cheLiangTaiZhangService.queryList(ddh, cyclCph, ddztIds, ddztMcs, jcsjs, jcsje, ccsjs, ccsje, page, rows, sort, order);
 		
 		jsonMap.put("total", count);
 		if(count==0) {

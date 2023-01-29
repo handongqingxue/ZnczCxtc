@@ -10,10 +10,10 @@ public interface CheLiangTaiZhangService {
 	
 	public int uploadChuChang(CheLiangTaiZhang cltz);
 
-	public int queryForInt(String ddh, String cph, String ddztIds, String ddztMcs, String jcsjs, String jcsje,
+	public int queryForInt(String ddh, String cyclCph, String ddztIds, String ddztMcs, String jcsjs, String jcsje,
 			String ccsjs, String ccsje);
 
-	public List<CheLiangTaiZhang> queryList(String ddh, String cph, String ddztIds, String ddztMcs, String jcsjs,
+	public List<CheLiangTaiZhang> queryList(String ddh, String cyclCph, String ddztIds, String ddztMcs, String jcsjs,
 			String jcsje, String ccsjs, String ccsje, int page, int rows, String sort, String order);
 
 	public CheLiangTaiZhang selectById(String id);
