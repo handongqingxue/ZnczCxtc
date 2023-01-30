@@ -352,6 +352,26 @@ public class SJGLController {
 		return json;
 	}
 	
+	@RequestMapping(value="/deleteShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteShenHeJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=siJiShenHeJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除审核记录失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
 	@RequestMapping(value="/querySHJLList")
 	@ResponseBody
 	public Map<String, Object> querySHJLList(String sjXm,String shrYhm,String shsjks,String shsjjs,int page,int rows,String sort,String order) {

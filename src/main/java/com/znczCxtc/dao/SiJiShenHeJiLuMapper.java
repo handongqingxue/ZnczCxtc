@@ -10,6 +10,8 @@ public interface SiJiShenHeJiLuMapper {
 
 	int add(SiJiShenHeJiLu sjshjl);
 
+	int deleteByIds(List<String> idList);
+
 	int queryForInt(@Param("sjXm") String sjXm, @Param("shrYhm") String shrYhm, @Param("shsjks") String shsjks, @Param("shsjjs") String shsjjs);
 
 	List<SiJiShenHeJiLu> queryList(@Param("sjXm") String sjXm, @Param("shrYhm") String shrYhm, @Param("shsjks") String shsjks, @Param("shsjjs") String shsjjs,

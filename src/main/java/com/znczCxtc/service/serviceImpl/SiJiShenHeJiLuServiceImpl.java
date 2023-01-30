@@ -1,5 +1,6 @@
 package com.znczCxtc.service.serviceImpl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,15 @@ public class SiJiShenHeJiLuServiceImpl implements SiJiShenHeJiLuService {
 
 	@Autowired
 	private SiJiShenHeJiLuMapper siJiShenHeJiLuDao;
+
+	@Override
+	public int deleteByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=siJiShenHeJiLuDao.deleteByIds(idList);
+		return count;
+	}
 	
 	@Override
 	public int queryForInt(String sjXm, String shrYhm, String shsjks, String shsjjs) {
@@ -26,12 +36,6 @@ public class SiJiShenHeJiLuServiceImpl implements SiJiShenHeJiLuService {
 			String sort, String order) {
 		// TODO Auto-generated method stub
 		return siJiShenHeJiLuDao.queryList(sjXm, shrYhm, shsjks, shsjjs, (page-1)*rows, rows, sort, order);
-	}
-
-	@Override
-	public int deleteByIds(String ids) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

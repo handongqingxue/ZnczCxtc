@@ -365,9 +365,8 @@ function deleteByIds() {
 			}
 			ids=ids.substring(1);
 			
-			/*
 			$.ajaxSetup({async:false});
-			$.post(clglPath + "deleteCheLiang",
+			$.post(clglPath + "deleteCLTZ",
 				{ids:ids},
 				function(result){
 					if(result.status==1){
@@ -379,7 +378,6 @@ function deleteByIds() {
 					}
 				}
 			,"json");
-			*/
 			
 		}
 	});

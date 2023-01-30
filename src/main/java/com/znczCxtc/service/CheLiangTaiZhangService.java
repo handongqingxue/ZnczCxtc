@@ -10,6 +10,8 @@ public interface CheLiangTaiZhangService {
 	
 	public int uploadChuChang(CheLiangTaiZhang cltz);
 
+	int deleteByIds(String ids);
+
 	public int queryForInt(String ddh, String cyclCph, String ddztIds, String ddztMcs, String jcsjs, String jcsje,
 			String ccsjs, String ccsje);
 

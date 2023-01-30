@@ -20,7 +20,7 @@
 .tab1_div .toolbar .row_div .shlx_span,
 .tab1_div .toolbar .row_div .shsj_span,
 .tab1_div .toolbar .row_div .cyclCph_span,
-.tab1_div .toolbar .row_div .shr_span,
+.tab1_div .toolbar .row_div .shrYhm_span,
 .tab1_div .toolbar .row_div .yss_span,
 .tab1_div .toolbar .row_div .wzMc_span,
 .tab1_div .toolbar .row_div .fhdw_span,
@@ -32,7 +32,7 @@
 }
 .tab1_div .toolbar .row_div .ddh_inp,
 .tab1_div .toolbar .row_div .cyclCph_inp,
-.tab1_div .toolbar .row_div .shr_inp,
+.tab1_div .toolbar .row_div .shrYhm_inp,
 .tab1_div .toolbar .row_div .yssMc_inp,
 .tab1_div .toolbar .row_div .wzMc_inp,
 .tab1_div .toolbar .row_div .fhdwMc_inp,
@@ -202,7 +202,7 @@ function initOutputExcelDialog(){
         			var shsjks=shsjksDTB.datetimebox("getValue");
         			var shsjjs=shsjjsDTB.datetimebox("getValue");
         			var cyclCph=encodeURIParam($("#toolbar #cyclCph").val());
-        			var shrYhm=encodeURIParam($("#toolbar #shr").val());
+        			var shrYhm=encodeURIParam($("#toolbar #shrYhm").val());
         			var yssMc=encodeURIParam($("#toolbar #yssMc").val());
         			var wzMc=encodeURIParam($("#toolbar #wzMc").val());
         			var fhdwMc=encodeURIParam($("#toolbar #fhdwMc").val());
@@ -320,7 +320,7 @@ function initSearchLB(){
 			var shsjks=shsjksDTB.datetimebox("getValue");
 			var shsjjs=shsjjsDTB.datetimebox("getValue");
 			var cyclCph=$("#toolbar #cyclCph").val();
-			var shrYhm=$("#toolbar #shr").val();
+			var shrYhm=$("#toolbar #shrYhm").val();
 			var yssMc=$("#toolbar #yssMc").val();
 			var wzMc=$("#toolbar #wzMc").val();
 			var fhdwMc=$("#toolbar #fhdwMc").val();
@@ -527,8 +527,8 @@ function setFitWidthInParent(parent,self){
 				<input id="shsjjs_dtb"/>
 				<span class="cyclCph_span">车牌号：</span>
 				<input type="text" class="cyclCph_inp" id="cyclCph" placeholder="请输入车牌号"/>
-				<span class="shr_span">审核人：</span>
-				<input type="text" class="shr_inp" id="shr" placeholder="请输入审核人"/>
+				<span class="shrYhm_span">审核人：</span>
+				<input type="text" class="shrYhm_inp" id="shrYhm" placeholder="请输入审核人"/>
 			</div>
 			<div class="row_div">
 				<span class="yss_span">运输商：</span>

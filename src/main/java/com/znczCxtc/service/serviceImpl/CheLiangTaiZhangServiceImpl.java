@@ -30,6 +30,15 @@ public class CheLiangTaiZhangServiceImpl implements CheLiangTaiZhangService {
 	}
 
 	@Override
+	public int deleteByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=cheLiangTaiZhangDao.deleteByIds(idList);
+		return count;
+	}
+
+	@Override
 	public int queryForInt(String ddh, String cyclCph, String ddztIds, String ddztMcs, String jcsjs, String jcsje,
 			String ccsjs, String ccsje) {
 		// TODO Auto-generated method stub
