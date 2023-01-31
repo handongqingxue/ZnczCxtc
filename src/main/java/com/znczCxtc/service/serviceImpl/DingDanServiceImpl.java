@@ -152,6 +152,12 @@ public class DingDanServiceImpl implements DingDanService {
 	}
 
 	@Override
+	public DingDan getQrcodeInfoByCphZt(String cyclCph, String ddztMc) {
+		// TODO Auto-generated method stub
+		return dingDanDao.getQrcodeInfoByCphZt(cyclCph, ddztMc);
+	}
+
+	@Override
 	public boolean checkDdhIfExist(String ddh) {
 		// TODO Auto-generated method stub
 		int count=dingDanDao.getCountByDdh(ddh);

@@ -2390,6 +2390,29 @@ public class PhoneController {
 		}
 		return json;
 	}
+	
+	@RequestMapping(value="/getQrcodeInfoByCphZt")
+	@ResponseBody
+	public Map<String, Object> getQrcodeInfoByCphZt(String cyclCph,String ddztMc) {
+		
+		System.out.println("cyclCph==="+cyclCph);
+		System.out.println("ddztMc==="+ddztMc);
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		DingDan dd = dingDanService.getQrcodeInfoByCphZt(cyclCph, ddztMc);
+		
+		if(dd==null) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "没找到相关订单");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("dingDan", dd);
+		}
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/getConstantFlagMap")
 	@ResponseBody

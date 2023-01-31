@@ -33,6 +33,8 @@ public interface DingDanService {
 	 */
 	DingDan getDingDanBySfzhZt(String sfzh, String ddztMc);
 
+	DingDan getQrcodeInfoByCphZt(String cyclCph, String ddztMc);
+
 	/**
 	 * 根据车牌号和状态获取订单信息(可能是多个状态下的订单，因为测试中可能忽略车牌号的唯一性，同一个车牌号可能有多条订单，出现多条记录时只返回第一条记录)
 	 * @param cph
