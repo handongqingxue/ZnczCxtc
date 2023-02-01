@@ -238,6 +238,26 @@ public class PDGLController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/deleteHaoMa",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteHaoMa(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=haoMaService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除号码失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除号码成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
 	@RequestMapping(value="/queryHaoMaList")
 	@ResponseBody
 	public Map<String, Object> queryHaoMaList(String dlMc,String hm,String pdh,Integer hmztId,int page,int rows,String sort,String order) {
@@ -322,26 +342,6 @@ public class PDGLController {
 		jsonMap.put("rows", dlList);
 		
 		return jsonMap;
-	}
-
-	@RequestMapping(value="/deleteHaoMa",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteHaoMa(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=haoMaService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除号码失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除号码成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
 	}
 
 

@@ -284,6 +284,26 @@ public class PhoneController {
 		}
 		return jsonMap;
 	}
+
+	@RequestMapping(value="/deleteDingDan",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteDingDan(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=dingDanService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除订单失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除订单成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
 	
 	@RequestMapping(value="/editDingDan")
 	@ResponseBody
@@ -360,6 +380,26 @@ public class PhoneController {
 		}
 		return jsonMap;
 	}
+
+	@RequestMapping(value="/deleteDingDanShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteDingDanShenHeJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=dingDanShenHeJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除审核记录失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
 	
 	@RequestMapping(value="/getDDSHJLList")
 	@ResponseBody
@@ -389,6 +429,77 @@ public class PhoneController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/checkDingDanByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkDingDanByIds(String ids, String ddztMc, Integer jyFlag, DingDanShenHeJiLu shjl) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=dingDanService.checkByIds(ids,ddztMc,jyFlag,shjl);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("审核订单失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("审核订单成功");
+			json=JsonUtil.getJsonFromObject(plan);
+			
+			if(!shjl.getShjg()) {//这块代码是在一检审核或二检审核不通过情况下，把订单状态还原到之前的待扫码。与下单审核、入库审核无关
+				List<String> idList = Arrays.asList(ids.split(","));
+				for (String idStr : idList) {
+					Long ddId = Long.valueOf(idStr);
+					DingDan dd=new DingDan();
+					dd.setId(ddId);
+					if(shjl.getShlx()==DingDanShenHeJiLu.YI_JIAN_SHEN_HE) {
+						dd.setDdztMc(DingDanZhuangTai.YI_JIAN_DAI_SAO_MA_TEXT);
+						dd.setYjzt(DingDan.DAI_SHANG_BANG);
+					}
+					else if(shjl.getShlx()==DingDanShenHeJiLu.ER_JIAN_SHEN_HE) {
+						dd.setDdztMc(DingDanZhuangTai.ER_JIAN_DAI_SAO_MA_TEXT);
+						dd.setEjzt(DingDan.DAI_SHANG_BANG);
+					}
+					dingDanService.edit(dd);
+				}
+			}
+		}
+		return json;
+	}
+	
+	@RequestMapping(value="/getDingDanZhuangTaiSelectList")
+	@ResponseBody
+	public Map<String, Object> getDingDanZhuangTaiSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<DingDanZhuangTai> ddztList=dingDanZhuangTaiService.queryCBBList();
+		
+		jsonMap.put("list", ddztList);
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteBangDanJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteBangDanJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=bangDanJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除磅单信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除磅单信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
 	@RequestMapping(value="/getBDJLList")
 	@ResponseBody
 	public Map<String, Object> getBDJLList(String ddh,int page,int rows) {
@@ -409,6 +520,26 @@ public class PhoneController {
 		}
 		
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteGuoBangJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteGuoBangJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=guoBangJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除过磅信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除过磅信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 	
 	@RequestMapping(value="/getGBJL")
@@ -497,6 +628,26 @@ public class PhoneController {
 		}
 		return jsonMap;
 	}
+
+	@RequestMapping(value="/deleteWuZiLeiXing",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteWuZiLeiXing(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=wuZiLeiXingService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除物资类型失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除物资类型成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
 	
 	@RequestMapping(value="/editWuZiLeiXing")
 	@ResponseBody
@@ -566,6 +717,19 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getWuZiLeiXingSelectList")
+	@ResponseBody
+	public Map<String, Object> getWuZiLeiXingSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<WuZiLeiXing> wzlxList=wuZiLeiXingService.queryCBBList();
+		
+		jsonMap.put("list", wzlxList);
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/newWuZi")
 	@ResponseBody
@@ -583,6 +747,54 @@ public class PhoneController {
 			jsonMap.put("info", "创建物资失败！");
 		}
 		return jsonMap;
+	}
+	
+	@RequestMapping(value="/checkIfExistWuZiByLxIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkIfExistWuZiByLxIds(String lxIds,String lxMcs) {
+		//TODO 针对分类的动态进行实时调整更新
+		List<WuZiLeiXing> wzlxList=wuZiService.checkIfExistByLxIds(lxIds,lxMcs);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(wzlxList.size()>0) {
+			plan.setStatus(1);
+			StringBuilder msgSB=new StringBuilder();
+			for (int i = 0; i < wzlxList.size(); i++) {
+				WuZiLeiXing wzlx = wzlxList.get(i);
+				msgSB.append(",");
+				msgSB.append(wzlx.getMc());
+			}
+			msgSB.append("类型下有物资，请先删除物资");
+			String msgStr = msgSB.toString();
+			plan.setMsg(msgStr.substring(1, msgStr.length()));
+			plan.setData(wzlxList);
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(0);
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteWuZi",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteWuZi(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=wuZiService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除物资失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除物资成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 
 	@RequestMapping(value="/editWuZi")
@@ -649,6 +861,19 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/getWuZiSelectList")
+	@ResponseBody
+	public Map<String, Object> queryWuZiCBBList(String wzlxId) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<WuZi> wzList=wuZiService.queryCBBList(wzlxId);
+		
+		jsonMap.put("list", wzList);
+		
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/newCheLiang")
 	@ResponseBody
 	public Map<String, Object> newCheLiang(CheLiang cl) {
@@ -673,6 +898,26 @@ public class PhoneController {
 			e.printStackTrace();
 		}
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteCheLiang",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteCheLiang(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cheLiangService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除车辆信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除车辆信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 
 	@RequestMapping(value="/editCheLiang")
@@ -808,6 +1053,39 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/getCheLiangSelectList")
+	@ResponseBody
+	public Map<String, Object> getCheLiangSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<CheLiang> clList=cheLiangService.queryCBBList();
+		
+		jsonMap.put("list", clList);
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteCheLiangShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteCheLiangShenHeJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cheLiangShenHeJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除审核记录失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
 	@RequestMapping(value="/getCLSHJLList")
 	@ResponseBody
 	public Map<String, Object> getCLSHJLList(String clCph,String shrYhm,String shsjks,String shsjjs,int page,int rows) {
@@ -833,6 +1111,53 @@ public class PhoneController {
 		}
 		
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/checkCheLiangByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkCheLiangByIds(String ids, CheLiangShenHeJiLu clshjl) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cheLiangService.checkByIds(ids,clshjl);
+		PlanResult plan=new PlanResult();
+		String tsStr=null;
+		Boolean shjg = clshjl.getShjg();
+		if(shjg)
+			tsStr="审核";
+		else
+			tsStr="退回";
+		
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg(tsStr+"车辆信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg(tsStr+"车辆信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
+	@RequestMapping(value="/deleteCLTZ",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteCLTZ(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cheLiangTaiZhangService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除车辆台账失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除车辆台账成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 	
 	@RequestMapping(value="/getCLTZ")
@@ -906,6 +1231,26 @@ public class PhoneController {
 			e.printStackTrace();
 		}
 		return jsonMap;
+	}
+	
+	@RequestMapping(value="/deleteSiJi",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteSiJi(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=siJiService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除司机信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除司机信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 	
 	@RequestMapping(value="/editSiJi")
@@ -1035,6 +1380,39 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/getSiJiSelectList")
+	@ResponseBody
+	public Map<String, Object> getSiJiSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<SiJi> sjList=siJiService.queryCBBList();
+		
+		jsonMap.put("list", sjList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/deleteSiJiShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteSiJiShenHeJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=siJiShenHeJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除审核记录失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
 	@RequestMapping(value="/getSJSHJLList")
 	@ResponseBody
 	public Map<String, Object> getSJSHJLList(String sjXm,String shrYhm,String shsjks,String shsjjs,int page,int rows) {
@@ -1060,6 +1438,33 @@ public class PhoneController {
 		}
 		
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/checkSiJiByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkSiJiByIds(String ids, SiJiShenHeJiLu sjshjl) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=siJiService.checkByIds(ids,sjshjl);
+		PlanResult plan=new PlanResult();
+		String tsStr=null;
+		Boolean shjg = sjshjl.getShjg();
+		if(shjg)
+			tsStr="审核";
+		else
+			tsStr="退回";
+		
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg(tsStr+"司机信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg(tsStr+"司机信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 	
 	@RequestMapping(value="/newHaoMaZhuangTai")
@@ -1149,6 +1554,43 @@ public class PhoneController {
 		return jsonMap;
 	}
 
+	/**
+	 * 查询号码状态下拉框信息
+	 * @return
+	 */
+	@RequestMapping(value="/getHaoMaZhuangTaiSelectList")
+	@ResponseBody
+	public Map<String, Object> getHaoMaZhuangTaiSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<HaoMaZhuangTai> hmztList=haoMaZhuangTaiService.queryHaoMaZhuangTaiCBBList();
+		
+		jsonMap.put("list", hmztList);
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/deleteHaoMa",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteHaoMa(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=haoMaService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除号码失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除号码成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
 	@RequestMapping(value="/getHaoMaList")
 	@ResponseBody
 	public Map<String, Object> getHaoMaList(String dlMc,String hm,String pdh,Integer hmztId,int page,int rows) {
@@ -1187,6 +1629,26 @@ public class PhoneController {
 			jsonMap.put("info", "创建队列失败！");
 		}
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteDuiLie",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteDuiLie(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=duiLieService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除队列失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除队列成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 
 	@RequestMapping(value="/editDuiLie")
@@ -1252,6 +1714,19 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getDuiLieSelectList")
+	@ResponseBody
+	public Map<String, Object> getDuiLieSelectList(Integer zt) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<DuiLie> dlList=duiLieService.queryCBBList(zt);
+		
+		jsonMap.put("list", dlList);
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/newYunShuShang")
 	@ResponseBody
@@ -1269,6 +1744,26 @@ public class PhoneController {
 			jsonMap.put("info", "创建运输商失败！");
 		}
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteYunShuShang",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteYunShuShang(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=yunShuShangService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除运输商失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除运输商成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 	
 	@RequestMapping(value="/editYunShuShang")
@@ -1334,6 +1829,19 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getYunShuShangSelectList")
+	@ResponseBody
+	public Map<String, Object> getYunShuShangSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<YunShuShang> yssList=yunShuShangService.queryCBBList();
+		
+		jsonMap.put("list", yssList);
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/newFaHuoDanWei")
 	@ResponseBody
@@ -1351,6 +1859,26 @@ public class PhoneController {
 			jsonMap.put("info", "创建发货单位失败！");
 		}
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteFaHuoDanWei",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteFaHuoDanWei(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=faHuoDanWeiService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除发货单位失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除发货单位成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 	
 	@RequestMapping(value="/editFaHuoDanWei")
@@ -1416,6 +1944,19 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/getFaHuoDanWeiSelectList")
+	@ResponseBody
+	public Map<String, Object> getFaHuoDanWeiSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<FaHuoDanWei> fhdwList=faHuoDanWeiService.queryCBBList();
+		
+		jsonMap.put("list", fhdwList);
+		
+		return jsonMap;
+	}
 
 	@RequestMapping(value="/newShouHuoDanWei")
 	@ResponseBody
@@ -1433,6 +1974,26 @@ public class PhoneController {
 			jsonMap.put("info", "创建收货单位失败！");
 		}
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteShouHuoDanWei",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteShouHuoDanWei(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=shouHuoDanWeiService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除收货单位失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除收货单位成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 
 	@RequestMapping(value="/editShouHuoDanWei")
@@ -1500,6 +2061,19 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/getShouHuoDanWeiSelectList")
+	@ResponseBody
+	public Map<String, Object> getShouHuoDanWeiSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<ShouHuoDanWei> shdwList=shouHuoDanWeiService.queryCBBList();
+		
+		jsonMap.put("list", shdwList);
+		
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/newCangKu")
 	@ResponseBody
 	public Map<String, Object> newCangKu(CangKu ck) {
@@ -1516,6 +2090,26 @@ public class PhoneController {
 			jsonMap.put("info", "创建仓库失败！");
 		}
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/deleteCangKu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteCangKu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=cangKuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除仓库失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除仓库成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 
 	@RequestMapping(value="/editCangKu")
@@ -1579,6 +2173,42 @@ public class PhoneController {
 			jsonMap.put("list", ckList);
 		}
 		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/checkMm")
+	@ResponseBody
+	public Map<String, Object> checkMm(String mm, String yhm) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		boolean bool=yongHuService.checkMm(mm,yhm);
+		
+		if(bool) {
+			jsonMap.put("status", "ok");
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "原密码错误！");
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/updateMmByYhId")
+	@ResponseBody
+	public Map<String, Object> updateMmByYhId(String mm,Integer id) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count = yongHuService.updateMmById(mm,id);
+		
+		if(count==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "修改密码失败");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("message", "修改密码成功，重新登录生效！是否重新登录？");
+		}
 		return jsonMap;
 	}
 
@@ -1646,6 +2276,31 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 删除用户审核记录
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(value="/deleteYongHuShenHeJiLu",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteYongHuShenHeJiLu(String ids) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=yongHuShenHeJiLuService.deleteByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除用户审核记录失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除用户审核记录成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
 	@RequestMapping(value="/getYHSHJLList")
 	@ResponseBody
 	public Map<String, Object> getYHSHJLList(String yhm,String shrYhm,String shsjks,String shsjjs,int page,int rows) {
@@ -1671,6 +2326,39 @@ public class PhoneController {
 		}
 		
 		return jsonMap;
+	}
+
+	/**
+	 * 审核用户
+	 * @param ids
+	 * @param yhshjl
+	 * @return
+	 */
+	@RequestMapping(value="/checkYongHuByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkYongHuByIds(String ids, YongHuShenHeJiLu yhshjl) {
+		//TODO 针对分类的动态进行实时调整更新
+		int count=yongHuService.checkByIds(ids,yhshjl);
+		PlanResult plan=new PlanResult();
+		String tsStr=null;
+		Boolean shjg = yhshjl.getShjg();
+		if(shjg)
+			tsStr="审核";
+		else
+			tsStr="退回";
+		
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg(tsStr+"用户信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg(tsStr+"用户信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 	
 	@RequestMapping(value="/newJueSe")
@@ -1751,6 +2439,19 @@ public class PhoneController {
 			jsonMap.put("status", "ok");
 			jsonMap.put("list", jsList);
 		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getJueSeSelectList")
+	@ResponseBody
+	public Map<String, Object> getJueSeSelectList() {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<JueSe> jsList=jueSeService.queryCBBList();
+		
+		jsonMap.put("list", jsList);
 		
 		return jsonMap;
 	}
@@ -1837,558 +2538,17 @@ public class PhoneController {
 		return jsonMap;
 	}
 	
-	@RequestMapping(value="/updateMmByYhId")
+	@RequestMapping(value="/getQuanXianSelectList")
 	@ResponseBody
-	public Map<String, Object> updateMmByYhId(String mm,Integer id) {
-		
+	public Map<String, Object> getQuanXianSelectList() {
+
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		int count = yongHuService.updateMmById(mm,id);
+		List<QuanXian> qxList=quanXianService.queryCBBList();
 		
-		if(count==0) {
-			jsonMap.put("status", "no");
-			jsonMap.put("message", "修改密码失败");
-		}
-		else {
-			jsonMap.put("status", "ok");
-			jsonMap.put("message", "修改密码成功，重新登录生效！是否重新登录？");
-		}
+		jsonMap.put("list", qxList);
+		
 		return jsonMap;
-	}
-	
-	@RequestMapping(value="/checkMm")
-	@ResponseBody
-	public Map<String, Object> checkMm(String mm, String yhm) {
-		
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		boolean bool=yongHuService.checkMm(mm,yhm);
-		
-		if(bool) {
-			jsonMap.put("status", "ok");
-		}
-		else {
-			jsonMap.put("status", "no");
-			jsonMap.put("message", "原密码错误！");
-		}
-		return jsonMap;
-	}
-
-	@RequestMapping(value="/checkDingDanByIds",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String checkDingDanByIds(String ids, String ddztMc, Integer jyFlag, DingDanShenHeJiLu shjl) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=dingDanService.checkByIds(ids,ddztMc,jyFlag,shjl);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("审核订单失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("审核订单成功");
-			json=JsonUtil.getJsonFromObject(plan);
-			
-			if(!shjl.getShjg()) {//这块代码是在一检审核或二检审核不通过情况下，把订单状态还原到之前的待扫码。与下单审核、入库审核无关
-				List<String> idList = Arrays.asList(ids.split(","));
-				for (String idStr : idList) {
-					Long ddId = Long.valueOf(idStr);
-					DingDan dd=new DingDan();
-					dd.setId(ddId);
-					if(shjl.getShlx()==DingDanShenHeJiLu.YI_JIAN_SHEN_HE) {
-						dd.setDdztMc(DingDanZhuangTai.YI_JIAN_DAI_SAO_MA_TEXT);
-						dd.setYjzt(DingDan.DAI_SHANG_BANG);
-					}
-					else if(shjl.getShlx()==DingDanShenHeJiLu.ER_JIAN_SHEN_HE) {
-						dd.setDdztMc(DingDanZhuangTai.ER_JIAN_DAI_SAO_MA_TEXT);
-						dd.setEjzt(DingDan.DAI_SHANG_BANG);
-					}
-					dingDanService.edit(dd);
-				}
-			}
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteDingDanShenHeJiLu",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteDingDanShenHeJiLu(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=dingDanShenHeJiLuService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除审核记录失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除审核记录成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteBangDanJiLu",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteBangDanJiLu(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=bangDanJiLuService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除磅单信息失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除磅单信息成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteGuoBangJiLu",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteGuoBangJiLu(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=guoBangJiLuService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除过磅信息失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除过磅信息成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-	
-	@RequestMapping(value="/checkIfExistWuZiByLxIds",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String checkIfExistWuZiByLxIds(String lxIds,String lxMcs) {
-		//TODO 针对分类的动态进行实时调整更新
-		List<WuZiLeiXing> wzlxList=wuZiService.checkIfExistByLxIds(lxIds,lxMcs);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(wzlxList.size()>0) {
-			plan.setStatus(1);
-			StringBuilder msgSB=new StringBuilder();
-			for (int i = 0; i < wzlxList.size(); i++) {
-				WuZiLeiXing wzlx = wzlxList.get(i);
-				msgSB.append(",");
-				msgSB.append(wzlx.getMc());
-			}
-			msgSB.append("类型下有物资，请先删除物资");
-			String msgStr = msgSB.toString();
-			plan.setMsg(msgStr.substring(1, msgStr.length()));
-			plan.setData(wzlxList);
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(0);
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteWuZiLeiXing",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteWuZiLeiXing(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=wuZiLeiXingService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除物资类型失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除物资类型成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteWuZi",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteWuZi(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=wuZiService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除物资失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除物资成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteYunShuShang",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteYunShuShang(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=yunShuShangService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除运输商失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除运输商成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteFaHuoDanWei",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteFaHuoDanWei(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=faHuoDanWeiService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除发货单位失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除发货单位成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteShouHuoDanWei",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteShouHuoDanWei(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=shouHuoDanWeiService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除收货单位失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除收货单位成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteCangKu",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteCangKu(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=cangKuService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除仓库失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除仓库成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/checkCheLiangByIds",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String checkCheLiangByIds(String ids, CheLiangShenHeJiLu clshjl) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=cheLiangService.checkByIds(ids,clshjl);
-		PlanResult plan=new PlanResult();
-		String tsStr=null;
-		Boolean shjg = clshjl.getShjg();
-		if(shjg)
-			tsStr="审核";
-		else
-			tsStr="退回";
-		
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg(tsStr+"车辆信息失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg(tsStr+"车辆信息成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteCheLiang",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteCheLiang(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=cheLiangService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除车辆信息失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除车辆信息成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteCheLiangShenHeJiLu",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteCheLiangShenHeJiLu(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=cheLiangShenHeJiLuService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除审核记录失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除审核记录成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/checkSiJiByIds",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String checkSiJiByIds(String ids, SiJiShenHeJiLu sjshjl) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=siJiService.checkByIds(ids,sjshjl);
-		PlanResult plan=new PlanResult();
-		String tsStr=null;
-		Boolean shjg = sjshjl.getShjg();
-		if(shjg)
-			tsStr="审核";
-		else
-			tsStr="退回";
-		
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg(tsStr+"司机信息失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg(tsStr+"司机信息成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-	
-	@RequestMapping(value="/deleteSiJi",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteSiJi(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=siJiService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除司机信息失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除司机信息成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteSiJiShenHeJiLu",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteSiJiShenHeJiLu(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=siJiShenHeJiLuService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除审核记录失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除审核记录成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteHaoMa",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteHaoMa(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=haoMaService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除号码失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除号码成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteDuiLie",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteDuiLie(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=duiLieService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除队列失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除队列成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	/**
-	 * 审核用户
-	 * @param ids
-	 * @param yhshjl
-	 * @return
-	 */
-	@RequestMapping(value="/checkYongHuByIds",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String checkYongHuByIds(String ids, YongHuShenHeJiLu yhshjl) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=yongHuService.checkByIds(ids,yhshjl);
-		PlanResult plan=new PlanResult();
-		String tsStr=null;
-		Boolean shjg = yhshjl.getShjg();
-		if(shjg)
-			tsStr="审核";
-		else
-			tsStr="退回";
-		
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg(tsStr+"用户信息失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg(tsStr+"用户信息成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	/**
-	 * 删除用户审核记录
-	 * @param ids
-	 * @return
-	 */
-	@RequestMapping(value="/deleteYongHuShenHeJiLu",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteYongHuShenHeJiLu(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=yongHuShenHeJiLuService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除用户审核记录失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除用户审核记录成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteCLTZ",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteCLTZ(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=cheLiangTaiZhangService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除车辆台账失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除车辆台账成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
-	}
-
-	@RequestMapping(value="/deleteDingDan",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String deleteDingDan(String ids) {
-		//TODO 针对分类的动态进行实时调整更新
-		int count=dingDanService.deleteByIds(ids);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(0);
-			plan.setMsg("删除订单失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(1);
-			plan.setMsg("删除订单成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
 	}
 	
 	@RequestMapping(value="/getQrcodeInfoByCphZt")
@@ -2561,166 +2721,6 @@ public class PhoneController {
 				break;
 			}
 		}
-		
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/getDingDanZhuangTaiSelectList")
-	@ResponseBody
-	public Map<String, Object> getDingDanZhuangTaiSelectList() {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<DingDanZhuangTai> ddztList=dingDanZhuangTaiService.queryCBBList();
-		
-		jsonMap.put("list", ddztList);
-		
-		return jsonMap;
-	}
-
-	/**
-	 * 查询号码状态下拉框信息
-	 * @return
-	 */
-	@RequestMapping(value="/getHaoMaZhuangTaiSelectList")
-	@ResponseBody
-	public Map<String, Object> getHaoMaZhuangTaiSelectList() {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<HaoMaZhuangTai> hmztList=haoMaZhuangTaiService.queryHaoMaZhuangTaiCBBList();
-		
-		jsonMap.put("list", hmztList);
-		
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/getYunShuShangSelectList")
-	@ResponseBody
-	public Map<String, Object> getYunShuShangSelectList() {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<YunShuShang> yssList=yunShuShangService.queryCBBList();
-		
-		jsonMap.put("list", yssList);
-		
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/getWuZiLeiXingSelectList")
-	@ResponseBody
-	public Map<String, Object> getWuZiLeiXingSelectList() {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<WuZiLeiXing> wzlxList=wuZiLeiXingService.queryCBBList();
-		
-		jsonMap.put("list", wzlxList);
-		
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/getWuZiSelectList")
-	@ResponseBody
-	public Map<String, Object> queryWuZiCBBList(String wzlxId) {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<WuZi> wzList=wuZiService.queryCBBList(wzlxId);
-		
-		jsonMap.put("list", wzList);
-		
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/getFaHuoDanWeiSelectList")
-	@ResponseBody
-	public Map<String, Object> getFaHuoDanWeiSelectList() {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<FaHuoDanWei> fhdwList=faHuoDanWeiService.queryCBBList();
-		
-		jsonMap.put("list", fhdwList);
-		
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/getShouHuoDanWeiSelectList")
-	@ResponseBody
-	public Map<String, Object> getShouHuoDanWeiSelectList() {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<ShouHuoDanWei> shdwList=shouHuoDanWeiService.queryCBBList();
-		
-		jsonMap.put("list", shdwList);
-		
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/getCheLiangSelectList")
-	@ResponseBody
-	public Map<String, Object> getCheLiangSelectList() {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<CheLiang> clList=cheLiangService.queryCBBList();
-		
-		jsonMap.put("list", clList);
-		
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/getSiJiSelectList")
-	@ResponseBody
-	public Map<String, Object> getSiJiSelectList() {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<SiJi> sjList=siJiService.queryCBBList();
-		
-		jsonMap.put("list", sjList);
-		
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/getDuiLieSelectList")
-	@ResponseBody
-	public Map<String, Object> getDuiLieSelectList(Integer zt) {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<DuiLie> dlList=duiLieService.queryCBBList(zt);
-		
-		jsonMap.put("list", dlList);
-		
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/getJueSeSelectList")
-	@ResponseBody
-	public Map<String, Object> getJueSeSelectList() {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<JueSe> jsList=jueSeService.queryCBBList();
-		
-		jsonMap.put("list", jsList);
-		
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/getQuanXianSelectList")
-	@ResponseBody
-	public Map<String, Object> getQuanXianSelectList() {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		List<QuanXian> qxList=quanXianService.queryCBBList();
-		
-		jsonMap.put("list", qxList);
 		
 		return jsonMap;
 	}
