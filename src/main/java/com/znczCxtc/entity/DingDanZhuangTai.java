@@ -167,6 +167,8 @@ public class DingDanZhuangTai {
 	 */
 	public static final String YI_FEI_QI_TEXT="已废弃";//20
 	//订单状态的名称end
+	
+	public static final String CHECK_SHANG_BANG_TEXT="上磅";
 		
 	private Integer id;
 	public Integer getId() {
